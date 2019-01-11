@@ -22,5 +22,10 @@ namespace The_UGamer_Launcher
             CollectionForm collection = new CollectionForm();
             collection.Show();
         }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
