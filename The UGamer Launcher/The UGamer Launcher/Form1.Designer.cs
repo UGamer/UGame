@@ -91,7 +91,7 @@
             this.webBrowser1.Name = "webBrowser1";
             this.webBrowser1.Size = new System.Drawing.Size(1282, 515);
             this.webBrowser1.TabIndex = 3;
-            this.webBrowser1.Url = new System.Uri("https://ugamer.github.io/Library/launcher/launcher.html", System.UriKind.Absolute);
+            this.webBrowser1.Url = new System.Uri("E:/Projects/UGame Launcher/launcher/launcher.html", System.UriKind.Absolute);
             this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser1_DocumentCompleted);
             // 
             // Form1

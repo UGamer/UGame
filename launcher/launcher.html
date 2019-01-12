@@ -1,0 +1,623 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;charset=windows-1252">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="style.css">
+<TITLE>The Library of Yeep</TITLE>
+<style>
+
+
+</style>
+</HEAD>
+<BODY>
+
+<TABLE BORDER=1 BGCOLOR=#ffffff CELLSPACING=0 id="myTable"><FONT FACE="Calibri" COLOR=#000000><CAPTION></CAPTION></FONT>
+
+<THEAD>
+<TR>
+<th id="imageColumn"></th>
+<th onclick="sortTable(1)" id="titleColumn">Title</th>
+    <th onclick="sortTable(2)" id="platformColumn">Platform</th>
+    <th onclick="sortTable(3)" id="statusColumn">Status</th>
+    <th onclick="sortTableNum(4)" id="ratingColumn">Rating</th>
+    <th onclick="sortTableNum(5)" id="hoursColumn">Hours</th>
+    <th onclick="sortTable(6)" id="obtainedColumn">Obtained</th>
+    <th onclick="sortTable(7)" id="startDateColumn">Start Date</th>
+    <th onclick="sortTable(8)" id="endDateColumn">End Date</th>
+    <th id="notesColumn">Launch</th>
+
+</TR>
+</THEAD>
+<TBODY>
+<!-- Data Pasting Starts Here !-->
+<TR VALIGN=TOP>
+<TD><img src="img/100OrangeJuice.png"></TD>
+<TD>100% Orange Juice</TD>
+<TD>Steam</TD>
+<TD>On and Off</TD>
+<TD>7</TD>
+<TD>34</TD>
+<TD>2016/05/28</TD>
+<TD>2016/05/28<BR></TD>
+<TD><BR></TD>
+<TD><a href="steam://rungameid/282800" class="w3-button w3-black">Launch</a></TD>
+
+</TR>
+
+<TR VALIGN=TOP>
+<TD><img src="img/ApeEscape.png"></TD>
+<TD>Ape Escape</TD>
+<TD>PS1 (Emulated)</TD>
+<TD>Don't Have</TD>
+<TD><BR></TD>
+<TD><BR></TD>
+<TD>2019/01/11</TD>
+<TD><BR></TD>
+<TD><BR></TD>
+<TD><a href="steam://rungameid/10037971988267401216" class="w3-button w3-black">Launch</a></TD>
+
+</TR>
+
+<TR VALIGN=TOP>
+<TD><img src="img/ApeEscape2.png"></TD>
+<TD>Ape Escape 2</TD>
+<TD>PS2 (Emulated)</TD>
+<TD>Start Over</TD>
+<TD>8</TD>
+<TD>20</TD>
+<TD>2018/01/30</TD>
+<TD><BR></TD>
+<TD><BR></TD>
+<TD><a href="steam://rungameid/17489832429710475264" class="w3-button w3-black">Launch</a></TD>
+
+</TR>
+
+<TR VALIGN=TOP>
+<TD><img src="img/ApeEscape3.png"></TD>
+<TD>Ape Escape 3</TD>
+<TD>PS2 (Emulated)</TD>
+<TD>Completed</TD>
+<TD>8</TD>
+<TD>10</TD>
+<TD><BR></TD>
+<TD>2017</TD>
+<TD>2017</TD>
+<TD><a href="steam://rungameid/14643004286309498880" class="w3-button w3-black">Launch</a></TD>
+
+</TR>
+
+<TR VALIGN=TOP>
+<TD><img src="img/CallOfDutyBlackOps4.png"></TD>
+<TD>Call of Duty: Black Ops 4</TD>
+<TD>Battle.net</TD>
+<TD>On Hold</TD>
+<TD>7</TD>
+<TD><BR></TD>
+<TD>2018/10/14</TD>
+<TD>2018/10/14</TD>
+<TD>2018/12/15</TD>
+<TD><a href="steam://rungameid/14976252319224561664" class="w3-button w3-black">Launch</a></TD>
+
+</TR>
+
+<TR VALIGN=TOP>
+<TD><img src="img/Destiny2.png"></TD>
+<TD>Destiny 2</TD>
+<TD>Battle.net</TD>
+<TD>Not Started</TD>
+<TD><BR></TD>
+<TD>1</TD>
+<TD>2018/11/02</TD>
+<TD><BR></TD>
+<TD><BR></TD>
+<TD><a href="steam://rungameid/15826196604454436864" class="w3-button w3-black">Launch</a></TD>
+
+</TR>
+
+<TR VALIGN=TOP>
+<TD><img src="img/DisneyInfinity3.png"></TD>
+<TD>Disney Infinity 3.0</TD>
+<TD>Windows 10</TD>
+<TD>Dropped</TD>
+<TD>6</TD>
+<TD>5</TD>
+<TD>2015/11/06</TD>
+<TD>2015/11/06</TD>
+<TD>2015/11/13</TD>
+<TD>WIP</TD>
+
+</TR>
+
+<TR VALIGN=TOP>
+<TD><img src="img/FinalFantasyVII.png"></TD>
+<TD>Final Fantasy VII</TD>
+<TD>PS1 (Emulated)</TD>
+<TD>Start Over</TD>
+<TD>8</TD>
+<TD>20</TD>
+<TD>2016/11/20</TD>
+<TD>2016/11/22</TD>
+<TD><BR></TD>
+<TD>WIP</TD>
+
+</TR>
+
+<TR VALIGN=TOP>
+<TD><img src="img/FortniteBattleRoyale.jpeg"></TD>
+<TD>Fortnite: Battle Royale</TD>
+<TD>Epic Games</TD>
+<TD>On and Off</TD>
+<TD>3</TD>
+<TD>301</TD>
+<TD>2017/09/23</TD>
+<TD>2017/09/23</TD>
+<TD><BR></TD>
+<TD>WIP</TD>
+
+</TR>
+
+<TR VALIGN=TOP>
+<TD><img src="img/FortniteSaveTheWorld.png"></TD>
+<TD>Fortnite: Save the World</TD>
+<TD>Epic Games</TD>
+<TD>On Hold</TD>
+<TD>6</TD>
+<TD>25</TD>
+<TD>2018/07/17</TD>
+<TD>2018/07/17</TD>
+<TD><BR></TD>
+<TD>WIP</TD>
+
+</TR>
+
+<TR VALIGN=TOP>
+<TD><img src="img/ForzaMotorsport6Apex.png"></TD>
+<TD>Forza Motorsport 6: Apex</TD>
+<TD>Windows 10</TD>
+<TD>Never Started</TD>
+<TD><BR></TD>
+<TD>0</TD>
+<TD>2016/05/08</TD>
+<TD><BR></TD>
+<TD><BR></TD>
+<TD>WIP</TD>
+
+</TR>
+
+<TR VALIGN=TOP>
+<TD><img src="img/Halo5Forge.png"></TD>
+<TD>Halo 5: Forge</TD>
+<TD>Windows 10</TD>
+<TD>Dropped</TD>
+<TD>4</TD>
+<TD>1</TD>
+<TD>2016/09/10</TD>
+<TD>2016/09/10</TD>
+<TD>2016/09/10</TD>
+<TD>WIP</TD>
+
+</TR>
+
+<TR VALIGN=TOP>
+<TD><img src="img/HeroesOfTheStorm.png"></TD>
+<TD>Heroes of the Storm</TD>
+<TD>Battle.net</TD>
+<TD>Dropped</TD>
+<TD>5</TD>
+<TD>5</TD>
+<TD>2016/11/15</TD>
+<TD>2016/11/15</TD>
+<TD>2017/05/15</TD>
+<TD>WIP</TD>
+
+</TR>
+
+<TR VALIGN=TOP>
+<TD><img src="img/IronTanks.png"></TD>
+<TD>Iron Tanks</TD>
+<TD>Windows 10</TD>
+<TD>Never Started</TD>
+<TD><BR></TD>
+<TD>0</TD>
+<TD>2016/05/21</TD>
+<TD><BR></TD>
+<TD><BR></TD>
+<TD>WIP</TD>
+
+</TR>
+
+<TR VALIGN=TOP>
+<TD><img src="img/JetpackJoyride.png"></TD>
+<TD>Jetpack Joyride</TD>
+<TD>Windows 10</TD>
+<TD>Dropped</TD>
+<TD>7</TD>
+<TD>1</TD>
+<TD>2016/05/1/2</TD>
+<TD>2016/05/1/2</TD>
+<TD>2016/05/1/2</TD>
+<TD>WIP</TD>
+
+</TR>
+
+<TR VALIGN=TOP>
+<TD><img src="img/KillingFloor2.png"></TD>
+<TD>Killing Floor 2</TD>
+<TD>Steam</TD>
+<TD>On and Off</TD>
+<TD>9</TD>
+<TD>126</TD>
+<TD>2015/06/19</TD>
+<TD>2015/06/19</TD>
+<TD><BR></TD>
+<TD><a href="steam://rungameid/232090" class="w3-button w3-black">Launch</a></TD>
+
+</TR>
+
+<TR VALIGN=TOP>
+<TD><img src="img/KirbySuperStarUltra.png"></TD>
+<TD>Kirby Super Star Ultra</TD>
+<TD>Nintendo DS (Emulated)</TD>
+<TD>On Hold</TD>
+<TD>9</TD>
+<TD>2</TD>
+<TD>2018/05/02</TD>
+<TD>2018/05/02</TD>
+<TD><BR></TD>
+<TD>WIP</TD>
+
+</TR>
+
+<TR VALIGN=TOP>
+<TD><img src="img/KirbysAdventure.png"></TD>
+<TD>Kirby's Adventure</TD>
+<TD>NES (Emulated)</TD>
+<TD>Start Over</TD>
+<TD><BR></TD>
+<TD>0</TD>
+<TD>2019/01/03</TD>
+<TD><BR></TD>
+<TD><BR></TD>
+<TD>WIP</TD>
+
+</TR>
+
+<TR VALIGN=TOP>
+<TD><BR></TD>
+<TD>Microsoft Solitaire Collection</TD>
+<TD>Windows 10</TD>
+<TD>On and Off</TD>
+<TD>8</TD>
+<TD>137</TD>
+<TD>2016</TD>
+<TD>2016</TD>
+<TD><BR></TD>
+<TD>WIP</TD>
+
+</TR>
+
+<TR VALIGN=TOP>
+<TD><img src="img/MinecraftJava.png"></TD>
+<TD>Minecraft (Java)</TD>
+<TD>PC</TD>
+<TD>On and Off</TD>
+<TD>10</TD>
+<TD>2000</TD>
+<TD>2011 July</TD>
+<TD>2011 July</TD>
+<TD>Never.</TD>
+<TD><a href="steam://rungameid/18109885695613992960" class="w3-button w3-black">Launch</a></TD>
+
+</TR>
+
+<TR VALIGN=TOP>
+<TD><img src="img/MinecraftWindows10.png"></TD>
+<TD>Minecraft (Windows 10)</TD>
+<TD>PC</TD>
+<TD>On Hold</TD>
+<TD>9</TD>
+<TD>10</TD>
+<TD>2016</TD>
+<TD>2016</TD>
+<TD><BR></TD>
+<TD>WIP</TD>
+
+</TR>
+
+<TR VALIGN=TOP>
+<TD><BR></TD>
+<TD>Modern Combat 5</TD>
+<TD>Windows 10</TD>
+<TD>Never Started</TD>
+<TD><BR></TD>
+<TD>0</TD>
+<TD>2015/09/05</TD>
+<TD><BR></TD>
+<TD><BR></TD>
+<TD>WIP</TD>
+
+</TR>
+
+<TR VALIGN=TOP>
+<TD><img src="img/MUGEN.png"></TD>
+<TD>MUGEN</TD>
+<TD>PC</TD>
+<TD>On Hold</TD>
+<TD>9</TD>
+<TD>100</TD>
+<TD>2012</TD>
+<TD>2012</TD>
+<TD><BR></TD>
+<TD>WIP</TD>
+
+</TR>
+
+<TR VALIGN=TOP>
+<TD><img src="img/Overkill3.png"></TD>
+<TD>Overkill 3</TD>
+<TD>Windows 10</TD>
+<TD>Dropped</TD>
+<TD>3</TD>
+<TD>1</TD>
+<TD>2016/05/12</TD>
+<TD>2016/05/12</TD>
+<TD>2016/05/12</TD>
+<TD>WIP</TD>
+
+</TR>
+
+<TR VALIGN=TOP>
+<TD><a href="E:\Games\Overwatch\Overwatch Launcher.exe"><img src="img/Overwatch.png"><a></TD>
+<TD>Overwatch</TD>
+<TD>Battle.net</TD>
+<TD>On and Off</TD>
+<TD>3</TD>
+<TD>436</TD>
+<TD>2016/05/23</TD>
+<TD>2016/05/23</TD>
+<TD>2019/01/01</TD>
+<TD><a href="steam://rungameid/11967785770288152576" class="w3-button w3-black">Launch</a></TD>
+
+</TR>
+
+<TR VALIGN=TOP>
+<TD><img src="img/PokeMMO.png"></TD>
+<TD>PokeMMO</TD>
+<TD>PC</TD>
+<TD>On and Off</TD>
+<TD>10</TD>
+<TD>100</TD>
+<TD>2015</TD>
+<TD>2015</TD>
+<TD><BR></TD>
+<TD><a href="steam://rungameid/11545762666035281920" class="w3-button w3-black">Launch</a></TD>
+
+</TR>
+
+<TR VALIGN=TOP>
+<TD><img src="img/ProjectAM2R.png"></TD>
+<TD>Project AM2R</TD>
+<TD>PC</TD>
+<TD>Never Started</TD>
+<TD><BR></TD>
+<TD>0</TD>
+<TD>August 2017</TD>
+<TD><BR></TD>
+<TD><BR></TD>
+<TD><a href="steam://rungameid/16553658670194360320" class="w3-button w3-black">Launch</a></TD>
+
+</TR>
+
+<TR VALIGN=TOP>
+<TD><img src="img/ProjectSpark.png"></TD>
+<TD>Project Spark</TD>
+<TD>Windows 10</TD>
+<TD>Never Started</TD>
+<TD><BR></TD>
+<TD>0</TD>
+<TD>2016/05/12</TD>
+<TD><BR></TD>
+<TD><BR></TD>
+<TD>WIP</TD>
+
+</TR>
+
+<TR VALIGN=TOP>
+<TD><BR></TD>
+<TD>Sonic Dash</TD>
+<TD>Windows 10</TD>
+<TD>Dropped</TD>
+<TD>5</TD>
+<TD>1</TD>
+<TD>2015/10/11</TD>
+<TD>2015/10/11</TD>
+<TD>2015/10/12</TD>
+<TD>WIP</TD>
+
+</TR>
+
+<TR VALIGN=TOP>
+<TD><img src="img/SonicRoboBlast2.png"></TD>
+<TD>Sonic Robo Blast 2</TD>
+<TD>PC</TD>
+<TD>On Hold</TD>
+<TD>8</TD>
+<TD>100</TD>
+<TD>2010</TD>
+<TD>2010</TD>
+<TD><BR></TD>
+<TD><a href="steam://rungameid/17972807412020674560" class="w3-button w3-black">Launch</a></TD>
+
+</TR>
+
+<TR VALIGN=TOP>
+<TD><img src="img/SonicWorld.png"></TD>
+<TD>Sonic World</TD>
+<TD>PC</TD>
+<TD>On Hold</TD>
+<TD>8</TD>
+<TD>5</TD>
+<TD>2017</TD>
+<TD>2017</TD>
+<TD><BR></TD>
+<TD>WIP</TD>
+
+</TR>
+
+<TR VALIGN=TOP>
+<TD><img src="img/Subnautica.png"></TD>
+<TD>Subnautica</TD>
+<TD>Epic Games</TD>
+<TD>Never Started</TD>
+<TD><BR></TD>
+<TD><BR></TD>
+<TD>2018/12/15</TD>
+<TD><BR></TD>
+<TD><BR></TD>
+<TD>WIP</TD>
+
+</TR>
+
+<TR VALIGN=TOP>
+<TD><BR></TD>
+<TD>Tiny Troopers</TD>
+<TD>Windows 10</TD>
+<TD>Never Started</TD>
+<TD><BR></TD>
+<TD>0</TD>
+<TD>2015/10/11</TD>
+<TD><BR></TD>
+<TD><BR></TD>
+<TD>WIP</TD>
+
+</TR>
+
+<TR VALIGN=TOP>
+<TD><img src="img/UnrealTournament4.png"></TD>
+<TD>Unreal Tournament 4</TD>
+<TD>Epic Games</TD>
+<TD>On Hold</TD>
+<TD>6</TD>
+<TD>3</TD>
+<TD>2015/07/06</TD>
+<TD>2015/07/06</TD>
+<TD>2018</TD>
+<TD>WIP</TD>
+
+</TR>
+
+<TR VALIGN=TOP>
+<TD><img src="img/WorldOfWarcraft.png"></TD>
+<TD>World of Warcraft</TD>
+<TD>Battle.net</TD>
+<TD>Dropped</TD>
+<TD>3</TD>
+<TD>1</TD>
+<TD><BR></TD>
+<TD>2017</TD>
+<TD>2017</TD>
+<TD><a href="steam://rungameid/10438769896719384576" class="w3-button w3-black">Launch</a></TD>
+
+</TR>
+
+<!-- Data Pasting Ends Here !-->
+
+<script>
+function sortTable(n) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.getElementById("myTable");
+  switching = true;
+  //Set the sorting direction to ascending:
+  dir = "asc"; 
+  /*Make a loop that will continue until
+  no switching has been done:*/
+  while (switching) {
+    //start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /*Loop through all table rows (except the
+    first, which contains table headers):*/
+    for (i = 1; i < (rows.length - 1); i++) {
+      //start by saying there should be no switching:
+      shouldSwitch = false;
+      /*Get the two elements you want to compare,
+      one from current row and one from the next:*/
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      /*check if the two rows should switch place,
+      based on the direction, asc or desc:*/
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          //if so, mark as a switch and break the loop:
+          shouldSwitch= true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          //if so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      //Each time a switch is done, increase this count by 1:
+      switchcount ++;      
+    } else {
+      /*If no switching has been done AND the direction is "asc",
+      set the direction to "desc" and run the while loop again.*/
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
+
+function sortTableNum(n) {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("myTable");
+  switching = true;
+  /*Make a loop that will continue until
+  no switching has been done:*/
+  while (switching) {
+    //start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /*Loop through all table rows (except the
+    first, which contains table headers):*/
+    for (i = 1; i < (rows.length - 1); i++) {
+      //start by saying there should be no switching:
+      shouldSwitch = false;
+      /*Get the two elements you want to compare,
+      one from current row and one from the next:*/
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      //check if the two rows should switch place:
+      if (Number(x.innerHTML) > Number(y.innerHTML)) {
+        //if so, mark as a switch and break the loop:
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}
+</script>
+
+</TR>
+</TBODY>
+<TFOOT></TFOOT>
+</TABLE>
+
+</BODY>
+</HTML> 

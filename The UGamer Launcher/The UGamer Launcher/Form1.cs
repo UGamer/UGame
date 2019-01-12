@@ -15,7 +15,7 @@ namespace The_UGamer_Launcher
         public Form1()
         {
             InitializeComponent();
-            Uri url = new Uri("https://ugamer.github.io/Library/launcher/launcher.html");
+            Uri url = new Uri("E:/Projects/UGame Launcher/launcher/launcher.html");
             if (webBrowser1.Url == url)
             {
                 launcherButton.Visible = true;
@@ -43,7 +43,7 @@ namespace The_UGamer_Launcher
 
         private void launcherButto(object sender, EventArgs e)
         {
-            Uri url = new Uri("https://ugamer.github.io/Library/launcher/launcher.html");
+            Uri url = new Uri("E:/Projects/UGame Launcher/launcher/launcher.html");
             webBrowser1.Url = url;
             collectionButton.Visible = true;
             launcherButton.Visible = false;
