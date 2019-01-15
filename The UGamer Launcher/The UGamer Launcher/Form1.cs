@@ -50,5 +50,25 @@ namespace The_UGamer_Launcher
                 webBrowser1.Url = url;
             }
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'collectionDataSet.Table1' table. You can move, or remove it, as needed.
+            this.table1TableAdapter.Fill(this.collectionDataSet.Table1);
+
+        }
+
+        private void fillToolStripButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.table1TableAdapter.Fill(this.collectionDataSet.Table1);
+            }
+            catch (System.Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+            }
+
+        }
     }
 }
