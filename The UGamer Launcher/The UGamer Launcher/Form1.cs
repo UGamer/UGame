@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace The_UGamer_Launcher
 {
@@ -15,17 +16,6 @@ namespace The_UGamer_Launcher
         public Form1()
         {
             InitializeComponent();
-            Uri url = new Uri("E:/Projects/UGame Launcher/launcher/launcher.html");
-            if (webBrowser1.Url == url)
-            {
-                launcherButton.Visible = true;
-                collectionButton.Visible = false;
-            }
-            else
-            {
-                collectionButton.Visible = true;
-                launcherButton.Visible = false;
-            }
         }
 
         private void collectionButto(object sender, EventArgs e)
@@ -51,7 +41,14 @@ namespace The_UGamer_Launcher
 
         private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
+            Uri url = new Uri("E:/Projects/UGame Launcher/launcher/launcher.html");
+            Uri sonicWorld = new Uri("E:/Projects/UGame Launcher/launcher/sonicWorld.html");
 
+            if (webBrowser1.Url == sonicWorld)
+            {
+                Process.Start("E:/Games/Sonic World/launch.bat");
+                webBrowser1.Url = url;
+            }
         }
     }
 }
