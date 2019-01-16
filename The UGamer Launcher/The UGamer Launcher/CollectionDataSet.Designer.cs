@@ -301,6 +301,8 @@ namespace The_UGamer_Launcher {
             
             private global::System.Data.DataColumn _columnNotes_Comments;
             
+            private global::System.Data.DataColumn columnLaunch;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public Table1DataTable() {
@@ -424,6 +426,14 @@ namespace The_UGamer_Launcher {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn LaunchColumn {
+                get {
+                    return this.columnLaunch;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -459,7 +469,7 @@ namespace The_UGamer_Launcher {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public Table1Row AddTable1Row(string Field1, string Title, string Platform, string Status, int Rating, int Hours, string Obtained, string Start_Date, string End_Date, string _Notes_Comments) {
+            public Table1Row AddTable1Row(string Field1, string Title, string Platform, string Status, int Rating, int Hours, string Obtained, string Start_Date, string End_Date, string _Notes_Comments, string Launch) {
                 Table1Row rowTable1Row = ((Table1Row)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -472,7 +482,8 @@ namespace The_UGamer_Launcher {
                         Obtained,
                         Start_Date,
                         End_Date,
-                        _Notes_Comments};
+                        _Notes_Comments,
+                        Launch};
                 rowTable1Row.ItemArray = columnValuesArray;
                 this.Rows.Add(rowTable1Row);
                 return rowTable1Row;
@@ -513,6 +524,7 @@ namespace The_UGamer_Launcher {
                 this.columnStart_Date = base.Columns["Start Date"];
                 this.columnEnd_Date = base.Columns["End Date"];
                 this._columnNotes_Comments = base.Columns["Notes/Comments"];
+                this.columnLaunch = base.Columns["Launch"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -542,6 +554,8 @@ namespace The_UGamer_Launcher {
                 this._columnNotes_Comments.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnNotes_Comments");
                 this._columnNotes_Comments.ExtendedProperties.Add("Generator_UserColumnName", "Notes/Comments");
                 base.Columns.Add(this._columnNotes_Comments);
+                this.columnLaunch = new global::System.Data.DataColumn("Launch", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLaunch);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnID}, true));
                 this.columnID.AutoIncrement = true;
@@ -870,6 +884,22 @@ namespace The_UGamer_Launcher {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Launch {
+                get {
+                    try {
+                        return ((string)(this[this.tableTable1.LaunchColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Launch\' in table \'Table1\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTable1.LaunchColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsField1Null() {
                 return this.IsNull(this.tableTable1.Field1Column);
             }
@@ -986,6 +1016,18 @@ namespace The_UGamer_Launcher {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void Set_Notes_CommentsNull() {
                 this[this.tableTable1._Notes_CommentsColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsLaunchNull() {
+                return this.IsNull(this.tableTable1.LaunchColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetLaunchNull() {
+                this[this.tableTable1.LaunchColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -1248,12 +1290,17 @@ namespace The_UGamer_Launcher.CollectionDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[1];
+            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[2];
             this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT ID, Field1, Title, Platform, Status, Rating, Hours, Obtained, [Start Date]" +
                 ", [End Date], [Notes/Comments] FROM Table1";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.OleDb.OleDbCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "SELECT ID, Field1, Title, Platform, Status, Rating, Hours, Obtained, [Start Date]" +
+                ", [End Date], [Notes/Comments] FROM Table1";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1278,6 +1325,19 @@ namespace The_UGamer_Launcher.CollectionDataSetTableAdapters {
             CollectionDataSet.Table1DataTable dataTable = new CollectionDataSet.Table1DataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillBy(CollectionDataSet.Table1DataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

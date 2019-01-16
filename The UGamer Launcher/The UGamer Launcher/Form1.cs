@@ -20,8 +20,8 @@ namespace The_UGamer_Launcher
 
         private void collectionButto(object sender, EventArgs e)
         {
-            Uri url = new Uri("https://ugamer.github.io/Library/collection.html");
-            webBrowser1.Url = url;
+            launcherData.Visible = false;
+            collectionData.Visible = true;
             launcherButton.Visible = true;
             collectionButton.Visible = false;
         }
@@ -33,22 +33,10 @@ namespace The_UGamer_Launcher
 
         private void launcherButto(object sender, EventArgs e)
         {
-            Uri url = new Uri("E:/Projects/UGame Launcher/launcher/launcher.html");
-            webBrowser1.Url = url;
+            launcherData.Visible = true;
+            collectionData.Visible = false;
             collectionButton.Visible = true;
             launcherButton.Visible = false;
-        }
-
-        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
-        {
-            Uri url = new Uri("E:/Projects/UGame Launcher/launcher/launcher.html");
-            Uri sonicWorld = new Uri("E:/Projects/UGame Launcher/launcher/sonicWorld.html");
-
-            if (webBrowser1.Url == sonicWorld)
-            {
-                Process.Start("E:/Games/Sonic World/launch.bat");
-                webBrowser1.Url = url;
-            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -63,6 +51,19 @@ namespace The_UGamer_Launcher
             try
             {
                 this.table1TableAdapter.Fill(this.collectionDataSet.Table1);
+            }
+            catch (System.Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        private void fillByToolStripButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.table1TableAdapter.FillBy(this.collectionDataSet.Table1);
             }
             catch (System.Exception ex)
             {
