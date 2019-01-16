@@ -71,5 +71,11 @@ namespace The_UGamer_Launcher
             }
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DetailSelect detailSelect = new DetailSelect();
+            detailSelect.Show();
+        }
     }
 }

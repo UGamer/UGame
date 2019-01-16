@@ -52,6 +52,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -68,16 +69,34 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CollectionDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DetailSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DetailSelect.Designer.cs">
+      <DependentUpon>DetailSelect.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="GameDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GameDetails.Designer.cs">
+      <DependentUpon>GameDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="DetailSelect.resx">
+      <DependentUpon>DetailSelect.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GameDetails.resx">
+      <DependentUpon>GameDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -87,6 +106,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="CollectionDataSet.xsc">
       <DependentUpon>CollectionDataSet.xsd</DependentUpon>
@@ -128,7 +148,17 @@
     <Content Include="Collection.accdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\100OrangeJuice.png" />
+    <None Include="Resources\ApeEscape.png" />
+    <None Include="Resources\ApeEscape2.png" />
+    <None Include="Resources\ApeEscape3.png" />
+    <Content Include="Resources\detail\100OrangeJuice.png" />
+    <Content Include="Resources\detail\ApeEscape.png" />
+    <Content Include="Resources\detail\ApeEscape2.png" />
+    <Content Include="Resources\detail\ApeEscape3.png" />
+    <Content Include="Resources\detail\KirbySuperStarUltra.png" />
     <Content Include="UGame Launcher.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
