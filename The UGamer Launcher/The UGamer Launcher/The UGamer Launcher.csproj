@@ -69,6 +69,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CollectionDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="CollectionDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CollectionDataSet1.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DetailSelect.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -118,6 +123,17 @@
     </None>
     <None Include="CollectionDataSet.xss">
       <DependentUpon>CollectionDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="CollectionDataSet1.xsc">
+      <DependentUpon>CollectionDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="CollectionDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CollectionDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="CollectionDataSet1.xss">
+      <DependentUpon>CollectionDataSet1.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
