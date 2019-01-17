@@ -22,9 +22,11 @@ namespace The_UGamer_Launcher
             
         }
 
-        public void DisplayInfo(string input1, string input2)
+        public void DisplayInfo(string input1, string input2, string platform)
         {
             pictureBox1.BackgroundImage = Image.FromFile("Resources/detail/" + input2 + ".png");
+            nameLabel.Text = input1;
+            platformLabel.Text = platform;
         }
 
     }

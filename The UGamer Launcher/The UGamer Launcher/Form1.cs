@@ -74,8 +74,13 @@ namespace The_UGamer_Launcher
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DetailSelect detailSelect = new DetailSelect();
+            DetailSelect detailSelect = new DetailSelect(this);
             detailSelect.Show();
+        }
+
+        private void collectionData_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
