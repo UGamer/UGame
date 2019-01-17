@@ -24,7 +24,7 @@ namespace The_UGamer_Launcher
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string input = "", input2 = "";
+            string input = "";
             int y = 0, z = 0;
 
             DataTable dt = frm1.collectionDataSet.Tables[0];
@@ -35,9 +35,7 @@ namespace The_UGamer_Launcher
             {
                 table[index] = dt.Rows[index][columnIndex].ToString();
             }
-            Regex rgx = new Regex(" ");
             input = textBox1.Text;
-            input2 = rgx.Replace(input, "");
             for (int x = 0; x < dt.Rows.Count; x++)
                 if (input == table[x])
                 {
@@ -49,8 +47,24 @@ namespace The_UGamer_Launcher
             if (y == 1)
             {
                 string platform = dt.Rows[z][3].ToString();
+                string status = dt.Rows[z][4].ToString();
+                string rating = dt.Rows[z][5].ToString();
+                string hours = dt.Rows[z][6].ToString();
+                string obtained = dt.Rows[z][7].ToString();
+                string startDate = dt.Rows[z][8].ToString();
+                string endDate = dt.Rows[z][9].ToString();
+                string notes = dt.Rows[z][10].ToString();
+                string launchString = dt.Rows[z][11].ToString();
+                Uri launch;
+                if (launchString != "")
+                    launch = new Uri(launchString);
+                else
+                    launch = new Uri("https://ugamer.github.io/");
+                        
+                gameWindow.Text = input;
                 gameWindow.Show();
-                gameWindow.DisplayInfo(input, input2, platform);
+                gameWindow.DisplayInfo(input, platform, status, rating,
+                    hours, obtained, startDate, endDate, notes, launch);
                 label2.Visible = false;
                 y = 0;
             }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace The_UGamer_Launcher
 {
@@ -22,12 +23,48 @@ namespace The_UGamer_Launcher
             
         }
 
-        public void DisplayInfo(string input1, string input2, string platform)
+        public void DisplayInfo(string title, string platform,
+            string status, string rating, string hours, string obtained, 
+            string startDate, string endDate, string notes, Uri launch)
         {
-            pictureBox1.BackgroundImage = Image.FromFile("Resources/detail/" + input2 + ".png");
-            nameLabel.Text = input1;
-            platformLabel.Text = platform;
+            noImageLabel.Visible = false;
+            try
+            {
+                pictureBox1.BackgroundImage = Image.FromFile("Resources/" + title + ".png");
+            }
+            catch (FileNotFoundException e)
+            {
+                noImageLabel.Visible = true;
+            }
+            nameLabel.Text = title;
+            platformLabel.Text = "Platform: " + platform;
+            statusLabel.Text = "Status: " + status;
+            if (rating == "")
+                ratingLabel.Text = "";
+            else
+                ratingLabel.Text = "Rating: " + rating;
+            hoursLabel.Text = "Hours: " + hours;
+            if (obtained == "")
+                obtainedLabel.Text = "";
+            else
+                obtainedLabel.Text = "Obtained: " + obtained;
+            if (startDate == "")
+                startDateLabel.Text = "";
+            else
+                startDateLabel.Text = "Start Date: " + startDate;
+            if (endDate == "")
+                endDateLabel.Text = "";
+            else
+                endDateLabel.Text = "End Date: " + endDate;
+            if (notes == "")
+                notesLabel.Text = "";
+            else
+                notesLabel.Text = "Notes/Comments: \n" + notes;
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
