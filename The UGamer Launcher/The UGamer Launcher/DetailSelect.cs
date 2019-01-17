@@ -27,8 +27,8 @@ namespace The_UGamer_Launcher
             string input = "";
             int y = 0, z = 0;
 
-            DataTable dt = frm1.collectionDataSet.Tables[0];
-            int columnIndex = 2; // Name column
+            DataTable dt = frm1.collectionDataSetFinal.Tables[0];
+            int columnIndex = 0; // Name column
             string[] table = new string[dt.Rows.Count];
             int index = 0;
             for (index = 0; index < dt.Rows.Count; index++)
@@ -46,15 +46,15 @@ namespace The_UGamer_Launcher
             GameDetails gameWindow = new GameDetails();
             if (y == 1)
             {
-                string platform = dt.Rows[z][3].ToString();
-                string status = dt.Rows[z][4].ToString();
-                string rating = dt.Rows[z][5].ToString();
-                string hours = dt.Rows[z][6].ToString();
-                string obtained = dt.Rows[z][7].ToString();
-                string startDate = dt.Rows[z][8].ToString();
-                string endDate = dt.Rows[z][9].ToString();
-                string notes = dt.Rows[z][10].ToString();
-                string launchString = dt.Rows[z][11].ToString();
+                string platform = dt.Rows[z][1].ToString();
+                string status = dt.Rows[z][2].ToString();
+                string rating = dt.Rows[z][3].ToString();
+                string hours = dt.Rows[z][4].ToString();
+                string obtained = dt.Rows[z][5].ToString();
+                string startDate = dt.Rows[z][6].ToString();
+                string endDate = dt.Rows[z][7].ToString();
+                string notes = dt.Rows[z][8].ToString();
+                string launchString = dt.Rows[z][9].ToString();
                 Uri launch;
                 if (launchString != "")
                     launch = new Uri(launchString);

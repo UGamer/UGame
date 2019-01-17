@@ -74,6 +74,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CollectionDataSet1.xsd</DependentUpon>
     </Compile>
+    <Compile Include="CollectionDataSet2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CollectionDataSet2.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="CollectionDataSetFinal.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CollectionDataSetFinal.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DetailSelect.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -135,6 +145,28 @@
     <None Include="CollectionDataSet1.xss">
       <DependentUpon>CollectionDataSet1.xsd</DependentUpon>
     </None>
+    <None Include="CollectionDataSet2.xsc">
+      <DependentUpon>CollectionDataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="CollectionDataSet2.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CollectionDataSet2.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="CollectionDataSet2.xss">
+      <DependentUpon>CollectionDataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="CollectionDataSetFinal.xsc">
+      <DependentUpon>CollectionDataSetFinal.xsd</DependentUpon>
+    </None>
+    <None Include="CollectionDataSetFinal.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CollectionDataSetFinal.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="CollectionDataSetFinal.xss">
+      <DependentUpon>CollectionDataSetFinal.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -161,13 +193,13 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Collection.accdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="Resources\100OrangeJuice.png" />
     <None Include="Resources\ApeEscape.png" />
     <None Include="Resources\ApeEscape2.png" />
     <None Include="Resources\ApeEscape3.png" />
+    <Content Include="Collection.accdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\detail\100OrangeJuice.png" />
     <Content Include="Resources\detail\ApeEscape.png" />
     <Content Include="Resources\detail\ApeEscape2.png" />

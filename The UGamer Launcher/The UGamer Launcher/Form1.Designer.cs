@@ -30,16 +30,18 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.launcherButton = new System.Windows.Forms.Button();
-            this.collectionButton = new System.Windows.Forms.Button();
+            this.detailButton = new System.Windows.Forms.Button();
             this.logo = new System.Windows.Forms.PictureBox();
             this.table1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.collectionDataSet = new The_UGamer_Launcher.CollectionDataSet();
             this.table1TableAdapter = new The_UGamer_Launcher.CollectionDataSetTableAdapters.Table1TableAdapter();
-            this.fillToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.fillToolStrip = new System.Windows.Forms.ToolStrip();
-            this.launcherData = new System.Windows.Forms.DataGridView();
-            this.field1DataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.collectionDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.table1BindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.collectionDataSet1 = new The_UGamer_Launcher.CollectionDataSet1();
+            this.table1TableAdapter1 = new The_UGamer_Launcher.CollectionDataSet1TableAdapters.Table1TableAdapter();
+            this.fillByToolStrip = new System.Windows.Forms.ToolStrip();
+            this.fillByToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.dataTable = new System.Windows.Forms.DataGridView();
             this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.platformDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.statusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -48,65 +50,43 @@
             this.obtainedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.startDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.endDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.notesCommentsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.launchDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.collectionData = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button1 = new System.Windows.Forms.Button();
-            this.collectionDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.collectionDataSet1 = new The_UGamer_Launcher.CollectionDataSet1();
-            this.table1BindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.table1TableAdapter1 = new The_UGamer_Launcher.CollectionDataSet1TableAdapters.Table1TableAdapter();
+            this.table1BindingSource3 = new System.Windows.Forms.BindingSource(this.components);
+            this.collectionDataSetFinal = new The_UGamer_Launcher.CollectionDataSetFinal();
+            this.table1TableAdapter3 = new The_UGamer_Launcher.CollectionDataSetFinalTableAdapters.Table1TableAdapter();
+            this.table1BindingSource2 = new System.Windows.Forms.BindingSource(this.components);
+            this.collectionDataSet2 = new The_UGamer_Launcher.CollectionDataSet2();
+            this.table1TableAdapter2 = new The_UGamer_Launcher.CollectionDataSet2TableAdapters.Table1TableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet)).BeginInit();
-            this.fillToolStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.launcherData)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.collectionData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSetBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet1)).BeginInit();
+            this.fillByToolStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataTable)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSetFinal)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet2)).BeginInit();
             this.SuspendLayout();
             // 
-            // launcherButton
+            // detailButton
             // 
-            this.launcherButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.launcherButton.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.launcherButton.FlatAppearance.BorderSize = 2;
-            this.launcherButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.launcherButton.ForeColor = System.Drawing.SystemColors.Control;
-            this.launcherButton.Location = new System.Drawing.Point(1200, 549);
-            this.launcherButton.Margin = new System.Windows.Forms.Padding(2);
-            this.launcherButton.Name = "launcherButton";
-            this.launcherButton.Size = new System.Drawing.Size(113, 64);
-            this.launcherButton.TabIndex = 0;
-            this.launcherButton.Text = "Launcher";
-            this.launcherButton.UseVisualStyleBackColor = false;
-            this.launcherButton.Click += new System.EventHandler(this.launcherButto);
-            // 
-            // collectionButton
-            // 
-            this.collectionButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.collectionButton.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.collectionButton.FlatAppearance.BorderSize = 2;
-            this.collectionButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.collectionButton.ForeColor = System.Drawing.SystemColors.Control;
-            this.collectionButton.Location = new System.Drawing.Point(1200, 549);
-            this.collectionButton.Margin = new System.Windows.Forms.Padding(2);
-            this.collectionButton.Name = "collectionButton";
-            this.collectionButton.Size = new System.Drawing.Size(113, 64);
-            this.collectionButton.TabIndex = 1;
-            this.collectionButton.Text = "Collection";
-            this.collectionButton.UseVisualStyleBackColor = false;
-            this.collectionButton.Click += new System.EventHandler(this.collectionButto);
+            this.detailButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.detailButton.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.detailButton.FlatAppearance.BorderSize = 2;
+            this.detailButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.detailButton.ForeColor = System.Drawing.SystemColors.Control;
+            this.detailButton.Location = new System.Drawing.Point(1200, 549);
+            this.detailButton.Margin = new System.Windows.Forms.Padding(2);
+            this.detailButton.Name = "detailButton";
+            this.detailButton.Size = new System.Drawing.Size(113, 64);
+            this.detailButton.TabIndex = 1;
+            this.detailButton.Text = "Details";
+            this.detailButton.UseVisualStyleBackColor = false;
+            this.detailButton.Click += new System.EventHandler(this.detailButton_Click_1);
             // 
             // logo
             // 
@@ -135,34 +115,50 @@
             // 
             this.table1TableAdapter.ClearBeforeFill = true;
             // 
-            // fillToolStripButton
+            // collectionDataSetBindingSource
             // 
-            this.fillToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.fillToolStripButton.Name = "fillToolStripButton";
-            this.fillToolStripButton.Size = new System.Drawing.Size(26, 22);
-            this.fillToolStripButton.Text = "Fill";
-            this.fillToolStripButton.Click += new System.EventHandler(this.fillToolStripButton_Click);
+            this.collectionDataSetBindingSource.DataSource = this.collectionDataSet;
+            this.collectionDataSetBindingSource.Position = 0;
             // 
-            // fillToolStrip
+            // table1BindingSource1
             // 
-            this.fillToolStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.fillToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fillToolStripButton});
-            this.fillToolStrip.Location = new System.Drawing.Point(0, 0);
-            this.fillToolStrip.Name = "fillToolStrip";
-            this.fillToolStrip.Size = new System.Drawing.Size(1324, 25);
-            this.fillToolStrip.TabIndex = 5;
-            this.fillToolStrip.Text = "fillToolStrip";
+            this.table1BindingSource1.DataMember = "Table1";
+            this.table1BindingSource1.DataSource = this.collectionDataSet1;
             // 
-            // launcherData
+            // collectionDataSet1
             // 
-            this.launcherData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.launcherData.AutoGenerateColumns = false;
-            this.launcherData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.launcherData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.field1DataGridViewTextBoxColumn1,
+            this.collectionDataSet1.DataSetName = "CollectionDataSet1";
+            this.collectionDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // table1TableAdapter1
+            // 
+            this.table1TableAdapter1.ClearBeforeFill = true;
+            // 
+            // fillByToolStrip
+            // 
+            this.fillByToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fillByToolStripButton});
+            this.fillByToolStrip.Location = new System.Drawing.Point(0, 0);
+            this.fillByToolStrip.Name = "fillByToolStrip";
+            this.fillByToolStrip.Size = new System.Drawing.Size(1333, 25);
+            this.fillByToolStrip.TabIndex = 8;
+            this.fillByToolStrip.Text = "fillByToolStrip";
+            // 
+            // fillByToolStripButton
+            // 
+            this.fillByToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.fillByToolStripButton.Name = "fillByToolStripButton";
+            this.fillByToolStripButton.Size = new System.Drawing.Size(39, 22);
+            this.fillByToolStripButton.Text = "FillBy";
+            this.fillByToolStripButton.Click += new System.EventHandler(this.fillByToolStripButton_Click_2);
+            // 
+            // dataTable
+            // 
+            this.dataTable.AllowUserToAddRows = false;
+            this.dataTable.AllowUserToDeleteRows = false;
+            this.dataTable.AutoGenerateColumns = false;
+            this.dataTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.titleDataGridViewTextBoxColumn,
             this.platformDataGridViewTextBoxColumn,
             this.statusDataGridViewTextBoxColumn,
@@ -171,21 +167,14 @@
             this.obtainedDataGridViewTextBoxColumn,
             this.startDateDataGridViewTextBoxColumn,
             this.endDateDataGridViewTextBoxColumn,
+            this.notesCommentsDataGridViewTextBoxColumn,
             this.launchDataGridViewTextBoxColumn});
-            this.launcherData.DataSource = this.table1BindingSource;
-            this.launcherData.Location = new System.Drawing.Point(12, 35);
-            this.launcherData.Name = "launcherData";
-            this.launcherData.ReadOnly = true;
-            this.launcherData.RowTemplate.Height = 28;
-            this.launcherData.Size = new System.Drawing.Size(1291, 500);
-            this.launcherData.TabIndex = 4;
-            // 
-            // field1DataGridViewTextBoxColumn1
-            // 
-            this.field1DataGridViewTextBoxColumn1.DataPropertyName = "Field1";
-            this.field1DataGridViewTextBoxColumn1.HeaderText = "";
-            this.field1DataGridViewTextBoxColumn1.Name = "field1DataGridViewTextBoxColumn1";
-            this.field1DataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataTable.DataSource = this.table1BindingSource3;
+            this.dataTable.Location = new System.Drawing.Point(22, 28);
+            this.dataTable.Name = "dataTable";
+            this.dataTable.ReadOnly = true;
+            this.dataTable.Size = new System.Drawing.Size(1291, 500);
+            this.dataTable.TabIndex = 9;
             // 
             // titleDataGridViewTextBoxColumn
             // 
@@ -250,172 +239,60 @@
             this.endDateDataGridViewTextBoxColumn.ReadOnly = true;
             this.endDateDataGridViewTextBoxColumn.Width = 80;
             // 
+            // notesCommentsDataGridViewTextBoxColumn
+            // 
+            this.notesCommentsDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.notesCommentsDataGridViewTextBoxColumn.DataPropertyName = "Notes/Comments";
+            this.notesCommentsDataGridViewTextBoxColumn.HeaderText = "Notes/Comments";
+            this.notesCommentsDataGridViewTextBoxColumn.Name = "notesCommentsDataGridViewTextBoxColumn";
+            this.notesCommentsDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
             // launchDataGridViewTextBoxColumn
             // 
-            this.launchDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.launchDataGridViewTextBoxColumn.DataPropertyName = "Launch";
             this.launchDataGridViewTextBoxColumn.HeaderText = "Launch";
             this.launchDataGridViewTextBoxColumn.Name = "launchDataGridViewTextBoxColumn";
             this.launchDataGridViewTextBoxColumn.ReadOnly = true;
+            this.launchDataGridViewTextBoxColumn.Visible = false;
             // 
-            // collectionData
+            // table1BindingSource3
             // 
-            this.collectionData.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
-            this.collectionData.AllowUserToAddRows = false;
-            this.collectionData.AllowUserToDeleteRows = false;
-            this.collectionData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.collectionData.AutoGenerateColumns = false;
-            this.collectionData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.collectionData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn5,
-            this.dataGridViewTextBoxColumn6,
-            this.dataGridViewTextBoxColumn7,
-            this.dataGridViewTextBoxColumn8,
-            this.dataGridViewTextBoxColumn9,
-            this.dataGridViewTextBoxColumn10});
-            this.collectionData.DataSource = this.table1BindingSource;
-            this.collectionData.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
-            this.collectionData.Location = new System.Drawing.Point(12, 35);
-            this.collectionData.Name = "collectionData";
-            this.collectionData.ReadOnly = true;
-            this.collectionData.RowTemplate.Height = 28;
-            this.collectionData.Size = new System.Drawing.Size(1291, 500);
-            this.collectionData.TabIndex = 6;
-            this.collectionData.Visible = false;
-            this.collectionData.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.collectionData_CellContentClick);
+            this.table1BindingSource3.DataMember = "Table1";
+            this.table1BindingSource3.DataSource = this.collectionDataSetFinal;
             // 
-            // dataGridViewTextBoxColumn1
+            // collectionDataSetFinal
             // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "Field1";
-            this.dataGridViewTextBoxColumn1.HeaderText = "";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.collectionDataSetFinal.DataSetName = "CollectionDataSetFinal";
+            this.collectionDataSetFinal.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // dataGridViewTextBoxColumn2
+            // table1TableAdapter3
             // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "Title";
-            this.dataGridViewTextBoxColumn2.HeaderText = "Title";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            this.dataGridViewTextBoxColumn2.Width = 219;
+            this.table1TableAdapter3.ClearBeforeFill = true;
             // 
-            // dataGridViewTextBoxColumn3
+            // table1BindingSource2
             // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "Platform";
-            this.dataGridViewTextBoxColumn3.HeaderText = "Platform";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            this.table1BindingSource2.DataMember = "Table1";
+            this.table1BindingSource2.DataSource = this.collectionDataSet2;
             // 
-            // dataGridViewTextBoxColumn4
+            // collectionDataSet2
             // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "Status";
-            this.dataGridViewTextBoxColumn4.HeaderText = "Status";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            this.dataGridViewTextBoxColumn4.Width = 90;
+            this.collectionDataSet2.DataSetName = "CollectionDataSet2";
+            this.collectionDataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // dataGridViewTextBoxColumn5
+            // table1TableAdapter2
             // 
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "Rating";
-            this.dataGridViewTextBoxColumn5.HeaderText = "Rating";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ReadOnly = true;
-            this.dataGridViewTextBoxColumn5.Width = 70;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "Hours";
-            this.dataGridViewTextBoxColumn6.HeaderText = "Hours";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.ReadOnly = true;
-            this.dataGridViewTextBoxColumn6.Width = 70;
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            this.dataGridViewTextBoxColumn7.DataPropertyName = "Obtained";
-            this.dataGridViewTextBoxColumn7.HeaderText = "Obtained";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.ReadOnly = true;
-            this.dataGridViewTextBoxColumn7.Width = 80;
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            this.dataGridViewTextBoxColumn8.DataPropertyName = "Start Date";
-            this.dataGridViewTextBoxColumn8.HeaderText = "Start Date";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.ReadOnly = true;
-            this.dataGridViewTextBoxColumn8.Width = 80;
-            // 
-            // dataGridViewTextBoxColumn9
-            // 
-            this.dataGridViewTextBoxColumn9.DataPropertyName = "End Date";
-            this.dataGridViewTextBoxColumn9.HeaderText = "End Date";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            this.dataGridViewTextBoxColumn9.ReadOnly = true;
-            this.dataGridViewTextBoxColumn9.Width = 80;
-            // 
-            // dataGridViewTextBoxColumn10
-            // 
-            this.dataGridViewTextBoxColumn10.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn10.DataPropertyName = "Notes/Comments";
-            this.dataGridViewTextBoxColumn10.HeaderText = "Notes/Comments";
-            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            this.dataGridViewTextBoxColumn10.ReadOnly = true;
-            // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button1.FlatAppearance.BorderSize = 2;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.ForeColor = System.Drawing.SystemColors.Control;
-            this.button1.Location = new System.Drawing.Point(1068, 549);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(113, 64);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Details";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // collectionDataSetBindingSource
-            // 
-            this.collectionDataSetBindingSource.DataSource = this.collectionDataSet;
-            this.collectionDataSetBindingSource.Position = 0;
-            // 
-            // collectionDataSet1
-            // 
-            this.collectionDataSet1.DataSetName = "CollectionDataSet1";
-            this.collectionDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // table1BindingSource1
-            // 
-            this.table1BindingSource1.DataMember = "Table1";
-            this.table1BindingSource1.DataSource = this.collectionDataSet1;
-            // 
-            // table1TableAdapter1
-            // 
-            this.table1TableAdapter1.ClearBeforeFill = true;
+            this.table1TableAdapter2.ClearBeforeFill = true;
             // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1324, 631);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.collectionData);
-            this.Controls.Add(this.fillToolStrip);
-            this.Controls.Add(this.launcherData);
+            this.ClientSize = new System.Drawing.Size(1333, 639);
+            this.Controls.Add(this.dataTable);
+            this.Controls.Add(this.fillByToolStrip);
             this.Controls.Add(this.logo);
-            this.Controls.Add(this.collectionButton);
-            this.Controls.Add(this.launcherButton);
+            this.Controls.Add(this.detailButton);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
@@ -424,30 +301,40 @@
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet)).EndInit();
-            this.fillToolStrip.ResumeLayout(false);
-            this.fillToolStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.launcherData)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.collectionData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSetBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet1)).EndInit();
+            this.fillByToolStrip.ResumeLayout(false);
+            this.fillByToolStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataTable)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSetFinal)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button launcherButton;
-        private System.Windows.Forms.Button collectionButton;
+        private System.Windows.Forms.Button detailButton;
         private System.Windows.Forms.PictureBox logo;
         public CollectionDataSet collectionDataSet;
         private System.Windows.Forms.BindingSource table1BindingSource;
         private CollectionDataSetTableAdapters.Table1TableAdapter table1TableAdapter;
-        private System.Windows.Forms.ToolStripButton fillToolStripButton;
-        private System.Windows.Forms.ToolStrip fillToolStrip;
-        private System.Windows.Forms.DataGridView launcherData;
-        private System.Windows.Forms.DataGridViewTextBoxColumn field1DataGridViewTextBoxColumn1;
+        private System.Windows.Forms.BindingSource collectionDataSetBindingSource;
+        private CollectionDataSet1 collectionDataSet1;
+        private System.Windows.Forms.BindingSource table1BindingSource1;
+        private CollectionDataSet1TableAdapters.Table1TableAdapter table1TableAdapter1;
+        private CollectionDataSet2 collectionDataSet2;
+        private System.Windows.Forms.BindingSource table1BindingSource2;
+        private CollectionDataSet2TableAdapters.Table1TableAdapter table1TableAdapter2;
+        private System.Windows.Forms.ToolStrip fillByToolStrip;
+        private System.Windows.Forms.ToolStripButton fillByToolStripButton;
+        private System.Windows.Forms.DataGridView dataTable;
+        public CollectionDataSetFinal collectionDataSetFinal;
+        private System.Windows.Forms.BindingSource table1BindingSource3;
+        private CollectionDataSetFinalTableAdapters.Table1TableAdapter table1TableAdapter3;
         private System.Windows.Forms.DataGridViewTextBoxColumn titleDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn platformDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn statusDataGridViewTextBoxColumn;
@@ -456,23 +343,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn obtainedDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn startDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn endDateDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn notesCommentsDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn launchDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridView collectionData;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
-        private System.Windows.Forms.BindingSource collectionDataSetBindingSource;
-        private CollectionDataSet1 collectionDataSet1;
-        private System.Windows.Forms.BindingSource table1BindingSource1;
-        private CollectionDataSet1TableAdapters.Table1TableAdapter table1TableAdapter1;
     }
 }
 

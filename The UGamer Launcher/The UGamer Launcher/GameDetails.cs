@@ -20,11 +20,11 @@ namespace The_UGamer_Launcher
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         public void DisplayInfo(string title, string platform,
-            string status, string rating, string hours, string obtained, 
+            string status, string rating, string hours, string obtained,
             string startDate, string endDate, string notes, Uri launch)
         {
             noImageLabel.Visible = false;
@@ -60,11 +60,18 @@ namespace The_UGamer_Launcher
                 notesLabel.Text = "";
             else
                 notesLabel.Text = "Notes/Comments: \n" + notes;
+
+            button1.Click += (sender, EventArgs) => { button_Click(sender, EventArgs, launch); };
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            
+        }
 
+        private void button_Click(object sender, EventArgs e, Uri launch2)
+        {
+            launcher.Url = launch2;
         }
     }
 }
