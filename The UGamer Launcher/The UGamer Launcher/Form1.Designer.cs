@@ -40,7 +40,6 @@
             this.collectionDataSet1 = new The_UGamer_Launcher.CollectionDataSet1();
             this.table1TableAdapter1 = new The_UGamer_Launcher.CollectionDataSet1TableAdapters.Table1TableAdapter();
             this.fillByToolStrip = new System.Windows.Forms.ToolStrip();
-            this.fillByToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.dataTable = new System.Windows.Forms.DataGridView();
             this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.platformDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -58,13 +57,14 @@
             this.table1BindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.collectionDataSet2 = new The_UGamer_Launcher.CollectionDataSet2();
             this.table1TableAdapter2 = new The_UGamer_Launcher.CollectionDataSet2TableAdapters.Table1TableAdapter();
+            this.driverWarningLabel = new System.Windows.Forms.Label();
+            this.driverInstall = new System.Windows.Forms.WebBrowser();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet1)).BeginInit();
-            this.fillByToolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSetFinal)).BeginInit();
@@ -136,21 +136,11 @@
             // 
             // fillByToolStrip
             // 
-            this.fillByToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fillByToolStripButton});
             this.fillByToolStrip.Location = new System.Drawing.Point(0, 0);
             this.fillByToolStrip.Name = "fillByToolStrip";
             this.fillByToolStrip.Size = new System.Drawing.Size(1333, 25);
             this.fillByToolStrip.TabIndex = 8;
             this.fillByToolStrip.Text = "fillByToolStrip";
-            // 
-            // fillByToolStripButton
-            // 
-            this.fillByToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.fillByToolStripButton.Name = "fillByToolStripButton";
-            this.fillByToolStripButton.Size = new System.Drawing.Size(39, 22);
-            this.fillByToolStripButton.Text = "FillBy";
-            this.fillByToolStripButton.Click += new System.EventHandler(this.fillByToolStripButton_Click_2);
             // 
             // dataTable
             // 
@@ -283,12 +273,35 @@
             // 
             this.table1TableAdapter2.ClearBeforeFill = true;
             // 
+            // driverWarningLabel
+            // 
+            this.driverWarningLabel.AutoSize = true;
+            this.driverWarningLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.driverWarningLabel.Location = new System.Drawing.Point(187, 249);
+            this.driverWarningLabel.Name = "driverWarningLabel";
+            this.driverWarningLabel.Size = new System.Drawing.Size(972, 78);
+            this.driverWarningLabel.TabIndex = 10;
+            this.driverWarningLabel.Text = "You don\'t have the correct drivers to display the database!\r\nOpen the driver inst" +
+    "allation from Microsoft and then you\'re set.";
+            this.driverWarningLabel.Visible = false;
+            // 
+            // driverInstall
+            // 
+            this.driverInstall.Location = new System.Drawing.Point(617, 354);
+            this.driverInstall.MinimumSize = new System.Drawing.Size(20, 20);
+            this.driverInstall.Name = "driverInstall";
+            this.driverInstall.Size = new System.Drawing.Size(68, 64);
+            this.driverInstall.TabIndex = 11;
+            this.driverInstall.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1333, 639);
+            this.Controls.Add(this.driverInstall);
+            this.Controls.Add(this.driverWarningLabel);
             this.Controls.Add(this.dataTable);
             this.Controls.Add(this.fillByToolStrip);
             this.Controls.Add(this.logo);
@@ -304,8 +317,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet1)).EndInit();
-            this.fillByToolStrip.ResumeLayout(false);
-            this.fillByToolStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSetFinal)).EndInit();
@@ -330,7 +341,6 @@
         private System.Windows.Forms.BindingSource table1BindingSource2;
         private CollectionDataSet2TableAdapters.Table1TableAdapter table1TableAdapter2;
         private System.Windows.Forms.ToolStrip fillByToolStrip;
-        private System.Windows.Forms.ToolStripButton fillByToolStripButton;
         private System.Windows.Forms.DataGridView dataTable;
         public CollectionDataSetFinal collectionDataSetFinal;
         private System.Windows.Forms.BindingSource table1BindingSource3;
@@ -345,6 +355,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn endDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn notesCommentsDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn launchDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Label driverWarningLabel;
+        private System.Windows.Forms.WebBrowser driverInstall;
     }
 }
 
