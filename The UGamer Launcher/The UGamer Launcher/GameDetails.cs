@@ -18,16 +18,28 @@ namespace The_UGamer_Launcher
             string status, string rating, string hours, string obtained,
             string startDate, string endDate, string notes, Uri launch)
         { 
-            noImageLabel.Visible = false;
+            noImageText.Visible = false;
+            
             try
             {
-                gamePicture.BackgroundImage = Image.FromFile("Resources/" + input2 + ".png");
+                Icon windowIcon = new Icon("Resources/Icons/" + input2 + ".ico");
+                this.Icon = windowIcon;
+            }
+            // This catchs the exception for when there is no icon.
+            catch (FileNotFoundException e)
+            {
+                
+            }
+
+            try
+            {
+                gamePicture.BackgroundImage = Image.FromFile("Resources/Details/" + input2 + ".png");
             }
             // This catchs the exception for when there is no image.
             catch (FileNotFoundException e)
             {
-                noImageLabel.Text = "File \"" + input2 + " \" not found.";
-                noImageLabel.Visible = true;
+                noImageText.Text = "Image \"" + input2 + " \" not found.";
+                noImageText.Visible = true;
             }
             nameLabel.Text = title; // Displays the name of the game.
             platformLabel.Text = "Platform: " + platform;

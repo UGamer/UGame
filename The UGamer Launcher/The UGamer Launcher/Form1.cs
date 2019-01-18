@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -16,7 +17,8 @@ namespace The_UGamer_Launcher
             // This is caught if you don't have the required OLE DB drivers.
             catch (InvalidOperationException e) 
             {
-                driverWarningLabel.Visible = true;
+                dataTable.Visible = false;
+                driverWarning.Visible = true;
                 Uri installURL = new Uri("https://www.microsoft.com/en-us/download/confirmation.aspx?id=23734");
                 driverInstall.Url = installURL;
             }
@@ -35,6 +37,15 @@ namespace The_UGamer_Launcher
         {
             DetailSelect detailSelect = new DetailSelect(this);
             detailSelect.Show();
+        }
+
+        private void dataTable_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            string titleValue;
+            object value = dataTable.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+            titleValue = value.ToString();
+            DetailSelect detailSelect = new DetailSelect(this);
+            detailSelect.dataScan(titleValue);
         }
     }
 }

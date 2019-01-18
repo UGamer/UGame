@@ -46,9 +46,9 @@
             this.table1BindingSource3 = new System.Windows.Forms.BindingSource(this.components);
             this.collectionDataSetFinal = new The_UGamer_Launcher.CollectionDataSetFinal();
             this.table1TableAdapter3 = new The_UGamer_Launcher.CollectionDataSetFinalTableAdapters.Table1TableAdapter();
-            this.driverWarningLabel = new System.Windows.Forms.Label();
             this.driverInstall = new System.Windows.Forms.WebBrowser();
             this.logo = new System.Windows.Forms.PictureBox();
+            this.driverWarning = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSetFinal)).BeginInit();
@@ -67,12 +67,13 @@
             this.detailButton.Name = "detailButton";
             this.detailButton.Size = new System.Drawing.Size(113, 64);
             this.detailButton.TabIndex = 1;
-            this.detailButton.Text = "Details";
+            this.detailButton.Text = "Search";
             this.detailButton.UseVisualStyleBackColor = false;
             this.detailButton.Click += new System.EventHandler(this.detailButton_Click_1);
             // 
             // fillByToolStrip
             // 
+            this.fillByToolStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.fillByToolStrip.Location = new System.Drawing.Point(0, 0);
             this.fillByToolStrip.Name = "fillByToolStrip";
             this.fillByToolStrip.Size = new System.Drawing.Size(1333, 25);
@@ -83,6 +84,9 @@
             // 
             this.dataTable.AllowUserToAddRows = false;
             this.dataTable.AllowUserToDeleteRows = false;
+            this.dataTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataTable.AutoGenerateColumns = false;
             this.dataTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -102,6 +106,7 @@
             this.dataTable.ReadOnly = true;
             this.dataTable.Size = new System.Drawing.Size(1291, 500);
             this.dataTable.TabIndex = 9;
+            this.dataTable.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataTable_CellDoubleClick);
             // 
             // titleDataGridViewTextBoxColumn
             // 
@@ -196,18 +201,6 @@
             // 
             this.table1TableAdapter3.ClearBeforeFill = true;
             // 
-            // driverWarningLabel
-            // 
-            this.driverWarningLabel.AutoSize = true;
-            this.driverWarningLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.driverWarningLabel.Location = new System.Drawing.Point(187, 249);
-            this.driverWarningLabel.Name = "driverWarningLabel";
-            this.driverWarningLabel.Size = new System.Drawing.Size(972, 78);
-            this.driverWarningLabel.TabIndex = 10;
-            this.driverWarningLabel.Text = "You don\'t have the correct drivers to display the database!\r\nOpen the driver inst" +
-    "allation from Microsoft and then you\'re set.";
-            this.driverWarningLabel.Visible = false;
-            // 
             // driverInstall
             // 
             this.driverInstall.Location = new System.Drawing.Point(617, 354);
@@ -228,17 +221,34 @@
             this.logo.TabIndex = 12;
             this.logo.TabStop = false;
             // 
+            // driverWarning
+            // 
+            this.driverWarning.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.driverWarning.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.driverWarning.Location = new System.Drawing.Point(22, 28);
+            this.driverWarning.Multiline = true;
+            this.driverWarning.Name = "driverWarning";
+            this.driverWarning.ReadOnly = true;
+            this.driverWarning.Size = new System.Drawing.Size(1291, 500);
+            this.driverWarning.TabIndex = 13;
+            this.driverWarning.Text = "You don\'t have the correct drivers to display the database! \r\n\r\nOpen the driver i" +
+    "nstallation from Microsoft and then restart the launcher.";
+            this.driverWarning.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.driverWarning.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1333, 639);
             this.Controls.Add(this.driverInstall);
-            this.Controls.Add(this.driverWarningLabel);
             this.Controls.Add(this.dataTable);
             this.Controls.Add(this.fillByToolStrip);
             this.Controls.Add(this.detailButton);
             this.Controls.Add(this.logo);
+            this.Controls.Add(this.driverWarning);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
@@ -270,9 +280,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn endDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn notesCommentsDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn launchDataGridViewTextBoxColumn;
-        private System.Windows.Forms.Label driverWarningLabel;
         private System.Windows.Forms.WebBrowser driverInstall;
         private System.Windows.Forms.PictureBox logo;
+        private System.Windows.Forms.TextBox driverWarning;
     }
 }
 
