@@ -38,7 +38,7 @@ namespace The_UGamer_Launcher
             // This catchs the exception for when there is no image.
             catch (FileNotFoundException e)
             {
-                noImageText.Text = "Image \"" + input2 + " \" not found.";
+                noImageText.Text = "Image \"" + input2 + "\" not found.";
                 noImageText.Visible = true;
             }
             nameLabel.Text = title; // Displays the name of the game.

@@ -30,6 +30,11 @@ namespace The_UGamer_Launcher
         private void Form1_Load(object sender, EventArgs e) 
         {
             this.table1TableAdapter3.Fill(this.collectionDataSetFinal.Table1);
+            int entryCount = dataTable.Rows.Count;
+            if (entryCount != 1)
+                gameCountText.Text = Convert.ToString(entryCount) + " total games";
+            else
+                gameCountText.Text = Convert.ToString(entryCount) + " total game";
         }
 
         // Clicking the "Details" button opens a new details window.

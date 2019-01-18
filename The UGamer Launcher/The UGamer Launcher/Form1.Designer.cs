@@ -49,6 +49,7 @@
             this.driverInstall = new System.Windows.Forms.WebBrowser();
             this.logo = new System.Windows.Forms.PictureBox();
             this.driverWarning = new System.Windows.Forms.TextBox();
+            this.gameCountText = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSetFinal)).BeginInit();
@@ -62,7 +63,7 @@
             this.detailButton.FlatAppearance.BorderSize = 2;
             this.detailButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.detailButton.ForeColor = System.Drawing.SystemColors.Control;
-            this.detailButton.Location = new System.Drawing.Point(1200, 549);
+            this.detailButton.Location = new System.Drawing.Point(1200, 565);
             this.detailButton.Margin = new System.Windows.Forms.Padding(2);
             this.detailButton.Name = "detailButton";
             this.detailButton.Size = new System.Drawing.Size(113, 64);
@@ -104,7 +105,7 @@
             this.dataTable.Location = new System.Drawing.Point(22, 28);
             this.dataTable.Name = "dataTable";
             this.dataTable.ReadOnly = true;
-            this.dataTable.Size = new System.Drawing.Size(1291, 500);
+            this.dataTable.Size = new System.Drawing.Size(1291, 513);
             this.dataTable.TabIndex = 9;
             this.dataTable.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataTable_CellDoubleClick);
             // 
@@ -215,7 +216,7 @@
             this.logo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.logo.BackColor = System.Drawing.Color.Transparent;
             this.logo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.logo.Location = new System.Drawing.Point(12, 549);
+            this.logo.Location = new System.Drawing.Point(22, 559);
             this.logo.Name = "logo";
             this.logo.Size = new System.Drawing.Size(188, 70);
             this.logo.TabIndex = 12;
@@ -231,18 +232,30 @@
             this.driverWarning.Multiline = true;
             this.driverWarning.Name = "driverWarning";
             this.driverWarning.ReadOnly = true;
-            this.driverWarning.Size = new System.Drawing.Size(1291, 500);
+            this.driverWarning.Size = new System.Drawing.Size(1291, 513);
             this.driverWarning.TabIndex = 13;
             this.driverWarning.Text = "You don\'t have the correct drivers to display the database! \r\n\r\nOpen the driver i" +
     "nstallation from Microsoft and then restart the launcher.";
             this.driverWarning.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.driverWarning.Visible = false;
             // 
+            // gameCountText
+            // 
+            this.gameCountText.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.gameCountText.Location = new System.Drawing.Point(559, 549);
+            this.gameCountText.Name = "gameCountText";
+            this.gameCountText.ReadOnly = true;
+            this.gameCountText.Size = new System.Drawing.Size(175, 26);
+            this.gameCountText.TabIndex = 14;
+            this.gameCountText.Text = "Total Games";
+            this.gameCountText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1333, 639);
+            this.ClientSize = new System.Drawing.Size(1333, 652);
+            this.Controls.Add(this.gameCountText);
             this.Controls.Add(this.driverInstall);
             this.Controls.Add(this.dataTable);
             this.Controls.Add(this.fillByToolStrip);
@@ -283,6 +296,7 @@
         private System.Windows.Forms.WebBrowser driverInstall;
         private System.Windows.Forms.PictureBox logo;
         private System.Windows.Forms.TextBox driverWarning;
+        private System.Windows.Forms.TextBox gameCountText;
     }
 }
 
