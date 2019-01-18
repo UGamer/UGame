@@ -29,7 +29,8 @@ namespace The_UGamer_Launcher
         // This fills the data table with the user data.
         private void Form1_Load(object sender, EventArgs e) 
         {
-            this.table1TableAdapter3.Fill(this.collectionDataSetFinal.Table1);
+            // TODO: This line of code loads data into the 'collectionDataSetFinal2.Table1' table. You can move, or remove it, as needed.
+            this.table1TableAdapter.Fill(this.collectionDataSetFinal2.Table1);
             int entryCount = dataTable.Rows.Count;
             if (entryCount != 1)
                 gameCountText.Text = Convert.ToString(entryCount) + " total games";
@@ -51,6 +52,12 @@ namespace The_UGamer_Launcher
             titleValue = value.ToString();
             DetailSelect detailSelect = new DetailSelect(this);
             detailSelect.dataScan(titleValue);
+        }
+
+        private void addEntryButton_Click(object sender, EventArgs e)
+        {
+            AddGame addGame = new AddGame(this);
+            addGame.Show();
         }
     }
 }

@@ -31,13 +31,14 @@ namespace The_UGamer_Launcher
             int y = 0, z = 0;
 
             // This makes the whole database into an array.
-            DataTable dt = frm1.collectionDataSetFinal.Tables[0];
-            int columnIndex = 0; // Name column
+            DataTable dt = frm1.collectionDataSetFinal2.Table1;
+            int columnIndex = 1; // Name column
             string[] table = new string[dt.Rows.Count];
             int index = 0;
             for (index = 0; index < dt.Rows.Count; index++)
             {
                 table[index] = dt.Rows[index][columnIndex].ToString();
+                label1.Text = table[index];
             }
 
             // This checks if the user input is actually an entry.
@@ -84,15 +85,15 @@ namespace The_UGamer_Launcher
             GameDetails gameWindow = new GameDetails();
             if (y == 1)
             {
-                string platform = dt.Rows[z][1].ToString();
-                string status = dt.Rows[z][2].ToString();
-                string rating = dt.Rows[z][3].ToString();
-                string hours = dt.Rows[z][4].ToString();
-                string obtained = dt.Rows[z][5].ToString();
-                string startDate = dt.Rows[z][6].ToString();
-                string endDate = dt.Rows[z][7].ToString();
-                string notes = dt.Rows[z][8].ToString();
-                string launchString = dt.Rows[z][9].ToString();
+                string platform = dt.Rows[z][2].ToString();
+                string status = dt.Rows[z][3].ToString();
+                string rating = dt.Rows[z][4].ToString();
+                string hours = dt.Rows[z][5].ToString();
+                string obtained = dt.Rows[z][6].ToString();
+                string startDate = dt.Rows[z][7].ToString();
+                string endDate = dt.Rows[z][8].ToString();
+                string notes = dt.Rows[z][9].ToString();
+                string launchString = dt.Rows[z][10].ToString();
 
                 if (launchString.IndexOf("\\") != -1)
                     launchString = pathFix.Replace(input, "/"); // This fixes .exe links automatically.

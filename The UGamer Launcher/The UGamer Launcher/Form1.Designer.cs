@@ -33,6 +33,15 @@
             this.detailButton = new System.Windows.Forms.Button();
             this.fillByToolStrip = new System.Windows.Forms.ToolStrip();
             this.dataTable = new System.Windows.Forms.DataGridView();
+            this.driverInstall = new System.Windows.Forms.WebBrowser();
+            this.driverWarning = new System.Windows.Forms.TextBox();
+            this.gameCountText = new System.Windows.Forms.TextBox();
+            this.addEntryButton = new System.Windows.Forms.Button();
+            this.logo = new System.Windows.Forms.PictureBox();
+            this.table1BindingSource3 = new System.Windows.Forms.BindingSource(this.components);
+            this.collectionDataSetFinal = new The_UGamer_Launcher.CollectionDataSetFinal();
+            this.table1TableAdapter3 = new The_UGamer_Launcher.CollectionDataSetFinalTableAdapters.Table1TableAdapter();
+            this.table1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.platformDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.statusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,17 +52,16 @@
             this.endDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.notesCommentsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.launchDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.table1BindingSource3 = new System.Windows.Forms.BindingSource(this.components);
-            this.collectionDataSetFinal = new The_UGamer_Launcher.CollectionDataSetFinal();
-            this.table1TableAdapter3 = new The_UGamer_Launcher.CollectionDataSetFinalTableAdapters.Table1TableAdapter();
-            this.driverInstall = new System.Windows.Forms.WebBrowser();
-            this.logo = new System.Windows.Forms.PictureBox();
-            this.driverWarning = new System.Windows.Forms.TextBox();
-            this.gameCountText = new System.Windows.Forms.TextBox();
+            this.table1BindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.collectionDataSetFinal2 = new The_UGamer_Launcher.CollectionDataSetFinal2();
+            this.table1TableAdapter = new The_UGamer_Launcher.CollectionDataSetFinal2TableAdapters.Table1TableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSetFinal)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSetFinal2)).BeginInit();
             this.SuspendLayout();
             // 
             // detailButton
@@ -77,7 +85,7 @@
             this.fillByToolStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.fillByToolStrip.Location = new System.Drawing.Point(0, 0);
             this.fillByToolStrip.Name = "fillByToolStrip";
-            this.fillByToolStrip.Size = new System.Drawing.Size(1333, 25);
+            this.fillByToolStrip.Size = new System.Drawing.Size(1333, 28);
             this.fillByToolStrip.TabIndex = 8;
             this.fillByToolStrip.Text = "fillByToolStrip";
             // 
@@ -101,13 +109,96 @@
             this.endDateDataGridViewTextBoxColumn,
             this.notesCommentsDataGridViewTextBoxColumn,
             this.launchDataGridViewTextBoxColumn});
-            this.dataTable.DataSource = this.table1BindingSource3;
+            this.dataTable.DataSource = this.table1BindingSource1;
             this.dataTable.Location = new System.Drawing.Point(22, 28);
             this.dataTable.Name = "dataTable";
             this.dataTable.ReadOnly = true;
             this.dataTable.Size = new System.Drawing.Size(1291, 513);
             this.dataTable.TabIndex = 9;
             this.dataTable.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataTable_CellDoubleClick);
+            // 
+            // driverInstall
+            // 
+            this.driverInstall.Location = new System.Drawing.Point(617, 354);
+            this.driverInstall.MinimumSize = new System.Drawing.Size(20, 20);
+            this.driverInstall.Name = "driverInstall";
+            this.driverInstall.Size = new System.Drawing.Size(68, 64);
+            this.driverInstall.TabIndex = 11;
+            this.driverInstall.Visible = false;
+            // 
+            // driverWarning
+            // 
+            this.driverWarning.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.driverWarning.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.driverWarning.Location = new System.Drawing.Point(22, 28);
+            this.driverWarning.Multiline = true;
+            this.driverWarning.Name = "driverWarning";
+            this.driverWarning.ReadOnly = true;
+            this.driverWarning.Size = new System.Drawing.Size(1291, 513);
+            this.driverWarning.TabIndex = 13;
+            this.driverWarning.Text = "You don\'t have the correct drivers to display the database! \r\n\r\nOpen the driver i" +
+    "nstallation from Microsoft and then restart the launcher.";
+            this.driverWarning.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.driverWarning.Visible = false;
+            // 
+            // gameCountText
+            // 
+            this.gameCountText.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.gameCountText.Location = new System.Drawing.Point(559, 549);
+            this.gameCountText.Name = "gameCountText";
+            this.gameCountText.ReadOnly = true;
+            this.gameCountText.Size = new System.Drawing.Size(175, 26);
+            this.gameCountText.TabIndex = 14;
+            this.gameCountText.Text = "Total Games";
+            this.gameCountText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // addEntryButton
+            // 
+            this.addEntryButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.addEntryButton.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.addEntryButton.FlatAppearance.BorderSize = 2;
+            this.addEntryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addEntryButton.ForeColor = System.Drawing.SystemColors.Control;
+            this.addEntryButton.Location = new System.Drawing.Point(1083, 565);
+            this.addEntryButton.Margin = new System.Windows.Forms.Padding(2);
+            this.addEntryButton.Name = "addEntryButton";
+            this.addEntryButton.Size = new System.Drawing.Size(113, 64);
+            this.addEntryButton.TabIndex = 15;
+            this.addEntryButton.Text = "Add Entry";
+            this.addEntryButton.UseVisualStyleBackColor = false;
+            this.addEntryButton.Click += new System.EventHandler(this.addEntryButton_Click);
+            // 
+            // logo
+            // 
+            this.logo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.logo.BackColor = System.Drawing.Color.Transparent;
+            this.logo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.logo.Location = new System.Drawing.Point(22, 559);
+            this.logo.Name = "logo";
+            this.logo.Size = new System.Drawing.Size(188, 70);
+            this.logo.TabIndex = 12;
+            this.logo.TabStop = false;
+            // 
+            // table1BindingSource3
+            // 
+            this.table1BindingSource3.DataMember = "Table1";
+            this.table1BindingSource3.DataSource = this.collectionDataSetFinal;
+            // 
+            // collectionDataSetFinal
+            // 
+            this.collectionDataSetFinal.DataSetName = "CollectionDataSetFinal";
+            this.collectionDataSetFinal.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // table1TableAdapter3
+            // 
+            this.table1TableAdapter3.ClearBeforeFill = true;
+            // 
+            // table1BindingSource
+            // 
+            this.table1BindingSource.DataMember = "Table1";
+            this.table1BindingSource.DataSource = this.collectionDataSetFinal;
             // 
             // titleDataGridViewTextBoxColumn
             // 
@@ -158,7 +249,7 @@
             // 
             // startDateDataGridViewTextBoxColumn
             // 
-            this.startDateDataGridViewTextBoxColumn.DataPropertyName = "Start Date";
+            this.startDateDataGridViewTextBoxColumn.DataPropertyName = "StartDate";
             this.startDateDataGridViewTextBoxColumn.HeaderText = "Start Date";
             this.startDateDataGridViewTextBoxColumn.Name = "startDateDataGridViewTextBoxColumn";
             this.startDateDataGridViewTextBoxColumn.ReadOnly = true;
@@ -166,7 +257,7 @@
             // 
             // endDateDataGridViewTextBoxColumn
             // 
-            this.endDateDataGridViewTextBoxColumn.DataPropertyName = "End Date";
+            this.endDateDataGridViewTextBoxColumn.DataPropertyName = "EndDate";
             this.endDateDataGridViewTextBoxColumn.HeaderText = "End Date";
             this.endDateDataGridViewTextBoxColumn.Name = "endDateDataGridViewTextBoxColumn";
             this.endDateDataGridViewTextBoxColumn.ReadOnly = true;
@@ -175,7 +266,7 @@
             // notesCommentsDataGridViewTextBoxColumn
             // 
             this.notesCommentsDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.notesCommentsDataGridViewTextBoxColumn.DataPropertyName = "Notes/Comments";
+            this.notesCommentsDataGridViewTextBoxColumn.DataPropertyName = "Notes";
             this.notesCommentsDataGridViewTextBoxColumn.HeaderText = "Notes/Comments";
             this.notesCommentsDataGridViewTextBoxColumn.Name = "notesCommentsDataGridViewTextBoxColumn";
             this.notesCommentsDataGridViewTextBoxColumn.ReadOnly = true;
@@ -188,73 +279,26 @@
             this.launchDataGridViewTextBoxColumn.ReadOnly = true;
             this.launchDataGridViewTextBoxColumn.Visible = false;
             // 
-            // table1BindingSource3
+            // table1BindingSource1
             // 
-            this.table1BindingSource3.DataMember = "Table1";
-            this.table1BindingSource3.DataSource = this.collectionDataSetFinal;
+            this.table1BindingSource1.DataMember = "Table1";
+            this.table1BindingSource1.DataSource = this.collectionDataSetFinal2;
             // 
-            // collectionDataSetFinal
+            // collectionDataSetFinal2
             // 
-            this.collectionDataSetFinal.DataSetName = "CollectionDataSetFinal";
-            this.collectionDataSetFinal.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.collectionDataSetFinal2.DataSetName = "CollectionDataSetFinal2";
+            this.collectionDataSetFinal2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // table1TableAdapter3
+            // table1TableAdapter
             // 
-            this.table1TableAdapter3.ClearBeforeFill = true;
-            // 
-            // driverInstall
-            // 
-            this.driverInstall.Location = new System.Drawing.Point(617, 354);
-            this.driverInstall.MinimumSize = new System.Drawing.Size(20, 20);
-            this.driverInstall.Name = "driverInstall";
-            this.driverInstall.Size = new System.Drawing.Size(68, 64);
-            this.driverInstall.TabIndex = 11;
-            this.driverInstall.Visible = false;
-            // 
-            // logo
-            // 
-            this.logo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.logo.BackColor = System.Drawing.Color.Transparent;
-            this.logo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.logo.Location = new System.Drawing.Point(22, 559);
-            this.logo.Name = "logo";
-            this.logo.Size = new System.Drawing.Size(188, 70);
-            this.logo.TabIndex = 12;
-            this.logo.TabStop = false;
-            // 
-            // driverWarning
-            // 
-            this.driverWarning.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.driverWarning.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.driverWarning.Location = new System.Drawing.Point(22, 28);
-            this.driverWarning.Multiline = true;
-            this.driverWarning.Name = "driverWarning";
-            this.driverWarning.ReadOnly = true;
-            this.driverWarning.Size = new System.Drawing.Size(1291, 513);
-            this.driverWarning.TabIndex = 13;
-            this.driverWarning.Text = "You don\'t have the correct drivers to display the database! \r\n\r\nOpen the driver i" +
-    "nstallation from Microsoft and then restart the launcher.";
-            this.driverWarning.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.driverWarning.Visible = false;
-            // 
-            // gameCountText
-            // 
-            this.gameCountText.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.gameCountText.Location = new System.Drawing.Point(559, 549);
-            this.gameCountText.Name = "gameCountText";
-            this.gameCountText.ReadOnly = true;
-            this.gameCountText.Size = new System.Drawing.Size(175, 26);
-            this.gameCountText.TabIndex = 14;
-            this.gameCountText.Text = "Total Games";
-            this.gameCountText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.table1TableAdapter.ClearBeforeFill = true;
             // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1333, 652);
+            this.Controls.Add(this.addEntryButton);
             this.Controls.Add(this.gameCountText);
             this.Controls.Add(this.driverInstall);
             this.Controls.Add(this.dataTable);
@@ -268,9 +312,12 @@
             this.Text = "UGame Launcher";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataTable)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSetFinal)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSetFinal2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -283,6 +330,11 @@
         public CollectionDataSetFinal collectionDataSetFinal;
         private System.Windows.Forms.BindingSource table1BindingSource3;
         private CollectionDataSetFinalTableAdapters.Table1TableAdapter table1TableAdapter3;
+        private System.Windows.Forms.WebBrowser driverInstall;
+        private System.Windows.Forms.PictureBox logo;
+        private System.Windows.Forms.TextBox driverWarning;
+        private System.Windows.Forms.TextBox gameCountText;
+        private System.Windows.Forms.Button addEntryButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn titleDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn platformDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn statusDataGridViewTextBoxColumn;
@@ -293,10 +345,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn endDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn notesCommentsDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn launchDataGridViewTextBoxColumn;
-        private System.Windows.Forms.WebBrowser driverInstall;
-        private System.Windows.Forms.PictureBox logo;
-        private System.Windows.Forms.TextBox driverWarning;
-        private System.Windows.Forms.TextBox gameCountText;
+        private System.Windows.Forms.BindingSource table1BindingSource;
+        public CollectionDataSetFinal2 collectionDataSetFinal2;
+        private System.Windows.Forms.BindingSource table1BindingSource1;
+        private CollectionDataSetFinal2TableAdapters.Table1TableAdapter table1TableAdapter;
     }
 }
 
