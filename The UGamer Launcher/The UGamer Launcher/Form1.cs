@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace The_UGamer_Launcher
@@ -7,30 +8,30 @@ namespace The_UGamer_Launcher
     {
         public Form1()
         {
+            // Starts up the program.
             try
             {
                 InitializeComponent();
             }
-            catch (InvalidOperationException e) // This is caught if you don't have the required OLE DB drivers.
+            // This is caught if you don't have the required OLE DB drivers.
+            catch (InvalidOperationException e) 
             {
                 driverWarningLabel.Visible = true;
                 Uri installURL = new Uri("https://www.microsoft.com/en-us/download/confirmation.aspx?id=23734");
                 driverInstall.Url = installURL;
             }
+            this.BackgroundImage = Image.FromFile("Resources/Theme/backgroundImage.png");
+            logo.BackgroundImage = Image.FromFile("Resources/Theme/logo.png");
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e) // Delete this later.
-        {
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e) // This fills the data table with the user data.
+        // This fills the data table with the user data.
+        private void Form1_Load(object sender, EventArgs e) 
         {
             this.table1TableAdapter3.Fill(this.collectionDataSetFinal.Table1);
-
         }
 
-        private void detailButton_Click_1(object sender, EventArgs e) // Clicking the "Details" button opens a new details window.
+        // Clicking the "Details" button opens a new details window.
+        private void detailButton_Click_1(object sender, EventArgs e) 
         {
             DetailSelect detailSelect = new DetailSelect(this);
             detailSelect.Show();

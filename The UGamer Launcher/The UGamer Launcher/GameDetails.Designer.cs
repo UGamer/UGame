@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GameDetails));
             this.nameLabel = new System.Windows.Forms.Label();
             this.platformLabel = new System.Windows.Forms.Label();
             this.statusLabel = new System.Windows.Forms.Label();
@@ -41,19 +41,10 @@
             this.button1 = new System.Windows.Forms.Button();
             this.noImageLabel = new System.Windows.Forms.Label();
             this.launcher = new System.Windows.Forms.WebBrowser();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.gamePicture = new System.Windows.Forms.PictureBox();
+            this.notesBox = new System.Windows.Forms.TextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.gamePicture)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox1.Location = new System.Drawing.Point(8, 8);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(263, 266);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // nameLabel
             // 
@@ -132,14 +123,14 @@
             this.notesLabel.AutoSize = true;
             this.notesLabel.Location = new System.Drawing.Point(277, 226);
             this.notesLabel.Name = "notesLabel";
-            this.notesLabel.Size = new System.Drawing.Size(12, 13);
+            this.notesLabel.Size = new System.Drawing.Size(92, 13);
             this.notesLabel.TabIndex = 9;
-            this.notesLabel.Text = "s";
+            this.notesLabel.Text = "Notes/Comments:";
             // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(85, 278);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(118, 27);
             this.button1.TabIndex = 10;
@@ -167,12 +158,31 @@
             this.launcher.TabIndex = 12;
             this.launcher.Visible = false;
             // 
+            // gamePicture
+            // 
+            this.gamePicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.gamePicture.Location = new System.Drawing.Point(8, 8);
+            this.gamePicture.Margin = new System.Windows.Forms.Padding(2);
+            this.gamePicture.Name = "gamePicture";
+            this.gamePicture.Size = new System.Drawing.Size(263, 266);
+            this.gamePicture.TabIndex = 13;
+            this.gamePicture.TabStop = false;
+            // 
+            // notesBox
+            // 
+            this.notesBox.Location = new System.Drawing.Point(277, 243);
+            this.notesBox.Multiline = true;
+            this.notesBox.Name = "notesBox";
+            this.notesBox.ReadOnly = true;
+            this.notesBox.Size = new System.Drawing.Size(334, 62);
+            this.notesBox.TabIndex = 14;
+            // 
             // GameDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(623, 320);
-            this.Controls.Add(this.launcher);
+            this.Controls.Add(this.notesBox);
             this.Controls.Add(this.noImageLabel);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.notesLabel);
@@ -184,19 +194,19 @@
             this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.platformLabel);
             this.Controls.Add(this.nameLabel);
-            this.Controls.Add(this.pictureBox1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Controls.Add(this.gamePicture);
+            this.Controls.Add(this.launcher);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "GameDetails";
             this.Text = "GameDetails";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gamePicture)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label nameLabel;
         private System.Windows.Forms.Label platformLabel;
         private System.Windows.Forms.Label statusLabel;
@@ -209,5 +219,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label noImageLabel;
         private System.Windows.Forms.WebBrowser launcher;
+        private System.Windows.Forms.PictureBox gamePicture;
+        private System.Windows.Forms.TextBox notesBox;
     }
 }

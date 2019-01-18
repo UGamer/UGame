@@ -64,21 +64,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CollectionDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CollectionDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="CollectionDataSet1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CollectionDataSet1.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="CollectionDataSet2.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CollectionDataSet2.xsd</DependentUpon>
-    </Compile>
     <Compile Include="CollectionDataSetFinal.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -123,39 +108,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="CollectionDataSet.xsc">
-      <DependentUpon>CollectionDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="CollectionDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>CollectionDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="CollectionDataSet.xss">
-      <DependentUpon>CollectionDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="CollectionDataSet1.xsc">
-      <DependentUpon>CollectionDataSet1.xsd</DependentUpon>
-    </None>
-    <None Include="CollectionDataSet1.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>CollectionDataSet1.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="CollectionDataSet1.xss">
-      <DependentUpon>CollectionDataSet1.xsd</DependentUpon>
-    </None>
-    <None Include="CollectionDataSet2.xsc">
-      <DependentUpon>CollectionDataSet2.xsd</DependentUpon>
-    </None>
-    <None Include="CollectionDataSet2.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>CollectionDataSet2.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="CollectionDataSet2.xss">
-      <DependentUpon>CollectionDataSet2.xsd</DependentUpon>
-    </None>
     <None Include="CollectionDataSetFinal.xsc">
       <DependentUpon>CollectionDataSetFinal.xsd</DependentUpon>
     </None>

@@ -31,14 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.detailButton = new System.Windows.Forms.Button();
-            this.logo = new System.Windows.Forms.PictureBox();
-            this.table1BindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.collectionDataSet = new The_UGamer_Launcher.CollectionDataSet();
-            this.table1TableAdapter = new The_UGamer_Launcher.CollectionDataSetTableAdapters.Table1TableAdapter();
-            this.collectionDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.table1BindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.collectionDataSet1 = new The_UGamer_Launcher.CollectionDataSet1();
-            this.table1TableAdapter1 = new The_UGamer_Launcher.CollectionDataSet1TableAdapters.Table1TableAdapter();
             this.fillByToolStrip = new System.Windows.Forms.ToolStrip();
             this.dataTable = new System.Windows.Forms.DataGridView();
             this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,22 +46,13 @@
             this.table1BindingSource3 = new System.Windows.Forms.BindingSource(this.components);
             this.collectionDataSetFinal = new The_UGamer_Launcher.CollectionDataSetFinal();
             this.table1TableAdapter3 = new The_UGamer_Launcher.CollectionDataSetFinalTableAdapters.Table1TableAdapter();
-            this.table1BindingSource2 = new System.Windows.Forms.BindingSource(this.components);
-            this.collectionDataSet2 = new The_UGamer_Launcher.CollectionDataSet2();
-            this.table1TableAdapter2 = new The_UGamer_Launcher.CollectionDataSet2TableAdapters.Table1TableAdapter();
             this.driverWarningLabel = new System.Windows.Forms.Label();
             this.driverInstall = new System.Windows.Forms.WebBrowser();
-            ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSetBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet1)).BeginInit();
+            this.logo = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSetFinal)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             this.SuspendLayout();
             // 
             // detailButton
@@ -87,52 +70,6 @@
             this.detailButton.Text = "Details";
             this.detailButton.UseVisualStyleBackColor = false;
             this.detailButton.Click += new System.EventHandler(this.detailButton_Click_1);
-            // 
-            // logo
-            // 
-            this.logo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.logo.BackColor = System.Drawing.Color.Transparent;
-            this.logo.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("logo.BackgroundImage")));
-            this.logo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.logo.Location = new System.Drawing.Point(12, 549);
-            this.logo.Name = "logo";
-            this.logo.Size = new System.Drawing.Size(188, 70);
-            this.logo.TabIndex = 2;
-            this.logo.TabStop = false;
-            this.logo.Click += new System.EventHandler(this.pictureBox1_Click);
-            // 
-            // table1BindingSource
-            // 
-            this.table1BindingSource.DataMember = "Table1";
-            this.table1BindingSource.DataSource = this.collectionDataSet;
-            // 
-            // collectionDataSet
-            // 
-            this.collectionDataSet.DataSetName = "CollectionDataSet";
-            this.collectionDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // table1TableAdapter
-            // 
-            this.table1TableAdapter.ClearBeforeFill = true;
-            // 
-            // collectionDataSetBindingSource
-            // 
-            this.collectionDataSetBindingSource.DataSource = this.collectionDataSet;
-            this.collectionDataSetBindingSource.Position = 0;
-            // 
-            // table1BindingSource1
-            // 
-            this.table1BindingSource1.DataMember = "Table1";
-            this.table1BindingSource1.DataSource = this.collectionDataSet1;
-            // 
-            // collectionDataSet1
-            // 
-            this.collectionDataSet1.DataSetName = "CollectionDataSet1";
-            this.collectionDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // table1TableAdapter1
-            // 
-            this.table1TableAdapter1.ClearBeforeFill = true;
             // 
             // fillByToolStrip
             // 
@@ -259,20 +196,6 @@
             // 
             this.table1TableAdapter3.ClearBeforeFill = true;
             // 
-            // table1BindingSource2
-            // 
-            this.table1BindingSource2.DataMember = "Table1";
-            this.table1BindingSource2.DataSource = this.collectionDataSet2;
-            // 
-            // collectionDataSet2
-            // 
-            this.collectionDataSet2.DataSetName = "CollectionDataSet2";
-            this.collectionDataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // table1TableAdapter2
-            // 
-            this.table1TableAdapter2.ClearBeforeFill = true;
-            // 
             // driverWarningLabel
             // 
             this.driverWarningLabel.AutoSize = true;
@@ -294,34 +217,37 @@
             this.driverInstall.TabIndex = 11;
             this.driverInstall.Visible = false;
             // 
+            // logo
+            // 
+            this.logo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.logo.BackColor = System.Drawing.Color.Transparent;
+            this.logo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.logo.Location = new System.Drawing.Point(12, 549);
+            this.logo.Name = "logo";
+            this.logo.Size = new System.Drawing.Size(188, 70);
+            this.logo.TabIndex = 12;
+            this.logo.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1333, 639);
             this.Controls.Add(this.driverInstall);
             this.Controls.Add(this.driverWarningLabel);
             this.Controls.Add(this.dataTable);
             this.Controls.Add(this.fillByToolStrip);
-            this.Controls.Add(this.logo);
             this.Controls.Add(this.detailButton);
+            this.Controls.Add(this.logo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "UGame Launcher";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSetBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSetFinal)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -329,17 +255,6 @@
 
         #endregion
         private System.Windows.Forms.Button detailButton;
-        private System.Windows.Forms.PictureBox logo;
-        public CollectionDataSet collectionDataSet;
-        private System.Windows.Forms.BindingSource table1BindingSource;
-        private CollectionDataSetTableAdapters.Table1TableAdapter table1TableAdapter;
-        private System.Windows.Forms.BindingSource collectionDataSetBindingSource;
-        private CollectionDataSet1 collectionDataSet1;
-        private System.Windows.Forms.BindingSource table1BindingSource1;
-        private CollectionDataSet1TableAdapters.Table1TableAdapter table1TableAdapter1;
-        private CollectionDataSet2 collectionDataSet2;
-        private System.Windows.Forms.BindingSource table1BindingSource2;
-        private CollectionDataSet2TableAdapters.Table1TableAdapter table1TableAdapter2;
         private System.Windows.Forms.ToolStrip fillByToolStrip;
         private System.Windows.Forms.DataGridView dataTable;
         public CollectionDataSetFinal collectionDataSetFinal;
@@ -357,6 +272,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn launchDataGridViewTextBoxColumn;
         private System.Windows.Forms.Label driverWarningLabel;
         private System.Windows.Forms.WebBrowser driverInstall;
+        private System.Windows.Forms.PictureBox logo;
     }
 }
 
