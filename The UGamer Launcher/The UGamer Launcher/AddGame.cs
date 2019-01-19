@@ -40,24 +40,60 @@ namespace The_UGamer_Launcher
             string rating, string hours, string obtained, string startDate,
                 string endDate, string launchCode, string notes)
         {
-            string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\deboltm\Documents\GitHub\UGame-Launcher\The UGamer Launcher\The UGamer Launcher\bin\Debug\Collection.accdb";
+            string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Collection.accdb";
             OleDbConnection con = new OleDbConnection(connectionString);
-            // OleDbCommand cmd = new OleDbCommand("INSERT INTO Table1 (Title, Platform, Status, Rating, Hours, Obtained, [Start Date], [End Date], [Notes/Comments], Launch) VALUES (Title, Platform, Status, Rating, Hours, Obtained, Start Date, End Date, Notes/Comments, Launch);", con);
             OleDbCommand cmd = new OleDbCommand("INSERT INTO Table1 (Title, Platform, Status, Rating, Hours, Obtained, StartDate, EndDate, Notes, Launch) VALUES (@Title, @Platform, @Status, @Rating, @Hours, @Obtained, @StartDate, @EndDate, @Notes, @Launch);", con);
 
             con.Open();
-            
+
             cmd.Parameters.AddWithValue("@Title", title);
-            cmd.Parameters.AddWithValue("@Platform", platform);
-            cmd.Parameters.AddWithValue("@Status", status);
-            cmd.Parameters.AddWithValue("@Rating", rating);
-            cmd.Parameters.AddWithValue("@Hours", hours);
-            cmd.Parameters.AddWithValue("@Obtained", obtained);
-            cmd.Parameters.AddWithValue("@StartDate", startDate);
-            cmd.Parameters.AddWithValue("@End Date", endDate);
-            cmd.Parameters.AddWithValue("@Notes/Comments", notes);
-            cmd.Parameters.AddWithValue("@Launch", launchCode);
-            cmd.ExecuteNonQuery();
+            if (platform == "")
+                cmd.Parameters.AddWithValue("@Platform", " ");
+            else
+                cmd.Parameters.AddWithValue("@Platform", platform);
+
+            if (status == "")
+                cmd.Parameters.AddWithValue("@Status", " ");
+            else
+                cmd.Parameters.AddWithValue("@Status", status);
+
+            if (rating == "")
+                cmd.Parameters.AddWithValue("@Rating", "0");
+            else
+                cmd.Parameters.AddWithValue("@Rating", rating);
+
+            if (hours == "")
+                cmd.Parameters.AddWithValue("@Hours", "0");
+            else
+                cmd.Parameters.AddWithValue("@Hours", hours);
+
+            if (obtained == "")
+                cmd.Parameters.AddWithValue("@Obtained", " ");
+            else
+                cmd.Parameters.AddWithValue("@Obtained", obtained);
+
+            if (startDate == "")
+                cmd.Parameters.AddWithValue("@StartDate", " ");
+            else
+                cmd.Parameters.AddWithValue("@StartDate", startDate);
+
+            if (endDate == "")
+                cmd.Parameters.AddWithValue("@EndDate", " ");
+            else
+                cmd.Parameters.AddWithValue("@EndDate", endDate);
+
+            if (notes == "")
+                cmd.Parameters.AddWithValue("@Notes", " ");
+            else
+                cmd.Parameters.AddWithValue("@Notes", notes);
+
+            if (launchCode == "")
+                cmd.Parameters.AddWithValue("@Launch", " ");
+            else
+                cmd.Parameters.AddWithValue("@Launch", launchCode);
+
+            if (title != "")
+                cmd.ExecuteNonQuery();
         }
     }
 }
