@@ -32,11 +32,12 @@ namespace The_UGamer_Launcher
             string endDate = endDateBox.Text;
             string launchCode = launchBox.Text;
             string notes = notesBox.Text;
+
             addEntry(title, platform, status, rating, hours, obtained, startDate, 
                 endDate, launchCode, notes);
         }
 
-        private static void addEntry(string title, string platform, string status,
+        private void addEntry(string title, string platform, string status,
             string rating, string hours, string obtained, string startDate,
                 string endDate, string launchCode, string notes)
         {
@@ -93,7 +94,26 @@ namespace The_UGamer_Launcher
                 cmd.Parameters.AddWithValue("@Launch", launchCode);
 
             if (title != "")
+            {
                 cmd.ExecuteNonQuery();
+                this.Text = "Add an entry... Game added.";
+                titleBox.Text = "";
+                platformBox.Text = "";
+                statusBox.Text = "";
+                ratingBox.Text = "";
+                hoursBox.Text = "";
+                obtainedBox.Text = "";
+                startDateBox.Text = "";
+                endDateBox.Text = "";
+                launchBox.Text = "";
+                notesBox.Text = "";
+            }
+            else
+            {
+                this.Text = "Add an entry... Game not added.";
+            }
+
+            return;
         }
     }
 }
