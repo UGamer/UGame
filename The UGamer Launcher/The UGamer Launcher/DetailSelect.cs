@@ -38,7 +38,6 @@ namespace The_UGamer_Launcher
             for (index = 0; index < dt.Rows.Count; index++)
             {
                 table[index] = dt.Rows[index][columnIndex].ToString();
-                label1.Text = table[index];
             }
 
             // This checks if the user input is actually an entry.
@@ -96,24 +95,28 @@ namespace The_UGamer_Launcher
                 string launchString = dt.Rows[z][10].ToString();
 
                 if (launchString.IndexOf("\\") != -1)
-                    launchString = pathFix.Replace(input, "/"); // This fixes .exe links automatically.
+                    launchString = pathFix.Replace(launchString, "/"); // This fixes .exe links automatically.
 
-                Uri launch;
-                if (launchString != "")
-                    launch = new Uri(launchString);
-                else
-                    launch = new Uri("https://ugamer.github.io/");
+                bool exePath = isExe(launchString);
 
                 gameWindow.Text = input;
                 gameWindow.Show();
                 gameWindow.DisplayInfo(input, input2, platform, status, rating,
-                    hours, obtained, startDate, endDate, notes, launch);
+                    hours, obtained, startDate, endDate, notes, launchString, exePath);
                 label2.Visible = false;
                 y = 0;
             }
             // If the entry does not exist, an error message shows.
             else
                 label2.Visible = true;
+        }
+
+        private static bool isExe(string p)
+        {
+            if (p.IndexOf(".exe") == -1)
+                return false;
+            else
+                return true;
         }
     }
 }

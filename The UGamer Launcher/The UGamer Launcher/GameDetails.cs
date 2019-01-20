@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
+using System.Diagnostics;
 
 namespace The_UGamer_Launcher
 {
@@ -16,7 +17,7 @@ namespace The_UGamer_Launcher
         // Displays all the info for the game.
         public void DisplayInfo(string title, string input2, string platform,
             string status, string rating, string hours, string obtained,
-            string startDate, string endDate, string notes, Uri launch)
+            string startDate, string endDate, string notes, string launchString2, bool exePath2)
         { 
             noImageText.Visible = false;
             
@@ -66,7 +67,10 @@ namespace The_UGamer_Launcher
             else
                 notesBox.Text = notes;
 
-            button1.Click += (sender, EventArgs) => { button_Click(sender, EventArgs, launch); }; // This passes the launch URL to the launch button.
+            if (launchString2 == "")
+                button1.Visible = false;
+
+            button1.Click += (sender, EventArgs) => { button_Click(sender, EventArgs, launchString2, exePath2); }; // This passes the launch URL to the launch button.
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -74,9 +78,18 @@ namespace The_UGamer_Launcher
             
         }
 
-        private void button_Click(object sender, EventArgs e, Uri launch2)
+        private void button_Click(object sender, EventArgs e, String launchString3, bool exePath3)
         {
-            launcher.Url = launch2; // The game launches through URL.
+            if (exePath3 == true)
+            {
+                Process.Start(launchString3);
+            }
+            else
+            {
+                Uri launch2;
+                launch2 = new Uri(launchString3);
+                launcher.Url = launch2; // The game launches through URL.
+            }
         }
     }
 }

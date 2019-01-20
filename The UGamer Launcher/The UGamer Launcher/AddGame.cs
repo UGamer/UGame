@@ -89,7 +89,7 @@ namespace The_UGamer_Launcher
                 cmd.Parameters.AddWithValue("@Notes", notes);
 
             if (launchCode == "")
-                cmd.Parameters.AddWithValue("@Launch", " ");
+                cmd.Parameters.AddWithValue("@Launch", "");
             else
                 cmd.Parameters.AddWithValue("@Launch", launchCode);
 

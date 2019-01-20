@@ -10,18 +10,7 @@ namespace The_UGamer_Launcher
         public Form1()
         {
             // Starts up the program.
-            try
-            {
-                InitializeComponent();
-            }
-            // This is caught if you don't have the required OLE DB drivers.
-            catch (InvalidOperationException e) 
-            {
-                dataTable.Visible = false;
-                driverWarning.Visible = true;
-                Uri installURL = new Uri("https://www.microsoft.com/en-us/download/confirmation.aspx?id=23734");
-                driverInstall.Url = installURL;
-            }
+            InitializeComponent();
             this.BackgroundImage = Image.FromFile("Resources/Theme/backgroundImage.png");
             logo.BackgroundImage = Image.FromFile("Resources/Theme/logo.png");
         }
@@ -30,7 +19,18 @@ namespace The_UGamer_Launcher
         private void Form1_Load(object sender, EventArgs e) 
         {
             // TODO: This line of code loads data into the 'collectionDataSetFinal2.Table1' table. You can move, or remove it, as needed.
-            this.table1TableAdapter.Fill(this.collectionDataSetFinal2.Table1);
+            try
+            {
+                this.table1TableAdapter.Fill(this.collectionDataSetFinal2.Table1);
+            }
+            // This is caught if you don't have the required OLE DB drivers.
+            catch (InvalidOperationException d)
+            {
+                dataTable.Visible = false;
+                driverWarning.Visible = true;
+                Uri installURL = new Uri("https://www.microsoft.com/en-us/download/confirmation.aspx?id=23734");
+                driverInstall.Url = installURL;
+            }
             int entryCount = dataTable.Rows.Count;
             if (entryCount != 1)
                 gameCountText.Text = Convert.ToString(entryCount) + " total games";
