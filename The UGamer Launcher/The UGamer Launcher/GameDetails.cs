@@ -21,27 +21,56 @@ namespace The_UGamer_Launcher
         { 
             noImageText.Visible = false;
             
+            // This block of text determines the icon.
             try
             {
                 Icon windowIcon = new Icon("Resources/Icons/" + input2 + ".ico");
                 this.Icon = windowIcon;
             }
-            // This catchs the exception for when there is no icon.
-            catch (FileNotFoundException e)
+            catch (FileNotFoundException e) { }
+
+            Image detailedPic = detailedImageAssign(input2);
+            Image backgroundPic = backgroundImageAssign(input2, detailedPic);
+
+            if (detailedPic.Width != 1)
             {
-                
+                gamePicture.BackgroundImage = detailedPic;
+            }
+            else
+            {
+                try
+                {
+                    if (backgroundPic.Width != 1)
+                    {
+                        gamePicture.BackgroundImage = backgroundPic;
+                        noImageText.Visible = false;
+                    }
+                }
+                catch (FileNotFoundException e) { }
             }
 
-            try
+            if (backgroundPic.Width != 1)
             {
-                gamePicture.BackgroundImage = Image.FromFile("Resources/Details/" + input2 + ".png");
+                try
+                {
+                    Bitmap bg = new Bitmap(backgroundPic);
+                    var radius = 20;
+                    StackBlur.StackBlur.Process(bg, radius);
+                    this.BackgroundImage = bg;
+                }
+                catch (FileNotFoundException f)
+                {
+                    try
+                    {
+                        Bitmap bg = new Bitmap(detailedPic);
+                        var radius = 20;
+                        StackBlur.StackBlur.Process(bg, radius);
+                        this.BackgroundImage = bg;
+                    }
+                    catch (FileNotFoundException g) { }
+                }
             }
-            // This catchs the exception for when there is no image.
-            catch (FileNotFoundException e)
-            {
-                noImageText.Text = "Image \"" + input2 + "\" not found.";
-                noImageText.Visible = true;
-            }
+
             nameLabel.Text = title; // Displays the name of the game.
             platformLabel.Text = "Platform: " + platform;
             statusLabel.Text = "Status: " + status;
@@ -89,6 +118,91 @@ namespace The_UGamer_Launcher
                 Uri launch2;
                 launch2 = new Uri(launchString3);
                 launcher.Url = launch2; // The game launches through URL.
+            }
+        }
+
+        private Image detailedImageAssign(string input2)
+        {
+            Image background;
+            try
+            {
+                background = Image.FromFile("Resources/Details/" + input2 + ".png");
+                return background;
+            }
+            catch (FileNotFoundException e)
+            {
+                try
+                {
+                    background = Image.FromFile("Resources/Details/" + input2 + ".jpg");
+                    return background;
+                }
+                catch (FileNotFoundException f)
+                {
+                    try
+                    {
+                        background = Image.FromFile("Resources/Details/" + input2 + ".jpeg");
+                        return background;
+                    }
+                    catch (FileNotFoundException g)
+                    {
+                        try
+                        {
+                           background = Image.FromFile("Resources/Details/" + input2 + ".gif");
+                            return background;
+                        }
+                        catch (FileNotFoundException h)
+                        {
+                            noImageText.Text = "Image \"" + input2 + "\" not found.";
+                            noImageText.Visible = true;
+                            return background = Image.FromFile("Resources/DONT TOUCH.png");
+                        }
+                    }
+                }
+            }
+
+        }
+
+        private Bitmap backgroundImageAssign(string input2, Image backup)
+        {
+            Image background;
+            Bitmap bg;
+            try
+            {
+                background = Image.FromFile("Resources/BG/" + input2 + ".png");
+                bg = new Bitmap(background);
+                return bg;
+            }
+            catch (FileNotFoundException e)
+            {
+                try
+                {
+                    background = Image.FromFile("Resources/BG/" + input2 + ".jpg");
+                    bg = new Bitmap(background);
+                    return bg;
+                }
+                catch (FileNotFoundException f)
+                {
+                    try
+                    {
+                        background = Image.FromFile("Resources/BG/" + input2 + ".jpeg");
+                        bg = new Bitmap(background);
+                        return bg;
+                    }
+                    catch (FileNotFoundException g)
+                    {
+                        try
+                        {
+                            background = Image.FromFile("Resources/BG/" + input2 + ".gif");
+                            bg = new Bitmap(background);
+                            return bg;
+                        }
+                        catch (FileNotFoundException h)
+                        {
+                            bg = new Bitmap(backup);
+                            return bg;
+                        }
+                    }
+                }
             }
         }
     }

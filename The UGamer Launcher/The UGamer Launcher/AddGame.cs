@@ -112,7 +112,6 @@ namespace The_UGamer_Launcher
             {
                 this.Text = "Add an entry... Game not added.";
             }
-
             return;
         }
     }
