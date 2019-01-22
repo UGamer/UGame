@@ -242,7 +242,7 @@
             this.addEntryButton.Name = "addEntryButton";
             this.addEntryButton.Size = new System.Drawing.Size(113, 64);
             this.addEntryButton.TabIndex = 15;
-            this.addEntryButton.Text = "Add Entry";
+            this.addEntryButton.Text = "Entries";
             this.addEntryButton.UseVisualStyleBackColor = false;
             this.addEntryButton.Click += new System.EventHandler(this.addEntryButton_Click);
             // 

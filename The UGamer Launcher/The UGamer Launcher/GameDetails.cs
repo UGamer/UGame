@@ -102,17 +102,12 @@ namespace The_UGamer_Launcher
             button1.Click += (sender, EventArgs) => { button_Click(sender, EventArgs, launchString2, exePath2, batPath2); }; // This passes the launch URL to the launch button.
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            
-        }
+        private void button1_Click(object sender, EventArgs e) { }
 
         private void button_Click(object sender, EventArgs e, String launchString3, bool exePath3, bool batPath3)
         {
             if (exePath3 == true || batPath3 == true)
-            {
                 Process.Start(launchString3);
-            }
             else
             {
                 Uri launch2;
