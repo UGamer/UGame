@@ -86,12 +86,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CollectionDataSetFinal2.xsd</DependentUpon>
     </Compile>
-    <Compile Include="DetailSelect.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DetailSelect.Designer.cs">
-      <DependentUpon>DetailSelect.cs</DependentUpon>
-    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -108,9 +102,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AddGame.resx">
       <DependentUpon>AddGame.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DetailSelect.resx">
-      <DependentUpon>DetailSelect.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

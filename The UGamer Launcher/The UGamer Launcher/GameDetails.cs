@@ -109,7 +109,7 @@ namespace The_UGamer_Launcher
 
         private void button_Click(object sender, EventArgs e, String launchString3, bool exePath3, bool batPath3)
         {
-            if (exePath3 == true)
+            if (exePath3 == true || batPath3 == true)
             {
                 Process.Start(launchString3);
             }

@@ -49,13 +49,6 @@ namespace The_UGamer_Launcher
                 gameCountText.Text = Convert.ToString(entryCount) + " total game";
         }
 
-        // Clicking the "Details" button opens a new details window.
-        private void detailButton_Click_1(object sender, EventArgs e) 
-        {
-            DetailSelect detailSelect = new DetailSelect(this);
-            detailSelect.Show();
-        }
-
         private void dataTable_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             string titleValue;
