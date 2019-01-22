@@ -17,7 +17,7 @@ namespace The_UGamer_Launcher
         // Displays all the info for the game.
         public void DisplayInfo(string title, string input2, string platform,
             string status, string rating, string hours, string obtained,
-            string startDate, string endDate, string notes, string launchString2, bool exePath2)
+            string startDate, string endDate, string notes, string launchString2, bool exePath2, bool batPath2)
         { 
             noImageText.Visible = false;
             
@@ -99,7 +99,7 @@ namespace The_UGamer_Launcher
             if (launchString2 == "")
                 button1.Visible = false;
 
-            button1.Click += (sender, EventArgs) => { button_Click(sender, EventArgs, launchString2, exePath2); }; // This passes the launch URL to the launch button.
+            button1.Click += (sender, EventArgs) => { button_Click(sender, EventArgs, launchString2, exePath2, batPath2); }; // This passes the launch URL to the launch button.
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -107,7 +107,7 @@ namespace The_UGamer_Launcher
             
         }
 
-        private void button_Click(object sender, EventArgs e, String launchString3, bool exePath3)
+        private void button_Click(object sender, EventArgs e, String launchString3, bool exePath3, bool batPath3)
         {
             if (exePath3 == true)
             {

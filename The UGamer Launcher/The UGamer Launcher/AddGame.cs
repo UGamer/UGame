@@ -88,7 +88,9 @@ namespace The_UGamer_Launcher
             else
                 cmd.Parameters.AddWithValue("@Notes", notes);
 
-            if (launchCode == "")
+            if (title == "Sonic World")
+                cmd.Parameters.AddWithValue("@Launch", "BATs/Sonic World.bat");
+            else if (launchCode == "")
                 cmd.Parameters.AddWithValue("@Launch", "");
             else
                 cmd.Parameters.AddWithValue("@Launch", launchCode);
