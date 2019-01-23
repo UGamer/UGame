@@ -39,6 +39,7 @@ namespace The_UGamer_Launcher
             string rating, string hours, string minutes, string seconds, string obtained, string startDate,
                 string endDate, string launchCode, string notes)
         {
+
             int hoursInt = 0;
             int minsInt = 0;
             int secsInt = 0;
@@ -178,7 +179,59 @@ namespace The_UGamer_Launcher
                 platformBox.Text = dt.Rows[z][2].ToString();
                 statusBox.Text = dt.Rows[z][3].ToString();
                 ratingBox.Text = dt.Rows[z][4].ToString();
+
                 hoursBox.Text = dt.Rows[z][5].ToString();
+
+                string hoursPlayed = hoursBox.Text;
+                string minutesPlayed = hoursBox.Text;
+                string secondsPlayed = hoursBox.Text;
+
+                int hourIndex = hoursPlayed.IndexOf("h");
+                string hours = hoursPlayed.Substring(0, hourIndex);
+                int minuteIndex = minutesPlayed.IndexOf("m");
+                int minuteLength = minutesPlayed.IndexOf("m") - (hourIndex + 2);
+                string minutes = minutesPlayed.Substring(hourIndex + 2, minuteLength);
+                int secondIndex = secondsPlayed.IndexOf("s");
+                int secondLength = secondsPlayed.IndexOf("s") - (minuteIndex + 2);
+                string seconds = secondsPlayed.Substring(minuteIndex + 2, secondLength);
+
+                int hoursInt = 0;
+                int minsInt = 0;
+                int secsInt = 0;
+
+                string newHoursString = "00";
+                string newMinutesString = "00";
+                string newSecondsString = "00";
+
+                if (hours != "")
+                {
+                    hoursInt = Convert.ToInt32(hours);
+                    newHoursString = hours;
+                }
+                if (minutes != "")
+                {
+                    minsInt = Convert.ToInt32(minutes);
+                    newMinutesString = minutes;
+                }
+                if (seconds != "")
+                {
+                    secsInt = Convert.ToInt32(seconds);
+                    newSecondsString = seconds;
+                }
+
+                if (hoursInt < 10 && minsInt != 0)
+                    newHoursString = "0" + hours;
+                if (minsInt < 10 && minsInt != 0)
+                    newMinutesString = "0" + minutes;
+                if (secsInt < 10 && secsInt != 0)
+                    newSecondsString = "0" + seconds;
+
+                string playTime = newHoursString + "h:" + newMinutesString + "m:" + newSecondsString + "s";
+
+                hoursBox.Text = hours;
+                minutesBox.Text = minutes;
+                secondsBox.Text = seconds;
+
                 obtainedBox.Text = dt.Rows[z][6].ToString();
                 startDateBox.Text = dt.Rows[z][7].ToString();
                 endDateBox.Text = dt.Rows[z][8].ToString();
@@ -205,7 +258,9 @@ namespace The_UGamer_Launcher
             string status = statusBox.Text;
             string rating = ratingBox.Text;
 
-            string playTime = hoursBox.Text;
+            string hours = hoursBox.Text;
+            string minutes = minutesBox.Text;
+            string seconds = secondsBox.Text;
 
             string obtained = obtainedBox.Text;
             string startDate = startDateBox.Text;
@@ -213,12 +268,14 @@ namespace The_UGamer_Launcher
             string launchCode = launchBox.Text;
             string notes = notesBox.Text;
 
-            replaceEntryMethod(originalTitleString, title, platform, status, rating, playTime, obtained, startDate,
+            replaceEntryMethod(originalTitleString, title, platform, status, rating, 
+                hours, minutes, seconds, obtained, startDate,
                 endDate, launchCode, notes);
         }
 
         private void replaceEntryMethod(string originalTitleString, string title, string platform, string status,
-            string rating, string playTime, string obtained, string startDate,
+            string rating, string hours, string minutes,
+            string seconds, string obtained, string startDate,
                 string endDate, string launchCode, string notes)
         {
             string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Collection.accdb";
@@ -230,6 +287,39 @@ namespace The_UGamer_Launcher
             string caption = "Editing entry \"" + originalTitleString + "\"";
             MessageBoxButtons buttons = MessageBoxButtons.YesNo;
             DialogResult result = MessageBox.Show(message, caption, buttons);
+
+            int hoursInt = 0;
+            int minsInt = 0;
+            int secsInt = 0;
+
+            string newHoursString = "00";
+            string newMinutesString = "00";
+            string newSecondsString = "00";
+
+            if (hours != "")
+            {
+                hoursInt = Convert.ToInt32(hours);
+                newHoursString = hours;
+            }
+            if (minutes != "")
+            {
+                minsInt = Convert.ToInt32(minutes);
+                newMinutesString = minutes;
+            }
+            if (seconds != "")
+            {
+                secsInt = Convert.ToInt32(seconds);
+                newSecondsString = seconds;
+            }
+
+            if (hoursInt < 10 && minsInt != 0)
+                newHoursString = "0" + hours;
+            if (minsInt < 10 && minsInt != 0)
+                newMinutesString = "0" + minutes;
+            if (secsInt < 10 && secsInt != 0)
+                newSecondsString = "0" + seconds;
+
+            string playTime = newHoursString + "h:" + newMinutesString + "m:" + newSecondsString + "s";
 
             if (result == DialogResult.Yes)
             {
@@ -352,6 +442,24 @@ namespace The_UGamer_Launcher
                 this.Text = "Edit an entry... Editing \"" + title + "\"";
                 return;
             }
+        }
+
+        private void hoursBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Tab)
+                minutesBox.Focus();
+        }
+
+        private void minutesBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Tab)
+                secondsBox.Focus();
+        }
+
+        private void secondsBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Tab)
+                obtainedBox.Focus();
         }
     }
 }
