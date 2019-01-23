@@ -29,10 +29,13 @@ namespace The_UGamer_Launcher
         // This fills the data table with the user data.
         private void Form1_Load(object sender, EventArgs e) 
         {
+            // TODO: This line of code loads data into the 'collectionDataSet3.Table1' table. You can move, or remove it, as needed.
+            this.table1TableAdapter1.Fill(this.collectionDataSet3.Table1);
             // TODO: This line of code loads data into the 'collectionDataSetFinal2.Table1' table. You can move, or remove it, as needed.
             try
             {
-                this.table1TableAdapter.Fill(this.collectionDataSetFinal2.Table1);
+                this.table1TableAdapter1.Fill(this.collectionDataSet3.Table1);
+                // this.table1TableAdapter.Fill(this.collectionDataSetFinal2.Table1);
             }
             // This is caught if you don't have the required OLE DB drivers.
             catch (InvalidOperationException d)
@@ -52,9 +55,13 @@ namespace The_UGamer_Launcher
         private void dataTable_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             string titleValue;
-            object value = dataTable.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
-            titleValue = value.ToString();
-            dataScan(titleValue);
+            try
+            {
+                object value = dataTable.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+                titleValue = value.ToString();
+                dataScan(titleValue);
+            }
+            catch (ArgumentOutOfRangeException f) { }
         }
 
         private void addEntryButton_Click(object sender, EventArgs e)
@@ -80,7 +87,7 @@ namespace The_UGamer_Launcher
             int y = 0, z = 0;
 
             // This makes the whole database into an array.
-            DataTable dt = collectionDataSetFinal2.Table1;
+            DataTable dt = collectionDataSet3.Table1;
             int columnIndex = 1; // Name column
             string[] table = new string[dt.Rows.Count];
             int index = 0;
@@ -175,6 +182,19 @@ namespace The_UGamer_Launcher
                 return false;
             else
                 return true;
+        }
+
+        private void fillBy1ToolStripButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.table1TableAdapter.FillBy1(this.collectionDataSetFinal2.Table1);
+            }
+            catch (System.Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+            }
+
         }
     }
 }

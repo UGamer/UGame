@@ -44,6 +44,7 @@
             this.notesBox = new System.Windows.Forms.TextBox();
             this.noImageText = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.launchLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.gamePicture)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -244,6 +245,15 @@
             this.panel1.Size = new System.Drawing.Size(273, 203);
             this.panel1.TabIndex = 16;
             // 
+            // launchLabel
+            // 
+            this.launchLabel.AutoSize = true;
+            this.launchLabel.Location = new System.Drawing.Point(88, 384);
+            this.launchLabel.Name = "launchLabel";
+            this.launchLabel.Size = new System.Drawing.Size(0, 13);
+            this.launchLabel.TabIndex = 17;
+            this.launchLabel.Visible = false;
+            // 
             // GameDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -253,6 +263,7 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(683, 409);
+            this.Controls.Add(this.launchLabel);
             this.Controls.Add(this.nameLabel);
             this.Controls.Add(this.notesBox);
             this.Controls.Add(this.button1);
@@ -289,5 +300,6 @@
         private System.Windows.Forms.TextBox notesBox;
         private System.Windows.Forms.TextBox noImageText;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label launchLabel;
     }
 }

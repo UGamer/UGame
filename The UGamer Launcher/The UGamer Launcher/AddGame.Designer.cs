@@ -46,6 +46,11 @@
             this.replaceEntry = new System.Windows.Forms.Button();
             this.originalTitle = new System.Windows.Forms.TextBox();
             this.deleteEntryButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.minutesBox = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.secondsBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // labels
@@ -56,8 +61,8 @@
             this.labels.Name = "labels";
             this.labels.Size = new System.Drawing.Size(92, 247);
             this.labels.TabIndex = 0;
-            this.labels.Text = "Title: \r\n\r\nPlatform: \r\n\r\nStatus:\r\n\r\nRating: \r\n\r\nHours:  \r\n\r\nObtained:\r\n\r\nStart Da" +
-    "te:\r\n\r\nEnd Date:\r\n\r\nLaunch Code:\r\n\r\nNotes/Comments:";
+            this.labels.Text = "Title: \r\n\r\nPlatform: \r\n\r\nStatus:\r\n\r\nRating: \r\n\r\nTime Played:  \r\n\r\nObtained:\r\n\r\nSt" +
+    "art Date:\r\n\r\nEnd Date:\r\n\r\nLaunch Code:\r\n\r\nNotes/Comments:";
             // 
             // titleBox
             // 
@@ -96,7 +101,7 @@
             this.hoursBox.Location = new System.Drawing.Point(104, 106);
             this.hoursBox.Margin = new System.Windows.Forms.Padding(2);
             this.hoursBox.Name = "hoursBox";
-            this.hoursBox.Size = new System.Drawing.Size(415, 20);
+            this.hoursBox.Size = new System.Drawing.Size(88, 20);
             this.hoursBox.TabIndex = 5;
             // 
             // endDateBox
@@ -206,11 +211,59 @@
             this.deleteEntryButton.Visible = false;
             this.deleteEntryButton.Click += new System.EventHandler(this.deleteEntryButton_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(197, 109);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(33, 13);
+            this.label1.TabIndex = 17;
+            this.label1.Text = "hours";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(328, 109);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(43, 13);
+            this.label2.TabIndex = 19;
+            this.label2.Text = "minutes";
+            // 
+            // minutesBox
+            // 
+            this.minutesBox.Location = new System.Drawing.Point(235, 106);
+            this.minutesBox.Margin = new System.Windows.Forms.Padding(2);
+            this.minutesBox.Name = "minutesBox";
+            this.minutesBox.Size = new System.Drawing.Size(88, 20);
+            this.minutesBox.TabIndex = 18;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(469, 109);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(47, 13);
+            this.label3.TabIndex = 21;
+            this.label3.Text = "seconds";
+            // 
+            // secondsBox
+            // 
+            this.secondsBox.Location = new System.Drawing.Point(376, 106);
+            this.secondsBox.Margin = new System.Windows.Forms.Padding(2);
+            this.secondsBox.Name = "secondsBox";
+            this.secondsBox.Size = new System.Drawing.Size(88, 20);
+            this.secondsBox.TabIndex = 20;
+            // 
             // AddGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(533, 335);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.secondsBox);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.minutesBox);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.deleteEntryButton);
             this.Controls.Add(this.originalTitle);
             this.Controls.Add(this.replaceEntry);
@@ -256,5 +309,10 @@
         private System.Windows.Forms.Button replaceEntry;
         private System.Windows.Forms.TextBox originalTitle;
         private System.Windows.Forms.Button deleteEntryButton;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox minutesBox;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox secondsBox;
     }
 }

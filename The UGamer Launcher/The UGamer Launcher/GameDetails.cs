@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
+using System.Data.OleDb;
 
 namespace The_UGamer_Launcher
 {
@@ -73,47 +74,194 @@ namespace The_UGamer_Launcher
 
             nameLabel.Text = title; // Displays the name of the game.
             platformLabel.Text = "Platform: " + platform;
-            statusLabel.Text = "Status: " + status;
-            if (rating == "")
-                ratingLabel.Text = "";
+
+            if (status == "")
+                statusLabel.Text = "Status:  ";
             else
-                ratingLabel.Text = "Rating: " + rating + "/10";
-            hoursLabel.Text = "Hours: " + hours;
+                statusLabel.Text = "Status: " + status;
+
+            if (rating == "")
+                ratingLabel.Text = "Rating:  ";
+            else
+                ratingLabel.Text = "Rating: " + rating;
+
+            if (hours == "")
+                hoursLabel.Text = "Time Played:  ";
+            else
+                hoursLabel.Text = "Time Played: " + hours;
+
             if (obtained == "")
-                obtainedLabel.Text = "";
+                obtainedLabel.Text = "Obtained:  ";
             else
                 obtainedLabel.Text = "Obtained: " + obtained;
+
             if (startDate == "")
-                startDateLabel.Text = "";
+                startDateLabel.Text = "Start Date:  ";
             else
                 startDateLabel.Text = "Start Date: " + startDate;
+
             if (endDate == "")
-                endDateLabel.Text = "";
+                endDateLabel.Text = "End Date:  ";
             else
                 endDateLabel.Text = "End Date: " + endDate;
+
             if (notes == "")
-                notesBox.Text = "";
+                notesBox.Text = " ";
             else
                 notesBox.Text = notes;
 
-            if (launchString2 == "")
-                button1.Visible = false;
+            if (launchString2 != "")
+                launchLabel.Text = launchString2;
+
+            if (launchString2 == "" || launchString2 == " ")
+            {
+                button1.Text = "Track Time";
+                launchString2 = "TIME TRACKER.bat";
+                batPath2 = true;
+            }
 
             button1.Click += (sender, EventArgs) => { button_Click(sender, EventArgs, launchString2, exePath2, batPath2); }; // This passes the launch URL to the launch button.
         }
 
         private void button1_Click(object sender, EventArgs e) { }
 
-        private void button_Click(object sender, EventArgs e, String launchString3, bool exePath3, bool batPath3)
+        private void button_Click(object sender, EventArgs e, string launchString3, bool exePath3, bool batPath3)
         {
+            Stopwatch gameTime = new Stopwatch();
+            Process game = new Process();
             if (exePath3 == true || batPath3 == true)
-                Process.Start(launchString3);
+            {
+                game.StartInfo.FileName = launchString3;
+                gameTime.Start();
+                game.Start();
+                for (bool exit = false; exit != true;)
+                {
+                    if (game.HasExited == true)
+                        exit = true;
+                }
+            }
             else
             {
+                Process timeTracker = new Process();
+                timeTracker.StartInfo.FileName = "TIME TRACKER.bat";
                 Uri launch2;
                 launch2 = new Uri(launchString3);
+                gameTime.Start();
+                timeTracker.Start();
                 launcher.Url = launch2; // The game launches through URL.
+                for (bool exit = false; exit != true;)
+                {
+                    if (timeTracker.HasExited == true)
+                        exit = true;
+                }
             }
+            gameTime.Stop();
+            int seconds = Convert.ToInt32(gameTime.ElapsedMilliseconds / 1000);
+
+            int playSeconds = seconds % 60;
+            int playMinutes = seconds / 60;
+            int playHours = playMinutes / 60;
+            playMinutes %= 60;
+            string message = "";
+            if (playHours != 0)
+            {
+                message = "You played " + nameLabel.Text + " for " + playHours + " hours, " 
+                    + playMinutes + " minutes, and " + playSeconds + " seconds!";
+            }
+            else if (playHours == 0 && playMinutes != 0)
+            {
+                message = "You played " + nameLabel.Text + " for " + playMinutes + " minutes, and " 
+                    + playSeconds + " seconds!";
+            }
+            else
+            {
+                message = "You played " + nameLabel.Text + " for " + playSeconds + " seconds!";
+            }
+            string caption = "Play Time";
+            updateTime(seconds);
+            MessageBox.Show(message, caption);
+        }
+
+        private void updateTime(int seconds)
+        {
+            string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Collection.accdb";
+            OleDbConnection con = new OleDbConnection(connectionString);
+            OleDbCommand delCmd = new OleDbCommand("DELETE FROM Table1 WHERE Title='" + nameLabel.Text + "';", con);
+            OleDbCommand cmd = new OleDbCommand("INSERT INTO Table1 (Title, Platform, Status, Rating, PlayTime, Obtained, StartDate, EndDate, Notes, Launch) VALUES (@Title, @Platform, @Status, @Rating, @PlayTime, @Obtained, @StartDate, @EndDate, @Notes, @Launch);", con);
+
+            con.Open();
+
+            delCmd.ExecuteNonQuery();
+
+            string platform = platformLabel.Text.Substring(10);
+            string status = statusLabel.Text.Substring(8);
+            string rating = ratingLabel.Text.Substring(8);
+            string obtained = obtainedLabel.Text.Substring(10);
+            string startDate = startDateLabel.Text.Substring(11);
+            string endDate = endDateLabel.Text.Substring(9);
+            string launchCode = launchLabel.Text;
+
+            string hoursPlayed = hoursLabel.Text.Substring(13);
+            string minutesPlayed = hoursLabel.Text.Substring(13);
+            string secondsPlayed = hoursLabel.Text.Substring(13);
+
+            int hourIndex = hoursPlayed.IndexOf("h");
+            string hPlayed = hoursPlayed.Substring(0, hourIndex);
+            int minuteIndex = minutesPlayed.IndexOf("m");
+            int minuteLength = minutesPlayed.IndexOf("m") - (hourIndex + 2);
+            string mPlayed = minutesPlayed.Substring(hourIndex + 2, minuteLength);
+            int secondIndex = secondsPlayed.IndexOf("s");
+            int secondLength = secondsPlayed.IndexOf("s") - (minuteIndex + 2);
+            string sPlayed = secondsPlayed.Substring(minuteIndex + 2, secondLength);
+
+            int oldHoursPlayed = Convert.ToInt32(hPlayed);
+            int oldMinutesPlayed = Convert.ToInt32(mPlayed);
+            int oldSecondsPlayed = Convert.ToInt32(sPlayed);
+
+            int playMinutes = seconds / 60;
+            int playSeconds = seconds % 60;
+            int playHours = playMinutes / 60;
+            playMinutes %= 60;
+
+            int newHours = oldHoursPlayed + playHours;
+            int newMinutes = oldMinutesPlayed + playMinutes;
+            int newSeconds = oldSecondsPlayed + playSeconds;
+
+
+            for (; newSeconds > 60; )
+            {
+                newMinutes++;
+            }
+
+            for (; newMinutes > 60;)
+            {
+                newHours++;
+            }
+            
+            string newHoursString = newHours.ToString("##");
+            string newMinutesString = newMinutes.ToString("##");
+            string newSecondsString = newSeconds.ToString("##");
+
+            if (newHours < 10)
+                newHoursString = "0" + newHours;
+            if (newMinutes < 10)
+                newMinutesString = "0" + newMinutes;
+            if (newSeconds < 10)
+                newSecondsString = "0" + newSeconds;
+
+            string timePlayed = newHoursString + "h:" + newMinutesString + "m:" + newSecondsString + "s";
+
+            cmd.Parameters.AddWithValue("@Title", nameLabel.Text);
+            cmd.Parameters.AddWithValue("@Platform", platform);
+            cmd.Parameters.AddWithValue("@Status", status);
+            cmd.Parameters.AddWithValue("@Rating", rating);
+            cmd.Parameters.AddWithValue("@PlayTime", timePlayed);
+            cmd.Parameters.AddWithValue("@Obtained", obtained);
+            cmd.Parameters.AddWithValue("@StartDate", startDate);
+            cmd.Parameters.AddWithValue("@EndDate", endDate);
+            cmd.Parameters.AddWithValue("@Notes", notesBox.Text);
+            cmd.Parameters.AddWithValue("@Launch", launchCode);
+            cmd.ExecuteNonQuery();
         }
 
         private Image detailedImageAssign(string input2)

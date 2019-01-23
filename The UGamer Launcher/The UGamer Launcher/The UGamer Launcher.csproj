@@ -76,6 +76,11 @@
     <Compile Include="AddGame.Designer.cs">
       <DependentUpon>AddGame.cs</DependentUpon>
     </Compile>
+    <Compile Include="CollectionDataSet3.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CollectionDataSet3.xsd</DependentUpon>
+    </Compile>
     <Compile Include="CollectionDataSetFinal.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -119,6 +124,17 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="CollectionDataSet3.xsc">
+      <DependentUpon>CollectionDataSet3.xsd</DependentUpon>
+    </None>
+    <None Include="CollectionDataSet3.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CollectionDataSet3.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="CollectionDataSet3.xss">
+      <DependentUpon>CollectionDataSet3.xsd</DependentUpon>
+    </None>
     <None Include="CollectionDataSetFinal.xsc">
       <DependentUpon>CollectionDataSetFinal.xsd</DependentUpon>
     </None>
