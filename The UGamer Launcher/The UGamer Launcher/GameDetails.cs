@@ -162,8 +162,6 @@ namespace The_UGamer_Launcher
             gameTime.Stop();
             int seconds = Convert.ToInt32(gameTime.ElapsedMilliseconds / 1000);
 
-            seconds = 6720;
-
             int playSeconds = seconds % 60;
             int playMinutes = seconds / 60;
             int playHours = playMinutes / 60;
