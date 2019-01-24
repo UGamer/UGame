@@ -216,8 +216,8 @@ namespace The_UGamer_Launcher
             string status = statusLabel.Text.Substring(8);
             string rating = ratingLabel.Text.Substring(8);
             string obtained = obtainedLabel.Text.Substring(10);
-            string startDate = startDateLabel.Text.Substring(11);
-            string endDate = endDateLabel.Text.Substring(9);
+            string startDate = startDateLabel.Text.Substring(12);
+            string endDate = endDateLabel.Text.Substring(10);
             string launchCode = launchLabel.Text;
 
             string hoursPlayed = hoursLabel.Text.Substring(13);

@@ -29,9 +29,6 @@ namespace The_UGamer_Launcher
         // This fills the data table with the user data.
         private void Form1_Load(object sender, EventArgs e) 
         {
-            // TODO: This line of code loads data into the 'collectionDataSet3.Table1' table. You can move, or remove it, as needed.
-            this.table1TableAdapter1.Fill(this.collectionDataSet3.Table1);
-            // TODO: This line of code loads data into the 'collectionDataSetFinal2.Table1' table. You can move, or remove it, as needed.
             try
             {
                 this.table1TableAdapter1.Fill(this.collectionDataSet3.Table1);
@@ -66,7 +63,8 @@ namespace The_UGamer_Launcher
 
         private void addEntryButton_Click(object sender, EventArgs e)
         {
-            AddGame addGame = new AddGame(this);
+            bool refresh = false;
+            AddGame addGame = new AddGame(this, refresh);
             addGame.Show();
         }
 
@@ -184,17 +182,9 @@ namespace The_UGamer_Launcher
                 return true;
         }
 
-        private void fillBy1ToolStripButton_Click(object sender, EventArgs e)
+        private void refreshButton_Click(object sender, EventArgs e)
         {
-            try
-            {
-                this.table1TableAdapter.FillBy1(this.collectionDataSetFinal2.Table1);
-            }
-            catch (System.Exception ex)
-            {
-                System.Windows.Forms.MessageBox.Show(ex.Message);
-            }
-
+            this.table1TableAdapter1.Fill(this.collectionDataSet3.Table1);
         }
     }
 }

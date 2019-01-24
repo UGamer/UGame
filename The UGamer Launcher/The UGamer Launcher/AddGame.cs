@@ -8,10 +8,12 @@ namespace The_UGamer_Launcher
     public partial class AddGame : Form
     {
         public Form1 frm1;
-        public AddGame(Form1 parent)
+        public bool refresh = false;
+        public AddGame(Form1 parent, bool refreshSignal)
         {
             InitializeComponent();
             frm1 = parent;
+            frm1.Show();
         }
 
         private void addEntryButton_Click(object sender, EventArgs e)
@@ -33,6 +35,8 @@ namespace The_UGamer_Launcher
 
             addEntry(title, platform, status, rating, hours, minutes, seconds, obtained, startDate, 
                 endDate, launchCode, notes);
+
+            refresh = true;
         }
 
         private void addEntry(string title, string platform, string status,
