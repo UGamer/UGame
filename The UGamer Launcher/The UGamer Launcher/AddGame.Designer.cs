@@ -56,90 +56,102 @@
             // labels
             // 
             this.labels.AutoSize = true;
-            this.labels.Location = new System.Drawing.Point(14, 12);
+            this.labels.Location = new System.Drawing.Point(9, 8);
+            this.labels.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labels.Name = "labels";
-            this.labels.Size = new System.Drawing.Size(136, 380);
+            this.labels.Size = new System.Drawing.Size(92, 247);
             this.labels.TabIndex = 0;
             this.labels.Text = "Title: \r\n\r\nPlatform: \r\n\r\nStatus:\r\n\r\nRating: \r\n\r\nTime Played:  \r\n\r\nObtained:\r\n\r\nSt" +
     "art Date:\r\n\r\nEnd Date:\r\n\r\nLaunch Code:\r\n\r\nNotes/Comments:";
             // 
             // titleBox
             // 
-            this.titleBox.Location = new System.Drawing.Point(156, 12);
+            this.titleBox.Location = new System.Drawing.Point(104, 8);
+            this.titleBox.Margin = new System.Windows.Forms.Padding(2);
             this.titleBox.Name = "titleBox";
-            this.titleBox.Size = new System.Drawing.Size(620, 26);
+            this.titleBox.Size = new System.Drawing.Size(415, 20);
             this.titleBox.TabIndex = 1;
             // 
             // platformBox
             // 
-            this.platformBox.Location = new System.Drawing.Point(156, 52);
+            this.platformBox.Location = new System.Drawing.Point(104, 34);
+            this.platformBox.Margin = new System.Windows.Forms.Padding(2);
             this.platformBox.Name = "platformBox";
-            this.platformBox.Size = new System.Drawing.Size(620, 26);
+            this.platformBox.Size = new System.Drawing.Size(415, 20);
             this.platformBox.TabIndex = 2;
             // 
             // statusBox
             // 
-            this.statusBox.Location = new System.Drawing.Point(156, 89);
+            this.statusBox.Location = new System.Drawing.Point(104, 58);
+            this.statusBox.Margin = new System.Windows.Forms.Padding(2);
             this.statusBox.Name = "statusBox";
-            this.statusBox.Size = new System.Drawing.Size(620, 26);
+            this.statusBox.Size = new System.Drawing.Size(415, 20);
             this.statusBox.TabIndex = 3;
             // 
             // ratingBox
             // 
-            this.ratingBox.Location = new System.Drawing.Point(156, 126);
+            this.ratingBox.Location = new System.Drawing.Point(104, 82);
+            this.ratingBox.Margin = new System.Windows.Forms.Padding(2);
             this.ratingBox.Name = "ratingBox";
-            this.ratingBox.Size = new System.Drawing.Size(620, 26);
+            this.ratingBox.Size = new System.Drawing.Size(415, 20);
             this.ratingBox.TabIndex = 4;
             // 
             // hoursBox
             // 
-            this.hoursBox.Location = new System.Drawing.Point(156, 163);
+            this.hoursBox.Location = new System.Drawing.Point(104, 106);
+            this.hoursBox.Margin = new System.Windows.Forms.Padding(2);
             this.hoursBox.Name = "hoursBox";
-            this.hoursBox.Size = new System.Drawing.Size(130, 26);
+            this.hoursBox.Size = new System.Drawing.Size(88, 20);
             this.hoursBox.TabIndex = 5;
-            this.hoursBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.hoursBox_KeyDown);
+            this.hoursBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.hoursBox_KeyUp);
             // 
             // endDateBox
             // 
-            this.endDateBox.Location = new System.Drawing.Point(156, 292);
+            this.endDateBox.Location = new System.Drawing.Point(104, 190);
+            this.endDateBox.Margin = new System.Windows.Forms.Padding(2);
             this.endDateBox.Name = "endDateBox";
-            this.endDateBox.Size = new System.Drawing.Size(620, 26);
+            this.endDateBox.Size = new System.Drawing.Size(415, 20);
             this.endDateBox.TabIndex = 8;
             // 
             // startDateBox
             // 
-            this.startDateBox.Location = new System.Drawing.Point(156, 249);
+            this.startDateBox.Location = new System.Drawing.Point(104, 162);
+            this.startDateBox.Margin = new System.Windows.Forms.Padding(2);
             this.startDateBox.Name = "startDateBox";
-            this.startDateBox.Size = new System.Drawing.Size(620, 26);
+            this.startDateBox.Size = new System.Drawing.Size(415, 20);
             this.startDateBox.TabIndex = 7;
             // 
             // obtainedBox
             // 
-            this.obtainedBox.Location = new System.Drawing.Point(156, 208);
+            this.obtainedBox.Location = new System.Drawing.Point(104, 135);
+            this.obtainedBox.Margin = new System.Windows.Forms.Padding(2);
             this.obtainedBox.Name = "obtainedBox";
-            this.obtainedBox.Size = new System.Drawing.Size(620, 26);
+            this.obtainedBox.Size = new System.Drawing.Size(415, 20);
             this.obtainedBox.TabIndex = 6;
             // 
             // launchBox
             // 
-            this.launchBox.Location = new System.Drawing.Point(156, 329);
+            this.launchBox.Location = new System.Drawing.Point(104, 214);
+            this.launchBox.Margin = new System.Windows.Forms.Padding(2);
             this.launchBox.Name = "launchBox";
-            this.launchBox.Size = new System.Drawing.Size(620, 26);
+            this.launchBox.Size = new System.Drawing.Size(415, 20);
             this.launchBox.TabIndex = 9;
             // 
             // notesBox
             // 
-            this.notesBox.Location = new System.Drawing.Point(156, 368);
+            this.notesBox.Location = new System.Drawing.Point(104, 239);
+            this.notesBox.Margin = new System.Windows.Forms.Padding(2);
             this.notesBox.Multiline = true;
             this.notesBox.Name = "notesBox";
-            this.notesBox.Size = new System.Drawing.Size(620, 72);
+            this.notesBox.Size = new System.Drawing.Size(415, 48);
             this.notesBox.TabIndex = 10;
             // 
             // addEntryButton
             // 
-            this.addEntryButton.Location = new System.Drawing.Point(16, 457);
+            this.addEntryButton.Location = new System.Drawing.Point(11, 297);
+            this.addEntryButton.Margin = new System.Windows.Forms.Padding(2);
             this.addEntryButton.Name = "addEntryButton";
-            this.addEntryButton.Size = new System.Drawing.Size(132, 42);
+            this.addEntryButton.Size = new System.Drawing.Size(88, 27);
             this.addEntryButton.TabIndex = 11;
             this.addEntryButton.Text = "Add Entry";
             this.addEntryButton.UseVisualStyleBackColor = true;
@@ -147,9 +159,10 @@
             // 
             // editEntry
             // 
-            this.editEntry.Location = new System.Drawing.Point(156, 457);
+            this.editEntry.Location = new System.Drawing.Point(104, 297);
+            this.editEntry.Margin = new System.Windows.Forms.Padding(2);
             this.editEntry.Name = "editEntry";
-            this.editEntry.Size = new System.Drawing.Size(132, 42);
+            this.editEntry.Size = new System.Drawing.Size(88, 27);
             this.editEntry.TabIndex = 12;
             this.editEntry.Text = "Edit Entry";
             this.editEntry.UseVisualStyleBackColor = true;
@@ -159,10 +172,9 @@
             // 
             this.noGameLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.noGameLabel.AutoSize = true;
-            this.noGameLabel.Location = new System.Drawing.Point(540, 482);
-            this.noGameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.noGameLabel.Location = new System.Drawing.Point(360, 313);
             this.noGameLabel.Name = "noGameLabel";
-            this.noGameLabel.Size = new System.Drawing.Size(240, 20);
+            this.noGameLabel.Size = new System.Drawing.Size(161, 13);
             this.noGameLabel.TabIndex = 13;
             this.noGameLabel.Text = "Sorry... that game does not exist.";
             this.noGameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -170,9 +182,10 @@
             // 
             // replaceEntry
             // 
-            this.replaceEntry.Location = new System.Drawing.Point(294, 457);
+            this.replaceEntry.Location = new System.Drawing.Point(196, 297);
+            this.replaceEntry.Margin = new System.Windows.Forms.Padding(2);
             this.replaceEntry.Name = "replaceEntry";
-            this.replaceEntry.Size = new System.Drawing.Size(132, 42);
+            this.replaceEntry.Size = new System.Drawing.Size(88, 27);
             this.replaceEntry.TabIndex = 14;
             this.replaceEntry.Text = "Replace Entry";
             this.replaceEntry.UseVisualStyleBackColor = true;
@@ -181,18 +194,18 @@
             // 
             // originalTitle
             // 
-            this.originalTitle.Location = new System.Drawing.Point(20, 398);
-            this.originalTitle.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.originalTitle.Location = new System.Drawing.Point(13, 259);
             this.originalTitle.Name = "originalTitle";
-            this.originalTitle.Size = new System.Drawing.Size(24, 26);
+            this.originalTitle.Size = new System.Drawing.Size(17, 20);
             this.originalTitle.TabIndex = 15;
             this.originalTitle.Visible = false;
             // 
             // deleteEntryButton
             // 
-            this.deleteEntryButton.Location = new System.Drawing.Point(432, 457);
+            this.deleteEntryButton.Location = new System.Drawing.Point(288, 297);
+            this.deleteEntryButton.Margin = new System.Windows.Forms.Padding(2);
             this.deleteEntryButton.Name = "deleteEntryButton";
-            this.deleteEntryButton.Size = new System.Drawing.Size(132, 42);
+            this.deleteEntryButton.Size = new System.Drawing.Size(88, 27);
             this.deleteEntryButton.TabIndex = 16;
             this.deleteEntryButton.Text = "Delete Entry";
             this.deleteEntryButton.UseVisualStyleBackColor = true;
@@ -202,54 +215,53 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(296, 168);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(197, 109);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(49, 20);
+            this.label1.Size = new System.Drawing.Size(33, 13);
             this.label1.TabIndex = 17;
             this.label1.Text = "hours";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(492, 168);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(328, 109);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 20);
+            this.label2.Size = new System.Drawing.Size(43, 13);
             this.label2.TabIndex = 19;
             this.label2.Text = "minutes";
             // 
             // minutesBox
             // 
-            this.minutesBox.Location = new System.Drawing.Point(352, 163);
+            this.minutesBox.Location = new System.Drawing.Point(235, 106);
+            this.minutesBox.Margin = new System.Windows.Forms.Padding(2);
             this.minutesBox.Name = "minutesBox";
-            this.minutesBox.Size = new System.Drawing.Size(130, 26);
+            this.minutesBox.Size = new System.Drawing.Size(88, 20);
             this.minutesBox.TabIndex = 18;
-            this.minutesBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.minutesBox_KeyDown);
+            this.minutesBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.minutesBox_KeyUp);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(704, 168);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(469, 109);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(69, 20);
+            this.label3.Size = new System.Drawing.Size(47, 13);
             this.label3.TabIndex = 21;
             this.label3.Text = "seconds";
             // 
             // secondsBox
             // 
-            this.secondsBox.Location = new System.Drawing.Point(564, 163);
+            this.secondsBox.Location = new System.Drawing.Point(376, 106);
+            this.secondsBox.Margin = new System.Windows.Forms.Padding(2);
             this.secondsBox.Name = "secondsBox";
-            this.secondsBox.Size = new System.Drawing.Size(130, 26);
+            this.secondsBox.Size = new System.Drawing.Size(88, 20);
             this.secondsBox.TabIndex = 20;
-            this.secondsBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.secondsBox_KeyDown);
+            this.secondsBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.secondsBox_KeyUp);
             // 
             // AddGame
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 515);
+            this.ClientSize = new System.Drawing.Size(533, 335);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.secondsBox);
             this.Controls.Add(this.label2);
@@ -273,6 +285,7 @@
             this.Controls.Add(this.titleBox);
             this.Controls.Add(this.labels);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "AddGame";
             this.Text = "Entries";
             this.ResumeLayout(false);

@@ -444,22 +444,23 @@ namespace The_UGamer_Launcher
             }
         }
 
-        private void hoursBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Tab)
-                minutesBox.Focus();
-        }
-
-        private void minutesBox_KeyDown(object sender, KeyEventArgs e)
+        private void minutesBox_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Tab)
                 secondsBox.Focus();
         }
 
-        private void secondsBox_KeyDown(object sender, KeyEventArgs e)
+        private void secondsBox_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Tab)
                 obtainedBox.Focus();
+        }
+
+        private void hoursBox_KeyUp(object sender, KeyEventArgs e)
+        {
+
+            if (e.KeyCode == Keys.Tab)
+                minutesBox.Focus();
         }
     }
 }

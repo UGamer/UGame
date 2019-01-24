@@ -116,7 +116,6 @@ namespace The_UGamer_Launcher
             if (launchString2 == "" || launchString2 == " ")
             {
                 button1.Text = "Track Time";
-                launchString2 = "TIME TRACKER.bat";
                 batPath2 = true;
             }
 
@@ -129,21 +128,26 @@ namespace The_UGamer_Launcher
         {
             Stopwatch gameTime = new Stopwatch();
             Process game = new Process();
+            Process timeTracker = new Process();
+            timeTracker.StartInfo.FileName = "TIME TRACKER.bat";
+            game.StartInfo.FileName = "";
             if (exePath3 == true || batPath3 == true)
             {
                 game.StartInfo.FileName = launchString3;
                 gameTime.Start();
-                game.Start();
+                timeTracker.Start();
+                if (game.StartInfo.FileName != "" && game.StartInfo.FileName != " ")
+                {
+                    game.Start();
+                }
                 for (bool exit = false; exit != true;)
                 {
-                    if (game.HasExited == true)
+                    if (timeTracker.HasExited == true)
                         exit = true;
                 }
             }
             else
             {
-                Process timeTracker = new Process();
-                timeTracker.StartInfo.FileName = "TIME TRACKER.bat";
                 Uri launch2;
                 launch2 = new Uri(launchString3);
                 gameTime.Start();
@@ -158,32 +162,49 @@ namespace The_UGamer_Launcher
             gameTime.Stop();
             int seconds = Convert.ToInt32(gameTime.ElapsedMilliseconds / 1000);
 
+            seconds = 6720;
+
             int playSeconds = seconds % 60;
             int playMinutes = seconds / 60;
             int playHours = playMinutes / 60;
             playMinutes %= 60;
+
+
             string message = "";
-            if (playHours != 0)
+            if (playHours != 0 && playMinutes != 0 && playSeconds != 0)
             {
                 message = "You played " + nameLabel.Text + " for " + playHours + " hours, " 
                     + playMinutes + " minutes, and " + playSeconds + " seconds!";
             }
-            else if (playHours == 0 && playMinutes != 0)
+            else if (playHours != 0 && playMinutes != 0 && playSeconds == 0)
             {
-                message = "You played " + nameLabel.Text + " for " + playMinutes + " minutes, and " 
+                message = "You played " + nameLabel.Text + " for " + playHours + " hours and "
+                    + playMinutes + " minutes!";
+            }
+            else if (playHours != 0 && playMinutes == 0 && playSeconds != 0)
+            {
+                message = "You played " + nameLabel.Text + " for " + playHours + " hours and " 
                     + playSeconds + " seconds!";
+            }
+            else if (playHours != 0 && playMinutes == 0 && playSeconds == 0)
+            {
+                message = "You played " + nameLabel.Text + " for " + playHours + " hours!";
+            }
+            else if (playHours == 0 && playMinutes != 0 && playSeconds != 0)
+            {
+                message = "You played " + nameLabel.Text + " for " + playMinutes + " minutes and " 
+                    + playSeconds + " seconds!";
+            }
+            else if (playHours == 0 && playMinutes != 0 && playSeconds == 0)
+            {
+                message = "You played " + nameLabel.Text + " for " + playMinutes + " minutes!";
             }
             else
             {
                 message = "You played " + nameLabel.Text + " for " + playSeconds + " seconds!";
             }
             string caption = "Play Time";
-            updateTime(seconds);
-            MessageBox.Show(message, caption);
-        }
 
-        private void updateTime(int seconds)
-        {
             string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Collection.accdb";
             OleDbConnection con = new OleDbConnection(connectionString);
             OleDbCommand delCmd = new OleDbCommand("DELETE FROM Table1 WHERE Title='" + nameLabel.Text + "';", con);
@@ -218,29 +239,18 @@ namespace The_UGamer_Launcher
             int oldMinutesPlayed = Convert.ToInt32(mPlayed);
             int oldSecondsPlayed = Convert.ToInt32(sPlayed);
 
-            int playMinutes = seconds / 60;
-            int playSeconds = seconds % 60;
-            int playHours = playMinutes / 60;
-            playMinutes %= 60;
-
             int newHours = oldHoursPlayed + playHours;
             int newMinutes = oldMinutesPlayed + playMinutes;
             int newSeconds = oldSecondsPlayed + playSeconds;
 
+            newHours += newMinutes / 60;
+            newMinutes %= 60;
+            newMinutes += newSeconds / 60;
+            newSeconds %= 60;
 
-            for (; newSeconds > 60; )
-            {
-                newMinutes++;
-            }
-
-            for (; newMinutes > 60;)
-            {
-                newHours++;
-            }
-            
-            string newHoursString = newHours.ToString("##");
-            string newMinutesString = newMinutes.ToString("##");
-            string newSecondsString = newSeconds.ToString("##");
+            string newHoursString = newHours.ToString();
+            string newMinutesString = newMinutes.ToString();
+            string newSecondsString = newSeconds.ToString();
 
             if (newHours < 10)
                 newHoursString = "0" + newHours;
@@ -262,6 +272,8 @@ namespace The_UGamer_Launcher
             cmd.Parameters.AddWithValue("@Notes", notesBox.Text);
             cmd.Parameters.AddWithValue("@Launch", launchCode);
             cmd.ExecuteNonQuery();
+
+            MessageBox.Show(message, caption);
         }
 
         private Image detailedImageAssign(string input2)
