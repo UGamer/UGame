@@ -129,18 +129,24 @@ namespace The_UGamer_Launcher
             Stopwatch gameTime = new Stopwatch();
             Process game = new Process();
             Process timeTracker = new Process();
+            InGameOverlay overlay = new InGameOverlay();
+            overlay.Show();
+            overlay.Setup(nameLabel.Text);
             timeTracker.StartInfo.FileName = "TIME TRACKER.bat";
             game.StartInfo.FileName = "";
             if (exePath3 == true || batPath3 == true)
             {
                 game.StartInfo.FileName = launchString3;
                 gameTime.Start();
+                timeTracker.Start();
                 if (game.StartInfo.FileName != "" && game.StartInfo.FileName != " ")
                 {
                     game.Start();
                 }
                 for (bool exit = false; exit != true;)
                 {
+                    int overlaySeconds = Convert.ToInt32(gameTime.ElapsedMilliseconds / 1000);
+                    overlay.UpdateTime(overlaySeconds);
                     if (timeTracker.HasExited == true)
                         exit = true;
                 }

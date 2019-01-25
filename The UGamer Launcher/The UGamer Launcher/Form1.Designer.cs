@@ -62,7 +62,6 @@
             this.table1TableAdapter1 = new The_UGamer_Launcher.CollectionDataSet3TableAdapters.Table1TableAdapter();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.refreshButton = new System.Windows.Forms.ToolStripButton();
-            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet3)).BeginInit();
@@ -354,21 +353,11 @@
             this.refreshButton.Text = "Refresh";
             this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(524, 447);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(251, 64);
-            this.button1.TabIndex = 21;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1333, 652);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.searchBox);
             this.Controls.Add(this.searchButton);
@@ -433,7 +422,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn launchDataGridViewTextBoxColumn;
         private System.Windows.Forms.ToolStrip toolStrip1;
         public System.Windows.Forms.ToolStripButton refreshButton;
-        private System.Windows.Forms.Button button1;
     }
 }
 
