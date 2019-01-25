@@ -13,7 +13,6 @@ namespace The_UGamer_Launcher
         {
             InitializeComponent();
             frm1 = parent;
-            frm1.Show();
         }
 
         private void addEntryButton_Click(object sender, EventArgs e)

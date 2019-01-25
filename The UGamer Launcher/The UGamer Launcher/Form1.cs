@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace The_UGamer_Launcher
 {
@@ -41,12 +42,42 @@ namespace The_UGamer_Launcher
                 driverWarning.Visible = true;
                 Uri installURL = new Uri("https://www.microsoft.com/en-us/download/confirmation.aspx?id=23734");
                 driverInstall.Url = installURL;
+                searchBox.Visible = false;
+                gameCountText.Visible = false;
+                addEntryButton.Visible = false;
+                toolStrip1.Visible = false;
+                for (bool installed = false; installed == false;)
+                {
+                    try
+                    {
+                        this.table1TableAdapter1.Fill(this.collectionDataSet3.Table1);
+                        installed = true;
+                    }
+                    catch (InvalidOperationException f)
+                    {
+
+                    }
+                }
+                Process.Start(Application.ExecutablePath);
+                this.Close();
             }
             int entryCount = dataTable.Rows.Count;
             if (entryCount != 1)
                 gameCountText.Text = Convert.ToString(entryCount) + " total games";
             else
                 gameCountText.Text = Convert.ToString(entryCount) + " total game";
+
+            DataTable dt = collectionDataSet3.Table1;
+            AutoCompleteStringCollection autoFill = new AutoCompleteStringCollection();
+            int columnIndex = 1; // Name column
+            string[] table = new string[dt.Rows.Count];
+            int index = 0;
+            for (index = 0; index < dt.Rows.Count; index++)
+            {
+                table[index] = dt.Rows[index][columnIndex].ToString();
+                autoFill.Add(table[index]);
+            }
+            searchBox.AutoCompleteCustomSource = autoFill;
         }
 
         private void dataTable_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -184,7 +215,9 @@ namespace The_UGamer_Launcher
 
         private void refreshButton_Click(object sender, EventArgs e)
         {
-            this.table1TableAdapter1.Fill(this.collectionDataSet3.Table1);
+            // this.table1TableAdapter1.Fill(this.collectionDataSet3.Table1);
+            Process.Start(Application.ExecutablePath);
+            this.Close();
         }
     }
 }

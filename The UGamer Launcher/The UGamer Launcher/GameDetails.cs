@@ -135,7 +135,6 @@ namespace The_UGamer_Launcher
             {
                 game.StartInfo.FileName = launchString3;
                 gameTime.Start();
-                timeTracker.Start();
                 if (game.StartInfo.FileName != "" && game.StartInfo.FileName != " ")
                 {
                     game.Start();
