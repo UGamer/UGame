@@ -51,6 +51,7 @@
             // 
             // nameLabel
             // 
+            this.nameLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.nameLabel.AutoSize = true;
             this.nameLabel.BackColor = System.Drawing.Color.White;
             this.nameLabel.Font = new System.Drawing.Font("Century Gothic", 27.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -106,7 +107,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.hoursLabel.AutoSize = true;
             this.hoursLabel.BackColor = System.Drawing.Color.White;
-            this.hoursLabel.Location = new System.Drawing.Point(4, 85);
+            this.hoursLabel.Location = new System.Drawing.Point(4, 83);
             this.hoursLabel.Name = "hoursLabel";
             this.hoursLabel.Size = new System.Drawing.Size(12, 13);
             this.hoursLabel.TabIndex = 5;
@@ -153,12 +154,10 @@
             // 
             // notesLabel
             // 
-            this.notesLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.notesLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.notesLabel.AutoSize = true;
             this.notesLabel.BackColor = System.Drawing.Color.White;
-            this.notesLabel.Location = new System.Drawing.Point(336, 282);
+            this.notesLabel.Location = new System.Drawing.Point(338, 269);
             this.notesLabel.Name = "notesLabel";
             this.notesLabel.Size = new System.Drawing.Size(92, 13);
             this.notesLabel.TabIndex = 9;
@@ -205,11 +204,9 @@
             // 
             // notesBox
             // 
-            this.notesBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.notesBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.notesBox.BackColor = System.Drawing.Color.White;
-            this.notesBox.Location = new System.Drawing.Point(335, 295);
+            this.notesBox.Location = new System.Drawing.Point(337, 282);
             this.notesBox.Multiline = true;
             this.notesBox.Name = "notesBox";
             this.notesBox.ReadOnly = true;
@@ -231,7 +228,7 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.platformLabel);
             this.panel1.Controls.Add(this.statusLabel);
@@ -242,7 +239,7 @@
             this.panel1.Controls.Add(this.ratingLabel);
             this.panel1.Location = new System.Drawing.Point(335, 76);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(273, 203);
+            this.panel1.Size = new System.Drawing.Size(334, 183);
             this.panel1.TabIndex = 16;
             // 
             // launchLabel

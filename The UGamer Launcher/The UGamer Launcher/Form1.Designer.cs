@@ -295,7 +295,8 @@
             // 
             // searchButton
             // 
-            this.searchButton.Location = new System.Drawing.Point(855, 575);
+            this.searchButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.searchButton.Location = new System.Drawing.Point(855, 574);
             this.searchButton.Name = "searchButton";
             this.searchButton.Size = new System.Drawing.Size(24, 22);
             this.searchButton.TabIndex = 18;
@@ -305,6 +306,7 @@
             // 
             // searchBox
             // 
+            this.searchBox.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.searchBox.AutoCompleteCustomSource.AddRange(new string[] {
             "Sonic"});
             this.searchBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
