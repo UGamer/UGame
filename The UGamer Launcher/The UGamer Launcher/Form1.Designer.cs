@@ -62,6 +62,9 @@
             this.table1TableAdapter1 = new The_UGamer_Launcher.CollectionDataSet3TableAdapters.Table1TableAdapter();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.refreshButton = new System.Windows.Forms.ToolStripButton();
+            this.collectionDataSet4 = new The_UGamer_Launcher.CollectionDataSet4();
+            this.table1BindingSource4 = new System.Windows.Forms.BindingSource(this.components);
+            this.table1TableAdapter2 = new The_UGamer_Launcher.CollectionDataSet4TableAdapters.Table1TableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet3)).BeginInit();
@@ -72,6 +75,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSetFinal2)).BeginInit();
             this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource4)).BeginInit();
             this.SuspendLayout();
             // 
             // dataTable
@@ -94,7 +99,7 @@
             this.endDateDataGridViewTextBoxColumn,
             this.notesCommentsDataGridViewTextBoxColumn,
             this.launchDataGridViewTextBoxColumn});
-            this.dataTable.DataSource = this.table1BindingSource2;
+            this.dataTable.DataSource = this.table1BindingSource4;
             this.dataTable.Location = new System.Drawing.Point(22, 28);
             this.dataTable.Name = "dataTable";
             this.dataTable.ReadOnly = true;
@@ -355,6 +360,20 @@
             this.refreshButton.Text = "Refresh";
             this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
             // 
+            // collectionDataSet4
+            // 
+            this.collectionDataSet4.DataSetName = "CollectionDataSet4";
+            this.collectionDataSet4.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // table1BindingSource4
+            // 
+            this.table1BindingSource4.DataMember = "Table1";
+            this.table1BindingSource4.DataSource = this.collectionDataSet4;
+            // 
+            // table1TableAdapter2
+            // 
+            this.table1TableAdapter2.ClearBeforeFill = true;
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -386,6 +405,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSetFinal2)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource4)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -424,6 +445,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn launchDataGridViewTextBoxColumn;
         private System.Windows.Forms.ToolStrip toolStrip1;
         public System.Windows.Forms.ToolStripButton refreshButton;
+        public CollectionDataSet4 collectionDataSet4;
+        private System.Windows.Forms.BindingSource table1BindingSource4;
+        private CollectionDataSet4TableAdapters.Table1TableAdapter table1TableAdapter2;
     }
 }
 

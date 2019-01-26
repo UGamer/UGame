@@ -51,6 +51,8 @@
             this.minutesBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.secondsBox = new System.Windows.Forms.TextBox();
+            this.newsURLBox = new System.Windows.Forms.TextBox();
+            this.wikiURLBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // labels
@@ -59,13 +61,16 @@
             this.labels.Location = new System.Drawing.Point(9, 8);
             this.labels.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labels.Name = "labels";
-            this.labels.Size = new System.Drawing.Size(92, 247);
+            this.labels.Size = new System.Drawing.Size(92, 299);
             this.labels.TabIndex = 0;
             this.labels.Text = "Title: \r\n\r\nPlatform: \r\n\r\nStatus:\r\n\r\nRating: \r\n\r\nTime Played:  \r\n\r\nObtained:\r\n\r\nSt" +
-    "art Date:\r\n\r\nEnd Date:\r\n\r\nLaunch Code:\r\n\r\nNotes/Comments:";
+    "art Date:\r\n\r\nEnd Date:\r\n\r\nLaunch Code:\r\n\r\nNews URL:\r\n\r\nWiki URL:\r\n\r\nNotes/Commen" +
+    "ts:";
             // 
             // titleBox
             // 
+            this.titleBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.titleBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.titleBox.Location = new System.Drawing.Point(104, 8);
             this.titleBox.Margin = new System.Windows.Forms.Padding(2);
             this.titleBox.Name = "titleBox";
@@ -139,7 +144,7 @@
             // 
             // notesBox
             // 
-            this.notesBox.Location = new System.Drawing.Point(104, 239);
+            this.notesBox.Location = new System.Drawing.Point(104, 294);
             this.notesBox.Margin = new System.Windows.Forms.Padding(2);
             this.notesBox.Multiline = true;
             this.notesBox.Name = "notesBox";
@@ -148,7 +153,8 @@
             // 
             // addEntryButton
             // 
-            this.addEntryButton.Location = new System.Drawing.Point(11, 297);
+            this.addEntryButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.addEntryButton.Location = new System.Drawing.Point(11, 353);
             this.addEntryButton.Margin = new System.Windows.Forms.Padding(2);
             this.addEntryButton.Name = "addEntryButton";
             this.addEntryButton.Size = new System.Drawing.Size(88, 27);
@@ -159,7 +165,8 @@
             // 
             // editEntry
             // 
-            this.editEntry.Location = new System.Drawing.Point(104, 297);
+            this.editEntry.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.editEntry.Location = new System.Drawing.Point(104, 353);
             this.editEntry.Margin = new System.Windows.Forms.Padding(2);
             this.editEntry.Name = "editEntry";
             this.editEntry.Size = new System.Drawing.Size(88, 27);
@@ -172,7 +179,7 @@
             // 
             this.noGameLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.noGameLabel.AutoSize = true;
-            this.noGameLabel.Location = new System.Drawing.Point(360, 313);
+            this.noGameLabel.Location = new System.Drawing.Point(360, 369);
             this.noGameLabel.Name = "noGameLabel";
             this.noGameLabel.Size = new System.Drawing.Size(161, 13);
             this.noGameLabel.TabIndex = 13;
@@ -182,7 +189,8 @@
             // 
             // replaceEntry
             // 
-            this.replaceEntry.Location = new System.Drawing.Point(196, 297);
+            this.replaceEntry.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.replaceEntry.Location = new System.Drawing.Point(196, 353);
             this.replaceEntry.Margin = new System.Windows.Forms.Padding(2);
             this.replaceEntry.Name = "replaceEntry";
             this.replaceEntry.Size = new System.Drawing.Size(88, 27);
@@ -194,7 +202,7 @@
             // 
             // originalTitle
             // 
-            this.originalTitle.Location = new System.Drawing.Point(13, 259);
+            this.originalTitle.Location = new System.Drawing.Point(12, 310);
             this.originalTitle.Name = "originalTitle";
             this.originalTitle.Size = new System.Drawing.Size(17, 20);
             this.originalTitle.TabIndex = 15;
@@ -202,7 +210,8 @@
             // 
             // deleteEntryButton
             // 
-            this.deleteEntryButton.Location = new System.Drawing.Point(288, 297);
+            this.deleteEntryButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.deleteEntryButton.Location = new System.Drawing.Point(288, 353);
             this.deleteEntryButton.Margin = new System.Windows.Forms.Padding(2);
             this.deleteEntryButton.Name = "deleteEntryButton";
             this.deleteEntryButton.Size = new System.Drawing.Size(88, 27);
@@ -257,11 +266,29 @@
             this.secondsBox.TabIndex = 20;
             this.secondsBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.secondsBox_KeyUp);
             // 
+            // newsURLBox
+            // 
+            this.newsURLBox.Location = new System.Drawing.Point(104, 238);
+            this.newsURLBox.Margin = new System.Windows.Forms.Padding(2);
+            this.newsURLBox.Name = "newsURLBox";
+            this.newsURLBox.Size = new System.Drawing.Size(415, 20);
+            this.newsURLBox.TabIndex = 22;
+            // 
+            // wikiURLBox
+            // 
+            this.wikiURLBox.Location = new System.Drawing.Point(104, 262);
+            this.wikiURLBox.Margin = new System.Windows.Forms.Padding(2);
+            this.wikiURLBox.Name = "wikiURLBox";
+            this.wikiURLBox.Size = new System.Drawing.Size(415, 20);
+            this.wikiURLBox.TabIndex = 23;
+            // 
             // AddGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(533, 335);
+            this.ClientSize = new System.Drawing.Size(533, 391);
+            this.Controls.Add(this.wikiURLBox);
+            this.Controls.Add(this.newsURLBox);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.secondsBox);
             this.Controls.Add(this.label2);
@@ -317,5 +344,7 @@
         private System.Windows.Forms.TextBox minutesBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox secondsBox;
+        private System.Windows.Forms.TextBox newsURLBox;
+        private System.Windows.Forms.TextBox wikiURLBox;
     }
 }

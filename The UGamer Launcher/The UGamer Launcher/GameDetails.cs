@@ -4,23 +4,33 @@ using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
 using System.Data.OleDb;
+using CefSharp;
+using CefSharp.WinForms;
 
 namespace The_UGamer_Launcher
 {
     public partial class GameDetails : Form
     {
-        public Stopwatch gameTime = new Stopwatch();
+        private Stopwatch gameTime = new Stopwatch();
+        private ChromiumWebBrowser chromeBrowser;
+        string newsUrl;
+        string wikiUrl;
 
         // Starts up a detail form.
         public GameDetails() 
         {
             InitializeComponent();
+            if (noImageText.Visible == true)
+            {
+                gamePicture.Visible = false;
+            }
         }
         
         // Displays all the info for the game.
         public void DisplayInfo(string title, string input2, string platform,
             string status, string rating, string hours, string obtained,
-            string startDate, string endDate, string notes, string launchString2, bool exePath2, bool batPath2)
+            string startDate, string endDate, string notes, string launchString2, bool exePath2, bool batPath2,
+            string newsString2, string wikiString2)
         { 
             noImageText.Visible = false;
             
@@ -120,6 +130,9 @@ namespace The_UGamer_Launcher
                 button1.Text = "Track Time";
                 batPath2 = true;
             }
+
+            setURLs(newsString2, wikiString2);
+            chromeBrowser.Load(newsString2);
 
             button1.Click += (sender, EventArgs) => { button_Click(sender, EventArgs, launchString2, exePath2, batPath2); }; // This passes the launch URL to the launch button.
         }
@@ -358,6 +371,68 @@ namespace The_UGamer_Launcher
             gameTime.Restart();
             button1.Visible = true;
             stopTime.Visible = false;
+        }
+
+        FormWindowState LastWindowState = FormWindowState.Normal;
+        private void GameDetails_Resize(object sender, EventArgs e)
+        {
+
+            // When window state changes
+            if (WindowState != LastWindowState)
+            {
+                LastWindowState = WindowState;
+
+                if (WindowState == FormWindowState.Maximized)
+                {
+                    chromeBrowser.Visible = true;
+                    newsButton.Visible = true;
+                    wikiButton.Visible = true;
+                    // Maximized!
+                }
+                if (WindowState == FormWindowState.Normal)
+                {
+                    chromeBrowser.Visible = false;
+                    newsButton.Visible = false;
+                    wikiButton.Visible = false;
+                    // Restored!
+                }
+            }
+
+        }
+
+        private void newsButton_Click(object sender, EventArgs e)
+        {
+            chromeBrowser.Load(newsUrl);
+        }
+
+        private void setURLs(string news, string wiki)
+        {
+            if (newsUrl != " " && wikiUrl != " ")
+            {
+                
+                // Create a browser component
+                chromeBrowser = new ChromiumWebBrowser("http://ourcodeworld.com");
+                // Add it to the form and fill it to the form window.
+                Size browserSize = new Size(1074, 217);
+                chromeBrowser.Size = browserSize;
+                chromeBrowser.Location = new Point(11, 423);
+                chromeBrowser.Dock = DockStyle.None;
+                chromeBrowser.Visible = false;
+                chromeBrowser.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Top);
+                this.Controls.Add(chromeBrowser);
+                this.newsUrl = news;
+                this.wikiUrl = wiki;
+            }
+            else
+            {
+                this.Controls.Remove(newsButton);
+                this.Controls.Remove(wikiButton);
+            }
+        }
+
+        private void wikiButton_Click(object sender, EventArgs e)
+        {
+            chromeBrowser.Load(wikiUrl);
         }
     }
 }

@@ -13,6 +13,18 @@ namespace The_UGamer_Launcher
         {
             InitializeComponent();
             frm1 = parent;
+
+            DataTable dt = frm1.collectionDataSet4.Table1;
+            AutoCompleteStringCollection autoFill = new AutoCompleteStringCollection();
+            int columnIndex = 1; // Name column
+            string[] table = new string[dt.Rows.Count];
+            int index = 0;
+            for (index = 0; index < dt.Rows.Count; index++)
+            {
+                table[index] = dt.Rows[index][columnIndex].ToString();
+                autoFill.Add(table[index]);
+            }
+            titleBox.AutoCompleteCustomSource = autoFill;
         }
 
         private void addEntryButton_Click(object sender, EventArgs e)
@@ -29,18 +41,20 @@ namespace The_UGamer_Launcher
             string obtained = obtainedBox.Text;
             string startDate = startDateBox.Text;
             string endDate = endDateBox.Text;
-            string launchCode = launchBox.Text;
             string notes = notesBox.Text;
+            string launchCode = launchBox.Text;
+            string newsCode = newsURLBox.Text;
+            string wikiCode = wikiURLBox.Text;
 
             addEntry(title, platform, status, rating, hours, minutes, seconds, obtained, startDate, 
-                endDate, launchCode, notes);
+                endDate, launchCode, notes, newsCode, wikiCode);
 
             refresh = true;
         }
 
         private void addEntry(string title, string platform, string status,
             string rating, string hours, string minutes, string seconds, string obtained, string startDate,
-                string endDate, string launchCode, string notes)
+                string endDate, string launchCode, string notes, string newsCode, string wikiCode)
         {
 
             int hoursInt = 0;
@@ -78,7 +92,7 @@ namespace The_UGamer_Launcher
 
             string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Collection.accdb";
             OleDbConnection con = new OleDbConnection(connectionString);
-            OleDbCommand cmd = new OleDbCommand("INSERT INTO Table1 (Title, Platform, Status, Rating, PlayTime, Obtained, StartDate, EndDate, Notes, Launch) VALUES (@Title, @Platform, @Status, @Rating, @PlayTime, @Obtained, @StartDate, @EndDate, @Notes, @Launch);", con);
+            OleDbCommand cmd = new OleDbCommand("INSERT INTO Table1 (Title, Platform, Status, Rating, PlayTime, Obtained, StartDate, EndDate, Notes, Launch, News, Wiki) VALUES (@Title, @Platform, @Status, @Rating, @PlayTime, @Obtained, @StartDate, @EndDate, @Notes, @Launch, @News, @Wiki);", con);
 
             con.Open();
 
@@ -130,6 +144,16 @@ namespace The_UGamer_Launcher
             else
                 cmd.Parameters.AddWithValue("@Launch", launchCode);
 
+            if (newsCode == "")
+                cmd.Parameters.AddWithValue("@News", " ");
+            else
+                cmd.Parameters.AddWithValue("@News", newsCode);
+
+            if (wikiCode == "")
+                cmd.Parameters.AddWithValue("@Wiki", " ");
+            else
+                cmd.Parameters.AddWithValue("@Wiki", wikiCode);
+
             if (title != "")
             {
                 cmd.ExecuteNonQuery();
@@ -146,6 +170,8 @@ namespace The_UGamer_Launcher
                 endDateBox.Text = "";
                 launchBox.Text = "";
                 notesBox.Text = "";
+                newsURLBox.Text = "";
+                wikiURLBox.Text = "";
             }
             else
             {
@@ -158,7 +184,7 @@ namespace The_UGamer_Launcher
         {
             int z = 0, y = 0;
 
-            DataTable dt = frm1.collectionDataSet3.Table1;
+            DataTable dt = frm1.collectionDataSet4.Table1;
             int columnIndex = 1; // Name column
             string[] table = new string[dt.Rows.Count];
             int index = 0;
@@ -240,6 +266,8 @@ namespace The_UGamer_Launcher
                 endDateBox.Text = dt.Rows[z][8].ToString();
                 notesBox.Text = dt.Rows[z][9].ToString();
                 launchBox.Text = dt.Rows[z][10].ToString();
+                newsURLBox.Text = dt.Rows[z][11].ToString();
+                wikiURLBox.Text = dt.Rows[z][12].ToString();
                 noGameLabel.Visible = false;
                 y = 0;
 
@@ -270,21 +298,23 @@ namespace The_UGamer_Launcher
             string endDate = endDateBox.Text;
             string launchCode = launchBox.Text;
             string notes = notesBox.Text;
+            string newsCode = newsURLBox.Text;
+            string wikiCode = wikiURLBox.Text;
 
             replaceEntryMethod(originalTitleString, title, platform, status, rating, 
                 hours, minutes, seconds, obtained, startDate,
-                endDate, launchCode, notes);
+                endDate, launchCode, notes, newsCode, wikiCode);
         }
 
         private void replaceEntryMethod(string originalTitleString, string title, string platform, string status,
             string rating, string hours, string minutes,
             string seconds, string obtained, string startDate,
-                string endDate, string launchCode, string notes)
+                string endDate, string launchCode, string notes, string newsCode, string wikiCode)
         {
             string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Collection.accdb";
             OleDbConnection con = new OleDbConnection(connectionString);
             OleDbCommand delCmd = new OleDbCommand("DELETE FROM Table1 WHERE Title='" + originalTitleString + "';", con);
-            OleDbCommand cmd = new OleDbCommand("INSERT INTO Table1 (Title, Platform, Status, Rating, PlayTime, Obtained, StartDate, EndDate, Notes, Launch) VALUES (@Title, @Platform, @Status, @Rating, @PlayTime, @Obtained, @StartDate, @EndDate, @Notes, @Launch);", con);
+            OleDbCommand cmd = new OleDbCommand("INSERT INTO Table1 (Title, Platform, Status, Rating, PlayTime, Obtained, StartDate, EndDate, Notes, Launch, News, Wiki) VALUES (@Title, @Platform, @Status, @Rating, @PlayTime, @Obtained, @StartDate, @EndDate, @Notes, @Launch, @News, @Wiki);", con);
 
             string message = "Are you sure you want to edit entry \"" + originalTitleString + "\"?";
             string caption = "Editing entry \"" + originalTitleString + "\"";
@@ -378,6 +408,16 @@ namespace The_UGamer_Launcher
                 else
                     cmd.Parameters.AddWithValue("@Launch", launchCode);
 
+                if (newsCode == "")
+                    cmd.Parameters.AddWithValue("@News", " ");
+                else
+                    cmd.Parameters.AddWithValue("@News", newsCode);
+
+                if (wikiCode == "")
+                    cmd.Parameters.AddWithValue("@Wiki", " ");
+                else
+                    cmd.Parameters.AddWithValue("@Wiki", wikiCode);
+
                 cmd.ExecuteNonQuery();
                 this.Text = "Edit an entry... Game edited.";
                 titleBox.Text = "";
@@ -392,6 +432,8 @@ namespace The_UGamer_Launcher
                 endDateBox.Text = "";
                 launchBox.Text = "";
                 notesBox.Text = "";
+                newsURLBox.Text = "";
+                wikiURLBox.Text = "";
             }
             else
             {
@@ -437,6 +479,8 @@ namespace The_UGamer_Launcher
                 endDateBox.Text = "";
                 launchBox.Text = "";
                 notesBox.Text = "";
+                newsURLBox.Text = "";
+                wikiURLBox.Text = "";
 
                 return;
             }

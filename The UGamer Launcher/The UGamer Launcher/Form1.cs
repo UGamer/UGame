@@ -5,6 +5,8 @@ using System.IO;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
+using CefSharp;
+using CefSharp.WinForms;
 
 namespace The_UGamer_Launcher
 {
@@ -32,8 +34,7 @@ namespace The_UGamer_Launcher
         {
             try
             {
-                this.table1TableAdapter1.Fill(this.collectionDataSet3.Table1);
-                // this.table1TableAdapter.Fill(this.collectionDataSetFinal2.Table1);
+                this.table1TableAdapter2.Fill(this.collectionDataSet4.Table1);
             }
             // This is caught if you don't have the required OLE DB drivers.
             catch (InvalidOperationException d)
@@ -50,7 +51,7 @@ namespace The_UGamer_Launcher
                 {
                     try
                     {
-                        this.table1TableAdapter1.Fill(this.collectionDataSet3.Table1);
+                        this.table1TableAdapter2.Fill(this.collectionDataSet4.Table1);
                         installed = true;
                     }
                     catch (InvalidOperationException f)
@@ -67,7 +68,7 @@ namespace The_UGamer_Launcher
             else
                 gameCountText.Text = Convert.ToString(entryCount) + " total game";
 
-            DataTable dt = collectionDataSet3.Table1;
+            DataTable dt = collectionDataSet4.Table1;
             AutoCompleteStringCollection autoFill = new AutoCompleteStringCollection();
             int columnIndex = 1; // Name column
             string[] table = new string[dt.Rows.Count];
@@ -78,6 +79,10 @@ namespace The_UGamer_Launcher
                 autoFill.Add(table[index]);
             }
             searchBox.AutoCompleteCustomSource = autoFill;
+
+            CefSettings settings = new CefSettings();
+            // Initialize cef with the provided settings
+            Cef.Initialize(settings);
         }
 
         private void dataTable_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -116,7 +121,7 @@ namespace The_UGamer_Launcher
             int y = 0, z = 0;
 
             // This makes the whole database into an array.
-            DataTable dt = collectionDataSet3.Table1;
+            DataTable dt = collectionDataSet4.Table1;
             int columnIndex = 1; // Name column
             string[] table = new string[dt.Rows.Count];
             int index = 0;
@@ -178,6 +183,8 @@ namespace The_UGamer_Launcher
                 string endDate = dt.Rows[z][8].ToString();
                 string notes = dt.Rows[z][9].ToString();
                 string launchString = dt.Rows[z][10].ToString();
+                string newsString = dt.Rows[z][11].ToString();
+                string wikiString = dt.Rows[z][12].ToString();
 
                 if (launchString.IndexOf("\\") != -1)
                     launchString = pathFix.Replace(launchString, "/"); // This fixes .exe links automatically.
@@ -188,7 +195,8 @@ namespace The_UGamer_Launcher
                 gameWindow.Text = input;
                 gameWindow.Show();
                 gameWindow.DisplayInfo(input, input2, platform, status, rating,
-                    hours, obtained, startDate, endDate, notes, launchString, exePath, batPath);
+                    hours, obtained, startDate, endDate, notes, launchString, exePath, batPath,
+                    newsString, wikiString);
                 noGameLabel.Visible = false;
                 y = 0;
             }

@@ -46,13 +46,14 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.launchLabel = new System.Windows.Forms.Label();
             this.stopTime = new System.Windows.Forms.Button();
+            this.wikiButton = new System.Windows.Forms.Button();
+            this.newsButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gamePicture)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // nameLabel
             // 
-            this.nameLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.nameLabel.AutoSize = true;
             this.nameLabel.BackColor = System.Drawing.Color.White;
             this.nameLabel.Font = new System.Drawing.Font("Century Gothic", 27.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -155,7 +156,6 @@
             // 
             // notesLabel
             // 
-            this.notesLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.notesLabel.AutoSize = true;
             this.notesLabel.BackColor = System.Drawing.Color.White;
             this.notesLabel.Location = new System.Drawing.Point(338, 269);
@@ -166,16 +166,15 @@
             // 
             // button1
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.button1.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.button1.FlatAppearance.BorderSize = 2;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.ForeColor = System.Drawing.SystemColors.Control;
-            this.button1.Location = new System.Drawing.Point(110, 357);
+            this.button1.Location = new System.Drawing.Point(8, 348);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(118, 27);
+            this.button1.Size = new System.Drawing.Size(154, 56);
             this.button1.TabIndex = 10;
             this.button1.Text = "Start Playing";
             this.button1.UseVisualStyleBackColor = false;
@@ -192,7 +191,6 @@
             // 
             // gamePicture
             // 
-            this.gamePicture.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.gamePicture.BackColor = System.Drawing.Color.Transparent;
             this.gamePicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.gamePicture.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -205,7 +203,6 @@
             // 
             // notesBox
             // 
-            this.notesBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.notesBox.BackColor = System.Drawing.Color.White;
             this.notesBox.Location = new System.Drawing.Point(337, 282);
             this.notesBox.Multiline = true;
@@ -216,7 +213,6 @@
             // 
             // noImageText
             // 
-            this.noImageText.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.noImageText.Location = new System.Drawing.Point(48, 158);
             this.noImageText.Margin = new System.Windows.Forms.Padding(2);
             this.noImageText.Multiline = true;
@@ -229,7 +225,6 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.platformLabel);
             this.panel1.Controls.Add(this.statusLabel);
@@ -254,21 +249,56 @@
             // 
             // stopTime
             // 
-            this.stopTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.stopTime.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.stopTime.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.stopTime.FlatAppearance.BorderSize = 2;
             this.stopTime.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.stopTime.ForeColor = System.Drawing.SystemColors.Control;
-            this.stopTime.Location = new System.Drawing.Point(110, 357);
+            this.stopTime.Location = new System.Drawing.Point(8, 348);
             this.stopTime.Margin = new System.Windows.Forms.Padding(2);
             this.stopTime.Name = "stopTime";
-            this.stopTime.Size = new System.Drawing.Size(118, 27);
+            this.stopTime.Size = new System.Drawing.Size(154, 56);
             this.stopTime.TabIndex = 18;
             this.stopTime.Text = "Stop Playing";
             this.stopTime.UseVisualStyleBackColor = false;
             this.stopTime.Visible = false;
             this.stopTime.Click += new System.EventHandler(this.stopTime_Click);
+            // 
+            // wikiButton
+            // 
+            this.wikiButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.wikiButton.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.wikiButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.wikiButton.FlatAppearance.BorderSize = 2;
+            this.wikiButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.wikiButton.ForeColor = System.Drawing.SystemColors.Control;
+            this.wikiButton.Location = new System.Drawing.Point(689, 346);
+            this.wikiButton.Margin = new System.Windows.Forms.Padding(2);
+            this.wikiButton.Name = "wikiButton";
+            this.wikiButton.Size = new System.Drawing.Size(154, 56);
+            this.wikiButton.TabIndex = 20;
+            this.wikiButton.Text = "Wiki";
+            this.wikiButton.UseVisualStyleBackColor = false;
+            this.wikiButton.Visible = false;
+            this.wikiButton.Click += new System.EventHandler(this.wikiButton_Click);
+            // 
+            // newsButton
+            // 
+            this.newsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.newsButton.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.newsButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.newsButton.FlatAppearance.BorderSize = 2;
+            this.newsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.newsButton.ForeColor = System.Drawing.SystemColors.Control;
+            this.newsButton.Location = new System.Drawing.Point(689, 286);
+            this.newsButton.Margin = new System.Windows.Forms.Padding(2);
+            this.newsButton.Name = "newsButton";
+            this.newsButton.Size = new System.Drawing.Size(154, 56);
+            this.newsButton.TabIndex = 21;
+            this.newsButton.Text = "News";
+            this.newsButton.UseVisualStyleBackColor = false;
+            this.newsButton.Visible = false;
+            this.newsButton.Click += new System.EventHandler(this.newsButton_Click);
             // 
             // GameDetails
             // 
@@ -277,7 +307,7 @@
             this.AutoScroll = true;
             this.AutoSize = true;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(683, 409);
+            this.ClientSize = new System.Drawing.Size(854, 413);
             this.Controls.Add(this.stopTime);
             this.Controls.Add(this.launchLabel);
             this.Controls.Add(this.nameLabel);
@@ -288,10 +318,13 @@
             this.Controls.Add(this.noImageText);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.gamePicture);
+            this.Controls.Add(this.newsButton);
+            this.Controls.Add(this.wikiButton);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "GameDetails";
             this.Text = "GameDetails";
+            this.Resize += new System.EventHandler(this.GameDetails_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.gamePicture)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -318,5 +351,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label launchLabel;
         private System.Windows.Forms.Button stopTime;
+        private System.Windows.Forms.Button wikiButton;
+        private System.Windows.Forms.Button newsButton;
     }
 }
