@@ -103,12 +103,6 @@
     <Compile Include="GameDetails.Designer.cs">
       <DependentUpon>GameDetails.cs</DependentUpon>
     </Compile>
-    <Compile Include="InGameOverlay.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="InGameOverlay.Designer.cs">
-      <DependentUpon>InGameOverlay.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AddGame.resx">
@@ -119,9 +113,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GameDetails.resx">
       <DependentUpon>GameDetails.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="InGameOverlay.resx">
-      <DependentUpon>InGameOverlay.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

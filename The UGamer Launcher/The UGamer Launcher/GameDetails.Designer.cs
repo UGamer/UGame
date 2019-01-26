@@ -45,6 +45,7 @@
             this.noImageText = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.launchLabel = new System.Windows.Forms.Label();
+            this.stopTime = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gamePicture)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -176,7 +177,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(118, 27);
             this.button1.TabIndex = 10;
-            this.button1.Text = "Launch";
+            this.button1.Text = "Start Playing";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -251,15 +252,33 @@
             this.launchLabel.TabIndex = 17;
             this.launchLabel.Visible = false;
             // 
+            // stopTime
+            // 
+            this.stopTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.stopTime.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.stopTime.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.stopTime.FlatAppearance.BorderSize = 2;
+            this.stopTime.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.stopTime.ForeColor = System.Drawing.SystemColors.Control;
+            this.stopTime.Location = new System.Drawing.Point(110, 357);
+            this.stopTime.Margin = new System.Windows.Forms.Padding(2);
+            this.stopTime.Name = "stopTime";
+            this.stopTime.Size = new System.Drawing.Size(118, 27);
+            this.stopTime.TabIndex = 18;
+            this.stopTime.Text = "Stop Playing";
+            this.stopTime.UseVisualStyleBackColor = false;
+            this.stopTime.Visible = false;
+            this.stopTime.Click += new System.EventHandler(this.stopTime_Click);
+            // 
             // GameDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSize = true;
-            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(683, 409);
+            this.Controls.Add(this.stopTime);
             this.Controls.Add(this.launchLabel);
             this.Controls.Add(this.nameLabel);
             this.Controls.Add(this.notesBox);
@@ -298,5 +317,6 @@
         private System.Windows.Forms.TextBox noImageText;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label launchLabel;
+        private System.Windows.Forms.Button stopTime;
     }
 }
