@@ -131,8 +131,10 @@ namespace The_UGamer_Launcher
                 batPath2 = true;
             }
 
-            setURLs(newsString2, wikiString2);
-            chromeBrowser.Load(newsString2);
+            bool hasPage = setURLs(newsString2, wikiString2);
+
+            if (hasPage == true)
+                chromeBrowser.Load(newsString2);
 
             button1.Click += (sender, EventArgs) => { button_Click(sender, EventArgs, launchString2, exePath2, batPath2); }; // This passes the launch URL to the launch button.
         }
@@ -384,14 +386,14 @@ namespace The_UGamer_Launcher
 
                 if (WindowState == FormWindowState.Maximized)
                 {
-                    chromeBrowser.Visible = true;
+                    browserDock.Visible = true;
                     newsButton.Visible = true;
                     wikiButton.Visible = true;
                     // Maximized!
                 }
                 if (WindowState == FormWindowState.Normal)
                 {
-                    chromeBrowser.Visible = false;
+                    browserDock.Visible = false;
                     newsButton.Visible = false;
                     wikiButton.Visible = false;
                     // Restored!
@@ -405,28 +407,27 @@ namespace The_UGamer_Launcher
             chromeBrowser.Load(newsUrl);
         }
 
-        private void setURLs(string news, string wiki)
+        private bool setURLs(string news, string wiki)
         {
-            if (newsUrl != " " && wikiUrl != " ")
-            {
-                
-                // Create a browser component
-                chromeBrowser = new ChromiumWebBrowser("http://ourcodeworld.com");
-                // Add it to the form and fill it to the form window.
-                Size browserSize = new Size(1074, 217);
-                chromeBrowser.Size = browserSize;
-                chromeBrowser.Location = new Point(11, 423);
-                chromeBrowser.Dock = DockStyle.None;
-                chromeBrowser.Visible = false;
-                chromeBrowser.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Top);
-                this.Controls.Add(chromeBrowser);
-                this.newsUrl = news;
-                this.wikiUrl = wiki;
-            }
-            else
+            if (news == " " || wiki == " " || news == "" || wiki == "")
             {
                 this.Controls.Remove(newsButton);
                 this.Controls.Remove(wikiButton);
+                this.Controls.Remove(browserDock);
+                return false;
+            }
+            else
+            {
+                // Create a browser component
+                chromeBrowser = new ChromiumWebBrowser(news);
+                // Add it to the form and fill it to the form window.
+                Size browserSize = new Size(659, 88);
+                chromeBrowser.Size = browserSize;
+                chromeBrowser.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Top);
+                this.browserDock.Controls.Add(chromeBrowser);
+                this.newsUrl = news;
+                this.wikiUrl = wiki;
+                return true;
             }
         }
 

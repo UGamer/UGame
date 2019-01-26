@@ -48,6 +48,7 @@
             this.stopTime = new System.Windows.Forms.Button();
             this.wikiButton = new System.Windows.Forms.Button();
             this.newsButton = new System.Windows.Forms.Button();
+            this.browserDock = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.gamePicture)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -272,7 +273,7 @@
             this.wikiButton.FlatAppearance.BorderSize = 2;
             this.wikiButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.wikiButton.ForeColor = System.Drawing.SystemColors.Control;
-            this.wikiButton.Location = new System.Drawing.Point(689, 346);
+            this.wikiButton.Location = new System.Drawing.Point(689, 345);
             this.wikiButton.Margin = new System.Windows.Forms.Padding(2);
             this.wikiButton.Name = "wikiButton";
             this.wikiButton.Size = new System.Drawing.Size(154, 56);
@@ -290,7 +291,7 @@
             this.newsButton.FlatAppearance.BorderSize = 2;
             this.newsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.newsButton.ForeColor = System.Drawing.SystemColors.Control;
-            this.newsButton.Location = new System.Drawing.Point(689, 286);
+            this.newsButton.Location = new System.Drawing.Point(689, 285);
             this.newsButton.Margin = new System.Windows.Forms.Padding(2);
             this.newsButton.Name = "newsButton";
             this.newsButton.Size = new System.Drawing.Size(154, 56);
@@ -300,6 +301,19 @@
             this.newsButton.Visible = false;
             this.newsButton.Click += new System.EventHandler(this.newsButton_Click);
             // 
+            // browserDock
+            // 
+            this.browserDock.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.browserDock.AutoScroll = true;
+            this.browserDock.BackColor = System.Drawing.Color.Transparent;
+            this.browserDock.Location = new System.Drawing.Point(8, 410);
+            this.browserDock.Name = "browserDock";
+            this.browserDock.Size = new System.Drawing.Size(659, 0);
+            this.browserDock.TabIndex = 22;
+            this.browserDock.Visible = false;
+            // 
             // GameDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -307,7 +321,8 @@
             this.AutoScroll = true;
             this.AutoSize = true;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(854, 413);
+            this.ClientSize = new System.Drawing.Size(854, 412);
+            this.Controls.Add(this.browserDock);
             this.Controls.Add(this.stopTime);
             this.Controls.Add(this.launchLabel);
             this.Controls.Add(this.nameLabel);
@@ -320,6 +335,7 @@
             this.Controls.Add(this.gamePicture);
             this.Controls.Add(this.newsButton);
             this.Controls.Add(this.wikiButton);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "GameDetails";
@@ -353,5 +369,6 @@
         private System.Windows.Forms.Button stopTime;
         private System.Windows.Forms.Button wikiButton;
         private System.Windows.Forms.Button newsButton;
+        private System.Windows.Forms.Panel browserDock;
     }
 }
