@@ -4,7 +4,7 @@ A performance-lightweight launcher that comes with more details and customizabil
 
 ## History
 
-The "UGame Launcher" was created with the idea of having all of your games in one place from across numerous different platforms. This includes games from Steam, Origin, uPlay, Epic Games, other PC games (League, Minecraft), and games from any platform you can think of.
+The "UGame Launcher" was created with the idea of having all of your games in one place from across numerous different platforms. This includes games from Steam, Origin, uPlay, Epic Games, other PC games (League, Minecraft), and games from any platform you can think of. In the future, there might be an in-game overlay that comes with the launcher, but for now I recommend you use "Overwolf" when not using Steam.
 
 ## Getting Started
 
