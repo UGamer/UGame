@@ -59,7 +59,7 @@ namespace The_UGamer_Launcher
 
                     }
                 }
-                Process.Start(Application.ExecutablePath);
+                System.Diagnostics.Process.Start(Application.ExecutablePath);
                 this.Close();
             }
             int entryCount = dataTable.Rows.Count;
@@ -224,7 +224,7 @@ namespace The_UGamer_Launcher
         private void refreshButton_Click(object sender, EventArgs e)
         {
             // this.table1TableAdapter1.Fill(this.collectionDataSet3.Table1);
-            Process.Start(Application.ExecutablePath);
+            System.Diagnostics.Process.Start(Application.ExecutablePath);
             this.Close();
         }
     }

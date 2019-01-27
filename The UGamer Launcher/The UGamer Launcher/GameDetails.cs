@@ -143,7 +143,7 @@ namespace The_UGamer_Launcher
 
         private void button_Click(object sender, EventArgs e, string launchString3, bool exePath3, bool batPath3)
         {
-            Process game = new Process();
+            System.Diagnostics.Process game = new System.Diagnostics.Process();
             game.StartInfo.FileName = "";
             if (exePath3 == true || batPath3 == true)
             {
