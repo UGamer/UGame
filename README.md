@@ -26,8 +26,8 @@ You can watch a tutorial series on how to work the launcher here: https://www.yo
 
 ## Resources
 
-Game Database: https://docs.google.com/spreadsheets/d/1Gv0IYyRZRxKTYkR_kisJ0ZguyA515s_3HbTb5PC0E40/edit?usp=sharing
-Image Database: https://drive.google.com/drive/folders/14no5yUOnIGdVi2Uct2p-2MBn75nEaTun
+* Game Database: https://docs.google.com/spreadsheets/d/1Gv0IYyRZRxKTYkR_kisJ0ZguyA515s_3HbTb5PC0E40/edit?usp=sharing
+* Image Database: https://drive.google.com/drive/folders/14no5yUOnIGdVi2Uct2p-2MBn75nEaTun
 
 # Credits
 
