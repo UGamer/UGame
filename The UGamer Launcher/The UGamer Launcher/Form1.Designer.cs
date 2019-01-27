@@ -41,42 +41,36 @@
             this.endDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.notesCommentsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.launchDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.table1BindingSource2 = new System.Windows.Forms.BindingSource(this.components);
-            this.collectionDataSet3 = new The_UGamer_Launcher.CollectionDataSet3();
+            this.table1BindingSource4 = new System.Windows.Forms.BindingSource(this.components);
+            this.collectionDataSet4 = new The_UGamer_Launcher.CollectionDataSet4();
             this.driverInstall = new System.Windows.Forms.WebBrowser();
             this.driverWarning = new System.Windows.Forms.TextBox();
             this.gameCountText = new System.Windows.Forms.TextBox();
             this.addEntryButton = new System.Windows.Forms.Button();
             this.logo = new System.Windows.Forms.PictureBox();
-            this.table1BindingSource3 = new System.Windows.Forms.BindingSource(this.components);
-            this.collectionDataSetFinal = new The_UGamer_Launcher.CollectionDataSetFinal();
-            this.table1TableAdapter3 = new The_UGamer_Launcher.CollectionDataSetFinalTableAdapters.Table1TableAdapter();
-            this.table1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.noGameLabel = new System.Windows.Forms.Label();
             this.searchButton = new System.Windows.Forms.Button();
             this.searchBox = new System.Windows.Forms.TextBox();
-            this.table1BindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.collectionDataSetFinal2 = new The_UGamer_Launcher.CollectionDataSetFinal2();
-            this.table1TableAdapter = new The_UGamer_Launcher.CollectionDataSetFinal2TableAdapters.Table1TableAdapter();
-            this.table1TableAdapter1 = new The_UGamer_Launcher.CollectionDataSet3TableAdapters.Table1TableAdapter();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.refreshButton = new System.Windows.Forms.ToolStripButton();
-            this.collectionDataSet4 = new The_UGamer_Launcher.CollectionDataSet4();
-            this.table1BindingSource4 = new System.Windows.Forms.BindingSource(this.components);
             this.table1TableAdapter2 = new The_UGamer_Launcher.CollectionDataSet4TableAdapters.Table1TableAdapter();
+            this.table1BindingSource2 = new System.Windows.Forms.BindingSource(this.components);
+            this.table1BindingSource3 = new System.Windows.Forms.BindingSource(this.components);
+            this.table1BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.table1BindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.collectionDataSet5 = new The_UGamer_Launcher.CollectionDataSet5();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.refreshButton = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSetFinal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSetFinal2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet5)).BeginInit();
             this.toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource4)).BeginInit();
             this.SuspendLayout();
             // 
             // dataTable
@@ -164,7 +158,7 @@
             // endDateDataGridViewTextBoxColumn
             // 
             this.endDateDataGridViewTextBoxColumn.DataPropertyName = "EndDate";
-            this.endDateDataGridViewTextBoxColumn.HeaderText = "End Date";
+            this.endDateDataGridViewTextBoxColumn.HeaderText = "Last Played";
             this.endDateDataGridViewTextBoxColumn.Name = "endDateDataGridViewTextBoxColumn";
             this.endDateDataGridViewTextBoxColumn.ReadOnly = true;
             this.endDateDataGridViewTextBoxColumn.Width = 80;
@@ -185,15 +179,15 @@
             this.launchDataGridViewTextBoxColumn.ReadOnly = true;
             this.launchDataGridViewTextBoxColumn.Visible = false;
             // 
-            // table1BindingSource2
+            // table1BindingSource4
             // 
-            this.table1BindingSource2.DataMember = "Table1";
-            this.table1BindingSource2.DataSource = this.collectionDataSet3;
+            this.table1BindingSource4.DataMember = "Table1";
+            this.table1BindingSource4.DataSource = this.collectionDataSet4;
             // 
-            // collectionDataSet3
+            // collectionDataSet4
             // 
-            this.collectionDataSet3.DataSetName = "CollectionDataSet3";
-            this.collectionDataSet3.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.collectionDataSet4.DataSetName = "CollectionDataSet4";
+            this.collectionDataSet4.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // driverInstall
             // 
@@ -259,25 +253,6 @@
             this.logo.TabIndex = 12;
             this.logo.TabStop = false;
             // 
-            // table1BindingSource3
-            // 
-            this.table1BindingSource3.DataMember = "Table1";
-            this.table1BindingSource3.DataSource = this.collectionDataSetFinal;
-            // 
-            // collectionDataSetFinal
-            // 
-            this.collectionDataSetFinal.DataSetName = "CollectionDataSetFinal";
-            this.collectionDataSetFinal.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // table1TableAdapter3
-            // 
-            this.table1TableAdapter3.ClearBeforeFill = true;
-            // 
-            // table1BindingSource
-            // 
-            this.table1BindingSource.DataMember = "Table1";
-            this.table1BindingSource.DataSource = this.collectionDataSetFinal;
-            // 
             // toolStripButton1
             // 
             this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -322,33 +297,35 @@
             this.searchBox.TabIndex = 19;
             this.searchBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchBox_KeyDown);
             // 
-            // table1BindingSource1
+            // table1TableAdapter2
             // 
-            this.table1BindingSource1.DataMember = "Table1";
-            this.table1BindingSource1.DataSource = this.collectionDataSetFinal2;
+            this.table1TableAdapter2.ClearBeforeFill = true;
             // 
-            // collectionDataSetFinal2
+            // collectionDataSet5
             // 
-            this.collectionDataSetFinal2.DataSetName = "CollectionDataSetFinal2";
-            this.collectionDataSetFinal2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // table1TableAdapter
-            // 
-            this.table1TableAdapter.ClearBeforeFill = true;
-            // 
-            // table1TableAdapter1
-            // 
-            this.table1TableAdapter1.ClearBeforeFill = true;
+            this.collectionDataSet5.DataSetName = "CollectionDataSet5";
+            this.collectionDataSet5.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton2,
             this.refreshButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1333, 25);
             this.toolStrip1.TabIndex = 20;
             this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripButton2
+            // 
+            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
+            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Size = new System.Drawing.Size(53, 22);
+            this.toolStripButton2.Text = "Settings";
+            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
             // 
             // refreshButton
             // 
@@ -359,20 +336,6 @@
             this.refreshButton.Size = new System.Drawing.Size(50, 22);
             this.refreshButton.Text = "Refresh";
             this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
-            // 
-            // collectionDataSet4
-            // 
-            this.collectionDataSet4.DataSetName = "CollectionDataSet4";
-            this.collectionDataSet4.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // table1BindingSource4
-            // 
-            this.table1BindingSource4.DataMember = "Table1";
-            this.table1BindingSource4.DataSource = this.collectionDataSet4;
-            // 
-            // table1TableAdapter2
-            // 
-            this.table1TableAdapter2.ClearBeforeFill = true;
             // 
             // Form1
             // 
@@ -393,20 +356,19 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "UGame Launcher";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataTable)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSetFinal)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSetFinal2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet5)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource4)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -414,25 +376,22 @@
 
         #endregion
         private System.Windows.Forms.DataGridView dataTable;
-        public CollectionDataSetFinal collectionDataSetFinal;
         private System.Windows.Forms.BindingSource table1BindingSource3;
-        private CollectionDataSetFinalTableAdapters.Table1TableAdapter table1TableAdapter3;
         private System.Windows.Forms.WebBrowser driverInstall;
         private System.Windows.Forms.PictureBox logo;
         private System.Windows.Forms.TextBox driverWarning;
         private System.Windows.Forms.TextBox gameCountText;
         private System.Windows.Forms.Button addEntryButton;
         private System.Windows.Forms.BindingSource table1BindingSource;
-        public CollectionDataSetFinal2 collectionDataSetFinal2;
         private System.Windows.Forms.BindingSource table1BindingSource1;
-        private CollectionDataSetFinal2TableAdapters.Table1TableAdapter table1TableAdapter;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.Label noGameLabel;
         private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.TextBox searchBox;
-        public CollectionDataSet3 collectionDataSet3;
         private System.Windows.Forms.BindingSource table1BindingSource2;
-        public CollectionDataSet3TableAdapters.Table1TableAdapter table1TableAdapter1;
+        public CollectionDataSet4 collectionDataSet4;
+        private System.Windows.Forms.BindingSource table1BindingSource4;
+        private CollectionDataSet4TableAdapters.Table1TableAdapter table1TableAdapter2;
         private System.Windows.Forms.DataGridViewTextBoxColumn titleDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn platformDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn statusDataGridViewTextBoxColumn;
@@ -443,11 +402,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn endDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn notesCommentsDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn launchDataGridViewTextBoxColumn;
+        private CollectionDataSet5 collectionDataSet5;
         private System.Windows.Forms.ToolStrip toolStrip1;
         public System.Windows.Forms.ToolStripButton refreshButton;
-        public CollectionDataSet4 collectionDataSet4;
-        private System.Windows.Forms.BindingSource table1BindingSource4;
-        private CollectionDataSet4TableAdapters.Table1TableAdapter table1TableAdapter2;
+        private System.Windows.Forms.ToolStripButton toolStripButton2;
     }
 }
 

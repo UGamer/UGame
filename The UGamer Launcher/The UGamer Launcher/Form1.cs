@@ -18,20 +18,94 @@ namespace The_UGamer_Launcher
             InitializeComponent();
             try
             {
-                this.BackgroundImage = Image.FromFile("Resources/Theme/backgroundImage.png");
+                IconAssign();
             }
             catch (FileNotFoundException e) { }
 
             try
             {
-                logo.BackgroundImage = Image.FromFile("Resources/Theme/logo.png");
+                File.Delete("Resources/Theme/logoUSING.png");
+                File.Delete("Resources/Theme/backgroundImageUSING.png");
             }
             catch (FileNotFoundException e) { }
+
+            try
+            {
+                File.Copy("Resources/Theme/backgroundImage.png", "Resources/Theme/backgroundImageUSING.png");
+                this.BackgroundImage = ThemeAssign("backgroundImageUSING");
+                File.Delete("Resources/Theme/backgroundImage.png");
+            }
+            catch (FileNotFoundException e)
+            {
+                try
+                {
+                    File.Copy("Resources/Theme/backgroundImage.jpg", "Resources/Theme/backgroundImageUSING.png");
+                    this.BackgroundImage = ThemeAssign("backgroundImageUSING");
+                    File.Delete("Resources/Theme/backgroundImage.jpg");
+                }
+                catch (FileNotFoundException f)
+                {
+                    try
+                    {
+                        File.Copy("Resources/Theme/backgroundImage.jpeg", "Resources/Theme/backgroundImageUSING.png");
+                        this.BackgroundImage = ThemeAssign("backgroundImageUSING");
+                        File.Delete("Resources/Theme/backgroundImage.jpeg");
+                    }
+                    catch (FileNotFoundException g)
+                    {
+                        try
+                        {
+                            File.Copy("Resources/Theme/backgroundImage.gif", "Resources/Theme/backgroundImageUSING.png");
+                            this.BackgroundImage = ThemeAssign("backgroundImageUSING");
+                            File.Delete("Resources/Theme/backgroundImage.gif");
+                        }
+                        catch (FileNotFoundException h) { }
+                    }
+                }
+            }
+
+            try
+            {
+                File.Copy("Resources/Theme/logo.png", "Resources/Theme/logoUSING.png");
+                logo.BackgroundImage = ThemeAssign("logoUSING");
+                File.Delete("Resources/Theme/logo.png");
+            }
+            catch (FileNotFoundException e)
+            {
+                try
+                {
+                    File.Copy("Resources/Theme/logo.jpg", "Resources/Theme/logoUSING.png");
+                    logo.BackgroundImage = ThemeAssign("logoUSING");
+                    File.Delete("Resources/Theme/logo.jpg");
+                }
+                catch (FileNotFoundException f)
+                {
+                    try
+                    {
+                        File.Copy("Resources/Theme/logo.jpeg", "Resources/Theme/logoUSING.png");
+                        logo.BackgroundImage = ThemeAssign("logoUSING");
+                        File.Delete("Resources/Theme/logo.jpeg");
+                    }
+                    catch (FileNotFoundException g)
+                    {
+                        try
+                        {
+                            File.Copy("Resources/Theme/logo.gif", "Resources/Theme/logoUSING.png");
+                            logo.BackgroundImage = ThemeAssign("logoUSING");
+                            File.Delete("Resources/Theme/logo.gif");
+                        }
+                        catch (FileNotFoundException h)
+                        {
+                        }
+                    }
+                }
+            }
         }
 
         // This fills the data table with the user data.
         private void Form1_Load(object sender, EventArgs e) 
         {
+            // TODO: This line of code loads data into the 'collectionDataSet5.Themes' table. You can move, or remove it, as needed.
             try
             {
                 this.table1TableAdapter2.Fill(this.collectionDataSet4.Table1);
@@ -46,7 +120,6 @@ namespace The_UGamer_Launcher
                 searchBox.Visible = false;
                 gameCountText.Visible = false;
                 addEntryButton.Visible = false;
-                toolStrip1.Visible = false;
                 for (bool installed = false; installed == false;)
                 {
                     try
@@ -221,11 +294,113 @@ namespace The_UGamer_Launcher
                 return true;
         }
 
+        public Image ThemeAssign(string input2)
+        {
+            Image background;
+            try
+            {
+                background = Image.FromFile("Resources/Theme/" + input2 + ".png");
+                return background;
+            }
+            catch (FileNotFoundException e)
+            {
+                try
+                {
+                    background = Image.FromFile("Resources/Theme/" + input2 + ".jpg");
+                    return background;
+                }
+                catch (FileNotFoundException f)
+                {
+                    try
+                    {
+                        background = Image.FromFile("Resources/Theme/" + input2 + ".jpeg");
+                        return background;
+                    }
+                    catch (FileNotFoundException g)
+                    {
+                        try
+                        {
+                            background = Image.FromFile("Resources/Theme/" + input2 + ".gif");
+                            return background;
+                        }
+                        catch (FileNotFoundException h)
+                        {
+                            return background = Image.FromFile("Resources/DONT TOUCH.png");
+                        }
+                    }
+                }
+            }
+        }
+
+        public void IconAssign()
+        {
+            Icon windowIcon;
+            try
+            {
+                windowIcon = new Icon("Resources/Theme/icon.ico");
+                this.Icon = windowIcon;
+            }
+            catch (FileNotFoundException e)
+            {
+
+            }
+        }
+
+        private void settingsButton_Click(object sender, EventArgs e)
+        {
+            Settings settings = new Settings(this);
+            settings.Show();
+        }
+
+        private void refreshButton_Click_1(object sender, EventArgs e)
+        {
+            // this.table1TableAdapter1.Fill(this.collectionDataSet4.Table1);
+            Process.Start(Application.ExecutablePath);
+            this.Close();
+        }
+
+        private void changeTheme_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        public Icon IconAssign(string input2)
+        {
+            Icon windowIcon;
+            try
+            {
+                windowIcon = new Icon("Resources/Theme/" + input2 + ".ico");
+                return windowIcon;
+            }
+            catch (FileNotFoundException e)
+            {
+                windowIcon = new Icon("Resources/Theme/icon.ico");
+                return windowIcon;
+            }
+        }
+
         private void refreshButton_Click(object sender, EventArgs e)
         {
-            // this.table1TableAdapter1.Fill(this.collectionDataSet3.Table1);
-            System.Diagnostics.Process.Start(Application.ExecutablePath);
-            this.Close();
+
+        }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            Settings settings = new Settings(this);
+            settings.Show();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                File.Copy("Resources/Theme/backgroundImageUSING.png", "Resources/Theme/backgroundImage.png");
+                File.Copy("Resources/Theme/logoUSING.png", "Resources/Theme/logo.png");
+            }
+            catch
+            {
+
+            }
         }
     }
 }

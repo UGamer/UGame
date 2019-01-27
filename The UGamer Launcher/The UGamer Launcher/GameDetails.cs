@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
 using System.Data.OleDb;
+using System.Text.RegularExpressions;
 using CefSharp;
 using CefSharp.WinForms;
 
@@ -24,6 +25,12 @@ namespace The_UGamer_Launcher
             {
                 gamePicture.Visible = false;
             }
+
+            try
+            {
+                this.BackgroundImage = ThemeAssign("backgroundImage");
+            }
+            catch (FileNotFoundException e) { }
         }
         
         // Displays all the info for the game.
@@ -37,8 +44,7 @@ namespace The_UGamer_Launcher
             // This block of text determines the icon.
             try
             {
-                Icon windowIcon = new Icon("Resources/Icons/" + input2 + ".ico");
-                this.Icon = windowIcon;
+                IconAssign(input2);
             }
             catch (FileNotFoundException e) { }
 
@@ -134,7 +140,21 @@ namespace The_UGamer_Launcher
             bool hasPage = setURLs(newsString2, wikiString2);
 
             if (hasPage == true)
-                chromeBrowser.Load(newsString2);
+            {
+                if (newsString2 != "" && newsString2 != " ")
+                    chromeBrowser.Load(newsString2);
+                else
+                {
+                    this.Controls.Remove(newsButton);
+                    chromeBrowser.Load(wikiString2);
+                }
+            }
+
+            if (wikiString2 == "" || wikiString2 == " ")
+            {
+                this.Controls.Remove(wikiButton);
+                newsButton.Location = new Point(689, 345);
+            }
 
             button1.Click += (sender, EventArgs) => { button_Click(sender, EventArgs, launchString2, exePath2, batPath2); }; // This passes the launch URL to the launch button.
         }
@@ -143,7 +163,7 @@ namespace The_UGamer_Launcher
 
         private void button_Click(object sender, EventArgs e, string launchString3, bool exePath3, bool batPath3)
         {
-            System.Diagnostics.Process game = new System.Diagnostics.Process();
+            Process game = new Process();
             game.StartInfo.FileName = "";
             if (exePath3 == true || batPath3 == true)
             {
@@ -163,7 +183,7 @@ namespace The_UGamer_Launcher
                 Uri launch2;
                 launch2 = new Uri(launchString3);
                 gameTime.Start();
-                launcher.Url = launch2; // The game launches through URL.
+                launcher.Url = launch2;
             }
             button1.Visible = false;
             stopTime.Visible = true;
@@ -313,10 +333,6 @@ namespace The_UGamer_Launcher
             string platform = platformLabel.Text.Substring(10);
             string status = statusLabel.Text.Substring(8);
             string rating = ratingLabel.Text.Substring(8);
-            string obtained = obtainedLabel.Text.Substring(10);
-            string startDate = startDateLabel.Text.Substring(12);
-            string endDate = endDateLabel.Text.Substring(10);
-            string launchCode = launchLabel.Text;
 
             string hoursPlayed = hoursLabel.Text.Substring(13);
             string minutesPlayed = hoursLabel.Text.Substring(13);
@@ -357,14 +373,39 @@ namespace The_UGamer_Launcher
 
             string timePlayed = newHoursString + "h:" + newMinutesString + "m:" + newSecondsString + "s";
 
+            string obtained = obtainedLabel.Text.Substring(10);
+
+            DateTime today = DateTime.Now;
+            Regex dateFix = new Regex("-");
+
+            string startDate = startDateLabel.Text.Substring(12);
+            string startDate2;
+            if (startDate == " " || startDate == "")
+            {
+                string startDate1 = today.ToString("u");
+                startDate2 = startDate1.Substring(0, 10);
+                startDate2 = dateFix.Replace(startDate2, "/");
+            }
+            else
+            {
+                startDate2 = startDate;
+            }
+
+            DateTime today2 = DateTime.Now;
+            string endDate1 = today2.ToString("u");
+            string endDate2 = endDate1.Substring(0, 10);
+            endDate2 = dateFix.Replace(endDate2, "/");
+
+            string launchCode = launchLabel.Text;
+
             cmd.Parameters.AddWithValue("@Title", nameLabel.Text);
             cmd.Parameters.AddWithValue("@Platform", platform);
             cmd.Parameters.AddWithValue("@Status", status);
             cmd.Parameters.AddWithValue("@Rating", rating);
             cmd.Parameters.AddWithValue("@PlayTime", timePlayed);
             cmd.Parameters.AddWithValue("@Obtained", obtained);
-            cmd.Parameters.AddWithValue("@StartDate", startDate);
-            cmd.Parameters.AddWithValue("@EndDate", endDate);
+            cmd.Parameters.AddWithValue("@StartDate", startDate2);
+            cmd.Parameters.AddWithValue("@EndDate", endDate2);
             cmd.Parameters.AddWithValue("@Notes", notesBox.Text);
             cmd.Parameters.AddWithValue("@Launch", launchCode);
             cmd.ExecuteNonQuery();
@@ -409,14 +450,14 @@ namespace The_UGamer_Launcher
 
         private bool setURLs(string news, string wiki)
         {
-            if (news == " " || wiki == " " || news == "" || wiki == "")
+            if ((news == " " || news == "") && (wiki == " " || wiki == ""))
             {
                 this.Controls.Remove(newsButton);
                 this.Controls.Remove(wikiButton);
                 this.Controls.Remove(browserDock);
                 return false;
             }
-            else
+            else if ((news != " " || news != "") && (wiki != " " || wiki != ""))
             {
                 // Create a browser component
                 chromeBrowser = new ChromiumWebBrowser(news);
@@ -429,11 +470,152 @@ namespace The_UGamer_Launcher
                 this.wikiUrl = wiki;
                 return true;
             }
+            else if ((news == " " || news == "") && (wiki != " " || wiki != ""))
+            {
+                // Create a browser component
+                chromeBrowser = new ChromiumWebBrowser(news);
+                // Add it to the form and fill it to the form window.
+                Size browserSize = new Size(659, 88);
+                chromeBrowser.Size = browserSize;
+                chromeBrowser.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Top);
+                this.browserDock.Controls.Add(chromeBrowser);
+                // this.Controls.Remove(newsButton);
+                newsButton.Visible = false;
+                this.wikiUrl = wiki;
+                return true;
+            }
+            else
+            {
+                // Create a browser component
+                chromeBrowser = new ChromiumWebBrowser(news);
+                // Add it to the form and fill it to the form window.
+                Size browserSize = new Size(659, 88);
+                chromeBrowser.Size = browserSize;
+                chromeBrowser.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Top);
+                this.browserDock.Controls.Add(chromeBrowser);
+                this.newsUrl = news;
+                this.Controls.Remove(wikiButton);
+                return true;
+            }
         }
 
         private void wikiButton_Click(object sender, EventArgs e)
         {
             chromeBrowser.Load(wikiUrl);
+        }
+
+        public Image ThemeAssign(string input2)
+        {
+            Image background;
+            try
+            {
+                background = Image.FromFile("Resources/Theme/" + input2 + ".png");
+                return background;
+            }
+            catch (FileNotFoundException e)
+            {
+                try
+                {
+                    background = Image.FromFile("Resources/Theme/" + input2 + ".jpg");
+                    return background;
+                }
+                catch (FileNotFoundException f)
+                {
+                    try
+                    {
+                        background = Image.FromFile("Resources/Theme/" + input2 + ".jpeg");
+                        return background;
+                    }
+                    catch (FileNotFoundException g)
+                    {
+                        try
+                        {
+                            background = Image.FromFile("Resources/Theme/" + input2 + ".gif");
+                            return background;
+                        }
+                        catch (FileNotFoundException h)
+                        {
+                            return background = Image.FromFile("Resources/DONT TOUCH.png");
+                        }
+                    }
+                }
+            }
+        }
+
+        public void IconAssign(string input2)
+        {
+            Icon windowIcon;
+            Image image;
+            Bitmap bitmap;
+            try
+            {
+                windowIcon = new Icon("Resources/Icons/" + input2 + ".ico");
+                this.Icon = windowIcon;
+            }
+            catch (FileNotFoundException e)
+            {
+                try
+                {
+                    image = Image.FromFile("Resources/Icons/" + input2 + ".png");
+                    bitmap = new Bitmap(image);
+                    IntPtr Hicon = bitmap.GetHicon();
+                    windowIcon = Icon.FromHandle(Hicon);
+                    this.Icon = windowIcon;
+                }
+                catch (FileNotFoundException f)
+                {
+                    try
+                    {
+                        image = Image.FromFile("Resources/Icons/" + input2 + ".jpg");
+                        bitmap = new Bitmap(image);
+                        IntPtr Hicon = bitmap.GetHicon();
+                        windowIcon = Icon.FromHandle(Hicon);
+                        this.Icon = windowIcon;
+                    }
+                    catch (FileNotFoundException g)
+                    {
+                        try
+                        {
+                            image = Image.FromFile("Resources/Icons/" + input2 + ".jpeg");
+                            bitmap = new Bitmap(image);
+                            IntPtr Hicon = bitmap.GetHicon();
+                            windowIcon = Icon.FromHandle(Hicon);
+                            this.Icon = windowIcon;
+                        }
+                        catch (FileNotFoundException h)
+                        {
+                            try
+                            {
+                                image = Image.FromFile("Resources/Icons/" + input2 + ".gif");
+                                bitmap = new Bitmap(image);
+                                IntPtr Hicon = bitmap.GetHicon();
+                                windowIcon = Icon.FromHandle(Hicon);
+                                this.Icon = windowIcon;
+                            }
+                            catch (FileNotFoundException k)
+                            {
+                                try
+                                {
+                                    windowIcon = new Icon("Resources/Theme/icon.ico");
+                                    this.Icon = windowIcon;
+                                }
+                                catch (FileNotFoundException i)
+                                {
+                                    try
+                                    {
+                                        windowIcon = new Icon("Resources/Theme/icon.ico");
+                                        this.Icon = windowIcon;
+                                    }
+                                    catch (FileNotFoundException j)
+                                    {
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

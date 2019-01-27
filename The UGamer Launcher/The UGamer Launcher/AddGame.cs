@@ -2,6 +2,8 @@
 using System.Data;
 using System.Windows.Forms;
 using System.Data.OleDb;
+using System.IO;
+using System.Drawing;
 
 namespace The_UGamer_Launcher
 {
@@ -13,6 +15,17 @@ namespace The_UGamer_Launcher
         {
             InitializeComponent();
             frm1 = parent;
+            try
+            {
+                IconAssign();
+            }
+            catch (FileNotFoundException e) { }
+
+            try
+            {
+                this.BackgroundImage = frm1.ThemeAssign("backgroundImage");
+            }
+            catch (FileNotFoundException e) { }
 
             DataTable dt = frm1.collectionDataSet4.Table1;
             AutoCompleteStringCollection autoFill = new AutoCompleteStringCollection();
@@ -98,12 +111,12 @@ namespace The_UGamer_Launcher
 
             cmd.Parameters.AddWithValue("@Title", title);
             if (platform == "")
-                cmd.Parameters.AddWithValue("@Platform", " ");
+                cmd.Parameters.AddWithValue("@Platform", "");
             else
                 cmd.Parameters.AddWithValue("@Platform", platform);
 
             if (status == "")
-                cmd.Parameters.AddWithValue("@Status", " ");
+                cmd.Parameters.AddWithValue("@Status", "");
             else
                 cmd.Parameters.AddWithValue("@Status", status);
 
@@ -118,22 +131,22 @@ namespace The_UGamer_Launcher
                 cmd.Parameters.AddWithValue("@PlayTime", playTime);
 
             if (obtained == "")
-                cmd.Parameters.AddWithValue("@Obtained", " ");
+                cmd.Parameters.AddWithValue("@Obtained", "");
             else
                 cmd.Parameters.AddWithValue("@Obtained", obtained);
 
             if (startDate == "")
-                cmd.Parameters.AddWithValue("@StartDate", " ");
+                cmd.Parameters.AddWithValue("@StartDate", "");
             else
                 cmd.Parameters.AddWithValue("@StartDate", startDate);
 
             if (endDate == "")
-                cmd.Parameters.AddWithValue("@EndDate", " ");
+                cmd.Parameters.AddWithValue("@EndDate", "");
             else
                 cmd.Parameters.AddWithValue("@EndDate", endDate);
 
             if (notes == "")
-                cmd.Parameters.AddWithValue("@Notes", " ");
+                cmd.Parameters.AddWithValue("@Notes", "");
             else
                 cmd.Parameters.AddWithValue("@Notes", notes);
 
@@ -145,12 +158,12 @@ namespace The_UGamer_Launcher
                 cmd.Parameters.AddWithValue("@Launch", launchCode);
 
             if (newsCode == "")
-                cmd.Parameters.AddWithValue("@News", " ");
+                cmd.Parameters.AddWithValue("@News", "");
             else
                 cmd.Parameters.AddWithValue("@News", newsCode);
 
             if (wikiCode == "")
-                cmd.Parameters.AddWithValue("@Wiki", " ");
+                cmd.Parameters.AddWithValue("@Wiki", "");
             else
                 cmd.Parameters.AddWithValue("@Wiki", wikiCode);
 
@@ -362,12 +375,12 @@ namespace The_UGamer_Launcher
 
                 cmd.Parameters.AddWithValue("@Title", title);
                 if (platform == "")
-                    cmd.Parameters.AddWithValue("@Platform", " ");
+                    cmd.Parameters.AddWithValue("@Platform", "");
                 else
                     cmd.Parameters.AddWithValue("@Platform", platform);
 
                 if (status == "")
-                    cmd.Parameters.AddWithValue("@Status", " ");
+                    cmd.Parameters.AddWithValue("@Status", "");
                 else
                     cmd.Parameters.AddWithValue("@Status", status);
 
@@ -382,22 +395,22 @@ namespace The_UGamer_Launcher
                     cmd.Parameters.AddWithValue("@PlayTime", playTime);
 
                 if (obtained == "")
-                    cmd.Parameters.AddWithValue("@Obtained", " ");
+                    cmd.Parameters.AddWithValue("@Obtained", "");
                 else
                     cmd.Parameters.AddWithValue("@Obtained", obtained);
 
                 if (startDate == "")
-                    cmd.Parameters.AddWithValue("@StartDate", " ");
+                    cmd.Parameters.AddWithValue("@StartDate", "");
                 else
                     cmd.Parameters.AddWithValue("@StartDate", startDate);
 
                 if (endDate == "")
-                    cmd.Parameters.AddWithValue("@EndDate", " ");
+                    cmd.Parameters.AddWithValue("@EndDate", "");
                 else
                     cmd.Parameters.AddWithValue("@EndDate", endDate);
 
                 if (notes == "")
-                    cmd.Parameters.AddWithValue("@Notes", " ");
+                    cmd.Parameters.AddWithValue("@Notes", "");
                 else
                     cmd.Parameters.AddWithValue("@Notes", notes);
 
@@ -409,12 +422,12 @@ namespace The_UGamer_Launcher
                     cmd.Parameters.AddWithValue("@Launch", launchCode);
 
                 if (newsCode == "")
-                    cmd.Parameters.AddWithValue("@News", " ");
+                    cmd.Parameters.AddWithValue("@News", "");
                 else
                     cmd.Parameters.AddWithValue("@News", newsCode);
 
                 if (wikiCode == "")
-                    cmd.Parameters.AddWithValue("@Wiki", " ");
+                    cmd.Parameters.AddWithValue("@Wiki", "");
                 else
                     cmd.Parameters.AddWithValue("@Wiki", wikiCode);
 
@@ -512,6 +525,20 @@ namespace The_UGamer_Launcher
 
             if (e.KeyCode == Keys.Tab)
                 minutesBox.Focus();
+        }
+
+        public void IconAssign()
+        {
+            Icon windowIcon;
+            try
+            {
+                windowIcon = new Icon("Resources/Theme/icon.ico");
+                this.Icon = windowIcon;
+            }
+            catch (FileNotFoundException e)
+            {
+
+            }
         }
     }
 }

@@ -57,18 +57,25 @@
             // 
             // labels
             // 
+            this.labels.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.labels.AutoSize = true;
+            this.labels.BackColor = System.Drawing.Color.White;
             this.labels.Location = new System.Drawing.Point(9, 8);
             this.labels.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labels.Name = "labels";
             this.labels.Size = new System.Drawing.Size(92, 299);
             this.labels.TabIndex = 0;
             this.labels.Text = "Title: \r\n\r\nPlatform: \r\n\r\nStatus:\r\n\r\nRating: \r\n\r\nTime Played:  \r\n\r\nObtained:\r\n\r\nSt" +
-    "art Date:\r\n\r\nEnd Date:\r\n\r\nLaunch Code:\r\n\r\nNews URL:\r\n\r\nWiki URL:\r\n\r\nNotes/Commen" +
-    "ts:";
+    "art Date:\r\n\r\nLast Played:\r\n\r\nLaunch Code:\r\n\r\nNews URL:\r\n\r\nWiki URL:\r\n\r\nNotes/Com" +
+    "ments:";
             // 
             // titleBox
             // 
+            this.titleBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.titleBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.titleBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.titleBox.Location = new System.Drawing.Point(104, 8);
@@ -79,6 +86,9 @@
             // 
             // platformBox
             // 
+            this.platformBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.platformBox.Location = new System.Drawing.Point(104, 34);
             this.platformBox.Margin = new System.Windows.Forms.Padding(2);
             this.platformBox.Name = "platformBox";
@@ -87,6 +97,9 @@
             // 
             // statusBox
             // 
+            this.statusBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.statusBox.Location = new System.Drawing.Point(104, 58);
             this.statusBox.Margin = new System.Windows.Forms.Padding(2);
             this.statusBox.Name = "statusBox";
@@ -95,6 +108,9 @@
             // 
             // ratingBox
             // 
+            this.ratingBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ratingBox.Location = new System.Drawing.Point(104, 82);
             this.ratingBox.Margin = new System.Windows.Forms.Padding(2);
             this.ratingBox.Name = "ratingBox";
@@ -103,6 +119,8 @@
             // 
             // hoursBox
             // 
+            this.hoursBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.hoursBox.Location = new System.Drawing.Point(104, 106);
             this.hoursBox.Margin = new System.Windows.Forms.Padding(2);
             this.hoursBox.Name = "hoursBox";
@@ -112,6 +130,9 @@
             // 
             // endDateBox
             // 
+            this.endDateBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.endDateBox.Location = new System.Drawing.Point(104, 190);
             this.endDateBox.Margin = new System.Windows.Forms.Padding(2);
             this.endDateBox.Name = "endDateBox";
@@ -120,6 +141,9 @@
             // 
             // startDateBox
             // 
+            this.startDateBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.startDateBox.Location = new System.Drawing.Point(104, 162);
             this.startDateBox.Margin = new System.Windows.Forms.Padding(2);
             this.startDateBox.Name = "startDateBox";
@@ -128,6 +152,9 @@
             // 
             // obtainedBox
             // 
+            this.obtainedBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.obtainedBox.Location = new System.Drawing.Point(104, 135);
             this.obtainedBox.Margin = new System.Windows.Forms.Padding(2);
             this.obtainedBox.Name = "obtainedBox";
@@ -136,6 +163,9 @@
             // 
             // launchBox
             // 
+            this.launchBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.launchBox.Location = new System.Drawing.Point(104, 214);
             this.launchBox.Margin = new System.Windows.Forms.Padding(2);
             this.launchBox.Name = "launchBox";
@@ -144,6 +174,9 @@
             // 
             // notesBox
             // 
+            this.notesBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.notesBox.Location = new System.Drawing.Point(104, 294);
             this.notesBox.Margin = new System.Windows.Forms.Padding(2);
             this.notesBox.Multiline = true;
@@ -154,25 +187,31 @@
             // addEntryButton
             // 
             this.addEntryButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.addEntryButton.BackColor = System.Drawing.Color.Black;
+            this.addEntryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addEntryButton.ForeColor = System.Drawing.Color.White;
             this.addEntryButton.Location = new System.Drawing.Point(11, 353);
             this.addEntryButton.Margin = new System.Windows.Forms.Padding(2);
             this.addEntryButton.Name = "addEntryButton";
             this.addEntryButton.Size = new System.Drawing.Size(88, 27);
             this.addEntryButton.TabIndex = 11;
             this.addEntryButton.Text = "Add Entry";
-            this.addEntryButton.UseVisualStyleBackColor = true;
+            this.addEntryButton.UseVisualStyleBackColor = false;
             this.addEntryButton.Click += new System.EventHandler(this.addEntryButton_Click);
             // 
             // editEntry
             // 
             this.editEntry.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.editEntry.BackColor = System.Drawing.Color.Black;
+            this.editEntry.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.editEntry.ForeColor = System.Drawing.Color.White;
             this.editEntry.Location = new System.Drawing.Point(104, 353);
             this.editEntry.Margin = new System.Windows.Forms.Padding(2);
             this.editEntry.Name = "editEntry";
             this.editEntry.Size = new System.Drawing.Size(88, 27);
             this.editEntry.TabIndex = 12;
             this.editEntry.Text = "Edit Entry";
-            this.editEntry.UseVisualStyleBackColor = true;
+            this.editEntry.UseVisualStyleBackColor = false;
             this.editEntry.Click += new System.EventHandler(this.editEntry_Click);
             // 
             // noGameLabel
@@ -190,13 +229,16 @@
             // replaceEntry
             // 
             this.replaceEntry.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.replaceEntry.BackColor = System.Drawing.Color.Black;
+            this.replaceEntry.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.replaceEntry.ForeColor = System.Drawing.Color.White;
             this.replaceEntry.Location = new System.Drawing.Point(196, 353);
             this.replaceEntry.Margin = new System.Windows.Forms.Padding(2);
             this.replaceEntry.Name = "replaceEntry";
             this.replaceEntry.Size = new System.Drawing.Size(88, 27);
             this.replaceEntry.TabIndex = 14;
             this.replaceEntry.Text = "Replace Entry";
-            this.replaceEntry.UseVisualStyleBackColor = true;
+            this.replaceEntry.UseVisualStyleBackColor = false;
             this.replaceEntry.Visible = false;
             this.replaceEntry.Click += new System.EventHandler(this.replaceEntry_Click);
             // 
@@ -211,19 +253,25 @@
             // deleteEntryButton
             // 
             this.deleteEntryButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.deleteEntryButton.BackColor = System.Drawing.Color.Black;
+            this.deleteEntryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.deleteEntryButton.ForeColor = System.Drawing.Color.White;
             this.deleteEntryButton.Location = new System.Drawing.Point(288, 353);
             this.deleteEntryButton.Margin = new System.Windows.Forms.Padding(2);
             this.deleteEntryButton.Name = "deleteEntryButton";
             this.deleteEntryButton.Size = new System.Drawing.Size(88, 27);
             this.deleteEntryButton.TabIndex = 16;
             this.deleteEntryButton.Text = "Delete Entry";
-            this.deleteEntryButton.UseVisualStyleBackColor = true;
+            this.deleteEntryButton.UseVisualStyleBackColor = false;
             this.deleteEntryButton.Visible = false;
             this.deleteEntryButton.Click += new System.EventHandler(this.deleteEntryButton_Click);
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(197, 109);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(33, 13);
@@ -232,7 +280,10 @@
             // 
             // label2
             // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(328, 109);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(43, 13);
@@ -241,6 +292,8 @@
             // 
             // minutesBox
             // 
+            this.minutesBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.minutesBox.Location = new System.Drawing.Point(235, 106);
             this.minutesBox.Margin = new System.Windows.Forms.Padding(2);
             this.minutesBox.Name = "minutesBox";
@@ -250,7 +303,10 @@
             // 
             // label3
             // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.White;
             this.label3.Location = new System.Drawing.Point(469, 109);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(47, 13);
@@ -259,6 +315,8 @@
             // 
             // secondsBox
             // 
+            this.secondsBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.secondsBox.Location = new System.Drawing.Point(376, 106);
             this.secondsBox.Margin = new System.Windows.Forms.Padding(2);
             this.secondsBox.Name = "secondsBox";
@@ -268,6 +326,9 @@
             // 
             // newsURLBox
             // 
+            this.newsURLBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.newsURLBox.Location = new System.Drawing.Point(104, 238);
             this.newsURLBox.Margin = new System.Windows.Forms.Padding(2);
             this.newsURLBox.Name = "newsURLBox";
@@ -276,6 +337,9 @@
             // 
             // wikiURLBox
             // 
+            this.wikiURLBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.wikiURLBox.Location = new System.Drawing.Point(104, 262);
             this.wikiURLBox.Margin = new System.Windows.Forms.Padding(2);
             this.wikiURLBox.Name = "wikiURLBox";
