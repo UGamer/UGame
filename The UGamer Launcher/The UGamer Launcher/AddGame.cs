@@ -434,6 +434,8 @@ namespace The_UGamer_Launcher
                 notesBox.Text = "";
                 newsURLBox.Text = "";
                 wikiURLBox.Text = "";
+                replaceEntry.Visible = false;
+                deleteEntryButton.Visible = false;
             }
             else
             {
@@ -481,6 +483,8 @@ namespace The_UGamer_Launcher
                 notesBox.Text = "";
                 newsURLBox.Text = "";
                 wikiURLBox.Text = "";
+                replaceEntry.Visible = false;
+                deleteEntryButton.Visible = false;
 
                 return;
             }
