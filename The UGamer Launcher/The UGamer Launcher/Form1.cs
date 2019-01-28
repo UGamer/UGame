@@ -354,9 +354,7 @@ namespace The_UGamer_Launcher
 
         private void refreshButton_Click_1(object sender, EventArgs e)
         {
-            // this.table1TableAdapter1.Fill(this.collectionDataSet4.Table1);
-            Process.Start(Application.ExecutablePath);
-            this.Close();
+            
         }
 
         private void changeTheme_Click(object sender, EventArgs e)
@@ -381,7 +379,9 @@ namespace The_UGamer_Launcher
 
         private void refreshButton_Click(object sender, EventArgs e)
         {
-
+            // this.table1TableAdapter1.Fill(this.collectionDataSet4.Table1);
+            Process.Start(Application.ExecutablePath);
+            this.Close();
         }
 
         private void toolStripButton2_Click(object sender, EventArgs e)
