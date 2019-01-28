@@ -108,6 +108,18 @@ namespace The_UGamer_Launcher
             OleDbCommand cmd = new OleDbCommand("INSERT INTO Table1 (Title, Platform, Status, Rating, PlayTime, Obtained, StartDate, EndDate, Notes, Launch, News, Wiki) VALUES (@Title, @Platform, @Status, @Rating, @PlayTime, @Obtained, @StartDate, @EndDate, @Notes, @Launch, @News, @Wiki);", con);
 
             con.Open();
+            title.Trim();
+            platform.Trim();
+            status.Trim();
+            rating.Trim();
+            playTime.Trim();
+            obtained.Trim();
+            startDate.Trim();
+            endDate.Trim();
+            notes.Trim();
+            launchCode.Trim();
+            newsCode.Trim();
+            wikiCode.Trim();
 
             cmd.Parameters.AddWithValue("@Title", title);
             if (platform == "")
@@ -366,6 +378,19 @@ namespace The_UGamer_Launcher
                 newSecondsString = "0" + seconds;
 
             string playTime = newHoursString + "h:" + newMinutesString + "m:" + newSecondsString + "s";
+
+            title.Trim();
+            platform.Trim();
+            status.Trim();
+            rating.Trim();
+            playTime.Trim();
+            obtained.Trim();
+            startDate.Trim();
+            endDate.Trim();
+            notes.Trim();
+            launchCode.Trim();
+            newsCode.Trim();
+            wikiCode.Trim();
 
             if (result == DialogResult.Yes)
             {

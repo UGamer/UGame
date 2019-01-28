@@ -119,9 +119,9 @@ namespace The_UGamer_Launcher
                 startDateLabel.Text = "Start Date: " + startDate;
 
             if (endDate == "")
-                endDateLabel.Text = "End Date:  ";
+                endDateLabel.Text = "Last Played:  ";
             else
-                endDateLabel.Text = "End Date: " + endDate;
+                endDateLabel.Text = "Last Played: " + endDate;
 
             if (notes == "")
                 notesBox.Text = " ";
