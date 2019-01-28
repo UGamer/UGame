@@ -156,6 +156,8 @@ namespace The_UGamer_Launcher
             CefSettings settings = new CefSettings();
             // Initialize cef with the provided settings
             Cef.Initialize(settings);
+
+            dataTable.SortCompare += customSortCompare;
         }
 
         private void dataTable_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -401,6 +403,33 @@ namespace The_UGamer_Launcher
             {
 
             }
+        }
+
+        private void customSortCompare(object sender, DataGridViewSortCompareEventArgs e)
+        {
+            if (e.Column.Index == 5)
+            {
+                string value1 = e.CellValue1.ToString();
+                string value2 = e.CellValue2.ToString();
+                Regex fixingTime1 = new Regex("h:");
+                Regex fixingTime2 = new Regex("m:");
+                Regex fixingTime3 = new Regex("s");
+                fixingTime1.Replace(value1, "");
+                fixingTime2.Replace(value1, "");
+                fixingTime3.Replace(value1, "");
+                
+                fixingTime1.Replace(value2, "");
+                fixingTime2.Replace(value2, "");
+                fixingTime3.Replace(value2, "");
+
+                int value1Int = Convert.ToInt32(value1);
+                int value2Int = Convert.ToInt32(value2);
+
+                e.SortResult = int.Parse(e.CellValue1.ToString()).CompareTo(int.Parse(e.CellValue2.ToString()));
+                e.Handled = true;//pass by the default sorting
+            }
+
+            dataTable.SortCompare += customSortCompare;
         }
     }
 }
