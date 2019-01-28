@@ -167,11 +167,11 @@ namespace The_UGamer_Launcher
             game.StartInfo.FileName = "";
             if (exePath3 == true || batPath3 == true)
             {
-                game.StartInfo.FileName = launchString3;
+                ProcessStartInfo procStartInfo = new ProcessStartInfo("launchString3");
                 gameTime.Start();
-                if (game.StartInfo.FileName != "" && game.StartInfo.FileName != " ")
+                if (procStartInfo.FileName != "" && procStartInfo.FileName != " ")
                 {
-                    game.Start();
+                    Process.Start(procStartInfo);
                 }
                 /* for (bool exit = false; exit != true;)
                 {
