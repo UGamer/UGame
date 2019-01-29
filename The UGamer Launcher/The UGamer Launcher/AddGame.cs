@@ -183,21 +183,7 @@ namespace The_UGamer_Launcher
             if (title != "")
             {
                 cmd.ExecuteNonQuery();
-                this.Text = "Add an entry... Game added.";
-                titleBox.Text = "";
-                platformBox.Text = "";
-                statusBox.Text = "";
-                ratingBox.Text = "";
-                hoursBox.Text = "";
-                minutesBox.Text = "";
-                secondsBox.Text = "";
-                obtainedBox.Text = "";
-                startDateBox.Text = "";
-                endDateBox.Text = "";
-                launchBox.Text = "";
-                notesBox.Text = "";
-                newsURLBox.Text = "";
-                wikiURLBox.Text = "";
+                this.Text = "Add an entry... " + title + " added.";
             }
             else
             {
@@ -466,20 +452,6 @@ namespace The_UGamer_Launcher
 
                 cmd.ExecuteNonQuery();
                 this.Text = "Edit an entry... Game edited.";
-                titleBox.Text = "";
-                platformBox.Text = "";
-                statusBox.Text = "";
-                ratingBox.Text = "";
-                hoursBox.Text = "";
-                minutesBox.Text = "";
-                secondsBox.Text = "";
-                obtainedBox.Text = "";
-                startDateBox.Text = "";
-                endDateBox.Text = "";
-                launchBox.Text = "";
-                notesBox.Text = "";
-                newsURLBox.Text = "";
-                wikiURLBox.Text = "";
                 replaceEntry.Visible = false;
                 deleteEntryButton.Visible = false;
             }
@@ -515,20 +487,6 @@ namespace The_UGamer_Launcher
                 delCmd.ExecuteNonQuery();
 
                 this.Text = "Entries... removed \"" + originalTitleString + "\"";
-                titleBox.Text = "";
-                platformBox.Text = "";
-                statusBox.Text = "";
-                ratingBox.Text = "";
-                hoursBox.Text = "";
-                minutesBox.Text = "";
-                secondsBox.Text = "";
-                obtainedBox.Text = "";
-                startDateBox.Text = "";
-                endDateBox.Text = "";
-                launchBox.Text = "";
-                notesBox.Text = "";
-                newsURLBox.Text = "";
-                wikiURLBox.Text = "";
                 replaceEntry.Visible = false;
                 deleteEntryButton.Visible = false;
 
@@ -572,6 +530,24 @@ namespace The_UGamer_Launcher
             {
 
             }
+        }
+
+        private void clearFieldsButton_Click(object sender, EventArgs e)
+        {
+            titleBox.Text = "";
+            platformBox.Text = "";
+            statusBox.Text = "";
+            ratingBox.Text = "";
+            hoursBox.Text = "";
+            minutesBox.Text = "";
+            secondsBox.Text = "";
+            obtainedBox.Text = "";
+            startDateBox.Text = "";
+            endDateBox.Text = "";
+            launchBox.Text = "";
+            notesBox.Text = "";
+            newsURLBox.Text = "";
+            wikiURLBox.Text = "";
         }
     }
 }
