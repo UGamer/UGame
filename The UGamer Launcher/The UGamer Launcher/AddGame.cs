@@ -182,8 +182,18 @@ namespace The_UGamer_Launcher
 
             if (title != "")
             {
-                cmd.ExecuteNonQuery();
-                this.Text = "Add an entry... " + title + " added.";
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                    this.Text = "Add an entry... " + title + " added.";
+                }
+                catch (OleDbException e)
+                {
+                    string caption = "ERROR: Notes/Comments field too long.";
+                    string message = "Your notes/comments field is too long. Please reduce to 255 characters.";
+                    MessageBox.Show(message, caption);
+                }
+                
             }
             else
             {
@@ -450,8 +460,17 @@ namespace The_UGamer_Launcher
                 else
                     cmd.Parameters.AddWithValue("@Wiki", wikiCode);
 
-                cmd.ExecuteNonQuery();
-                this.Text = "Edit an entry... Game edited.";
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                    this.Text = "Edit an entry... Game edited.";
+                }
+                catch (OleDbException e)
+                {
+                    caption = "ERROR: Notes/Comments field too long.";
+                    message = "Your notes/comments field is too long. Please reduce to 255 characters.";
+                    MessageBox.Show(message, caption);
+                }
                 replaceEntry.Visible = false;
                 deleteEntryButton.Visible = false;
             }
