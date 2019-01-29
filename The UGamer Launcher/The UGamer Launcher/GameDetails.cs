@@ -37,7 +37,7 @@ namespace The_UGamer_Launcher
         public void DisplayInfo(string title, string input2, string platform,
             string status, string rating, string hours, string obtained,
             string startDate, string endDate, string notes, string launchString2, bool exePath2, bool batPath2,
-            string newsString2, string wikiString2)
+            string newsString2, string wikiString2, bool hasArgs2)
         { 
             noImageText.Visible = false;
             
@@ -156,23 +156,46 @@ namespace The_UGamer_Launcher
                 newsButton.Location = new Point(689, 345);
             }
 
-            button1.Click += (sender, EventArgs) => { button_Click(sender, EventArgs, launchString2, exePath2, batPath2); }; // This passes the launch URL to the launch button.
+            button1.Click += (sender, EventArgs) => { button_Click(sender, EventArgs, launchString2, exePath2, batPath2, hasArgs2); }; // This passes the launch URL to the launch button.
         }
 
         private void button1_Click(object sender, EventArgs e) { }
 
-        private void button_Click(object sender, EventArgs e, string launchString3, bool exePath3, bool batPath3)
+        private void button_Click(object sender, EventArgs e, string launchString3, bool exePath3, bool batPath3, bool hasArgs3)
         {
             Process game = new Process();
             game.StartInfo.FileName = "";
-            if (exePath3 == true || batPath3 == true)
+            if ((exePath3 == true || batPath3 == true))
             {
-                ProcessStartInfo procStartInfo = new ProcessStartInfo("launchString3");
-                gameTime.Start();
-                if (procStartInfo.FileName != "" && procStartInfo.FileName != " ")
+                if (hasArgs3 == true)
                 {
-                    Process.Start(procStartInfo);
+                    int getRidOfQuotes = launchString3.IndexOf("\"");
+                    if (getRidOfQuotes == 0)
+                    {
+                        launchString3.Substring(1);
+                        int secondQuote = launchString3.IndexOf("\"");
+                        launchString3.Substring(0, secondQuote);
+                    }
+                    int exeLoc = launchString3.IndexOf(".exe");
+                    string fileName = launchString3.Substring(0, exeLoc + 5);
+                    string args = launchString3.Substring(exeLoc + 5);
+                    ProcessStartInfo procStartInfo = new ProcessStartInfo(fileName, args);
+                    gameTime.Start();
+                    if (procStartInfo.FileName != "" && procStartInfo.FileName != " ")
+                    {
+                        Process.Start(procStartInfo);
+                    }
                 }
+                else
+                {
+                    ProcessStartInfo procStartInfo = new ProcessStartInfo(launchString3);
+                    gameTime.Start();
+                    if (procStartInfo.FileName != "" && procStartInfo.FileName != " ")
+                    {
+                        Process.Start(procStartInfo);
+                    }
+                }
+                
                 /* for (bool exit = false; exit != true;)
                 {
                     int overlaySeconds = Convert.ToInt32(gameTime.ElapsedMilliseconds / 1000);

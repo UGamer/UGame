@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Data.OleDb;
 using System.IO;
 using System.Drawing;
+using System.Text.RegularExpressions;
 
 namespace The_UGamer_Launcher
 {
@@ -338,6 +339,13 @@ namespace The_UGamer_Launcher
         {
             string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Collection.accdb";
             OleDbConnection con = new OleDbConnection(connectionString);
+
+            Regex apostrophe = new Regex("'");
+            if (originalTitleString.IndexOf("'") != -1)
+            {
+                apostrophe.Replace(originalTitleString, "\'");
+            }
+
             OleDbCommand delCmd = new OleDbCommand("DELETE FROM Table1 WHERE Title='" + originalTitleString + "';", con);
             OleDbCommand cmd = new OleDbCommand("INSERT INTO Table1 (Title, Platform, Status, Rating, PlayTime, Obtained, StartDate, EndDate, Notes, Launch, News, Wiki) VALUES (@Title, @Platform, @Status, @Rating, @PlayTime, @Obtained, @StartDate, @EndDate, @Notes, @Launch, @News, @Wiki);", con);
 

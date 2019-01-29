@@ -266,12 +266,16 @@ namespace The_UGamer_Launcher
 
                 bool exePath = isExe(launchString);
                 bool batPath = isBat(launchString);
+                bool hasArgs = false;
+
+                if (exePath == true || batPath == true)
+                    hasArgs = hasArgsMethod(launchString);
 
                 gameWindow.Text = input;
                 gameWindow.Show();
                 gameWindow.DisplayInfo(input, input2, platform, status, rating,
                     hours, obtained, startDate, endDate, notes, launchString, exePath, batPath,
-                    newsString, wikiString);
+                    newsString, wikiString, hasArgs);
                 noGameLabel.Visible = false;
                 y = 0;
             }
@@ -291,6 +295,17 @@ namespace The_UGamer_Launcher
         private static bool isBat(string p)
         {
             if (p.IndexOf(".bat") == -1)
+                return false;
+            else
+                return true;
+        }
+
+        private static bool hasArgsMethod(string p)
+        {
+            int exeLoc = p.IndexOf(".exe");
+            string lookForArgs = p.Substring(exeLoc);
+
+            if (lookForArgs.IndexOf("-") == -1)
                 return false;
             else
                 return true;
