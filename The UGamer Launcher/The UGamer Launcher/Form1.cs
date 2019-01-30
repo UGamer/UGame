@@ -123,20 +123,6 @@ namespace The_UGamer_Launcher
                 searchBox.Visible = false;
                 gameCountText.Visible = false;
                 addEntryButton.Visible = false;
-                for (bool installed = false; installed == false;)
-                {
-                    try
-                    {
-                        this.table1TableAdapter2.Fill(this.collectionDataSet4.Table1);
-                        installed = true;
-                    }
-                    catch (InvalidOperationException f)
-                    {
-
-                    }
-                }
-                System.Diagnostics.Process.Start(Application.ExecutablePath);
-                this.Close();
             }
             int entryCount = dataTable.Rows.Count;
             if (entryCount != 1)

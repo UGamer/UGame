@@ -358,7 +358,7 @@ namespace The_UGamer_Launcher
 
             string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Collection.accdb";
             OleDbConnection con = new OleDbConnection(connectionString);
-            OleDbCommand delCmd = new OleDbCommand("DELETE FROM Table1 WHERE Title='" + nameLabel.Text + "';", con);
+            OleDbCommand delCmd = new OleDbCommand("DELETE FROM Table1 WHERE Title=\"" + nameLabel.Text + "\";", con);
             OleDbCommand cmd = new OleDbCommand("INSERT INTO Table1 (Title, Platform, Status, Rating, PlayTime, Obtained, StartDate, EndDate, Notes, Launch) VALUES (@Title, @Platform, @Status, @Rating, @PlayTime, @Obtained, @StartDate, @EndDate, @Notes, @Launch);", con);
 
             con.Open();

@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Data.OleDb;
 using System.IO;
 using System.Drawing;
+using System.Diagnostics;
 using System.Text.RegularExpressions;
 
 namespace The_UGamer_Launcher
@@ -12,6 +13,7 @@ namespace The_UGamer_Launcher
     {
         public Form1 frm1;
         public bool refresh = false;
+
         public AddGame(Form1 parent, bool refreshSignal)
         {
             InitializeComponent();
@@ -326,6 +328,8 @@ namespace The_UGamer_Launcher
             replaceEntryMethod(originalTitleString, title, platform, status, rating, 
                 hours, minutes, seconds, obtained, startDate,
                 endDate, launchCode, notes, newsCode, wikiCode);
+
+            refresh = true;
         }
 
         private void replaceEntryMethod(string originalTitleString, string title, string platform, string status,
@@ -479,6 +483,7 @@ namespace The_UGamer_Launcher
         {
             string originalTitleString = originalTitle.Text;
             deleteEntry(originalTitleString);
+            refresh = true;
         }
 
         private void deleteEntry(string originalTitleString)
@@ -561,6 +566,16 @@ namespace The_UGamer_Launcher
             notesBox.Text = "";
             newsURLBox.Text = "";
             wikiURLBox.Text = "";
+        }
+
+        private void AddGame_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (refresh == true)
+            {
+                Process.Start(Application.ExecutablePath);
+                Application.Exit();
+                this.Close();
+            }
         }
     }
 }
