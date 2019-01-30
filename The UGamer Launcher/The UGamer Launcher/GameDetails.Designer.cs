@@ -340,6 +340,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "GameDetails";
             this.Text = "GameDetails";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GameDetails_FormClosing);
             this.Resize += new System.EventHandler(this.GameDetails_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.gamePicture)).EndInit();
             this.panel1.ResumeLayout(false);

@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using System.Diagnostics;
 using CefSharp;
 using CefSharp.WinForms;
+using System.ComponentModel;
 
 namespace The_UGamer_Launcher
 {
@@ -109,6 +110,8 @@ namespace The_UGamer_Launcher
             try
             {
                 this.table1TableAdapter2.Fill(this.collectionDataSet4.Table1);
+                dataTable.Sort(dataTable.Columns[1], ListSortDirection.Ascending);
+
             }
             // This is caught if you don't have the required OLE DB drivers.
             catch (InvalidOperationException d)

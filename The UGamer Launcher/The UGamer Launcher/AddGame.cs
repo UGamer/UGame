@@ -270,11 +270,11 @@ namespace The_UGamer_Launcher
                     newSecondsString = seconds;
                 }
 
-                if (hoursInt < 10 && minsInt != 0)
+                if (hoursInt < 10 && hoursInt > 0)
                     newHoursString = "0" + hours;
-                if (minsInt < 10 && minsInt != 0)
+                if (minsInt < 10 && minsInt > 0)
                     newMinutesString = "0" + minutes;
-                if (secsInt < 10 && secsInt != 0)
+                if (secsInt < 10 && secsInt > 0)
                     newSecondsString = "0" + seconds;
 
                 string playTime = newHoursString + "h:" + newMinutesString + "m:" + newSecondsString + "s";
@@ -336,13 +336,7 @@ namespace The_UGamer_Launcher
             string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Collection.accdb";
             OleDbConnection con = new OleDbConnection(connectionString);
 
-            Regex apostrophe = new Regex("'");
-            if (originalTitleString.IndexOf("'") != -1)
-            {
-                apostrophe.Replace(originalTitleString, "\'");
-            }
-
-            OleDbCommand delCmd = new OleDbCommand("DELETE FROM Table1 WHERE Title='" + originalTitleString + "';", con);
+            OleDbCommand delCmd = new OleDbCommand("DELETE FROM Table1 WHERE Title=\"" + originalTitleString + "\";", con);
             OleDbCommand cmd = new OleDbCommand("INSERT INTO Table1 (Title, Platform, Status, Rating, PlayTime, Obtained, StartDate, EndDate, Notes, Launch, News, Wiki) VALUES (@Title, @Platform, @Status, @Rating, @PlayTime, @Obtained, @StartDate, @EndDate, @Notes, @Launch, @News, @Wiki);", con);
 
             string message = "Are you sure you want to edit entry \"" + originalTitleString + "\"?";
@@ -374,11 +368,11 @@ namespace The_UGamer_Launcher
                 newSecondsString = seconds;
             }
 
-            if (hoursInt < 10 && minsInt != 0)
+            if (hoursInt < 10 && hoursInt > 0)
                 newHoursString = "0" + hours;
-            if (minsInt < 10 && minsInt != 0)
+            if (minsInt < 10 && minsInt > 0)
                 newMinutesString = "0" + minutes;
-            if (secsInt < 10 && secsInt != 0)
+            if (secsInt < 10 && secsInt > 0)
                 newSecondsString = "0" + seconds;
 
             string playTime = newHoursString + "h:" + newMinutesString + "m:" + newSecondsString + "s";
@@ -491,7 +485,7 @@ namespace The_UGamer_Launcher
         {
             string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Collection.accdb";
             OleDbConnection con = new OleDbConnection(connectionString);
-            OleDbCommand delCmd = new OleDbCommand("DELETE FROM Table1 WHERE Title='" + originalTitleString + "';", con);
+            OleDbCommand delCmd = new OleDbCommand("DELETE FROM Table1 WHERE Title=\"" + originalTitleString + "\";", con);
 
             this.Text = "Remove an entry... Removing \"" + originalTitleString + "\"";
 

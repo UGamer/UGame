@@ -14,11 +14,14 @@ namespace The_UGamer_Launcher
     {
         private Stopwatch gameTime = new Stopwatch();
         private ChromiumWebBrowser chromeBrowser;
+        private bool gameRunning = false;
+        private bool didPlay = false;
+        private string title;
         string newsUrl;
         string wikiUrl;
 
         // Starts up a detail form.
-        public GameDetails() 
+        public GameDetails()
         {
             InitializeComponent();
             if (noImageText.Visible == true)
@@ -32,15 +35,16 @@ namespace The_UGamer_Launcher
             }
             catch (FileNotFoundException e) { }
         }
-        
+
         // Displays all the info for the game.
         public void DisplayInfo(string title, string input2, string platform,
             string status, string rating, string hours, string obtained,
             string startDate, string endDate, string notes, string launchString2, bool exePath2, bool batPath2,
             string newsString2, string wikiString2, bool hasArgs2)
-        { 
+        {
+            this.title = title;
             noImageText.Visible = false;
-            
+
             // This block of text determines the icon.
             try
             {
@@ -195,7 +199,7 @@ namespace The_UGamer_Launcher
                         Process.Start(procStartInfo);
                     }
                 }
-                
+
                 /* for (bool exit = false; exit != true;)
                 {
                     int overlaySeconds = Convert.ToInt32(gameTime.ElapsedMilliseconds / 1000);
@@ -210,6 +214,8 @@ namespace The_UGamer_Launcher
             }
             button1.Visible = false;
             stopTime.Visible = true;
+            didPlay = true;
+            gameRunning = true;
         }
 
 
@@ -239,7 +245,7 @@ namespace The_UGamer_Launcher
                     {
                         try
                         {
-                           background = Image.FromFile("Resources/Details/" + input2 + ".gif");
+                            background = Image.FromFile("Resources/Details/" + input2 + ".gif");
                             return background;
                         }
                         catch (FileNotFoundException h)
@@ -300,7 +306,13 @@ namespace The_UGamer_Launcher
 
         private void stopTime_Click(object sender, EventArgs e)
         {
+            stopTimeMethod();
+        }
+
+        private void stopTimeMethod()
+        {
             gameTime.Stop();
+            gameRunning = false;
             int seconds = Convert.ToInt32(gameTime.ElapsedMilliseconds / 1000);
 
             int playSeconds = seconds % 60;
@@ -434,7 +446,6 @@ namespace The_UGamer_Launcher
             cmd.ExecuteNonQuery();
 
             MessageBox.Show(message, caption);
-            gameTime.Restart();
             button1.Visible = true;
             stopTime.Visible = false;
         }
@@ -637,6 +648,41 @@ namespace The_UGamer_Launcher
                             }
                         }
                     }
+                }
+            }
+        }
+
+        private void GameDetails_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (didPlay == true)
+            {
+                if (gameRunning == true)
+                {
+                    gameTime.Stop();
+                    string message = "You're still keeping track of \" " + title + " \". Are you sure you want to stop the time and quit?";
+                    string caption = "Are you sure?";
+                    MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                    DialogResult result = MessageBox.Show(message, caption, buttons);
+                    if (result == DialogResult.Yes)
+                    {
+                        stopTimeMethod();
+                        gameTime.Restart();
+                        didPlay = false;
+                        Process.Start(Application.ExecutablePath);
+                        Application.Exit();
+                    }
+                    else
+                    {
+                        gameTime.Start();
+                        e.Cancel = true;
+                        return;
+                    }
+                }
+                else
+                {
+                    gameTime.Restart();
+                    Process.Start(Application.ExecutablePath);
+                    Application.Exit();
                 }
             }
         }
