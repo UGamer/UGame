@@ -435,5 +435,12 @@ namespace The_UGamer_Launcher
 
             dataTable.SortCompare += customSortCompare;
         }
+
+        private void EntriesToolTipButton_Click(object sender, EventArgs e)
+        {
+            bool refresh = false;
+            AddGame addGame = new AddGame(this, refresh);
+            addGame.Show();
+        }
     }
 }
