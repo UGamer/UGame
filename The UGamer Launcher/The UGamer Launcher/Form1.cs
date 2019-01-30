@@ -110,8 +110,7 @@ namespace The_UGamer_Launcher
             try
             {
                 this.table1TableAdapter2.Fill(this.collectionDataSet4.Table1);
-                dataTable.Sort(dataTable.Columns[1], ListSortDirection.Ascending);
-
+                dataTable.Sort(dataTable.Columns[0], ListSortDirection.Ascending);
             }
             // This is caught if you don't have the required OLE DB drivers.
             catch (InvalidOperationException d)
@@ -124,6 +123,7 @@ namespace The_UGamer_Launcher
                 gameCountText.Visible = false;
                 addEntryButton.Visible = false;
             }
+
             int entryCount = dataTable.Rows.Count;
             if (entryCount != 1)
                 gameCountText.Text = Convert.ToString(entryCount) + " total games";
