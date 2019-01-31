@@ -8,6 +8,7 @@ using System.Diagnostics;
 using CefSharp;
 using CefSharp.WinForms;
 using System.ComponentModel;
+using System.Collections.Generic;
 
 namespace The_UGamer_Launcher
 {
@@ -103,9 +104,17 @@ namespace The_UGamer_Launcher
             }
         }
 
+        public class Statuses
+        {
+
+        }
+
+
         // This fills the data table with the user data.
         private void Form1_Load(object sender, EventArgs e) 
         {
+            // TODO: This line of code loads data into the 'collectionDataSet5.Table1' table. You can move, or remove it, as needed.
+            this.table1TableAdapter2.Fill(this.collectionDataSet4.Table1);
             // TODO: This line of code loads data into the 'collectionDataSet5.Themes' table. You can move, or remove it, as needed.
             try
             {
@@ -141,6 +150,15 @@ namespace The_UGamer_Launcher
                 autoFill.Add(table[index]);
             }
             searchBox.AutoCompleteCustomSource = autoFill;
+
+            /* 
+            var dataSource1 = new List<Statuses>();
+            var dataSource2 = new List<Statuses>();
+            columnIndex = 3;
+            for (index = 0; index < dt.Rows.Count; index++)
+            {
+                dataSource1.Add();
+            } */
 
             CefSettings settings = new CefSettings();
             // Initialize cef with the provided settings

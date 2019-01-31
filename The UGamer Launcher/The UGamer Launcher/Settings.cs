@@ -9,11 +9,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Diagnostics;
 
 namespace The_UGamer_Launcher
 {
     public partial class Settings : Form
     {
+        public bool refresh = false;
         Form frm1;
         public Settings(Form1 parent)
         {
@@ -48,7 +50,18 @@ namespace The_UGamer_Launcher
                 
                 savedBG.Save(filePath1, ImageFormat.Png);
                 savedLogo.Save(filePath2, ImageFormat.Png);
+                refresh = true;
+                NoChangesLabel.Visible = false;
+            }
 
+            if (refresh == true)
+            {
+                Process.Start(Application.ExecutablePath);
+                Application.Exit();
+            }
+            else
+            {
+                NoChangesLabel.Visible = true;
             }
         }
 
@@ -102,6 +115,19 @@ namespace The_UGamer_Launcher
             {
                 windowIcon = new Icon("Resources/Theme/icon.ico");
                 return windowIcon;
+            }
+        }
+
+        private void Settings_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (refresh == true)
+            {
+                Process.Start(Application.ExecutablePath);
+                Application.Exit();
+            }
+            else
+            {
+
             }
         }
     }

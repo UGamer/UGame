@@ -62,10 +62,27 @@
             this.EntriesToolTipButton = new System.Windows.Forms.ToolStripButton();
             this.refreshButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.FilterToolStripButton = new System.Windows.Forms.ToolStripDropDownButton();
+            this.ViewToolStripButton = new System.Windows.Forms.ToolStripDropDownButton();
+            this.FilterButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.PlatformFilter = new System.Windows.Forms.ToolStripMenuItem();
             this.PlatformFilterBox = new System.Windows.Forms.ToolStripTextBox();
+            this.StatusFilter = new System.Windows.Forms.ToolStripMenuItem();
             this.StatusFilterBox = new System.Windows.Forms.ToolStripTextBox();
-            this.RatingFilterBox = new System.Windows.Forms.ToolStripTextBox();
+            this.StatusComboBox = new System.Windows.Forms.ToolStripComboBox();
+            this.RatingFilter = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
+            this.TimePlayedFilter = new System.Windows.Forms.ToolStripMenuItem();
+            this.ObtainedFilter = new System.Windows.Forms.ToolStripMenuItem();
+            this.StartDateFilter = new System.Windows.Forms.ToolStripMenuItem();
+            this.LastPlayedFilter = new System.Windows.Forms.ToolStripMenuItem();
+            this.NotesFilter = new System.Windows.Forms.ToolStripMenuItem();
+            this.LaunchFilter = new System.Windows.Forms.ToolStripMenuItem();
+            this.NewsFilter = new System.Windows.Forms.ToolStripMenuItem();
+            this.WikiFilter = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.SaveFilters = new System.Windows.Forms.ToolStripMenuItem();
+            this.collectionDataSet5BindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet4)).BeginInit();
@@ -76,6 +93,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet5)).BeginInit();
             this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet5BindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // dataTable
@@ -227,7 +245,7 @@
             this.gameCountText.Location = new System.Drawing.Point(559, 549);
             this.gameCountText.Name = "gameCountText";
             this.gameCountText.ReadOnly = true;
-            this.gameCountText.Size = new System.Drawing.Size(175, 26);
+            this.gameCountText.Size = new System.Drawing.Size(175, 20);
             this.gameCountText.TabIndex = 14;
             this.gameCountText.Text = "Total Games";
             this.gameCountText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -274,7 +292,7 @@
             this.noGameLabel.Location = new System.Drawing.Point(556, 598);
             this.noGameLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.noGameLabel.Name = "noGameLabel";
-            this.noGameLabel.Size = new System.Drawing.Size(285, 20);
+            this.noGameLabel.Size = new System.Drawing.Size(189, 13);
             this.noGameLabel.TabIndex = 17;
             this.noGameLabel.Text = "Sorry, it seems that game doesn\'t exist.";
             this.noGameLabel.Visible = false;
@@ -299,7 +317,7 @@
             this.searchBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.searchBox.Location = new System.Drawing.Point(439, 575);
             this.searchBox.Name = "searchBox";
-            this.searchBox.Size = new System.Drawing.Size(419, 26);
+            this.searchBox.Size = new System.Drawing.Size(419, 20);
             this.searchBox.TabIndex = 19;
             this.searchBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchBox_KeyDown);
             // 
@@ -317,12 +335,12 @@
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.EntriesToolTipButton,
-            this.FilterToolStripButton,
             this.refreshButton,
-            this.toolStripButton2});
+            this.toolStripButton2,
+            this.ViewToolStripButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1333, 32);
+            this.toolStrip1.Size = new System.Drawing.Size(1333, 25);
             this.toolStrip1.TabIndex = 20;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -332,7 +350,7 @@
             this.EntriesToolTipButton.Image = ((System.Drawing.Image)(resources.GetObject("EntriesToolTipButton.Image")));
             this.EntriesToolTipButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.EntriesToolTipButton.Name = "EntriesToolTipButton";
-            this.EntriesToolTipButton.Size = new System.Drawing.Size(68, 29);
+            this.EntriesToolTipButton.Size = new System.Drawing.Size(46, 22);
             this.EntriesToolTipButton.Text = "Entries";
             this.EntriesToolTipButton.Click += new System.EventHandler(this.EntriesToolTipButton_Click);
             // 
@@ -342,7 +360,7 @@
             this.refreshButton.Image = ((System.Drawing.Image)(resources.GetObject("refreshButton.Image")));
             this.refreshButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.refreshButton.Name = "refreshButton";
-            this.refreshButton.Size = new System.Drawing.Size(74, 29);
+            this.refreshButton.Size = new System.Drawing.Size(50, 22);
             this.refreshButton.Text = "Refresh";
             this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
             // 
@@ -352,40 +370,173 @@
             this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(80, 29);
+            this.toolStripButton2.Size = new System.Drawing.Size(53, 22);
             this.toolStripButton2.Text = "Settings";
             this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
             // 
-            // FilterToolStripButton
+            // ViewToolStripButton
             // 
-            this.FilterToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.FilterToolStripButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.PlatformFilterBox,
-            this.StatusFilterBox,
-            this.RatingFilterBox});
-            this.FilterToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("FilterToolStripButton.Image")));
-            this.FilterToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.FilterToolStripButton.Name = "FilterToolStripButton";
-            this.FilterToolStripButton.Size = new System.Drawing.Size(68, 29);
-            this.FilterToolStripButton.Text = "Filter";
+            this.ViewToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.ViewToolStripButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.FilterButton});
+            this.ViewToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("ViewToolStripButton.Image")));
+            this.ViewToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ViewToolStripButton.Name = "ViewToolStripButton";
+            this.ViewToolStripButton.Size = new System.Drawing.Size(45, 22);
+            this.ViewToolStripButton.Text = "View";
+            // 
+            // FilterButton
+            // 
+            this.FilterButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.FilterButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripSeparator2,
+            this.PlatformFilter,
+            this.StatusFilter,
+            this.RatingFilter,
+            this.TimePlayedFilter,
+            this.ObtainedFilter,
+            this.StartDateFilter,
+            this.LastPlayedFilter,
+            this.NotesFilter,
+            this.LaunchFilter,
+            this.NewsFilter,
+            this.WikiFilter,
+            this.toolStripSeparator1,
+            this.SaveFilters});
+            this.FilterButton.Name = "FilterButton";
+            this.FilterButton.Size = new System.Drawing.Size(180, 22);
+            this.FilterButton.Text = "Filter";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
+            // 
+            // PlatformFilter
+            // 
+            this.PlatformFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.PlatformFilter.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.PlatformFilterBox});
+            this.PlatformFilter.Name = "PlatformFilter";
+            this.PlatformFilter.Size = new System.Drawing.Size(180, 22);
+            this.PlatformFilter.Text = "Platform";
             // 
             // PlatformFilterBox
             // 
             this.PlatformFilterBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PlatformFilterBox.Name = "PlatformFilterBox";
-            this.PlatformFilterBox.Size = new System.Drawing.Size(100, 31);
+            this.PlatformFilterBox.Size = new System.Drawing.Size(100, 23);
+            // 
+            // StatusFilter
+            // 
+            this.StatusFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.StatusFilter.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.StatusFilterBox,
+            this.StatusComboBox});
+            this.StatusFilter.Name = "StatusFilter";
+            this.StatusFilter.Size = new System.Drawing.Size(180, 22);
+            this.StatusFilter.Text = "Status";
             // 
             // StatusFilterBox
             // 
             this.StatusFilterBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.StatusFilterBox.Name = "StatusFilterBox";
-            this.StatusFilterBox.Size = new System.Drawing.Size(100, 31);
+            this.StatusFilterBox.Size = new System.Drawing.Size(100, 23);
             // 
-            // RatingFilterBox
+            // StatusComboBox
             // 
-            this.RatingFilterBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.RatingFilterBox.Name = "RatingFilterBox";
-            this.RatingFilterBox.Size = new System.Drawing.Size(100, 31);
+            this.StatusComboBox.AutoCompleteCustomSource.AddRange(new string[] {
+            "Ferg"});
+            this.StatusComboBox.Name = "StatusComboBox";
+            this.StatusComboBox.Size = new System.Drawing.Size(121, 23);
+            // 
+            // RatingFilter
+            // 
+            this.RatingFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.RatingFilter.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripTextBox1});
+            this.RatingFilter.Name = "RatingFilter";
+            this.RatingFilter.Size = new System.Drawing.Size(180, 22);
+            this.RatingFilter.Text = "Rating";
+            // 
+            // toolStripTextBox1
+            // 
+            this.toolStripTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.toolStripTextBox1.Name = "toolStripTextBox1";
+            this.toolStripTextBox1.Size = new System.Drawing.Size(100, 23);
+            // 
+            // TimePlayedFilter
+            // 
+            this.TimePlayedFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.TimePlayedFilter.Name = "TimePlayedFilter";
+            this.TimePlayedFilter.Size = new System.Drawing.Size(180, 22);
+            this.TimePlayedFilter.Text = "Time Played";
+            // 
+            // ObtainedFilter
+            // 
+            this.ObtainedFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.ObtainedFilter.Name = "ObtainedFilter";
+            this.ObtainedFilter.Size = new System.Drawing.Size(180, 22);
+            this.ObtainedFilter.Text = "Obtained";
+            // 
+            // StartDateFilter
+            // 
+            this.StartDateFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.StartDateFilter.Name = "StartDateFilter";
+            this.StartDateFilter.Size = new System.Drawing.Size(180, 22);
+            this.StartDateFilter.Text = "Start Date";
+            // 
+            // LastPlayedFilter
+            // 
+            this.LastPlayedFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.LastPlayedFilter.Name = "LastPlayedFilter";
+            this.LastPlayedFilter.Size = new System.Drawing.Size(180, 22);
+            this.LastPlayedFilter.Text = "Last Played";
+            // 
+            // NotesFilter
+            // 
+            this.NotesFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.NotesFilter.Name = "NotesFilter";
+            this.NotesFilter.Size = new System.Drawing.Size(180, 22);
+            this.NotesFilter.Text = "Notes/Comments";
+            // 
+            // LaunchFilter
+            // 
+            this.LaunchFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.LaunchFilter.Name = "LaunchFilter";
+            this.LaunchFilter.Size = new System.Drawing.Size(180, 22);
+            this.LaunchFilter.Text = "Launch";
+            // 
+            // NewsFilter
+            // 
+            this.NewsFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.NewsFilter.Name = "NewsFilter";
+            this.NewsFilter.Size = new System.Drawing.Size(180, 22);
+            this.NewsFilter.Text = "News";
+            // 
+            // WikiFilter
+            // 
+            this.WikiFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.WikiFilter.Name = "WikiFilter";
+            this.WikiFilter.Size = new System.Drawing.Size(180, 22);
+            this.WikiFilter.Text = "Wiki";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            // 
+            // SaveFilters
+            // 
+            this.SaveFilters.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SaveFilters.Name = "SaveFilters";
+            this.SaveFilters.Size = new System.Drawing.Size(180, 22);
+            this.SaveFilters.Text = "Save + Apply";
+            // 
+            // collectionDataSet5BindingSource
+            // 
+            this.collectionDataSet5BindingSource.DataSource = this.collectionDataSet5;
+            this.collectionDataSet5BindingSource.Position = 0;
             // 
             // Form1
             // 
@@ -419,6 +570,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet5)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet5BindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -446,21 +598,38 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         public System.Windows.Forms.ToolStripButton refreshButton;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PlayTime;
+        private System.Windows.Forms.ToolStripButton EntriesToolTipButton;
+        private System.Windows.Forms.ToolStripDropDownButton ViewToolStripButton;
+        private System.Windows.Forms.ToolStripMenuItem FilterButton;
+        private System.Windows.Forms.ToolStripMenuItem PlatformFilter;
+        private System.Windows.Forms.ToolStripMenuItem StatusFilter;
+        private System.Windows.Forms.ToolStripMenuItem RatingFilter;
+        private System.Windows.Forms.ToolStripMenuItem TimePlayedFilter;
+        private System.Windows.Forms.ToolStripMenuItem ObtainedFilter;
+        private System.Windows.Forms.ToolStripMenuItem StartDateFilter;
+        private System.Windows.Forms.ToolStripMenuItem LastPlayedFilter;
+        private System.Windows.Forms.ToolStripMenuItem NotesFilter;
+        private System.Windows.Forms.ToolStripMenuItem LaunchFilter;
+        private System.Windows.Forms.ToolStripMenuItem NewsFilter;
+        private System.Windows.Forms.ToolStripMenuItem WikiFilter;
+        private System.Windows.Forms.ToolStripMenuItem SaveFilters;
+        private System.Windows.Forms.ToolStripTextBox PlatformFilterBox;
+        private System.Windows.Forms.ToolStripTextBox StatusFilterBox;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.BindingSource collectionDataSet5BindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn titleDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn platformDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn statusDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ratingDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PlayTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn obtainedDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn startDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn endDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn notesCommentsDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn launchDataGridViewTextBoxColumn;
-        private System.Windows.Forms.ToolStripButton EntriesToolTipButton;
-        private System.Windows.Forms.ToolStripDropDownButton FilterToolStripButton;
-        private System.Windows.Forms.ToolStripTextBox PlatformFilterBox;
-        private System.Windows.Forms.ToolStripTextBox StatusFilterBox;
-        private System.Windows.Forms.ToolStripTextBox RatingFilterBox;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripComboBox StatusComboBox;
+        private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
     }
 }
 

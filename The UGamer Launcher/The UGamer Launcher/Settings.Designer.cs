@@ -32,20 +32,21 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Settings));
             this.label1 = new System.Windows.Forms.Label();
             this.themeSelect = new System.Windows.Forms.ComboBox();
+            this.themesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.collectionDataSet5BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.collectionDataSet5 = new The_UGamer_Launcher.CollectionDataSet5();
             this.table1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.collectionDataSet4 = new The_UGamer_Launcher.CollectionDataSet4();
             this.table1TableAdapter = new The_UGamer_Launcher.CollectionDataSet4TableAdapters.Table1TableAdapter();
             this.themeDetails = new System.Windows.Forms.Button();
             this.saveApply = new System.Windows.Forms.Button();
-            this.collectionDataSet5 = new The_UGamer_Launcher.CollectionDataSet5();
-            this.collectionDataSet5BindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.themesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.themesTableAdapter = new The_UGamer_Launcher.CollectionDataSet5TableAdapters.ThemesTableAdapter();
+            this.NoChangesLabel = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.themesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet5BindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet5BindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.themesBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -66,6 +67,21 @@
             this.themeSelect.Name = "themeSelect";
             this.themeSelect.Size = new System.Drawing.Size(230, 21);
             this.themeSelect.TabIndex = 1;
+            // 
+            // themesBindingSource
+            // 
+            this.themesBindingSource.DataMember = "Themes";
+            this.themesBindingSource.DataSource = this.collectionDataSet5BindingSource;
+            // 
+            // collectionDataSet5BindingSource
+            // 
+            this.collectionDataSet5BindingSource.DataSource = this.collectionDataSet5;
+            this.collectionDataSet5BindingSource.Position = 0;
+            // 
+            // collectionDataSet5
+            // 
+            this.collectionDataSet5.DataSetName = "CollectionDataSet5";
+            this.collectionDataSet5.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // table1BindingSource
             // 
@@ -92,7 +108,7 @@
             // 
             // saveApply
             // 
-            this.saveApply.Location = new System.Drawing.Point(126, 37);
+            this.saveApply.Location = new System.Drawing.Point(124, 63);
             this.saveApply.Name = "saveApply";
             this.saveApply.Size = new System.Drawing.Size(84, 23);
             this.saveApply.TabIndex = 4;
@@ -100,30 +116,26 @@
             this.saveApply.UseVisualStyleBackColor = true;
             this.saveApply.Click += new System.EventHandler(this.saveApply_Click);
             // 
-            // collectionDataSet5
-            // 
-            this.collectionDataSet5.DataSetName = "CollectionDataSet5";
-            this.collectionDataSet5.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // collectionDataSet5BindingSource
-            // 
-            this.collectionDataSet5BindingSource.DataSource = this.collectionDataSet5;
-            this.collectionDataSet5BindingSource.Position = 0;
-            // 
-            // themesBindingSource
-            // 
-            this.themesBindingSource.DataMember = "Themes";
-            this.themesBindingSource.DataSource = this.collectionDataSet5BindingSource;
-            // 
             // themesTableAdapter
             // 
             this.themesTableAdapter.ClearBeforeFill = true;
+            // 
+            // NoChangesLabel
+            // 
+            this.NoChangesLabel.AutoSize = true;
+            this.NoChangesLabel.Location = new System.Drawing.Point(81, 47);
+            this.NoChangesLabel.Name = "NoChangesLabel";
+            this.NoChangesLabel.Size = new System.Drawing.Size(179, 13);
+            this.NoChangesLabel.TabIndex = 5;
+            this.NoChangesLabel.Text = "There were no changes to be made.";
+            this.NoChangesLabel.Visible = false;
             // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(337, 71);
+            this.ClientSize = new System.Drawing.Size(337, 98);
+            this.Controls.Add(this.NoChangesLabel);
             this.Controls.Add(this.saveApply);
             this.Controls.Add(this.themeDetails);
             this.Controls.Add(this.themeSelect);
@@ -131,12 +143,13 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Settings";
             this.Text = "Settings";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Settings_FormClosed);
             this.Load += new System.EventHandler(this.Settings_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.themesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet5BindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet5BindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.themesBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -155,5 +168,6 @@
         private CollectionDataSet5 collectionDataSet5;
         private System.Windows.Forms.BindingSource themesBindingSource;
         private CollectionDataSet5TableAdapters.ThemesTableAdapter themesTableAdapter;
+        private System.Windows.Forms.Label NoChangesLabel;
     }
 }

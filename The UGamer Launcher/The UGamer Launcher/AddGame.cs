@@ -574,7 +574,10 @@ namespace The_UGamer_Launcher
             {
                 Process.Start(Application.ExecutablePath);
                 Application.Exit();
-                this.Close();
+            }
+            else
+            {
+
             }
         }
     }
