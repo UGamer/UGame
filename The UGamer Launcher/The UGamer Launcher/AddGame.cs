@@ -26,7 +26,7 @@ namespace The_UGamer_Launcher
 
             try
             {
-                this.BackgroundImage = frm1.ThemeAssign("backgroundImage");
+                this.BackgroundImage = frm1.ThemeAssign("backgroundImageUSING");
             }
             catch (FileNotFoundException e) { }
 
@@ -97,7 +97,7 @@ namespace The_UGamer_Launcher
                 newSecondsString = seconds;
             }
 
-            if (hoursInt < 10 && minsInt != 0)
+            if (hoursInt < 10 && hoursInt != 0)
                 newHoursString = "0" + hours;
             if (minsInt < 10 && minsInt != 0)
                 newMinutesString = "0" + minutes;
@@ -566,6 +566,8 @@ namespace The_UGamer_Launcher
             notesBox.Text = "";
             newsURLBox.Text = "";
             wikiURLBox.Text = "";
+
+            this.Text = "Entries";
         }
 
         private void AddGame_FormClosing(object sender, FormClosingEventArgs e)

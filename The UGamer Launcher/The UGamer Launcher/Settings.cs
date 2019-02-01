@@ -27,6 +27,11 @@ namespace The_UGamer_Launcher
         {
             // TODO: This line of code loads data into the 'collectionDataSet5.Themes' table. You can move, or remove it, as needed.
             this.themesTableAdapter.Fill(this.collectionDataSet5.Themes);
+            try
+            {
+                this.BackgroundImage = ThemeAssign("backgroundImageUSING");
+            }
+            catch (FileNotFoundException f) { }
         }
 
         private void saveApply_Click(object sender, EventArgs e)

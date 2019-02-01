@@ -7,6 +7,7 @@ using System.Data.OleDb;
 using System.Text.RegularExpressions;
 using CefSharp;
 using CefSharp.WinForms;
+using System.Threading;
 
 namespace The_UGamer_Launcher
 {
@@ -14,6 +15,7 @@ namespace The_UGamer_Launcher
     {
         private Stopwatch gameTime = new Stopwatch();
         private ChromiumWebBrowser chromeBrowser;
+        Thread timePlaying;
         private bool gameRunning = false;
         private bool didPlay = false;
         private string title;
@@ -31,7 +33,7 @@ namespace The_UGamer_Launcher
 
             try
             {
-                this.BackgroundImage = ThemeAssign("backgroundImage");
+                this.BackgroundImage = ThemeAssign("backgroundImageUSING");
             }
             catch (FileNotFoundException e) { }
         }
@@ -199,11 +201,6 @@ namespace The_UGamer_Launcher
                         Process.Start(procStartInfo);
                     }
                 }
-
-                /* for (bool exit = false; exit != true;)
-                {
-                    int overlaySeconds = Convert.ToInt32(gameTime.ElapsedMilliseconds / 1000);
-                } */
             }
             else
             {
@@ -212,10 +209,63 @@ namespace The_UGamer_Launcher
                 gameTime.Start();
                 launcher.Url = launch2;
             }
+
+            timePlaying = new Thread(new ThreadStart(DisplaySeconds));
+            timePlaying.Start();
+
             button1.Visible = false;
             stopTime.Visible = true;
             didPlay = true;
             gameRunning = true;
+        }
+
+        private void DisplaySeconds()
+        {
+            string secondsString;
+            string minutesString;
+            string hoursString;
+            int seconds;
+            int minutes;
+            int hours;
+            string timePlayingString = "";
+            for (; ; )
+            {
+                seconds = Convert.ToInt32(gameTime.ElapsedMilliseconds / 1000);
+                minutes = seconds / 60;
+                seconds %= 60;
+                hours = minutes / 60;
+                minutes %= 60;
+
+                secondsString = Convert.ToString(seconds);
+                minutesString = Convert.ToString(minutes);
+                hoursString = Convert.ToString(hours);
+
+                if (hours < 10)
+                    hoursString = "0" + hours;
+                if (minutes < 10)
+                    minutesString = "0" + minutes;
+                if (seconds < 10)
+                    secondsString = "0" + seconds;
+
+                timePlayingString = "Current Play Session: " + hoursString + "h:" + minutesString + 
+                    "m:" + secondsString + "s";
+                SetText(timePlayingString);
+            }
+        }
+
+        delegate void StringArgReturningVoidDelegate(string text);
+
+        private void SetText(string text)
+        {
+            if (this.TimePlayingLabel.InvokeRequired)
+            {
+                StringArgReturningVoidDelegate d = new StringArgReturningVoidDelegate(SetText);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                this.TimePlayingLabel.Text = text;
+            }
         }
 
 
@@ -311,6 +361,7 @@ namespace The_UGamer_Launcher
 
         private void stopTimeMethod()
         {
+            timePlaying.Abort();
             gameTime.Stop();
             gameRunning = false;
             int seconds = Convert.ToInt32(gameTime.ElapsedMilliseconds / 1000);
@@ -399,11 +450,11 @@ namespace The_UGamer_Launcher
             string newMinutesString = newMinutes.ToString();
             string newSecondsString = newSeconds.ToString();
 
-            if (newHours < 10)
+            if (newHours < 10 && newHours != 0)
                 newHoursString = "0" + newHours;
-            if (newMinutes < 10)
+            if (newMinutes < 10 && newMinutes != 0)
                 newMinutesString = "0" + newMinutes;
-            if (newSeconds < 10)
+            if (newSeconds < 10 && newSeconds != 0)
                 newSecondsString = "0" + newSeconds;
 
             string timePlayed = newHoursString + "h:" + newMinutesString + "m:" + newSecondsString + "s";
@@ -681,9 +732,14 @@ namespace The_UGamer_Launcher
                 else
                 {
                     gameTime.Restart();
+                    didPlay = false;
                     Process.Start(Application.ExecutablePath);
                     Application.Exit();
                 }
+            }
+            else
+            {
+
             }
         }
     }

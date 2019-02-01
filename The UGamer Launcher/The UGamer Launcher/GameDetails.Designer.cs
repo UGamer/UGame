@@ -49,6 +49,7 @@
             this.wikiButton = new System.Windows.Forms.Button();
             this.newsButton = new System.Windows.Forms.Button();
             this.browserDock = new System.Windows.Forms.Panel();
+            this.TimePlayingLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.gamePicture)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -314,6 +315,16 @@
             this.browserDock.TabIndex = 22;
             this.browserDock.Visible = false;
             // 
+            // TimePlayingLabel
+            // 
+            this.TimePlayingLabel.AutoSize = true;
+            this.TimePlayingLabel.BackColor = System.Drawing.Color.White;
+            this.TimePlayingLabel.Location = new System.Drawing.Point(168, 368);
+            this.TimePlayingLabel.Name = "TimePlayingLabel";
+            this.TimePlayingLabel.Size = new System.Drawing.Size(171, 13);
+            this.TimePlayingLabel.TabIndex = 23;
+            this.TimePlayingLabel.Text = "Current Play Session: 00h:00m:00s";
+            // 
             // GameDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -322,6 +333,7 @@
             this.AutoSize = true;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(854, 412);
+            this.Controls.Add(this.TimePlayingLabel);
             this.Controls.Add(this.browserDock);
             this.Controls.Add(this.stopTime);
             this.Controls.Add(this.launchLabel);
@@ -371,5 +383,6 @@
         private System.Windows.Forms.Button wikiButton;
         private System.Windows.Forms.Button newsButton;
         private System.Windows.Forms.Panel browserDock;
+        private System.Windows.Forms.Label TimePlayingLabel;
     }
 }

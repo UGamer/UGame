@@ -404,13 +404,13 @@
             this.toolStripSeparator1,
             this.SaveFilters});
             this.FilterButton.Name = "FilterButton";
-            this.FilterButton.Size = new System.Drawing.Size(180, 22);
+            this.FilterButton.Size = new System.Drawing.Size(100, 22);
             this.FilterButton.Text = "Filter";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(166, 6);
             // 
             // PlatformFilter
             // 
@@ -418,7 +418,7 @@
             this.PlatformFilter.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.PlatformFilterBox});
             this.PlatformFilter.Name = "PlatformFilter";
-            this.PlatformFilter.Size = new System.Drawing.Size(180, 22);
+            this.PlatformFilter.Size = new System.Drawing.Size(169, 22);
             this.PlatformFilter.Text = "Platform";
             // 
             // PlatformFilterBox
@@ -434,7 +434,7 @@
             this.StatusFilterBox,
             this.StatusComboBox});
             this.StatusFilter.Name = "StatusFilter";
-            this.StatusFilter.Size = new System.Drawing.Size(180, 22);
+            this.StatusFilter.Size = new System.Drawing.Size(169, 22);
             this.StatusFilter.Text = "Status";
             // 
             // StatusFilterBox
@@ -456,7 +456,7 @@
             this.RatingFilter.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripTextBox1});
             this.RatingFilter.Name = "RatingFilter";
-            this.RatingFilter.Size = new System.Drawing.Size(180, 22);
+            this.RatingFilter.Size = new System.Drawing.Size(169, 22);
             this.RatingFilter.Text = "Rating";
             // 
             // toolStripTextBox1
@@ -469,68 +469,68 @@
             // 
             this.TimePlayedFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.TimePlayedFilter.Name = "TimePlayedFilter";
-            this.TimePlayedFilter.Size = new System.Drawing.Size(180, 22);
+            this.TimePlayedFilter.Size = new System.Drawing.Size(169, 22);
             this.TimePlayedFilter.Text = "Time Played";
             // 
             // ObtainedFilter
             // 
             this.ObtainedFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.ObtainedFilter.Name = "ObtainedFilter";
-            this.ObtainedFilter.Size = new System.Drawing.Size(180, 22);
+            this.ObtainedFilter.Size = new System.Drawing.Size(169, 22);
             this.ObtainedFilter.Text = "Obtained";
             // 
             // StartDateFilter
             // 
             this.StartDateFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.StartDateFilter.Name = "StartDateFilter";
-            this.StartDateFilter.Size = new System.Drawing.Size(180, 22);
+            this.StartDateFilter.Size = new System.Drawing.Size(169, 22);
             this.StartDateFilter.Text = "Start Date";
             // 
             // LastPlayedFilter
             // 
             this.LastPlayedFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.LastPlayedFilter.Name = "LastPlayedFilter";
-            this.LastPlayedFilter.Size = new System.Drawing.Size(180, 22);
+            this.LastPlayedFilter.Size = new System.Drawing.Size(169, 22);
             this.LastPlayedFilter.Text = "Last Played";
             // 
             // NotesFilter
             // 
             this.NotesFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.NotesFilter.Name = "NotesFilter";
-            this.NotesFilter.Size = new System.Drawing.Size(180, 22);
+            this.NotesFilter.Size = new System.Drawing.Size(169, 22);
             this.NotesFilter.Text = "Notes/Comments";
             // 
             // LaunchFilter
             // 
             this.LaunchFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.LaunchFilter.Name = "LaunchFilter";
-            this.LaunchFilter.Size = new System.Drawing.Size(180, 22);
+            this.LaunchFilter.Size = new System.Drawing.Size(169, 22);
             this.LaunchFilter.Text = "Launch";
             // 
             // NewsFilter
             // 
             this.NewsFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.NewsFilter.Name = "NewsFilter";
-            this.NewsFilter.Size = new System.Drawing.Size(180, 22);
+            this.NewsFilter.Size = new System.Drawing.Size(169, 22);
             this.NewsFilter.Text = "News";
             // 
             // WikiFilter
             // 
             this.WikiFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.WikiFilter.Name = "WikiFilter";
-            this.WikiFilter.Size = new System.Drawing.Size(180, 22);
+            this.WikiFilter.Size = new System.Drawing.Size(169, 22);
             this.WikiFilter.Text = "Wiki";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(166, 6);
             // 
             // SaveFilters
             // 
             this.SaveFilters.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SaveFilters.Name = "SaveFilters";
-            this.SaveFilters.Size = new System.Drawing.Size(180, 22);
+            this.SaveFilters.Size = new System.Drawing.Size(169, 22);
             this.SaveFilters.Text = "Save + Apply";
             // 
             // collectionDataSet5BindingSource
