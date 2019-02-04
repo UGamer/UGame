@@ -80,7 +80,7 @@
             this.titleBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.titleBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.titleBox.Location = new System.Drawing.Point(104, 8);
-            this.titleBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.titleBox.Margin = new System.Windows.Forms.Padding(2);
             this.titleBox.Name = "titleBox";
             this.titleBox.Size = new System.Drawing.Size(415, 20);
             this.titleBox.TabIndex = 1;
@@ -91,7 +91,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.platformBox.Location = new System.Drawing.Point(104, 34);
-            this.platformBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.platformBox.Margin = new System.Windows.Forms.Padding(2);
             this.platformBox.Name = "platformBox";
             this.platformBox.Size = new System.Drawing.Size(415, 20);
             this.platformBox.TabIndex = 2;
@@ -102,7 +102,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.statusBox.Location = new System.Drawing.Point(104, 58);
-            this.statusBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.statusBox.Margin = new System.Windows.Forms.Padding(2);
             this.statusBox.Name = "statusBox";
             this.statusBox.Size = new System.Drawing.Size(415, 20);
             this.statusBox.TabIndex = 3;
@@ -113,7 +113,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ratingBox.Location = new System.Drawing.Point(104, 82);
-            this.ratingBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ratingBox.Margin = new System.Windows.Forms.Padding(2);
             this.ratingBox.Name = "ratingBox";
             this.ratingBox.Size = new System.Drawing.Size(415, 20);
             this.ratingBox.TabIndex = 4;
@@ -123,7 +123,7 @@
             this.hoursBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.hoursBox.Location = new System.Drawing.Point(104, 106);
-            this.hoursBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.hoursBox.Margin = new System.Windows.Forms.Padding(2);
             this.hoursBox.Name = "hoursBox";
             this.hoursBox.Size = new System.Drawing.Size(88, 20);
             this.hoursBox.TabIndex = 5;
@@ -135,7 +135,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.endDateBox.Location = new System.Drawing.Point(104, 190);
-            this.endDateBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.endDateBox.Margin = new System.Windows.Forms.Padding(2);
             this.endDateBox.Name = "endDateBox";
             this.endDateBox.Size = new System.Drawing.Size(415, 20);
             this.endDateBox.TabIndex = 8;
@@ -146,7 +146,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.startDateBox.Location = new System.Drawing.Point(104, 162);
-            this.startDateBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.startDateBox.Margin = new System.Windows.Forms.Padding(2);
             this.startDateBox.Name = "startDateBox";
             this.startDateBox.Size = new System.Drawing.Size(415, 20);
             this.startDateBox.TabIndex = 7;
@@ -157,7 +157,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.obtainedBox.Location = new System.Drawing.Point(104, 135);
-            this.obtainedBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.obtainedBox.Margin = new System.Windows.Forms.Padding(2);
             this.obtainedBox.Name = "obtainedBox";
             this.obtainedBox.Size = new System.Drawing.Size(415, 20);
             this.obtainedBox.TabIndex = 6;
@@ -168,7 +168,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.launchBox.Location = new System.Drawing.Point(104, 214);
-            this.launchBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.launchBox.Margin = new System.Windows.Forms.Padding(2);
             this.launchBox.Name = "launchBox";
             this.launchBox.Size = new System.Drawing.Size(415, 20);
             this.launchBox.TabIndex = 9;
@@ -179,7 +179,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.notesBox.Location = new System.Drawing.Point(104, 294);
-            this.notesBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.notesBox.Margin = new System.Windows.Forms.Padding(2);
             this.notesBox.Multiline = true;
             this.notesBox.Name = "notesBox";
             this.notesBox.Size = new System.Drawing.Size(415, 48);
@@ -192,7 +192,7 @@
             this.addEntryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addEntryButton.ForeColor = System.Drawing.Color.White;
             this.addEntryButton.Location = new System.Drawing.Point(11, 353);
-            this.addEntryButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.addEntryButton.Margin = new System.Windows.Forms.Padding(2);
             this.addEntryButton.Name = "addEntryButton";
             this.addEntryButton.Size = new System.Drawing.Size(88, 27);
             this.addEntryButton.TabIndex = 11;
@@ -207,7 +207,7 @@
             this.editEntry.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.editEntry.ForeColor = System.Drawing.Color.White;
             this.editEntry.Location = new System.Drawing.Point(104, 353);
-            this.editEntry.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.editEntry.Margin = new System.Windows.Forms.Padding(2);
             this.editEntry.Name = "editEntry";
             this.editEntry.Size = new System.Drawing.Size(88, 27);
             this.editEntry.TabIndex = 12;
@@ -234,7 +234,7 @@
             this.replaceEntry.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.replaceEntry.ForeColor = System.Drawing.Color.White;
             this.replaceEntry.Location = new System.Drawing.Point(196, 353);
-            this.replaceEntry.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.replaceEntry.Margin = new System.Windows.Forms.Padding(2);
             this.replaceEntry.Name = "replaceEntry";
             this.replaceEntry.Size = new System.Drawing.Size(88, 27);
             this.replaceEntry.TabIndex = 14;
@@ -258,7 +258,7 @@
             this.deleteEntryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.deleteEntryButton.ForeColor = System.Drawing.Color.White;
             this.deleteEntryButton.Location = new System.Drawing.Point(288, 353);
-            this.deleteEntryButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.deleteEntryButton.Margin = new System.Windows.Forms.Padding(2);
             this.deleteEntryButton.Name = "deleteEntryButton";
             this.deleteEntryButton.Size = new System.Drawing.Size(88, 27);
             this.deleteEntryButton.TabIndex = 16;
@@ -296,7 +296,7 @@
             this.minutesBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.minutesBox.Location = new System.Drawing.Point(235, 106);
-            this.minutesBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.minutesBox.Margin = new System.Windows.Forms.Padding(2);
             this.minutesBox.Name = "minutesBox";
             this.minutesBox.Size = new System.Drawing.Size(88, 20);
             this.minutesBox.TabIndex = 18;
@@ -319,7 +319,7 @@
             this.secondsBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.secondsBox.Location = new System.Drawing.Point(376, 106);
-            this.secondsBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.secondsBox.Margin = new System.Windows.Forms.Padding(2);
             this.secondsBox.Name = "secondsBox";
             this.secondsBox.Size = new System.Drawing.Size(88, 20);
             this.secondsBox.TabIndex = 20;
@@ -331,7 +331,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.newsURLBox.Location = new System.Drawing.Point(104, 238);
-            this.newsURLBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.newsURLBox.Margin = new System.Windows.Forms.Padding(2);
             this.newsURLBox.Name = "newsURLBox";
             this.newsURLBox.Size = new System.Drawing.Size(415, 20);
             this.newsURLBox.TabIndex = 22;
@@ -342,7 +342,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.wikiURLBox.Location = new System.Drawing.Point(104, 262);
-            this.wikiURLBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.wikiURLBox.Margin = new System.Windows.Forms.Padding(2);
             this.wikiURLBox.Name = "wikiURLBox";
             this.wikiURLBox.Size = new System.Drawing.Size(415, 20);
             this.wikiURLBox.TabIndex = 23;
@@ -354,7 +354,7 @@
             this.clearFieldsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.clearFieldsButton.ForeColor = System.Drawing.Color.White;
             this.clearFieldsButton.Location = new System.Drawing.Point(11, 322);
-            this.clearFieldsButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.clearFieldsButton.Margin = new System.Windows.Forms.Padding(2);
             this.clearFieldsButton.Name = "clearFieldsButton";
             this.clearFieldsButton.Size = new System.Drawing.Size(88, 27);
             this.clearFieldsButton.TabIndex = 24;
@@ -393,10 +393,9 @@
             this.Controls.Add(this.titleBox);
             this.Controls.Add(this.labels);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "AddGame";
             this.Text = "Entries";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddGame_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

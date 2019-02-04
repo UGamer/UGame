@@ -59,7 +59,12 @@
             this.table1BindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.collectionDataSet5 = new The_UGamer_Launcher.CollectionDataSet5();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.EntriesToolTipButton = new System.Windows.Forms.ToolStripButton();
+            this.EditToolStripButton = new System.Windows.Forms.ToolStripDropDownButton();
+            this.ColumnsToolStripButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.addColumnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editColumnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.removeColumnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.EntriesToolTipButton = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.ViewToolStripButton = new System.Windows.Forms.ToolStripDropDownButton();
@@ -83,6 +88,8 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.SaveFilters = new System.Windows.Forms.ToolStripMenuItem();
             this.collectionDataSet5BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.CategoriesFilter = new System.Windows.Forms.ToolStripMenuItem();
+            this.CategoriesBox = new System.Windows.Forms.ToolStripComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet4)).BeginInit();
@@ -334,7 +341,7 @@
             // 
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.EntriesToolTipButton,
+            this.EditToolStripButton,
             this.refreshButton,
             this.toolStripButton2,
             this.ViewToolStripButton});
@@ -344,15 +351,58 @@
             this.toolStrip1.TabIndex = 20;
             this.toolStrip1.Text = "toolStrip1";
             // 
+            // EditToolStripButton
+            // 
+            this.EditToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.EditToolStripButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ColumnsToolStripButton,
+            this.EntriesToolTipButton});
+            this.EditToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("EditToolStripButton.Image")));
+            this.EditToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.EditToolStripButton.Name = "EditToolStripButton";
+            this.EditToolStripButton.Size = new System.Drawing.Size(40, 22);
+            this.EditToolStripButton.Text = "Edit";
+            // 
+            // ColumnsToolStripButton
+            // 
+            this.ColumnsToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.ColumnsToolStripButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addColumnToolStripMenuItem,
+            this.editColumnToolStripMenuItem,
+            this.removeColumnToolStripMenuItem});
+            this.ColumnsToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("ColumnsToolStripButton.Image")));
+            this.ColumnsToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ColumnsToolStripButton.Name = "ColumnsToolStripButton";
+            this.ColumnsToolStripButton.Size = new System.Drawing.Size(131, 22);
+            this.ColumnsToolStripButton.Text = "Columns...";
+            // 
+            // addColumnToolStripMenuItem
+            // 
+            this.addColumnToolStripMenuItem.Name = "addColumnToolStripMenuItem";
+            this.addColumnToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.addColumnToolStripMenuItem.Text = "Add Column";
+            // 
+            // editColumnToolStripMenuItem
+            // 
+            this.editColumnToolStripMenuItem.Name = "editColumnToolStripMenuItem";
+            this.editColumnToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.editColumnToolStripMenuItem.Text = "Edit Column";
+            // 
+            // removeColumnToolStripMenuItem
+            // 
+            this.removeColumnToolStripMenuItem.Name = "removeColumnToolStripMenuItem";
+            this.removeColumnToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.removeColumnToolStripMenuItem.Text = "Remove Column";
+            // 
             // EntriesToolTipButton
             // 
             this.EntriesToolTipButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.EntriesToolTipButton.Image = ((System.Drawing.Image)(resources.GetObject("EntriesToolTipButton.Image")));
             this.EntriesToolTipButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.EntriesToolTipButton.Name = "EntriesToolTipButton";
-            this.EntriesToolTipButton.Size = new System.Drawing.Size(46, 22);
+            this.EntriesToolTipButton.Size = new System.Drawing.Size(131, 22);
             this.EntriesToolTipButton.Text = "Entries";
-            this.EntriesToolTipButton.Click += new System.EventHandler(this.EntriesToolTipButton_Click);
+            this.EntriesToolTipButton.Click += new System.EventHandler(this.EntriesToolTipButton_Click_1);
             // 
             // refreshButton
             // 
@@ -401,16 +451,17 @@
             this.LaunchFilter,
             this.NewsFilter,
             this.WikiFilter,
+            this.CategoriesFilter,
             this.toolStripSeparator1,
             this.SaveFilters});
             this.FilterButton.Name = "FilterButton";
-            this.FilterButton.Size = new System.Drawing.Size(100, 22);
+            this.FilterButton.Size = new System.Drawing.Size(180, 22);
             this.FilterButton.Text = "Filter";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(166, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
             // 
             // PlatformFilter
             // 
@@ -418,7 +469,7 @@
             this.PlatformFilter.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.PlatformFilterBox});
             this.PlatformFilter.Name = "PlatformFilter";
-            this.PlatformFilter.Size = new System.Drawing.Size(169, 22);
+            this.PlatformFilter.Size = new System.Drawing.Size(180, 22);
             this.PlatformFilter.Text = "Platform";
             // 
             // PlatformFilterBox
@@ -434,7 +485,7 @@
             this.StatusFilterBox,
             this.StatusComboBox});
             this.StatusFilter.Name = "StatusFilter";
-            this.StatusFilter.Size = new System.Drawing.Size(169, 22);
+            this.StatusFilter.Size = new System.Drawing.Size(180, 22);
             this.StatusFilter.Text = "Status";
             // 
             // StatusFilterBox
@@ -456,7 +507,7 @@
             this.RatingFilter.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripTextBox1});
             this.RatingFilter.Name = "RatingFilter";
-            this.RatingFilter.Size = new System.Drawing.Size(169, 22);
+            this.RatingFilter.Size = new System.Drawing.Size(180, 22);
             this.RatingFilter.Text = "Rating";
             // 
             // toolStripTextBox1
@@ -469,74 +520,88 @@
             // 
             this.TimePlayedFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.TimePlayedFilter.Name = "TimePlayedFilter";
-            this.TimePlayedFilter.Size = new System.Drawing.Size(169, 22);
+            this.TimePlayedFilter.Size = new System.Drawing.Size(180, 22);
             this.TimePlayedFilter.Text = "Time Played";
             // 
             // ObtainedFilter
             // 
             this.ObtainedFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.ObtainedFilter.Name = "ObtainedFilter";
-            this.ObtainedFilter.Size = new System.Drawing.Size(169, 22);
+            this.ObtainedFilter.Size = new System.Drawing.Size(180, 22);
             this.ObtainedFilter.Text = "Obtained";
             // 
             // StartDateFilter
             // 
             this.StartDateFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.StartDateFilter.Name = "StartDateFilter";
-            this.StartDateFilter.Size = new System.Drawing.Size(169, 22);
+            this.StartDateFilter.Size = new System.Drawing.Size(180, 22);
             this.StartDateFilter.Text = "Start Date";
             // 
             // LastPlayedFilter
             // 
             this.LastPlayedFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.LastPlayedFilter.Name = "LastPlayedFilter";
-            this.LastPlayedFilter.Size = new System.Drawing.Size(169, 22);
+            this.LastPlayedFilter.Size = new System.Drawing.Size(180, 22);
             this.LastPlayedFilter.Text = "Last Played";
             // 
             // NotesFilter
             // 
             this.NotesFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.NotesFilter.Name = "NotesFilter";
-            this.NotesFilter.Size = new System.Drawing.Size(169, 22);
+            this.NotesFilter.Size = new System.Drawing.Size(180, 22);
             this.NotesFilter.Text = "Notes/Comments";
             // 
             // LaunchFilter
             // 
             this.LaunchFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.LaunchFilter.Name = "LaunchFilter";
-            this.LaunchFilter.Size = new System.Drawing.Size(169, 22);
+            this.LaunchFilter.Size = new System.Drawing.Size(180, 22);
             this.LaunchFilter.Text = "Launch";
             // 
             // NewsFilter
             // 
             this.NewsFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.NewsFilter.Name = "NewsFilter";
-            this.NewsFilter.Size = new System.Drawing.Size(169, 22);
+            this.NewsFilter.Size = new System.Drawing.Size(180, 22);
             this.NewsFilter.Text = "News";
             // 
             // WikiFilter
             // 
             this.WikiFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.WikiFilter.Name = "WikiFilter";
-            this.WikiFilter.Size = new System.Drawing.Size(169, 22);
+            this.WikiFilter.Size = new System.Drawing.Size(180, 22);
             this.WikiFilter.Text = "Wiki";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(166, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // SaveFilters
             // 
             this.SaveFilters.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SaveFilters.Name = "SaveFilters";
-            this.SaveFilters.Size = new System.Drawing.Size(169, 22);
+            this.SaveFilters.Size = new System.Drawing.Size(180, 22);
             this.SaveFilters.Text = "Save + Apply";
             // 
             // collectionDataSet5BindingSource
             // 
             this.collectionDataSet5BindingSource.DataSource = this.collectionDataSet5;
             this.collectionDataSet5BindingSource.Position = 0;
+            // 
+            // CategoriesFilter
+            // 
+            this.CategoriesFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.CategoriesFilter.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CategoriesBox});
+            this.CategoriesFilter.Name = "CategoriesFilter";
+            this.CategoriesFilter.Size = new System.Drawing.Size(180, 22);
+            this.CategoriesFilter.Text = "Categories";
+            // 
+            // CategoriesBox
+            // 
+            this.CategoriesBox.Name = "CategoriesBox";
+            this.CategoriesBox.Size = new System.Drawing.Size(180, 23);
             // 
             // Form1
             // 
@@ -599,7 +664,6 @@
         public System.Windows.Forms.ToolStripButton refreshButton;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.DataGridViewTextBoxColumn PlayTime;
-        private System.Windows.Forms.ToolStripButton EntriesToolTipButton;
         private System.Windows.Forms.ToolStripDropDownButton ViewToolStripButton;
         private System.Windows.Forms.ToolStripMenuItem FilterButton;
         private System.Windows.Forms.ToolStripMenuItem PlatformFilter;
@@ -630,6 +694,14 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripComboBox StatusComboBox;
         private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
+        private System.Windows.Forms.ToolStripDropDownButton EditToolStripButton;
+        private System.Windows.Forms.ToolStripMenuItem ColumnsToolStripButton;
+        private System.Windows.Forms.ToolStripMenuItem addColumnToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editColumnToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem removeColumnToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem EntriesToolTipButton;
+        private System.Windows.Forms.ToolStripMenuItem CategoriesFilter;
+        private System.Windows.Forms.ToolStripComboBox CategoriesBox;
     }
 }
 

@@ -18,6 +18,7 @@ namespace The_UGamer_Launcher
         Thread timePlaying;
         private bool gameRunning = false;
         private bool didPlay = false;
+        private bool isPaused = false;
         private string title;
         string newsUrl;
         string wikiUrl;
@@ -215,6 +216,7 @@ namespace The_UGamer_Launcher
 
             button1.Visible = false;
             stopTime.Visible = true;
+            PauseTimeButton.Visible = true;
             didPlay = true;
             gameRunning = true;
         }
@@ -450,11 +452,11 @@ namespace The_UGamer_Launcher
             string newMinutesString = newMinutes.ToString();
             string newSecondsString = newSeconds.ToString();
 
-            if (newHours < 10 && newHours != 0)
+            if (newHours < 10)
                 newHoursString = "0" + newHours;
-            if (newMinutes < 10 && newMinutes != 0)
+            if (newMinutes < 10)
                 newMinutesString = "0" + newMinutes;
-            if (newSeconds < 10 && newSeconds != 0)
+            if (newSeconds < 10)
                 newSecondsString = "0" + newSeconds;
 
             string timePlayed = newHoursString + "h:" + newMinutesString + "m:" + newSecondsString + "s";
@@ -497,8 +499,12 @@ namespace The_UGamer_Launcher
             cmd.ExecuteNonQuery();
 
             MessageBox.Show(message, caption);
+            hoursLabel.Text = "Time Played: " + timePlayed;
             button1.Visible = true;
             stopTime.Visible = false;
+            isPaused = false;
+            PauseTimeButton.Text = "Pause Playing";
+            PauseTimeButton.Visible = false;
         }
 
         FormWindowState LastWindowState = FormWindowState.Normal;
@@ -719,8 +725,7 @@ namespace The_UGamer_Launcher
                         stopTimeMethod();
                         gameTime.Restart();
                         didPlay = false;
-                        Process.Start(Application.ExecutablePath);
-                        Application.Exit();
+                        this.Close();
                     }
                     else
                     {
@@ -733,13 +738,28 @@ namespace The_UGamer_Launcher
                 {
                     gameTime.Restart();
                     didPlay = false;
-                    Process.Start(Application.ExecutablePath);
-                    Application.Exit();
+                    this.Close();
                 }
             }
             else
             {
 
+            }
+        }
+
+        private void PauseTimeButton_Click(object sender, EventArgs e)
+        {
+            if (isPaused == false)
+            {
+                gameTime.Stop();
+                isPaused = true;
+                PauseTimeButton.Text = "Resume Playing";
+            }
+            else
+            {
+                gameTime.Start();
+                isPaused = false;
+                PauseTimeButton.Text = "Pause Playing";
             }
         }
     }

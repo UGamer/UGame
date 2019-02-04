@@ -50,6 +50,7 @@
             this.newsButton = new System.Windows.Forms.Button();
             this.browserDock = new System.Windows.Forms.Panel();
             this.TimePlayingLabel = new System.Windows.Forms.Label();
+            this.PauseTimeButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gamePicture)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -259,7 +260,7 @@
             this.stopTime.Location = new System.Drawing.Point(8, 348);
             this.stopTime.Margin = new System.Windows.Forms.Padding(2);
             this.stopTime.Name = "stopTime";
-            this.stopTime.Size = new System.Drawing.Size(154, 56);
+            this.stopTime.Size = new System.Drawing.Size(67, 56);
             this.stopTime.TabIndex = 18;
             this.stopTime.Text = "Stop Playing";
             this.stopTime.UseVisualStyleBackColor = false;
@@ -325,6 +326,23 @@
             this.TimePlayingLabel.TabIndex = 23;
             this.TimePlayingLabel.Text = "Current Play Session: 00h:00m:00s";
             // 
+            // PauseTimeButton
+            // 
+            this.PauseTimeButton.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.PauseTimeButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.PauseTimeButton.FlatAppearance.BorderSize = 2;
+            this.PauseTimeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.PauseTimeButton.ForeColor = System.Drawing.SystemColors.Control;
+            this.PauseTimeButton.Location = new System.Drawing.Point(93, 348);
+            this.PauseTimeButton.Margin = new System.Windows.Forms.Padding(2);
+            this.PauseTimeButton.Name = "PauseTimeButton";
+            this.PauseTimeButton.Size = new System.Drawing.Size(67, 56);
+            this.PauseTimeButton.TabIndex = 24;
+            this.PauseTimeButton.Text = "Pause Playing";
+            this.PauseTimeButton.UseVisualStyleBackColor = false;
+            this.PauseTimeButton.Visible = false;
+            this.PauseTimeButton.Click += new System.EventHandler(this.PauseTimeButton_Click);
+            // 
             // GameDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -333,6 +351,7 @@
             this.AutoSize = true;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(854, 412);
+            this.Controls.Add(this.PauseTimeButton);
             this.Controls.Add(this.TimePlayingLabel);
             this.Controls.Add(this.browserDock);
             this.Controls.Add(this.stopTime);
@@ -384,5 +403,6 @@
         private System.Windows.Forms.Button newsButton;
         private System.Windows.Forms.Panel browserDock;
         private System.Windows.Forms.Label TimePlayingLabel;
+        private System.Windows.Forms.Button PauseTimeButton;
     }
 }

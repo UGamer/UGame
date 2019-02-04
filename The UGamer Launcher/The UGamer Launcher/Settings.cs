@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
+using System.Data.OleDb;
 
 namespace The_UGamer_Launcher
 {
@@ -134,6 +135,34 @@ namespace The_UGamer_Launcher
             {
 
             }
+        }
+
+        private void ColumnAddButton_Click(object sender, EventArgs e)
+        {
+            string table = ColumnTableBox.Text;
+            string name = ColumnNameBox.Text;
+            string type = ColumnTypeBox.Text;
+            ColumnAdd(name, type, table);
+        }
+
+        private void ColumnAdd(string name2, string type2, string table2)
+        {
+            name2.Trim();
+            type2.Trim();
+            table2.Trim();
+
+            if (table2 == "Games")
+            {
+                table2 = "Table1";
+            }
+
+            string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Collection.accdb";
+            OleDbConnection con = new OleDbConnection(connectionString);
+            OleDbCommand cmd = new OleDbCommand("ALTER TABLE " + table2 + " ADD " + name2 + " " + type2 + ";", con);
+
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
         }
     }
 }

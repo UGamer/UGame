@@ -13,6 +13,7 @@ namespace The_UGamer_Launcher
     {
         public Form1 frm1;
         public bool refresh = false;
+        DataTable newTable;
 
         public AddGame(Form1 parent, bool refreshSignal)
         {
@@ -30,7 +31,24 @@ namespace The_UGamer_Launcher
             }
             catch (FileNotFoundException e) { }
 
-            DataTable dt = frm1.collectionDataSet4.Table1;
+            FillTable();
+        }
+
+        private void FillTable()
+        {
+            string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Collection.accdb";
+            OleDbConnection con = new OleDbConnection(connectionString);
+            
+            OleDbCommand cmd = new OleDbCommand("SELECT * FROM Table1", con);
+            con.Open();
+            cmd.CommandType = CommandType.Text;
+            OleDbDataAdapter da = new OleDbDataAdapter(cmd);
+            newTable = new DataTable();
+            da.Fill(newTable);
+
+            con.Close();
+
+            DataTable dt = newTable;
             AutoCompleteStringCollection autoFill = new AutoCompleteStringCollection();
             int columnIndex = 1; // Name column
             string[] table = new string[dt.Rows.Count];
@@ -64,6 +82,8 @@ namespace The_UGamer_Launcher
 
             addEntry(title, platform, status, rating, hours, minutes, seconds, obtained, startDate, 
                 endDate, launchCode, notes, newsCode, wikiCode);
+
+            
 
             refresh = true;
         }
@@ -188,6 +208,7 @@ namespace The_UGamer_Launcher
                 {
                     cmd.ExecuteNonQuery();
                     this.Text = "Add an entry... " + title + " added.";
+                    FillTable();
                 }
                 catch (OleDbException e)
                 {
@@ -208,7 +229,20 @@ namespace The_UGamer_Launcher
         {
             int z = 0, y = 0;
 
-            DataTable dt = frm1.collectionDataSet4.Table1;
+            string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Collection.accdb";
+            OleDbConnection con = new OleDbConnection(connectionString);
+
+            OleDbCommand cmd = new OleDbCommand("SELECT * FROM Table1", con);
+            con.Open();
+            cmd.CommandType = CommandType.Text;
+            OleDbDataAdapter da = new OleDbDataAdapter(cmd);
+            DataTable newTable = new DataTable();
+            da.Fill(newTable);
+
+            con.Close();
+
+            // DataTable dt = frm1.collectionDataSet4.Table1;
+            DataTable dt = newTable;
             int columnIndex = 1; // Name column
             string[] table = new string[dt.Rows.Count];
             int index = 0;
@@ -328,6 +362,8 @@ namespace The_UGamer_Launcher
             replaceEntryMethod(originalTitleString, title, platform, status, rating, 
                 hours, minutes, seconds, obtained, startDate,
                 endDate, launchCode, notes, newsCode, wikiCode);
+
+            FillTable();
 
             refresh = true;
         }
@@ -462,6 +498,7 @@ namespace The_UGamer_Launcher
                 {
                     cmd.ExecuteNonQuery();
                     this.Text = "Edit an entry... Game edited.";
+                    FillTable();
                 }
                 catch (OleDbException e)
                 {
@@ -471,6 +508,7 @@ namespace The_UGamer_Launcher
                 }
                 replaceEntry.Visible = false;
                 deleteEntryButton.Visible = false;
+
             }
             else
             {
@@ -483,6 +521,7 @@ namespace The_UGamer_Launcher
         {
             string originalTitleString = originalTitle.Text;
             deleteEntry(originalTitleString);
+            FillTable();
             refresh = true;
         }
 
@@ -507,6 +546,7 @@ namespace The_UGamer_Launcher
                 this.Text = "Entries... removed \"" + originalTitleString + "\"";
                 replaceEntry.Visible = false;
                 deleteEntryButton.Visible = false;
+                FillTable();
 
                 return;
             }
@@ -568,19 +608,6 @@ namespace The_UGamer_Launcher
             wikiURLBox.Text = "";
 
             this.Text = "Entries";
-        }
-
-        private void AddGame_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (refresh == true)
-            {
-                Process.Start(Application.ExecutablePath);
-                Application.Exit();
-            }
-            else
-            {
-
-            }
         }
     }
 }

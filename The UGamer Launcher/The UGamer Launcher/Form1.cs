@@ -8,6 +8,7 @@ using System.Diagnostics;
 using CefSharp;
 using CefSharp.WinForms;
 using System.ComponentModel;
+using System.Data.OleDb;
 using System.Collections.Generic;
 
 namespace The_UGamer_Launcher
@@ -111,7 +112,7 @@ namespace The_UGamer_Launcher
 
 
         // This fills the data table with the user data.
-        private void Form1_Load(object sender, EventArgs e) 
+        private void Form1_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'collectionDataSet5.Table1' table. You can move, or remove it, as needed.
             this.table1TableAdapter2.Fill(this.collectionDataSet4.Table1);
@@ -160,6 +161,14 @@ namespace The_UGamer_Launcher
                 dataSource1.Add();
             } */
 
+            
+            var columnSource = new List<CategoryColumn>();
+            columnIndex = 3;
+            for (index = 0; index < dt.Columns.Count; index++)
+            {
+                columnSource.Add(new CategoryColumn() { Name = "blah"});
+            }
+
             CefSettings settings = new CefSettings();
             // Initialize cef with the provided settings
             Cef.Initialize(settings);
@@ -183,6 +192,7 @@ namespace The_UGamer_Launcher
         {
             bool refresh = false;
             AddGame addGame = new AddGame(this, refresh);
+            addGame.FormClosed += new FormClosedEventHandler(addGame_FormClosed);
             addGame.Show();
         }
 
@@ -191,7 +201,7 @@ namespace The_UGamer_Launcher
             if (e.KeyCode == Keys.Enter)
                 dataScan(searchBox.Text);
         }
-        
+
         private void searchButton_Click(object sender, EventArgs e)
         {
             dataScan(searchBox.Text);
@@ -202,8 +212,22 @@ namespace The_UGamer_Launcher
             string input2 = "";
             int y = 0, z = 0;
 
+            string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Collection.accdb";
+            OleDbConnection con = new OleDbConnection(connectionString);
+
+            OleDbCommand cmd = new OleDbCommand("SELECT * FROM Table1", con);
+            con.Open();
+            cmd.CommandType = CommandType.Text;
+            OleDbDataAdapter da = new OleDbDataAdapter(cmd);
+            DataTable newTable = new DataTable();
+            da.Fill(newTable);
+
+            con.Close();
+
             // This makes the whole database into an array.
-            DataTable dt = collectionDataSet4.Table1;
+
+            // DataTable dt = collectionDataSet4.Table1;
+            DataTable dt = newTable;
             int columnIndex = 1; // Name column
             string[] table = new string[dt.Rows.Count];
             int index = 0;
@@ -254,6 +278,7 @@ namespace The_UGamer_Launcher
 
             // This transfers all of the entry's data to the Game Details window.
             GameDetails gameWindow = new GameDetails();
+            gameWindow.FormClosed += new FormClosedEventHandler(gameWindow_FormClosed);
             if (y == 1)
             {
                 string platform = dt.Rows[z][2].ToString();
@@ -376,16 +401,6 @@ namespace The_UGamer_Launcher
             settings.Show();
         }
 
-        private void refreshButton_Click_1(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void changeTheme_Click(object sender, EventArgs e)
-        {
-
-        }
-
         public Icon IconAssign(string input2)
         {
             Icon windowIcon;
@@ -403,9 +418,44 @@ namespace The_UGamer_Launcher
 
         private void refreshButton_Click(object sender, EventArgs e)
         {
-            // this.table1TableAdapter1.Fill(this.collectionDataSet4.Table1);
-            Process.Start(Application.ExecutablePath);
-            this.Close();
+            RefreshGrid();
+        }
+
+        private void RefreshGrid()
+        {
+            string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Collection.accdb";
+            OleDbConnection con = new OleDbConnection(connectionString);
+
+            dataTable.DataSource = null;
+            dataTable.Update();
+            dataTable.Refresh();
+            OleDbCommand cmd = new OleDbCommand("SELECT * FROM Table1", con);
+            con.Open();
+            cmd.CommandType = CommandType.Text;
+            OleDbDataAdapter da = new OleDbDataAdapter(cmd);
+            DataTable newTable = new DataTable();
+            da.Fill(newTable);
+            dataTable.DataSource = newTable;
+            dataTable.Sort(dataTable.Columns[0], ListSortDirection.Ascending);
+            con.Close();
+
+            int entryCount = dataTable.Rows.Count;
+            if (entryCount != 1)
+                gameCountText.Text = Convert.ToString(entryCount) + " total games";
+            else
+                gameCountText.Text = Convert.ToString(entryCount) + " total game";
+
+            DataTable dt = newTable;
+            AutoCompleteStringCollection autoFill = new AutoCompleteStringCollection();
+            int columnIndex = 1; // Name column
+            string[] table = new string[dt.Rows.Count];
+            int index = 0;
+            for (index = 0; index < dt.Rows.Count; index++)
+            {
+                table[index] = dt.Rows[index][columnIndex].ToString();
+                autoFill.Add(table[index]);
+            }
+            searchBox.AutoCompleteCustomSource = autoFill;
         }
 
         private void toolStripButton2_Click(object sender, EventArgs e)
@@ -454,11 +504,28 @@ namespace The_UGamer_Launcher
             dataTable.SortCompare += customSortCompare;
         }
 
-        private void EntriesToolTipButton_Click(object sender, EventArgs e)
+        private void EntriesToolTipButton_Click_1(object sender, EventArgs e)
         {
             bool refresh = false;
             AddGame addGame = new AddGame(this, refresh);
             addGame.Show();
         }
+
+        private void gameWindow_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            RefreshGrid();
+        }
+
+        private void addGame_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            RefreshGrid();
+        }
+
+        private class CategoryColumn
+        {
+            public string Name { get; set; }
+        }
+
+
     }
 }
