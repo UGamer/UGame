@@ -83,8 +83,6 @@ namespace The_UGamer_Launcher
             addEntry(title, platform, status, rating, hours, minutes, seconds, obtained, startDate, 
                 endDate, launchCode, notes, newsCode, wikiCode);
 
-            
-
             refresh = true;
         }
 

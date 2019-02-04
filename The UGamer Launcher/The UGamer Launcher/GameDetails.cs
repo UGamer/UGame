@@ -16,6 +16,7 @@ namespace The_UGamer_Launcher
         private Stopwatch gameTime = new Stopwatch();
         private ChromiumWebBrowser chromeBrowser;
         Thread timePlaying;
+        public bool refresh = false;
         private bool gameRunning = false;
         private bool didPlay = false;
         private bool isPaused = false;
@@ -219,6 +220,7 @@ namespace The_UGamer_Launcher
             PauseTimeButton.Visible = true;
             didPlay = true;
             gameRunning = true;
+            refresh = true;
         }
 
         private void DisplaySeconds()

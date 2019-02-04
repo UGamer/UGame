@@ -15,6 +15,9 @@ namespace The_UGamer_Launcher
 {
     public partial class Form1 : Form
     {
+        public GameDetails gameWindow;
+        public AddGame addGame;
+
         public Form1()
         {
             // Starts up the program.
@@ -191,7 +194,7 @@ namespace The_UGamer_Launcher
         private void addEntryButton_Click(object sender, EventArgs e)
         {
             bool refresh = false;
-            AddGame addGame = new AddGame(this, refresh);
+            addGame = new AddGame(this, refresh);
             addGame.FormClosed += new FormClosedEventHandler(addGame_FormClosed);
             addGame.Show();
         }
@@ -277,7 +280,7 @@ namespace The_UGamer_Launcher
                 }
 
             // This transfers all of the entry's data to the Game Details window.
-            GameDetails gameWindow = new GameDetails();
+            gameWindow = new GameDetails();
             gameWindow.FormClosed += new FormClosedEventHandler(gameWindow_FormClosed);
             if (y == 1)
             {
@@ -507,18 +510,20 @@ namespace The_UGamer_Launcher
         private void EntriesToolTipButton_Click_1(object sender, EventArgs e)
         {
             bool refresh = false;
-            AddGame addGame = new AddGame(this, refresh);
+            addGame = new AddGame(this, refresh);
             addGame.Show();
         }
 
         private void gameWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
-            RefreshGrid();
+            if (gameWindow.refresh == true)
+                RefreshGrid();
         }
 
         private void addGame_FormClosed(object sender, FormClosedEventArgs e)
         {
-            RefreshGrid();
+            if (addGame.refresh == true)
+                RefreshGrid();
         }
 
         private class CategoryColumn
