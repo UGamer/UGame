@@ -263,7 +263,11 @@ namespace The_UGamer_Launcher
                 originalTitle.Text = dt.Rows[z][1].ToString();
                 platformBox.Text = dt.Rows[z][2].ToString();
                 statusBox.Text = dt.Rows[z][3].ToString();
+
                 ratingBox.Text = dt.Rows[z][4].ToString();
+                int rating = Convert.ToInt32(ratingBox.Text);
+                if (rating == 0)
+                    ratingBox.Text = "";
 
                 hoursBox.Text = dt.Rows[z][5].ToString();
 
@@ -304,6 +308,8 @@ namespace The_UGamer_Launcher
                     newSecondsString = seconds;
                 }
 
+                
+
                 if (hoursInt < 10 && hoursInt > 0)
                     newHoursString = "0" + hours;
                 if (minsInt < 10 && minsInt > 0)
@@ -313,9 +319,27 @@ namespace The_UGamer_Launcher
 
                 string playTime = newHoursString + "h:" + newMinutesString + "m:" + newSecondsString + "s";
 
-                hoursBox.Text = hours;
-                minutesBox.Text = minutes;
-                secondsBox.Text = seconds;
+                if (hoursInt == 0)
+                    hoursBox.Text = "";
+                else if (hoursInt < 10)
+                    hoursBox.Text = Convert.ToString(hoursInt);
+                else
+                    hoursBox.Text = newHoursString;
+
+                if (minsInt == 0)
+                    minutesBox.Text = "";
+                else if (hoursInt < 10)
+                    minutesBox.Text = Convert.ToString(minsInt);
+                else
+                    minutesBox.Text = newMinutesString;
+
+                if (secsInt == 0)
+                    secondsBox.Text = "";
+                else if (secsInt < 10)
+                    secondsBox.Text = Convert.ToString(secsInt);
+                else
+                    secondsBox.Text = newSecondsString;
+
 
                 obtainedBox.Text = dt.Rows[z][6].ToString();
                 startDateBox.Text = dt.Rows[z][7].ToString();
