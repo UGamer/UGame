@@ -207,6 +207,10 @@ namespace The_UGamer_Launcher
                     cmd.ExecuteNonQuery();
                     this.Text = "Add an entry... " + title + " added.";
                     FillTable();
+                    if (launchCode.IndexOf("steam://rungameid/") != -1)
+                    {
+                        launchBox.Text = "steam://rungameid/";
+                    }
                 }
                 catch (OleDbException e)
                 {

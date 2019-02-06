@@ -206,15 +206,10 @@ namespace The_UGamer_Launcher
             }
             else
             {
-                Uri launch2;
-                launch2 = new Uri(launchString3);
-                gameTime.Start();
-                launcher.Url = launch2;
             }
 
             timePlaying = new Thread(new ThreadStart(DisplaySeconds));
             timePlaying.Start();
-
             button1.Visible = false;
             stopTime.Visible = true;
             PauseTimeButton.Visible = true;

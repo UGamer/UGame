@@ -10,6 +10,7 @@ using CefSharp.WinForms;
 using System.ComponentModel;
 using System.Data.OleDb;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace The_UGamer_Launcher
 {
@@ -17,11 +18,15 @@ namespace The_UGamer_Launcher
     {
         public GameDetails gameWindow;
         public AddGame addGame;
+        public Thread notificationCheck;
+        private bool displayData = false;
+        DataTable newTable;
 
         public Form1()
         {
             // Starts up the program.
             InitializeComponent();
+            notificationCheck = new Thread(new ThreadStart(NotificationSystem));
             try
             {
                 IconAssign();
@@ -117,6 +122,10 @@ namespace The_UGamer_Launcher
         // This fills the data table with the user data.
         private void Form1_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'notificationsSet.Notifications' table. You can move, or remove it, as needed.
+            this.notificationsTableAdapter1.Fill(this.notificationsSet.Notifications);
+            // TODO: This line of code loads data into the 'notificationDataSet.Notifications' table. You can move, or remove it, as needed.
+            this.notificationsTableAdapter.Fill(this.notificationDataSet.Notifications);
             // TODO: This line of code loads data into the 'collectionDataSet5.Table1' table. You can move, or remove it, as needed.
             this.table1TableAdapter2.Fill(this.collectionDataSet4.Table1);
             // TODO: This line of code loads data into the 'collectionDataSet5.Themes' table. You can move, or remove it, as needed.
@@ -179,6 +188,75 @@ namespace The_UGamer_Launcher
             dataTable.SortCompare += customSortCompare;
         }
 
+        private void NotificationSystem()
+        {
+            string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Collection.accdb";
+            OleDbConnection con = new OleDbConnection(connectionString);
+
+            OleDbCommand cmd = new OleDbCommand("SELECT * FROM Notifications", con);
+            OleDbCommand cmd2 = new OleDbCommand("SELECT * FROM Table1", con);
+            OleDbCommand addNowPlayingNotif = new OleDbCommand("INSERT INTO Notifications (DateAdded, NotificationType, GameTitle, Message, Action) VALUES (@DateAdded, @NotificationType, @GameTitle, @Message, @Action);", con);
+            
+            con.Open();
+            cmd.CommandType = CommandType.Text;
+            OleDbDataAdapter da = new OleDbDataAdapter(cmd);
+            DataTable notificationTable = new DataTable();
+            da.Fill(notificationTable);
+            
+            cmd2.CommandType = CommandType.Text;
+            OleDbDataAdapter da2 = new OleDbDataAdapter(cmd2);
+            DataTable gameTable = new DataTable();
+            da2.Fill(gameTable);
+
+
+            int gameTableNameIndex = 1;
+            int statusIndex = 3;
+            int lastPlayedIndex = 8;
+            int dateIndex = 1; // Name column
+            int typeIndex = 2;
+            string[] NowPlaying;
+
+            DateTime fourteenDaysAgo = DateTime.Today.AddDays(-14);
+            Regex dateFix = new Regex("-");
+            string endDate1 = fourteenDaysAgo.ToString("u");
+            string twoWeeksAgo = endDate1.Substring(0, 10);
+            twoWeeksAgo = dateFix.Replace(twoWeeksAgo, "/");
+
+            DateTime today2 = DateTime.Now;
+            string todayDate = today2.ToString("u");
+            string todayString = endDate1.Substring(0, 10);
+            todayString = dateFix.Replace(todayString, "/");
+
+
+            string[] gameTable2Names = new string[gameTable.Rows.Count];
+            string[] notifTable2Dates = new string[notificationTable.Rows.Count];
+            string[] notifTable2Types = new string[notificationTable.Rows.Count];
+            int index = 0;
+            for (index = 0; index < gameTable.Rows.Count; index++)
+            {
+                if (gameTable.Rows[index][statusIndex].ToString() == "Dropped" ||
+                    gameTable.Rows[index][statusIndex].ToString() == "Never Started" ||
+                    gameTable.Rows[index][statusIndex].ToString() == "On Hold" ||
+                    gameTable.Rows[index][statusIndex].ToString() == "Plan to Play" ||
+                    gameTable.Rows[index][statusIndex].ToString() == "Start Over" ||
+                    gameTable.Rows[index][statusIndex].ToString() == "Don't Have")
+                {
+                    addNowPlayingNotif.Parameters.AddWithValue("@DateAdded", todayString);
+                    addNowPlayingNotif.Parameters.AddWithValue("@NotificationType", "NowPlaying");
+                    addNowPlayingNotif.Parameters.AddWithValue("@GameTitle", gameTable.Rows[index][gameTableNameIndex].ToString());
+                    addNowPlayingNotif.Parameters.AddWithValue("@Message", "You started playing " + gameTable.Rows[index][gameTableNameIndex].ToString() + ". Would you like to change it's status?");
+                    addNowPlayingNotif.Parameters.AddWithValue("@Action", "Change");
+
+                    addNowPlayingNotif.ExecuteNonQuery();
+                }
+                    
+                gameTable2Names[index] = gameTable.Rows[index][gameTableNameIndex].ToString();
+            }
+
+
+            con.Close();
+        }
+
         private void dataTable_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             string titleValue;
@@ -193,10 +271,21 @@ namespace The_UGamer_Launcher
 
         private void addEntryButton_Click(object sender, EventArgs e)
         {
-            bool refresh = false;
-            addGame = new AddGame(this, refresh);
-            addGame.FormClosed += new FormClosedEventHandler(addGame_FormClosed);
-            addGame.Show();
+            if (displayData == true)
+            {
+                NotificationsDGV.Visible = false;
+                dataTable.Visible = true;
+                displayData = false;
+                addEntryButton.Text = "Notifications";
+            }
+
+            else
+            {
+                NotificationsDGV.Visible = true;
+                dataTable.Visible = false;
+                displayData = true;
+                addEntryButton.Text = "Collection";
+            }
         }
 
         private void searchBox_KeyDown(object sender, KeyEventArgs e)
@@ -512,6 +601,7 @@ namespace The_UGamer_Launcher
             bool refresh = false;
             addGame = new AddGame(this, refresh);
             addGame.Show();
+            addGame.FormClosed += new FormClosedEventHandler(addGame_FormClosed);
         }
 
         private void gameWindow_FormClosed(object sender, FormClosedEventArgs e)
@@ -530,6 +620,169 @@ namespace The_UGamer_Launcher
         {
             public string Name { get; set; }
         }
+
+        private void replaceEntryMethod(string originalTitleString, string title, string platform, string status,
+            string rating, string hours, string minutes,
+            string seconds, string obtained, string startDate,
+                string endDate, string launchCode, string notes, string newsCode, string wikiCode)
+        {
+            string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Collection.accdb";
+            OleDbConnection con = new OleDbConnection(connectionString);
+
+            OleDbCommand delCmd = new OleDbCommand("DELETE FROM Table1 WHERE Title=\"" + originalTitleString + "\";", con);
+            OleDbCommand cmd = new OleDbCommand("INSERT INTO Table1 (Title, Platform, Status, Rating, PlayTime, Obtained, StartDate, EndDate, Notes, Launch, News, Wiki) VALUES (@Title, @Platform, @Status, @Rating, @PlayTime, @Obtained, @StartDate, @EndDate, @Notes, @Launch, @News, @Wiki);", con);
+
+            string message = "Are you sure you want to edit entry \"" + originalTitleString + "\"?";
+            string caption = "Editing entry \"" + originalTitleString + "\"";
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            DialogResult result = MessageBox.Show(message, caption, buttons);
+
+            int hoursInt = 0;
+            int minsInt = 0;
+            int secsInt = 0;
+
+            string newHoursString = "00";
+            string newMinutesString = "00";
+            string newSecondsString = "00";
+
+            if (hours != "")
+            {
+                hoursInt = Convert.ToInt32(hours);
+                newHoursString = hours;
+            }
+            if (minutes != "")
+            {
+                minsInt = Convert.ToInt32(minutes);
+                newMinutesString = minutes;
+            }
+            if (seconds != "")
+            {
+                secsInt = Convert.ToInt32(seconds);
+                newSecondsString = seconds;
+            }
+
+            if (hoursInt < 10 && hoursInt > 0)
+                newHoursString = "0" + hours;
+            if (minsInt < 10 && minsInt > 0)
+                newMinutesString = "0" + minutes;
+            if (secsInt < 10 && secsInt > 0)
+                newSecondsString = "0" + seconds;
+
+            string playTime = newHoursString + "h:" + newMinutesString + "m:" + newSecondsString + "s";
+
+            title.Trim();
+            platform.Trim();
+            status.Trim();
+            rating.Trim();
+            playTime.Trim();
+            obtained.Trim();
+            startDate.Trim();
+            endDate.Trim();
+            notes.Trim();
+            launchCode.Trim();
+            newsCode.Trim();
+            wikiCode.Trim();
+
+            if (result == DialogResult.Yes)
+            {
+                con.Open();
+
+                delCmd.ExecuteNonQuery();
+
+                cmd.Parameters.AddWithValue("@Title", title);
+                if (platform == "")
+                    cmd.Parameters.AddWithValue("@Platform", "");
+                else
+                    cmd.Parameters.AddWithValue("@Platform", platform);
+
+                if (status == "")
+                    cmd.Parameters.AddWithValue("@Status", "");
+                else
+                    cmd.Parameters.AddWithValue("@Status", status);
+
+                if (rating == "")
+                    cmd.Parameters.AddWithValue("@Rating", "0");
+                else
+                    cmd.Parameters.AddWithValue("@Rating", rating);
+
+                if (playTime == "")
+                    cmd.Parameters.AddWithValue("@PlayTime", "00h:00m:00s");
+                else
+                    cmd.Parameters.AddWithValue("@PlayTime", playTime);
+
+                if (obtained == "")
+                    cmd.Parameters.AddWithValue("@Obtained", "");
+                else
+                    cmd.Parameters.AddWithValue("@Obtained", obtained);
+
+                if (startDate == "")
+                    cmd.Parameters.AddWithValue("@StartDate", "");
+                else
+                    cmd.Parameters.AddWithValue("@StartDate", startDate);
+
+                if (endDate == "")
+                    cmd.Parameters.AddWithValue("@EndDate", "");
+                else
+                    cmd.Parameters.AddWithValue("@EndDate", endDate);
+
+                if (notes == "")
+                    cmd.Parameters.AddWithValue("@Notes", "");
+                else
+                    cmd.Parameters.AddWithValue("@Notes", notes);
+
+                if (title == "Sonic World")
+                    cmd.Parameters.AddWithValue("@Launch", "BATs/Sonic World.bat");
+                else if (launchCode == "")
+                    cmd.Parameters.AddWithValue("@Launch", "");
+                else
+                    cmd.Parameters.AddWithValue("@Launch", launchCode);
+
+                if (newsCode == "")
+                    cmd.Parameters.AddWithValue("@News", "");
+                else
+                    cmd.Parameters.AddWithValue("@News", newsCode);
+
+                if (wikiCode == "")
+                    cmd.Parameters.AddWithValue("@Wiki", "");
+                else
+                    cmd.Parameters.AddWithValue("@Wiki", wikiCode);
+
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                    this.Text = "Edit an entry... Game edited.";
+                    FillTable();
+                }
+                catch (OleDbException e)
+                {
+                    caption = "ERROR: Notes/Comments field too long.";
+                    message = "Your notes/comments field is too long. Please reduce to 255 characters.";
+                    MessageBox.Show(message, caption);
+                }
+
+            }
+            else
+            {
+                return;
+            }
+            return;
+        }
+
+        private void FillTable()
+        {
+            string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Collection.accdb";
+            OleDbConnection con = new OleDbConnection(connectionString);
+
+            OleDbCommand cmd = new OleDbCommand("SELECT * FROM Table1", con);
+            con.Open();
+            cmd.CommandType = CommandType.Text;
+            OleDbDataAdapter da = new OleDbDataAdapter(cmd);
+            newTable = new DataTable();
+            da.Fill(newTable);
+
+            con.Close();
+        }
+
 
 
     }
