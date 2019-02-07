@@ -503,6 +503,7 @@ namespace The_UGamer_Launcher
             isPaused = false;
             PauseTimeButton.Text = "Pause Playing";
             PauseTimeButton.Visible = false;
+            gameTime.Restart();
         }
 
         FormWindowState LastWindowState = FormWindowState.Normal;
