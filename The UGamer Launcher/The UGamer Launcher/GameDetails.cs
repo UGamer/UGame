@@ -206,6 +206,7 @@ namespace The_UGamer_Launcher
             }
             else
             {
+                gameTime.Start();
             }
 
             timePlaying = new Thread(new ThreadStart(DisplaySeconds));

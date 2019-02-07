@@ -27,6 +27,7 @@ namespace The_UGamer_Launcher
             // Starts up the program.
             InitializeComponent();
             notificationCheck = new Thread(new ThreadStart(NotificationSystem));
+            notificationCheck.Start();
             try
             {
                 IconAssign();
@@ -173,12 +174,12 @@ namespace The_UGamer_Launcher
                 dataSource1.Add();
             } */
 
-            
+
             var columnSource = new List<CategoryColumn>();
             columnIndex = 3;
             for (index = 0; index < dt.Columns.Count; index++)
             {
-                columnSource.Add(new CategoryColumn() { Name = "blah"});
+                columnSource.Add(new CategoryColumn() { Name = "blah" });
             }
 
             CefSettings settings = new CefSettings();
@@ -188,6 +189,8 @@ namespace The_UGamer_Launcher
             dataTable.SortCompare += customSortCompare;
         }
 
+        delegate void StringArgReturningVoidDelegate(string text);
+        
         private void NotificationSystem()
         {
             string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Collection.accdb";
@@ -195,7 +198,7 @@ namespace The_UGamer_Launcher
 
             OleDbCommand cmd = new OleDbCommand("SELECT * FROM Notifications", con);
             OleDbCommand cmd2 = new OleDbCommand("SELECT * FROM Table1", con);
-            OleDbCommand addNowPlayingNotif = new OleDbCommand("INSERT INTO Notifications (DateAdded, NotificationType, GameTitle, Message, Action) VALUES (@DateAdded, @NotificationType, @GameTitle, @Message, @Action);", con);
+            OleDbCommand addNowPlayingNotif = new OleDbCommand("INSERT INTO Notifications ([DateAdded], [NotificationType], [GameTitle], [Message], [Action]) VALUES (@DateAdded, @NotificationType, @GameTitle, @Message, @Action);", con);
             
             con.Open();
             cmd.CommandType = CommandType.Text;
@@ -214,7 +217,7 @@ namespace The_UGamer_Launcher
             int lastPlayedIndex = 8;
             int dateIndex = 1; // Name column
             int typeIndex = 2;
-            string[] NowPlaying;
+            int[] NowPlaying;
 
             DateTime fourteenDaysAgo = DateTime.Today.AddDays(-14);
             Regex dateFix = new Regex("-");
@@ -224,13 +227,9 @@ namespace The_UGamer_Launcher
 
             DateTime today2 = DateTime.Now;
             string todayDate = today2.ToString("u");
-            string todayString = endDate1.Substring(0, 10);
+            string todayString = todayDate.Substring(0, 10);
             todayString = dateFix.Replace(todayString, "/");
-
-
-            string[] gameTable2Names = new string[gameTable.Rows.Count];
-            string[] notifTable2Dates = new string[notificationTable.Rows.Count];
-            string[] notifTable2Types = new string[notificationTable.Rows.Count];
+            
             int index = 0;
             for (index = 0; index < gameTable.Rows.Count; index++)
             {
@@ -240,19 +239,17 @@ namespace The_UGamer_Launcher
                     gameTable.Rows[index][statusIndex].ToString() == "Plan to Play" ||
                     gameTable.Rows[index][statusIndex].ToString() == "Start Over" ||
                     gameTable.Rows[index][statusIndex].ToString() == "Don't Have")
+                    
                 {
                     addNowPlayingNotif.Parameters.AddWithValue("@DateAdded", todayString);
                     addNowPlayingNotif.Parameters.AddWithValue("@NotificationType", "NowPlaying");
                     addNowPlayingNotif.Parameters.AddWithValue("@GameTitle", gameTable.Rows[index][gameTableNameIndex].ToString());
                     addNowPlayingNotif.Parameters.AddWithValue("@Message", "You started playing " + gameTable.Rows[index][gameTableNameIndex].ToString() + ". Would you like to change it's status?");
                     addNowPlayingNotif.Parameters.AddWithValue("@Action", "Change");
-
-                    addNowPlayingNotif.ExecuteNonQuery();
                 }
-                    
-                gameTable2Names[index] = gameTable.Rows[index][gameTableNameIndex].ToString();
             }
 
+            addNowPlayingNotif.ExecuteNonQuery();
 
             con.Close();
         }
@@ -426,13 +423,20 @@ namespace The_UGamer_Launcher
 
         private static bool hasArgsMethod(string p)
         {
-            int exeLoc = p.IndexOf(".exe");
-            string lookForArgs = p.Substring(exeLoc);
+            try
+            {
+                int exeLoc = p.IndexOf(".exe");
+                string lookForArgs = p.Substring(exeLoc);
 
-            if (lookForArgs.IndexOf("-") == -1)
+                if (lookForArgs.IndexOf("-") == -1)
+                    return false;
+                else
+                    return true;
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
                 return false;
-            else
-                return true;
+            }
         }
 
         public Image ThemeAssign(string input2)
