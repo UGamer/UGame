@@ -209,8 +209,11 @@ namespace The_UGamer_Launcher
                 gameTime.Start();
             }
 
+            /*
             timePlaying = new Thread(new ThreadStart(DisplaySeconds));
             timePlaying.Start();
+            */
+
             button1.Visible = false;
             stopTime.Visible = true;
             PauseTimeButton.Visible = true;
@@ -267,7 +270,6 @@ namespace The_UGamer_Launcher
                 this.TimePlayingLabel.Text = text;
             }
         }
-
 
         private Image detailedImageAssign(string input2)
         {
@@ -361,7 +363,8 @@ namespace The_UGamer_Launcher
 
         private void stopTimeMethod()
         {
-            timePlaying.Abort();
+            // timePlaying.Abort();
+
             gameTime.Stop();
             gameRunning = false;
             int seconds = Convert.ToInt32(gameTime.ElapsedMilliseconds / 1000);
