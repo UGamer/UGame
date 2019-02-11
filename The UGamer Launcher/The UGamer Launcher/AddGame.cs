@@ -23,7 +23,9 @@ namespace The_UGamer_Launcher
             {
                 IconAssign();
             }
+#pragma warning disable CS0168 // Variable is declared but never used
             catch (FileNotFoundException e) { }
+#pragma warning restore CS0168 // Variable is declared but never used
 
             try
             {

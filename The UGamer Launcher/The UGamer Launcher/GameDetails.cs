@@ -208,11 +208,9 @@ namespace The_UGamer_Launcher
             {
                 gameTime.Start();
             }
-
-            /*
+            
             timePlaying = new Thread(new ThreadStart(DisplaySeconds));
             timePlaying.Start();
-            */
 
             button1.Visible = false;
             stopTime.Visible = true;
@@ -363,7 +361,7 @@ namespace The_UGamer_Launcher
 
         private void stopTimeMethod()
         {
-            // timePlaying.Abort();
+            timePlaying.Abort();
 
             gameTime.Stop();
             gameRunning = false;
@@ -512,7 +510,6 @@ namespace The_UGamer_Launcher
         FormWindowState LastWindowState = FormWindowState.Normal;
         private void GameDetails_Resize(object sender, EventArgs e)
         {
-
             // When window state changes
             if (WindowState != LastWindowState)
             {
@@ -520,6 +517,9 @@ namespace The_UGamer_Launcher
 
                 if (WindowState == FormWindowState.Maximized)
                 {
+                    if (LastWindowState == FormWindowState.Minimized)
+                        timePlaying.Start();
+
                     browserDock.Visible = true;
                     newsButton.Visible = true;
                     wikiButton.Visible = true;
@@ -527,6 +527,17 @@ namespace The_UGamer_Launcher
                 }
                 if (WindowState == FormWindowState.Normal)
                 {
+                    if (LastWindowState == FormWindowState.Minimized)
+                        timePlaying.Start();
+
+                    browserDock.Visible = false;
+                    newsButton.Visible = false;
+                    wikiButton.Visible = false;
+                    // Restored!
+                }
+                if (WindowState == FormWindowState.Minimized)
+                {
+                    timePlaying.Abort();
                     browserDock.Visible = false;
                     newsButton.Visible = false;
                     wikiButton.Visible = false;
