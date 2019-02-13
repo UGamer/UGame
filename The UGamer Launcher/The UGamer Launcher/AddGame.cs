@@ -637,5 +637,86 @@ namespace The_UGamer_Launcher
 
             this.Text = "Entries";
         }
+
+        public void DisplayInfo(string title, string platform, string status, string rating,
+                    string hours, string obtained, string startDate, string endDate, string notes, 
+                    string launchString, string newsString, string wikiString)
+        {
+            originalTitle.Text = title;
+            titleBox.Text = title;
+            platformBox.Text = platform;
+            statusBox.Text = status;
+            ratingBox.Text = rating;
+
+            hoursBox.Text = hours;
+            string hoursPlayed = hoursBox.Text;
+            string minutesPlayed = hoursBox.Text;
+            string secondsPlayed = hoursBox.Text;
+
+            int hourIndex = hoursPlayed.IndexOf("h");
+            hours = hoursPlayed.Substring(0, hourIndex);
+            int minuteIndex = minutesPlayed.IndexOf("m");
+            int minuteLength = minutesPlayed.IndexOf("m") - (hourIndex + 2);
+            string minutes = minutesPlayed.Substring(hourIndex + 2, minuteLength);
+            int secondIndex = secondsPlayed.IndexOf("s");
+            int secondLength = secondsPlayed.IndexOf("s") - (minuteIndex + 2);
+            string seconds = secondsPlayed.Substring(minuteIndex + 2, secondLength);
+
+            int hoursInt = 0;
+            int minsInt = 0;
+            int secsInt = 0;
+
+            string newHoursString = "00";
+            string newMinutesString = "00";
+            string newSecondsString = "00";
+
+            if (hours != "")
+            {
+                hoursInt = Convert.ToInt32(hours);
+                newHoursString = hours;
+            }
+            if (minutes != "")
+            {
+                minsInt = Convert.ToInt32(minutes);
+                newMinutesString = minutes;
+            }
+            if (seconds != "")
+            {
+                secsInt = Convert.ToInt32(seconds);
+                newSecondsString = seconds;
+            }
+
+
+
+            if (hoursInt < 10 && hoursInt > 0)
+                newHoursString = "0" + hours;
+            if (minsInt < 10 && minsInt > 0)
+                newMinutesString = "0" + minutes;
+            if (secsInt < 10 && secsInt > 0)
+                newSecondsString = "0" + seconds;
+
+            string playTime = newHoursString + "h:" + newMinutesString + "m:" + newSecondsString + "s";
+
+            if (hoursInt == 0)
+                hoursBox.Text = "";
+            else if (hoursInt < 10)
+                hoursBox.Text = Convert.ToString(hoursInt);
+            else
+                hoursBox.Text = newHoursString;
+
+            minutesBox.Text = newMinutesString;
+            secondsBox.Text = newSecondsString;
+
+            obtainedBox.Text = obtained;
+            startDateBox.Text = startDate;
+            endDateBox.Text = endDate;
+            notesBox.Text = notes;
+            launchBox.Text = launchString;
+            newsURLBox.Text = newsString;
+            wikiURLBox.Text = wikiString;
+
+            replaceEntry.Visible = true;
+            deleteEntryButton.Visible = true;
+        }
     }
 }

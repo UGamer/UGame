@@ -32,7 +32,6 @@
             this.labels = new System.Windows.Forms.Label();
             this.titleBox = new System.Windows.Forms.TextBox();
             this.platformBox = new System.Windows.Forms.TextBox();
-            this.statusBox = new System.Windows.Forms.TextBox();
             this.ratingBox = new System.Windows.Forms.TextBox();
             this.hoursBox = new System.Windows.Forms.TextBox();
             this.endDateBox = new System.Windows.Forms.TextBox();
@@ -54,6 +53,7 @@
             this.newsURLBox = new System.Windows.Forms.TextBox();
             this.wikiURLBox = new System.Windows.Forms.TextBox();
             this.clearFieldsButton = new System.Windows.Forms.Button();
+            this.statusBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // labels
@@ -95,17 +95,6 @@
             this.platformBox.Name = "platformBox";
             this.platformBox.Size = new System.Drawing.Size(415, 20);
             this.platformBox.TabIndex = 2;
-            // 
-            // statusBox
-            // 
-            this.statusBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.statusBox.Location = new System.Drawing.Point(104, 58);
-            this.statusBox.Margin = new System.Windows.Forms.Padding(2);
-            this.statusBox.Name = "statusBox";
-            this.statusBox.Size = new System.Drawing.Size(415, 20);
-            this.statusBox.TabIndex = 3;
             // 
             // ratingBox
             // 
@@ -362,11 +351,36 @@
             this.clearFieldsButton.UseVisualStyleBackColor = false;
             this.clearFieldsButton.Click += new System.EventHandler(this.clearFieldsButton_Click);
             // 
+            // statusBox
+            // 
+            this.statusBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.statusBox.BackColor = System.Drawing.Color.White;
+            this.statusBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.statusBox.FormattingEnabled = true;
+            this.statusBox.Items.AddRange(new object[] {
+            "Completed",
+            "Completed (100%)",
+            "Don\'t Own",
+            "Dropped",
+            "Never Started",
+            "On and Off",
+            "On Hold",
+            "Plan to Play",
+            "Playing",
+            "Start Over"});
+            this.statusBox.Location = new System.Drawing.Point(104, 58);
+            this.statusBox.Name = "statusBox";
+            this.statusBox.Size = new System.Drawing.Size(415, 21);
+            this.statusBox.TabIndex = 25;
+            // 
             // AddGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(533, 391);
+            this.Controls.Add(this.statusBox);
             this.Controls.Add(this.clearFieldsButton);
             this.Controls.Add(this.wikiURLBox);
             this.Controls.Add(this.newsURLBox);
@@ -388,7 +402,6 @@
             this.Controls.Add(this.obtainedBox);
             this.Controls.Add(this.hoursBox);
             this.Controls.Add(this.ratingBox);
-            this.Controls.Add(this.statusBox);
             this.Controls.Add(this.platformBox);
             this.Controls.Add(this.titleBox);
             this.Controls.Add(this.labels);
@@ -406,7 +419,6 @@
         private System.Windows.Forms.Label labels;
         private System.Windows.Forms.TextBox titleBox;
         private System.Windows.Forms.TextBox platformBox;
-        private System.Windows.Forms.TextBox statusBox;
         private System.Windows.Forms.TextBox ratingBox;
         private System.Windows.Forms.TextBox hoursBox;
         private System.Windows.Forms.TextBox endDateBox;
@@ -428,5 +440,6 @@
         private System.Windows.Forms.TextBox newsURLBox;
         private System.Windows.Forms.TextBox wikiURLBox;
         private System.Windows.Forms.Button clearFieldsButton;
+        private System.Windows.Forms.ComboBox statusBox;
     }
 }

@@ -190,7 +190,7 @@ namespace The_UGamer_Launcher
         }
 
         delegate void StringArgReturningVoidDelegate(string text);
-        
+
         private void NotificationSystem()
         {
             string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Collection.accdb";
@@ -199,25 +199,26 @@ namespace The_UGamer_Launcher
             OleDbCommand cmd = new OleDbCommand("SELECT * FROM Notifications", con);
             OleDbCommand cmd2 = new OleDbCommand("SELECT * FROM Table1", con);
             OleDbCommand addNowPlayingNotif = new OleDbCommand("INSERT INTO Notifications ([DateAdded], [NotificationType], [GameTitle], [Message], [Action]) VALUES (@DateAdded, @NotificationType, @GameTitle, @Message, @Action);", con);
-            
+
             con.Open();
             cmd.CommandType = CommandType.Text;
             OleDbDataAdapter da = new OleDbDataAdapter(cmd);
             DataTable notificationTable = new DataTable();
             da.Fill(notificationTable);
-            
+
             cmd2.CommandType = CommandType.Text;
             OleDbDataAdapter da2 = new OleDbDataAdapter(cmd2);
             DataTable gameTable = new DataTable();
             da2.Fill(gameTable);
 
 
-            int gameTableNameIndex = 1;
-            int statusIndex = 3;
-            int lastPlayedIndex = 8;
-            int dateIndex = 1; // Name column
-            int typeIndex = 2;
+            int gameTableNameIndex = 1; //works
+            int statusIndex = 3; //works
+            int lastPlayedIndex = 8; //works
+            int typeIndex = 2; //works
+            int notifTableNameIndex = 3;
             int[] NowPlaying;
+            bool dupe = false;
 
             DateTime fourteenDaysAgo = DateTime.Today.AddDays(-14);
             Regex dateFix = new Regex("-");
@@ -231,12 +232,13 @@ namespace The_UGamer_Launcher
             todayString = dateFix.Replace(todayString, "/");
 
             DateTime lastPlayedDate = new DateTime();
-            
+
+
             foreach (DataRow row in gameTable.Rows)
             {
                 string gameName = "";
                 string year = "", month = "", day = "";
-                
+                int result = 0;
                 try
                 {
                     year = row[lastPlayedIndex].ToString();
@@ -251,11 +253,12 @@ namespace The_UGamer_Launcher
                     int dayInt = Convert.ToInt32(newDay);
 
                     lastPlayedDate = new DateTime(yearInt, monthInt, dayInt);
+                    result = DateTime.Compare(lastPlayedDate, fourteenDaysAgo);
                 }
-                catch (ArgumentOutOfRangeException e)
-                {
+                catch // (ArgumentOutOfRangeException e)
+                { }
 
-                }
+                string[] notifTableName = new string[notificationTable.Rows.Count];
 
                 if ((row[statusIndex].ToString() == "Dropped" ||
                     row[statusIndex].ToString() == "Never Started" ||
@@ -265,42 +268,81 @@ namespace The_UGamer_Launcher
                     row[statusIndex].ToString() == "Don't Have") &&
                     (row[lastPlayedIndex].ToString() == todayString))
                 {
+                    for (int index = 0; index < notificationTable.Rows.Count; index++)
+                    {
+                        notifTableName[index] = notificationTable.Rows[index][notifTableNameIndex].ToString();
+                    }
                     gameName = row[gameTableNameIndex].ToString();
-                    addNowPlayingNotif.Parameters.AddWithValue("@DateAdded", todayString);
-                    addNowPlayingNotif.Parameters.AddWithValue("@NotificationType", "NowPlaying");
-                    addNowPlayingNotif.Parameters.AddWithValue("@GameTitle", gameName);
-                    addNowPlayingNotif.Parameters.AddWithValue("@Message", "You started playing " + gameName + ". Would you like to change it's status?");
-                    addNowPlayingNotif.Parameters.AddWithValue("@Action", "Change");
+                    for (int x = 0; x < notifTableName.Length; x++)
+                    {
+                        if (notifTableName[x] == gameName)
+                            dupe = true;
+                    }
 
-                    addNowPlayingNotif.ExecuteNonQuery();
+                    if (dupe == false)
+                    {
+                        addNowPlayingNotif.Parameters.AddWithValue("@DateAdded", todayString);
+                        addNowPlayingNotif.Parameters.AddWithValue("@NotificationType", "NowPlaying");
+                        addNowPlayingNotif.Parameters.AddWithValue("@GameTitle", gameName);
+                        addNowPlayingNotif.Parameters.AddWithValue("@Message", "You started playing " + gameName + ". Would you like to change it's status?");
+                        addNowPlayingNotif.Parameters.AddWithValue("@Action", "Change");
 
-                    addNowPlayingNotif.Parameters.RemoveAt("@DateAdded");
-                    addNowPlayingNotif.Parameters.RemoveAt("@NotificationType");
-                    addNowPlayingNotif.Parameters.RemoveAt("@GameTitle");
-                    addNowPlayingNotif.Parameters.RemoveAt("@Message");
-                    addNowPlayingNotif.Parameters.RemoveAt("@Action");
+                        addNowPlayingNotif.ExecuteNonQuery();
+
+                        addNowPlayingNotif.Parameters.RemoveAt("@DateAdded");
+                        addNowPlayingNotif.Parameters.RemoveAt("@NotificationType");
+                        addNowPlayingNotif.Parameters.RemoveAt("@GameTitle");
+                        addNowPlayingNotif.Parameters.RemoveAt("@Message");
+                        addNowPlayingNotif.Parameters.RemoveAt("@Action");
+                    }
+                    dupe = false;
                 }
                 
                 else if (row[statusIndex].ToString() == "Playing" &&
-                    lastPlayedDate <= fourteenDaysAgo)
+                    result >= 1)
                 {
+                    for (int index = 0; index < notificationTable.Rows.Count; index++)
+                    {
+                        notifTableName[index] = notificationTable.Rows[index][notifTableNameIndex].ToString();
+                    }
                     gameName = row[gameTableNameIndex].ToString();
-                    addNowPlayingNotif.Parameters.AddWithValue("@DateAdded", todayString);
-                    addNowPlayingNotif.Parameters.AddWithValue("@NotificationType", "NoLongerPlaying");
-                    addNowPlayingNotif.Parameters.AddWithValue("@GameTitle", gameName);
-                    addNowPlayingNotif.Parameters.AddWithValue("@Message", "You haven't played " + gameName + ". Would you like to change it's status?");
-                    addNowPlayingNotif.Parameters.AddWithValue("@Action", "Change");
+                    for (int x = 0; x < notifTableName.Length; x++)
+                    {
+                        if (notifTableName[x] == gameName)
+                            dupe = true;
+                    }
 
-                    addNowPlayingNotif.ExecuteNonQuery();
+                    if (dupe == false)
+                    {
+                        addNowPlayingNotif.Parameters.AddWithValue("@DateAdded", todayString);
+                        addNowPlayingNotif.Parameters.AddWithValue("@NotificationType", "NoLongerPlaying");
+                        addNowPlayingNotif.Parameters.AddWithValue("@GameTitle", gameName);
+                        addNowPlayingNotif.Parameters.AddWithValue("@Message", "You haven't played " + gameName + ". Would you like to change it's status?");
+                        addNowPlayingNotif.Parameters.AddWithValue("@Action", "Change");
 
-                    addNowPlayingNotif.Parameters.RemoveAt("@DateAdded");
-                    addNowPlayingNotif.Parameters.RemoveAt("@NotificationType");
-                    addNowPlayingNotif.Parameters.RemoveAt("@GameTitle");
-                    addNowPlayingNotif.Parameters.RemoveAt("@Message");
-                    addNowPlayingNotif.Parameters.RemoveAt("@Action");
+                        addNowPlayingNotif.ExecuteNonQuery();
+
+                        addNowPlayingNotif.Parameters.RemoveAt("@DateAdded");
+                        addNowPlayingNotif.Parameters.RemoveAt("@NotificationType");
+                        addNowPlayingNotif.Parameters.RemoveAt("@GameTitle");
+                        addNowPlayingNotif.Parameters.RemoveAt("@Message");
+                        addNowPlayingNotif.Parameters.RemoveAt("@Action");
+                    }
+                    dupe = false;
                 }
             }
 
+            con.Close();
+
+            NotificationsDGV.DataSource = null;
+            NotificationsDGV.Update();
+            NotificationsDGV.Refresh();
+            con.Open();
+            cmd.CommandType = CommandType.Text;
+            OleDbDataAdapter da3 = new OleDbDataAdapter(cmd);
+            DataTable notifTableNew = new DataTable();
+            da3.Fill(notifTableNew);
+            NotificationsDGV.DataSource = notifTableNew;
             con.Close();
         }
 
@@ -839,7 +881,92 @@ namespace The_UGamer_Launcher
             con.Close();
         }
 
+        private void NotificationsDGV_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            string changeValue;
+            string titleValue;
+            try
+            {
+                object value = NotificationsDGV.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+                object value2 = NotificationsDGV.Rows[e.RowIndex].Cells[3].Value;
+                titleValue = value2.ToString();
+                changeValue = value.ToString();
+                if (changeValue == "Change")
+                {
+                    EditSpecificEntry(titleValue);
+                    RemoveFromNotifications(titleValue);
+                }
+            }
+            catch (ArgumentOutOfRangeException f) { }
+        }
 
+        private void EditSpecificEntry(string title)
+        {
+            string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Collection.accdb";
+            OleDbConnection con = new OleDbConnection(connectionString);
 
+            OleDbCommand cmd = new OleDbCommand("SELECT * FROM Table1", con);
+            con.Open();
+            cmd.CommandType = CommandType.Text;
+            OleDbDataAdapter da = new OleDbDataAdapter(cmd);
+            DataTable editingTable = new DataTable();
+            da.Fill(editingTable);
+
+            con.Close();
+
+            int z = 0, y = 0;
+            int columnIndex = 1; // Name column
+            string[] table = new string[editingTable.Rows.Count];
+            int index = 0;
+            for (index = 0; index < editingTable.Rows.Count; index++)
+            {
+                table[index] = editingTable.Rows[index][columnIndex].ToString();
+            }
+
+            for (int x = 0; x < editingTable.Rows.Count; x++)
+                if (title == table[x])
+                {
+                    z = x;
+                    y = 1;
+                }
+
+            addGame = new AddGame(this, displayData);
+            addGame.FormClosed += new FormClosedEventHandler(addGame_FormClosed);
+            if (y == 1)
+            {
+                string platform = editingTable.Rows[z][2].ToString();
+                string status = editingTable.Rows[z][3].ToString();
+                string rating = editingTable.Rows[z][4].ToString();
+                string hours = editingTable.Rows[z][5].ToString();
+                string obtained = editingTable.Rows[z][6].ToString();
+                string startDate = editingTable.Rows[z][7].ToString();
+                string endDate = editingTable.Rows[z][8].ToString();
+                string notes = editingTable.Rows[z][9].ToString();
+                string launchString = editingTable.Rows[z][10].ToString();
+                string newsString = editingTable.Rows[z][11].ToString();
+                string wikiString = editingTable.Rows[z][12].ToString();
+
+                addGame.Text = "Editing entry... \"" + title + "\"";
+                addGame.Show();
+                addGame.DisplayInfo(title, platform, status, rating,
+                    hours, obtained, startDate, endDate, notes, launchString,
+                    newsString, wikiString);
+                noGameLabel.Visible = false;
+                y = 0;
+            }
+        }
+
+        private void RemoveFromNotifications(string title)
+        {
+            string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Collection.accdb";
+            OleDbConnection con = new OleDbConnection(connectionString);
+            OleDbCommand delCmd = new OleDbCommand("DELETE FROM Notifications WHERE GameTitle=\"" + title + "\";", con);
+
+            con.Open();
+
+            delCmd.ExecuteNonQuery();
+
+            return;
+        }
     }
 }
