@@ -650,7 +650,8 @@ namespace The_UGamer_Launcher
             }
             searchBox.AutoCompleteCustomSource = autoFill;
 
-            NotificationSystem();
+            notificationCheck = new Thread(new ThreadStart(NotificationSystem));
+            notificationCheck.Start();
         }
 
         private void toolStripButton2_Click(object sender, EventArgs e)
