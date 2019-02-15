@@ -495,6 +495,8 @@ namespace The_UGamer_Launcher
             cmd.Parameters.AddWithValue("@EndDate", endDate2);
             cmd.Parameters.AddWithValue("@Notes", notesBox.Text);
             cmd.Parameters.AddWithValue("@Launch", launchCode);
+            cmd.Parameters.AddWithValue("@News", newsUrl);
+            cmd.Parameters.AddWithValue("@Wiki", wikiUrl);
             cmd.ExecuteNonQuery();
 
             MessageBox.Show(message, caption);

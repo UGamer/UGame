@@ -54,6 +54,7 @@
             this.wikiURLBox = new System.Windows.Forms.TextBox();
             this.clearFieldsButton = new System.Windows.Forms.Button();
             this.statusBox = new System.Windows.Forms.ComboBox();
+            this.obtainedDatePicker = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // labels
@@ -361,11 +362,19 @@
             this.statusBox.Size = new System.Drawing.Size(620, 28);
             this.statusBox.TabIndex = 25;
             // 
+            // obtainedDatePicker
+            // 
+            this.obtainedDatePicker.Location = new System.Drawing.Point(156, 208);
+            this.obtainedDatePicker.Name = "obtainedDatePicker";
+            this.obtainedDatePicker.Size = new System.Drawing.Size(620, 26);
+            this.obtainedDatePicker.TabIndex = 26;
+            // 
             // AddGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 602);
+            this.Controls.Add(this.obtainedDatePicker);
             this.Controls.Add(this.statusBox);
             this.Controls.Add(this.clearFieldsButton);
             this.Controls.Add(this.wikiURLBox);
@@ -426,5 +435,6 @@
         private System.Windows.Forms.TextBox wikiURLBox;
         private System.Windows.Forms.Button clearFieldsButton;
         private System.Windows.Forms.ComboBox statusBox;
+        private System.Windows.Forms.DateTimePicker obtainedDatePicker;
     }
 }

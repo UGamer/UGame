@@ -25,6 +25,7 @@ namespace The_UGamer_Launcher
         DataTable newTable;
         private static string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Collection.accdb";
         private OleDbConnection con = new OleDbConnection(connectionString);
+        private DataTable globalNotificationTable;
 
         private string type;
         private string notifMessage;
@@ -39,6 +40,7 @@ namespace The_UGamer_Launcher
 
             NotificationSystem();
             ImageNotificationSystem();
+            addEntryButton.Text = "Notifications (" + globalNotificationTable.Rows.Count.ToString() + ")";
 
             /*
             notificationCheck = new Thread(new ThreadStart(NotificationSystem));
@@ -430,97 +432,69 @@ namespace The_UGamer_Launcher
                 bgMissing = detailedImageAssign(input2, "BG");
                 detailMissing = detailedImageAssign(input2, "Details");
                 iconMissing = CheckForIcons(input2);
-
-                string bgMissingString = bgMissing.ToString();
-                string detailMissingString = detailMissing.ToString();
-                string iconMissingString = iconMissing.ToString();
-
-                string missingString = bgMissingString + " " + detailMissingString + " " + iconMissingString;
-
+                
                 string type = "MissingImages";
                 string notifMessage;
                 string actionString = "Dismiss";
 
                 dupe = CheckForDupes(notificationTable, notifTableNameIndex, row);
-
+                
                 if (bgMissing == true && detailMissing == true && iconMissing == true)
-                {
                     if (dupe == false)
                     {
                         notifMessage = "You are missing images for " + gameName + ". Missing: Background, Detailed, Icon.";
-                        
-                        // AddNotification(addNowPlayingNotif, todayString, type, gameName, notifMessage, actionString);
                         AddNotification(addNowPlayingNotif, todayString, type, gameName, notifMessage, actionString);
-                        
                         dupe = true;
                     }
-                }
+                
                 if (bgMissing == true && detailMissing == true)
-                {
-                    dupe = CheckForDupes(notificationTable, notifTableNameIndex, row);
-                    
                     if (dupe == false)
                     {
                         notifMessage = "You are missing images for " + gameName + ". Missing: Background, Detailed.";
                         AddNotification(addNowPlayingNotif, todayString, type, gameName, notifMessage, actionString);
                         dupe = true;
                     }
-                }
+
                 if (bgMissing == true && iconMissing == true)
-                {
-                    dupe = CheckForDupes(notificationTable, notifTableNameIndex, row);
-                    
                     if (dupe == false)
                     {
                         notifMessage = "You are missing images for " + gameName + ". Missing: Background, Icon.";
                         AddNotification(addNowPlayingNotif, todayString, type, gameName, notifMessage, actionString);
                         dupe = true;
                     }
-                }
-                if (detailMissing == true && iconMissing == true)
-                {
-                    dupe = CheckForDupes(notificationTable, notifTableNameIndex, row);
 
+                if (detailMissing == true && iconMissing == true)
                     if (dupe == false)
                     {
                         notifMessage = "You are missing images for " + gameName + ". Missing: Detailed, Icon.";
                         AddNotification(addNowPlayingNotif, todayString, type, gameName, notifMessage, actionString);
                         dupe = true;
                     }
-                }
+
                 if (bgMissing == true)
-                {
-                    dupe = CheckForDupes(notificationTable, notifTableNameIndex, row);
-                    
                     if (dupe == false)
                     {
                         notifMessage = "You are missing images for " + gameName + ". Missing: Background.";
                         AddNotification(addNowPlayingNotif, todayString, type, gameName, notifMessage, actionString);
                         dupe = true;
                     }
-                }
+
                 if (detailMissing == true)
-                {
-                    dupe = CheckForDupes(notificationTable, notifTableNameIndex, row);
-                    
                     if (dupe == false)
                     {
                         notifMessage = "You are missing images for " + gameName + ". Missing: Detailed.";
                         AddNotification(addNowPlayingNotif, todayString, type, gameName, notifMessage, actionString);
                         dupe = true;
                     }
-                }
+
                 if (iconMissing == true)
-                {
-                    dupe = CheckForDupes(notificationTable, notifTableNameIndex, row);
-                    
                     if (dupe == false)
                     {
                         notifMessage = "You are missing images for " + gameName + ". Missing: Icon.";
                         AddNotification(addNowPlayingNotif, todayString, type, gameName, notifMessage, actionString);
                         dupe = true;
                     }
-                }
+
                 dupe = false;
             }
 
@@ -534,7 +508,7 @@ namespace The_UGamer_Launcher
             NotificationsDGV.DataSource = notifTableNew;
 
             con.Close();
-            SetText("Done");
+            globalNotificationTable = notifTableNew;
         }
 
         private bool CheckForDupes(DataTable table, int colIndex, DataRow row)
@@ -591,32 +565,32 @@ namespace The_UGamer_Launcher
             try
             {
                 background = Image.FromFile("Resources/" + folder + "/" + input2 + ".png");
-                return true;
+                return false;
             }
             catch (FileNotFoundException e)
             {
                 try
                 {
                     background = Image.FromFile("Resources/" + folder + "/" + input2 + ".jpg");
-                    return true;
+                    return false;
                 }
                 catch (FileNotFoundException f)
                 {
                     try
                     {
                         background = Image.FromFile("Resources/" + folder + "/" + input2 + ".jpeg");
-                        return true;
+                        return false;
                     }
                     catch (FileNotFoundException g)
                     {
                         try
                         {
                             background = Image.FromFile("Resources/" + folder + "/" + input2 + ".gif");
-                            return true;
+                            return false;
                         }
                         catch (FileNotFoundException h)
                         {
-                            return false;
+                            return true;
                         }
                     }
                 }
