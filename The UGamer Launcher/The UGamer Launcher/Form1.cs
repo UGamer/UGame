@@ -16,6 +16,7 @@ namespace The_UGamer_Launcher
 {
     public partial class Form1 : Form
     {
+        private int gameTableNameIndex = 1;
         public GameDetails gameWindow;
         public AddGame addGame;
         public Thread notificationCheck;
@@ -24,6 +25,11 @@ namespace The_UGamer_Launcher
         DataTable newTable;
         private static string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Collection.accdb";
         private OleDbConnection con = new OleDbConnection(connectionString);
+
+        private string type;
+        private string notifMessage;
+        private string actionString;
+
 
         public Form1()
         {
@@ -209,7 +215,7 @@ namespace The_UGamer_Launcher
             OleDbCommand cmd = new OleDbCommand("SELECT * FROM Notifications", con);
             OleDbCommand cmd2 = new OleDbCommand("SELECT * FROM Table1", con);
             OleDbCommand addNowPlayingNotif = new OleDbCommand("INSERT INTO Notifications ([DateAdded], [NotificationType], [GameTitle], [Message], [Action]) VALUES (@DateAdded, @NotificationType, @GameTitle, @Message, @Action);", con);
-            
+
             cmd.CommandType = CommandType.Text;
             OleDbDataAdapter da = new OleDbDataAdapter(cmd);
             DataTable notificationTable = new DataTable();
@@ -246,9 +252,9 @@ namespace The_UGamer_Launcher
             {
                 string gameName = "";
                 string year = "", month = "", day = "";
-                
+
                 string[] notifTableName = new string[notificationTable.Rows.Count];
-                
+
                 if ((row[statusIndex].ToString() == "Dropped" ||
                     row[statusIndex].ToString() == "Never Started" ||
                     row[statusIndex].ToString() == "On Hold" ||
@@ -289,7 +295,7 @@ namespace The_UGamer_Launcher
 
                 else if (row[statusIndex].ToString() == "Playing")
                 {
-                    int yearInt  = 2000;
+                    int yearInt = 2000;
                     try
                     {
                         year = row[lastPlayedIndex].ToString();
@@ -344,7 +350,7 @@ namespace The_UGamer_Launcher
                     }
                 }
             }
-            
+
 
             NotificationsDGV.DataSource = null;
             NotificationsDGV.Update();
@@ -361,7 +367,7 @@ namespace The_UGamer_Launcher
             OleDbCommand cmd = new OleDbCommand("SELECT * FROM Notifications", con);
             OleDbCommand cmd2 = new OleDbCommand("SELECT * FROM Table1", con);
             OleDbCommand addNowPlayingNotif = new OleDbCommand("INSERT INTO Notifications ([DateAdded], [NotificationType], [GameTitle], [Message], [Action]) VALUES (@DateAdded, @NotificationType, @GameTitle, @Message, @Action);", con);
-            
+
             cmd.CommandType = CommandType.Text;
             OleDbDataAdapter da = new OleDbDataAdapter(cmd);
             DataTable notificationTable = new DataTable();
@@ -372,13 +378,10 @@ namespace The_UGamer_Launcher
             DataTable gameTable = new DataTable();
             da2.Fill(gameTable);
 
-
-            int gameTableNameIndex = 1; //works
             int typeIndex = 2; //works
             int notifTableNameIndex = 3;
-            bool bgMissing = true, detailMissing = true, iconMissing = true;
             bool dupe = false;
-            
+
             Regex dateFix = new Regex("-");
 
             DateTime today2 = DateTime.Now;
@@ -388,10 +391,10 @@ namespace The_UGamer_Launcher
 
             foreach (DataRow row in gameTable.Rows)
             {
+                bool bgMissing = true, detailMissing = true, iconMissing = true;
                 string gameName = row[gameTableNameIndex].ToString();
                 string input2 = gameName;
                 string[] notifTableName = new string[notificationTable.Rows.Count];
-                
 
                 // This checks if the user input is actually an entry.
                 Regex pathFix = new Regex(@"T:\\");
@@ -406,7 +409,7 @@ namespace The_UGamer_Launcher
                 Regex rgxFix7 = new Regex(">");
                 Regex rgxFix8 = new Regex("|");
 
-                
+
                 if (input2.IndexOf("/") != -1)
                     input2 = rgxFix1.Replace(input2, "");
                 if (input2.IndexOf(":") != -1)
@@ -426,238 +429,101 @@ namespace The_UGamer_Launcher
 
                 bgMissing = detailedImageAssign(input2, "BG");
                 detailMissing = detailedImageAssign(input2, "Details");
-                Icon testIcon;
-                try
-                {
-                    testIcon = new Icon("Resources/Icons/" + input2 + ".ico");
-                    iconMissing = false;
-                }
-                catch (FileNotFoundException e)
-                {
+                iconMissing = CheckForIcons(input2);
 
-                }
+                string bgMissingString = bgMissing.ToString();
+                string detailMissingString = detailMissing.ToString();
+                string iconMissingString = iconMissing.ToString();
 
-                if (bgMissing == true)
+                string missingString = bgMissingString + " " + detailMissingString + " " + iconMissingString;
+
+                string type = "MissingImages";
+                string notifMessage;
+                string actionString = "Dismiss";
+
+                dupe = CheckForDupes(notificationTable, notifTableNameIndex, row);
+
+                if (bgMissing == true && detailMissing == true && iconMissing == true)
                 {
-                    for (int index = 0; index < notificationTable.Rows.Count; index++)
-                    {
-                        notifTableName[index] = notificationTable.Rows[index][notifTableNameIndex].ToString();
-                    }
-                    gameName = row[gameTableNameIndex].ToString();
-                    for (int x = 0; x < notifTableName.Length; x++)
-                    {
-                        if (notifTableName[x] == gameName)
-                            dupe = true;
-                    }
-
                     if (dupe == false)
                     {
-                        addNowPlayingNotif.Parameters.AddWithValue("@DateAdded", todayString);
-                        addNowPlayingNotif.Parameters.AddWithValue("@NotificationType", "MissingImages");
-                        addNowPlayingNotif.Parameters.AddWithValue("@GameTitle", gameName);
-                        addNowPlayingNotif.Parameters.AddWithValue("@Message", "You are missing images for " + gameName + ". Missing: Background.");
-                        addNowPlayingNotif.Parameters.AddWithValue("@Action", "Dismiss");
-
-                        addNowPlayingNotif.ExecuteNonQuery();
-
-                        addNowPlayingNotif.Parameters.RemoveAt("@DateAdded");
-                        addNowPlayingNotif.Parameters.RemoveAt("@NotificationType");
-                        addNowPlayingNotif.Parameters.RemoveAt("@GameTitle");
-                        addNowPlayingNotif.Parameters.RemoveAt("@Message");
-                        addNowPlayingNotif.Parameters.RemoveAt("@Action");
+                        notifMessage = "You are missing images for " + gameName + ". Missing: Background, Detailed, Icon.";
+                        
+                        // AddNotification(addNowPlayingNotif, todayString, type, gameName, notifMessage, actionString);
+                        AddNotification(addNowPlayingNotif, todayString, type, gameName, notifMessage, actionString);
+                        
+                        dupe = true;
                     }
-                    dupe = false;
-                }
-                if (detailMissing == true)
-                {
-                    for (int index = 0; index < notificationTable.Rows.Count; index++)
-                    {
-                        notifTableName[index] = notificationTable.Rows[index][notifTableNameIndex].ToString();
-                    }
-                    gameName = row[gameTableNameIndex].ToString();
-                    for (int x = 0; x < notifTableName.Length; x++)
-                    {
-                        if (notifTableName[x] == gameName)
-                            dupe = true;
-                    }
-
-                    if (dupe == false)
-                    {
-                        addNowPlayingNotif.Parameters.AddWithValue("@DateAdded", todayString);
-                        addNowPlayingNotif.Parameters.AddWithValue("@NotificationType", "MissingImages");
-                        addNowPlayingNotif.Parameters.AddWithValue("@GameTitle", gameName);
-                        addNowPlayingNotif.Parameters.AddWithValue("@Message", "You are missing images for " + gameName + ". Missing: Detailed.");
-                        addNowPlayingNotif.Parameters.AddWithValue("@Action", "Dismiss");
-
-                        addNowPlayingNotif.ExecuteNonQuery();
-
-                        addNowPlayingNotif.Parameters.RemoveAt("@DateAdded");
-                        addNowPlayingNotif.Parameters.RemoveAt("@NotificationType");
-                        addNowPlayingNotif.Parameters.RemoveAt("@GameTitle");
-                        addNowPlayingNotif.Parameters.RemoveAt("@Message");
-                        addNowPlayingNotif.Parameters.RemoveAt("@Action");
-                    }
-                    dupe = false;
-                }
-                if (iconMissing == true)
-                {
-                    for (int index = 0; index < notificationTable.Rows.Count; index++)
-                    {
-                        notifTableName[index] = notificationTable.Rows[index][notifTableNameIndex].ToString();
-                    }
-                    gameName = row[gameTableNameIndex].ToString();
-                    for (int x = 0; x < notifTableName.Length; x++)
-                    {
-                        if (notifTableName[x] == gameName)
-                            dupe = true;
-                    }
-
-                    if (dupe == false)
-                    {
-                        addNowPlayingNotif.Parameters.AddWithValue("@DateAdded", todayString);
-                        addNowPlayingNotif.Parameters.AddWithValue("@NotificationType", "MissingImages");
-                        addNowPlayingNotif.Parameters.AddWithValue("@GameTitle", bgMissing.ToString());
-                        addNowPlayingNotif.Parameters.AddWithValue("@Message", "You are missing images for " + gameName + ". Missing: Icon.");
-                        addNowPlayingNotif.Parameters.AddWithValue("@Action", "Dismiss");
-
-                        addNowPlayingNotif.ExecuteNonQuery();
-
-                        addNowPlayingNotif.Parameters.RemoveAt("@DateAdded");
-                        addNowPlayingNotif.Parameters.RemoveAt("@NotificationType");
-                        addNowPlayingNotif.Parameters.RemoveAt("@GameTitle");
-                        addNowPlayingNotif.Parameters.RemoveAt("@Message");
-                        addNowPlayingNotif.Parameters.RemoveAt("@Action");
-                    }
-                    dupe = false;
                 }
                 if (bgMissing == true && detailMissing == true)
                 {
-                    for (int index = 0; index < notificationTable.Rows.Count; index++)
-                    {
-                        notifTableName[index] = notificationTable.Rows[index][notifTableNameIndex].ToString();
-                    }
-                    gameName = row[gameTableNameIndex].ToString();
-                    for (int x = 0; x < notifTableName.Length; x++)
-                    {
-                        if (notifTableName[x] == gameName)
-                            dupe = true;
-                    }
-
+                    dupe = CheckForDupes(notificationTable, notifTableNameIndex, row);
+                    
                     if (dupe == false)
                     {
-                        addNowPlayingNotif.Parameters.AddWithValue("@DateAdded", todayString);
-                        addNowPlayingNotif.Parameters.AddWithValue("@NotificationType", "MissingImages");
-                        addNowPlayingNotif.Parameters.AddWithValue("@GameTitle", gameName);
-                        addNowPlayingNotif.Parameters.AddWithValue("@Message", "You are missing images for " + gameName + ". Missing: Background, Detailed.");
-                        addNowPlayingNotif.Parameters.AddWithValue("@Action", "Dismiss");
-
-                        addNowPlayingNotif.ExecuteNonQuery();
-
-                        addNowPlayingNotif.Parameters.RemoveAt("@DateAdded");
-                        addNowPlayingNotif.Parameters.RemoveAt("@NotificationType");
-                        addNowPlayingNotif.Parameters.RemoveAt("@GameTitle");
-                        addNowPlayingNotif.Parameters.RemoveAt("@Message");
-                        addNowPlayingNotif.Parameters.RemoveAt("@Action");
+                        notifMessage = "You are missing images for " + gameName + ". Missing: Background, Detailed.";
+                        AddNotification(addNowPlayingNotif, todayString, type, gameName, notifMessage, actionString);
+                        dupe = true;
                     }
-                    dupe = false;
                 }
-                
-                if (detailMissing == true && iconMissing == true)
-                {
-                    for (int index = 0; index < notificationTable.Rows.Count; index++)
-                    {
-                        notifTableName[index] = notificationTable.Rows[index][notifTableNameIndex].ToString();
-                    }
-                    gameName = row[gameTableNameIndex].ToString();
-                    for (int x = 0; x < notifTableName.Length; x++)
-                    {
-                        if (notifTableName[x] == gameName)
-                            dupe = true;
-                    }
-
-                    if (dupe == false)
-                    {
-                        addNowPlayingNotif.Parameters.AddWithValue("@DateAdded", todayString);
-                        addNowPlayingNotif.Parameters.AddWithValue("@NotificationType", "MissingImages");
-                        addNowPlayingNotif.Parameters.AddWithValue("@GameTitle", gameName);
-                        addNowPlayingNotif.Parameters.AddWithValue("@Message", "You are missing images for " + gameName + ". Missing: Detailed, Icon.");
-                        addNowPlayingNotif.Parameters.AddWithValue("@Action", "Dismiss");
-
-                        addNowPlayingNotif.ExecuteNonQuery();
-
-                        addNowPlayingNotif.Parameters.RemoveAt("@DateAdded");
-                        addNowPlayingNotif.Parameters.RemoveAt("@NotificationType");
-                        addNowPlayingNotif.Parameters.RemoveAt("@GameTitle");
-                        addNowPlayingNotif.Parameters.RemoveAt("@Message");
-                        addNowPlayingNotif.Parameters.RemoveAt("@Action");
-                    }
-                    dupe = false;
-                }
-                
                 if (bgMissing == true && iconMissing == true)
                 {
-                    for (int index = 0; index < notificationTable.Rows.Count; index++)
-                    {
-                        notifTableName[index] = notificationTable.Rows[index][notifTableNameIndex].ToString();
-                    }
-                    gameName = row[gameTableNameIndex].ToString();
-                    for (int x = 0; x < notifTableName.Length; x++)
-                    {
-                        if (notifTableName[x] == gameName)
-                            dupe = true;
-                    }
-
-                    if (dupe == false)
-                    {
-                        addNowPlayingNotif.Parameters.AddWithValue("@DateAdded", todayString);
-                        addNowPlayingNotif.Parameters.AddWithValue("@NotificationType", "MissingImages");
-                        addNowPlayingNotif.Parameters.AddWithValue("@GameTitle", gameName);
-                        addNowPlayingNotif.Parameters.AddWithValue("@Message", "You are missing images for " + gameName + ". Missing: Background, Icon.");
-                        addNowPlayingNotif.Parameters.AddWithValue("@Action", "Dismiss");
-
-                        addNowPlayingNotif.ExecuteNonQuery();
-
-                        addNowPlayingNotif.Parameters.RemoveAt("@DateAdded");
-                        addNowPlayingNotif.Parameters.RemoveAt("@NotificationType");
-                        addNowPlayingNotif.Parameters.RemoveAt("@GameTitle");
-                        addNowPlayingNotif.Parameters.RemoveAt("@Message");
-                        addNowPlayingNotif.Parameters.RemoveAt("@Action");
-                    }
-                    dupe = false;
-                }
-                if (bgMissing == true && detailMissing == true && iconMissing == true)
-                {
-                    for (int index = 0; index < notificationTable.Rows.Count; index++)
-                    {
-                        notifTableName[index] = notificationTable.Rows[index][notifTableNameIndex].ToString();
-                    }
-                    gameName = row[gameTableNameIndex].ToString();
-                    for (int x = 0; x < notifTableName.Length; x++)
-                    {
-                        if (notifTableName[x] == gameName)
-                            dupe = true;
-                    }
-
-                    if (dupe == false)
-                    {
-                        addNowPlayingNotif.Parameters.AddWithValue("@DateAdded", todayString);
-                        addNowPlayingNotif.Parameters.AddWithValue("@NotificationType", "MissingImages");
-                        addNowPlayingNotif.Parameters.AddWithValue("@GameTitle", gameName);
-                        addNowPlayingNotif.Parameters.AddWithValue("@Message", "You are missing images for " + gameName + ". Missing: Background, Detailed, Icon.");
-                        addNowPlayingNotif.Parameters.AddWithValue("@Action", "Dismiss");
-
-                        addNowPlayingNotif.ExecuteNonQuery();
-
-                        addNowPlayingNotif.Parameters.RemoveAt("@DateAdded");
-                        addNowPlayingNotif.Parameters.RemoveAt("@NotificationType");
-                        addNowPlayingNotif.Parameters.RemoveAt("@GameTitle");
-                        addNowPlayingNotif.Parameters.RemoveAt("@Message");
-                        addNowPlayingNotif.Parameters.RemoveAt("@Action");
-                    }
-                    dupe = false;
-                }
-            }
+                    dupe = CheckForDupes(notificationTable, notifTableNameIndex, row);
                     
+                    if (dupe == false)
+                    {
+                        notifMessage = "You are missing images for " + gameName + ". Missing: Background, Icon.";
+                        AddNotification(addNowPlayingNotif, todayString, type, gameName, notifMessage, actionString);
+                        dupe = true;
+                    }
+                }
+                if (detailMissing == true && iconMissing == true)
+                {
+                    dupe = CheckForDupes(notificationTable, notifTableNameIndex, row);
+
+                    if (dupe == false)
+                    {
+                        notifMessage = "You are missing images for " + gameName + ". Missing: Detailed, Icon.";
+                        AddNotification(addNowPlayingNotif, todayString, type, gameName, notifMessage, actionString);
+                        dupe = true;
+                    }
+                }
+                if (bgMissing == true)
+                {
+                    dupe = CheckForDupes(notificationTable, notifTableNameIndex, row);
+                    
+                    if (dupe == false)
+                    {
+                        notifMessage = "You are missing images for " + gameName + ". Missing: Background.";
+                        AddNotification(addNowPlayingNotif, todayString, type, gameName, notifMessage, actionString);
+                        dupe = true;
+                    }
+                }
+                if (detailMissing == true)
+                {
+                    dupe = CheckForDupes(notificationTable, notifTableNameIndex, row);
+                    
+                    if (dupe == false)
+                    {
+                        notifMessage = "You are missing images for " + gameName + ". Missing: Detailed.";
+                        AddNotification(addNowPlayingNotif, todayString, type, gameName, notifMessage, actionString);
+                        dupe = true;
+                    }
+                }
+                if (iconMissing == true)
+                {
+                    dupe = CheckForDupes(notificationTable, notifTableNameIndex, row);
+                    
+                    if (dupe == false)
+                    {
+                        notifMessage = "You are missing images for " + gameName + ". Missing: Icon.";
+                        AddNotification(addNowPlayingNotif, todayString, type, gameName, notifMessage, actionString);
+                        dupe = true;
+                    }
+                }
+                dupe = false;
+            }
+
             NotificationsDGV.DataSource = null;
             NotificationsDGV.Update();
             NotificationsDGV.Refresh();
@@ -666,9 +532,57 @@ namespace The_UGamer_Launcher
             DataTable notifTableNew = new DataTable();
             da3.Fill(notifTableNew);
             NotificationsDGV.DataSource = notifTableNew;
-            
+
             con.Close();
             SetText("Done");
+        }
+
+        private bool CheckForDupes(DataTable table, int colIndex, DataRow row)
+        {
+            string gameName;
+            string[] notifTableName = new string[table.Rows.Count];
+            for (int index = 0; index < table.Rows.Count; index++)
+            {
+                notifTableName[index] = table.Rows[index][colIndex].ToString();
+            }
+            gameName = row[gameTableNameIndex].ToString();
+            for (int x = 0; x < notifTableName.Length; x++)
+            {
+                if (notifTableName[x] == gameName)
+                    return true;
+            }
+            return false;
+        }
+
+        private void AddNotification(OleDbCommand cmd, string today, string type, string title, string message, string action)
+        {
+            cmd.Parameters.AddWithValue("@DateAdded", today);
+            cmd.Parameters.AddWithValue("@NotificationType", type);
+            cmd.Parameters.AddWithValue("@GameTitle", title);
+            cmd.Parameters.AddWithValue("@Message", message);
+            cmd.Parameters.AddWithValue("@Action", action);
+
+            cmd.ExecuteNonQuery();
+
+            cmd.Parameters.RemoveAt("@DateAdded");
+            cmd.Parameters.RemoveAt("@NotificationType");
+            cmd.Parameters.RemoveAt("@GameTitle");
+            cmd.Parameters.RemoveAt("@Message");
+            cmd.Parameters.RemoveAt("@Action");
+        }
+
+        private bool CheckForIcons(string input2)
+        {
+            Icon testIcon;
+            try
+            {
+                testIcon = new Icon("Resources/Icons/" + input2 + ".ico");
+                return false;
+            }
+            catch (FileNotFoundException e)
+            {
+                return true;
+            }
         }
 
         private bool detailedImageAssign(string input2, string folder)
