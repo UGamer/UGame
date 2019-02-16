@@ -98,6 +98,7 @@ namespace The_UGamer_Launcher
                 }
             }
 
+            nameLabel.UseMnemonic = false;
             nameLabel.Text = title; // Displays the name of the game.
             platformLabel.Text = "Platform: " + platform;
 
@@ -209,8 +210,10 @@ namespace The_UGamer_Launcher
                 gameTime.Start();
             }
             
+            /*
             timePlaying = new Thread(new ThreadStart(DisplaySeconds));
             timePlaying.Start();
+            */
 
             button1.Visible = false;
             stopTime.Visible = true;
@@ -361,7 +364,7 @@ namespace The_UGamer_Launcher
 
         private void stopTimeMethod()
         {
-            timePlaying.Abort();
+            // timePlaying.Abort();
 
             gameTime.Stop();
             gameRunning = false;

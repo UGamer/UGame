@@ -102,6 +102,7 @@
             this.notificationsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.notificationsTableAdapter = new The_UGamer_Launcher.NotificationDataSetTableAdapters.NotificationsTableAdapter();
             this.notificationsTableAdapter1 = new The_UGamer_Launcher.NotificationsSetTableAdapters.NotificationsTableAdapter();
+            this.LoadingLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet4)).BeginInit();
@@ -708,11 +709,22 @@
             // 
             this.notificationsTableAdapter1.ClearBeforeFill = true;
             // 
+            // LoadingLabel
+            // 
+            this.LoadingLabel.AutoSize = true;
+            this.LoadingLabel.Font = new System.Drawing.Font("Microsoft JhengHei", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LoadingLabel.Location = new System.Drawing.Point(557, 277);
+            this.LoadingLabel.Name = "LoadingLabel";
+            this.LoadingLabel.Size = new System.Drawing.Size(188, 47);
+            this.LoadingLabel.TabIndex = 22;
+            this.LoadingLabel.Text = "Loading...";
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1333, 652);
+            this.Controls.Add(this.LoadingLabel);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.NotificationsDGV);
             this.Controls.Add(this.searchBox);
@@ -825,6 +837,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn messageDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn gameTitleDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn actionDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Label LoadingLabel;
     }
 }
 

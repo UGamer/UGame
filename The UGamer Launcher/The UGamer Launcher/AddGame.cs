@@ -14,6 +14,7 @@ namespace The_UGamer_Launcher
         public Form1 frm1;
         public bool refresh = false;
         DataTable newTable;
+        Regex dateFix = new Regex("-");
 
         public AddGame(Form1 parent, bool refreshSignal)
         {
@@ -74,9 +75,10 @@ namespace The_UGamer_Launcher
             string minutes = minutesBox.Text;
             string seconds = secondsBox.Text;
 
-            string obtained = obtainedBox.Text;
-            string startDate = startDateBox.Text;
-            string endDate = endDateBox.Text;
+            string obtained = DateFix(obtainedDatePicker.Value.ToString("u"));
+            string startDate = DateFix(startDatePicker.Value.ToString("u"));
+            string endDate = DateFix(endDatePicker.Value.ToString("u"));
+
             string notes = notesBox.Text;
             string launchCode = launchBox.Text;
             string newsCode = newsURLBox.Text;
@@ -347,9 +349,9 @@ namespace The_UGamer_Launcher
                     secondsBox.Text = newSecondsString;
 
 
-                obtainedBox.Text = dt.Rows[z][6].ToString();
-                startDateBox.Text = dt.Rows[z][7].ToString();
-                endDateBox.Text = dt.Rows[z][8].ToString();
+                obtainedDatePicker.Text = dt.Rows[z][6].ToString();
+                startDatePicker.Text = dt.Rows[z][7].ToString();
+                endDatePicker.Text = dt.Rows[z][8].ToString();
                 notesBox.Text = dt.Rows[z][9].ToString();
                 launchBox.Text = dt.Rows[z][10].ToString();
                 newsURLBox.Text = dt.Rows[z][11].ToString();
@@ -365,6 +367,7 @@ namespace The_UGamer_Launcher
             // If the entry does not exist, an error message shows.
             else
                 noGameLabel.Visible = true;
+
         }
 
         private void replaceEntry_Click(object sender, EventArgs e)
@@ -378,10 +381,11 @@ namespace The_UGamer_Launcher
             string hours = hoursBox.Text;
             string minutes = minutesBox.Text;
             string seconds = secondsBox.Text;
+            
+            string obtained = DateFix(obtainedDatePicker.Value.ToString("u"));
+            string startDate = DateFix(startDatePicker.Value.ToString("u"));
+            string endDate = DateFix(endDatePicker.Value.ToString("u"));
 
-            string obtained = obtainedBox.Text;
-            string startDate = startDateBox.Text;
-            string endDate = endDateBox.Text;
             string launchCode = launchBox.Text;
             string notes = notesBox.Text;
             string newsCode = newsURLBox.Text;
@@ -593,8 +597,10 @@ namespace The_UGamer_Launcher
 
         private void secondsBox_KeyUp(object sender, KeyEventArgs e)
         {
+            /*
             if (e.KeyCode == Keys.Tab)
                 obtainedBox.Focus();
+                */
         }
 
         private void hoursBox_KeyUp(object sender, KeyEventArgs e)
@@ -620,6 +626,13 @@ namespace The_UGamer_Launcher
 
         private void clearFieldsButton_Click(object sender, EventArgs e)
         {
+            Regex dateFix = new Regex("-");
+
+            DateTime today2 = DateTime.Now;
+            string todayDate = today2.ToString("u");
+            string todayString = todayDate.Substring(0, 10);
+            todayString = dateFix.Replace(todayString, "/");
+
             titleBox.Text = "";
             platformBox.Text = "";
             statusBox.Text = "";
@@ -627,9 +640,9 @@ namespace The_UGamer_Launcher
             hoursBox.Text = "";
             minutesBox.Text = "";
             secondsBox.Text = "";
-            obtainedBox.Text = "";
-            startDateBox.Text = "";
-            endDateBox.Text = "";
+            obtainedDatePicker.Value = today2;
+            startDatePicker.Value = today2;
+            endDatePicker.Value = today2;
             launchBox.Text = "";
             notesBox.Text = "";
             newsURLBox.Text = "";
@@ -686,8 +699,6 @@ namespace The_UGamer_Launcher
                 newSecondsString = seconds;
             }
 
-
-
             if (hoursInt < 10 && hoursInt > 0)
                 newHoursString = "0" + hours;
             if (minsInt < 10 && minsInt > 0)
@@ -707,9 +718,10 @@ namespace The_UGamer_Launcher
             minutesBox.Text = newMinutesString;
             secondsBox.Text = newSecondsString;
 
-            obtainedBox.Text = obtained;
-            startDateBox.Text = startDate;
-            endDateBox.Text = endDate;
+            obtainedDatePicker.Text = obtained;
+            startDatePicker.Text = startDate;
+            endDatePicker.Text = endDate;
+
             notesBox.Text = notes;
             launchBox.Text = launchString;
             newsURLBox.Text = newsString;
@@ -717,6 +729,13 @@ namespace The_UGamer_Launcher
 
             replaceEntry.Visible = true;
             deleteEntryButton.Visible = true;
+        }
+
+        public string DateFix(string oldDate)
+        {
+            string newDate = oldDate.Substring(0, 10);
+            newDate = dateFix.Replace(newDate, "/");
+            return newDate;
         }
     }
 }

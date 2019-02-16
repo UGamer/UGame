@@ -36,18 +36,6 @@ namespace The_UGamer_Launcher
         {
             // Starts up the program.
             InitializeComponent();
-            con.Open();
-
-            NotificationSystem();
-            ImageNotificationSystem();
-            addEntryButton.Text = "Notifications (" + globalNotificationTable.Rows.Count.ToString() + ")";
-
-            /*
-            notificationCheck = new Thread(new ThreadStart(NotificationSystem));
-            notificationCheck.Start();
-            imageCheck = new Thread(new ThreadStart(ImageNotificationSystem));
-            imageCheck.Start();
-            */
 
             try
             {
@@ -144,6 +132,13 @@ namespace The_UGamer_Launcher
         // This fills the data table with the user data.
         private void Form1_Load(object sender, EventArgs e)
         {
+            dataTable.Visible = false;
+
+            con.Open();
+            NotificationSystem();
+            ImageNotificationSystem();
+            addEntryButton.Text = "Notifications (" + globalNotificationTable.Rows.Count.ToString() + ")";
+
             // TODO: This line of code loads data into the 'notificationsSet.Notifications' table. You can move, or remove it, as needed.
             this.notificationsTableAdapter1.Fill(this.notificationsSet.Notifications);
             // TODO: This line of code loads data into the 'notificationDataSet.Notifications' table. You can move, or remove it, as needed.
@@ -208,6 +203,11 @@ namespace The_UGamer_Launcher
             Cef.Initialize(settings);
 
             dataTable.SortCompare += customSortCompare;
+
+            dataTable.Visible = true;
+            LoadingLabel.Visible = false;
+
+            con.Close();
         }
 
         delegate void StringArgReturningVoidDelegate(string text);
@@ -231,9 +231,7 @@ namespace The_UGamer_Launcher
             int gameTableNameIndex = 1; //works
             int statusIndex = 3; //works
             int lastPlayedIndex = 8;
-            int typeIndex = 2; //works
             int notifTableNameIndex = 3;
-            int[] NowPlaying;
             bool dupe = false;
 
             DateTime fourteenDaysAgo = DateTime.Today.AddDays(-14);
@@ -433,11 +431,10 @@ namespace The_UGamer_Launcher
                 detailMissing = detailedImageAssign(input2, "Details");
                 iconMissing = CheckForIcons(input2);
                 
-                string type = "MissingImages";
-                string notifMessage;
-                string actionString = "Dismiss";
+                type = "MissingImages";
+                actionString = "Dismiss";
 
-                dupe = CheckForDupes(notificationTable, notifTableNameIndex, row);
+                dupe = CheckForDupes(notificationTable, notifTableNameIndex, row, type);
                 
                 if (bgMissing == true && detailMissing == true && iconMissing == true)
                     if (dupe == false)
@@ -506,23 +503,26 @@ namespace The_UGamer_Launcher
             DataTable notifTableNew = new DataTable();
             da3.Fill(notifTableNew);
             NotificationsDGV.DataSource = notifTableNew;
-
-            con.Close();
+            
             globalNotificationTable = notifTableNew;
         }
 
-        private bool CheckForDupes(DataTable table, int colIndex, DataRow row)
+        private bool CheckForDupes(DataTable table, int colIndex, DataRow row, string notifType)
         {
             string gameName;
             string[] notifTableName = new string[table.Rows.Count];
+            string[] notifTableType = new string[table.Rows.Count];
             for (int index = 0; index < table.Rows.Count; index++)
             {
                 notifTableName[index] = table.Rows[index][colIndex].ToString();
+                notifTableType[index] = table.Rows[index][2].ToString();
             }
             gameName = row[gameTableNameIndex].ToString();
             for (int x = 0; x < notifTableName.Length; x++)
             {
-                if (notifTableName[x] == gameName)
+                if (notifTableName[x] == gameName && notifTableType[x] == notifType)
+                    return true;
+                else if (notifTableName[x] == gameName)
                     return true;
             }
             return false;
@@ -891,8 +891,7 @@ namespace The_UGamer_Launcher
             }
             searchBox.AutoCompleteCustomSource = autoFill;
 
-            notificationCheck = new Thread(new ThreadStart(NotificationSystem));
-            notificationCheck.Start();
+            NotificationSystem();
         }
 
         private void toolStripButton2_Click(object sender, EventArgs e)
@@ -1218,6 +1217,10 @@ namespace The_UGamer_Launcher
             con.Open();
 
             delCmd.ExecuteNonQuery();
+
+            RefreshGrid();
+
+            con.Close();
 
             return;
         }

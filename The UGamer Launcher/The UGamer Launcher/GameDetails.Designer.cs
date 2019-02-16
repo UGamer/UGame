@@ -325,6 +325,7 @@
             this.TimePlayingLabel.Size = new System.Drawing.Size(171, 13);
             this.TimePlayingLabel.TabIndex = 23;
             this.TimePlayingLabel.Text = "Current Play Session: 00h:00m:00s";
+            this.TimePlayingLabel.Visible = false;
             // 
             // PauseTimeButton
             // 
