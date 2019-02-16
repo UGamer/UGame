@@ -15,6 +15,8 @@ namespace The_UGamer_Launcher
         public bool refresh = false;
         DataTable newTable;
         Regex dateFix = new Regex("-");
+        private static string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Collection.accdb";
+        private OleDbConnection con = new OleDbConnection(connectionString);
 
         public AddGame(Form1 parent, bool refreshSignal)
         {
@@ -34,16 +36,16 @@ namespace The_UGamer_Launcher
             }
             catch (FileNotFoundException e) { }
 
+            con.Open();
             FillTable();
         }
 
         private void FillTable()
         {
-            string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Collection.accdb";
-            OleDbConnection con = new OleDbConnection(connectionString);
+            
             
             OleDbCommand cmd = new OleDbCommand("SELECT * FROM Table1", con);
-            con.Open();
+            
             cmd.CommandType = CommandType.Text;
             OleDbDataAdapter da = new OleDbDataAdapter(cmd);
             newTable = new DataTable();
@@ -141,12 +143,10 @@ namespace The_UGamer_Launcher
                 newSecondsString = "0" + seconds;
             
             string playTime = newHoursString + "h:" + newMinutesString + "m:" + newSecondsString + "s";
-
-            string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Collection.accdb";
-            OleDbConnection con = new OleDbConnection(connectionString);
+            
             OleDbCommand cmd = new OleDbCommand("INSERT INTO Table1 (Title, Platform, Status, Rating, PlayTime, Obtained, StartDate, EndDate, Notes, Launch, News, Wiki) VALUES (@Title, @Platform, @Status, @Rating, @PlayTime, @Obtained, @StartDate, @EndDate, @Notes, @Launch, @News, @Wiki);", con);
 
-            con.Open();
+            // con.Open();
             title.Trim();
             platform.Trim();
             status.Trim();
@@ -248,12 +248,10 @@ namespace The_UGamer_Launcher
         private void editEntry_Click(object sender, EventArgs e)
         {
             int z = 0, y = 0;
-
-            string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Collection.accdb";
-            OleDbConnection con = new OleDbConnection(connectionString);
+            
 
             OleDbCommand cmd = new OleDbCommand("SELECT * FROM Table1", con);
-            con.Open();
+            // con.Open();
             cmd.CommandType = CommandType.Text;
             OleDbDataAdapter da = new OleDbDataAdapter(cmd);
             DataTable newTable = new DataTable();
@@ -461,8 +459,6 @@ namespace The_UGamer_Launcher
             string seconds, string obtained, string startDate,
                 string endDate, string launchCode, string notes, string newsCode, string wikiCode)
         {
-            string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Collection.accdb";
-            OleDbConnection con = new OleDbConnection(connectionString);
 
             OleDbCommand delCmd = new OleDbCommand("DELETE FROM Table1 WHERE Title=\"" + originalTitleString + "\";", con);
             OleDbCommand cmd = new OleDbCommand("INSERT INTO Table1 (Title, Platform, Status, Rating, PlayTime, Obtained, StartDate, EndDate, Notes, Launch, News, Wiki) VALUES (@Title, @Platform, @Status, @Rating, @PlayTime, @Obtained, @StartDate, @EndDate, @Notes, @Launch, @News, @Wiki);", con);
@@ -520,7 +516,7 @@ namespace The_UGamer_Launcher
 
             if (result == DialogResult.Yes)
             {
-                con.Open();
+                // con.Open();
 
                 delCmd.ExecuteNonQuery();
 
@@ -615,8 +611,6 @@ namespace The_UGamer_Launcher
 
         private void deleteEntry(string originalTitleString)
         {
-            string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Collection.accdb";
-            OleDbConnection con = new OleDbConnection(connectionString);
             OleDbCommand delCmd = new OleDbCommand("DELETE FROM Table1 WHERE Title=\"" + originalTitleString + "\";", con);
 
             this.Text = "Remove an entry... Removing \"" + originalTitleString + "\"";
@@ -627,7 +621,7 @@ namespace The_UGamer_Launcher
             DialogResult result = MessageBox.Show(message, title, buttons);
             if (result == DialogResult.Yes)
             {
-                con.Open();
+                // con.Open();
 
                 delCmd.ExecuteNonQuery();
 

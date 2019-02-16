@@ -23,6 +23,8 @@ namespace The_UGamer_Launcher
         private string title;
         string newsUrl;
         string wikiUrl;
+        private static string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Collection.accdb";
+        private OleDbConnection con = new OleDbConnection(connectionString);
 
         // Starts up a detail form.
         public GameDetails()
@@ -416,7 +418,7 @@ namespace The_UGamer_Launcher
             OleDbCommand delCmd = new OleDbCommand("DELETE FROM Table1 WHERE Title=\"" + nameLabel.Text + "\";", con);
             OleDbCommand cmd = new OleDbCommand("INSERT INTO Table1 (Title, Platform, Status, Rating, PlayTime, Obtained, StartDate, EndDate, Notes, Launch) VALUES (@Title, @Platform, @Status, @Rating, @PlayTime, @Obtained, @StartDate, @EndDate, @Notes, @Launch);", con);
 
-            con.Open();
+            // con.Open();
 
             delCmd.ExecuteNonQuery();
 

@@ -18,10 +18,13 @@ namespace The_UGamer_Launcher
     {
         public bool refresh = false;
         Form frm1;
+        private static string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Collection.accdb";
+        private OleDbConnection con = new OleDbConnection(connectionString);
         public Settings(Form1 parent)
         {
             InitializeComponent();
             frm1 = parent;
+            con.Open();
         }
 
         private void Settings_Load(object sender, EventArgs e)
@@ -155,12 +158,10 @@ namespace The_UGamer_Launcher
             {
                 table2 = "Table1";
             }
-
-            string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Collection.accdb";
-            OleDbConnection con = new OleDbConnection(connectionString);
+            
             OleDbCommand cmd = new OleDbCommand("ALTER TABLE " + table2 + " ADD " + name2 + " " + type2 + ";", con);
 
-            con.Open();
+            // con.Open();
             cmd.ExecuteNonQuery();
             con.Close();
         }
