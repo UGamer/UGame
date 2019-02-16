@@ -207,7 +207,7 @@ namespace The_UGamer_Launcher
             dataTable.Visible = true;
             LoadingLabel.Visible = false;
 
-            con.Close();
+            // con.Close();
         }
 
         delegate void StringArgReturningVoidDelegate(string text);
@@ -646,13 +646,13 @@ namespace The_UGamer_Launcher
             int y = 0, z = 0;
             
             OleDbCommand cmd = new OleDbCommand("SELECT * FROM Table1", con);
-            con.Open();
+            // con.Open();
             cmd.CommandType = CommandType.Text;
             OleDbDataAdapter da = new OleDbDataAdapter(cmd);
             DataTable newTable = new DataTable();
             da.Fill(newTable);
 
-            con.Close();
+            // con.Close();
 
             // This makes the whole database into an array.
 
@@ -1026,7 +1026,7 @@ namespace The_UGamer_Launcher
 
             if (result == DialogResult.Yes)
             {
-                con.Open();
+                // con.Open();
 
                 delCmd.ExecuteNonQuery();
 
@@ -1112,13 +1112,13 @@ namespace The_UGamer_Launcher
         private void FillTable()
         {
             OleDbCommand cmd = new OleDbCommand("SELECT * FROM Table1", con);
-            con.Open();
+            // con.Open();
             cmd.CommandType = CommandType.Text;
             OleDbDataAdapter da = new OleDbDataAdapter(cmd);
             newTable = new DataTable();
             da.Fill(newTable);
 
-            con.Close();
+            // con.Close();
         }
 
         private void NotificationsDGV_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -1147,13 +1147,13 @@ namespace The_UGamer_Launcher
         private void EditSpecificEntry(string title)
         {
             OleDbCommand cmd = new OleDbCommand("SELECT * FROM Table1", con);
-            con.Open();
+            // con.Open();
             cmd.CommandType = CommandType.Text;
             OleDbDataAdapter da = new OleDbDataAdapter(cmd);
             DataTable editingTable = new DataTable();
             da.Fill(editingTable);
 
-            con.Close();
+            // con.Close();
 
             int z = 0, y = 0;
             int columnIndex = 1; // Name column
@@ -1214,13 +1214,13 @@ namespace The_UGamer_Launcher
         {
             OleDbCommand delCmd = new OleDbCommand("DELETE FROM Notifications WHERE GameTitle=\"" + title + "\";", con);
             
-            con.Open();
+            // con.Open();
 
             delCmd.ExecuteNonQuery();
 
             RefreshGrid();
 
-            con.Close();
+            // con.Close();
 
             return;
         }

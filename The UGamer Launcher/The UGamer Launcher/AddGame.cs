@@ -718,7 +718,11 @@ namespace The_UGamer_Launcher
             titleBox.Text = title;
             platformBox.Text = platform;
             statusBox.Text = status;
-            ratingBox.Text = rating;
+
+            if (rating == "0")
+                ratingBox.Text = "";
+            else
+                ratingBox.Text = rating;
 
             hoursBox.Text = hours;
             string hoursPlayed = hoursBox.Text;
@@ -774,8 +778,19 @@ namespace The_UGamer_Launcher
             else
                 hoursBox.Text = newHoursString;
 
-            minutesBox.Text = newMinutesString;
-            secondsBox.Text = newSecondsString;
+            if (minsInt == 0)
+                minutesBox.Text = "";
+            else if (minsInt < 10)
+                minutesBox.Text = Convert.ToString(minsInt);
+            else
+                minutesBox.Text = newMinutesString;
+
+            if (secsInt == 0)
+                secondsBox.Text = "";
+            else if (secsInt < 10)
+                secondsBox.Text = Convert.ToString(secsInt);
+            else
+                secondsBox.Text = newSecondsString;
 
             obtainedDatePicker.Text = obtained;
             startDatePicker.Text = startDate;
