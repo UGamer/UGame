@@ -51,7 +51,7 @@ namespace The_UGamer_Launcher
             newTable = new DataTable();
             da.Fill(newTable);
 
-            con.Close();
+            // con.Close();
 
             DataTable dt = newTable;
             AutoCompleteStringCollection autoFill = new AutoCompleteStringCollection();
@@ -257,7 +257,7 @@ namespace The_UGamer_Launcher
             DataTable newTable = new DataTable();
             da.Fill(newTable);
 
-            con.Close();
+            // con.Close();
 
             // DataTable dt = frm1.collectionDataSet4.Table1;
             DataTable dt = newTable;

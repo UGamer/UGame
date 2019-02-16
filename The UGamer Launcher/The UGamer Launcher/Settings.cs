@@ -163,7 +163,7 @@ namespace The_UGamer_Launcher
 
             // con.Open();
             cmd.ExecuteNonQuery();
-            con.Close();
+            // con.Close();
         }
     }
 }
