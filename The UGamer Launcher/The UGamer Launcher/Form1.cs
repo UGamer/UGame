@@ -864,14 +864,14 @@ namespace The_UGamer_Launcher
             dataTable.Update();
             dataTable.Refresh();
             OleDbCommand cmd = new OleDbCommand("SELECT * FROM Table1", con);
-            con.Open();
+            // con.Open();
             cmd.CommandType = CommandType.Text;
             OleDbDataAdapter da = new OleDbDataAdapter(cmd);
             DataTable newTable = new DataTable();
             da.Fill(newTable);
             dataTable.DataSource = newTable;
             dataTable.Sort(dataTable.Columns[0], ListSortDirection.Ascending);
-            con.Close();
+            // con.Close();
 
             int entryCount = dataTable.Rows.Count;
             if (entryCount != 1)

@@ -75,9 +75,24 @@ namespace The_UGamer_Launcher
             string minutes = minutesBox.Text;
             string seconds = secondsBox.Text;
 
-            string obtained = DateFix(obtainedDatePicker.Value.ToString("u"));
-            string startDate = DateFix(startDatePicker.Value.ToString("u"));
-            string endDate = DateFix(endDatePicker.Value.ToString("u"));
+            string obtained;
+            string startDate;
+            string endDate;
+
+            if (IgnoreObtained.Checked == false)
+                obtained = DateFix(obtainedDatePicker.Value.ToString("u"));
+            else
+                obtained = "";
+
+            if (IgnoreStart.Checked == false)
+                startDate = DateFix(startDatePicker.Value.ToString("u"));
+            else
+                startDate = "";
+
+            if (IgnoreEnd.Checked == false)
+                endDate = DateFix(endDatePicker.Value.ToString("u"));
+            else
+                endDate = "";
 
             string notes = notesBox.Text;
             string launchCode = launchBox.Text;
@@ -94,7 +109,6 @@ namespace The_UGamer_Launcher
             string rating, string hours, string minutes, string seconds, string obtained, string startDate,
                 string endDate, string launchCode, string notes, string newsCode, string wikiCode)
         {
-
             int hoursInt = 0;
             int minsInt = 0;
             int secsInt = 0;
@@ -316,8 +330,6 @@ namespace The_UGamer_Launcher
                     newSecondsString = seconds;
                 }
 
-                
-
                 if (hoursInt < 10 && hoursInt > 0)
                     newHoursString = "0" + hours;
                 if (minsInt < 10 && minsInt > 0)
@@ -347,11 +359,40 @@ namespace The_UGamer_Launcher
                     secondsBox.Text = Convert.ToString(secsInt);
                 else
                     secondsBox.Text = newSecondsString;
+                
+                string obtainedEntry = dt.Rows[z][6].ToString();
+                string startDateEntry = dt.Rows[z][7].ToString();
+                string endDateEntry = dt.Rows[z][8].ToString();
+                
+                try
+                {
+                    obtainedDatePicker.Text = obtainedEntry;
+                }
+                catch (FormatException h)
+                {
+                    IgnoreObtained.Checked = true;
+                }
 
+                try
+                {
+                    startDatePicker.Text = startDateEntry;
+                }
+                catch (FormatException f)
+                {
+                    IgnoreStart.Checked = true;
+                }
 
-                obtainedDatePicker.Text = dt.Rows[z][6].ToString();
-                startDatePicker.Text = dt.Rows[z][7].ToString();
-                endDatePicker.Text = dt.Rows[z][8].ToString();
+                try
+                {
+                    endDatePicker.Text = endDateEntry;
+                }
+                catch (FormatException g)
+                {
+                    IgnoreEnd.Checked = true;
+                }
+                
+                
+                
                 notesBox.Text = dt.Rows[z][9].ToString();
                 launchBox.Text = dt.Rows[z][10].ToString();
                 newsURLBox.Text = dt.Rows[z][11].ToString();
@@ -381,10 +422,25 @@ namespace The_UGamer_Launcher
             string hours = hoursBox.Text;
             string minutes = minutesBox.Text;
             string seconds = secondsBox.Text;
-            
-            string obtained = DateFix(obtainedDatePicker.Value.ToString("u"));
-            string startDate = DateFix(startDatePicker.Value.ToString("u"));
-            string endDate = DateFix(endDatePicker.Value.ToString("u"));
+
+            string obtained;
+            string startDate;
+            string endDate;
+
+            if (IgnoreObtained.Checked == false)
+                obtained = DateFix(obtainedDatePicker.Value.ToString("u"));
+            else
+                obtained = "";
+
+            if (IgnoreStart.Checked == false)
+                startDate = DateFix(startDatePicker.Value.ToString("u"));
+            else
+                startDate = "";
+
+            if (IgnoreEnd.Checked == false)
+                endDate = DateFix(endDatePicker.Value.ToString("u"));
+            else
+                endDate = "";
 
             string launchCode = launchBox.Text;
             string notes = notesBox.Text;
@@ -640,6 +696,9 @@ namespace The_UGamer_Launcher
             hoursBox.Text = "";
             minutesBox.Text = "";
             secondsBox.Text = "";
+            IgnoreObtained.Checked = false;
+            IgnoreStart.Checked = false;
+            IgnoreEnd.Checked = false;
             obtainedDatePicker.Value = today2;
             startDatePicker.Value = today2;
             endDatePicker.Value = today2;

@@ -54,6 +54,9 @@
             this.obtainedDatePicker = new System.Windows.Forms.DateTimePicker();
             this.startDatePicker = new System.Windows.Forms.DateTimePicker();
             this.endDatePicker = new System.Windows.Forms.DateTimePicker();
+            this.IgnoreObtained = new System.Windows.Forms.CheckBox();
+            this.IgnoreStart = new System.Windows.Forms.CheckBox();
+            this.IgnoreEnd = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // labels
@@ -80,7 +83,7 @@
             this.titleBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.titleBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.titleBox.Location = new System.Drawing.Point(104, 8);
-            this.titleBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.titleBox.Margin = new System.Windows.Forms.Padding(2);
             this.titleBox.Name = "titleBox";
             this.titleBox.Size = new System.Drawing.Size(415, 20);
             this.titleBox.TabIndex = 1;
@@ -91,7 +94,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.platformBox.Location = new System.Drawing.Point(104, 34);
-            this.platformBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.platformBox.Margin = new System.Windows.Forms.Padding(2);
             this.platformBox.Name = "platformBox";
             this.platformBox.Size = new System.Drawing.Size(415, 20);
             this.platformBox.TabIndex = 2;
@@ -102,7 +105,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ratingBox.Location = new System.Drawing.Point(104, 82);
-            this.ratingBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ratingBox.Margin = new System.Windows.Forms.Padding(2);
             this.ratingBox.Name = "ratingBox";
             this.ratingBox.Size = new System.Drawing.Size(415, 20);
             this.ratingBox.TabIndex = 4;
@@ -112,7 +115,7 @@
             this.hoursBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.hoursBox.Location = new System.Drawing.Point(104, 106);
-            this.hoursBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.hoursBox.Margin = new System.Windows.Forms.Padding(2);
             this.hoursBox.Name = "hoursBox";
             this.hoursBox.Size = new System.Drawing.Size(88, 20);
             this.hoursBox.TabIndex = 5;
@@ -124,7 +127,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.launchBox.Location = new System.Drawing.Point(104, 214);
-            this.launchBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.launchBox.Margin = new System.Windows.Forms.Padding(2);
             this.launchBox.Name = "launchBox";
             this.launchBox.Size = new System.Drawing.Size(415, 20);
             this.launchBox.TabIndex = 9;
@@ -135,7 +138,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.notesBox.Location = new System.Drawing.Point(104, 294);
-            this.notesBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.notesBox.Margin = new System.Windows.Forms.Padding(2);
             this.notesBox.Multiline = true;
             this.notesBox.Name = "notesBox";
             this.notesBox.Size = new System.Drawing.Size(415, 48);
@@ -148,7 +151,7 @@
             this.addEntryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addEntryButton.ForeColor = System.Drawing.Color.White;
             this.addEntryButton.Location = new System.Drawing.Point(11, 353);
-            this.addEntryButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.addEntryButton.Margin = new System.Windows.Forms.Padding(2);
             this.addEntryButton.Name = "addEntryButton";
             this.addEntryButton.Size = new System.Drawing.Size(88, 27);
             this.addEntryButton.TabIndex = 11;
@@ -163,7 +166,7 @@
             this.editEntry.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.editEntry.ForeColor = System.Drawing.Color.White;
             this.editEntry.Location = new System.Drawing.Point(104, 353);
-            this.editEntry.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.editEntry.Margin = new System.Windows.Forms.Padding(2);
             this.editEntry.Name = "editEntry";
             this.editEntry.Size = new System.Drawing.Size(88, 27);
             this.editEntry.TabIndex = 12;
@@ -190,7 +193,7 @@
             this.replaceEntry.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.replaceEntry.ForeColor = System.Drawing.Color.White;
             this.replaceEntry.Location = new System.Drawing.Point(196, 353);
-            this.replaceEntry.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.replaceEntry.Margin = new System.Windows.Forms.Padding(2);
             this.replaceEntry.Name = "replaceEntry";
             this.replaceEntry.Size = new System.Drawing.Size(88, 27);
             this.replaceEntry.TabIndex = 14;
@@ -214,7 +217,7 @@
             this.deleteEntryButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.deleteEntryButton.ForeColor = System.Drawing.Color.White;
             this.deleteEntryButton.Location = new System.Drawing.Point(288, 353);
-            this.deleteEntryButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.deleteEntryButton.Margin = new System.Windows.Forms.Padding(2);
             this.deleteEntryButton.Name = "deleteEntryButton";
             this.deleteEntryButton.Size = new System.Drawing.Size(88, 27);
             this.deleteEntryButton.TabIndex = 16;
@@ -252,7 +255,7 @@
             this.minutesBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.minutesBox.Location = new System.Drawing.Point(235, 106);
-            this.minutesBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.minutesBox.Margin = new System.Windows.Forms.Padding(2);
             this.minutesBox.Name = "minutesBox";
             this.minutesBox.Size = new System.Drawing.Size(88, 20);
             this.minutesBox.TabIndex = 18;
@@ -275,7 +278,7 @@
             this.secondsBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.secondsBox.Location = new System.Drawing.Point(376, 106);
-            this.secondsBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.secondsBox.Margin = new System.Windows.Forms.Padding(2);
             this.secondsBox.Name = "secondsBox";
             this.secondsBox.Size = new System.Drawing.Size(88, 20);
             this.secondsBox.TabIndex = 20;
@@ -287,7 +290,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.newsURLBox.Location = new System.Drawing.Point(104, 238);
-            this.newsURLBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.newsURLBox.Margin = new System.Windows.Forms.Padding(2);
             this.newsURLBox.Name = "newsURLBox";
             this.newsURLBox.Size = new System.Drawing.Size(415, 20);
             this.newsURLBox.TabIndex = 22;
@@ -298,7 +301,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.wikiURLBox.Location = new System.Drawing.Point(104, 262);
-            this.wikiURLBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.wikiURLBox.Margin = new System.Windows.Forms.Padding(2);
             this.wikiURLBox.Name = "wikiURLBox";
             this.wikiURLBox.Size = new System.Drawing.Size(415, 20);
             this.wikiURLBox.TabIndex = 23;
@@ -310,7 +313,7 @@
             this.clearFieldsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.clearFieldsButton.ForeColor = System.Drawing.Color.White;
             this.clearFieldsButton.Location = new System.Drawing.Point(11, 322);
-            this.clearFieldsButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.clearFieldsButton.Margin = new System.Windows.Forms.Padding(2);
             this.clearFieldsButton.Name = "clearFieldsButton";
             this.clearFieldsButton.Size = new System.Drawing.Size(88, 27);
             this.clearFieldsButton.TabIndex = 24;
@@ -347,10 +350,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.obtainedDatePicker.CustomFormat = "u";
-            this.obtainedDatePicker.Location = new System.Drawing.Point(104, 135);
-            this.obtainedDatePicker.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.obtainedDatePicker.Location = new System.Drawing.Point(165, 135);
+            this.obtainedDatePicker.Margin = new System.Windows.Forms.Padding(2);
             this.obtainedDatePicker.Name = "obtainedDatePicker";
-            this.obtainedDatePicker.Size = new System.Drawing.Size(415, 20);
+            this.obtainedDatePicker.Size = new System.Drawing.Size(354, 20);
             this.obtainedDatePicker.TabIndex = 26;
             this.obtainedDatePicker.Value = new System.DateTime(2019, 2, 15, 0, 0, 0, 0);
             // 
@@ -360,10 +363,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.startDatePicker.CustomFormat = "u";
-            this.startDatePicker.Location = new System.Drawing.Point(104, 162);
+            this.startDatePicker.Location = new System.Drawing.Point(165, 162);
             this.startDatePicker.Margin = new System.Windows.Forms.Padding(2);
             this.startDatePicker.Name = "startDatePicker";
-            this.startDatePicker.Size = new System.Drawing.Size(415, 20);
+            this.startDatePicker.Size = new System.Drawing.Size(354, 20);
             this.startDatePicker.TabIndex = 27;
             this.startDatePicker.Value = new System.DateTime(2019, 2, 15, 0, 0, 0, 0);
             // 
@@ -373,18 +376,54 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.endDatePicker.CustomFormat = "u";
-            this.endDatePicker.Location = new System.Drawing.Point(104, 190);
+            this.endDatePicker.Location = new System.Drawing.Point(165, 190);
             this.endDatePicker.Margin = new System.Windows.Forms.Padding(2);
             this.endDatePicker.Name = "endDatePicker";
-            this.endDatePicker.Size = new System.Drawing.Size(415, 20);
+            this.endDatePicker.Size = new System.Drawing.Size(354, 20);
             this.endDatePicker.TabIndex = 28;
             this.endDatePicker.Value = new System.DateTime(2019, 2, 15, 0, 0, 0, 0);
+            // 
+            // IgnoreObtained
+            // 
+            this.IgnoreObtained.AutoSize = true;
+            this.IgnoreObtained.BackColor = System.Drawing.Color.White;
+            this.IgnoreObtained.Location = new System.Drawing.Point(104, 137);
+            this.IgnoreObtained.Name = "IgnoreObtained";
+            this.IgnoreObtained.Size = new System.Drawing.Size(56, 17);
+            this.IgnoreObtained.TabIndex = 29;
+            this.IgnoreObtained.Text = "Ignore";
+            this.IgnoreObtained.UseVisualStyleBackColor = false;
+            // 
+            // IgnoreStart
+            // 
+            this.IgnoreStart.AutoSize = true;
+            this.IgnoreStart.BackColor = System.Drawing.Color.White;
+            this.IgnoreStart.Location = new System.Drawing.Point(104, 165);
+            this.IgnoreStart.Name = "IgnoreStart";
+            this.IgnoreStart.Size = new System.Drawing.Size(56, 17);
+            this.IgnoreStart.TabIndex = 30;
+            this.IgnoreStart.Text = "Ignore";
+            this.IgnoreStart.UseVisualStyleBackColor = false;
+            // 
+            // IgnoreEnd
+            // 
+            this.IgnoreEnd.AutoSize = true;
+            this.IgnoreEnd.BackColor = System.Drawing.Color.White;
+            this.IgnoreEnd.Location = new System.Drawing.Point(104, 190);
+            this.IgnoreEnd.Name = "IgnoreEnd";
+            this.IgnoreEnd.Size = new System.Drawing.Size(56, 17);
+            this.IgnoreEnd.TabIndex = 31;
+            this.IgnoreEnd.Text = "Ignore";
+            this.IgnoreEnd.UseVisualStyleBackColor = false;
             // 
             // AddGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(533, 391);
+            this.Controls.Add(this.IgnoreEnd);
+            this.Controls.Add(this.IgnoreStart);
+            this.Controls.Add(this.IgnoreObtained);
             this.Controls.Add(this.endDatePicker);
             this.Controls.Add(this.startDatePicker);
             this.Controls.Add(this.obtainedDatePicker);
@@ -411,7 +450,7 @@
             this.Controls.Add(this.titleBox);
             this.Controls.Add(this.labels);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "AddGame";
             this.Text = "Entries";
             this.ResumeLayout(false);
@@ -446,5 +485,8 @@
         private System.Windows.Forms.DateTimePicker obtainedDatePicker;
         private System.Windows.Forms.DateTimePicker startDatePicker;
         private System.Windows.Forms.DateTimePicker endDatePicker;
+        private System.Windows.Forms.CheckBox IgnoreObtained;
+        private System.Windows.Forms.CheckBox IgnoreStart;
+        private System.Windows.Forms.CheckBox IgnoreEnd;
     }
 }
