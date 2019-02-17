@@ -585,8 +585,8 @@ namespace The_UGamer_Launcher
                 {
                     cmd.ExecuteNonQuery();
                     this.Text = "Edit an entry... Game edited.";
-                    FillTable();
                     con.Close();
+                    FillTable();
                 }
                 catch (OleDbException e)
                 {
