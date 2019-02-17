@@ -24,7 +24,6 @@ namespace The_UGamer_Launcher
         {
             InitializeComponent();
             frm1 = parent;
-            con.Open();
         }
 
         private void Settings_Load(object sender, EventArgs e)
@@ -161,9 +160,9 @@ namespace The_UGamer_Launcher
             
             OleDbCommand cmd = new OleDbCommand("ALTER TABLE " + table2 + " ADD " + name2 + " " + type2 + ";", con);
 
-            // con.Open();
+            con.Open();
             cmd.ExecuteNonQuery();
-            // con.Close();
+            con.Close();
         }
     }
 }

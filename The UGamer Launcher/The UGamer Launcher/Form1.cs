@@ -133,8 +133,7 @@ namespace The_UGamer_Launcher
         private void Form1_Load(object sender, EventArgs e)
         {
             dataTable.Visible = false;
-
-            con.Open();
+            
             NotificationSystem();
             ImageNotificationSystem();
             addEntryButton.Text = "Notifications (" + globalNotificationTable.Rows.Count.ToString() + ")";
@@ -206,14 +205,14 @@ namespace The_UGamer_Launcher
 
             dataTable.Visible = true;
             LoadingLabel.Visible = false;
-
-            // con.Close();
         }
 
         delegate void StringArgReturningVoidDelegate(string text);
 
         private void NotificationSystem()
         {
+            con.Open();
+
             OleDbCommand cmd = new OleDbCommand("SELECT * FROM Notifications", con);
             OleDbCommand cmd2 = new OleDbCommand("SELECT * FROM Table1", con);
             OleDbCommand addNowPlayingNotif = new OleDbCommand("INSERT INTO Notifications ([DateAdded], [NotificationType], [GameTitle], [Message], [Action]) VALUES (@DateAdded, @NotificationType, @GameTitle, @Message, @Action);", con);
@@ -350,8 +349,7 @@ namespace The_UGamer_Launcher
                     }
                 }
             }
-
-
+            
             NotificationsDGV.DataSource = null;
             NotificationsDGV.Update();
             NotificationsDGV.Refresh();
@@ -360,10 +358,14 @@ namespace The_UGamer_Launcher
             DataTable notifTableNew = new DataTable();
             da3.Fill(notifTableNew);
             NotificationsDGV.DataSource = notifTableNew;
+
+            con.Close();
         }
 
         private void ImageNotificationSystem()
         {
+            con.Open();
+
             OleDbCommand cmd = new OleDbCommand("SELECT * FROM Notifications", con);
             OleDbCommand cmd2 = new OleDbCommand("SELECT * FROM Table1", con);
             OleDbCommand addNowPlayingNotif = new OleDbCommand("INSERT INTO Notifications ([DateAdded], [NotificationType], [GameTitle], [Message], [Action]) VALUES (@DateAdded, @NotificationType, @GameTitle, @Message, @Action);", con);
@@ -505,6 +507,8 @@ namespace The_UGamer_Launcher
             NotificationsDGV.DataSource = notifTableNew;
             
             globalNotificationTable = notifTableNew;
+
+            con.Close();
         }
 
         private bool CheckForDupes(DataTable table, int colIndex, DataRow row, string notifType)
@@ -646,13 +650,13 @@ namespace The_UGamer_Launcher
             int y = 0, z = 0;
             
             OleDbCommand cmd = new OleDbCommand("SELECT * FROM Table1", con);
-            // con.Open();
+            con.Open();
             cmd.CommandType = CommandType.Text;
             OleDbDataAdapter da = new OleDbDataAdapter(cmd);
             DataTable newTable = new DataTable();
             da.Fill(newTable);
 
-            // con.Close();
+            con.Close();
 
             // This makes the whole database into an array.
 
@@ -864,14 +868,14 @@ namespace The_UGamer_Launcher
             dataTable.Update();
             dataTable.Refresh();
             OleDbCommand cmd = new OleDbCommand("SELECT * FROM Table1", con);
-            // con.Open();
+            con.Open();
             cmd.CommandType = CommandType.Text;
             OleDbDataAdapter da = new OleDbDataAdapter(cmd);
             DataTable newTable = new DataTable();
             da.Fill(newTable);
             dataTable.DataSource = newTable;
             dataTable.Sort(dataTable.Columns[0], ListSortDirection.Ascending);
-            // con.Close();
+            con.Close();
 
             int entryCount = dataTable.Rows.Count;
             if (entryCount != 1)
@@ -1026,7 +1030,7 @@ namespace The_UGamer_Launcher
 
             if (result == DialogResult.Yes)
             {
-                // con.Open();
+                con.Open();
 
                 delCmd.ExecuteNonQuery();
 
@@ -1092,6 +1096,7 @@ namespace The_UGamer_Launcher
                 {
                     cmd.ExecuteNonQuery();
                     this.Text = "Edit an entry... Game edited.";
+                    con.Close();
                     FillTable();
                 }
                 catch (OleDbException e)
@@ -1099,6 +1104,7 @@ namespace The_UGamer_Launcher
                     caption = "ERROR: Notes/Comments field too long.";
                     message = "Your notes/comments field is too long. Please reduce to 255 characters.";
                     MessageBox.Show(message, caption);
+                    con.Close();
                 }
 
             }
@@ -1112,13 +1118,13 @@ namespace The_UGamer_Launcher
         private void FillTable()
         {
             OleDbCommand cmd = new OleDbCommand("SELECT * FROM Table1", con);
-            // con.Open();
+            con.Open();
             cmd.CommandType = CommandType.Text;
             OleDbDataAdapter da = new OleDbDataAdapter(cmd);
             newTable = new DataTable();
             da.Fill(newTable);
 
-            // con.Close();
+            con.Close();
         }
 
         private void NotificationsDGV_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -1147,13 +1153,13 @@ namespace The_UGamer_Launcher
         private void EditSpecificEntry(string title)
         {
             OleDbCommand cmd = new OleDbCommand("SELECT * FROM Table1", con);
-            // con.Open();
+            con.Open();
             cmd.CommandType = CommandType.Text;
             OleDbDataAdapter da = new OleDbDataAdapter(cmd);
             DataTable editingTable = new DataTable();
             da.Fill(editingTable);
 
-            // con.Close();
+            con.Close();
 
             int z = 0, y = 0;
             int columnIndex = 1; // Name column
@@ -1214,13 +1220,13 @@ namespace The_UGamer_Launcher
         {
             OleDbCommand delCmd = new OleDbCommand("DELETE FROM Notifications WHERE GameTitle=\"" + title + "\";", con);
             
-            // con.Open();
+            con.Open();
 
             delCmd.ExecuteNonQuery();
 
             RefreshGrid();
 
-            // con.Close();
+            con.Close();
 
             return;
         }

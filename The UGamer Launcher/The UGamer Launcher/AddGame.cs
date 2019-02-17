@@ -36,14 +36,14 @@ namespace The_UGamer_Launcher
             }
             catch (FileNotFoundException e) { }
 
-            con.Open();
+            
             FillTable();
         }
 
         private void FillTable()
         {
-            
-            
+            con.Open();
+
             OleDbCommand cmd = new OleDbCommand("SELECT * FROM Table1", con);
             
             cmd.CommandType = CommandType.Text;
@@ -51,7 +51,7 @@ namespace The_UGamer_Launcher
             newTable = new DataTable();
             da.Fill(newTable);
 
-            // con.Close();
+            con.Close();
 
             DataTable dt = newTable;
             AutoCompleteStringCollection autoFill = new AutoCompleteStringCollection();
@@ -146,7 +146,8 @@ namespace The_UGamer_Launcher
             
             OleDbCommand cmd = new OleDbCommand("INSERT INTO Table1 (Title, Platform, Status, Rating, PlayTime, Obtained, StartDate, EndDate, Notes, Launch, News, Wiki) VALUES (@Title, @Platform, @Status, @Rating, @PlayTime, @Obtained, @StartDate, @EndDate, @Notes, @Launch, @News, @Wiki);", con);
 
-            // con.Open();
+            con.Open();
+
             title.Trim();
             platform.Trim();
             status.Trim();
@@ -229,12 +230,14 @@ namespace The_UGamer_Launcher
                     {
                         launchBox.Text = "steam://rungameid/";
                     }
+                    con.Close();
                 }
                 catch (OleDbException e)
                 {
                     string caption = "ERROR: Notes/Comments field too long.";
                     string message = "Your notes/comments field is too long. Please reduce to 255 characters.";
                     MessageBox.Show(message, caption);
+                    con.Close();
                 }
                 
             }
@@ -251,13 +254,13 @@ namespace The_UGamer_Launcher
             
 
             OleDbCommand cmd = new OleDbCommand("SELECT * FROM Table1", con);
-            // con.Open();
+            con.Open();
             cmd.CommandType = CommandType.Text;
             OleDbDataAdapter da = new OleDbDataAdapter(cmd);
             DataTable newTable = new DataTable();
             da.Fill(newTable);
 
-            // con.Close();
+            con.Close();
 
             // DataTable dt = frm1.collectionDataSet4.Table1;
             DataTable dt = newTable;
@@ -516,7 +519,7 @@ namespace The_UGamer_Launcher
 
             if (result == DialogResult.Yes)
             {
-                // con.Open();
+                con.Open();
 
                 delCmd.ExecuteNonQuery();
 
@@ -583,12 +586,14 @@ namespace The_UGamer_Launcher
                     cmd.ExecuteNonQuery();
                     this.Text = "Edit an entry... Game edited.";
                     FillTable();
+                    con.Close();
                 }
                 catch (OleDbException e)
                 {
                     caption = "ERROR: Notes/Comments field too long.";
                     message = "Your notes/comments field is too long. Please reduce to 255 characters.";
                     MessageBox.Show(message, caption);
+                    con.Close();
                 }
                 replaceEntry.Visible = false;
                 deleteEntryButton.Visible = false;
@@ -621,14 +626,18 @@ namespace The_UGamer_Launcher
             DialogResult result = MessageBox.Show(message, title, buttons);
             if (result == DialogResult.Yes)
             {
-                // con.Open();
+                con.Open();
 
                 delCmd.ExecuteNonQuery();
 
                 this.Text = "Entries... removed \"" + originalTitleString + "\"";
                 replaceEntry.Visible = false;
                 deleteEntryButton.Visible = false;
+
+                con.Close();
                 FillTable();
+
+                
 
                 return;
             }

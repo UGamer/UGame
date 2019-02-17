@@ -418,7 +418,7 @@ namespace The_UGamer_Launcher
             OleDbCommand delCmd = new OleDbCommand("DELETE FROM Table1 WHERE Title=\"" + nameLabel.Text + "\";", con);
             OleDbCommand cmd = new OleDbCommand("INSERT INTO Table1 (Title, Platform, Status, Rating, PlayTime, Obtained, StartDate, EndDate, Notes, Launch) VALUES (@Title, @Platform, @Status, @Rating, @PlayTime, @Obtained, @StartDate, @EndDate, @Notes, @Launch);", con);
 
-            // con.Open();
+            con.Open();
 
             delCmd.ExecuteNonQuery();
 
@@ -512,6 +512,8 @@ namespace The_UGamer_Launcher
             PauseTimeButton.Text = "Pause Playing";
             PauseTimeButton.Visible = false;
             gameTime.Restart();
+
+            con.Close();
         }
 
         FormWindowState LastWindowState = FormWindowState.Normal;
