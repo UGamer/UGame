@@ -621,7 +621,7 @@ namespace The_UGamer_Launcher
                 NotificationsDGV.Visible = false;
                 dataTable.Visible = true;
                 displayData = false;
-                addEntryButton.Text = "Notifications";
+                addEntryButton.Text = "Notifications (" + globalNotificationTable.Rows.Count.ToString() + ")";
             }
 
             else
@@ -1129,6 +1129,7 @@ namespace The_UGamer_Launcher
 
         private void NotificationsDGV_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            // con.Open();
             string changeValue;
             string titleValue;
             try
@@ -1148,18 +1149,19 @@ namespace The_UGamer_Launcher
                 }
             }
             catch (ArgumentOutOfRangeException f) { }
+            con.Close();
         }
 
         private void EditSpecificEntry(string title)
         {
             OleDbCommand cmd = new OleDbCommand("SELECT * FROM Table1", con);
-            con.Open();
+            
             cmd.CommandType = CommandType.Text;
             OleDbDataAdapter da = new OleDbDataAdapter(cmd);
             DataTable editingTable = new DataTable();
             da.Fill(editingTable);
 
-            con.Close();
+            
 
             int z = 0, y = 0;
             int columnIndex = 1; // Name column
@@ -1219,14 +1221,14 @@ namespace The_UGamer_Launcher
         private void RemoveFromNotifications(string title)
         {
             OleDbCommand delCmd = new OleDbCommand("DELETE FROM Notifications WHERE GameTitle=\"" + title + "\";", con);
-            
+
             con.Open();
 
             delCmd.ExecuteNonQuery();
 
-            RefreshGrid();
-
             con.Close();
+
+            RefreshGrid();
 
             return;
         }

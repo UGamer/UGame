@@ -175,8 +175,9 @@ namespace The_UGamer_Launcher
         private void button_Click(object sender, EventArgs e, string launchString3, bool exePath3, bool batPath3, bool hasArgs3)
         {
             Process game = new Process();
+            Uri launchUrl;
             game.StartInfo.FileName = "";
-            if ((exePath3 == true || batPath3 == true))
+            if (exePath3 == true || batPath3 == true)
             {
                 if (hasArgs3 == true)
                 {
@@ -207,11 +208,17 @@ namespace The_UGamer_Launcher
                     }
                 }
             }
-            else
+            else if (launchString3 == "")
             {
                 gameTime.Start();
             }
-            
+            else
+            {
+                gameTime.Start();
+                launchUrl = new Uri(launchString3);
+                launcher.Url = launchUrl;
+            }
+
             /*
             timePlaying = new Thread(new ThreadStart(DisplaySeconds));
             timePlaying.Start();
@@ -377,6 +384,7 @@ namespace The_UGamer_Launcher
             int playHours = playMinutes / 60;
             playMinutes %= 60;
 
+            gameTime.Restart();
 
             string message = "";
             if (playHours != 0 && playMinutes != 0 && playSeconds != 0)
@@ -412,9 +420,7 @@ namespace The_UGamer_Launcher
                 message = "You played " + nameLabel.Text + " for " + playSeconds + " seconds!";
             }
             string caption = "Play Time";
-
-            string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Collection.accdb";
-            OleDbConnection con = new OleDbConnection(connectionString);
+            
             OleDbCommand delCmd = new OleDbCommand("DELETE FROM Table1 WHERE Title=\"" + nameLabel.Text + "\";", con);
             OleDbCommand cmd = new OleDbCommand("INSERT INTO Table1 (Title, Platform, Status, Rating, PlayTime, Obtained, StartDate, EndDate, Notes, Launch) VALUES (@Title, @Platform, @Status, @Rating, @PlayTime, @Obtained, @StartDate, @EndDate, @Notes, @Launch);", con);
 
@@ -511,7 +517,6 @@ namespace The_UGamer_Launcher
             isPaused = false;
             PauseTimeButton.Text = "Pause Playing";
             PauseTimeButton.Visible = false;
-            gameTime.Restart();
 
             con.Close();
         }
