@@ -358,6 +358,7 @@ namespace The_UGamer_Launcher
             DataTable notifTableNew = new DataTable();
             da3.Fill(notifTableNew);
             NotificationsDGV.DataSource = notifTableNew;
+            globalNotificationTable = notifTableNew;
 
             con.Close();
         }
@@ -505,7 +506,6 @@ namespace The_UGamer_Launcher
             DataTable notifTableNew = new DataTable();
             da3.Fill(notifTableNew);
             NotificationsDGV.DataSource = notifTableNew;
-            
             globalNotificationTable = notifTableNew;
 
             con.Close();
@@ -1147,9 +1147,19 @@ namespace The_UGamer_Launcher
                 {
                     RemoveFromNotifications(titleValue);
                 }
+                // PLEASE PUT 
+                OleDbCommand refreshCmd = new OleDbCommand("SELECT * FROM Notifications", con);
+                con.Open();
+                refreshCmd.CommandType = CommandType.Text;
+                OleDbDataAdapter da = new OleDbDataAdapter(refreshCmd);
+                DataTable newTableNotif = new DataTable();
+                da.Fill(newTableNotif);
+                con.Close();
+
+                globalNotificationTable = newTableNotif;
             }
             catch (ArgumentOutOfRangeException f) { }
-            con.Close();
+            
         }
 
         private void EditSpecificEntry(string title)
@@ -1160,8 +1170,6 @@ namespace The_UGamer_Launcher
             OleDbDataAdapter da = new OleDbDataAdapter(cmd);
             DataTable editingTable = new DataTable();
             da.Fill(editingTable);
-
-            
 
             int z = 0, y = 0;
             int columnIndex = 1; // Name column

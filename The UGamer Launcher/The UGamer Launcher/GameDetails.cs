@@ -227,6 +227,7 @@ namespace The_UGamer_Launcher
             button1.Visible = false;
             stopTime.Visible = true;
             PauseTimeButton.Visible = true;
+            discardButton.Visible = true;
             didPlay = true;
             gameRunning = true;
             refresh = true;
@@ -517,6 +518,7 @@ namespace The_UGamer_Launcher
             isPaused = false;
             PauseTimeButton.Text = "Pause Playing";
             PauseTimeButton.Visible = false;
+            discardButton.Visible = false;
 
             con.Close();
         }
@@ -787,6 +789,31 @@ namespace The_UGamer_Launcher
                 gameTime.Start();
                 isPaused = false;
                 PauseTimeButton.Text = "Pause Playing";
+            }
+        }
+
+        private void discardButton_Click(object sender, EventArgs e)
+        {
+            gameTime.Stop();
+            string message = "Are you sure you want to discard your \"" + title + "\" session?";
+            string caption = "Discard Session?";
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            DialogResult result = MessageBox.Show(message, caption, buttons);
+            if (result == DialogResult.Yes)
+            {
+                gameTime.Restart();
+                didPlay = false;
+                stopTime.Visible = false;
+                PauseTimeButton.Visible = false;
+                button1.Visible = true;
+                isPaused = false;
+                PauseTimeButton.Text = "Pause Playing";
+                discardButton.Visible = false;
+            }
+            else
+            {
+                gameTime.Start();
+                return;
             }
         }
     }
