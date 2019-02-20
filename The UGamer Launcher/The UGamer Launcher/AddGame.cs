@@ -814,5 +814,11 @@ namespace The_UGamer_Launcher
             newDate = dateFix.Replace(newDate, "/");
             return newDate;
         }
+
+        private void AddGameButton_Click(object sender, EventArgs e)
+        {
+            AddGameOptions launchDecision = new AddGameOptions();
+            launchDecision.Show();
+        }
     }
 }

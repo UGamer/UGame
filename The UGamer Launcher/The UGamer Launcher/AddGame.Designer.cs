@@ -57,6 +57,7 @@
             this.IgnoreObtained = new System.Windows.Forms.CheckBox();
             this.IgnoreStart = new System.Windows.Forms.CheckBox();
             this.IgnoreEnd = new System.Windows.Forms.CheckBox();
+            this.AddGameButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // labels
@@ -406,11 +407,22 @@
             this.IgnoreEnd.Text = "Ignore";
             this.IgnoreEnd.UseVisualStyleBackColor = false;
             // 
+            // AddGameButton
+            // 
+            this.AddGameButton.Location = new System.Drawing.Point(754, 329);
+            this.AddGameButton.Name = "AddGameButton";
+            this.AddGameButton.Size = new System.Drawing.Size(26, 26);
+            this.AddGameButton.TabIndex = 32;
+            this.AddGameButton.Text = "+";
+            this.AddGameButton.UseVisualStyleBackColor = true;
+            this.AddGameButton.Click += new System.EventHandler(this.AddGameButton_Click);
+            // 
             // AddGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 602);
+            this.Controls.Add(this.AddGameButton);
             this.Controls.Add(this.IgnoreEnd);
             this.Controls.Add(this.IgnoreStart);
             this.Controls.Add(this.IgnoreObtained);
@@ -477,5 +489,6 @@
         private System.Windows.Forms.CheckBox IgnoreObtained;
         private System.Windows.Forms.CheckBox IgnoreStart;
         private System.Windows.Forms.CheckBox IgnoreEnd;
+        private System.Windows.Forms.Button AddGameButton;
     }
 }

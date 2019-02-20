@@ -68,6 +68,7 @@
     </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing.Common, Version=4.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Drawing.Common.4.5.1\lib\net461\System.Drawing.Common.dll</HintPath>
     </Reference>
@@ -87,6 +88,12 @@
     </Compile>
     <Compile Include="AddGame.Designer.cs">
       <DependentUpon>AddGame.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddGameOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddGameOptions.Designer.cs">
+      <DependentUpon>AddGameOptions.cs</DependentUpon>
     </Compile>
     <Compile Include="CollectionDataSet4.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -130,6 +137,9 @@
     </Compile>
     <EmbeddedResource Include="AddGame.resx">
       <DependentUpon>AddGame.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddGameOptions.resx">
+      <DependentUpon>AddGameOptions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

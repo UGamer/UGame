@@ -134,15 +134,15 @@ namespace The_UGamer_Launcher
         {
             dataTable.Visible = false;
             
+            // ------------ UNCOMMENT THIS WHEN DONE IMPLEMENTING
+            /* 
             NotificationSystem();
             ImageNotificationSystem();
             addEntryButton.Text = "Notifications (" + globalNotificationTable.Rows.Count.ToString() + ")";
+            */
 
-            // TODO: This line of code loads data into the 'notificationsSet.Notifications' table. You can move, or remove it, as needed.
             this.notificationsTableAdapter1.Fill(this.notificationsSet.Notifications);
-            // TODO: This line of code loads data into the 'notificationDataSet.Notifications' table. You can move, or remove it, as needed.
             this.notificationsTableAdapter.Fill(this.notificationDataSet.Notifications);
-            // TODO: This line of code loads data into the 'collectionDataSet5.Table1' table. You can move, or remove it, as needed.
             this.table1TableAdapter2.Fill(this.collectionDataSet4.Table1);
             // TODO: This line of code loads data into the 'collectionDataSet5.Themes' table. You can move, or remove it, as needed.
             try
