@@ -731,16 +731,15 @@ namespace The_UGamer_Launcher
                     launchString = pathFix.Replace(launchString, "/"); // This fixes .exe links automatically.
 
                 bool exePath = isExe(launchString);
-                bool batPath = isBat(launchString);
                 bool hasArgs = false;
 
-                if (exePath == true || batPath == true)
+                if (exePath == true)
                     hasArgs = hasArgsMethod(launchString);
 
                 gameWindow.Text = input;
                 gameWindow.Show();
                 gameWindow.DisplayInfo(input, input2, platform, status, rating,
-                    hours, obtained, startDate, endDate, notes, launchString, exePath, batPath,
+                    hours, obtained, startDate, endDate, notes, launchString, exePath,
                     newsString, wikiString, hasArgs);
                 noGameLabel.Visible = false;
                 y = 0;
@@ -754,12 +753,8 @@ namespace The_UGamer_Launcher
         {
             if (p.IndexOf(".exe") == -1)
                 return false;
-            else
-                return true;
-        }
-
-        private static bool isBat(string p)
-        {
+            if (p.IndexOf(".lnk") == -1)
+                return false;
             if (p.IndexOf(".bat") == -1)
                 return false;
             else

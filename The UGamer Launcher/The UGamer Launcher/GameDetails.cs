@@ -45,7 +45,7 @@ namespace The_UGamer_Launcher
         // Displays all the info for the game.
         public void DisplayInfo(string title, string input2, string platform,
             string status, string rating, string hours, string obtained,
-            string startDate, string endDate, string notes, string launchString2, bool exePath2, bool batPath2,
+            string startDate, string endDate, string notes, string launchString2, bool exePath2,
             string newsString2, string wikiString2, bool hasArgs2)
         {
             this.title = title;
@@ -145,7 +145,6 @@ namespace The_UGamer_Launcher
             if (launchString2 == "" || launchString2 == " ")
             {
                 button1.Text = "Track Time";
-                batPath2 = true;
             }
 
             bool hasPage = setURLs(newsString2, wikiString2);
@@ -167,17 +166,17 @@ namespace The_UGamer_Launcher
                 newsButton.Location = new Point(689, 345);
             }
 
-            button1.Click += (sender, EventArgs) => { button_Click(sender, EventArgs, launchString2, exePath2, batPath2, hasArgs2); }; // This passes the launch URL to the launch button.
+            button1.Click += (sender, EventArgs) => { button_Click(sender, EventArgs, launchString2, exePath2,  hasArgs2); }; // This passes the launch URL to the launch button.
         }
 
         private void button1_Click(object sender, EventArgs e) { }
 
-        private void button_Click(object sender, EventArgs e, string launchString3, bool exePath3, bool batPath3, bool hasArgs3)
+        private void button_Click(object sender, EventArgs e, string launchString3, bool exePath3, bool hasArgs3)
         {
             Process game = new Process();
             Uri launchUrl;
             game.StartInfo.FileName = "";
-            if (exePath3 == true || batPath3 == true)
+            if (exePath3 == true)
             {
                 if (hasArgs3 == true)
                 {
