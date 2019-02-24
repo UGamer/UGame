@@ -752,11 +752,11 @@ namespace The_UGamer_Launcher
         private static bool isExe(string p)
         {
             if (p.IndexOf(".exe") == -1)
-                return false;
+                return true;
             if (p.IndexOf(".lnk") == -1)
-                return false;
+                return true;
             if (p.IndexOf(".bat") == -1)
-                return false;
+                return true;
             else
                 return true;
         }

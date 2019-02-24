@@ -20,9 +20,13 @@ namespace The_UGamer_Launcher
         private bool gameRunning = false;
         private bool didPlay = false;
         private bool isPaused = false;
+        private bool hasImage = true;
         private string title;
         string newsUrl;
         string wikiUrl;
+        private Size browserSize = new Size(659, 88);
+        Overlay ingame = new Overlay();
+
         private static string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Collection.accdb";
         private OleDbConnection con = new OleDbConnection(connectionString);
 
@@ -39,7 +43,10 @@ namespace The_UGamer_Launcher
             {
                 this.BackgroundImage = ThemeAssign("backgroundImageUSING");
             }
-            catch (FileNotFoundException e) { }
+            catch (FileNotFoundException e)
+            {
+                hasImage = false;
+            }
         }
 
         // Displays all the info for the game.
@@ -191,10 +198,14 @@ namespace The_UGamer_Launcher
                     string fileName = launchString3.Substring(0, exeLoc + 5);
                     string args = launchString3.Substring(exeLoc + 5);
                     ProcessStartInfo procStartInfo = new ProcessStartInfo(fileName, args);
+
+                    ingame.Show();
+
                     gameTime.Start();
                     if (procStartInfo.FileName != "" && procStartInfo.FileName != " ")
                     {
                         Process.Start(procStartInfo);
+                        ingame.Show();
                     }
                 }
                 else
@@ -204,6 +215,7 @@ namespace The_UGamer_Launcher
                     if (procStartInfo.FileName != "" && procStartInfo.FileName != " ")
                     {
                         Process.Start(procStartInfo);
+                        ingame.Show();
                     }
                 }
             }
@@ -216,6 +228,7 @@ namespace The_UGamer_Launcher
                 gameTime.Start();
                 launchUrl = new Uri(launchString3);
                 launcher.Url = launchUrl;
+                ingame.Show();
             }
 
             /*
@@ -375,6 +388,7 @@ namespace The_UGamer_Launcher
         {
             // timePlaying.Abort();
 
+            ingame.Close();
             gameTime.Stop();
             gameRunning = false;
             int seconds = Convert.ToInt32(gameTime.ElapsedMilliseconds / 1000);
@@ -559,7 +573,6 @@ namespace The_UGamer_Launcher
                     // Restored!
                 }
             }
-
         }
 
         private void newsButton_Click(object sender, EventArgs e)
@@ -581,7 +594,6 @@ namespace The_UGamer_Launcher
                 // Create a browser component
                 chromeBrowser = new ChromiumWebBrowser(news);
                 // Add it to the form and fill it to the form window.
-                Size browserSize = new Size(659, 88);
                 chromeBrowser.Size = browserSize;
                 chromeBrowser.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Top);
                 this.browserDock.Controls.Add(chromeBrowser);
@@ -594,7 +606,6 @@ namespace The_UGamer_Launcher
                 // Create a browser component
                 chromeBrowser = new ChromiumWebBrowser(news);
                 // Add it to the form and fill it to the form window.
-                Size browserSize = new Size(659, 88);
                 chromeBrowser.Size = browserSize;
                 chromeBrowser.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Top);
                 this.browserDock.Controls.Add(chromeBrowser);
@@ -608,7 +619,7 @@ namespace The_UGamer_Launcher
                 // Create a browser component
                 chromeBrowser = new ChromiumWebBrowser(news);
                 // Add it to the form and fill it to the form window.
-                Size browserSize = new Size(659, 88);
+                
                 chromeBrowser.Size = browserSize;
                 chromeBrowser.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Top);
                 this.browserDock.Controls.Add(chromeBrowser);
@@ -814,6 +825,54 @@ namespace The_UGamer_Launcher
                 gameTime.Start();
                 return;
             }
+        }
+
+        private void BrowserButton_Click(object sender, EventArgs e)
+        {
+            BrowserButton.Visible = false;
+            BackButton.Visible = true;
+
+            gamePicture.Visible = false;
+            noImageText.Visible = false;
+            nameLabel.Visible = false;
+            panel1.Visible = false;
+            notesLabel.Visible = false;
+            notesBox.Visible = false;
+
+            // Size fullBrowserSize = new Size(835, 304);
+            Size fullBrowserSize = new Size(1280, 720);
+            Point fullBrowserLocation = new Point(8, 20);
+
+            browserDock.Size = fullBrowserSize;
+            browserDock.Location = fullBrowserLocation;
+
+            // chromeBrowser.Size = fullBrowserSize;
+
+            browserDock.Visible = true;
+            newsButton.Visible = true;
+            wikiButton.Visible = true;
+        }
+
+        private void BackButton_Click(object sender, EventArgs e)
+        {
+            BrowserButton.Visible = true;
+            BackButton.Visible = false;
+
+            gamePicture.Visible = true;
+
+            if (hasImage == false)
+                noImageText.Visible = true;
+
+            nameLabel.Visible = true;
+            panel1.Visible = true;
+            notesLabel.Visible = true;
+            notesBox.Visible = true;
+
+            browserDock.Visible = false;
+            newsButton.Visible = false;
+            wikiButton.Visible = false;
+
+            browserDock.Size = browserSize;
         }
     }
 }
