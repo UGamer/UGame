@@ -17,6 +17,12 @@ namespace The_UGamer_Launcher
         Regex dateFix = new Regex("-");
         private static string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Collection.accdb";
         private OleDbConnection con = new OleDbConnection(connectionString);
+        private string[] linkTitles;
+        private string[] linkURLs;
+        private string links;
+        private string globalLaunch = "";
+        AddGameOptions launchDecision;
+        AddLinks linkDecision;
 
         public AddGame(Form1 parent, bool refreshSignal)
         {
@@ -98,8 +104,14 @@ namespace The_UGamer_Launcher
 
             string notes = notesBox.Text;
             string launchCode = launchBox.Text;
-            string newsCode = newsURLBox.Text;
-            string wikiCode = wikiURLBox.Text;
+
+            string link1Title = link1TitleBox.Text;
+            string link2Title = link2TitleBox.Text;
+            
+            string wikiURL = wikiURLBox.Text;
+
+            string newsCode = link1TitleBox.Text + "[URL]" + newsURLBox.Text;
+            string wikiCode = link2TitleBox.Text + "[URL]" + wikiURLBox.Text;
 
             addEntry(title, platform, status, rating, hours, minutes, seconds, obtained, startDate, 
                 endDate, launchCode, notes, newsCode, wikiCode);
@@ -396,8 +408,29 @@ namespace The_UGamer_Launcher
                 
                 notesBox.Text = dt.Rows[z][9].ToString();
                 launchBox.Text = dt.Rows[z][10].ToString();
-                newsURLBox.Text = dt.Rows[z][11].ToString();
-                wikiURLBox.Text = dt.Rows[z][12].ToString();
+
+                string newsCode = dt.Rows[z][11].ToString();
+                string wikiCode = dt.Rows[z][12].ToString();
+
+                string link1Title = newsCode;
+                string link2Title = wikiCode;
+                string link1URL = newsCode;
+                string link2URL = wikiCode;
+
+                int link1Index = link1Title.IndexOf("[URL]");
+                link1Title = link1Title.Substring(0, link1Index);
+                link1URL = link1URL.Substring(link1Index + 5);
+
+                link1TitleBox.Text = link1Title;
+                newsURLBox.Text = link1URL;
+
+                int link2Index = link2Title.IndexOf("[URL]");
+                link2Title = link2Title.Substring(0, link2Index);
+                link2URL = link2URL.Substring(link2Index + 5);
+
+                link2TitleBox.Text = link2Title;
+                wikiURLBox.Text = link2URL;
+
                 noGameLabel.Visible = false;
                 y = 0;
 
@@ -445,8 +478,15 @@ namespace The_UGamer_Launcher
 
             string launchCode = launchBox.Text;
             string notes = notesBox.Text;
-            string newsCode = newsURLBox.Text;
-            string wikiCode = wikiURLBox.Text;
+
+            string link1Title = link1TitleBox.Text;
+            string link2Title = link2TitleBox.Text;
+
+            string wikiURL = wikiURLBox.Text;
+
+            string newsCode = link1TitleBox.Text + "[URL]" + newsURLBox.Text;
+            string wikiCode = link2TitleBox.Text + "[URL]" + wikiURLBox.Text;
+            
 
             replaceEntryMethod(originalTitleString, title, platform, status, rating, 
                 hours, minutes, seconds, obtained, startDate,
@@ -801,8 +841,25 @@ namespace The_UGamer_Launcher
 
             notesBox.Text = notes;
             launchBox.Text = launchString;
-            newsURLBox.Text = newsString;
-            wikiURLBox.Text = wikiString;
+
+            string link1Title = newsString;
+            string link2Title = wikiString;
+            string link1URL = newsString;
+            string link2URL = wikiString;
+
+            int link1Index = link1Title.IndexOf("[URL]");
+            link1Title = link1Title.Substring(0, link1Index);
+            link1URL = link1URL.Substring(link1Index + 5);
+
+            link1TitleBox.Text = link1Title;
+            newsURLBox.Text = link1URL;
+
+            int link2Index = link2Title.IndexOf("[URL]");
+            link2Title = link2Title.Substring(0, link2Index);
+            link2URL = link2URL.Substring(link2Index + 5);
+
+            link2TitleBox.Text = link2Title;
+            wikiURLBox.Text = link2URL;
 
             replaceEntry.Visible = true;
             deleteEntryButton.Visible = true;
@@ -817,8 +874,38 @@ namespace The_UGamer_Launcher
 
         private void AddGameButton_Click(object sender, EventArgs e)
         {
-            AddGameOptions launchDecision = new AddGameOptions();
+            launchDecision = new AddGameOptions();
             launchDecision.Show();
+            launchDecision.FormClosed += new FormClosedEventHandler(launchDecision_FormClosed);
+        }
+
+        private void AddLinksButton_Click(object sender, EventArgs e)
+        {
+            linkDecision = new AddLinks();
+            linkDecision.Show();
+            linkDecision.FormClosed += new FormClosedEventHandler(linkDecision_FormClosed);
+        }
+
+        private void launchDecision_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            globalLaunch = launchDecision.finalReturn;
+            launchBox.Text = globalLaunch;
+        }
+
+        private void linkDecision_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.linkTitles = linkDecision.linkTitles;
+            this.linkURLs = linkDecision.linkURLs;
+            string links = "";
+
+            for (int index = 0; index < linkTitles.Length; index++)
+            {
+                if (index != 0)
+                    links += "[Title]" + linkTitles[index] + "[URL]" + linkURLs[index];
+                
+                else
+                    links += linkTitles[index] + "[URL]" + linkURLs[index];
+            }
         }
     }
 }

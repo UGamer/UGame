@@ -34,57 +34,56 @@
             this.EXEFilePathBox = new System.Windows.Forms.TextBox();
             this.Tabs = new System.Windows.Forms.TabControl();
             this.SteamTab = new System.Windows.Forms.TabPage();
-            this.EXETab = new System.Windows.Forms.TabPage();
-            this.BattleNETTab = new System.Windows.Forms.TabPage();
-            this.EmulationTab = new System.Windows.Forms.TabPage();
-            this.CompleteButton = new System.Windows.Forms.Button();
             this.SteamCodeLabel = new System.Windows.Forms.Label();
             this.SteamCodeBox = new System.Windows.Forms.TextBox();
+            this.EXETab = new System.Windows.Forms.TabPage();
+            this.EXEPathLabel = new System.Windows.Forms.Label();
+            this.BattleNETTab = new System.Windows.Forms.TabPage();
+            this.BattleNetPathLabel = new System.Windows.Forms.Label();
+            this.BattleNetGameComboBox = new System.Windows.Forms.ComboBox();
             this.BattleNETFilePathBox = new System.Windows.Forms.TextBox();
             this.BattleNetBrowseButton = new System.Windows.Forms.Button();
-            this.BattleNetGameComboBox = new System.Windows.Forms.ComboBox();
+            this.EmulationTab = new System.Windows.Forms.TabPage();
             this.EmulatorTabs = new System.Windows.Forms.TabControl();
             this.HiganTab = new System.Windows.Forms.TabPage();
-            this.N64Tab = new System.Windows.Forms.TabPage();
-            this.PS1Tab = new System.Windows.Forms.TabPage();
-            this.DSTab = new System.Windows.Forms.TabPage();
-            this.DolphinTab = new System.Windows.Forms.TabPage();
-            this.PS2Tab = new System.Windows.Forms.TabPage();
-            this.PSPTab = new System.Windows.Forms.TabPage();
-            this.WiiUTab = new System.Windows.Forms.TabPage();
-            this.HiganEmulatorBox = new System.Windows.Forms.TextBox();
-            this.HiganEmulatorBrowse = new System.Windows.Forms.Button();
+            this.HiganROMPathLabel = new System.Windows.Forms.Label();
+            this.HiganEmulatorPathLabel = new System.Windows.Forms.Label();
+            this.HiganFullscreen = new System.Windows.Forms.CheckBox();
             this.HiganROMBox = new System.Windows.Forms.TextBox();
             this.HiganROMBrowse = new System.Windows.Forms.Button();
-            this.HiganFullscreen = new System.Windows.Forms.CheckBox();
-            this.HiganEmulatorPathLabel = new System.Windows.Forms.Label();
-            this.HiganROMPathLabel = new System.Windows.Forms.Label();
-            this.EXEPathLabel = new System.Windows.Forms.Label();
-            this.BattleNetPathLabel = new System.Windows.Forms.Label();
+            this.HiganEmulatorBox = new System.Windows.Forms.TextBox();
+            this.HiganEmulatorBrowse = new System.Windows.Forms.Button();
+            this.N64Tab = new System.Windows.Forms.TabPage();
             this.N64ROMPathLabel = new System.Windows.Forms.Label();
             this.N64EmulatorPathLabel = new System.Windows.Forms.Label();
             this.N64ROMBox = new System.Windows.Forms.TextBox();
             this.N64ROMBrowse = new System.Windows.Forms.Button();
             this.N64EmulatorBox = new System.Windows.Forms.TextBox();
             this.N64EmulatorBrowsse = new System.Windows.Forms.Button();
+            this.PS1Tab = new System.Windows.Forms.TabPage();
             this.PS1ROMLabel = new System.Windows.Forms.Label();
             this.PS1EmulatorPathLabel = new System.Windows.Forms.Label();
             this.PS1ROMBox = new System.Windows.Forms.TextBox();
             this.PS1ROMButton = new System.Windows.Forms.Button();
             this.PS1EmulatorBox = new System.Windows.Forms.TextBox();
             this.PS1EmulatorButton = new System.Windows.Forms.Button();
+            this.DSTab = new System.Windows.Forms.TabPage();
             this.DSROMLabel = new System.Windows.Forms.Label();
             this.DSEmulatorLabel = new System.Windows.Forms.Label();
             this.DSROMBox = new System.Windows.Forms.TextBox();
             this.DSROMButton = new System.Windows.Forms.Button();
             this.DSEmulatorBox = new System.Windows.Forms.TextBox();
             this.DSEmulatorButton = new System.Windows.Forms.Button();
+            this.DolphinTab = new System.Windows.Forms.TabPage();
             this.DolphinROMLabel = new System.Windows.Forms.Label();
             this.DolphinEmulatorLabel = new System.Windows.Forms.Label();
             this.DolphinROMBox = new System.Windows.Forms.TextBox();
             this.DolphinROMButton = new System.Windows.Forms.Button();
             this.DolphinEmulatorBox = new System.Windows.Forms.TextBox();
             this.DolphinEmulatorButton = new System.Windows.Forms.Button();
+            this.PS2Tab = new System.Windows.Forms.TabPage();
+            this.PS2FullBootCheck = new System.Windows.Forms.CheckBox();
+            this.PS2ShowEmulatorCheck = new System.Windows.Forms.CheckBox();
             this.PS2ROMLabel = new System.Windows.Forms.Label();
             this.PS2EmulatorLabel = new System.Windows.Forms.Label();
             this.PS2FullScreenCheck = new System.Windows.Forms.CheckBox();
@@ -92,14 +91,14 @@
             this.PS2ROMButton = new System.Windows.Forms.Button();
             this.PS2EmulatorBox = new System.Windows.Forms.TextBox();
             this.PS2EmulatorButton = new System.Windows.Forms.Button();
-            this.PS2ShowEmulatorCheck = new System.Windows.Forms.CheckBox();
-            this.PS2FullBootCheck = new System.Windows.Forms.CheckBox();
+            this.PSPTab = new System.Windows.Forms.TabPage();
             this.PSPROMLabel = new System.Windows.Forms.Label();
             this.PSPEmulatorLabel = new System.Windows.Forms.Label();
             this.PSPROMBox = new System.Windows.Forms.TextBox();
             this.PSPROMButton = new System.Windows.Forms.Button();
             this.PSPEmulatorBox = new System.Windows.Forms.TextBox();
             this.PSPEmulatorButton = new System.Windows.Forms.Button();
+            this.WiiUTab = new System.Windows.Forms.TabPage();
             this.CEMUROMLabel = new System.Windows.Forms.Label();
             this.CEMUEmulatorLabel = new System.Windows.Forms.Label();
             this.CEMUFullscreenCheck = new System.Windows.Forms.CheckBox();
@@ -107,6 +106,7 @@
             this.CEMUROMButton = new System.Windows.Forms.Button();
             this.CEMUEmulatorBox = new System.Windows.Forms.TextBox();
             this.CEMUEmulatorButton = new System.Windows.Forms.Button();
+            this.CompleteButton = new System.Windows.Forms.Button();
             this.Tabs.SuspendLayout();
             this.SteamTab.SuspendLayout();
             this.EXETab.SuspendLayout();
@@ -167,56 +167,6 @@
             this.SteamTab.Text = "Steam";
             this.SteamTab.UseVisualStyleBackColor = true;
             // 
-            // EXETab
-            // 
-            this.EXETab.Controls.Add(this.EXEPathLabel);
-            this.EXETab.Controls.Add(this.EXEFilePathBox);
-            this.EXETab.Controls.Add(this.EXEButton);
-            this.EXETab.Location = new System.Drawing.Point(4, 29);
-            this.EXETab.Name = "EXETab";
-            this.EXETab.Padding = new System.Windows.Forms.Padding(3);
-            this.EXETab.Size = new System.Drawing.Size(792, 350);
-            this.EXETab.TabIndex = 1;
-            this.EXETab.Text = "Origin/uPlay/EXE/BAT";
-            this.EXETab.UseVisualStyleBackColor = true;
-            // 
-            // BattleNETTab
-            // 
-            this.BattleNETTab.Controls.Add(this.BattleNetPathLabel);
-            this.BattleNETTab.Controls.Add(this.BattleNetGameComboBox);
-            this.BattleNETTab.Controls.Add(this.BattleNETFilePathBox);
-            this.BattleNETTab.Controls.Add(this.BattleNetBrowseButton);
-            this.BattleNETTab.Location = new System.Drawing.Point(4, 29);
-            this.BattleNETTab.Name = "BattleNETTab";
-            this.BattleNETTab.Padding = new System.Windows.Forms.Padding(3);
-            this.BattleNETTab.Size = new System.Drawing.Size(792, 350);
-            this.BattleNETTab.TabIndex = 2;
-            this.BattleNETTab.Text = "Battle.NET";
-            this.BattleNETTab.UseVisualStyleBackColor = true;
-            // 
-            // EmulationTab
-            // 
-            this.EmulationTab.Controls.Add(this.EmulatorTabs);
-            this.EmulationTab.Location = new System.Drawing.Point(4, 29);
-            this.EmulationTab.Name = "EmulationTab";
-            this.EmulationTab.Padding = new System.Windows.Forms.Padding(3);
-            this.EmulationTab.Size = new System.Drawing.Size(792, 350);
-            this.EmulationTab.TabIndex = 3;
-            this.EmulationTab.Text = "Emulation";
-            this.EmulationTab.UseVisualStyleBackColor = true;
-            // 
-            // CompleteButton
-            // 
-            this.CompleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.CompleteButton.Location = new System.Drawing.Point(345, 389);
-            this.CompleteButton.Name = "CompleteButton";
-            this.CompleteButton.Size = new System.Drawing.Size(103, 39);
-            this.CompleteButton.TabIndex = 8;
-            this.CompleteButton.Text = "Complete";
-            this.CompleteButton.UseVisualStyleBackColor = true;
-            this.CompleteButton.Click += new System.EventHandler(this.CompleteButton_Click);
-            // 
             // SteamCodeLabel
             // 
             this.SteamCodeLabel.AutoSize = true;
@@ -235,23 +185,50 @@
             this.SteamCodeBox.Size = new System.Drawing.Size(230, 44);
             this.SteamCodeBox.TabIndex = 7;
             // 
-            // BattleNETFilePathBox
+            // EXETab
             // 
-            this.BattleNETFilePathBox.Enabled = false;
-            this.BattleNETFilePathBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BattleNETFilePathBox.Location = new System.Drawing.Point(10, 56);
-            this.BattleNETFilePathBox.Name = "BattleNETFilePathBox";
-            this.BattleNETFilePathBox.Size = new System.Drawing.Size(776, 39);
-            this.BattleNETFilePathBox.TabIndex = 8;
+            this.EXETab.Controls.Add(this.EXEPathLabel);
+            this.EXETab.Controls.Add(this.EXEFilePathBox);
+            this.EXETab.Controls.Add(this.EXEButton);
+            this.EXETab.Location = new System.Drawing.Point(4, 29);
+            this.EXETab.Name = "EXETab";
+            this.EXETab.Padding = new System.Windows.Forms.Padding(3);
+            this.EXETab.Size = new System.Drawing.Size(792, 350);
+            this.EXETab.TabIndex = 1;
+            this.EXETab.Text = "Origin/uPlay/EXE/BAT";
+            this.EXETab.UseVisualStyleBackColor = true;
             // 
-            // BattleNetBrowseButton
+            // EXEPathLabel
             // 
-            this.BattleNetBrowseButton.Location = new System.Drawing.Point(343, 116);
-            this.BattleNetBrowseButton.Name = "BattleNetBrowseButton";
-            this.BattleNetBrowseButton.Size = new System.Drawing.Size(103, 39);
-            this.BattleNetBrowseButton.TabIndex = 7;
-            this.BattleNetBrowseButton.Text = "Browse";
-            this.BattleNetBrowseButton.UseVisualStyleBackColor = true;
+            this.EXEPathLabel.AutoSize = true;
+            this.EXEPathLabel.Location = new System.Drawing.Point(9, 110);
+            this.EXEPathLabel.Name = "EXEPathLabel";
+            this.EXEPathLabel.Size = new System.Drawing.Size(75, 20);
+            this.EXEPathLabel.TabIndex = 7;
+            this.EXEPathLabel.Text = "File Path:";
+            // 
+            // BattleNETTab
+            // 
+            this.BattleNETTab.Controls.Add(this.BattleNetPathLabel);
+            this.BattleNETTab.Controls.Add(this.BattleNetGameComboBox);
+            this.BattleNETTab.Controls.Add(this.BattleNETFilePathBox);
+            this.BattleNETTab.Controls.Add(this.BattleNetBrowseButton);
+            this.BattleNETTab.Location = new System.Drawing.Point(4, 29);
+            this.BattleNETTab.Name = "BattleNETTab";
+            this.BattleNETTab.Padding = new System.Windows.Forms.Padding(3);
+            this.BattleNETTab.Size = new System.Drawing.Size(792, 350);
+            this.BattleNETTab.TabIndex = 2;
+            this.BattleNETTab.Text = "Battle.NET";
+            this.BattleNETTab.UseVisualStyleBackColor = true;
+            // 
+            // BattleNetPathLabel
+            // 
+            this.BattleNetPathLabel.AutoSize = true;
+            this.BattleNetPathLabel.Location = new System.Drawing.Point(10, 30);
+            this.BattleNetPathLabel.Name = "BattleNetPathLabel";
+            this.BattleNetPathLabel.Size = new System.Drawing.Size(127, 20);
+            this.BattleNetPathLabel.TabIndex = 10;
+            this.BattleNetPathLabel.Text = "Battle.NET Path:";
             // 
             // BattleNetGameComboBox
             // 
@@ -271,6 +248,36 @@
             this.BattleNetGameComboBox.Name = "BattleNetGameComboBox";
             this.BattleNetGameComboBox.Size = new System.Drawing.Size(393, 28);
             this.BattleNetGameComboBox.TabIndex = 9;
+            // 
+            // BattleNETFilePathBox
+            // 
+            this.BattleNETFilePathBox.Enabled = false;
+            this.BattleNETFilePathBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BattleNETFilePathBox.Location = new System.Drawing.Point(10, 56);
+            this.BattleNETFilePathBox.Name = "BattleNETFilePathBox";
+            this.BattleNETFilePathBox.Size = new System.Drawing.Size(776, 39);
+            this.BattleNETFilePathBox.TabIndex = 8;
+            // 
+            // BattleNetBrowseButton
+            // 
+            this.BattleNetBrowseButton.Location = new System.Drawing.Point(343, 116);
+            this.BattleNetBrowseButton.Name = "BattleNetBrowseButton";
+            this.BattleNetBrowseButton.Size = new System.Drawing.Size(103, 39);
+            this.BattleNetBrowseButton.TabIndex = 7;
+            this.BattleNetBrowseButton.Text = "Browse";
+            this.BattleNetBrowseButton.UseVisualStyleBackColor = true;
+            this.BattleNetBrowseButton.Click += new System.EventHandler(this.BattleNetBrowseButton_Click);
+            // 
+            // EmulationTab
+            // 
+            this.EmulationTab.Controls.Add(this.EmulatorTabs);
+            this.EmulationTab.Location = new System.Drawing.Point(4, 29);
+            this.EmulationTab.Name = "EmulationTab";
+            this.EmulationTab.Padding = new System.Windows.Forms.Padding(3);
+            this.EmulationTab.Size = new System.Drawing.Size(792, 350);
+            this.EmulationTab.TabIndex = 3;
+            this.EmulationTab.Text = "Emulation";
+            this.EmulationTab.UseVisualStyleBackColor = true;
             // 
             // EmulatorTabs
             // 
@@ -306,139 +313,33 @@
             this.HiganTab.Text = "Higan";
             this.HiganTab.UseVisualStyleBackColor = true;
             // 
-            // N64Tab
+            // HiganROMPathLabel
             // 
-            this.N64Tab.Controls.Add(this.N64ROMPathLabel);
-            this.N64Tab.Controls.Add(this.N64EmulatorPathLabel);
-            this.N64Tab.Controls.Add(this.N64ROMBox);
-            this.N64Tab.Controls.Add(this.N64ROMBrowse);
-            this.N64Tab.Controls.Add(this.N64EmulatorBox);
-            this.N64Tab.Controls.Add(this.N64EmulatorBrowsse);
-            this.N64Tab.Location = new System.Drawing.Point(4, 29);
-            this.N64Tab.Name = "N64Tab";
-            this.N64Tab.Padding = new System.Windows.Forms.Padding(3);
-            this.N64Tab.Size = new System.Drawing.Size(778, 311);
-            this.N64Tab.TabIndex = 1;
-            this.N64Tab.Text = "Project64";
-            this.N64Tab.UseVisualStyleBackColor = true;
+            this.HiganROMPathLabel.AutoSize = true;
+            this.HiganROMPathLabel.Location = new System.Drawing.Point(8, 118);
+            this.HiganROMPathLabel.Name = "HiganROMPathLabel";
+            this.HiganROMPathLabel.Size = new System.Drawing.Size(94, 20);
+            this.HiganROMPathLabel.TabIndex = 15;
+            this.HiganROMPathLabel.Text = "Game Path:";
             // 
-            // PS1Tab
+            // HiganEmulatorPathLabel
             // 
-            this.PS1Tab.Controls.Add(this.PS1ROMLabel);
-            this.PS1Tab.Controls.Add(this.PS1EmulatorPathLabel);
-            this.PS1Tab.Controls.Add(this.PS1ROMBox);
-            this.PS1Tab.Controls.Add(this.PS1ROMButton);
-            this.PS1Tab.Controls.Add(this.PS1EmulatorBox);
-            this.PS1Tab.Controls.Add(this.PS1EmulatorButton);
-            this.PS1Tab.Location = new System.Drawing.Point(4, 29);
-            this.PS1Tab.Name = "PS1Tab";
-            this.PS1Tab.Padding = new System.Windows.Forms.Padding(3);
-            this.PS1Tab.Size = new System.Drawing.Size(778, 311);
-            this.PS1Tab.TabIndex = 2;
-            this.PS1Tab.Text = "ePSXe";
-            this.PS1Tab.UseVisualStyleBackColor = true;
+            this.HiganEmulatorPathLabel.AutoSize = true;
+            this.HiganEmulatorPathLabel.Location = new System.Drawing.Point(8, 11);
+            this.HiganEmulatorPathLabel.Name = "HiganEmulatorPathLabel";
+            this.HiganEmulatorPathLabel.Size = new System.Drawing.Size(114, 20);
+            this.HiganEmulatorPathLabel.TabIndex = 14;
+            this.HiganEmulatorPathLabel.Text = "Emulator Path:";
             // 
-            // DSTab
+            // HiganFullscreen
             // 
-            this.DSTab.Controls.Add(this.DSROMLabel);
-            this.DSTab.Controls.Add(this.DSEmulatorLabel);
-            this.DSTab.Controls.Add(this.DSROMBox);
-            this.DSTab.Controls.Add(this.DSROMButton);
-            this.DSTab.Controls.Add(this.DSEmulatorBox);
-            this.DSTab.Controls.Add(this.DSEmulatorButton);
-            this.DSTab.Location = new System.Drawing.Point(4, 29);
-            this.DSTab.Name = "DSTab";
-            this.DSTab.Padding = new System.Windows.Forms.Padding(3);
-            this.DSTab.Size = new System.Drawing.Size(778, 311);
-            this.DSTab.TabIndex = 3;
-            this.DSTab.Text = "DeSmuME";
-            this.DSTab.UseVisualStyleBackColor = true;
-            // 
-            // DolphinTab
-            // 
-            this.DolphinTab.Controls.Add(this.DolphinROMLabel);
-            this.DolphinTab.Controls.Add(this.DolphinEmulatorLabel);
-            this.DolphinTab.Controls.Add(this.DolphinROMBox);
-            this.DolphinTab.Controls.Add(this.DolphinROMButton);
-            this.DolphinTab.Controls.Add(this.DolphinEmulatorBox);
-            this.DolphinTab.Controls.Add(this.DolphinEmulatorButton);
-            this.DolphinTab.Location = new System.Drawing.Point(4, 29);
-            this.DolphinTab.Name = "DolphinTab";
-            this.DolphinTab.Padding = new System.Windows.Forms.Padding(3);
-            this.DolphinTab.Size = new System.Drawing.Size(778, 311);
-            this.DolphinTab.TabIndex = 4;
-            this.DolphinTab.Text = "Dolphin";
-            this.DolphinTab.UseVisualStyleBackColor = true;
-            // 
-            // PS2Tab
-            // 
-            this.PS2Tab.Controls.Add(this.PS2FullBootCheck);
-            this.PS2Tab.Controls.Add(this.PS2ShowEmulatorCheck);
-            this.PS2Tab.Controls.Add(this.PS2ROMLabel);
-            this.PS2Tab.Controls.Add(this.PS2EmulatorLabel);
-            this.PS2Tab.Controls.Add(this.PS2FullScreenCheck);
-            this.PS2Tab.Controls.Add(this.PS2ROMBox);
-            this.PS2Tab.Controls.Add(this.PS2ROMButton);
-            this.PS2Tab.Controls.Add(this.PS2EmulatorBox);
-            this.PS2Tab.Controls.Add(this.PS2EmulatorButton);
-            this.PS2Tab.Location = new System.Drawing.Point(4, 29);
-            this.PS2Tab.Name = "PS2Tab";
-            this.PS2Tab.Padding = new System.Windows.Forms.Padding(3);
-            this.PS2Tab.Size = new System.Drawing.Size(778, 311);
-            this.PS2Tab.TabIndex = 5;
-            this.PS2Tab.Text = "PCSX2";
-            this.PS2Tab.UseVisualStyleBackColor = true;
-            // 
-            // PSPTab
-            // 
-            this.PSPTab.Controls.Add(this.PSPROMLabel);
-            this.PSPTab.Controls.Add(this.PSPEmulatorLabel);
-            this.PSPTab.Controls.Add(this.PSPROMBox);
-            this.PSPTab.Controls.Add(this.PSPROMButton);
-            this.PSPTab.Controls.Add(this.PSPEmulatorBox);
-            this.PSPTab.Controls.Add(this.PSPEmulatorButton);
-            this.PSPTab.Location = new System.Drawing.Point(4, 29);
-            this.PSPTab.Name = "PSPTab";
-            this.PSPTab.Padding = new System.Windows.Forms.Padding(3);
-            this.PSPTab.Size = new System.Drawing.Size(778, 311);
-            this.PSPTab.TabIndex = 6;
-            this.PSPTab.Text = "PPSSPP";
-            this.PSPTab.UseVisualStyleBackColor = true;
-            // 
-            // WiiUTab
-            // 
-            this.WiiUTab.Controls.Add(this.CEMUROMLabel);
-            this.WiiUTab.Controls.Add(this.CEMUEmulatorLabel);
-            this.WiiUTab.Controls.Add(this.CEMUFullscreenCheck);
-            this.WiiUTab.Controls.Add(this.CEMUROMBox);
-            this.WiiUTab.Controls.Add(this.CEMUROMButton);
-            this.WiiUTab.Controls.Add(this.CEMUEmulatorBox);
-            this.WiiUTab.Controls.Add(this.CEMUEmulatorButton);
-            this.WiiUTab.Location = new System.Drawing.Point(4, 29);
-            this.WiiUTab.Name = "WiiUTab";
-            this.WiiUTab.Padding = new System.Windows.Forms.Padding(3);
-            this.WiiUTab.Size = new System.Drawing.Size(778, 311);
-            this.WiiUTab.TabIndex = 7;
-            this.WiiUTab.Text = "CEMU";
-            this.WiiUTab.UseVisualStyleBackColor = true;
-            // 
-            // HiganEmulatorBox
-            // 
-            this.HiganEmulatorBox.Enabled = false;
-            this.HiganEmulatorBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.HiganEmulatorBox.Location = new System.Drawing.Point(12, 34);
-            this.HiganEmulatorBox.Name = "HiganEmulatorBox";
-            this.HiganEmulatorBox.Size = new System.Drawing.Size(754, 39);
-            this.HiganEmulatorBox.TabIndex = 10;
-            // 
-            // HiganEmulatorBrowse
-            // 
-            this.HiganEmulatorBrowse.Location = new System.Drawing.Point(334, 79);
-            this.HiganEmulatorBrowse.Name = "HiganEmulatorBrowse";
-            this.HiganEmulatorBrowse.Size = new System.Drawing.Size(103, 39);
-            this.HiganEmulatorBrowse.TabIndex = 9;
-            this.HiganEmulatorBrowse.Text = "Browse";
-            this.HiganEmulatorBrowse.UseVisualStyleBackColor = true;
+            this.HiganFullscreen.AutoSize = true;
+            this.HiganFullscreen.Location = new System.Drawing.Point(329, 253);
+            this.HiganFullscreen.Name = "HiganFullscreen";
+            this.HiganFullscreen.Size = new System.Drawing.Size(108, 24);
+            this.HiganFullscreen.TabIndex = 13;
+            this.HiganFullscreen.Text = "Fullscreen";
+            this.HiganFullscreen.UseVisualStyleBackColor = true;
             // 
             // HiganROMBox
             // 
@@ -457,52 +358,42 @@
             this.HiganROMBrowse.TabIndex = 11;
             this.HiganROMBrowse.Text = "Browse";
             this.HiganROMBrowse.UseVisualStyleBackColor = true;
+            this.HiganROMBrowse.Click += new System.EventHandler(this.HiganROMBrowse_Click);
             // 
-            // HiganFullscreen
+            // HiganEmulatorBox
             // 
-            this.HiganFullscreen.AutoSize = true;
-            this.HiganFullscreen.Location = new System.Drawing.Point(329, 253);
-            this.HiganFullscreen.Name = "HiganFullscreen";
-            this.HiganFullscreen.Size = new System.Drawing.Size(108, 24);
-            this.HiganFullscreen.TabIndex = 13;
-            this.HiganFullscreen.Text = "Fullscreen";
-            this.HiganFullscreen.UseVisualStyleBackColor = true;
+            this.HiganEmulatorBox.Enabled = false;
+            this.HiganEmulatorBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.HiganEmulatorBox.Location = new System.Drawing.Point(12, 34);
+            this.HiganEmulatorBox.Name = "HiganEmulatorBox";
+            this.HiganEmulatorBox.Size = new System.Drawing.Size(754, 39);
+            this.HiganEmulatorBox.TabIndex = 10;
             // 
-            // HiganEmulatorPathLabel
+            // HiganEmulatorBrowse
             // 
-            this.HiganEmulatorPathLabel.AutoSize = true;
-            this.HiganEmulatorPathLabel.Location = new System.Drawing.Point(8, 11);
-            this.HiganEmulatorPathLabel.Name = "HiganEmulatorPathLabel";
-            this.HiganEmulatorPathLabel.Size = new System.Drawing.Size(114, 20);
-            this.HiganEmulatorPathLabel.TabIndex = 14;
-            this.HiganEmulatorPathLabel.Text = "Emulator Path:";
+            this.HiganEmulatorBrowse.Location = new System.Drawing.Point(334, 79);
+            this.HiganEmulatorBrowse.Name = "HiganEmulatorBrowse";
+            this.HiganEmulatorBrowse.Size = new System.Drawing.Size(103, 39);
+            this.HiganEmulatorBrowse.TabIndex = 9;
+            this.HiganEmulatorBrowse.Text = "Browse";
+            this.HiganEmulatorBrowse.UseVisualStyleBackColor = true;
+            this.HiganEmulatorBrowse.Click += new System.EventHandler(this.HiganEmulatorBrowse_Click);
             // 
-            // HiganROMPathLabel
+            // N64Tab
             // 
-            this.HiganROMPathLabel.AutoSize = true;
-            this.HiganROMPathLabel.Location = new System.Drawing.Point(8, 118);
-            this.HiganROMPathLabel.Name = "HiganROMPathLabel";
-            this.HiganROMPathLabel.Size = new System.Drawing.Size(94, 20);
-            this.HiganROMPathLabel.TabIndex = 15;
-            this.HiganROMPathLabel.Text = "Game Path:";
-            // 
-            // EXEPathLabel
-            // 
-            this.EXEPathLabel.AutoSize = true;
-            this.EXEPathLabel.Location = new System.Drawing.Point(9, 110);
-            this.EXEPathLabel.Name = "EXEPathLabel";
-            this.EXEPathLabel.Size = new System.Drawing.Size(75, 20);
-            this.EXEPathLabel.TabIndex = 7;
-            this.EXEPathLabel.Text = "File Path:";
-            // 
-            // BattleNetPathLabel
-            // 
-            this.BattleNetPathLabel.AutoSize = true;
-            this.BattleNetPathLabel.Location = new System.Drawing.Point(10, 30);
-            this.BattleNetPathLabel.Name = "BattleNetPathLabel";
-            this.BattleNetPathLabel.Size = new System.Drawing.Size(127, 20);
-            this.BattleNetPathLabel.TabIndex = 10;
-            this.BattleNetPathLabel.Text = "Battle.NET Path:";
+            this.N64Tab.Controls.Add(this.N64ROMPathLabel);
+            this.N64Tab.Controls.Add(this.N64EmulatorPathLabel);
+            this.N64Tab.Controls.Add(this.N64ROMBox);
+            this.N64Tab.Controls.Add(this.N64ROMBrowse);
+            this.N64Tab.Controls.Add(this.N64EmulatorBox);
+            this.N64Tab.Controls.Add(this.N64EmulatorBrowsse);
+            this.N64Tab.Location = new System.Drawing.Point(4, 29);
+            this.N64Tab.Name = "N64Tab";
+            this.N64Tab.Padding = new System.Windows.Forms.Padding(3);
+            this.N64Tab.Size = new System.Drawing.Size(778, 311);
+            this.N64Tab.TabIndex = 1;
+            this.N64Tab.Text = "Project64";
+            this.N64Tab.UseVisualStyleBackColor = true;
             // 
             // N64ROMPathLabel
             // 
@@ -539,6 +430,7 @@
             this.N64ROMBrowse.TabIndex = 18;
             this.N64ROMBrowse.Text = "Browse";
             this.N64ROMBrowse.UseVisualStyleBackColor = true;
+            this.N64ROMBrowse.Click += new System.EventHandler(this.N64ROMBrowse_Click);
             // 
             // N64EmulatorBox
             // 
@@ -557,6 +449,23 @@
             this.N64EmulatorBrowsse.TabIndex = 16;
             this.N64EmulatorBrowsse.Text = "Browse";
             this.N64EmulatorBrowsse.UseVisualStyleBackColor = true;
+            this.N64EmulatorBrowsse.Click += new System.EventHandler(this.N64EmulatorBrowsse_Click);
+            // 
+            // PS1Tab
+            // 
+            this.PS1Tab.Controls.Add(this.PS1ROMLabel);
+            this.PS1Tab.Controls.Add(this.PS1EmulatorPathLabel);
+            this.PS1Tab.Controls.Add(this.PS1ROMBox);
+            this.PS1Tab.Controls.Add(this.PS1ROMButton);
+            this.PS1Tab.Controls.Add(this.PS1EmulatorBox);
+            this.PS1Tab.Controls.Add(this.PS1EmulatorButton);
+            this.PS1Tab.Location = new System.Drawing.Point(4, 29);
+            this.PS1Tab.Name = "PS1Tab";
+            this.PS1Tab.Padding = new System.Windows.Forms.Padding(3);
+            this.PS1Tab.Size = new System.Drawing.Size(778, 311);
+            this.PS1Tab.TabIndex = 2;
+            this.PS1Tab.Text = "ePSXe";
+            this.PS1Tab.UseVisualStyleBackColor = true;
             // 
             // PS1ROMLabel
             // 
@@ -593,6 +502,7 @@
             this.PS1ROMButton.TabIndex = 24;
             this.PS1ROMButton.Text = "Browse";
             this.PS1ROMButton.UseVisualStyleBackColor = true;
+            this.PS1ROMButton.Click += new System.EventHandler(this.PS1ROMButton_Click);
             // 
             // PS1EmulatorBox
             // 
@@ -611,6 +521,23 @@
             this.PS1EmulatorButton.TabIndex = 22;
             this.PS1EmulatorButton.Text = "Browse";
             this.PS1EmulatorButton.UseVisualStyleBackColor = true;
+            this.PS1EmulatorButton.Click += new System.EventHandler(this.PS1EmulatorButton_Click);
+            // 
+            // DSTab
+            // 
+            this.DSTab.Controls.Add(this.DSROMLabel);
+            this.DSTab.Controls.Add(this.DSEmulatorLabel);
+            this.DSTab.Controls.Add(this.DSROMBox);
+            this.DSTab.Controls.Add(this.DSROMButton);
+            this.DSTab.Controls.Add(this.DSEmulatorBox);
+            this.DSTab.Controls.Add(this.DSEmulatorButton);
+            this.DSTab.Location = new System.Drawing.Point(4, 29);
+            this.DSTab.Name = "DSTab";
+            this.DSTab.Padding = new System.Windows.Forms.Padding(3);
+            this.DSTab.Size = new System.Drawing.Size(778, 311);
+            this.DSTab.TabIndex = 3;
+            this.DSTab.Text = "DeSmuME";
+            this.DSTab.UseVisualStyleBackColor = true;
             // 
             // DSROMLabel
             // 
@@ -647,6 +574,7 @@
             this.DSROMButton.TabIndex = 30;
             this.DSROMButton.Text = "Browse";
             this.DSROMButton.UseVisualStyleBackColor = true;
+            this.DSROMButton.Click += new System.EventHandler(this.DSROMButton_Click);
             // 
             // DSEmulatorBox
             // 
@@ -665,6 +593,23 @@
             this.DSEmulatorButton.TabIndex = 28;
             this.DSEmulatorButton.Text = "Browse";
             this.DSEmulatorButton.UseVisualStyleBackColor = true;
+            this.DSEmulatorButton.Click += new System.EventHandler(this.DSEmulatorButton_Click);
+            // 
+            // DolphinTab
+            // 
+            this.DolphinTab.Controls.Add(this.DolphinROMLabel);
+            this.DolphinTab.Controls.Add(this.DolphinEmulatorLabel);
+            this.DolphinTab.Controls.Add(this.DolphinROMBox);
+            this.DolphinTab.Controls.Add(this.DolphinROMButton);
+            this.DolphinTab.Controls.Add(this.DolphinEmulatorBox);
+            this.DolphinTab.Controls.Add(this.DolphinEmulatorButton);
+            this.DolphinTab.Location = new System.Drawing.Point(4, 29);
+            this.DolphinTab.Name = "DolphinTab";
+            this.DolphinTab.Padding = new System.Windows.Forms.Padding(3);
+            this.DolphinTab.Size = new System.Drawing.Size(778, 311);
+            this.DolphinTab.TabIndex = 4;
+            this.DolphinTab.Text = "Dolphin";
+            this.DolphinTab.UseVisualStyleBackColor = true;
             // 
             // DolphinROMLabel
             // 
@@ -701,6 +646,7 @@
             this.DolphinROMButton.TabIndex = 36;
             this.DolphinROMButton.Text = "Browse";
             this.DolphinROMButton.UseVisualStyleBackColor = true;
+            this.DolphinROMButton.Click += new System.EventHandler(this.DolphinROMButton_Click);
             // 
             // DolphinEmulatorBox
             // 
@@ -719,6 +665,46 @@
             this.DolphinEmulatorButton.TabIndex = 34;
             this.DolphinEmulatorButton.Text = "Browse";
             this.DolphinEmulatorButton.UseVisualStyleBackColor = true;
+            this.DolphinEmulatorButton.Click += new System.EventHandler(this.DolphinEmulatorButton_Click);
+            // 
+            // PS2Tab
+            // 
+            this.PS2Tab.Controls.Add(this.PS2FullBootCheck);
+            this.PS2Tab.Controls.Add(this.PS2ShowEmulatorCheck);
+            this.PS2Tab.Controls.Add(this.PS2ROMLabel);
+            this.PS2Tab.Controls.Add(this.PS2EmulatorLabel);
+            this.PS2Tab.Controls.Add(this.PS2FullScreenCheck);
+            this.PS2Tab.Controls.Add(this.PS2ROMBox);
+            this.PS2Tab.Controls.Add(this.PS2ROMButton);
+            this.PS2Tab.Controls.Add(this.PS2EmulatorBox);
+            this.PS2Tab.Controls.Add(this.PS2EmulatorButton);
+            this.PS2Tab.Location = new System.Drawing.Point(4, 29);
+            this.PS2Tab.Name = "PS2Tab";
+            this.PS2Tab.Padding = new System.Windows.Forms.Padding(3);
+            this.PS2Tab.Size = new System.Drawing.Size(778, 311);
+            this.PS2Tab.TabIndex = 5;
+            this.PS2Tab.Text = "PCSX2";
+            this.PS2Tab.UseVisualStyleBackColor = true;
+            // 
+            // PS2FullBootCheck
+            // 
+            this.PS2FullBootCheck.AutoSize = true;
+            this.PS2FullBootCheck.Location = new System.Drawing.Point(217, 264);
+            this.PS2FullBootCheck.Name = "PS2FullBootCheck";
+            this.PS2FullBootCheck.Size = new System.Drawing.Size(98, 24);
+            this.PS2FullBootCheck.TabIndex = 24;
+            this.PS2FullBootCheck.Text = "Full Boot";
+            this.PS2FullBootCheck.UseVisualStyleBackColor = true;
+            // 
+            // PS2ShowEmulatorCheck
+            // 
+            this.PS2ShowEmulatorCheck.AutoSize = true;
+            this.PS2ShowEmulatorCheck.Location = new System.Drawing.Point(435, 264);
+            this.PS2ShowEmulatorCheck.Name = "PS2ShowEmulatorCheck";
+            this.PS2ShowEmulatorCheck.Size = new System.Drawing.Size(143, 24);
+            this.PS2ShowEmulatorCheck.TabIndex = 23;
+            this.PS2ShowEmulatorCheck.Text = "Show Emulator";
+            this.PS2ShowEmulatorCheck.UseVisualStyleBackColor = true;
             // 
             // PS2ROMLabel
             // 
@@ -765,6 +751,7 @@
             this.PS2ROMButton.TabIndex = 18;
             this.PS2ROMButton.Text = "Browse";
             this.PS2ROMButton.UseVisualStyleBackColor = true;
+            this.PS2ROMButton.Click += new System.EventHandler(this.PS2ROMButton_Click);
             // 
             // PS2EmulatorBox
             // 
@@ -783,26 +770,23 @@
             this.PS2EmulatorButton.TabIndex = 16;
             this.PS2EmulatorButton.Text = "Browse";
             this.PS2EmulatorButton.UseVisualStyleBackColor = true;
+            this.PS2EmulatorButton.Click += new System.EventHandler(this.PS2EmulatorButton_Click);
             // 
-            // PS2ShowEmulatorCheck
+            // PSPTab
             // 
-            this.PS2ShowEmulatorCheck.AutoSize = true;
-            this.PS2ShowEmulatorCheck.Location = new System.Drawing.Point(435, 264);
-            this.PS2ShowEmulatorCheck.Name = "PS2ShowEmulatorCheck";
-            this.PS2ShowEmulatorCheck.Size = new System.Drawing.Size(143, 24);
-            this.PS2ShowEmulatorCheck.TabIndex = 23;
-            this.PS2ShowEmulatorCheck.Text = "Show Emulator";
-            this.PS2ShowEmulatorCheck.UseVisualStyleBackColor = true;
-            // 
-            // PS2FullBootCheck
-            // 
-            this.PS2FullBootCheck.AutoSize = true;
-            this.PS2FullBootCheck.Location = new System.Drawing.Point(217, 264);
-            this.PS2FullBootCheck.Name = "PS2FullBootCheck";
-            this.PS2FullBootCheck.Size = new System.Drawing.Size(98, 24);
-            this.PS2FullBootCheck.TabIndex = 24;
-            this.PS2FullBootCheck.Text = "Full Boot";
-            this.PS2FullBootCheck.UseVisualStyleBackColor = true;
+            this.PSPTab.Controls.Add(this.PSPROMLabel);
+            this.PSPTab.Controls.Add(this.PSPEmulatorLabel);
+            this.PSPTab.Controls.Add(this.PSPROMBox);
+            this.PSPTab.Controls.Add(this.PSPROMButton);
+            this.PSPTab.Controls.Add(this.PSPEmulatorBox);
+            this.PSPTab.Controls.Add(this.PSPEmulatorButton);
+            this.PSPTab.Location = new System.Drawing.Point(4, 29);
+            this.PSPTab.Name = "PSPTab";
+            this.PSPTab.Padding = new System.Windows.Forms.Padding(3);
+            this.PSPTab.Size = new System.Drawing.Size(778, 311);
+            this.PSPTab.TabIndex = 6;
+            this.PSPTab.Text = "PPSSPP";
+            this.PSPTab.UseVisualStyleBackColor = true;
             // 
             // PSPROMLabel
             // 
@@ -839,6 +823,7 @@
             this.PSPROMButton.TabIndex = 42;
             this.PSPROMButton.Text = "Browse";
             this.PSPROMButton.UseVisualStyleBackColor = true;
+            this.PSPROMButton.Click += new System.EventHandler(this.PSPROMButton_Click);
             // 
             // PSPEmulatorBox
             // 
@@ -857,6 +842,24 @@
             this.PSPEmulatorButton.TabIndex = 40;
             this.PSPEmulatorButton.Text = "Browse";
             this.PSPEmulatorButton.UseVisualStyleBackColor = true;
+            this.PSPEmulatorButton.Click += new System.EventHandler(this.PSPEmulatorButton_Click);
+            // 
+            // WiiUTab
+            // 
+            this.WiiUTab.Controls.Add(this.CEMUROMLabel);
+            this.WiiUTab.Controls.Add(this.CEMUEmulatorLabel);
+            this.WiiUTab.Controls.Add(this.CEMUFullscreenCheck);
+            this.WiiUTab.Controls.Add(this.CEMUROMBox);
+            this.WiiUTab.Controls.Add(this.CEMUROMButton);
+            this.WiiUTab.Controls.Add(this.CEMUEmulatorBox);
+            this.WiiUTab.Controls.Add(this.CEMUEmulatorButton);
+            this.WiiUTab.Location = new System.Drawing.Point(4, 29);
+            this.WiiUTab.Name = "WiiUTab";
+            this.WiiUTab.Padding = new System.Windows.Forms.Padding(3);
+            this.WiiUTab.Size = new System.Drawing.Size(778, 311);
+            this.WiiUTab.TabIndex = 7;
+            this.WiiUTab.Text = "CEMU";
+            this.WiiUTab.UseVisualStyleBackColor = true;
             // 
             // CEMUROMLabel
             // 
@@ -903,6 +906,7 @@
             this.CEMUROMButton.TabIndex = 18;
             this.CEMUROMButton.Text = "Browse";
             this.CEMUROMButton.UseVisualStyleBackColor = true;
+            this.CEMUROMButton.Click += new System.EventHandler(this.CEMUROMButton_Click);
             // 
             // CEMUEmulatorBox
             // 
@@ -921,6 +925,19 @@
             this.CEMUEmulatorButton.TabIndex = 16;
             this.CEMUEmulatorButton.Text = "Browse";
             this.CEMUEmulatorButton.UseVisualStyleBackColor = true;
+            this.CEMUEmulatorButton.Click += new System.EventHandler(this.CEMUEmulatorButton_Click);
+            // 
+            // CompleteButton
+            // 
+            this.CompleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.CompleteButton.Location = new System.Drawing.Point(345, 389);
+            this.CompleteButton.Name = "CompleteButton";
+            this.CompleteButton.Size = new System.Drawing.Size(103, 39);
+            this.CompleteButton.TabIndex = 8;
+            this.CompleteButton.Text = "Complete";
+            this.CompleteButton.UseVisualStyleBackColor = true;
+            this.CompleteButton.Click += new System.EventHandler(this.CompleteButton_Click);
             // 
             // AddGameOptions
             // 

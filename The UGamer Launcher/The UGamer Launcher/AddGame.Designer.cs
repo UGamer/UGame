@@ -58,6 +58,9 @@
             this.IgnoreStart = new System.Windows.Forms.CheckBox();
             this.IgnoreEnd = new System.Windows.Forms.CheckBox();
             this.AddGameButton = new System.Windows.Forms.Button();
+            this.link1TitleBox = new System.Windows.Forms.TextBox();
+            this.link2TitleBox = new System.Windows.Forms.TextBox();
+            this.AddLinksButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // labels
@@ -72,8 +75,8 @@
             this.labels.Size = new System.Drawing.Size(136, 460);
             this.labels.TabIndex = 0;
             this.labels.Text = "Title: \r\n\r\nPlatform: \r\n\r\nStatus:\r\n\r\nRating: \r\n\r\nTime Played:  \r\n\r\nObtained:\r\n\r\nSt" +
-    "art Date:\r\n\r\nLast Played:\r\n\r\nLaunch Code:\r\n\r\nNews URL:\r\n\r\nWiki URL:\r\n\r\nNotes/Com" +
-    "ments:";
+    "art Date:\r\n\r\nLast Played:\r\n\r\nLaunch Code:\r\n\r\nURL #1:\r\n\r\nURL #2:\r\n\r\nNotes/Comment" +
+    "s:";
             // 
             // titleBox
             // 
@@ -282,9 +285,9 @@
             this.newsURLBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.newsURLBox.Location = new System.Drawing.Point(156, 366);
+            this.newsURLBox.Location = new System.Drawing.Point(352, 366);
             this.newsURLBox.Name = "newsURLBox";
-            this.newsURLBox.Size = new System.Drawing.Size(620, 26);
+            this.newsURLBox.Size = new System.Drawing.Size(424, 26);
             this.newsURLBox.TabIndex = 22;
             // 
             // wikiURLBox
@@ -292,9 +295,9 @@
             this.wikiURLBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.wikiURLBox.Location = new System.Drawing.Point(156, 403);
+            this.wikiURLBox.Location = new System.Drawing.Point(352, 403);
             this.wikiURLBox.Name = "wikiURLBox";
-            this.wikiURLBox.Size = new System.Drawing.Size(620, 26);
+            this.wikiURLBox.Size = new System.Drawing.Size(424, 26);
             this.wikiURLBox.TabIndex = 23;
             // 
             // clearFieldsButton
@@ -409,19 +412,50 @@
             // 
             // AddGameButton
             // 
-            this.AddGameButton.Location = new System.Drawing.Point(754, 329);
+            this.AddGameButton.Location = new System.Drawing.Point(749, 329);
             this.AddGameButton.Name = "AddGameButton";
-            this.AddGameButton.Size = new System.Drawing.Size(26, 26);
+            this.AddGameButton.Size = new System.Drawing.Size(31, 31);
             this.AddGameButton.TabIndex = 32;
             this.AddGameButton.Text = "+";
             this.AddGameButton.UseVisualStyleBackColor = true;
             this.AddGameButton.Click += new System.EventHandler(this.AddGameButton_Click);
+            // 
+            // link1TitleBox
+            // 
+            this.link1TitleBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.link1TitleBox.Location = new System.Drawing.Point(156, 366);
+            this.link1TitleBox.Name = "link1TitleBox";
+            this.link1TitleBox.Size = new System.Drawing.Size(190, 26);
+            this.link1TitleBox.TabIndex = 33;
+            // 
+            // link2TitleBox
+            // 
+            this.link2TitleBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.link2TitleBox.Location = new System.Drawing.Point(157, 403);
+            this.link2TitleBox.Name = "link2TitleBox";
+            this.link2TitleBox.Size = new System.Drawing.Size(189, 26);
+            this.link2TitleBox.TabIndex = 34;
+            // 
+            // AddLinksButton
+            // 
+            this.AddLinksButton.Location = new System.Drawing.Point(749, 366);
+            this.AddLinksButton.Name = "AddLinksButton";
+            this.AddLinksButton.Size = new System.Drawing.Size(31, 31);
+            this.AddLinksButton.TabIndex = 35;
+            this.AddLinksButton.Text = "+";
+            this.AddLinksButton.UseVisualStyleBackColor = true;
+            this.AddLinksButton.Click += new System.EventHandler(this.AddLinksButton_Click);
             // 
             // AddGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 602);
+            this.Controls.Add(this.AddLinksButton);
+            this.Controls.Add(this.link2TitleBox);
+            this.Controls.Add(this.link1TitleBox);
             this.Controls.Add(this.AddGameButton);
             this.Controls.Add(this.IgnoreEnd);
             this.Controls.Add(this.IgnoreStart);
@@ -490,5 +524,8 @@
         private System.Windows.Forms.CheckBox IgnoreStart;
         private System.Windows.Forms.CheckBox IgnoreEnd;
         private System.Windows.Forms.Button AddGameButton;
+        private System.Windows.Forms.TextBox link1TitleBox;
+        private System.Windows.Forms.TextBox link2TitleBox;
+        private System.Windows.Forms.Button AddLinksButton;
     }
 }

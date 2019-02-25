@@ -22,6 +22,8 @@ namespace The_UGamer_Launcher
         private bool isPaused = false;
         private bool hasImage = true;
         private string title;
+        string link1Title;
+        string link2Title;
         string newsUrl;
         string wikiUrl;
         private Size browserSize = new Size(659, 88);
@@ -582,6 +584,20 @@ namespace The_UGamer_Launcher
 
         private bool setURLs(string news, string wiki)
         {
+            string link1Title = news;
+            string link2Title = wiki;
+            string link1URL = news;
+            string link2URL = wiki;
+
+            int link1Index = link1Title.IndexOf("[URL]");
+            link1Title = link1Title.Substring(0, link1Index);
+            link1URL = link1URL.Substring(link1Index + 5);
+            
+            int link2Index = link2Title.IndexOf("[URL]");
+            link2Title = link2Title.Substring(0, link2Index);
+            link2URL = link2URL.Substring(link2Index + 5);
+            
+
             if ((news == " " || news == "") && (wiki == " " || wiki == ""))
             {
                 this.Controls.Remove(newsButton);
@@ -597,8 +613,10 @@ namespace The_UGamer_Launcher
                 chromeBrowser.Size = browserSize;
                 chromeBrowser.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Top);
                 this.browserDock.Controls.Add(chromeBrowser);
-                this.newsUrl = news;
-                this.wikiUrl = wiki;
+                this.newsUrl = link1URL;
+                this.wikiUrl = link2URL;
+                newsButton.Text = link1Title;
+                wikiButton.Text = link2Title;
                 return true;
             }
             else if ((news == " " || news == "") && (wiki != " " || wiki != ""))
@@ -611,7 +629,8 @@ namespace The_UGamer_Launcher
                 this.browserDock.Controls.Add(chromeBrowser);
                 // this.Controls.Remove(newsButton);
                 newsButton.Visible = false;
-                this.wikiUrl = wiki;
+                this.wikiUrl = link2URL;
+                wikiButton.Text = link2Title;
                 return true;
             }
             else
@@ -623,7 +642,8 @@ namespace The_UGamer_Launcher
                 chromeBrowser.Size = browserSize;
                 chromeBrowser.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Top);
                 this.browserDock.Controls.Add(chromeBrowser);
-                this.newsUrl = news;
+                this.newsUrl = link1URL;
+                newsButton.Text = link1Title;
                 this.Controls.Remove(wikiButton);
                 return true;
             }

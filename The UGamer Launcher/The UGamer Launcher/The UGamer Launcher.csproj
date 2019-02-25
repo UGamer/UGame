@@ -115,6 +115,12 @@
     <Compile Include="AddGameOptions.Designer.cs">
       <DependentUpon>AddGameOptions.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddLinks.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddLinks.Designer.cs">
+      <DependentUpon>AddLinks.cs</DependentUpon>
+    </Compile>
     <Compile Include="CollectionDataSet4.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -166,6 +172,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddGameOptions.resx">
       <DependentUpon>AddGameOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddLinks.resx">
+      <DependentUpon>AddLinks.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

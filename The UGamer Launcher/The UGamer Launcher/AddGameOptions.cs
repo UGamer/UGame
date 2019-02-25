@@ -12,22 +12,15 @@ namespace The_UGamer_Launcher
 {
     public partial class AddGameOptions : Form
     {
-        string finalReturn;
+        private string file;
+        public string finalReturn;
 
         public AddGameOptions()
         {
             InitializeComponent();
         }
 
-        private void EXEButton_Click(object sender, EventArgs e)
-        {
-            DialogResult result = EXEFileDialog.ShowDialog();
-            if (result == DialogResult.OK) // Test result.
-            {
-                string file = EXEFileDialog.FileName;
-                EXEFilePathBox.Text = file;
-            }
-        }
+        
 
         private void SteamCodeLabel_Click(object sender, EventArgs e)
         {
@@ -41,11 +34,19 @@ namespace The_UGamer_Launcher
 
         private void CompleteButton_Click(object sender, EventArgs e)
         {
+            bool exit = false;
+
             if (Tabs.SelectedTab == SteamTab)
+            {
                 finalReturn = "steam://rungameid/" + SteamCodeBox.Text;
+                exit = true;
+            }
             
             else if (Tabs.SelectedTab == EXETab)
+            {
                 finalReturn = EXEFilePathBox.Text;
+                exit = true;
+            }
             
             else if (Tabs.SelectedTab == BattleNETTab)
             {
@@ -91,11 +92,11 @@ namespace The_UGamer_Launcher
                     DialogResult result = MessageBox.Show(message, caption, buttons);
                     if (result == DialogResult.Yes)
                     {
-                        // return finalReturn;
+                        exit = true;
                     }
-
                 }
             }
+
             else if (Tabs.SelectedTab == EmulationTab)
             {
                 string message = "No specific game chosen to launch, meaning launching this entry will only" +
@@ -109,10 +110,12 @@ namespace The_UGamer_Launcher
                     {
                         if (HiganFullscreen.Checked == true)
                         {
-                            finalReturn += " --fullscreen " + HiganROMBox.Text;
+                            finalReturn += " --fullscreen \"" + HiganROMBox.Text + "\"";
                         }
                         else
                             finalReturn += " - " + HiganROMBox.Text;
+
+                        exit = true;
                     }
                     else
                     {
@@ -120,7 +123,7 @@ namespace The_UGamer_Launcher
                         DialogResult result = MessageBox.Show(message, caption, buttons);
                         if (result == DialogResult.Yes)
                         {
-                            // return finalReturn;
+                            exit = true;
                         }
                     }
                     
@@ -130,12 +133,9 @@ namespace The_UGamer_Launcher
                     finalReturn = N64EmulatorBox.Text;
                     if (N64ROMBox.Text != "")
                     {
-                        if (HiganFullscreen.Checked == true)
-                        {
-                            finalReturn += " --fullscreen " + HiganROMBox.Text;
-                        }
-                        else
-                            finalReturn += " - " + HiganROMBox.Text;
+                        finalReturn += " - \"" + N64ROMBox.Text + "\"";
+
+                        exit = true;
                     }
                     else
                     {
@@ -143,35 +143,251 @@ namespace The_UGamer_Launcher
                         DialogResult result = MessageBox.Show(message, caption, buttons);
                         if (result == DialogResult.Yes)
                         {
-                            // return finalReturn;
+                            exit = true;
                         }
                     }
                 }
                 else if (EmulatorTabs.SelectedTab == PS1Tab)
                 {
-
+                    finalReturn = PS1EmulatorBox.Text;
+                    if (PS1ROMBox.Text != "")
+                    {
+                        finalReturn += " -loadbin \"" + PS1ROMBox.Text + "\" -nogui";
+                        exit = true;
+                    }
+                    else
+                    {
+                        MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                        DialogResult result = MessageBox.Show(message, caption, buttons);
+                        if (result == DialogResult.Yes)
+                        {
+                            exit = true;
+                        }
+                    }
                 }
                 else if (EmulatorTabs.SelectedTab == DSTab)
                 {
-
+                    finalReturn = DSEmulatorBox.Text;
+                    if (DSROMBox.Text != "")
+                    {
+                        finalReturn += " \"" + DSROMBox.Text + "\"";
+                        exit = true;
+                    }
+                    else
+                    {
+                        MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                        DialogResult result = MessageBox.Show(message, caption, buttons);
+                        if (result == DialogResult.Yes)
+                        {
+                            exit = true;
+                        }
+                    }
                 }
                 else if (EmulatorTabs.SelectedTab == DolphinTab)
                 {
-
+                    finalReturn = DolphinEmulatorBox.Text;
+                    if (DolphinROMBox.Text != "")
+                    {
+                        finalReturn += " -e \"" + DolphinROMBox.Text + "\" -nogui";
+                        exit = true;
+                    }
+                    else
+                    {
+                        MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                        DialogResult result = MessageBox.Show(message, caption, buttons);
+                        if (result == DialogResult.Yes)
+                        {
+                            exit = true;
+                        }
+                    }
                 }
                 else if (EmulatorTabs.SelectedTab == PS2Tab)
                 {
+                    finalReturn = PS2EmulatorBox.Text;
+                    if (PS2ROMBox.Text != "")
+                    {
+                        if (PS2ShowEmulatorCheck.Checked == true)
+                            finalReturn += " --nogui";
+                        
+                        if (PS2FullBootCheck.Checked == true)
+                            finalReturn += " --fullboot";
+                        
+                        finalReturn += " - \"" + PS2ROMBox.Text + "\"";
 
+                        if (PS2FullScreenCheck.Checked == true)
+                            finalReturn += " --fullscreen";
+
+                        exit = true;
+                    }
+                    else
+                    {
+                        MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                        DialogResult result = MessageBox.Show(message, caption, buttons);
+                        if (result == DialogResult.Yes)
+                        {
+                            exit = true;
+                        }
+                    }
                 }
                 else if (EmulatorTabs.SelectedTab == PSPTab)
                 {
-
+                    finalReturn = PSPEmulatorBox.Text;
+                    if (PSPROMBox.Text != "")
+                    {
+                        finalReturn += " \"" + PSPROMBox.Text + "\"";
+                        exit = true;
+                    }
+                    else
+                    {
+                        MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                        DialogResult result = MessageBox.Show(message, caption, buttons);
+                        if (result == DialogResult.Yes)
+                        {
+                            exit = true;
+                        }
+                    }
                 }
                 else if (EmulatorTabs.SelectedTab == WiiUTab)
                 {
+                    finalReturn = CEMUEmulatorBox.Text;
+                    if (CEMUROMBox.Text != "")
+                    {
+                        finalReturn += " -g \"" + CEMUROMBox.Text + "\"";
 
+                        if (CEMUFullscreenCheck.Checked == true)
+                            finalReturn += " -f";
+
+                        exit = true;
+                    }
+                    else
+                    {
+                        MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                        DialogResult result = MessageBox.Show(message, caption, buttons);
+                        if (result == DialogResult.Yes)
+                        {
+                            exit = true;
+                        }
+                    }
                 }
             }
+
+            if (exit == true)
+                this.Close();
+        }
+
+        private void FindFile()
+        {
+            DialogResult result = EXEFileDialog.ShowDialog();
+            if (result == DialogResult.OK) // Test result.
+                file = EXEFileDialog.FileName;
+        }
+
+        private void EXEButton_Click(object sender, EventArgs e)
+        {
+            FindFile();
+            EXEFilePathBox.Text = file;
+        }
+
+        private void BattleNetBrowseButton_Click(object sender, EventArgs e)
+        {
+            FindFile();
+            BattleNETFilePathBox.Text = file;
+        }
+
+        private void HiganEmulatorBrowse_Click(object sender, EventArgs e)
+        {
+            FindFile();
+            HiganEmulatorBox.Text = file;
+        }
+
+        private void HiganROMBrowse_Click(object sender, EventArgs e)
+        {
+            FindFile();
+            HiganROMBox.Text = file;
+        }
+
+        private void N64EmulatorBrowsse_Click(object sender, EventArgs e)
+        {
+            FindFile();
+            N64EmulatorBox.Text = file;
+        }
+
+        private void N64ROMBrowse_Click(object sender, EventArgs e)
+        {
+            FindFile();
+            N64ROMBox.Text = file;
+        }
+
+        private void PS1EmulatorButton_Click(object sender, EventArgs e)
+        {
+            FindFile();
+            PS1EmulatorBox.Text = file;
+        }
+
+        private void PS1ROMButton_Click(object sender, EventArgs e)
+        {
+            FindFile();
+            PS1ROMBox.Text = file;
+        }
+
+        private void DSEmulatorButton_Click(object sender, EventArgs e)
+        {
+            FindFile();
+            DSEmulatorBox.Text = file;
+        }
+
+        private void DSROMButton_Click(object sender, EventArgs e)
+        {
+            FindFile();
+            DSROMBox.Text = file;
+        }
+
+        private void DolphinEmulatorButton_Click(object sender, EventArgs e)
+        {
+            FindFile();
+            DolphinEmulatorBox.Text = file;
+        }
+
+        private void DolphinROMButton_Click(object sender, EventArgs e)
+        {
+            FindFile();
+            DolphinROMBox.Text = file;
+        }
+
+        private void PS2EmulatorButton_Click(object sender, EventArgs e)
+        {
+            FindFile();
+            PS2EmulatorBox.Text = file;
+        }
+
+        private void PS2ROMButton_Click(object sender, EventArgs e)
+        {
+            FindFile();
+            PS2ROMBox.Text = file;
+        }
+
+        private void PSPEmulatorButton_Click(object sender, EventArgs e)
+        {
+            FindFile();
+            PSPEmulatorBox.Text = file;
+        }
+
+        private void PSPROMButton_Click(object sender, EventArgs e)
+        {
+            FindFile();
+            PSPROMBox.Text = file;
+        }
+
+        private void CEMUEmulatorButton_Click(object sender, EventArgs e)
+        {
+            FindFile();
+            CEMUEmulatorBox.Text = file;
+        }
+
+        private void CEMUROMButton_Click(object sender, EventArgs e)
+        {
+            FindFile();
+            CEMUROMBox.Text = file;
         }
     }
 }
