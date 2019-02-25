@@ -133,13 +133,6 @@ namespace The_UGamer_Launcher
         private void Form1_Load(object sender, EventArgs e)
         {
             dataTable.Visible = false;
-            
-            // ------------ UNCOMMENT THIS WHEN DONE IMPLEMENTING
-            /* 
-            NotificationSystem();
-            ImageNotificationSystem();
-            addEntryButton.Text = "Notifications (" + globalNotificationTable.Rows.Count.ToString() + ")";
-            */
 
             this.notificationsTableAdapter1.Fill(this.notificationsSet.Notifications);
             this.notificationsTableAdapter.Fill(this.notificationDataSet.Notifications);
@@ -204,6 +197,16 @@ namespace The_UGamer_Launcher
             dataTable.SortCompare += customSortCompare;
 
             dataTable.Visible = true;
+
+            DoNotifications();
+        }
+
+        private void DoNotifications()
+        {
+            NotificationSystem();
+            ImageNotificationSystem();
+            addEntryButton.Text = "Notifications (" + globalNotificationTable.Rows.Count.ToString() + ")";
+
             LoadingLabel.Visible = false;
         }
 
