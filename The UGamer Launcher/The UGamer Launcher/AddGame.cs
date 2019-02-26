@@ -105,23 +105,18 @@ namespace The_UGamer_Launcher
             string notes = notesBox.Text;
             string launchCode = launchBox.Text;
 
-            string link1Title = link1TitleBox.Text;
-            string link2Title = link2TitleBox.Text;
+            string links = linksBox.Text;
             
-            string wikiURL = wikiURLBox.Text;
-
-            string newsCode = link1TitleBox.Text + "[URL]" + newsURLBox.Text;
-            string wikiCode = link2TitleBox.Text + "[URL]" + wikiURLBox.Text;
 
             addEntry(title, platform, status, rating, hours, minutes, seconds, obtained, startDate, 
-                endDate, launchCode, notes, newsCode, wikiCode);
+                endDate, launchCode, notes, links);
 
             refresh = true;
         }
 
         private void addEntry(string title, string platform, string status,
             string rating, string hours, string minutes, string seconds, string obtained, string startDate,
-                string endDate, string launchCode, string notes, string newsCode, string wikiCode)
+                string endDate, string launchCode, string notes, string links)
         {
             int hoursInt = 0;
             int minsInt = 0;
@@ -170,8 +165,7 @@ namespace The_UGamer_Launcher
             endDate.Trim();
             notes.Trim();
             launchCode.Trim();
-            newsCode.Trim();
-            wikiCode.Trim();
+            links.Trim();
 
             cmd.Parameters.AddWithValue("@Title", title);
             if (platform == "")
@@ -221,10 +215,12 @@ namespace The_UGamer_Launcher
             else
                 cmd.Parameters.AddWithValue("@Launch", launchCode);
 
-            if (newsCode == "")
+            if (links == "")
                 cmd.Parameters.AddWithValue("@News", "");
             else
-                cmd.Parameters.AddWithValue("@News", newsCode);
+                cmd.Parameters.AddWithValue("@News", links);
+
+            string wikiCode = "";
 
             if (wikiCode == "")
                 cmd.Parameters.AddWithValue("@Wiki", "");
@@ -409,27 +405,7 @@ namespace The_UGamer_Launcher
                 notesBox.Text = dt.Rows[z][9].ToString();
                 launchBox.Text = dt.Rows[z][10].ToString();
 
-                string newsCode = dt.Rows[z][11].ToString();
-                string wikiCode = dt.Rows[z][12].ToString();
-
-                string link1Title = newsCode;
-                string link2Title = wikiCode;
-                string link1URL = newsCode;
-                string link2URL = wikiCode;
-
-                int link1Index = link1Title.IndexOf("[URL]");
-                link1Title = link1Title.Substring(0, link1Index);
-                link1URL = link1URL.Substring(link1Index + 5);
-
-                link1TitleBox.Text = link1Title;
-                newsURLBox.Text = link1URL;
-
-                int link2Index = link2Title.IndexOf("[URL]");
-                link2Title = link2Title.Substring(0, link2Index);
-                link2URL = link2URL.Substring(link2Index + 5);
-
-                link2TitleBox.Text = link2Title;
-                wikiURLBox.Text = link2URL;
+                linksBox.Text = dt.Rows[z][11].ToString();
 
                 noGameLabel.Visible = false;
                 y = 0;
@@ -479,18 +455,12 @@ namespace The_UGamer_Launcher
             string launchCode = launchBox.Text;
             string notes = notesBox.Text;
 
-            string link1Title = link1TitleBox.Text;
-            string link2Title = link2TitleBox.Text;
-
-            string wikiURL = wikiURLBox.Text;
-
-            string newsCode = link1TitleBox.Text + "[URL]" + newsURLBox.Text;
-            string wikiCode = link2TitleBox.Text + "[URL]" + wikiURLBox.Text;
+            string links = linksBox.Text;
             
 
             replaceEntryMethod(originalTitleString, title, platform, status, rating, 
                 hours, minutes, seconds, obtained, startDate,
-                endDate, launchCode, notes, newsCode, wikiCode);
+                endDate, launchCode, notes, links);
 
             FillTable();
 
@@ -500,7 +470,7 @@ namespace The_UGamer_Launcher
         private void replaceEntryMethod(string originalTitleString, string title, string platform, string status,
             string rating, string hours, string minutes,
             string seconds, string obtained, string startDate,
-                string endDate, string launchCode, string notes, string newsCode, string wikiCode)
+                string endDate, string launchCode, string notes, string links)
         {
 
             OleDbCommand delCmd = new OleDbCommand("DELETE FROM Table1 WHERE Title=\"" + originalTitleString + "\";", con);
@@ -554,8 +524,7 @@ namespace The_UGamer_Launcher
             endDate.Trim();
             notes.Trim();
             launchCode.Trim();
-            newsCode.Trim();
-            wikiCode.Trim();
+            links.Trim();
 
             if (result == DialogResult.Yes)
             {
@@ -611,10 +580,12 @@ namespace The_UGamer_Launcher
                 else
                     cmd.Parameters.AddWithValue("@Launch", launchCode);
 
-                if (newsCode == "")
+                if (links == "")
                     cmd.Parameters.AddWithValue("@News", "");
                 else
-                    cmd.Parameters.AddWithValue("@News", newsCode);
+                    cmd.Parameters.AddWithValue("@News", links);
+
+                string wikiCode = "";
 
                 if (wikiCode == "")
                     cmd.Parameters.AddWithValue("@Wiki", "");
@@ -747,7 +718,7 @@ namespace The_UGamer_Launcher
             endDatePicker.Value = today2;
             launchBox.Text = "";
             notesBox.Text = "";
-            newsURLBox.Text = "";
+            linksBox.Text = "";
             wikiURLBox.Text = "";
 
             this.Text = "Entries";
@@ -842,24 +813,7 @@ namespace The_UGamer_Launcher
             notesBox.Text = notes;
             launchBox.Text = launchString;
 
-            string link1Title = newsString;
-            string link2Title = wikiString;
-            string link1URL = newsString;
-            string link2URL = wikiString;
-
-            int link1Index = link1Title.IndexOf("[URL]");
-            link1Title = link1Title.Substring(0, link1Index);
-            link1URL = link1URL.Substring(link1Index + 5);
-
-            link1TitleBox.Text = link1Title;
-            newsURLBox.Text = link1URL;
-
-            int link2Index = link2Title.IndexOf("[URL]");
-            link2Title = link2Title.Substring(0, link2Index);
-            link2URL = link2URL.Substring(link2Index + 5);
-
-            link2TitleBox.Text = link2Title;
-            wikiURLBox.Text = link2URL;
+            linksBox.Text = newsString;
 
             replaceEntry.Visible = true;
             deleteEntryButton.Visible = true;
@@ -906,6 +860,8 @@ namespace The_UGamer_Launcher
                 else
                     links += linkTitles[index] + "[URL]" + linkURLs[index];
             }
+
+            linksBox.Text = links;
         }
     }
 }

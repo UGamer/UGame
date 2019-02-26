@@ -23,8 +23,10 @@ namespace The_UGamer_Launcher
         public Thread imageCheck;
         private bool displayData = false;
         DataTable newTable;
+
         private static string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Collection.accdb";
         private OleDbConnection con = new OleDbConnection(connectionString);
+
         private DataTable globalNotificationTable;
 
         private string type;
@@ -128,7 +130,6 @@ namespace The_UGamer_Launcher
 
         }
 
-
         // This fills the data table with the user data.
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -198,16 +199,9 @@ namespace The_UGamer_Launcher
 
             dataTable.Visible = true;
 
-            DoNotifications();
-        }
-
-        private void DoNotifications()
-        {
             NotificationSystem();
             ImageNotificationSystem();
             addEntryButton.Text = "Notifications (" + globalNotificationTable.Rows.Count.ToString() + ")";
-
-            LoadingLabel.Visible = false;
         }
 
         delegate void StringArgReturningVoidDelegate(string text);
@@ -432,11 +426,28 @@ namespace The_UGamer_Launcher
                     input2 = rgxFix7.Replace(input2, "");
                 if (input2.IndexOf("|") != -1)
                     input2 = rgxFix8.Replace(input2, "");
-
-                bgMissing = detailedImageAssign(input2, "BG");
-                detailMissing = detailedImageAssign(input2, "Details");
-                iconMissing = CheckForIcons(input2);
                 
+                int index;
+
+                string[] bgPaths = detailedImageAssign(input2, "BG");
+                string[] detailPaths = detailedImageAssign(input2, "Details");
+                string iconPath = "Resources/Icons/" + input2 + ".ico";
+
+                for (index = 0; (index < bgPaths.Length) && (bgMissing == false); index++)
+                {
+                    bgMissing = File.Exists(bgPaths[index]);
+                }
+
+                for (index = 0; (index < detailPaths.Length) && (detailMissing == false); index++)
+                {
+                    detailMissing = File.Exists(bgPaths[index]);
+                }
+
+                for (index = 0; (index < iconPath.Length) && (iconMissing == false); index++)
+                {
+                    iconMissing = File.Exists(bgPaths[index]);
+                }
+
                 type = "MissingImages";
                 actionString = "Dismiss";
 
@@ -514,6 +525,18 @@ namespace The_UGamer_Launcher
             con.Close();
         }
 
+        private string[] detailedImageAssign(string input2, string folder)
+        {
+            string[] paths = new string[4];
+
+            paths[0] = "Resources/" + folder + "/" + input2 + ".png";
+            paths[1] = "Resources/" + folder + "/" + input2 + ".jpg";
+            paths[2] = "Resources/" + folder + "/" + input2 + ".jpeg";
+            paths[3] = "Resources/" + folder + "/" + input2 + ".gif";
+
+            return paths;
+        }
+
         private bool CheckForDupes(DataTable table, int colIndex, DataRow row, string notifType)
         {
             string gameName;
@@ -550,59 +573,6 @@ namespace The_UGamer_Launcher
             cmd.Parameters.RemoveAt("@GameTitle");
             cmd.Parameters.RemoveAt("@Message");
             cmd.Parameters.RemoveAt("@Action");
-        }
-
-        private bool CheckForIcons(string input2)
-        {
-            Icon testIcon;
-            try
-            {
-                testIcon = new Icon("Resources/Icons/" + input2 + ".ico");
-                return false;
-            }
-            catch (FileNotFoundException e)
-            {
-                return true;
-            }
-        }
-
-        private bool detailedImageAssign(string input2, string folder)
-        {
-            Image background;
-            try
-            {
-                background = Image.FromFile("Resources/" + folder + "/" + input2 + ".png");
-                return false;
-            }
-            catch (FileNotFoundException e)
-            {
-                try
-                {
-                    background = Image.FromFile("Resources/" + folder + "/" + input2 + ".jpg");
-                    return false;
-                }
-                catch (FileNotFoundException f)
-                {
-                    try
-                    {
-                        background = Image.FromFile("Resources/" + folder + "/" + input2 + ".jpeg");
-                        return false;
-                    }
-                    catch (FileNotFoundException g)
-                    {
-                        try
-                        {
-                            background = Image.FromFile("Resources/" + folder + "/" + input2 + ".gif");
-                            return false;
-                        }
-                        catch (FileNotFoundException h)
-                        {
-                            return true;
-                        }
-                    }
-                }
-            }
-
         }
 
         private void dataTable_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -647,7 +617,7 @@ namespace The_UGamer_Launcher
             dataScan(searchBox.Text);
         }
 
-        public void dataScan(String input)
+        public void dataScan(string input)
         {
             string input2 = "";
             int y = 0, z = 0;
@@ -744,6 +714,7 @@ namespace The_UGamer_Launcher
                 gameWindow.DisplayInfo(input, input2, platform, status, rating,
                     hours, obtained, startDate, endDate, notes, launchString, exePath,
                     newsString, wikiString, hasArgs);
+
                 noGameLabel.Visible = false;
                 y = 0;
             }
@@ -754,14 +725,14 @@ namespace The_UGamer_Launcher
 
         private static bool isExe(string p)
         {
-            if (p.IndexOf(".exe") == -1)
+            if (p.IndexOf(".exe") != -1)
                 return true;
-            if (p.IndexOf(".lnk") == -1)
+            else if (p.IndexOf(".lnk") != -1)
                 return true;
-            if (p.IndexOf(".bat") == -1)
+            else if (p.IndexOf(".bat") != -1)
                 return true;
             else
-                return true;
+                return false;
         }
 
         private static bool hasArgsMethod(string p)

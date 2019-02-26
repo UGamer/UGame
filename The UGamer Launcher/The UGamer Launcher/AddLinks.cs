@@ -38,7 +38,7 @@ namespace The_UGamer_Launcher
             LinkURLBox.Visible = true;
             LinkAddButton.Visible = true;
 
-            linkAmount = Convert.ToInt32(ChooseAmountLabel.Text);
+            linkAmount = Convert.ToInt32(ChooseAmountBox.Text);
             linkTitles = new string[linkAmount];
             linkURLs = new string[linkAmount];
         }
@@ -54,10 +54,10 @@ namespace The_UGamer_Launcher
                 LinkURLBox.Text = "";
 
                 index++;
-            }
-            else
-            {
-
+                if (index == linkAmount)
+                {
+                    this.Close();
+                }
             }
         }
     }

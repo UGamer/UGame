@@ -22,8 +22,6 @@ namespace The_UGamer_Launcher
         private bool isPaused = false;
         private bool hasImage = true;
         private string title;
-        string link1Title;
-        string link2Title;
         string newsUrl;
         string wikiUrl;
         private Size browserSize = new Size(659, 88);
@@ -156,7 +154,7 @@ namespace The_UGamer_Launcher
                 button1.Text = "Track Time";
             }
 
-            bool hasPage = setURLs(newsString2, wikiString2);
+            bool hasPage = setURLs(newsString2);
 
             if (hasPage == true)
             {
@@ -174,17 +172,16 @@ namespace The_UGamer_Launcher
                 this.Controls.Remove(wikiButton);
                 newsButton.Location = new Point(689, 345);
             }
-
-            button1.Click += (sender, EventArgs) => { button_Click(sender, EventArgs, launchString2, exePath2,  hasArgs2); }; // This passes the launch URL to the launch button.
         }
 
-        private void button1_Click(object sender, EventArgs e) { }
-
-        private void button_Click(object sender, EventArgs e, string launchString3, bool exePath3, bool hasArgs3)
+        private void button1_Click(object sender, EventArgs e)
         {
-            Process game = new Process();
+            string launchString3 = launchLabel.Text;
+
+            bool exePath3 = isExe(launchString3);
+            bool hasArgs3 = hasArgsMethod(launchString3);
+
             Uri launchUrl;
-            game.StartInfo.FileName = "";
             if (exePath3 == true)
             {
                 if (hasArgs3 == true)
@@ -201,13 +198,13 @@ namespace The_UGamer_Launcher
                     string args = launchString3.Substring(exeLoc + 5);
                     ProcessStartInfo procStartInfo = new ProcessStartInfo(fileName, args);
 
-                    ingame.Show();
+                    // ingame.Show();
 
                     gameTime.Start();
                     if (procStartInfo.FileName != "" && procStartInfo.FileName != " ")
                     {
                         Process.Start(procStartInfo);
-                        ingame.Show();
+                        // ingame.Show();
                     }
                 }
                 else
@@ -217,7 +214,7 @@ namespace The_UGamer_Launcher
                     if (procStartInfo.FileName != "" && procStartInfo.FileName != " ")
                     {
                         Process.Start(procStartInfo);
-                        ingame.Show();
+                        // ingame.Show();
                     }
                 }
             }
@@ -230,7 +227,7 @@ namespace The_UGamer_Launcher
                 gameTime.Start();
                 launchUrl = new Uri(launchString3);
                 launcher.Url = launchUrl;
-                ingame.Show();
+                // ingame.Show();
             }
 
             /*
@@ -245,6 +242,36 @@ namespace The_UGamer_Launcher
             didPlay = true;
             gameRunning = true;
             refresh = true;
+        }
+
+        private bool isExe(string p)
+        {
+            if (p.IndexOf(".exe") != -1)
+                return true;
+            else if (p.IndexOf(".lnk") != -1)
+                return true;
+            else if (p.IndexOf(".bat") != -1)
+                return true;
+            else
+                return false;
+        }
+
+        private bool hasArgsMethod(string p)
+        {
+            try
+            {
+                int exeLoc = p.IndexOf(".exe");
+                string lookForArgs = p.Substring(exeLoc);
+
+                if (lookForArgs.IndexOf("-") == -1)
+                    return false;
+                else
+                    return true;
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                return false;
+            }
         }
 
         private void DisplaySeconds()
@@ -390,7 +417,7 @@ namespace The_UGamer_Launcher
         {
             // timePlaying.Abort();
 
-            ingame.Close();
+            // ingame.Close();
             gameTime.Stop();
             gameRunning = false;
             int seconds = Convert.ToInt32(gameTime.ElapsedMilliseconds / 1000);
@@ -582,30 +609,34 @@ namespace The_UGamer_Launcher
             chromeBrowser.Load(newsUrl);
         }
 
-        private bool setURLs(string news, string wiki)
+        private bool setURLs(string news)
         {
+            OleDbCommand createTempTable = new OleDbCommand("CREATE TABLE TempTable (Title TEXT, LinkURL TEXT);", con);
+
+
+
             string link1Title = news;
-            string link2Title = wiki;
-            string link1URL = news;
-            string link2URL = wiki;
+            string link1URLPart1 = news;
+            string link1URL;
 
-            int link1Index = link1Title.IndexOf("[URL]");
-            link1Title = link1Title.Substring(0, link1Index);
-            link1URL = link1URL.Substring(link1Index + 5);
-            
-            int link2Index = link2Title.IndexOf("[URL]");
-            link2Title = link2Title.Substring(0, link2Index);
-            link2URL = link2URL.Substring(link2Index + 5);
-            
+            int titleIndex = link1URLPart1.IndexOf("[Title]");
+            int URLIndex = link1Title.IndexOf("[URL]");
+            link1Title = link1Title.Substring(0, URLIndex);
+            link1URLPart1 = link1URLPart1.Substring(URLIndex + 5);
 
-            if ((news == " " || news == "") && (wiki == " " || wiki == ""))
+            if (titleIndex != -1)
+                link1URL = link1URLPart1.Substring(0, titleIndex);
+            else
+                link1URL = link1URLPart1;
+
+            if (news == " " || news == "")
             {
                 this.Controls.Remove(newsButton);
                 this.Controls.Remove(wikiButton);
                 this.Controls.Remove(browserDock);
                 return false;
             }
-            else if ((news != " " || news != "") && (wiki != " " || wiki != ""))
+            else if (news != " " || news != "")
             {
                 // Create a browser component
                 chromeBrowser = new ChromiumWebBrowser(news);
@@ -614,23 +645,9 @@ namespace The_UGamer_Launcher
                 chromeBrowser.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Top);
                 this.browserDock.Controls.Add(chromeBrowser);
                 this.newsUrl = link1URL;
-                this.wikiUrl = link2URL;
+                // this.wikiUrl = link2URL;
                 newsButton.Text = link1Title;
-                wikiButton.Text = link2Title;
-                return true;
-            }
-            else if ((news == " " || news == "") && (wiki != " " || wiki != ""))
-            {
-                // Create a browser component
-                chromeBrowser = new ChromiumWebBrowser(news);
-                // Add it to the form and fill it to the form window.
-                chromeBrowser.Size = browserSize;
-                chromeBrowser.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Top);
-                this.browserDock.Controls.Add(chromeBrowser);
-                // this.Controls.Remove(newsButton);
-                newsButton.Visible = false;
-                this.wikiUrl = link2URL;
-                wikiButton.Text = link2Title;
+                // wikiButton.Text = link2Title;
                 return true;
             }
             else

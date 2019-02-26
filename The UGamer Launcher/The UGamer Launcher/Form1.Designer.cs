@@ -53,10 +53,6 @@
             this.searchButton = new System.Windows.Forms.Button();
             this.searchBox = new System.Windows.Forms.TextBox();
             this.table1TableAdapter2 = new The_UGamer_Launcher.CollectionDataSet4TableAdapters.Table1TableAdapter();
-            this.table1BindingSource2 = new System.Windows.Forms.BindingSource(this.components);
-            this.table1BindingSource3 = new System.Windows.Forms.BindingSource(this.components);
-            this.table1BindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.table1BindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.collectionDataSet5 = new The_UGamer_Launcher.CollectionDataSet5();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.EditToolStripButton = new System.Windows.Forms.ToolStripDropDownButton();
@@ -98,25 +94,28 @@
             this.actionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.notificationsBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.notificationsSet = new The_UGamer_Launcher.NotificationsSet();
+            this.notificationsTableAdapter1 = new The_UGamer_Launcher.NotificationsSetTableAdapters.NotificationsTableAdapter();
+            this.table1BindingSource2 = new System.Windows.Forms.BindingSource(this.components);
+            this.table1BindingSource3 = new System.Windows.Forms.BindingSource(this.components);
+            this.table1BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.table1BindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.notificationDataSet = new The_UGamer_Launcher.NotificationDataSet();
             this.notificationsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.notificationsTableAdapter = new The_UGamer_Launcher.NotificationDataSetTableAdapters.NotificationsTableAdapter();
-            this.notificationsTableAdapter1 = new The_UGamer_Launcher.NotificationsSetTableAdapters.NotificationsTableAdapter();
-            this.LoadingLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet5)).BeginInit();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet5BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NotificationsDGV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.notificationsBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.notificationsSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.notificationDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.notificationsBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -691,6 +690,10 @@
             this.notificationsSet.DataSetName = "NotificationsSet";
             this.notificationsSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
+            // notificationsTableAdapter1
+            // 
+            this.notificationsTableAdapter1.ClearBeforeFill = true;
+            // 
             // notificationDataSet
             // 
             this.notificationDataSet.DataSetName = "NotificationDataSet";
@@ -705,28 +708,12 @@
             // 
             this.notificationsTableAdapter.ClearBeforeFill = true;
             // 
-            // notificationsTableAdapter1
-            // 
-            this.notificationsTableAdapter1.ClearBeforeFill = true;
-            // 
-            // LoadingLabel
-            // 
-            this.LoadingLabel.AutoSize = true;
-            this.LoadingLabel.Font = new System.Drawing.Font("Microsoft JhengHei", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LoadingLabel.Location = new System.Drawing.Point(557, 277);
-            this.LoadingLabel.Name = "LoadingLabel";
-            this.LoadingLabel.Size = new System.Drawing.Size(188, 47);
-            this.LoadingLabel.TabIndex = 22;
-            this.LoadingLabel.Text = "Loading...";
-            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1333, 652);
-            this.Controls.Add(this.LoadingLabel);
             this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.NotificationsDGV);
             this.Controls.Add(this.searchBox);
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.noGameLabel);
@@ -736,6 +723,7 @@
             this.Controls.Add(this.dataTable);
             this.Controls.Add(this.logo);
             this.Controls.Add(this.driverWarning);
+            this.Controls.Add(this.NotificationsDGV);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
@@ -746,10 +734,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet5)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
@@ -757,6 +741,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.NotificationsDGV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.notificationsBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.notificationsSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.notificationDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.notificationsBindingSource)).EndInit();
             this.ResumeLayout(false);
@@ -837,7 +825,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn messageDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn gameTitleDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn actionDataGridViewTextBoxColumn;
-        private System.Windows.Forms.Label LoadingLabel;
     }
 }
 
