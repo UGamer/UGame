@@ -4,10 +4,12 @@ using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
 using System.Data.OleDb;
+using System.Data;
 using System.Text.RegularExpressions;
 using CefSharp;
 using CefSharp.WinForms;
 using System.Threading;
+using System.ComponentModel;
 
 namespace The_UGamer_Launcher
 {
@@ -26,6 +28,9 @@ namespace The_UGamer_Launcher
         string wikiUrl;
         private Size browserSize = new Size(659, 88);
         Overlay ingame = new Overlay();
+        private bool justTrack = false;
+        string[,] links;
+        int linkCount = 0;
 
         private static string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Collection.accdb";
         private OleDbConnection con = new OleDbConnection(connectionString);
@@ -152,29 +157,18 @@ namespace The_UGamer_Launcher
             if (launchString2 == "" || launchString2 == " ")
             {
                 button1.Text = "Track Time";
+                TrackTimeButton.Visible = false;
             }
 
-            bool hasPage = setURLs(newsString2);
-
-            if (hasPage == true)
-            {
-                if (newsString2 != "" && newsString2 != " ")
-                    chromeBrowser.Load(newsString2);
-                else
-                {
-                    this.Controls.Remove(newsButton);
-                    chromeBrowser.Load(wikiString2);
-                }
-            }
-
-            if (wikiString2 == "" || wikiString2 == " ")
-            {
-                this.Controls.Remove(wikiButton);
-                newsButton.Location = new Point(689, 345);
-            }
+            setURLs(newsString2);
         }
 
         private void button1_Click(object sender, EventArgs e)
+        {
+            TrackTime(true);
+        }
+
+        private void TrackTime(bool executeLaunch)
         {
             string launchString3 = launchLabel.Text;
 
@@ -182,60 +176,67 @@ namespace The_UGamer_Launcher
             bool hasArgs3 = hasArgsMethod(launchString3);
 
             Uri launchUrl;
-            if (exePath3 == true)
+            if (executeLaunch == true)
             {
-                if (hasArgs3 == true)
+                if (exePath3 == true)
                 {
-                    int getRidOfQuotes = launchString3.IndexOf("\"");
-                    if (getRidOfQuotes == 0)
+                    if (hasArgs3 == true)
                     {
-                        launchString3.Substring(1);
-                        int secondQuote = launchString3.IndexOf("\"");
-                        launchString3.Substring(0, secondQuote);
-                    }
-                    int exeLoc = launchString3.IndexOf(".exe");
-                    string fileName = launchString3.Substring(0, exeLoc + 5);
-                    string args = launchString3.Substring(exeLoc + 5);
-                    ProcessStartInfo procStartInfo = new ProcessStartInfo(fileName, args);
+                        int getRidOfQuotes = launchString3.IndexOf("\"");
+                        if (getRidOfQuotes == 0)
+                        {
+                            launchString3.Substring(1);
+                            int secondQuote = launchString3.IndexOf("\"");
+                            launchString3.Substring(0, secondQuote);
+                        }
+                        int exeLoc = launchString3.IndexOf(".exe");
+                        string fileName = launchString3.Substring(0, exeLoc + 5);
+                        string args = launchString3.Substring(exeLoc + 5);
+                        ProcessStartInfo procStartInfo = new ProcessStartInfo(fileName, args);
 
-                    // ingame.Show();
-
-                    gameTime.Start();
-                    if (procStartInfo.FileName != "" && procStartInfo.FileName != " ")
-                    {
-                        Process.Start(procStartInfo);
                         // ingame.Show();
+
+                        gameTime.Start();
+                        if (procStartInfo.FileName != "" && procStartInfo.FileName != " ")
+                        {
+                            Process.Start(procStartInfo);
+                            // ingame.Show();
+                        }
                     }
+                    else
+                    {
+                        ProcessStartInfo procStartInfo = new ProcessStartInfo(launchString3);
+                        gameTime.Start();
+                        if (procStartInfo.FileName != "" && procStartInfo.FileName != " ")
+                        {
+                            Process.Start(procStartInfo);
+                            // ingame.Show();
+                        }
+                    }
+                }
+                else if (launchString3 == "")
+                {
+                    gameTime.Start();
                 }
                 else
                 {
-                    ProcessStartInfo procStartInfo = new ProcessStartInfo(launchString3);
                     gameTime.Start();
-                    if (procStartInfo.FileName != "" && procStartInfo.FileName != " ")
-                    {
-                        Process.Start(procStartInfo);
-                        // ingame.Show();
-                    }
+                    launchUrl = new Uri(launchString3);
+                    launcher.Url = launchUrl;
+                    // ingame.Show();
                 }
-            }
-            else if (launchString3 == "")
-            {
-                gameTime.Start();
             }
             else
             {
                 gameTime.Start();
-                launchUrl = new Uri(launchString3);
-                launcher.Url = launchUrl;
-                // ingame.Show();
             }
-
             /*
             timePlaying = new Thread(new ThreadStart(DisplaySeconds));
             timePlaying.Start();
             */
 
             button1.Visible = false;
+            TrackTimeButton.Visible = false;
             stopTime.Visible = true;
             PauseTimeButton.Visible = true;
             discardButton.Visible = true;
@@ -416,8 +417,8 @@ namespace The_UGamer_Launcher
         private void stopTimeMethod()
         {
             // timePlaying.Abort();
-
             // ingame.Close();
+
             gameTime.Stop();
             gameRunning = false;
             int seconds = Convert.ToInt32(gameTime.ElapsedMilliseconds / 1000);
@@ -555,7 +556,10 @@ namespace The_UGamer_Launcher
 
             MessageBox.Show(message, caption);
             hoursLabel.Text = "Time Played: " + timePlayed;
+
             button1.Visible = true;
+            if (justTrack == true)
+                TrackTimeButton.Visible = true;
             stopTime.Visible = false;
             isPaused = false;
             PauseTimeButton.Text = "Pause Playing";
@@ -579,8 +583,7 @@ namespace The_UGamer_Launcher
                         timePlaying.Start();
 
                     browserDock.Visible = true;
-                    newsButton.Visible = true;
-                    wikiButton.Visible = true;
+                    BrowserLinksDGV.Visible = true;
                     // Maximized!
                 }
                 if (WindowState == FormWindowState.Normal)
@@ -589,58 +592,97 @@ namespace The_UGamer_Launcher
                         timePlaying.Start();
 
                     browserDock.Visible = false;
-                    newsButton.Visible = false;
-                    wikiButton.Visible = false;
+                    BrowserLinksDGV.Visible = false;
                     // Restored!
                 }
                 if (WindowState == FormWindowState.Minimized)
                 {
                     timePlaying.Abort();
                     browserDock.Visible = false;
-                    newsButton.Visible = false;
-                    wikiButton.Visible = false;
+                    BrowserLinksDGV.Visible = false;
                     // Restored!
                 }
             }
         }
 
-        private void newsButton_Click(object sender, EventArgs e)
+        private void setURLs(string news)
         {
-            chromeBrowser.Load(newsUrl);
-        }
+            string allLinks = news;
+            int URLIndex1;
 
-        private bool setURLs(string news)
-        {
-            OleDbCommand createTempTable = new OleDbCommand("CREATE TABLE TempTable (Title TEXT, LinkURL TEXT);", con);
-
-
-
-            string link1Title = news;
-            string link1URLPart1 = news;
-            string link1URL = "";
-
-            try
+            for (int index = 0; index != 1;)
             {
-                int titleIndex = link1URLPart1.IndexOf("[Title]");
-                int URLIndex = link1Title.IndexOf("[URL]");
-                link1Title = link1Title.Substring(0, URLIndex);
-                link1URLPart1 = link1URLPart1.Substring(URLIndex + 5);
-                if (titleIndex != -1)
-                    link1URL = link1URLPart1.Substring(0, titleIndex);
+                URLIndex1 = allLinks.IndexOf("[URL]");
+                if (URLIndex1 != -1)
+                {
+                    linkCount++;
+                    allLinks = allLinks.Substring(URLIndex1 + 5);
+                }
                 else
-                    link1URL = link1URLPart1;
+                {
+                    index = 1;
+                }
             }
-            catch (ArgumentOutOfRangeException e)
-            {
 
+            string allLinks2 = news;
+            links = new string[2,linkCount];
+
+            for (int index = 0; index < linkCount; index++)
+            {
+                try
+                {
+                    int titleIndex = allLinks2.IndexOf("[Title]");
+                    int URLIndex = allLinks2.IndexOf("[URL]");
+                    string tempLink = allLinks2.Substring(titleIndex + 7);
+                    int titleLength = URLIndex - (titleIndex + 7);
+                    links[0, index] = allLinks2.Substring(titleIndex + 7, titleLength);
+                    int nextTitleIndex = tempLink.IndexOf("[Title]");
+                    if (nextTitleIndex != -1)
+                    {
+                        int urlLength = nextTitleIndex - URLIndex + 2;
+                        links[1, index] = allLinks2.Substring(URLIndex + 5, urlLength);
+                    }
+                    else
+                    {
+                        links[1, index] = allLinks2.Substring(URLIndex + 5);
+                    }
+                        
+                    allLinks2 = allLinks2.Substring(nextTitleIndex);
+                }
+                catch (ArgumentOutOfRangeException e)
+                {
+
+                }
             }
+
+            OleDbCommand insertTemp = new OleDbCommand("INSERT INTO TempTable (Title) VALUES (@Title);", con);
+
+            for (int index = 0; index < linkCount; index++)
+            {
+                insertTemp.Parameters.AddWithValue("@Title", links[0, index]);
+                con.Open();
+                insertTemp.ExecuteNonQuery();
+                con.Close();
+                insertTemp.Parameters.RemoveAt("@Title");
+            }
+
+            BrowserLinksDGV.DataSource = null;
+            BrowserLinksDGV.Update();
+            BrowserLinksDGV.Refresh();
+            OleDbCommand cmd = new OleDbCommand("SELECT * FROM TempTable", con);
+            con.Open();
+            cmd.CommandType = CommandType.Text;
+            OleDbDataAdapter da = new OleDbDataAdapter(cmd);
+            DataTable newTable = new DataTable();
+            da.Fill(newTable);
+            BrowserLinksDGV.DataSource = newTable;
+            BrowserLinksDGV.Sort(BrowserLinksDGV.Columns[0], ListSortDirection.Ascending);
+            con.Close();
 
             if (news == " " || news == "")
             {
-                this.Controls.Remove(newsButton);
-                this.Controls.Remove(wikiButton);
+                this.Controls.Remove(BrowserLinksDGV);
                 this.Controls.Remove(browserDock);
-                return false;
             }
             else if (news != " " || news != "")
             {
@@ -650,31 +692,7 @@ namespace The_UGamer_Launcher
                 chromeBrowser.Size = browserSize;
                 chromeBrowser.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Top);
                 this.browserDock.Controls.Add(chromeBrowser);
-                this.newsUrl = link1URL;
-                // this.wikiUrl = link2URL;
-                newsButton.Text = link1Title;
-                // wikiButton.Text = link2Title;
-                return true;
             }
-            else
-            {
-                // Create a browser component
-                chromeBrowser = new ChromiumWebBrowser(news);
-                // Add it to the form and fill it to the form window.
-                
-                chromeBrowser.Size = browserSize;
-                chromeBrowser.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Top);
-                this.browserDock.Controls.Add(chromeBrowser);
-                this.newsUrl = link1URL;
-                newsButton.Text = link1Title;
-                this.Controls.Remove(wikiButton);
-                return true;
-            }
-        }
-
-        private void wikiButton_Click(object sender, EventArgs e)
-        {
-            chromeBrowser.Load(wikiUrl);
         }
 
         public Image ThemeAssign(string input2)
@@ -875,6 +893,7 @@ namespace The_UGamer_Launcher
             BrowserButton.Visible = false;
             BackButton.Visible = true;
 
+            TrackTimeButton.Visible = false;
             gamePicture.Visible = false;
             noImageText.Visible = false;
             nameLabel.Visible = false;
@@ -884,16 +903,13 @@ namespace The_UGamer_Launcher
 
             // Size fullBrowserSize = new Size(835, 304);
             Size fullBrowserSize = new Size(1280, 720);
-            Point fullBrowserLocation = new Point(8, 20);
+            Point fullBrowserLocation = new Point(8, 40);
 
             browserDock.Size = fullBrowserSize;
             browserDock.Location = fullBrowserLocation;
 
-            // chromeBrowser.Size = fullBrowserSize;
-
             browserDock.Visible = true;
-            newsButton.Visible = true;
-            wikiButton.Visible = true;
+            BrowserLinksDGV.Visible = true;
         }
 
         private void BackButton_Click(object sender, EventArgs e)
@@ -901,6 +917,7 @@ namespace The_UGamer_Launcher
             BrowserButton.Visible = true;
             BackButton.Visible = false;
 
+            TrackTimeButton.Visible = true;
             gamePicture.Visible = true;
 
             if (hasImage == false)
@@ -912,10 +929,47 @@ namespace The_UGamer_Launcher
             notesBox.Visible = true;
 
             browserDock.Visible = false;
-            newsButton.Visible = false;
-            wikiButton.Visible = false;
+            BrowserLinksDGV.Visible = false;
 
             browserDock.Size = browserSize;
+        }
+
+        private void TrackTimeButton_Click(object sender, EventArgs e)
+        {
+            justTrack = true;
+            TrackTime(false);
+        }
+
+        private void GameDetails_Load(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'tempTableDataSet.TempTable' table. You can move, or remove it, as needed.
+            this.tempTableTableAdapter.Fill(this.tempTableDataSet.TempTable);
+
+        }
+
+        private void BrowserLinksDGV_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            string titleValue;
+            string urlToPass = "";
+            try
+            {
+                object value = BrowserLinksDGV.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+                titleValue = value.ToString();
+                
+
+                for (int index = 0; index < linkCount; index++)
+                {
+                    if (links[0, index] == titleValue)
+                        urlToPass = links[1, index];
+                }
+                ChangeURL(urlToPass);
+            }
+            catch (ArgumentOutOfRangeException f) { }
+        }
+
+        private void ChangeURL(string url)
+        {
+            chromeBrowser.Load(url);
         }
     }
 }
