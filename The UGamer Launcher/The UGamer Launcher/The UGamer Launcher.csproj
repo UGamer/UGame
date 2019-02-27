@@ -121,6 +121,11 @@
     <Compile Include="AddLinks.Designer.cs">
       <DependentUpon>AddLinks.cs</DependentUpon>
     </Compile>
+    <Compile Include="CollectionDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CollectionDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="CollectionDataSet4.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -203,6 +208,17 @@
     <EmbeddedResource Include="Settings.resx">
       <DependentUpon>Settings.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="CollectionDataSet.xsc">
+      <DependentUpon>CollectionDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="CollectionDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CollectionDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="CollectionDataSet.xss">
+      <DependentUpon>CollectionDataSet.xsd</DependentUpon>
+    </None>
     <None Include="CollectionDataSet4.xsc">
       <DependentUpon>CollectionDataSet4.xsd</DependentUpon>
     </None>

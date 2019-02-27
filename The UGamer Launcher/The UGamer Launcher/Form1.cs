@@ -133,11 +133,20 @@ namespace The_UGamer_Launcher
         // This fills the data table with the user data.
         private void Form1_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'collectionDataSet.Table1' table. You can move, or remove it, as needed.
+            this.table1TableAdapter.Fill(this.collectionDataSet.Table1);
             dataTable.Visible = false;
 
             this.notificationsTableAdapter1.Fill(this.notificationsSet.Notifications);
             this.notificationsTableAdapter.Fill(this.notificationDataSet.Notifications);
-            this.table1TableAdapter2.Fill(this.collectionDataSet4.Table1);
+            try
+            {
+                this.table1TableAdapter2.Fill(this.collectionDataSet4.Table1);
+            }
+            catch
+            {
+
+            }
             // TODO: This line of code loads data into the 'collectionDataSet5.Themes' table. You can move, or remove it, as needed.
             try
             {

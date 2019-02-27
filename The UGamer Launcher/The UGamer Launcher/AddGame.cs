@@ -854,11 +854,7 @@ namespace The_UGamer_Launcher
 
             for (int index = 0; index < linkTitles.Length; index++)
             {
-                if (index != 0)
-                    links += "[Title]" + linkTitles[index] + "[URL]" + linkURLs[index];
-                
-                else
-                    links += linkTitles[index] + "[URL]" + linkURLs[index];
+                links += "[Title]" + linkTitles[index] + "[URL]" + linkURLs[index];
             }
 
             linksBox.Text = links;
