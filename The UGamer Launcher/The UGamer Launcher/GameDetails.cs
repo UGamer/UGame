@@ -655,6 +655,11 @@ namespace The_UGamer_Launcher
                 }
             }
 
+            OleDbCommand clearTable = new OleDbCommand("DELETE FROM TempTable", con);
+            con.Open();
+            clearTable.ExecuteNonQuery();
+            con.Close();
+
             OleDbCommand insertTemp = new OleDbCommand("INSERT INTO TempTable (Title) VALUES (@Title);", con);
 
             for (int index = 0; index < linkCount; index++)
