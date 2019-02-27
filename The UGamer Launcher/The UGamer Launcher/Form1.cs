@@ -391,7 +391,7 @@ namespace The_UGamer_Launcher
 
             foreach (DataRow row in gameTable.Rows)
             {
-                bool bgMissing = true, detailMissing = true, iconMissing = true;
+                bool bgMissing = false, detailMissing = false, iconMissing = true;
                 string gameName = row[gameTableNameIndex].ToString();
                 string input2 = gameName;
                 string[] notifTableName = new string[notificationTable.Rows.Count];
@@ -435,17 +435,19 @@ namespace The_UGamer_Launcher
 
                 for (index = 0; (index < bgPaths.Length) && (bgMissing == false); index++)
                 {
-                    bgMissing = File.Exists(bgPaths[index]);
+                    if (bgMissing == false)
+                        bgMissing = File.Exists(bgPaths[index]);
                 }
 
                 for (index = 0; (index < detailPaths.Length) && (detailMissing == false); index++)
                 {
-                    detailMissing = File.Exists(bgPaths[index]);
+                    if (detailMissing == false)
+                        detailMissing = File.Exists(detailPaths[index]);
                 }
 
-                for (index = 0; (index < iconPath.Length) && (iconMissing == false); index++)
+                for (index = 0; (index < iconPath.Length) && (iconMissing == true); index++)
                 {
-                    iconMissing = File.Exists(bgPaths[index]);
+                    iconMissing = File.Exists(iconPath);
                 }
 
                 type = "MissingImages";
@@ -453,7 +455,7 @@ namespace The_UGamer_Launcher
 
                 dupe = CheckForDupes(notificationTable, notifTableNameIndex, row, type);
                 
-                if (bgMissing == true && detailMissing == true && iconMissing == true)
+                if (bgMissing == false && detailMissing == false && iconMissing == false)
                     if (dupe == false)
                     {
                         notifMessage = "You are missing images for " + gameName + ". Missing: Background, Detailed, Icon.";
@@ -461,7 +463,7 @@ namespace The_UGamer_Launcher
                         dupe = true;
                     }
                 
-                if (bgMissing == true && detailMissing == true)
+                if (bgMissing == false && detailMissing == false)
                     if (dupe == false)
                     {
                         notifMessage = "You are missing images for " + gameName + ". Missing: Background, Detailed.";
@@ -469,7 +471,7 @@ namespace The_UGamer_Launcher
                         dupe = true;
                     }
 
-                if (bgMissing == true && iconMissing == true)
+                if (bgMissing == false && iconMissing == false)
                     if (dupe == false)
                     {
                         notifMessage = "You are missing images for " + gameName + ". Missing: Background, Icon.";
@@ -477,7 +479,7 @@ namespace The_UGamer_Launcher
                         dupe = true;
                     }
 
-                if (detailMissing == true && iconMissing == true)
+                if (detailMissing == false && iconMissing == false)
                     if (dupe == false)
                     {
                         notifMessage = "You are missing images for " + gameName + ". Missing: Detailed, Icon.";
@@ -485,7 +487,7 @@ namespace The_UGamer_Launcher
                         dupe = true;
                     }
 
-                if (bgMissing == true)
+                if (bgMissing == false)
                     if (dupe == false)
                     {
                         notifMessage = "You are missing images for " + gameName + ". Missing: Background.";
@@ -493,7 +495,7 @@ namespace The_UGamer_Launcher
                         dupe = true;
                     }
 
-                if (detailMissing == true)
+                if (detailMissing == false)
                     if (dupe == false)
                     {
                         notifMessage = "You are missing images for " + gameName + ". Missing: Detailed.";
@@ -501,7 +503,7 @@ namespace The_UGamer_Launcher
                         dupe = true;
                     }
 
-                if (iconMissing == true)
+                if (iconMissing == false)
                     if (dupe == false)
                     {
                         notifMessage = "You are missing images for " + gameName + ". Missing: Icon.";

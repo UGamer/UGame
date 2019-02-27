@@ -617,17 +617,23 @@ namespace The_UGamer_Launcher
 
             string link1Title = news;
             string link1URLPart1 = news;
-            string link1URL;
+            string link1URL = "";
 
-            int titleIndex = link1URLPart1.IndexOf("[Title]");
-            int URLIndex = link1Title.IndexOf("[URL]");
-            link1Title = link1Title.Substring(0, URLIndex);
-            link1URLPart1 = link1URLPart1.Substring(URLIndex + 5);
+            try
+            {
+                int titleIndex = link1URLPart1.IndexOf("[Title]");
+                int URLIndex = link1Title.IndexOf("[URL]");
+                link1Title = link1Title.Substring(0, URLIndex);
+                link1URLPart1 = link1URLPart1.Substring(URLIndex + 5);
+                if (titleIndex != -1)
+                    link1URL = link1URLPart1.Substring(0, titleIndex);
+                else
+                    link1URL = link1URLPart1;
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
 
-            if (titleIndex != -1)
-                link1URL = link1URLPart1.Substring(0, titleIndex);
-            else
-                link1URL = link1URLPart1;
+            }
 
             if (news == " " || news == "")
             {
