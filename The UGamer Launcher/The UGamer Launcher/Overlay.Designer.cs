@@ -30,6 +30,7 @@
         {
             this.NameLabel = new System.Windows.Forms.Label();
             this.TimeLabel = new System.Windows.Forms.Label();
+            this.SystemTime = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // NameLabel
@@ -51,11 +52,21 @@
             this.TimeLabel.TabIndex = 1;
             this.TimeLabel.Text = "label1";
             // 
+            // SystemTime
+            // 
+            this.SystemTime.AutoSize = true;
+            this.SystemTime.Location = new System.Drawing.Point(12, 9);
+            this.SystemTime.Name = "SystemTime";
+            this.SystemTime.Size = new System.Drawing.Size(68, 13);
+            this.SystemTime.TabIndex = 2;
+            this.SystemTime.Text = "12:00:00 AM";
+            // 
             // Overlay
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 128);
+            this.Controls.Add(this.SystemTime);
             this.Controls.Add(this.TimeLabel);
             this.Controls.Add(this.NameLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -71,5 +82,6 @@
 
         private System.Windows.Forms.Label NameLabel;
         private System.Windows.Forms.Label TimeLabel;
+        private System.Windows.Forms.Label SystemTime;
     }
 }

@@ -681,7 +681,6 @@ namespace The_UGamer_Launcher
             DataTable newTable = new DataTable();
             da.Fill(newTable);
             BrowserLinksDGV.DataSource = newTable;
-            BrowserLinksDGV.Sort(BrowserLinksDGV.Columns[0], ListSortDirection.Ascending);
             con.Close();
 
             if (news == " " || news == "")
@@ -692,7 +691,7 @@ namespace The_UGamer_Launcher
             else if (news != " " || news != "")
             {
                 // Create a browser component
-                chromeBrowser = new ChromiumWebBrowser(news);
+                chromeBrowser = new ChromiumWebBrowser(links[1, 0]);
                 // Add it to the form and fill it to the form window.
                 chromeBrowser.Size = browserSize;
                 chromeBrowser.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Top);

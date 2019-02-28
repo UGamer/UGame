@@ -400,8 +400,6 @@ namespace The_UGamer_Launcher
                     IgnoreEnd.Checked = true;
                 }
                 
-                
-                
                 notesBox.Text = dt.Rows[z][9].ToString();
                 launchBox.Text = dt.Rows[z][10].ToString();
 
@@ -418,7 +416,6 @@ namespace The_UGamer_Launcher
             // If the entry does not exist, an error message shows.
             else
                 noGameLabel.Visible = true;
-
         }
 
         private void replaceEntry_Click(object sender, EventArgs e)
@@ -719,7 +716,6 @@ namespace The_UGamer_Launcher
             launchBox.Text = "";
             notesBox.Text = "";
             linksBox.Text = "";
-            wikiURLBox.Text = "";
 
             this.Text = "Entries";
         }
