@@ -850,6 +850,8 @@ namespace The_UGamer_Launcher
 
         private void BrowserButton_Click(object sender, EventArgs e)
         {
+            // =================== This is all the old code. ===================
+            /*
             BrowserButton.Visible = false;
             BackButton.Visible = true;
 
@@ -870,6 +872,11 @@ namespace The_UGamer_Launcher
 
             browserDock.Visible = true;
             BrowserLinksDGV.Visible = true;
+            */
+            // =================== This is all the old code. ===================
+
+            BrowserWindow detailedBrowser = new BrowserWindow(links, linkCount);
+            detailedBrowser.Show();
         }
 
         private void BackButton_Click(object sender, EventArgs e)
