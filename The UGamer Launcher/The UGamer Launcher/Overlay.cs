@@ -25,6 +25,9 @@ namespace The_UGamer_Launcher
         BrowserWindow openBrowser;
         bool browserOpen = false;
 
+        Notepad notes;
+        bool notesOpen = false;
+
         public Overlay(string name, string[,] links, int linkCount)
         {
             
@@ -61,7 +64,8 @@ namespace The_UGamer_Launcher
 
         private void t_tick(object sender, EventArgs e)
         {
-            string time = DateTime.Now.ToString().Substring(10);
+            int startIndex = (DateTime.Now.ToString().IndexOf(" ") + 1);
+            string time = DateTime.Now.ToString().Substring(startIndex);
             SystemTime.Text = time;
 
             playTimeCounter++;
@@ -100,6 +104,8 @@ namespace The_UGamer_Launcher
                 {
                     if (browserOpen == true)
                         openBrowser.Hide();
+                    if (notesOpen == true)
+                        notes.Hide();
                     this.Hide();
                     flag = false;
                 }
@@ -107,6 +113,8 @@ namespace The_UGamer_Launcher
                 {
                     if (browserOpen == true)
                         openBrowser.Show();
+                    if (notesOpen == true)
+                        notes.Show();
                     this.Show();
                     flag = true;
                 }
@@ -122,9 +130,18 @@ namespace The_UGamer_Launcher
             browserOpen = true;
         }
 
+        private void NotepadButton_Click(object sender, EventArgs e)
+        {
+            notes = new Notepad();
+            notes.Show();
+            notesOpen = true;
+        }
+
         private void Overlay_FormClosing(object sender, FormClosingEventArgs e)
         {
             gkh.unhook();
         }
+
+        
     }
 }

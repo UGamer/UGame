@@ -32,6 +32,7 @@
             this.TimeLabel = new System.Windows.Forms.Label();
             this.SystemTime = new System.Windows.Forms.Label();
             this.BrowserButton = new System.Windows.Forms.Button();
+            this.NotepadButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // NameLabel
@@ -47,7 +48,7 @@
             // TimeLabel
             // 
             this.TimeLabel.AutoSize = true;
-            this.TimeLabel.Location = new System.Drawing.Point(111, 97);
+            this.TimeLabel.Location = new System.Drawing.Point(617, 102);
             this.TimeLabel.Name = "TimeLabel";
             this.TimeLabel.Size = new System.Drawing.Size(171, 13);
             this.TimeLabel.TabIndex = 1;
@@ -72,11 +73,22 @@
             this.BrowserButton.UseVisualStyleBackColor = true;
             this.BrowserButton.Click += new System.EventHandler(this.BrowserButton_Click);
             // 
+            // NotepadButton
+            // 
+            this.NotepadButton.Location = new System.Drawing.Point(111, 92);
+            this.NotepadButton.Name = "NotepadButton";
+            this.NotepadButton.Size = new System.Drawing.Size(90, 23);
+            this.NotepadButton.TabIndex = 4;
+            this.NotepadButton.Text = "Notepad";
+            this.NotepadButton.UseVisualStyleBackColor = true;
+            this.NotepadButton.Click += new System.EventHandler(this.NotepadButton_Click);
+            // 
             // Overlay
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 128);
+            this.Controls.Add(this.NotepadButton);
             this.Controls.Add(this.BrowserButton);
             this.Controls.Add(this.SystemTime);
             this.Controls.Add(this.TimeLabel);
@@ -98,5 +110,6 @@
         private System.Windows.Forms.Label TimeLabel;
         private System.Windows.Forms.Label SystemTime;
         private System.Windows.Forms.Button BrowserButton;
+        private System.Windows.Forms.Button NotepadButton;
     }
 }

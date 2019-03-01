@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.BackButton = new System.Windows.Forms.Button();
-            this.ForwardButton = new System.Windows.Forms.Button();
-            this.AddressBox = new System.Windows.Forms.TextBox();
             this.SearchButton = new System.Windows.Forms.Button();
+            this.AddressBox = new System.Windows.Forms.TextBox();
+            this.ForwardButton = new System.Windows.Forms.Button();
+            this.BackButton = new System.Windows.Forms.Button();
             this.LinksBar = new System.Windows.Forms.ToolStrip();
             this.BrowserDock = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
@@ -51,34 +51,6 @@
             this.panel1.Size = new System.Drawing.Size(801, 32);
             this.panel1.TabIndex = 3;
             // 
-            // BackButton
-            // 
-            this.BackButton.Location = new System.Drawing.Point(0, 0);
-            this.BackButton.Name = "BackButton";
-            this.BackButton.Size = new System.Drawing.Size(25, 32);
-            this.BackButton.TabIndex = 3;
-            this.BackButton.Text = "<-";
-            this.BackButton.UseVisualStyleBackColor = true;
-            // 
-            // ForwardButton
-            // 
-            this.ForwardButton.Location = new System.Drawing.Point(31, 0);
-            this.ForwardButton.Name = "ForwardButton";
-            this.ForwardButton.Size = new System.Drawing.Size(25, 32);
-            this.ForwardButton.TabIndex = 4;
-            this.ForwardButton.Text = "->";
-            this.ForwardButton.UseVisualStyleBackColor = true;
-            // 
-            // AddressBox
-            // 
-            this.AddressBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.AddressBox.Location = new System.Drawing.Point(62, 6);
-            this.AddressBox.Name = "AddressBox";
-            this.AddressBox.Size = new System.Drawing.Size(697, 20);
-            this.AddressBox.TabIndex = 5;
-            this.AddressBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AddressBox_KeyDown);
-            // 
             // SearchButton
             // 
             this.SearchButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -89,6 +61,36 @@
             this.SearchButton.Text = "🔍";
             this.SearchButton.UseVisualStyleBackColor = true;
             this.SearchButton.Click += new System.EventHandler(this.SearchButton_Click);
+            // 
+            // AddressBox
+            // 
+            this.AddressBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.AddressBox.Enabled = false;
+            this.AddressBox.Location = new System.Drawing.Point(62, 6);
+            this.AddressBox.Name = "AddressBox";
+            this.AddressBox.Size = new System.Drawing.Size(697, 20);
+            this.AddressBox.TabIndex = 5;
+            this.AddressBox.Enter += new System.EventHandler(this.AddressBox_Enter);
+            this.AddressBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AddressBox_KeyDown);
+            // 
+            // ForwardButton
+            // 
+            this.ForwardButton.Location = new System.Drawing.Point(31, 0);
+            this.ForwardButton.Name = "ForwardButton";
+            this.ForwardButton.Size = new System.Drawing.Size(25, 32);
+            this.ForwardButton.TabIndex = 4;
+            this.ForwardButton.Text = "->";
+            this.ForwardButton.UseVisualStyleBackColor = true;
+            // 
+            // BackButton
+            // 
+            this.BackButton.Location = new System.Drawing.Point(0, 0);
+            this.BackButton.Name = "BackButton";
+            this.BackButton.Size = new System.Drawing.Size(25, 32);
+            this.BackButton.TabIndex = 3;
+            this.BackButton.Text = "<-";
+            this.BackButton.UseVisualStyleBackColor = true;
             // 
             // LinksBar
             // 
@@ -122,7 +124,6 @@
             this.Controls.Add(this.panel1);
             this.Name = "BrowserWindow";
             this.Text = "BrowserWindow";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BrowserWindow_FormClosing);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

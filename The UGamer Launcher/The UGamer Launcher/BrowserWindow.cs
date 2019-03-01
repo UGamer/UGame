@@ -15,15 +15,14 @@ namespace The_UGamer_Launcher
 {
     public partial class BrowserWindow : Form
     {
-        public static bool flag = true;
-        globalKeyboardHook gkh = new globalKeyboardHook();
-
         private string[,] links;
         private int linkCount;
         ToolStripButton[] linkButton;
 
         private string currentURL;
         ChromiumWebBrowser Browser;
+
+        bool timeToUnhook = false;
 
         public BrowserWindow(string[,] links, int linkCount)
         {
@@ -35,16 +34,20 @@ namespace The_UGamer_Launcher
             InitializeBrowser();
             InitializeLinks();
             InitializeDesign();
-
-            /*
-            gkh.HookedKeys.Add(Keys.Home);
-            gkh.KeyDown += new KeyEventHandler(gkh_KeyDown);
-            */
+            
         }
 
         private void InitializeBrowser()
         {
-            Browser = new ChromiumWebBrowser(links[1, 0]);
+            try
+            {
+                Browser = new ChromiumWebBrowser(links[1, 0]);
+            }
+            catch (IndexOutOfRangeException e)
+            {
+                Browser = new ChromiumWebBrowser("google.com");
+            }
+            
             // Add it to the form and fill it to the form window.
             Size browserSize = new Size(801, 389);
             Browser.Size = browserSize;
@@ -87,28 +90,9 @@ namespace The_UGamer_Launcher
                 Search();
         }
 
-        void gkh_KeyDown(object sender, KeyEventArgs e)
+        private void AddressBox_Enter(object sender, EventArgs e)
         {
-            if (e.KeyCode == Keys.Home)
-            {
-                if (flag)
-                {
-                    this.Hide();
-                    flag = false;
-                }
-                else
-                {
-                    this.Show();
-                    flag = true;
-                }
-
-                e.Handled = true;
-            }
-        }
-
-        private void BrowserWindow_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            gkh.unhook();
+            timeToUnhook = true;
         }
     }
 }
