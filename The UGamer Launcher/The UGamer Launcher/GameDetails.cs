@@ -234,6 +234,7 @@ namespace The_UGamer_Launcher
             else
             {
                 gameTime.Start();
+                ingame.Show();
             }
 
             button1.Visible = false;

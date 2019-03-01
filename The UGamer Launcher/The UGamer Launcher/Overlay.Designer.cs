@@ -83,6 +83,7 @@
             this.Controls.Add(this.NameLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Overlay";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Overlay";
             this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Overlay_FormClosing);
