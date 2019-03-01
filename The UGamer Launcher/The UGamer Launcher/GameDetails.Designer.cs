@@ -47,7 +47,6 @@
             this.launchLabel = new System.Windows.Forms.Label();
             this.stopTime = new System.Windows.Forms.Button();
             this.browserDock = new System.Windows.Forms.Panel();
-            this.TimePlayingLabel = new System.Windows.Forms.Label();
             this.PauseTimeButton = new System.Windows.Forms.Button();
             this.discardButton = new System.Windows.Forms.Button();
             this.BrowserButton = new System.Windows.Forms.Button();
@@ -185,7 +184,7 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.ForeColor = System.Drawing.SystemColors.Control;
             this.button1.Location = new System.Drawing.Point(8, 348);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(154, 56);
             this.button1.TabIndex = 10;
@@ -208,7 +207,7 @@
             this.gamePicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.gamePicture.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.gamePicture.Location = new System.Drawing.Point(8, 20);
-            this.gamePicture.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gamePicture.Margin = new System.Windows.Forms.Padding(2);
             this.gamePicture.Name = "gamePicture";
             this.gamePicture.Size = new System.Drawing.Size(319, 324);
             this.gamePicture.TabIndex = 13;
@@ -227,7 +226,7 @@
             // noImageText
             // 
             this.noImageText.Location = new System.Drawing.Point(48, 158);
-            this.noImageText.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.noImageText.Margin = new System.Windows.Forms.Padding(2);
             this.noImageText.Multiline = true;
             this.noImageText.Name = "noImageText";
             this.noImageText.Size = new System.Drawing.Size(240, 44);
@@ -268,7 +267,7 @@
             this.stopTime.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.stopTime.ForeColor = System.Drawing.SystemColors.Control;
             this.stopTime.Location = new System.Drawing.Point(8, 348);
-            this.stopTime.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.stopTime.Margin = new System.Windows.Forms.Padding(2);
             this.stopTime.Name = "stopTime";
             this.stopTime.Size = new System.Drawing.Size(67, 56);
             this.stopTime.TabIndex = 18;
@@ -290,18 +289,6 @@
             this.browserDock.TabIndex = 22;
             this.browserDock.Visible = false;
             // 
-            // TimePlayingLabel
-            // 
-            this.TimePlayingLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.TimePlayingLabel.AutoSize = true;
-            this.TimePlayingLabel.BackColor = System.Drawing.Color.White;
-            this.TimePlayingLabel.Location = new System.Drawing.Point(335, 369);
-            this.TimePlayingLabel.Name = "TimePlayingLabel";
-            this.TimePlayingLabel.Size = new System.Drawing.Size(171, 13);
-            this.TimePlayingLabel.TabIndex = 23;
-            this.TimePlayingLabel.Text = "Current Play Session: 00h:00m:00s";
-            this.TimePlayingLabel.Visible = false;
-            // 
             // PauseTimeButton
             // 
             this.PauseTimeButton.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -310,7 +297,7 @@
             this.PauseTimeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.PauseTimeButton.ForeColor = System.Drawing.SystemColors.Control;
             this.PauseTimeButton.Location = new System.Drawing.Point(93, 348);
-            this.PauseTimeButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PauseTimeButton.Margin = new System.Windows.Forms.Padding(2);
             this.PauseTimeButton.Name = "PauseTimeButton";
             this.PauseTimeButton.Size = new System.Drawing.Size(67, 56);
             this.PauseTimeButton.TabIndex = 24;
@@ -328,7 +315,7 @@
             this.discardButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.discardButton.ForeColor = System.Drawing.SystemColors.Control;
             this.discardButton.Location = new System.Drawing.Point(181, 348);
-            this.discardButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.discardButton.Margin = new System.Windows.Forms.Padding(2);
             this.discardButton.Name = "discardButton";
             this.discardButton.Size = new System.Drawing.Size(67, 56);
             this.discardButton.TabIndex = 27;
@@ -345,7 +332,7 @@
             this.BrowserButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BrowserButton.ForeColor = System.Drawing.SystemColors.Control;
             this.BrowserButton.Location = new System.Drawing.Point(517, 348);
-            this.BrowserButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BrowserButton.Margin = new System.Windows.Forms.Padding(2);
             this.BrowserButton.Name = "BrowserButton";
             this.BrowserButton.Size = new System.Drawing.Size(154, 56);
             this.BrowserButton.TabIndex = 28;
@@ -361,7 +348,7 @@
             this.BackButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BackButton.ForeColor = System.Drawing.SystemColors.Control;
             this.BackButton.Location = new System.Drawing.Point(8, 8);
-            this.BackButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BackButton.Margin = new System.Windows.Forms.Padding(2);
             this.BackButton.Name = "BackButton";
             this.BackButton.Size = new System.Drawing.Size(28, 28);
             this.BackButton.TabIndex = 29;
@@ -378,7 +365,7 @@
             this.TrackTimeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.TrackTimeButton.ForeColor = System.Drawing.SystemColors.Control;
             this.TrackTimeButton.Location = new System.Drawing.Point(173, 348);
-            this.TrackTimeButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.TrackTimeButton.Margin = new System.Windows.Forms.Padding(2);
             this.TrackTimeButton.Name = "TrackTimeButton";
             this.TrackTimeButton.Size = new System.Drawing.Size(154, 56);
             this.TrackTimeButton.TabIndex = 30;
@@ -397,7 +384,7 @@
             this.titleDataGridViewTextBoxColumn});
             this.BrowserLinksDGV.DataSource = this.tempTableBindingSource;
             this.BrowserLinksDGV.Location = new System.Drawing.Point(686, 282);
-            this.BrowserLinksDGV.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BrowserLinksDGV.Margin = new System.Windows.Forms.Padding(2);
             this.BrowserLinksDGV.Name = "BrowserLinksDGV";
             this.BrowserLinksDGV.ReadOnly = true;
             this.BrowserLinksDGV.RowTemplate.Height = 28;
@@ -441,7 +428,6 @@
             this.Controls.Add(this.BrowserButton);
             this.Controls.Add(this.discardButton);
             this.Controls.Add(this.PauseTimeButton);
-            this.Controls.Add(this.TimePlayingLabel);
             this.Controls.Add(this.browserDock);
             this.Controls.Add(this.stopTime);
             this.Controls.Add(this.launchLabel);
@@ -455,7 +441,7 @@
             this.Controls.Add(this.gamePicture);
             this.Controls.Add(this.BrowserLinksDGV);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "GameDetails";
             this.Text = "GameDetails";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GameDetails_FormClosing);
@@ -491,7 +477,6 @@
         private System.Windows.Forms.Label launchLabel;
         private System.Windows.Forms.Button stopTime;
         private System.Windows.Forms.Panel browserDock;
-        private System.Windows.Forms.Label TimePlayingLabel;
         private System.Windows.Forms.Button PauseTimeButton;
         private System.Windows.Forms.Button discardButton;
         private System.Windows.Forms.Button BrowserButton;

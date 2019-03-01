@@ -27,8 +27,9 @@ namespace The_UGamer_Launcher
         string newsUrl;
         string wikiUrl;
         private Size browserSize = new Size(659, 88);
-        Overlay ingame = new Overlay();
+        Overlay ingame;
         private bool justTrack = false;
+        private bool bothButton = false;
         string[,] links;
         int linkCount = 0;
 
@@ -159,6 +160,8 @@ namespace The_UGamer_Launcher
                 button1.Text = "Track Time";
                 TrackTimeButton.Visible = false;
             }
+            else
+                bothButton = true;
 
             setURLs(newsString2);
         }
@@ -170,6 +173,7 @@ namespace The_UGamer_Launcher
 
         private void TrackTime(bool executeLaunch)
         {
+            ingame = new Overlay(title, links, linkCount);
             string launchString3 = launchLabel.Text;
 
             bool exePath3 = isExe(launchString3);
@@ -200,7 +204,7 @@ namespace The_UGamer_Launcher
                         if (procStartInfo.FileName != "" && procStartInfo.FileName != " ")
                         {
                             Process.Start(procStartInfo);
-                            // ingame.Show();
+                            ingame.Show();
                         }
                     }
                     else
@@ -210,30 +214,27 @@ namespace The_UGamer_Launcher
                         if (procStartInfo.FileName != "" && procStartInfo.FileName != " ")
                         {
                             Process.Start(procStartInfo);
-                            // ingame.Show();
+                            ingame.Show();
                         }
                     }
                 }
                 else if (launchString3 == "")
                 {
                     gameTime.Start();
+                    ingame.Show();
                 }
                 else
                 {
                     gameTime.Start();
                     launchUrl = new Uri(launchString3);
                     launcher.Url = launchUrl;
-                    // ingame.Show();
+                    ingame.Show();
                 }
             }
             else
             {
                 gameTime.Start();
             }
-            /*
-            timePlaying = new Thread(new ThreadStart(DisplaySeconds));
-            timePlaying.Start();
-            */
 
             button1.Visible = false;
             TrackTimeButton.Visible = false;
@@ -272,55 +273,6 @@ namespace The_UGamer_Launcher
             catch (ArgumentOutOfRangeException e)
             {
                 return false;
-            }
-        }
-
-        private void DisplaySeconds()
-        {
-            string secondsString;
-            string minutesString;
-            string hoursString;
-            int seconds;
-            int minutes;
-            int hours;
-            string timePlayingString = "";
-            for (; ; )
-            {
-                seconds = Convert.ToInt32(gameTime.ElapsedMilliseconds / 1000);
-                minutes = seconds / 60;
-                seconds %= 60;
-                hours = minutes / 60;
-                minutes %= 60;
-
-                secondsString = Convert.ToString(seconds);
-                minutesString = Convert.ToString(minutes);
-                hoursString = Convert.ToString(hours);
-
-                if (hours < 10)
-                    hoursString = "0" + hours;
-                if (minutes < 10)
-                    minutesString = "0" + minutes;
-                if (seconds < 10)
-                    secondsString = "0" + seconds;
-
-                timePlayingString = "Current Play Session: " + hoursString + "h:" + minutesString + 
-                    "m:" + secondsString + "s";
-                SetText(timePlayingString);
-            }
-        }
-
-        delegate void StringArgReturningVoidDelegate(string text);
-
-        private void SetText(string text)
-        {
-            if (this.TimePlayingLabel.InvokeRequired)
-            {
-                StringArgReturningVoidDelegate d = new StringArgReturningVoidDelegate(SetText);
-                this.Invoke(d, new object[] { text });
-            }
-            else
-            {
-                this.TimePlayingLabel.Text = text;
             }
         }
 
@@ -565,6 +517,9 @@ namespace The_UGamer_Launcher
             PauseTimeButton.Text = "Pause Playing";
             PauseTimeButton.Visible = false;
             discardButton.Visible = false;
+
+            if (bothButton == true)
+                TrackTimeButton.Visible = true;
 
             con.Close();
         }
