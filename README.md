@@ -1,3 +1,5 @@
+# ![Logo](https://i.imgur.com/3uhZTqu.png)
+
 # UGame Launcher
 
 A performance-lightweight launcher that comes with more details and customizability than Steam.
