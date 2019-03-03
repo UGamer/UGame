@@ -1220,5 +1220,14 @@ namespace The_UGamer_Launcher
 
             return;
         }
+
+        private void openBrowserToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string[,] links = new string[2,1];
+            links[0, 0] = "Google";
+            links[1, 0] = "google.com";
+            BrowserWindow detailedBrowser = new BrowserWindow(links, 1);
+            detailedBrowser.Show();
+        }
     }
 }

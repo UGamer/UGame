@@ -31,6 +31,18 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.dataTable = new System.Windows.Forms.DataGridView();
+            this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.platformDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.statusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ratingDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PlayTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.obtainedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.startDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.endDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.notesCommentsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.launchDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.table1BindingSource5 = new System.Windows.Forms.BindingSource(this.components);
+            this.collectionDataSet = new The_UGamer_Launcher.CollectionDataSet();
             this.table1BindingSource4 = new System.Windows.Forms.BindingSource(this.components);
             this.collectionDataSet4 = new The_UGamer_Launcher.CollectionDataSet4();
             this.driverInstall = new System.Windows.Forms.WebBrowser();
@@ -92,21 +104,12 @@
             this.notificationDataSet = new The_UGamer_Launcher.NotificationDataSet();
             this.notificationsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.notificationsTableAdapter = new The_UGamer_Launcher.NotificationDataSetTableAdapters.NotificationsTableAdapter();
-            this.collectionDataSet = new The_UGamer_Launcher.CollectionDataSet();
-            this.table1BindingSource5 = new System.Windows.Forms.BindingSource(this.components);
             this.table1TableAdapter = new The_UGamer_Launcher.CollectionDataSetTableAdapters.Table1TableAdapter();
-            this.PlayTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.collectionDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.launchDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.notesCommentsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.endDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.startDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.obtainedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ratingDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.statusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.platformDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.openBrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
@@ -122,8 +125,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.notificationDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.notificationsBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSetBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -155,6 +156,94 @@
             this.dataTable.TabIndex = 9;
             this.dataTable.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataTable_CellDoubleClick);
             this.dataTable.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.customSortCompare);
+            // 
+            // titleDataGridViewTextBoxColumn
+            // 
+            this.titleDataGridViewTextBoxColumn.DataPropertyName = "Title";
+            this.titleDataGridViewTextBoxColumn.HeaderText = "Title";
+            this.titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
+            this.titleDataGridViewTextBoxColumn.ReadOnly = true;
+            this.titleDataGridViewTextBoxColumn.Width = 219;
+            // 
+            // platformDataGridViewTextBoxColumn
+            // 
+            this.platformDataGridViewTextBoxColumn.DataPropertyName = "Platform";
+            this.platformDataGridViewTextBoxColumn.HeaderText = "Platform";
+            this.platformDataGridViewTextBoxColumn.Name = "platformDataGridViewTextBoxColumn";
+            this.platformDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // statusDataGridViewTextBoxColumn
+            // 
+            this.statusDataGridViewTextBoxColumn.DataPropertyName = "Status";
+            this.statusDataGridViewTextBoxColumn.HeaderText = "Status";
+            this.statusDataGridViewTextBoxColumn.Name = "statusDataGridViewTextBoxColumn";
+            this.statusDataGridViewTextBoxColumn.ReadOnly = true;
+            this.statusDataGridViewTextBoxColumn.Width = 90;
+            // 
+            // ratingDataGridViewTextBoxColumn
+            // 
+            this.ratingDataGridViewTextBoxColumn.DataPropertyName = "Rating";
+            this.ratingDataGridViewTextBoxColumn.HeaderText = "Rating";
+            this.ratingDataGridViewTextBoxColumn.Name = "ratingDataGridViewTextBoxColumn";
+            this.ratingDataGridViewTextBoxColumn.ReadOnly = true;
+            this.ratingDataGridViewTextBoxColumn.Width = 70;
+            // 
+            // PlayTime
+            // 
+            this.PlayTime.DataPropertyName = "PlayTime";
+            this.PlayTime.HeaderText = "Time Played";
+            this.PlayTime.Name = "PlayTime";
+            this.PlayTime.ReadOnly = true;
+            // 
+            // obtainedDataGridViewTextBoxColumn
+            // 
+            this.obtainedDataGridViewTextBoxColumn.DataPropertyName = "Obtained";
+            this.obtainedDataGridViewTextBoxColumn.HeaderText = "Obtained";
+            this.obtainedDataGridViewTextBoxColumn.Name = "obtainedDataGridViewTextBoxColumn";
+            this.obtainedDataGridViewTextBoxColumn.ReadOnly = true;
+            this.obtainedDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // startDateDataGridViewTextBoxColumn
+            // 
+            this.startDateDataGridViewTextBoxColumn.DataPropertyName = "StartDate";
+            this.startDateDataGridViewTextBoxColumn.HeaderText = "Start Date";
+            this.startDateDataGridViewTextBoxColumn.Name = "startDateDataGridViewTextBoxColumn";
+            this.startDateDataGridViewTextBoxColumn.ReadOnly = true;
+            this.startDateDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // endDateDataGridViewTextBoxColumn
+            // 
+            this.endDateDataGridViewTextBoxColumn.DataPropertyName = "EndDate";
+            this.endDateDataGridViewTextBoxColumn.HeaderText = "Last Played";
+            this.endDateDataGridViewTextBoxColumn.Name = "endDateDataGridViewTextBoxColumn";
+            this.endDateDataGridViewTextBoxColumn.ReadOnly = true;
+            this.endDateDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // notesCommentsDataGridViewTextBoxColumn
+            // 
+            this.notesCommentsDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.notesCommentsDataGridViewTextBoxColumn.DataPropertyName = "Notes";
+            this.notesCommentsDataGridViewTextBoxColumn.HeaderText = "Notes/Comments";
+            this.notesCommentsDataGridViewTextBoxColumn.Name = "notesCommentsDataGridViewTextBoxColumn";
+            this.notesCommentsDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // launchDataGridViewTextBoxColumn
+            // 
+            this.launchDataGridViewTextBoxColumn.DataPropertyName = "Launch";
+            this.launchDataGridViewTextBoxColumn.HeaderText = "Launch";
+            this.launchDataGridViewTextBoxColumn.Name = "launchDataGridViewTextBoxColumn";
+            this.launchDataGridViewTextBoxColumn.ReadOnly = true;
+            this.launchDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // table1BindingSource5
+            // 
+            this.table1BindingSource5.DataMember = "Table1";
+            this.table1BindingSource5.DataSource = this.collectionDataSet;
+            // 
+            // collectionDataSet
+            // 
+            this.collectionDataSet.DataSetName = "CollectionDataSet";
+            this.collectionDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // table1BindingSource4
             // 
@@ -374,7 +463,8 @@
             // 
             this.ViewToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.ViewToolStripButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.FilterButton});
+            this.FilterButton,
+            this.openBrowserToolStripMenuItem});
             this.ViewToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("ViewToolStripButton.Image")));
             this.ViewToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ViewToolStripButton.Name = "ViewToolStripButton";
@@ -401,7 +491,7 @@
             this.toolStripSeparator1,
             this.SaveFilters});
             this.FilterButton.Name = "FilterButton";
-            this.FilterButton.Size = new System.Drawing.Size(100, 22);
+            this.FilterButton.Size = new System.Drawing.Size(180, 22);
             this.FilterButton.Text = "Filter";
             // 
             // toolStripSeparator2
@@ -637,102 +727,21 @@
             // 
             this.notificationsTableAdapter.ClearBeforeFill = true;
             // 
-            // collectionDataSet
-            // 
-            this.collectionDataSet.DataSetName = "CollectionDataSet";
-            this.collectionDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // table1BindingSource5
-            // 
-            this.table1BindingSource5.DataMember = "Table1";
-            this.table1BindingSource5.DataSource = this.collectionDataSet;
-            // 
             // table1TableAdapter
             // 
             this.table1TableAdapter.ClearBeforeFill = true;
-            // 
-            // PlayTime
-            // 
-            this.PlayTime.DataPropertyName = "PlayTime";
-            this.PlayTime.HeaderText = "Time Played";
-            this.PlayTime.Name = "PlayTime";
-            this.PlayTime.ReadOnly = true;
             // 
             // collectionDataSetBindingSource
             // 
             this.collectionDataSetBindingSource.DataSource = this.collectionDataSet;
             this.collectionDataSetBindingSource.Position = 0;
             // 
-            // launchDataGridViewTextBoxColumn
+            // openBrowserToolStripMenuItem
             // 
-            this.launchDataGridViewTextBoxColumn.DataPropertyName = "Launch";
-            this.launchDataGridViewTextBoxColumn.HeaderText = "Launch";
-            this.launchDataGridViewTextBoxColumn.Name = "launchDataGridViewTextBoxColumn";
-            this.launchDataGridViewTextBoxColumn.ReadOnly = true;
-            this.launchDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // notesCommentsDataGridViewTextBoxColumn
-            // 
-            this.notesCommentsDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.notesCommentsDataGridViewTextBoxColumn.DataPropertyName = "Notes";
-            this.notesCommentsDataGridViewTextBoxColumn.HeaderText = "Notes/Comments";
-            this.notesCommentsDataGridViewTextBoxColumn.Name = "notesCommentsDataGridViewTextBoxColumn";
-            this.notesCommentsDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // endDateDataGridViewTextBoxColumn
-            // 
-            this.endDateDataGridViewTextBoxColumn.DataPropertyName = "EndDate";
-            this.endDateDataGridViewTextBoxColumn.HeaderText = "Last Played";
-            this.endDateDataGridViewTextBoxColumn.Name = "endDateDataGridViewTextBoxColumn";
-            this.endDateDataGridViewTextBoxColumn.ReadOnly = true;
-            this.endDateDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // startDateDataGridViewTextBoxColumn
-            // 
-            this.startDateDataGridViewTextBoxColumn.DataPropertyName = "StartDate";
-            this.startDateDataGridViewTextBoxColumn.HeaderText = "Start Date";
-            this.startDateDataGridViewTextBoxColumn.Name = "startDateDataGridViewTextBoxColumn";
-            this.startDateDataGridViewTextBoxColumn.ReadOnly = true;
-            this.startDateDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // obtainedDataGridViewTextBoxColumn
-            // 
-            this.obtainedDataGridViewTextBoxColumn.DataPropertyName = "Obtained";
-            this.obtainedDataGridViewTextBoxColumn.HeaderText = "Obtained";
-            this.obtainedDataGridViewTextBoxColumn.Name = "obtainedDataGridViewTextBoxColumn";
-            this.obtainedDataGridViewTextBoxColumn.ReadOnly = true;
-            this.obtainedDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // ratingDataGridViewTextBoxColumn
-            // 
-            this.ratingDataGridViewTextBoxColumn.DataPropertyName = "Rating";
-            this.ratingDataGridViewTextBoxColumn.HeaderText = "Rating";
-            this.ratingDataGridViewTextBoxColumn.Name = "ratingDataGridViewTextBoxColumn";
-            this.ratingDataGridViewTextBoxColumn.ReadOnly = true;
-            this.ratingDataGridViewTextBoxColumn.Width = 70;
-            // 
-            // statusDataGridViewTextBoxColumn
-            // 
-            this.statusDataGridViewTextBoxColumn.DataPropertyName = "Status";
-            this.statusDataGridViewTextBoxColumn.HeaderText = "Status";
-            this.statusDataGridViewTextBoxColumn.Name = "statusDataGridViewTextBoxColumn";
-            this.statusDataGridViewTextBoxColumn.ReadOnly = true;
-            this.statusDataGridViewTextBoxColumn.Width = 90;
-            // 
-            // platformDataGridViewTextBoxColumn
-            // 
-            this.platformDataGridViewTextBoxColumn.DataPropertyName = "Platform";
-            this.platformDataGridViewTextBoxColumn.HeaderText = "Platform";
-            this.platformDataGridViewTextBoxColumn.Name = "platformDataGridViewTextBoxColumn";
-            this.platformDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // titleDataGridViewTextBoxColumn
-            // 
-            this.titleDataGridViewTextBoxColumn.DataPropertyName = "Title";
-            this.titleDataGridViewTextBoxColumn.HeaderText = "Title";
-            this.titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
-            this.titleDataGridViewTextBoxColumn.ReadOnly = true;
-            this.titleDataGridViewTextBoxColumn.Width = 219;
+            this.openBrowserToolStripMenuItem.Name = "openBrowserToolStripMenuItem";
+            this.openBrowserToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openBrowserToolStripMenuItem.Text = "Open Browser";
+            this.openBrowserToolStripMenuItem.Click += new System.EventHandler(this.openBrowserToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -757,6 +766,8 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataTable)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
@@ -773,8 +784,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.notificationDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.notificationsBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSetBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -858,6 +867,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn notesCommentsDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn launchDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource collectionDataSetBindingSource;
+        private System.Windows.Forms.ToolStripMenuItem openBrowserToolStripMenuItem;
     }
 }
 

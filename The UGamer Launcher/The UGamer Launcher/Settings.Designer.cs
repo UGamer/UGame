@@ -45,16 +45,19 @@
             this.SettingsTabs = new System.Windows.Forms.TabControl();
             this.ThemesTab = new System.Windows.Forms.TabPage();
             this.DataTab = new System.Windows.Forms.TabPage();
-            this.ColumnAddButton = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.ColumnEditButton = new System.Windows.Forms.Button();
-            this.ColumnRemoveButton = new System.Windows.Forms.Button();
-            this.ColumnNameBox = new System.Windows.Forms.TextBox();
-            this.ColumnTypeBox = new System.Windows.Forms.ComboBox();
+            this.ColumnStatusLabel = new System.Windows.Forms.Label();
             this.ColumnTableBox = new System.Windows.Forms.ComboBox();
             this.ColumnTableLabel = new System.Windows.Forms.Label();
-            this.ColumnStatusLabel = new System.Windows.Forms.Label();
+            this.ColumnTypeBox = new System.Windows.Forms.ComboBox();
+            this.ColumnRemoveButton = new System.Windows.Forms.Button();
+            this.ColumnEditButton = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.ColumnAddButton = new System.Windows.Forms.Button();
+            this.ColumnNameBox = new System.Windows.Forms.TextBox();
+            this.InGameTab = new System.Windows.Forms.TabPage();
+            this.CheckOverlayEnable = new System.Windows.Forms.CheckBox();
+            this.SaveButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.themesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet5BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet5)).BeginInit();
@@ -63,6 +66,7 @@
             this.SettingsTabs.SuspendLayout();
             this.ThemesTab.SuspendLayout();
             this.DataTab.SuspendLayout();
+            this.InGameTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -150,11 +154,12 @@
             // 
             this.SettingsTabs.Controls.Add(this.ThemesTab);
             this.SettingsTabs.Controls.Add(this.DataTab);
-            this.SettingsTabs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SettingsTabs.Controls.Add(this.InGameTab);
+            this.SettingsTabs.Dock = System.Windows.Forms.DockStyle.Top;
             this.SettingsTabs.Location = new System.Drawing.Point(0, 0);
             this.SettingsTabs.Name = "SettingsTabs";
             this.SettingsTabs.SelectedIndex = 0;
-            this.SettingsTabs.Size = new System.Drawing.Size(337, 172);
+            this.SettingsTabs.Size = new System.Drawing.Size(337, 170);
             this.SettingsTabs.TabIndex = 6;
             // 
             // ThemesTab
@@ -168,7 +173,7 @@
             this.ThemesTab.Location = new System.Drawing.Point(4, 22);
             this.ThemesTab.Name = "ThemesTab";
             this.ThemesTab.Padding = new System.Windows.Forms.Padding(3);
-            this.ThemesTab.Size = new System.Drawing.Size(329, 103);
+            this.ThemesTab.Size = new System.Drawing.Size(329, 144);
             this.ThemesTab.TabIndex = 0;
             this.ThemesTab.Text = "Themes";
             // 
@@ -192,69 +197,16 @@
             this.DataTab.Text = "Data";
             this.DataTab.UseVisualStyleBackColor = true;
             // 
-            // ColumnAddButton
+            // ColumnStatusLabel
             // 
-            this.ColumnAddButton.Location = new System.Drawing.Point(8, 99);
-            this.ColumnAddButton.Name = "ColumnAddButton";
-            this.ColumnAddButton.Size = new System.Drawing.Size(75, 39);
-            this.ColumnAddButton.TabIndex = 2;
-            this.ColumnAddButton.Text = "Add Column";
-            this.ColumnAddButton.UseVisualStyleBackColor = true;
-            this.ColumnAddButton.Click += new System.EventHandler(this.ColumnAddButton_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 35);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Name";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 59);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(31, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Type";
-            // 
-            // ColumnEditButton
-            // 
-            this.ColumnEditButton.Location = new System.Drawing.Point(126, 99);
-            this.ColumnEditButton.Name = "ColumnEditButton";
-            this.ColumnEditButton.Size = new System.Drawing.Size(75, 39);
-            this.ColumnEditButton.TabIndex = 6;
-            this.ColumnEditButton.Text = "Edit Column";
-            this.ColumnEditButton.UseVisualStyleBackColor = true;
-            // 
-            // ColumnRemoveButton
-            // 
-            this.ColumnRemoveButton.Location = new System.Drawing.Point(245, 99);
-            this.ColumnRemoveButton.Name = "ColumnRemoveButton";
-            this.ColumnRemoveButton.Size = new System.Drawing.Size(75, 39);
-            this.ColumnRemoveButton.TabIndex = 7;
-            this.ColumnRemoveButton.Text = "Remove Column";
-            this.ColumnRemoveButton.UseVisualStyleBackColor = true;
-            // 
-            // ColumnNameBox
-            // 
-            this.ColumnNameBox.Location = new System.Drawing.Point(44, 32);
-            this.ColumnNameBox.Name = "ColumnNameBox";
-            this.ColumnNameBox.Size = new System.Drawing.Size(277, 20);
-            this.ColumnNameBox.TabIndex = 1;
-            // 
-            // ColumnTypeBox
-            // 
-            this.ColumnTypeBox.FormattingEnabled = true;
-            this.ColumnTypeBox.Items.AddRange(new object[] {
-            "Numeric",
-            "Text"});
-            this.ColumnTypeBox.Location = new System.Drawing.Point(44, 56);
-            this.ColumnTypeBox.Name = "ColumnTypeBox";
-            this.ColumnTypeBox.Size = new System.Drawing.Size(277, 21);
-            this.ColumnTypeBox.TabIndex = 8;
+            this.ColumnStatusLabel.AutoSize = true;
+            this.ColumnStatusLabel.Location = new System.Drawing.Point(123, 80);
+            this.ColumnStatusLabel.Name = "ColumnStatusLabel";
+            this.ColumnStatusLabel.Size = new System.Drawing.Size(78, 13);
+            this.ColumnStatusLabel.TabIndex = 11;
+            this.ColumnStatusLabel.Text = "Column added.";
+            this.ColumnStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ColumnStatusLabel.Visible = false;
             // 
             // ColumnTableBox
             // 
@@ -276,22 +228,107 @@
             this.ColumnTableLabel.TabIndex = 9;
             this.ColumnTableLabel.Text = "Table";
             // 
-            // ColumnStatusLabel
+            // ColumnTypeBox
             // 
-            this.ColumnStatusLabel.AutoSize = true;
-            this.ColumnStatusLabel.Location = new System.Drawing.Point(123, 80);
-            this.ColumnStatusLabel.Name = "ColumnStatusLabel";
-            this.ColumnStatusLabel.Size = new System.Drawing.Size(78, 13);
-            this.ColumnStatusLabel.TabIndex = 11;
-            this.ColumnStatusLabel.Text = "Column added.";
-            this.ColumnStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.ColumnStatusLabel.Visible = false;
+            this.ColumnTypeBox.FormattingEnabled = true;
+            this.ColumnTypeBox.Items.AddRange(new object[] {
+            "Numeric",
+            "Text"});
+            this.ColumnTypeBox.Location = new System.Drawing.Point(44, 56);
+            this.ColumnTypeBox.Name = "ColumnTypeBox";
+            this.ColumnTypeBox.Size = new System.Drawing.Size(277, 21);
+            this.ColumnTypeBox.TabIndex = 8;
+            // 
+            // ColumnRemoveButton
+            // 
+            this.ColumnRemoveButton.Location = new System.Drawing.Point(245, 99);
+            this.ColumnRemoveButton.Name = "ColumnRemoveButton";
+            this.ColumnRemoveButton.Size = new System.Drawing.Size(75, 39);
+            this.ColumnRemoveButton.TabIndex = 7;
+            this.ColumnRemoveButton.Text = "Remove Column";
+            this.ColumnRemoveButton.UseVisualStyleBackColor = true;
+            // 
+            // ColumnEditButton
+            // 
+            this.ColumnEditButton.Location = new System.Drawing.Point(126, 99);
+            this.ColumnEditButton.Name = "ColumnEditButton";
+            this.ColumnEditButton.Size = new System.Drawing.Size(75, 39);
+            this.ColumnEditButton.TabIndex = 6;
+            this.ColumnEditButton.Text = "Edit Column";
+            this.ColumnEditButton.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 59);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(31, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Type";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 35);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Name";
+            // 
+            // ColumnAddButton
+            // 
+            this.ColumnAddButton.Location = new System.Drawing.Point(8, 99);
+            this.ColumnAddButton.Name = "ColumnAddButton";
+            this.ColumnAddButton.Size = new System.Drawing.Size(75, 39);
+            this.ColumnAddButton.TabIndex = 2;
+            this.ColumnAddButton.Text = "Add Column";
+            this.ColumnAddButton.UseVisualStyleBackColor = true;
+            this.ColumnAddButton.Click += new System.EventHandler(this.ColumnAddButton_Click);
+            // 
+            // ColumnNameBox
+            // 
+            this.ColumnNameBox.Location = new System.Drawing.Point(44, 32);
+            this.ColumnNameBox.Name = "ColumnNameBox";
+            this.ColumnNameBox.Size = new System.Drawing.Size(277, 20);
+            this.ColumnNameBox.TabIndex = 1;
+            // 
+            // InGameTab
+            // 
+            this.InGameTab.Controls.Add(this.CheckOverlayEnable);
+            this.InGameTab.Location = new System.Drawing.Point(4, 22);
+            this.InGameTab.Name = "InGameTab";
+            this.InGameTab.Padding = new System.Windows.Forms.Padding(3);
+            this.InGameTab.Size = new System.Drawing.Size(329, 144);
+            this.InGameTab.TabIndex = 2;
+            this.InGameTab.Text = "In-Game";
+            this.InGameTab.UseVisualStyleBackColor = true;
+            // 
+            // CheckOverlayEnable
+            // 
+            this.CheckOverlayEnable.AutoSize = true;
+            this.CheckOverlayEnable.Location = new System.Drawing.Point(8, 6);
+            this.CheckOverlayEnable.Name = "CheckOverlayEnable";
+            this.CheckOverlayEnable.Size = new System.Drawing.Size(84, 17);
+            this.CheckOverlayEnable.TabIndex = 0;
+            this.CheckOverlayEnable.Text = "Use Overlay";
+            this.CheckOverlayEnable.UseVisualStyleBackColor = true;
+            // 
+            // SaveButton
+            // 
+            this.SaveButton.Location = new System.Drawing.Point(118, 172);
+            this.SaveButton.Name = "SaveButton";
+            this.SaveButton.Size = new System.Drawing.Size(84, 23);
+            this.SaveButton.TabIndex = 7;
+            this.SaveButton.Text = "Save + Apply";
+            this.SaveButton.UseVisualStyleBackColor = true;
+            this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(337, 172);
+            this.ClientSize = new System.Drawing.Size(337, 202);
+            this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.SettingsTabs);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Settings";
@@ -308,6 +345,8 @@
             this.ThemesTab.PerformLayout();
             this.DataTab.ResumeLayout(false);
             this.DataTab.PerformLayout();
+            this.InGameTab.ResumeLayout(false);
+            this.InGameTab.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -339,5 +378,8 @@
         private System.Windows.Forms.ComboBox ColumnTableBox;
         private System.Windows.Forms.Label ColumnTableLabel;
         private System.Windows.Forms.Label ColumnStatusLabel;
+        private System.Windows.Forms.TabPage InGameTab;
+        private System.Windows.Forms.CheckBox CheckOverlayEnable;
+        private System.Windows.Forms.Button SaveButton;
     }
 }

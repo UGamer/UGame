@@ -164,5 +164,10 @@ namespace The_UGamer_Launcher
             cmd.ExecuteNonQuery();
             con.Close();
         }
+
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

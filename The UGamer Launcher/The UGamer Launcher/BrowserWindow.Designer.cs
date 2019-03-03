@@ -66,7 +66,6 @@
             // 
             this.AddressBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.AddressBox.Enabled = false;
             this.AddressBox.Location = new System.Drawing.Point(62, 6);
             this.AddressBox.Name = "AddressBox";
             this.AddressBox.Size = new System.Drawing.Size(697, 20);
@@ -124,6 +123,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "BrowserWindow";
             this.Text = "BrowserWindow";
+            this.TopMost = true;
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

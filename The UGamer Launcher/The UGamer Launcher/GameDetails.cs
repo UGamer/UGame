@@ -31,6 +31,7 @@ namespace The_UGamer_Launcher
         private bool justTrack = false;
         private bool bothButton = false;
         string[,] links;
+        string allLinks = "";
         int linkCount = 0;
 
         private static string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Collection.accdb";
@@ -163,6 +164,7 @@ namespace The_UGamer_Launcher
             else
                 bothButton = true;
 
+            allLinks = newsString2;
             setURLs(newsString2);
         }
 
@@ -173,7 +175,7 @@ namespace The_UGamer_Launcher
 
         private void TrackTime(bool executeLaunch)
         {
-            ingame = new Overlay(title, links, linkCount);
+            ingame = new Overlay(title, links, linkCount, this);
             string launchString3 = launchLabel.Text;
 
             bool exePath3 = isExe(launchString3);
@@ -503,7 +505,7 @@ namespace The_UGamer_Launcher
             cmd.Parameters.AddWithValue("@EndDate", endDate2);
             cmd.Parameters.AddWithValue("@Notes", notesBox.Text);
             cmd.Parameters.AddWithValue("@Launch", launchCode);
-            cmd.Parameters.AddWithValue("@News", newsUrl);
+            cmd.Parameters.AddWithValue("@News", allLinks);
             cmd.Parameters.AddWithValue("@Wiki", wikiUrl);
             cmd.ExecuteNonQuery();
 
@@ -523,6 +525,8 @@ namespace The_UGamer_Launcher
                 TrackTimeButton.Visible = true;
 
             con.Close();
+
+            ingame.Close();
         }
 
         FormWindowState LastWindowState = FormWindowState.Normal;
@@ -535,8 +539,6 @@ namespace The_UGamer_Launcher
 
                 if (WindowState == FormWindowState.Maximized)
                 {
-                    if (LastWindowState == FormWindowState.Minimized)
-                        timePlaying.Start();
 
                     browserDock.Visible = true;
                     BrowserLinksDGV.Visible = true;
@@ -544,8 +546,6 @@ namespace The_UGamer_Launcher
                 }
                 if (WindowState == FormWindowState.Normal)
                 {
-                    if (LastWindowState == FormWindowState.Minimized)
-                        timePlaying.Start();
 
                     browserDock.Visible = false;
                     BrowserLinksDGV.Visible = false;
@@ -553,7 +553,6 @@ namespace The_UGamer_Launcher
                 }
                 if (WindowState == FormWindowState.Minimized)
                 {
-                    timePlaying.Abort();
                     browserDock.Visible = false;
                     BrowserLinksDGV.Visible = false;
                     // Restored!
@@ -801,25 +800,29 @@ namespace The_UGamer_Launcher
                     this.Close();
                 }
             }
-            else
-            {
-
-            }
+            else { }
         }
 
         private void PauseTimeButton_Click(object sender, EventArgs e)
+        {
+            PauseTime();
+        }
+
+        public void PauseTime()
         {
             if (isPaused == false)
             {
                 gameTime.Stop();
                 isPaused = true;
                 PauseTimeButton.Text = "Resume Playing";
+                ingame.t.Stop();
             }
             else
             {
                 gameTime.Start();
                 isPaused = false;
                 PauseTimeButton.Text = "Pause Playing";
+                ingame.t.Start();
             }
         }
 
@@ -846,6 +849,7 @@ namespace The_UGamer_Launcher
                 gameTime.Start();
                 return;
             }
+            ingame.Close();
         }
 
         private void BrowserButton_Click(object sender, EventArgs e)
