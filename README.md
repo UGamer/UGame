@@ -1,10 +1,12 @@
+# ![Logo](https://i.imgur.com/3uhZTqu.png)
+
 # UGame Launcher
 
 A performance-lightweight launcher that comes with more details and customizability than Steam.
 
 ## History
 
-The "UGame Launcher" was created with the idea of having all of your games in one place from across numerous different platforms. This includes games from Steam, Origin, uPlay, Epic Games, other PC games (League, Minecraft), and games from any platform you can think of. In the future, there might be an in-game overlay that comes with the launcher, but for now I recommend you use "Overwolf" when not using Steam.
+The "UGame Launcher" was created with the idea of having all of your games in one place from across numerous different platforms. This includes games from Steam, Origin, uPlay, Epic Games, other PC games (League, Minecraft), and games from any platform you can think of.
 
 ## Getting Started
 
@@ -29,20 +31,20 @@ You can watch a tutorial series on how to work the launcher here: https://www.yo
 * Game Database: https://docs.google.com/spreadsheets/d/1Gv0IYyRZRxKTYkR_kisJ0ZguyA515s_3HbTb5PC0E40/edit?usp=sharing
 * Image Database: https://drive.google.com/drive/folders/14no5yUOnIGdVi2Uct2p-2MBn75nEaTun
 
-# Credits
+## Credits
 
-Thank you to all who helped in this project, knowingly or not.
+Thank you to all who helped in this project.
 
-## Packages
+### Packages
 
 * [StackBlur](https://github.com/victoriqueko/StackBlur) - Package used to blur backgrounds.
 * [CefSharp](https://github.com/cefsharp/CefSharp/) - Used to embed Chromium into the launcher.
 
-## Artwork
+### Artwork
 
 * Red/Blue Theme: Marc2344, UGamer/Yeppers
 * Dark Theme - Galaxy Theme - Sonic Theme: UGamer/Yeppers
 
-## Development
+### Development
 
 * Coding: UGamer/Yeppers
