@@ -141,6 +141,6 @@
         private System.Windows.Forms.Button BrowserButton;
         private System.Windows.Forms.Button NotepadButton;
         private System.Windows.Forms.Label ScreenshotLabel;
-        private System.Windows.Forms.Button PauseButton;
+        public System.Windows.Forms.Button PauseButton;
     }
 }

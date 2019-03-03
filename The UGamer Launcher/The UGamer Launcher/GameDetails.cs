@@ -816,6 +816,7 @@ namespace The_UGamer_Launcher
                 isPaused = true;
                 PauseTimeButton.Text = "Resume Playing";
                 ingame.t.Stop();
+                ingame.PauseButton.Text = "Resume Playing";
             }
             else
             {
@@ -823,6 +824,7 @@ namespace The_UGamer_Launcher
                 isPaused = false;
                 PauseTimeButton.Text = "Pause Playing";
                 ingame.t.Start();
+                ingame.PauseButton.Text = "Pause Playing";
             }
         }
 
