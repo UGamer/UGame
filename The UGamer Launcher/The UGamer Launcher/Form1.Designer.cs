@@ -70,9 +70,6 @@
             this.TimePlayedFilter = new System.Windows.Forms.ToolStripMenuItem();
             this.neverStartedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.startedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ObtainedFilter = new System.Windows.Forms.ToolStripMenuItem();
-            this.StartDateFilter = new System.Windows.Forms.ToolStripMenuItem();
-            this.LastPlayedFilter = new System.Windows.Forms.ToolStripMenuItem();
             this.LaunchFilter = new System.Windows.Forms.ToolStripMenuItem();
             this.CategoriesFilter = new System.Windows.Forms.ToolStripMenuItem();
             this.CategoriesBox = new System.Windows.Forms.ToolStripComboBox();
@@ -105,6 +102,8 @@
             this.table1TableAdapter2 = new The_UGamer_Launcher.CollectionDataSet4TableAdapters.Table1TableAdapter();
             this.collectionDataSet5 = new The_UGamer_Launcher.CollectionDataSet5();
             this.collectionDataSet5BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.canLaunchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cantLaunchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet)).BeginInit();
@@ -461,9 +460,6 @@
             this.StatusFilter,
             this.RatingFilter,
             this.TimePlayedFilter,
-            this.ObtainedFilter,
-            this.StartDateFilter,
-            this.LastPlayedFilter,
             this.LaunchFilter,
             this.CategoriesFilter,
             this.toolStripSeparator1,
@@ -523,30 +519,12 @@
             this.startedToolStripMenuItem.Text = "Started";
             this.startedToolStripMenuItem.Click += new System.EventHandler(this.startedToolStripMenuItem_Click);
             // 
-            // ObtainedFilter
-            // 
-            this.ObtainedFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.ObtainedFilter.Name = "ObtainedFilter";
-            this.ObtainedFilter.Size = new System.Drawing.Size(252, 30);
-            this.ObtainedFilter.Text = "Obtained";
-            // 
-            // StartDateFilter
-            // 
-            this.StartDateFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.StartDateFilter.Name = "StartDateFilter";
-            this.StartDateFilter.Size = new System.Drawing.Size(252, 30);
-            this.StartDateFilter.Text = "Start Date";
-            // 
-            // LastPlayedFilter
-            // 
-            this.LastPlayedFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.LastPlayedFilter.Name = "LastPlayedFilter";
-            this.LastPlayedFilter.Size = new System.Drawing.Size(252, 30);
-            this.LastPlayedFilter.Text = "Last Played";
-            // 
             // LaunchFilter
             // 
             this.LaunchFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.LaunchFilter.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.canLaunchToolStripMenuItem,
+            this.cantLaunchToolStripMenuItem});
             this.LaunchFilter.Name = "LaunchFilter";
             this.LaunchFilter.Size = new System.Drawing.Size(252, 30);
             this.LaunchFilter.Text = "Launch";
@@ -728,6 +706,18 @@
             this.collectionDataSet5BindingSource.DataSource = this.collectionDataSet5;
             this.collectionDataSet5BindingSource.Position = 0;
             // 
+            // canLaunchToolStripMenuItem
+            // 
+            this.canLaunchToolStripMenuItem.Name = "canLaunchToolStripMenuItem";
+            this.canLaunchToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
+            this.canLaunchToolStripMenuItem.Text = "Can Launch";
+            // 
+            // cantLaunchToolStripMenuItem
+            // 
+            this.cantLaunchToolStripMenuItem.Name = "cantLaunchToolStripMenuItem";
+            this.cantLaunchToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
+            this.cantLaunchToolStripMenuItem.Text = "Can\'t Launch";
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -804,9 +794,6 @@
         private System.Windows.Forms.ToolStripMenuItem StatusFilter;
         private System.Windows.Forms.ToolStripMenuItem RatingFilter;
         private System.Windows.Forms.ToolStripMenuItem TimePlayedFilter;
-        private System.Windows.Forms.ToolStripMenuItem ObtainedFilter;
-        private System.Windows.Forms.ToolStripMenuItem StartDateFilter;
-        private System.Windows.Forms.ToolStripMenuItem LastPlayedFilter;
         private System.Windows.Forms.ToolStripMenuItem LaunchFilter;
         private System.Windows.Forms.ToolStripMenuItem SaveFilters;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
@@ -852,6 +839,8 @@
         private System.Windows.Forms.ContextMenuStrip DatabaseContextMenu;
         private System.Windows.Forms.ToolStripMenuItem editEntryToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem hideEntryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem canLaunchToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cantLaunchToolStripMenuItem;
     }
 }
 

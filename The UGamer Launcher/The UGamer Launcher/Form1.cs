@@ -640,47 +640,60 @@ namespace The_UGamer_Launcher
 
             // All platforms are now in the ArrayList "ratings"
 
-            ToolStripMenuItem platformItem;
+            ToolStripMenuItem[] platformItem = new ToolStripMenuItem[platforms.Count];
 
             for (int w = 0; w < platforms.Count; w++)
             {
-                platformItem = new ToolStripMenuItem();
-                PlatformFilter.DropDownItems.Add(platformItem);
-                platformItem.Text = platforms[w].ToString();
-                platformItem.Click += item_Click;
+                PlatformFilter.DropDownItems.Add(platformItem[w]);
+                platformItem[w].Text = platforms[w].ToString();
+                platformItem[w].Click += platformItem_Click;
             }
 
-            ToolStripMenuItem statusItem;
+            ToolStripMenuItem[] statusItem = new ToolStripMenuItem[statuses.Count];
 
             for (int w = 0; w < statuses.Count; w++)
             {
-                statusItem = new ToolStripMenuItem();
-                StatusFilter.DropDownItems.Add(statusItem);
-                statusItem.Text = statuses[w].ToString();
-                statusItem.Click += item_Click;
+                StatusFilter.DropDownItems.Add(statusItem[w]);
+                statusItem[w].Text = statuses[w].ToString();
+                statusItem[w].Click += statusItem_Click;
             }
 
-            ToolStripMenuItem ratingItem;
+            ToolStripMenuItem[] ratingItem = new ToolStripMenuItem[ratings.Count];
 
             for (int w = 0; w < ratings.Count; w++)
             {
-                ratingItem = new ToolStripMenuItem();
-                RatingFilter.DropDownItems.Add(ratingItem);
-                ratingItem.Text = ratings[w].ToString();
-                ratingItem.Click += item_Click;
+                RatingFilter.DropDownItems.Add(ratingItem[w]);
+                ratingItem[w].Text = ratings[w].ToString();
+                ratingItem[w].Click += ratingItem_Click;
             }
         }
 
         string filterCommand = "";
 
-        private void item_Click(object sender, EventArgs e)
+        private void platformItem_Click(object sender, EventArgs e)
         {
+            if (PlatformFilter.Checked == false)
+                PlatformFilter.Checked = true;
+        }
 
+        private void statusItem_Click(object sender, EventArgs e)
+        {
+            if (StatusFilter.Checked == false)
+                StatusFilter.Checked = true;
+        }
+
+        private void ratingItem_Click(object sender, EventArgs e)
+        {
+            if (RatingFilter.Checked == false)
+                RatingFilter.Checked = true;
         }
 
         private void neverStartedToolStripMenuItem_Click(object sender, EventArgs e)
         {
             neverStartedToolStripMenuItem.Checked = true;
+
+            if (startedToolStripMenuItem.Checked == true)
+                neverStartedToolStripMenuItem.Checked = false;
 
             if (filterCommand == "")
                 filterCommand += "PlayTime = '00h:00m:00s'";
@@ -694,10 +707,7 @@ namespace The_UGamer_Launcher
             startedToolStripMenuItem.Checked = true;
 
             if (neverStartedToolStripMenuItem.Checked == true)
-            {
                 startedToolStripMenuItem.Checked = false;
-
-            }
 
             if (filterCommand == "")
                 filterCommand += "PlayTime <> '00h:00m:00s'";
@@ -707,6 +717,8 @@ namespace The_UGamer_Launcher
 
         private void FilterButton_DropDownClosed(object sender, EventArgs e)
         {
+
+
             OleDbCommand cmd = new OleDbCommand("SELECT * FROM Table1", con);
 
             cmd.CommandType = CommandType.Text;
