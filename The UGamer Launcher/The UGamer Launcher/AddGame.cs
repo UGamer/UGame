@@ -802,9 +802,34 @@ namespace The_UGamer_Launcher
             else
                 secondsBox.Text = newSecondsString;
 
-            obtainedDatePicker.Text = obtained;
-            startDatePicker.Text = startDate;
-            endDatePicker.Text = endDate;
+            try
+            {
+                obtainedDatePicker.Text = obtained;
+            }
+            catch
+            {
+                obtainedDatePicker.Text = "";
+            }
+
+            try
+            {
+                startDatePicker.Text = startDate;
+            }
+            catch
+            {
+                startDatePicker.Text = "";
+            }
+
+            try
+            {
+                endDatePicker.Text = endDate;
+            }
+            catch
+            {
+                endDatePicker.Text = "";
+            }
+
+
 
             notesBox.Text = notes;
             launchBox.Text = launchString;

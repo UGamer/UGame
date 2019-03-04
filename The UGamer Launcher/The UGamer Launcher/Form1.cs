@@ -11,6 +11,7 @@ using System.ComponentModel;
 using System.Data.OleDb;
 using System.Collections.Generic;
 using System.Threading;
+using System.Collections;
 
 namespace The_UGamer_Launcher
 {
@@ -207,6 +208,8 @@ namespace The_UGamer_Launcher
             dataTable.SortCompare += customSortCompare;
 
             dataTable.Visible = true;
+
+            FilterSystem();
 
             NotificationSystem();
             ImageNotificationSystem();
@@ -586,6 +589,144 @@ namespace The_UGamer_Launcher
             cmd.Parameters.RemoveAt("@Action");
         }
 
+        ArrayList platforms = new ArrayList();
+        ArrayList statuses = new ArrayList();
+        ArrayList ratings = new ArrayList();
+
+        private void FilterSystem()
+        {
+            for (int index = 0; index < dataTable.Rows.Count; index++)
+            {
+                object value = dataTable.Rows[index].Cells[1].Value;
+                string stringValue = value.ToString();
+                bool dupe = false;
+                for (int y = 0; (y < platforms.Count) && dupe == false; y++)
+                    if (platforms.Contains(stringValue))
+                        dupe = true;
+
+                if (dupe == false)
+                    platforms.Add(stringValue);
+            }
+
+            // All platforms are now in the ArrayList "platforms"
+
+            for (int index = 0; index < dataTable.Rows.Count; index++)
+            {
+                object value = dataTable.Rows[index].Cells[2].Value;
+                string stringValue = value.ToString();
+                bool dupe = false;
+                for (int y = 0; (y < statuses.Count) && dupe == false; y++)
+                    if (statuses.Contains(stringValue))
+                        dupe = true;
+
+                if (dupe == false)
+                    statuses.Add(stringValue);
+            }
+
+            // All platforms are now in the ArrayList "statuses"
+
+            for (int index = 0; index < dataTable.Rows.Count; index++)
+            {
+                object value = dataTable.Rows[index].Cells[3].Value;
+                string stringValue = value.ToString();
+                bool dupe = false;
+                for (int y = 0; (y < ratings.Count) && dupe == false; y++)
+                    if (ratings.Contains(stringValue))
+                        dupe = true;
+
+                if (dupe == false)
+                    ratings.Add(stringValue);
+            }
+
+            // All platforms are now in the ArrayList "ratings"
+
+            ToolStripMenuItem platformItem;
+
+            for (int w = 0; w < platforms.Count; w++)
+            {
+                platformItem = new ToolStripMenuItem();
+                PlatformFilter.DropDownItems.Add(platformItem);
+                platformItem.Text = platforms[w].ToString();
+                platformItem.Click += item_Click;
+            }
+
+            ToolStripMenuItem statusItem;
+
+            for (int w = 0; w < statuses.Count; w++)
+            {
+                statusItem = new ToolStripMenuItem();
+                StatusFilter.DropDownItems.Add(statusItem);
+                statusItem.Text = statuses[w].ToString();
+                statusItem.Click += item_Click;
+            }
+
+            ToolStripMenuItem ratingItem;
+
+            for (int w = 0; w < ratings.Count; w++)
+            {
+                ratingItem = new ToolStripMenuItem();
+                RatingFilter.DropDownItems.Add(ratingItem);
+                ratingItem.Text = ratings[w].ToString();
+                ratingItem.Click += item_Click;
+            }
+        }
+
+        string filterCommand = "";
+
+        private void item_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void neverStartedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            neverStartedToolStripMenuItem.Checked = true;
+
+            if (filterCommand == "")
+                filterCommand += "PlayTime = '00h:00m:00s'";
+            else
+                filterCommand += " AND PlayTime = '00h:00m:00s'";
+        }
+        
+        private void startedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            startedToolStripMenuItem.Checked = true;
+
+            if (neverStartedToolStripMenuItem.Checked == true)
+            {
+                startedToolStripMenuItem.Checked = false;
+
+            }
+
+            if (filterCommand == "")
+                filterCommand += "PlayTime <> '00h:00m:00s'";
+            else
+                filterCommand += " AND PlayTime <> '00h:00m:00s'";
+        }
+
+        private void FilterButton_DropDownClosed(object sender, EventArgs e)
+        {
+            OleDbCommand cmd = new OleDbCommand("SELECT * FROM Table1", con);
+
+            cmd.CommandType = CommandType.Text;
+            OleDbDataAdapter da = new OleDbDataAdapter(cmd);
+            DataTable editingTable = new DataTable();
+            da.Fill(editingTable);
+
+            DataView custDV = new DataView(editingTable, filterCommand, "Title", DataViewRowState.CurrentRows);
+            //  "PlayTime = '00h:00m:00s' AND Platform = 'Twitch.TV'"
+
+            dataTable.DataSource = custDV;
+
+            int entryCount = dataTable.Rows.Count;
+            if (entryCount != 1)
+                gameCountText.Text = Convert.ToString(entryCount) + " total games (filtered)";
+            else
+                gameCountText.Text = Convert.ToString(entryCount) + " total game (filtered)";
+
+        }
+
         private void dataTable_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             string titleValue;
@@ -875,7 +1016,10 @@ namespace The_UGamer_Launcher
             }
             searchBox.AutoCompleteCustomSource = autoFill;
 
+            neverStartedToolStripMenuItem.Checked = false;
+
             NotificationSystem();
+            ImageNotificationSystem();
         }
 
         private void toolStripButton2_Click(object sender, EventArgs e)
@@ -1228,6 +1372,38 @@ namespace The_UGamer_Launcher
             links[1, 0] = "google.com";
             BrowserWindow detailedBrowser = new BrowserWindow(links, 1);
             detailedBrowser.Show();
+        }
+
+        int rowIndex;
+
+        private void dataTable_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                this.dataTable.Rows[e.RowIndex].Selected = true;
+                this.rowIndex = e.RowIndex;
+                this.dataTable.CurrentCell = this.dataTable.Rows[e.RowIndex].Cells[0];
+                this.DatabaseContextMenu.Show(this.dataTable, e.Location);
+                DatabaseContextMenu.Show(Cursor.Position);
+            }
+        }
+
+        private void editEntryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string titleValue;
+            try
+            {
+                object value = dataTable.Rows[this.rowIndex].Cells[0].Value;
+                titleValue = value.ToString();
+                EditSpecificEntry(titleValue);
+            }
+            catch (ArgumentOutOfRangeException f) { }
+        }
+
+
+        private void hideEntryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.dataTable.Rows.RemoveAt(this.rowIndex);
         }
     }
 }
