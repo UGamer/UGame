@@ -20,32 +20,32 @@ namespace The_UGamer_Launcher
         ToolStripButton[] linkButton;
 
         private string currentURL;
+
         ChromiumWebBrowser Browser;
 
-        bool timeToUnhook = false;
 
         public BrowserWindow(string[,] links, int linkCount)
         {
             InitializeComponent();
-
             this.links = links;
             this.linkCount = linkCount;
-
             InitializeBrowser();
             InitializeLinks();
             InitializeDesign();
-            
         }
+        
 
         private void InitializeBrowser()
         {
             try
             {
                 Browser = new ChromiumWebBrowser(links[1, 0]);
+                AddressBox.Text = links[1, 0];
             }
             catch (IndexOutOfRangeException e)
             {
                 Browser = new ChromiumWebBrowser("google.com");
+                AddressBox.Text = "https://www.google.com";
             }
             
             // Add it to the form and fill it to the form window.
@@ -53,6 +53,15 @@ namespace The_UGamer_Launcher
             Browser.Size = browserSize;
             Browser.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Top);
             this.BrowserDock.Controls.Add(Browser);
+            Browser.AddressChanged += Browser_AddressChanged;
+        }
+
+        void Browser_AddressChanged(object sender, AddressChangedEventArgs e)
+        {
+            this.Invoke(new MethodInvoker(() =>
+            {
+                AddressBox.Text = e.Address;
+            }));
         }
 
         private void InitializeLinks()
@@ -92,7 +101,33 @@ namespace The_UGamer_Launcher
 
         private void AddressBox_Enter(object sender, EventArgs e)
         {
-            timeToUnhook = true;
+            
+        }
+
+        private void BackButton_Click(object sender, EventArgs e)
+        {
+            if (Browser.CanGoBack)
+            {
+                Browser.Back();
+            }
+        }
+
+        private void RefreshButton_Click(object sender, EventArgs e)
+        {
+            Browser.Refresh();
+        }
+
+        private void BrowserWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Cef.Shutdown();
+        }
+
+        private void ForwardButton_Click(object sender, EventArgs e)
+        {
+            if (Browser.CanGoForward)
+            {
+                Browser.Forward();
+            }
         }
     }
 }

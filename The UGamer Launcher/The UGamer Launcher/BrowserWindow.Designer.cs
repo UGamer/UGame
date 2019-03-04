@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.RefreshButton = new System.Windows.Forms.Button();
             this.SearchButton = new System.Windows.Forms.Button();
             this.AddressBox = new System.Windows.Forms.TextBox();
             this.ForwardButton = new System.Windows.Forms.Button();
@@ -42,6 +43,7 @@
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.RefreshButton);
             this.panel1.Controls.Add(this.SearchButton);
             this.panel1.Controls.Add(this.AddressBox);
             this.panel1.Controls.Add(this.ForwardButton);
@@ -51,10 +53,20 @@
             this.panel1.Size = new System.Drawing.Size(801, 32);
             this.panel1.TabIndex = 3;
             // 
+            // RefreshButton
+            // 
+            this.RefreshButton.Location = new System.Drawing.Point(70, 0);
+            this.RefreshButton.Name = "RefreshButton";
+            this.RefreshButton.Size = new System.Drawing.Size(25, 32);
+            this.RefreshButton.TabIndex = 20;
+            this.RefreshButton.Text = "↺";
+            this.RefreshButton.UseVisualStyleBackColor = true;
+            this.RefreshButton.Click += new System.EventHandler(this.RefreshButton_Click);
+            // 
             // SearchButton
             // 
             this.SearchButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.SearchButton.Location = new System.Drawing.Point(758, 5);
+            this.SearchButton.Location = new System.Drawing.Point(772, 5);
             this.SearchButton.Name = "SearchButton";
             this.SearchButton.Size = new System.Drawing.Size(24, 22);
             this.SearchButton.TabIndex = 19;
@@ -66,9 +78,9 @@
             // 
             this.AddressBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.AddressBox.Location = new System.Drawing.Point(62, 6);
+            this.AddressBox.Location = new System.Drawing.Point(101, 6);
             this.AddressBox.Name = "AddressBox";
-            this.AddressBox.Size = new System.Drawing.Size(697, 20);
+            this.AddressBox.Size = new System.Drawing.Size(672, 20);
             this.AddressBox.TabIndex = 5;
             this.AddressBox.Enter += new System.EventHandler(this.AddressBox_Enter);
             this.AddressBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AddressBox_KeyDown);
@@ -81,6 +93,7 @@
             this.ForwardButton.TabIndex = 4;
             this.ForwardButton.Text = "->";
             this.ForwardButton.UseVisualStyleBackColor = true;
+            this.ForwardButton.Click += new System.EventHandler(this.ForwardButton_Click);
             // 
             // BackButton
             // 
@@ -90,6 +103,7 @@
             this.BackButton.TabIndex = 3;
             this.BackButton.Text = "<-";
             this.BackButton.UseVisualStyleBackColor = true;
+            this.BackButton.Click += new System.EventHandler(this.BackButton_Click);
             // 
             // LinksBar
             // 
@@ -124,6 +138,7 @@
             this.Name = "BrowserWindow";
             this.Text = "BrowserWindow";
             this.TopMost = true;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BrowserWindow_FormClosing);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -138,5 +153,6 @@
         private System.Windows.Forms.Button SearchButton;
         private System.Windows.Forms.ToolStrip LinksBar;
         private System.Windows.Forms.Panel BrowserDock;
+        private System.Windows.Forms.Button RefreshButton;
     }
 }
