@@ -30,17 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataTable = new System.Windows.Forms.DataGridView();
-            this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.platformDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.statusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ratingDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PlayTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.obtainedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.startDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.endDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.notesCommentsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.launchDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.table1BindingSource5 = new System.Windows.Forms.BindingSource(this.components);
             this.collectionDataSet = new The_UGamer_Launcher.CollectionDataSet();
             this.driverInstall = new System.Windows.Forms.WebBrowser();
@@ -71,6 +62,8 @@
             this.neverStartedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.startedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LaunchFilter = new System.Windows.Forms.ToolStripMenuItem();
+            this.canLaunchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cantLaunchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CategoriesFilter = new System.Windows.Forms.ToolStripMenuItem();
             this.CategoriesBox = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -102,8 +95,16 @@
             this.table1TableAdapter2 = new The_UGamer_Launcher.CollectionDataSet4TableAdapters.Table1TableAdapter();
             this.collectionDataSet5 = new The_UGamer_Launcher.CollectionDataSet5();
             this.collectionDataSet5BindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.canLaunchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cantLaunchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.platformDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.statusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ratingDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PlayTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.obtainedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.startDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.endDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.notesCommentsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.launchDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet)).BeginInit();
@@ -156,84 +157,6 @@
             this.dataTable.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataTable_CellMouseUp);
             this.dataTable.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.customSortCompare);
             // 
-            // titleDataGridViewTextBoxColumn
-            // 
-            this.titleDataGridViewTextBoxColumn.DataPropertyName = "Title";
-            this.titleDataGridViewTextBoxColumn.HeaderText = "Title";
-            this.titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
-            this.titleDataGridViewTextBoxColumn.ReadOnly = true;
-            this.titleDataGridViewTextBoxColumn.Width = 219;
-            // 
-            // platformDataGridViewTextBoxColumn
-            // 
-            this.platformDataGridViewTextBoxColumn.DataPropertyName = "Platform";
-            this.platformDataGridViewTextBoxColumn.HeaderText = "Platform";
-            this.platformDataGridViewTextBoxColumn.Name = "platformDataGridViewTextBoxColumn";
-            this.platformDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // statusDataGridViewTextBoxColumn
-            // 
-            this.statusDataGridViewTextBoxColumn.DataPropertyName = "Status";
-            this.statusDataGridViewTextBoxColumn.HeaderText = "Status";
-            this.statusDataGridViewTextBoxColumn.Name = "statusDataGridViewTextBoxColumn";
-            this.statusDataGridViewTextBoxColumn.ReadOnly = true;
-            this.statusDataGridViewTextBoxColumn.Width = 90;
-            // 
-            // ratingDataGridViewTextBoxColumn
-            // 
-            this.ratingDataGridViewTextBoxColumn.DataPropertyName = "Rating";
-            this.ratingDataGridViewTextBoxColumn.HeaderText = "Rating";
-            this.ratingDataGridViewTextBoxColumn.Name = "ratingDataGridViewTextBoxColumn";
-            this.ratingDataGridViewTextBoxColumn.ReadOnly = true;
-            this.ratingDataGridViewTextBoxColumn.Width = 70;
-            // 
-            // PlayTime
-            // 
-            this.PlayTime.DataPropertyName = "PlayTime";
-            this.PlayTime.HeaderText = "Time Played";
-            this.PlayTime.Name = "PlayTime";
-            this.PlayTime.ReadOnly = true;
-            // 
-            // obtainedDataGridViewTextBoxColumn
-            // 
-            this.obtainedDataGridViewTextBoxColumn.DataPropertyName = "Obtained";
-            this.obtainedDataGridViewTextBoxColumn.HeaderText = "Obtained";
-            this.obtainedDataGridViewTextBoxColumn.Name = "obtainedDataGridViewTextBoxColumn";
-            this.obtainedDataGridViewTextBoxColumn.ReadOnly = true;
-            this.obtainedDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // startDateDataGridViewTextBoxColumn
-            // 
-            this.startDateDataGridViewTextBoxColumn.DataPropertyName = "StartDate";
-            this.startDateDataGridViewTextBoxColumn.HeaderText = "Start Date";
-            this.startDateDataGridViewTextBoxColumn.Name = "startDateDataGridViewTextBoxColumn";
-            this.startDateDataGridViewTextBoxColumn.ReadOnly = true;
-            this.startDateDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // endDateDataGridViewTextBoxColumn
-            // 
-            this.endDateDataGridViewTextBoxColumn.DataPropertyName = "EndDate";
-            this.endDateDataGridViewTextBoxColumn.HeaderText = "Last Played";
-            this.endDateDataGridViewTextBoxColumn.Name = "endDateDataGridViewTextBoxColumn";
-            this.endDateDataGridViewTextBoxColumn.ReadOnly = true;
-            this.endDateDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // notesCommentsDataGridViewTextBoxColumn
-            // 
-            this.notesCommentsDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.notesCommentsDataGridViewTextBoxColumn.DataPropertyName = "Notes";
-            this.notesCommentsDataGridViewTextBoxColumn.HeaderText = "Notes/Comments";
-            this.notesCommentsDataGridViewTextBoxColumn.Name = "notesCommentsDataGridViewTextBoxColumn";
-            this.notesCommentsDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // launchDataGridViewTextBoxColumn
-            // 
-            this.launchDataGridViewTextBoxColumn.DataPropertyName = "Launch";
-            this.launchDataGridViewTextBoxColumn.HeaderText = "Launch";
-            this.launchDataGridViewTextBoxColumn.Name = "launchDataGridViewTextBoxColumn";
-            this.launchDataGridViewTextBoxColumn.ReadOnly = true;
-            this.launchDataGridViewTextBoxColumn.Visible = false;
-            // 
             // table1BindingSource5
             // 
             this.table1BindingSource5.DataMember = "Table1";
@@ -276,7 +199,7 @@
             this.gameCountText.Location = new System.Drawing.Point(559, 549);
             this.gameCountText.Name = "gameCountText";
             this.gameCountText.ReadOnly = true;
-            this.gameCountText.Size = new System.Drawing.Size(175, 26);
+            this.gameCountText.Size = new System.Drawing.Size(175, 20);
             this.gameCountText.TabIndex = 14;
             this.gameCountText.Text = "Total Games";
             this.gameCountText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -323,7 +246,7 @@
             this.noGameLabel.Location = new System.Drawing.Point(556, 598);
             this.noGameLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.noGameLabel.Name = "noGameLabel";
-            this.noGameLabel.Size = new System.Drawing.Size(285, 20);
+            this.noGameLabel.Size = new System.Drawing.Size(189, 13);
             this.noGameLabel.TabIndex = 17;
             this.noGameLabel.Text = "Sorry, it seems that game doesn\'t exist.";
             this.noGameLabel.Visible = false;
@@ -348,7 +271,7 @@
             this.searchBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.searchBox.Location = new System.Drawing.Point(439, 575);
             this.searchBox.Name = "searchBox";
-            this.searchBox.Size = new System.Drawing.Size(419, 26);
+            this.searchBox.Size = new System.Drawing.Size(419, 20);
             this.searchBox.TabIndex = 19;
             this.searchBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchBox_KeyDown);
             // 
@@ -362,7 +285,7 @@
             this.ViewToolStripButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1333, 32);
+            this.toolStrip1.Size = new System.Drawing.Size(1333, 25);
             this.toolStrip1.TabIndex = 20;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -375,7 +298,7 @@
             this.EditToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("EditToolStripButton.Image")));
             this.EditToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.EditToolStripButton.Name = "EditToolStripButton";
-            this.EditToolStripButton.Size = new System.Drawing.Size(60, 29);
+            this.EditToolStripButton.Size = new System.Drawing.Size(40, 22);
             this.EditToolStripButton.Text = "Edit";
             // 
             // ColumnsToolStripButton
@@ -388,25 +311,25 @@
             this.ColumnsToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("ColumnsToolStripButton.Image")));
             this.ColumnsToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ColumnsToolStripButton.Name = "ColumnsToolStripButton";
-            this.ColumnsToolStripButton.Size = new System.Drawing.Size(178, 30);
+            this.ColumnsToolStripButton.Size = new System.Drawing.Size(131, 22);
             this.ColumnsToolStripButton.Text = "Columns...";
             // 
             // addColumnToolStripMenuItem
             // 
             this.addColumnToolStripMenuItem.Name = "addColumnToolStripMenuItem";
-            this.addColumnToolStripMenuItem.Size = new System.Drawing.Size(227, 30);
+            this.addColumnToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.addColumnToolStripMenuItem.Text = "Add Column";
             // 
             // editColumnToolStripMenuItem
             // 
             this.editColumnToolStripMenuItem.Name = "editColumnToolStripMenuItem";
-            this.editColumnToolStripMenuItem.Size = new System.Drawing.Size(227, 30);
+            this.editColumnToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.editColumnToolStripMenuItem.Text = "Edit Column";
             // 
             // removeColumnToolStripMenuItem
             // 
             this.removeColumnToolStripMenuItem.Name = "removeColumnToolStripMenuItem";
-            this.removeColumnToolStripMenuItem.Size = new System.Drawing.Size(227, 30);
+            this.removeColumnToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.removeColumnToolStripMenuItem.Text = "Remove Column";
             // 
             // EntriesToolTipButton
@@ -415,7 +338,7 @@
             this.EntriesToolTipButton.Image = ((System.Drawing.Image)(resources.GetObject("EntriesToolTipButton.Image")));
             this.EntriesToolTipButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.EntriesToolTipButton.Name = "EntriesToolTipButton";
-            this.EntriesToolTipButton.Size = new System.Drawing.Size(178, 30);
+            this.EntriesToolTipButton.Size = new System.Drawing.Size(131, 22);
             this.EntriesToolTipButton.Text = "Entries";
             this.EntriesToolTipButton.Click += new System.EventHandler(this.EntriesToolTipButton_Click_1);
             // 
@@ -425,7 +348,7 @@
             this.refreshButton.Image = ((System.Drawing.Image)(resources.GetObject("refreshButton.Image")));
             this.refreshButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.refreshButton.Name = "refreshButton";
-            this.refreshButton.Size = new System.Drawing.Size(74, 29);
+            this.refreshButton.Size = new System.Drawing.Size(50, 22);
             this.refreshButton.Text = "Refresh";
             this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
             // 
@@ -435,7 +358,7 @@
             this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(80, 29);
+            this.toolStripButton2.Size = new System.Drawing.Size(53, 22);
             this.toolStripButton2.Text = "Settings";
             this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
             // 
@@ -448,7 +371,7 @@
             this.ViewToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("ViewToolStripButton.Image")));
             this.ViewToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ViewToolStripButton.Name = "ViewToolStripButton";
-            this.ViewToolStripButton.Size = new System.Drawing.Size(67, 29);
+            this.ViewToolStripButton.Size = new System.Drawing.Size(45, 22);
             this.ViewToolStripButton.Text = "View";
             // 
             // FilterButton
@@ -465,34 +388,34 @@
             this.toolStripSeparator1,
             this.SaveFilters});
             this.FilterButton.Name = "FilterButton";
-            this.FilterButton.Size = new System.Drawing.Size(252, 30);
+            this.FilterButton.Size = new System.Drawing.Size(148, 22);
             this.FilterButton.Text = "Filter";
             this.FilterButton.DropDownClosed += new System.EventHandler(this.FilterButton_DropDownClosed);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(249, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(143, 6);
             // 
             // PlatformFilter
             // 
             this.PlatformFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.PlatformFilter.Name = "PlatformFilter";
-            this.PlatformFilter.Size = new System.Drawing.Size(252, 30);
+            this.PlatformFilter.Size = new System.Drawing.Size(146, 22);
             this.PlatformFilter.Text = "Platform";
             // 
             // StatusFilter
             // 
             this.StatusFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.StatusFilter.Name = "StatusFilter";
-            this.StatusFilter.Size = new System.Drawing.Size(252, 30);
+            this.StatusFilter.Size = new System.Drawing.Size(146, 22);
             this.StatusFilter.Text = "Status";
             // 
             // RatingFilter
             // 
             this.RatingFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.RatingFilter.Name = "RatingFilter";
-            this.RatingFilter.Size = new System.Drawing.Size(252, 30);
+            this.RatingFilter.Size = new System.Drawing.Size(146, 22);
             this.RatingFilter.Text = "Rating";
             // 
             // TimePlayedFilter
@@ -502,20 +425,20 @@
             this.neverStartedToolStripMenuItem,
             this.startedToolStripMenuItem});
             this.TimePlayedFilter.Name = "TimePlayedFilter";
-            this.TimePlayedFilter.Size = new System.Drawing.Size(252, 30);
+            this.TimePlayedFilter.Size = new System.Drawing.Size(146, 22);
             this.TimePlayedFilter.Text = "Time Played";
             // 
             // neverStartedToolStripMenuItem
             // 
             this.neverStartedToolStripMenuItem.Name = "neverStartedToolStripMenuItem";
-            this.neverStartedToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
+            this.neverStartedToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.neverStartedToolStripMenuItem.Text = "Never Started";
             this.neverStartedToolStripMenuItem.Click += new System.EventHandler(this.neverStartedToolStripMenuItem_Click);
             // 
             // startedToolStripMenuItem
             // 
             this.startedToolStripMenuItem.Name = "startedToolStripMenuItem";
-            this.startedToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
+            this.startedToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.startedToolStripMenuItem.Text = "Started";
             this.startedToolStripMenuItem.Click += new System.EventHandler(this.startedToolStripMenuItem_Click);
             // 
@@ -526,8 +449,20 @@
             this.canLaunchToolStripMenuItem,
             this.cantLaunchToolStripMenuItem});
             this.LaunchFilter.Name = "LaunchFilter";
-            this.LaunchFilter.Size = new System.Drawing.Size(252, 30);
+            this.LaunchFilter.Size = new System.Drawing.Size(146, 22);
             this.LaunchFilter.Text = "Launch";
+            // 
+            // canLaunchToolStripMenuItem
+            // 
+            this.canLaunchToolStripMenuItem.Name = "canLaunchToolStripMenuItem";
+            this.canLaunchToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.canLaunchToolStripMenuItem.Text = "Can Launch";
+            // 
+            // cantLaunchToolStripMenuItem
+            // 
+            this.cantLaunchToolStripMenuItem.Name = "cantLaunchToolStripMenuItem";
+            this.cantLaunchToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.cantLaunchToolStripMenuItem.Text = "Can\'t Launch";
             // 
             // CategoriesFilter
             // 
@@ -535,30 +470,30 @@
             this.CategoriesFilter.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.CategoriesBox});
             this.CategoriesFilter.Name = "CategoriesFilter";
-            this.CategoriesFilter.Size = new System.Drawing.Size(252, 30);
+            this.CategoriesFilter.Size = new System.Drawing.Size(146, 22);
             this.CategoriesFilter.Text = "Categories";
             // 
             // CategoriesBox
             // 
             this.CategoriesBox.Name = "CategoriesBox";
-            this.CategoriesBox.Size = new System.Drawing.Size(180, 33);
+            this.CategoriesBox.Size = new System.Drawing.Size(180, 23);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(249, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(143, 6);
             // 
             // SaveFilters
             // 
             this.SaveFilters.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SaveFilters.Name = "SaveFilters";
-            this.SaveFilters.Size = new System.Drawing.Size(252, 30);
+            this.SaveFilters.Size = new System.Drawing.Size(146, 22);
             this.SaveFilters.Text = "Save + Apply";
             // 
             // openBrowserToolStripMenuItem
             // 
             this.openBrowserToolStripMenuItem.Name = "openBrowserToolStripMenuItem";
-            this.openBrowserToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
+            this.openBrowserToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.openBrowserToolStripMenuItem.Text = "Open Browser";
             this.openBrowserToolStripMenuItem.Click += new System.EventHandler(this.openBrowserToolStripMenuItem_Click);
             // 
@@ -666,19 +601,19 @@
             this.editEntryToolStripMenuItem,
             this.hideEntryToolStripMenuItem});
             this.DatabaseContextMenu.Name = "DatabaseContextMenu";
-            this.DatabaseContextMenu.Size = new System.Drawing.Size(179, 64);
+            this.DatabaseContextMenu.Size = new System.Drawing.Size(139, 48);
             // 
             // editEntryToolStripMenuItem
             // 
             this.editEntryToolStripMenuItem.Name = "editEntryToolStripMenuItem";
-            this.editEntryToolStripMenuItem.Size = new System.Drawing.Size(178, 30);
+            this.editEntryToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
             this.editEntryToolStripMenuItem.Text = "Edit Entry...";
             this.editEntryToolStripMenuItem.Click += new System.EventHandler(this.editEntryToolStripMenuItem_Click);
             // 
             // hideEntryToolStripMenuItem
             // 
             this.hideEntryToolStripMenuItem.Name = "hideEntryToolStripMenuItem";
-            this.hideEntryToolStripMenuItem.Size = new System.Drawing.Size(178, 30);
+            this.hideEntryToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
             this.hideEntryToolStripMenuItem.Text = "Hide Entry...";
             this.hideEntryToolStripMenuItem.Click += new System.EventHandler(this.hideEntryToolStripMenuItem_Click);
             // 
@@ -706,17 +641,85 @@
             this.collectionDataSet5BindingSource.DataSource = this.collectionDataSet5;
             this.collectionDataSet5BindingSource.Position = 0;
             // 
-            // canLaunchToolStripMenuItem
+            // titleDataGridViewTextBoxColumn
             // 
-            this.canLaunchToolStripMenuItem.Name = "canLaunchToolStripMenuItem";
-            this.canLaunchToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
-            this.canLaunchToolStripMenuItem.Text = "Can Launch";
+            this.titleDataGridViewTextBoxColumn.DataPropertyName = "Title";
+            this.titleDataGridViewTextBoxColumn.HeaderText = "Title";
+            this.titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
+            this.titleDataGridViewTextBoxColumn.ReadOnly = true;
+            this.titleDataGridViewTextBoxColumn.Width = 219;
             // 
-            // cantLaunchToolStripMenuItem
+            // platformDataGridViewTextBoxColumn
             // 
-            this.cantLaunchToolStripMenuItem.Name = "cantLaunchToolStripMenuItem";
-            this.cantLaunchToolStripMenuItem.Size = new System.Drawing.Size(252, 30);
-            this.cantLaunchToolStripMenuItem.Text = "Can\'t Launch";
+            this.platformDataGridViewTextBoxColumn.DataPropertyName = "Platform";
+            this.platformDataGridViewTextBoxColumn.HeaderText = "Platform";
+            this.platformDataGridViewTextBoxColumn.Name = "platformDataGridViewTextBoxColumn";
+            this.platformDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // statusDataGridViewTextBoxColumn
+            // 
+            this.statusDataGridViewTextBoxColumn.DataPropertyName = "Status";
+            this.statusDataGridViewTextBoxColumn.HeaderText = "Status";
+            this.statusDataGridViewTextBoxColumn.Name = "statusDataGridViewTextBoxColumn";
+            this.statusDataGridViewTextBoxColumn.ReadOnly = true;
+            this.statusDataGridViewTextBoxColumn.Width = 90;
+            // 
+            // ratingDataGridViewTextBoxColumn
+            // 
+            this.ratingDataGridViewTextBoxColumn.DataPropertyName = "Rating";
+            this.ratingDataGridViewTextBoxColumn.HeaderText = "Rating";
+            this.ratingDataGridViewTextBoxColumn.Name = "ratingDataGridViewTextBoxColumn";
+            this.ratingDataGridViewTextBoxColumn.ReadOnly = true;
+            this.ratingDataGridViewTextBoxColumn.Width = 70;
+            // 
+            // PlayTime
+            // 
+            this.PlayTime.DataPropertyName = "PlayTime";
+            dataGridViewCellStyle2.NullValue = null;
+            this.PlayTime.DefaultCellStyle = dataGridViewCellStyle2;
+            this.PlayTime.HeaderText = "Time Played";
+            this.PlayTime.Name = "PlayTime";
+            this.PlayTime.ReadOnly = true;
+            // 
+            // obtainedDataGridViewTextBoxColumn
+            // 
+            this.obtainedDataGridViewTextBoxColumn.DataPropertyName = "Obtained";
+            this.obtainedDataGridViewTextBoxColumn.HeaderText = "Obtained";
+            this.obtainedDataGridViewTextBoxColumn.Name = "obtainedDataGridViewTextBoxColumn";
+            this.obtainedDataGridViewTextBoxColumn.ReadOnly = true;
+            this.obtainedDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // startDateDataGridViewTextBoxColumn
+            // 
+            this.startDateDataGridViewTextBoxColumn.DataPropertyName = "StartDate";
+            this.startDateDataGridViewTextBoxColumn.HeaderText = "Start Date";
+            this.startDateDataGridViewTextBoxColumn.Name = "startDateDataGridViewTextBoxColumn";
+            this.startDateDataGridViewTextBoxColumn.ReadOnly = true;
+            this.startDateDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // endDateDataGridViewTextBoxColumn
+            // 
+            this.endDateDataGridViewTextBoxColumn.DataPropertyName = "EndDate";
+            this.endDateDataGridViewTextBoxColumn.HeaderText = "Last Played";
+            this.endDateDataGridViewTextBoxColumn.Name = "endDateDataGridViewTextBoxColumn";
+            this.endDateDataGridViewTextBoxColumn.ReadOnly = true;
+            this.endDateDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // notesCommentsDataGridViewTextBoxColumn
+            // 
+            this.notesCommentsDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.notesCommentsDataGridViewTextBoxColumn.DataPropertyName = "Notes";
+            this.notesCommentsDataGridViewTextBoxColumn.HeaderText = "Notes/Comments";
+            this.notesCommentsDataGridViewTextBoxColumn.Name = "notesCommentsDataGridViewTextBoxColumn";
+            this.notesCommentsDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // launchDataGridViewTextBoxColumn
+            // 
+            this.launchDataGridViewTextBoxColumn.DataPropertyName = "Launch";
+            this.launchDataGridViewTextBoxColumn.HeaderText = "Launch";
+            this.launchDataGridViewTextBoxColumn.Name = "launchDataGridViewTextBoxColumn";
+            this.launchDataGridViewTextBoxColumn.ReadOnly = true;
+            this.launchDataGridViewTextBoxColumn.Visible = false;
             // 
             // Form1
             // 
@@ -822,16 +825,6 @@
         private CollectionDataSet collectionDataSet;
         private System.Windows.Forms.BindingSource table1BindingSource5;
         private CollectionDataSetTableAdapters.Table1TableAdapter table1TableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PlayTime;
-        private System.Windows.Forms.DataGridViewTextBoxColumn titleDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn platformDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn statusDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ratingDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn obtainedDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn startDateDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn endDateDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn notesCommentsDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn launchDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource collectionDataSetBindingSource;
         private System.Windows.Forms.ToolStripMenuItem openBrowserToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem neverStartedToolStripMenuItem;
@@ -841,6 +834,16 @@
         private System.Windows.Forms.ToolStripMenuItem hideEntryToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem canLaunchToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cantLaunchToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn titleDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn platformDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn statusDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ratingDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PlayTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn obtainedDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn startDateDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn endDateDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn notesCommentsDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn launchDataGridViewTextBoxColumn;
     }
 }
 

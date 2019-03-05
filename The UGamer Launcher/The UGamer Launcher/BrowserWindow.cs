@@ -74,12 +74,23 @@ namespace The_UGamer_Launcher
                 linkButton[index].DisplayStyle = ToolStripItemDisplayStyle.Text;
                 linkButton[index].Text = links[0, index];
                 LinksBar.Items.Add(linkButton[index]);
+                linkButton[index].Click += linkButton_Click;
             }
         }
 
         private void InitializeDesign()
         {
 
+        }
+
+        private void linkButton_Click(object sender, EventArgs e)
+        {
+            /*
+            string linkTitle = sender.ToString();
+            for (int index = 0; index < links.Length; index++)
+                if (links[0, index] == linkTitle)
+                    Browser.Load(links[1, index]);
+            */
         }
 
         private void Search()

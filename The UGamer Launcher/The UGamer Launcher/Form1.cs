@@ -126,11 +126,6 @@ namespace The_UGamer_Launcher
             }
         }
 
-        public class Statuses
-        {
-
-        }
-
         // This fills the data table with the user data.
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -640,31 +635,52 @@ namespace The_UGamer_Launcher
 
             // All platforms are now in the ArrayList "ratings"
 
-            ToolStripMenuItem[] platformItem = new ToolStripMenuItem[platforms.Count];
+            // ToolStripMenuItem[] platformItem = new ToolStripMenuItem[platforms.Count];
+            ToolStripMenuItem platformItem;
 
             for (int w = 0; w < platforms.Count; w++)
             {
+                /*
                 PlatformFilter.DropDownItems.Add(platformItem[w]);
                 platformItem[w].Text = platforms[w].ToString();
                 platformItem[w].Click += platformItem_Click;
+                */
+                platformItem = new ToolStripMenuItem();
+                PlatformFilter.DropDownItems.Add(platformItem);
+                platformItem.Text = platforms[w].ToString();
+                platformItem.Click += platformItem_Click;
             }
 
-            ToolStripMenuItem[] statusItem = new ToolStripMenuItem[statuses.Count];
+            // ToolStripMenuItem[] statusItem = new ToolStripMenuItem[statuses.Count];
+            ToolStripMenuItem statusItem;
 
             for (int w = 0; w < statuses.Count; w++)
             {
+                /*
                 StatusFilter.DropDownItems.Add(statusItem[w]);
                 statusItem[w].Text = statuses[w].ToString();
                 statusItem[w].Click += statusItem_Click;
+                */
+                statusItem = new ToolStripMenuItem();
+                StatusFilter.DropDownItems.Add(statusItem);
+                statusItem.Text = statuses[w].ToString();
+                statusItem.Click += statusItem_Click;
             }
 
-            ToolStripMenuItem[] ratingItem = new ToolStripMenuItem[ratings.Count];
+            // ToolStripMenuItem[] ratingItem = new ToolStripMenuItem[ratings.Count];
+            ToolStripMenuItem ratingItem;
 
             for (int w = 0; w < ratings.Count; w++)
             {
+                /*
                 RatingFilter.DropDownItems.Add(ratingItem[w]);
                 ratingItem[w].Text = ratings[w].ToString();
                 ratingItem[w].Click += ratingItem_Click;
+                */
+                ratingItem = new ToolStripMenuItem();
+                RatingFilter.DropDownItems.Add(ratingItem);
+                ratingItem.Text = ratings[w].ToString();
+                ratingItem.Click += ratingItem_Click;
             }
         }
 
@@ -1055,29 +1071,37 @@ namespace The_UGamer_Launcher
 
         private void customSortCompare(object sender, DataGridViewSortCompareEventArgs e)
         {
-            if (e.Column.Index == 5)
+            if (e.Column.Index == 4)
             {
                 string value1 = e.CellValue1.ToString();
                 string value2 = e.CellValue2.ToString();
-                Regex fixingTime1 = new Regex("h:");
-                Regex fixingTime2 = new Regex("m:");
-                Regex fixingTime3 = new Regex("s");
-                fixingTime1.Replace(value1, "");
-                fixingTime2.Replace(value1, "");
-                fixingTime3.Replace(value1, "");
+
+                int hourIndex = value1.IndexOf("h");
+                string hoursString = value1.Substring(0, hourIndex);
+                int minIndex = value1.IndexOf("m");
+                string minutesString = value1.Substring(hourIndex + 2, 2);
+                string secondsString = value1.Substring(minIndex + 2, 2);
+                int hours = Convert.ToInt32(hoursString);
+                int minutes = Convert.ToInt32(minutesString);
+                int seconds = Convert.ToInt32(secondsString);
+                int time1 = (hours * 60 * 60) + (minutes * 60) + seconds;
+
+                hourIndex = value2.IndexOf("h");
+                hoursString = value2.Substring(0, hourIndex);
+                minIndex = value2.IndexOf("m");
+                minutesString = value2.Substring(hourIndex + 2, 2);
+                secondsString = value2.Substring(minIndex + 2, 2);
+                hours = Convert.ToInt32(hoursString);
+                minutes = Convert.ToInt32(minutesString);
+                seconds = Convert.ToInt32(secondsString);
+                int time2 = (hours * 60 * 60) + (minutes * 60) + seconds;
                 
-                fixingTime1.Replace(value2, "");
-                fixingTime2.Replace(value2, "");
-                fixingTime3.Replace(value2, "");
 
-                int value1Int = Convert.ToInt32(value1);
-                int value2Int = Convert.ToInt32(value2);
-
-                e.SortResult = int.Parse(e.CellValue1.ToString()).CompareTo(int.Parse(e.CellValue2.ToString()));
-                e.Handled = true;//pass by the default sorting
+                e.SortResult = time1.CompareTo(time2);
+                e.Handled = true; //pass by the default sorting
             }
 
-            dataTable.SortCompare += customSortCompare;
+            gameCountText.Text = "Eh";
         }
 
         private void EntriesToolTipButton_Click_1(object sender, EventArgs e)
@@ -1411,8 +1435,7 @@ namespace The_UGamer_Launcher
             }
             catch (ArgumentOutOfRangeException f) { }
         }
-
-
+        
         private void hideEntryToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.dataTable.Rows.RemoveAt(this.rowIndex);
