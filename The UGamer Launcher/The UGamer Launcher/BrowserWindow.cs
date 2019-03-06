@@ -49,6 +49,10 @@ namespace The_UGamer_Launcher
 
         private void InitializeBrowser()
         {
+            CefSettings settings = new CefSettings();
+            // Initialize cef with the provided settings
+            Cef.Initialize(settings);
+
             try
             {
                 Browser = new ChromiumWebBrowser(links[1, 0]);
@@ -58,6 +62,17 @@ namespace The_UGamer_Launcher
             {
                 Browser = new ChromiumWebBrowser("google.com");
                 AddressBox.Text = "https://www.google.com";
+            }
+            catch (System.AccessViolationException e)
+            {
+                try
+                {
+                    Browser.Load(links[1, 0]);
+                }
+                catch (IndexOutOfRangeException f)
+                {
+                    Browser.Load("google.com");
+                }
             }
             
             // Add it to the form and fill it to the form window.

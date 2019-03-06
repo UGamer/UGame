@@ -591,19 +591,20 @@ namespace The_UGamer_Launcher
                     string tempLink = allLinks2.Substring(remove);
                     int titleIndex = tempLink.IndexOf("[Title]") + 7;
                     int URLIndex = tempLink.IndexOf("[URL]") + 5;
-                    int titleLength = URLIndex - titleIndex;
+                    int titleLength = (URLIndex - 5) - titleIndex;
                     string titleLink = tempLink;
                     string URLLink = tempLink;
-                    links[0, index] = titleLink.Substring(titleIndex + 7, titleLength);
+                    links[0, index] = titleLink.Substring(titleIndex, titleLength);
 
                     string tempLink2 = tempLink;
                     tempLink2 = tempLink2.Substring(7);
-                    int nextTitleIndex = tempLink2.IndexOf("[Title]") + 7;
+                    int nextTitleIndex = tempLink2.IndexOf("[Title]");
 
                     if (nextTitleIndex != -1)
                     {
-                        int urlLength = nextTitleIndex - URLIndex ;
-                        remove += URLIndex + urlLength;
+                        nextTitleIndex += 7;
+                        int urlLength = nextTitleIndex - URLIndex;
+                        remove += nextTitleIndex;
                         links[1, index] = URLLink.Substring(URLIndex, urlLength);
                     }
                     else

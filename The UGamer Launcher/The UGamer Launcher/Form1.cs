@@ -196,9 +196,7 @@ namespace The_UGamer_Launcher
                 columnSource.Add(new CategoryColumn() { Name = "blah" });
             }
 
-            CefSettings settings = new CefSettings();
-            // Initialize cef with the provided settings
-            Cef.Initialize(settings);
+            
 
             dataTable.SortCompare += customSortCompare;
 
