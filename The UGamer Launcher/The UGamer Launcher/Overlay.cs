@@ -40,6 +40,7 @@ namespace The_UGamer_Launcher
         int screenWidth = Convert.ToInt32(Screen.PrimaryScreen.Bounds.Width.ToString());
         int screenHeight = Convert.ToInt32(Screen.PrimaryScreen.Bounds.Height.ToString());
         System.Windows.Forms.Timer screenshotTimer;
+        System.Windows.Forms.Timer shiftTimer;
         globalKeyboardHook screenshotHook = new globalKeyboardHook();
         bool shiftDown = false;
 
@@ -64,8 +65,8 @@ namespace The_UGamer_Launcher
 
             InitializeSystemClock();
             
-            gkh.HookedKeys.Add(Keys.Home);
-            gkh.HookedKeys.Add(Keys.PrintScreen);
+            gkh.HookedKeys.Add(Keys.Tab);
+            gkh.HookedKeys.Add(Keys.F2);
             screenshotHook.HookedKeys.Add(Keys.LShiftKey);
             gkh.KeyDown += new KeyEventHandler(gkh_KeyDown);
             screenshotHook.KeyDown += new KeyEventHandler(screenshotHook_KeyDown);
@@ -123,6 +124,10 @@ namespace The_UGamer_Launcher
             t.Interval = 1000;
             t.Tick += new EventHandler(this.t_tick);
             t.Start();
+
+            shiftTimer = new System.Windows.Forms.Timer();
+            shiftTimer.Interval = 500;
+            shiftTimer.Tick += new EventHandler(this.shiftTimer_tick);
         }
 
         private void t_tick(object sender, EventArgs e)
@@ -166,12 +171,18 @@ namespace The_UGamer_Launcher
 
         void screenshotHook_KeyUp(object sender, KeyEventArgs e)
         {
-            shiftDown = false;
+            shiftTimer.Start();
         }
 
-        void gkh_KeyDown(object sender, KeyEventArgs e)
+        private void shiftTimer_tick(object sender, EventArgs e)
         {
-            if (e.KeyCode == Keys.Home && shiftDown == true)
+            shiftDown = false;
+            shiftTimer.Stop();
+        }
+
+            void gkh_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Tab && shiftDown == true)
             {
                 if (flag)
                 {
@@ -195,7 +206,7 @@ namespace The_UGamer_Launcher
                 e.Handled = true;
             }
 
-            if (e.KeyCode == Keys.PrintScreen && shiftDown == true)
+            if (e.KeyCode == Keys.F2 && shiftDown == true)
             {
                 try
                 {
