@@ -41,6 +41,7 @@ namespace The_UGamer_Launcher
         int screenHeight = Convert.ToInt32(Screen.PrimaryScreen.Bounds.Height.ToString());
         System.Windows.Forms.Timer screenshotTimer;
         globalKeyboardHook screenshotHook = new globalKeyboardHook();
+        bool shiftDown = false;
 
         Regex rgxFix1 = new Regex("/");
         Regex rgxFix2 = new Regex(":");
@@ -68,6 +69,7 @@ namespace The_UGamer_Launcher
             screenshotHook.HookedKeys.Add(Keys.LShiftKey);
             gkh.KeyDown += new KeyEventHandler(gkh_KeyDown);
             screenshotHook.KeyDown += new KeyEventHandler(screenshotHook_KeyDown);
+            screenshotHook.KeyUp += new KeyEventHandler(screenshotHook_KeyUp);
         }
 
         private void InitializeName()
@@ -159,12 +161,17 @@ namespace The_UGamer_Launcher
 
         void screenshotHook_KeyDown(object sender, KeyEventArgs e)
         {
+            shiftDown = true;
+        }
 
+        void screenshotHook_KeyUp(object sender, KeyEventArgs e)
+        {
+            shiftDown = false;
         }
 
         void gkh_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Home)
+            if (e.KeyCode == Keys.Home && shiftDown == true)
             {
                 if (flag)
                 {
@@ -188,7 +195,7 @@ namespace The_UGamer_Launcher
                 e.Handled = true;
             }
 
-            if (e.KeyCode == Keys.PrintScreen)
+            if (e.KeyCode == Keys.PrintScreen && shiftDown == true)
             {
                 try
                 {

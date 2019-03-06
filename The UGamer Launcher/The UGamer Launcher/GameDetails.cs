@@ -579,78 +579,42 @@ namespace The_UGamer_Launcher
                 }
             }
 
-            string allLinks2 = news;
+            
             links = new string[2,linkCount];
+            int remove = 0;
 
             for (int index = 0; index < linkCount; index++)
             {
-                try
+                // try
                 {
-                    int titleIndex = allLinks2.IndexOf("[Title]");
-                    int URLIndex = allLinks2.IndexOf("[URL]");
-                    string tempLink = allLinks2.Substring(titleIndex + 7);
-                    int titleLength = URLIndex - (titleIndex + 7);
-                    links[0, index] = allLinks2.Substring(titleIndex + 7, titleLength);
-                    int nextTitleIndex = tempLink.IndexOf("[Title]");
+                    string allLinks2 = news;
+                    string tempLink = allLinks2.Substring(remove);
+                    int titleIndex = tempLink.IndexOf("[Title]") + 7;
+                    int URLIndex = tempLink.IndexOf("[URL]") + 5;
+                    int titleLength = URLIndex - titleIndex;
+                    string titleLink = tempLink;
+                    string URLLink = tempLink;
+                    links[0, index] = titleLink.Substring(titleIndex + 7, titleLength);
+
+                    string tempLink2 = tempLink;
+                    tempLink2 = tempLink2.Substring(7);
+                    int nextTitleIndex = tempLink2.IndexOf("[Title]") + 7;
+
                     if (nextTitleIndex != -1)
                     {
-                        int urlLength = nextTitleIndex - URLIndex + 2;
-                        links[1, index] = allLinks2.Substring(URLIndex + 5, urlLength);
+                        int urlLength = nextTitleIndex - URLIndex ;
+                        remove += URLIndex + urlLength;
+                        links[1, index] = URLLink.Substring(URLIndex, urlLength);
                     }
                     else
                     {
-                        links[1, index] = allLinks2.Substring(URLIndex + 5);
+                        links[1, index] = URLLink.Substring(URLIndex);
                     }
-                        
-                    allLinks2 = allLinks2.Substring(nextTitleIndex);
                 }
-                catch (ArgumentOutOfRangeException e)
+                // catch (ArgumentOutOfRangeException e)
                 {
 
                 }
-            }
-
-            OleDbCommand clearTable = new OleDbCommand("DELETE FROM TempTable", con);
-            con.Open();
-            clearTable.ExecuteNonQuery();
-            con.Close();
-
-            OleDbCommand insertTemp = new OleDbCommand("INSERT INTO TempTable (Title) VALUES (@Title);", con);
-
-            for (int index = 0; index < linkCount; index++)
-            {
-                insertTemp.Parameters.AddWithValue("@Title", links[0, index]);
-                con.Open();
-                insertTemp.ExecuteNonQuery();
-                con.Close();
-                insertTemp.Parameters.RemoveAt("@Title");
-            }
-
-            BrowserLinksDGV.DataSource = null;
-            BrowserLinksDGV.Update();
-            BrowserLinksDGV.Refresh();
-            OleDbCommand cmd = new OleDbCommand("SELECT * FROM TempTable", con);
-            con.Open();
-            cmd.CommandType = CommandType.Text;
-            OleDbDataAdapter da = new OleDbDataAdapter(cmd);
-            DataTable newTable = new DataTable();
-            da.Fill(newTable);
-            BrowserLinksDGV.DataSource = newTable;
-            con.Close();
-
-            if (news == " " || news == "")
-            {
-                this.Controls.Remove(BrowserLinksDGV);
-                this.Controls.Remove(browserDock);
-            }
-            else if (news != " " || news != "")
-            {
-                // Create a browser component
-                chromeBrowser = new ChromiumWebBrowser(links[1, 0]);
-                // Add it to the form and fill it to the form window.
-                chromeBrowser.Size = browserSize;
-                chromeBrowser.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Top);
-                this.browserDock.Controls.Add(chromeBrowser);
             }
         }
 

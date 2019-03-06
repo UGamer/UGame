@@ -22,6 +22,8 @@ namespace The_UGamer_Launcher
         private string currentURL;
 
         ChromiumWebBrowser Browser;
+        
+        globalKeyboardHook gkh = new globalKeyboardHook();
 
 
         public BrowserWindow(string[,] links, int linkCount)
@@ -32,8 +34,18 @@ namespace The_UGamer_Launcher
             InitializeBrowser();
             InitializeLinks();
             InitializeDesign();
+            
+            gkh.HookedKeys.Add(Keys.MediaPlayPause);
+            gkh.KeyDown += new KeyEventHandler(gkh_KeyDown);
         }
         
+        private void gkh_KeyDown(object sender, KeyEventArgs e)
+        {
+            KeyEvent key = new KeyEvent();
+            key.WindowsKeyCode = 20;
+            // SendKeys.Send(" ");
+            Browser.GetBrowser().GetHost().SendKeyEvent(key);
+        }
 
         private void InitializeBrowser()
         {
@@ -68,7 +80,7 @@ namespace The_UGamer_Launcher
         {
             linkButton = new ToolStripButton[linkCount];
 
-            for (int index = 0; index < linkButton.Length; index++)
+            for (int index = 0; index < linkCount; index++)
             {
                 linkButton[index] = new ToolStripButton();
                 linkButton[index].DisplayStyle = ToolStripItemDisplayStyle.Text;
@@ -85,12 +97,10 @@ namespace The_UGamer_Launcher
 
         private void linkButton_Click(object sender, EventArgs e)
         {
-            /*
             string linkTitle = sender.ToString();
-            for (int index = 0; index < links.Length; index++)
+            for (int index = 0; index < linkCount; index++)
                 if (links[0, index] == linkTitle)
                     Browser.Load(links[1, index]);
-            */
         }
 
         private void Search()

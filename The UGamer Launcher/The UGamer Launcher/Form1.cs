@@ -1403,10 +1403,12 @@ namespace The_UGamer_Launcher
 
         private void openBrowserToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string[,] links = new string[2,1];
+            string[,] links = new string[2,2];
             links[0, 0] = "Google";
             links[1, 0] = "google.com";
-            BrowserWindow detailedBrowser = new BrowserWindow(links, 1);
+            links[0, 1] = "YouTube Music";
+            links[1, 1] = "music.youtube.com";
+            BrowserWindow detailedBrowser = new BrowserWindow(links, 2);
             detailedBrowser.Show();
         }
 
