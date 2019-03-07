@@ -13,8 +13,11 @@ namespace The_UGamer_Launcher
 {
     public partial class Notepad : Form
     {
-        public Notepad()
+        private string titleFriendly;
+
+        public Notepad(string titleFriendly)
         {
+            this.titleFriendly = titleFriendly;
             InitializeComponent();
             InitializeDesign();
         }
@@ -26,6 +29,7 @@ namespace The_UGamer_Launcher
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
+            /*
             if (FileDialog.ShowDialog() == DialogResult.OK)
             {
                 TextWriter tw = new StreamWriter(FileDialog.SelectedPath + "\\test.txt");
@@ -33,6 +37,43 @@ namespace The_UGamer_Launcher
                 tw.Close();
                 // File.WriteAllText(filename, logfiletextbox.Text);
                 MessageBox.Show("Saved to " + FileDialog.SelectedPath, "Saved Log File", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            */
+
+            SavePanel.Visible = true;
+        }
+
+        private void ConfirmSaveButton_Click(object sender, EventArgs e)
+        {
+            SavePanel.Visible = false;
+
+            string folderPath = "Notes\\" + titleFriendly + "\\";
+            string fileName = SaveFileNameBox.Text + ".txt";
+
+            try
+            {
+                TextWriter tw = new StreamWriter(folderPath + fileName);
+                tw.WriteLine(NotepadArea.Text);
+                tw.Close();
+                // File.WriteAllText(filename, logfiletextbox.Text);
+                MessageBox.Show("Saved to \"" + folderPath, "\".", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch
+            {
+                Directory.CreateDirectory("Notes\\" + titleFriendly);
+                TextWriter tw = new StreamWriter(folderPath + fileName);
+                tw.WriteLine(NotepadArea.Text);
+                tw.Close();
+                // File.WriteAllText(filename, logfiletextbox.Text);
+                MessageBox.Show("Saved to \"" + folderPath, "\".", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void LoadButton_Click(object sender, EventArgs e)
+        {
+            if (LoadFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                NotepadArea.Text = File.ReadAllText(LoadFileDialog.FileName, Encoding.UTF8);
             }
         }
     }

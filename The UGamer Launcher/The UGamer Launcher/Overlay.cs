@@ -243,8 +243,9 @@ namespace The_UGamer_Launcher
 
                     //Saving the Image File (I am here Saving it in My E drive).
                     
-                    string folderPath = "Screenshots\\";
+                    string folderPath = "Screenshots\\" + titleFriendly + "\\";
                     string fileName = "";
+                    string dateAndTime = "";
                     int number = 1;
                     bool dupe = true;
 
@@ -267,7 +268,13 @@ namespace The_UGamer_Launcher
                     }
                     catch
                     {
-                        MessageBox.Show("Screenshots folder not found.");
+                        Directory.CreateDirectory("Screenshots\\" + titleFriendly);
+                        captureBitmap.Save(folderPath + fileName + ".jpg", ImageFormat.Jpeg);
+                        ScreenshotLabel.Visible = true;
+                        screenshotTimer = new System.Windows.Forms.Timer();
+                        screenshotTimer.Interval = 5000;
+                        screenshotTimer.Tick += new EventHandler(this.screenshotTimer_tick);
+                        screenshotTimer.Start();
                     }
                     
 
@@ -313,7 +320,7 @@ namespace The_UGamer_Launcher
 
         private void NotepadButton_Click(object sender, EventArgs e)
         {
-            notes = new Notepad();
+            notes = new Notepad(titleFriendly);
             notes.Show();
             notesOpen = true;
             notes.FormClosing += new FormClosingEventHandler(this.notes_FormClosing);

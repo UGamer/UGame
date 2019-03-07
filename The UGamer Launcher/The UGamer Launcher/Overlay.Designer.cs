@@ -35,6 +35,7 @@
             this.NotepadButton = new System.Windows.Forms.Button();
             this.ScreenshotLabel = new System.Windows.Forms.Label();
             this.PauseButton = new System.Windows.Forms.Button();
+            this.ScreenshotsButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // NameLabel
@@ -91,7 +92,7 @@
             // 
             this.ScreenshotLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ScreenshotLabel.AutoSize = true;
-            this.ScreenshotLabel.Location = new System.Drawing.Point(678, 9);
+            this.ScreenshotLabel.Location = new System.Drawing.Point(582, 9);
             this.ScreenshotLabel.Name = "ScreenshotLabel";
             this.ScreenshotLabel.Size = new System.Drawing.Size(110, 13);
             this.ScreenshotLabel.TabIndex = 5;
@@ -109,12 +110,22 @@
             this.PauseButton.UseVisualStyleBackColor = true;
             this.PauseButton.Click += new System.EventHandler(this.PauseButton_Click);
             // 
+            // ScreenshotsButton
+            // 
+            this.ScreenshotsButton.Location = new System.Drawing.Point(698, 4);
+            this.ScreenshotsButton.Name = "ScreenshotsButton";
+            this.ScreenshotsButton.Size = new System.Drawing.Size(90, 23);
+            this.ScreenshotsButton.TabIndex = 7;
+            this.ScreenshotsButton.Text = "Screenshots";
+            this.ScreenshotsButton.UseVisualStyleBackColor = true;
+            // 
             // Overlay
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(800, 128);
+            this.Controls.Add(this.ScreenshotsButton);
             this.Controls.Add(this.PauseButton);
             this.Controls.Add(this.ScreenshotLabel);
             this.Controls.Add(this.NotepadButton);
@@ -142,5 +153,6 @@
         private System.Windows.Forms.Button NotepadButton;
         private System.Windows.Forms.Label ScreenshotLabel;
         public System.Windows.Forms.Button PauseButton;
+        private System.Windows.Forms.Button ScreenshotsButton;
     }
 }
