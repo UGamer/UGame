@@ -118,6 +118,7 @@
             this.ScreenshotsButton.TabIndex = 7;
             this.ScreenshotsButton.Text = "Screenshots";
             this.ScreenshotsButton.UseVisualStyleBackColor = true;
+            this.ScreenshotsButton.Click += new System.EventHandler(this.ScreenshotsButton_Click);
             // 
             // Overlay
             // 

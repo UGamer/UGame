@@ -44,14 +44,8 @@ namespace The_UGamer_Launcher
         globalKeyboardHook screenshotHook = new globalKeyboardHook();
         bool shiftDown = false;
 
-        Regex rgxFix1 = new Regex("/");
-        Regex rgxFix2 = new Regex(":");
-        Regex rgxFix3 = new Regex(".*");
-        Regex rgxFix4 = new Regex(".?");
-        Regex rgxFix5 = new Regex("\"");
-        Regex rgxFix6 = new Regex("<");
-        Regex rgxFix7 = new Regex(">");
-        Regex rgxFix8 = new Regex("|");
+        ScreenshotViewer screenshotView;
+        bool screenshotsOpen = false;
 
         public Overlay(string name, string[,] links, int linkCount, GameDetails details)
         {
@@ -190,6 +184,8 @@ namespace The_UGamer_Launcher
                         openBrowser.Hide();
                     if (notesOpen == true)
                         notes.Hide();
+                    if (screenshotsOpen == true)
+                        screenshotView.Hide();
                     this.Hide();
                     flag = false;
                 }
@@ -199,6 +195,8 @@ namespace The_UGamer_Launcher
                         openBrowser.Show();
                     if (notesOpen == true)
                         notes.Show();
+                    if (screenshotsOpen == true)
+                        screenshotView.Show();
                     this.Show();
                     flag = true;
                 }
@@ -350,6 +348,19 @@ namespace The_UGamer_Launcher
         private void Overlay_FormClosing(object sender, FormClosingEventArgs e)
         {
             gkh.unhook();
+        }
+
+        private void ScreenshotsButton_Click(object sender, EventArgs e)
+        {
+            screenshotView = new ScreenshotViewer(titleFriendly);
+            screenshotView.Show();
+            screenshotsOpen = false;
+            screenshotView.FormClosing += new FormClosingEventHandler(this.screenshotView_FormClosing);
+        }
+
+        private void screenshotView_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            screenshotsOpen = false;
         }
     }
 }

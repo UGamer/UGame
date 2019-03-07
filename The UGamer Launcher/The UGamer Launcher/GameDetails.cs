@@ -870,6 +870,7 @@ namespace The_UGamer_Launcher
             BrowserLinksDGV.Visible = false;
 
             browserDock.Size = browserSize;
+
         }
 
         private void TrackTimeButton_Click(object sender, EventArgs e)
