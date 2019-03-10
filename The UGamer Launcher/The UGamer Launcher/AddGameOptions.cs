@@ -275,118 +275,127 @@ namespace The_UGamer_Launcher
                 this.Close();
         }
 
-        private void FindFile()
+        private void FindFile(string fileType)
         {
-            DialogResult result = EXEFileDialog.ShowDialog();
-            if (result == DialogResult.OK) // Test result.
-                file = EXEFileDialog.FileName;
+            if (fileType == "EXE")
+            {
+                DialogResult result = EXEFileDialog.ShowDialog();
+                if (result == DialogResult.OK) // Test result.
+                    file = EXEFileDialog.FileName;
+            }
+            if (fileType == "ROM")
+            {
+                DialogResult result = ROMFileDialog.ShowDialog();
+                if (result == DialogResult.OK) // Test result.
+                    file = ROMFileDialog.FileName;
+            }
         }
 
         private void EXEButton_Click(object sender, EventArgs e)
         {
-            FindFile();
+            FindFile("EXE");
             EXEFilePathBox.Text = file;
         }
 
         private void BattleNetBrowseButton_Click(object sender, EventArgs e)
         {
-            FindFile();
+            FindFile("EXE");
             BattleNETFilePathBox.Text = file;
         }
 
         private void HiganEmulatorBrowse_Click(object sender, EventArgs e)
         {
-            FindFile();
+            FindFile("EXE");
             HiganEmulatorBox.Text = file;
         }
 
         private void HiganROMBrowse_Click(object sender, EventArgs e)
         {
-            FindFile();
+            FindFile("ROM");
             HiganROMBox.Text = file;
         }
 
         private void N64EmulatorBrowsse_Click(object sender, EventArgs e)
         {
-            FindFile();
+            FindFile("EXE");
             N64EmulatorBox.Text = file;
         }
 
         private void N64ROMBrowse_Click(object sender, EventArgs e)
         {
-            FindFile();
+            FindFile("ROM");
             N64ROMBox.Text = file;
         }
 
         private void PS1EmulatorButton_Click(object sender, EventArgs e)
         {
-            FindFile();
+            FindFile("EXE");
             PS1EmulatorBox.Text = file;
         }
 
         private void PS1ROMButton_Click(object sender, EventArgs e)
         {
-            FindFile();
+            FindFile("ROM");
             PS1ROMBox.Text = file;
         }
 
         private void DSEmulatorButton_Click(object sender, EventArgs e)
         {
-            FindFile();
+            FindFile("EXE");
             DSEmulatorBox.Text = file;
         }
 
         private void DSROMButton_Click(object sender, EventArgs e)
         {
-            FindFile();
+            FindFile("ROM");
             DSROMBox.Text = file;
         }
 
         private void DolphinEmulatorButton_Click(object sender, EventArgs e)
         {
-            FindFile();
+            FindFile("EXE");
             DolphinEmulatorBox.Text = file;
         }
 
         private void DolphinROMButton_Click(object sender, EventArgs e)
         {
-            FindFile();
+            FindFile("ROM");
             DolphinROMBox.Text = file;
         }
 
         private void PS2EmulatorButton_Click(object sender, EventArgs e)
         {
-            FindFile();
+            FindFile("EXE");
             PS2EmulatorBox.Text = file;
         }
 
         private void PS2ROMButton_Click(object sender, EventArgs e)
         {
-            FindFile();
+            FindFile("ROM");
             PS2ROMBox.Text = file;
         }
 
         private void PSPEmulatorButton_Click(object sender, EventArgs e)
         {
-            FindFile();
+            FindFile("EXE");
             PSPEmulatorBox.Text = file;
         }
 
         private void PSPROMButton_Click(object sender, EventArgs e)
         {
-            FindFile();
+            FindFile("ROM");
             PSPROMBox.Text = file;
         }
 
         private void CEMUEmulatorButton_Click(object sender, EventArgs e)
         {
-            FindFile();
+            FindFile("EXE");
             CEMUEmulatorBox.Text = file;
         }
 
         private void CEMUROMButton_Click(object sender, EventArgs e)
         {
-            FindFile();
+            FindFile("ROM");
             CEMUROMBox.Text = file;
         }
     }

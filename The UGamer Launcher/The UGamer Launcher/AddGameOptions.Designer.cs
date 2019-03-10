@@ -107,6 +107,7 @@
             this.CEMUEmulatorBox = new System.Windows.Forms.TextBox();
             this.CEMUEmulatorButton = new System.Windows.Forms.Button();
             this.CompleteButton = new System.Windows.Forms.Button();
+            this.ROMFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.Tabs.SuspendLayout();
             this.SteamTab.SuspendLayout();
             this.EXETab.SuspendLayout();
@@ -126,7 +127,7 @@
             // EXEButton
             // 
             this.EXEButton.Location = new System.Drawing.Point(227, 127);
-            this.EXEButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.EXEButton.Margin = new System.Windows.Forms.Padding(2);
             this.EXEButton.Name = "EXEButton";
             this.EXEButton.Size = new System.Drawing.Size(69, 25);
             this.EXEButton.TabIndex = 1;
@@ -136,14 +137,14 @@
             // 
             // EXEFileDialog
             // 
-            this.EXEFileDialog.Filter = "EXE File|*.exe|BAT File|*.bat|Shortcut File|*.lnk";
+            this.EXEFileDialog.Filter = "Launch File|*.exe;*.bat;*.lnk|EXE File|*.exe|BAT File|*.bat|Shortcut File|*.lnk";
             // 
             // EXEFilePathBox
             // 
             this.EXEFilePathBox.Enabled = false;
             this.EXEFilePathBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EXEFilePathBox.Location = new System.Drawing.Point(5, 88);
-            this.EXEFilePathBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.EXEFilePathBox.Margin = new System.Windows.Forms.Padding(2);
             this.EXEFilePathBox.Name = "EXEFilePathBox";
             this.EXEFilePathBox.Size = new System.Drawing.Size(519, 29);
             this.EXEFilePathBox.TabIndex = 6;
@@ -156,7 +157,7 @@
             this.Tabs.Controls.Add(this.EmulationTab);
             this.Tabs.Dock = System.Windows.Forms.DockStyle.Top;
             this.Tabs.Location = new System.Drawing.Point(0, 0);
-            this.Tabs.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Tabs.Margin = new System.Windows.Forms.Padding(2);
             this.Tabs.Name = "Tabs";
             this.Tabs.SelectedIndex = 0;
             this.Tabs.Size = new System.Drawing.Size(533, 249);
@@ -167,9 +168,9 @@
             this.SteamTab.Controls.Add(this.SteamCodeLabel);
             this.SteamTab.Controls.Add(this.SteamCodeBox);
             this.SteamTab.Location = new System.Drawing.Point(4, 22);
-            this.SteamTab.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.SteamTab.Margin = new System.Windows.Forms.Padding(2);
             this.SteamTab.Name = "SteamTab";
-            this.SteamTab.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.SteamTab.Padding = new System.Windows.Forms.Padding(2);
             this.SteamTab.Size = new System.Drawing.Size(525, 223);
             this.SteamTab.TabIndex = 0;
             this.SteamTab.Text = "Steam";
@@ -190,7 +191,7 @@
             // 
             this.SteamCodeBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SteamCodeBox.Location = new System.Drawing.Point(287, 99);
-            this.SteamCodeBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.SteamCodeBox.Margin = new System.Windows.Forms.Padding(2);
             this.SteamCodeBox.Name = "SteamCodeBox";
             this.SteamCodeBox.Size = new System.Drawing.Size(155, 32);
             this.SteamCodeBox.TabIndex = 7;
@@ -201,9 +202,9 @@
             this.EXETab.Controls.Add(this.EXEFilePathBox);
             this.EXETab.Controls.Add(this.EXEButton);
             this.EXETab.Location = new System.Drawing.Point(4, 22);
-            this.EXETab.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.EXETab.Margin = new System.Windows.Forms.Padding(2);
             this.EXETab.Name = "EXETab";
-            this.EXETab.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.EXETab.Padding = new System.Windows.Forms.Padding(2);
             this.EXETab.Size = new System.Drawing.Size(525, 223);
             this.EXETab.TabIndex = 1;
             this.EXETab.Text = "Origin/uPlay/EXE/BAT";
@@ -226,9 +227,9 @@
             this.BattleNETTab.Controls.Add(this.BattleNETFilePathBox);
             this.BattleNETTab.Controls.Add(this.BattleNetBrowseButton);
             this.BattleNETTab.Location = new System.Drawing.Point(4, 22);
-            this.BattleNETTab.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BattleNETTab.Margin = new System.Windows.Forms.Padding(2);
             this.BattleNETTab.Name = "BattleNETTab";
-            this.BattleNETTab.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BattleNETTab.Padding = new System.Windows.Forms.Padding(2);
             this.BattleNETTab.Size = new System.Drawing.Size(525, 223);
             this.BattleNETTab.TabIndex = 2;
             this.BattleNETTab.Text = "Battle.NET";
@@ -259,7 +260,7 @@
             "Starcraft 2",
             "World of Warcraft"});
             this.BattleNetGameComboBox.Location = new System.Drawing.Point(137, 118);
-            this.BattleNetGameComboBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BattleNetGameComboBox.Margin = new System.Windows.Forms.Padding(2);
             this.BattleNetGameComboBox.Name = "BattleNetGameComboBox";
             this.BattleNetGameComboBox.Size = new System.Drawing.Size(263, 21);
             this.BattleNetGameComboBox.TabIndex = 9;
@@ -269,7 +270,7 @@
             this.BattleNETFilePathBox.Enabled = false;
             this.BattleNETFilePathBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BattleNETFilePathBox.Location = new System.Drawing.Point(7, 36);
-            this.BattleNETFilePathBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BattleNETFilePathBox.Margin = new System.Windows.Forms.Padding(2);
             this.BattleNETFilePathBox.Name = "BattleNETFilePathBox";
             this.BattleNETFilePathBox.Size = new System.Drawing.Size(519, 29);
             this.BattleNETFilePathBox.TabIndex = 8;
@@ -277,7 +278,7 @@
             // BattleNetBrowseButton
             // 
             this.BattleNetBrowseButton.Location = new System.Drawing.Point(229, 75);
-            this.BattleNetBrowseButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BattleNetBrowseButton.Margin = new System.Windows.Forms.Padding(2);
             this.BattleNetBrowseButton.Name = "BattleNetBrowseButton";
             this.BattleNetBrowseButton.Size = new System.Drawing.Size(69, 25);
             this.BattleNetBrowseButton.TabIndex = 7;
@@ -289,9 +290,9 @@
             // 
             this.EmulationTab.Controls.Add(this.EmulatorTabs);
             this.EmulationTab.Location = new System.Drawing.Point(4, 22);
-            this.EmulationTab.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.EmulationTab.Margin = new System.Windows.Forms.Padding(2);
             this.EmulationTab.Name = "EmulationTab";
-            this.EmulationTab.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.EmulationTab.Padding = new System.Windows.Forms.Padding(2);
             this.EmulationTab.Size = new System.Drawing.Size(525, 223);
             this.EmulationTab.TabIndex = 3;
             this.EmulationTab.Text = "Emulation";
@@ -309,7 +310,7 @@
             this.EmulatorTabs.Controls.Add(this.WiiUTab);
             this.EmulatorTabs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.EmulatorTabs.Location = new System.Drawing.Point(2, 2);
-            this.EmulatorTabs.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.EmulatorTabs.Margin = new System.Windows.Forms.Padding(2);
             this.EmulatorTabs.Name = "EmulatorTabs";
             this.EmulatorTabs.SelectedIndex = 0;
             this.EmulatorTabs.Size = new System.Drawing.Size(521, 219);
@@ -325,9 +326,9 @@
             this.HiganTab.Controls.Add(this.HiganEmulatorBox);
             this.HiganTab.Controls.Add(this.HiganEmulatorBrowse);
             this.HiganTab.Location = new System.Drawing.Point(4, 22);
-            this.HiganTab.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.HiganTab.Margin = new System.Windows.Forms.Padding(2);
             this.HiganTab.Name = "HiganTab";
-            this.HiganTab.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.HiganTab.Padding = new System.Windows.Forms.Padding(2);
             this.HiganTab.Size = new System.Drawing.Size(513, 193);
             this.HiganTab.TabIndex = 0;
             this.HiganTab.Text = "Higan";
@@ -357,7 +358,7 @@
             // 
             this.HiganFullscreen.AutoSize = true;
             this.HiganFullscreen.Location = new System.Drawing.Point(219, 164);
-            this.HiganFullscreen.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.HiganFullscreen.Margin = new System.Windows.Forms.Padding(2);
             this.HiganFullscreen.Name = "HiganFullscreen";
             this.HiganFullscreen.Size = new System.Drawing.Size(74, 17);
             this.HiganFullscreen.TabIndex = 13;
@@ -369,7 +370,7 @@
             this.HiganROMBox.Enabled = false;
             this.HiganROMBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.HiganROMBox.Location = new System.Drawing.Point(8, 92);
-            this.HiganROMBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.HiganROMBox.Margin = new System.Windows.Forms.Padding(2);
             this.HiganROMBox.Name = "HiganROMBox";
             this.HiganROMBox.Size = new System.Drawing.Size(504, 29);
             this.HiganROMBox.TabIndex = 12;
@@ -377,7 +378,7 @@
             // HiganROMBrowse
             // 
             this.HiganROMBrowse.Location = new System.Drawing.Point(223, 121);
-            this.HiganROMBrowse.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.HiganROMBrowse.Margin = new System.Windows.Forms.Padding(2);
             this.HiganROMBrowse.Name = "HiganROMBrowse";
             this.HiganROMBrowse.Size = new System.Drawing.Size(69, 25);
             this.HiganROMBrowse.TabIndex = 11;
@@ -390,7 +391,7 @@
             this.HiganEmulatorBox.Enabled = false;
             this.HiganEmulatorBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.HiganEmulatorBox.Location = new System.Drawing.Point(8, 22);
-            this.HiganEmulatorBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.HiganEmulatorBox.Margin = new System.Windows.Forms.Padding(2);
             this.HiganEmulatorBox.Name = "HiganEmulatorBox";
             this.HiganEmulatorBox.Size = new System.Drawing.Size(504, 29);
             this.HiganEmulatorBox.TabIndex = 10;
@@ -398,7 +399,7 @@
             // HiganEmulatorBrowse
             // 
             this.HiganEmulatorBrowse.Location = new System.Drawing.Point(223, 51);
-            this.HiganEmulatorBrowse.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.HiganEmulatorBrowse.Margin = new System.Windows.Forms.Padding(2);
             this.HiganEmulatorBrowse.Name = "HiganEmulatorBrowse";
             this.HiganEmulatorBrowse.Size = new System.Drawing.Size(69, 25);
             this.HiganEmulatorBrowse.TabIndex = 9;
@@ -415,10 +416,10 @@
             this.N64Tab.Controls.Add(this.N64EmulatorBox);
             this.N64Tab.Controls.Add(this.N64EmulatorBrowsse);
             this.N64Tab.Location = new System.Drawing.Point(4, 22);
-            this.N64Tab.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.N64Tab.Margin = new System.Windows.Forms.Padding(2);
             this.N64Tab.Name = "N64Tab";
-            this.N64Tab.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.N64Tab.Size = new System.Drawing.Size(516, 198);
+            this.N64Tab.Padding = new System.Windows.Forms.Padding(2);
+            this.N64Tab.Size = new System.Drawing.Size(513, 193);
             this.N64Tab.TabIndex = 1;
             this.N64Tab.Text = "Project64";
             this.N64Tab.UseVisualStyleBackColor = true;
@@ -448,7 +449,7 @@
             this.N64ROMBox.Enabled = false;
             this.N64ROMBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.N64ROMBox.Location = new System.Drawing.Point(9, 116);
-            this.N64ROMBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.N64ROMBox.Margin = new System.Windows.Forms.Padding(2);
             this.N64ROMBox.Name = "N64ROMBox";
             this.N64ROMBox.Size = new System.Drawing.Size(504, 29);
             this.N64ROMBox.TabIndex = 19;
@@ -456,7 +457,7 @@
             // N64ROMBrowse
             // 
             this.N64ROMBrowse.Location = new System.Drawing.Point(224, 145);
-            this.N64ROMBrowse.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.N64ROMBrowse.Margin = new System.Windows.Forms.Padding(2);
             this.N64ROMBrowse.Name = "N64ROMBrowse";
             this.N64ROMBrowse.Size = new System.Drawing.Size(69, 25);
             this.N64ROMBrowse.TabIndex = 18;
@@ -469,7 +470,7 @@
             this.N64EmulatorBox.Enabled = false;
             this.N64EmulatorBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.N64EmulatorBox.Location = new System.Drawing.Point(9, 46);
-            this.N64EmulatorBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.N64EmulatorBox.Margin = new System.Windows.Forms.Padding(2);
             this.N64EmulatorBox.Name = "N64EmulatorBox";
             this.N64EmulatorBox.Size = new System.Drawing.Size(504, 29);
             this.N64EmulatorBox.TabIndex = 17;
@@ -477,7 +478,7 @@
             // N64EmulatorBrowsse
             // 
             this.N64EmulatorBrowsse.Location = new System.Drawing.Point(224, 75);
-            this.N64EmulatorBrowsse.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.N64EmulatorBrowsse.Margin = new System.Windows.Forms.Padding(2);
             this.N64EmulatorBrowsse.Name = "N64EmulatorBrowsse";
             this.N64EmulatorBrowsse.Size = new System.Drawing.Size(69, 25);
             this.N64EmulatorBrowsse.TabIndex = 16;
@@ -494,10 +495,10 @@
             this.PS1Tab.Controls.Add(this.PS1EmulatorBox);
             this.PS1Tab.Controls.Add(this.PS1EmulatorButton);
             this.PS1Tab.Location = new System.Drawing.Point(4, 22);
-            this.PS1Tab.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PS1Tab.Margin = new System.Windows.Forms.Padding(2);
             this.PS1Tab.Name = "PS1Tab";
-            this.PS1Tab.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.PS1Tab.Size = new System.Drawing.Size(516, 198);
+            this.PS1Tab.Padding = new System.Windows.Forms.Padding(2);
+            this.PS1Tab.Size = new System.Drawing.Size(513, 193);
             this.PS1Tab.TabIndex = 2;
             this.PS1Tab.Text = "ePSXe";
             this.PS1Tab.UseVisualStyleBackColor = true;
@@ -527,7 +528,7 @@
             this.PS1ROMBox.Enabled = false;
             this.PS1ROMBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PS1ROMBox.Location = new System.Drawing.Point(9, 116);
-            this.PS1ROMBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PS1ROMBox.Margin = new System.Windows.Forms.Padding(2);
             this.PS1ROMBox.Name = "PS1ROMBox";
             this.PS1ROMBox.Size = new System.Drawing.Size(504, 29);
             this.PS1ROMBox.TabIndex = 25;
@@ -535,7 +536,7 @@
             // PS1ROMButton
             // 
             this.PS1ROMButton.Location = new System.Drawing.Point(224, 145);
-            this.PS1ROMButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PS1ROMButton.Margin = new System.Windows.Forms.Padding(2);
             this.PS1ROMButton.Name = "PS1ROMButton";
             this.PS1ROMButton.Size = new System.Drawing.Size(69, 25);
             this.PS1ROMButton.TabIndex = 24;
@@ -548,7 +549,7 @@
             this.PS1EmulatorBox.Enabled = false;
             this.PS1EmulatorBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PS1EmulatorBox.Location = new System.Drawing.Point(9, 46);
-            this.PS1EmulatorBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PS1EmulatorBox.Margin = new System.Windows.Forms.Padding(2);
             this.PS1EmulatorBox.Name = "PS1EmulatorBox";
             this.PS1EmulatorBox.Size = new System.Drawing.Size(504, 29);
             this.PS1EmulatorBox.TabIndex = 23;
@@ -556,7 +557,7 @@
             // PS1EmulatorButton
             // 
             this.PS1EmulatorButton.Location = new System.Drawing.Point(224, 75);
-            this.PS1EmulatorButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PS1EmulatorButton.Margin = new System.Windows.Forms.Padding(2);
             this.PS1EmulatorButton.Name = "PS1EmulatorButton";
             this.PS1EmulatorButton.Size = new System.Drawing.Size(69, 25);
             this.PS1EmulatorButton.TabIndex = 22;
@@ -573,10 +574,10 @@
             this.DSTab.Controls.Add(this.DSEmulatorBox);
             this.DSTab.Controls.Add(this.DSEmulatorButton);
             this.DSTab.Location = new System.Drawing.Point(4, 22);
-            this.DSTab.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.DSTab.Margin = new System.Windows.Forms.Padding(2);
             this.DSTab.Name = "DSTab";
-            this.DSTab.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.DSTab.Size = new System.Drawing.Size(516, 198);
+            this.DSTab.Padding = new System.Windows.Forms.Padding(2);
+            this.DSTab.Size = new System.Drawing.Size(513, 193);
             this.DSTab.TabIndex = 3;
             this.DSTab.Text = "DeSmuME";
             this.DSTab.UseVisualStyleBackColor = true;
@@ -606,7 +607,7 @@
             this.DSROMBox.Enabled = false;
             this.DSROMBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DSROMBox.Location = new System.Drawing.Point(9, 116);
-            this.DSROMBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.DSROMBox.Margin = new System.Windows.Forms.Padding(2);
             this.DSROMBox.Name = "DSROMBox";
             this.DSROMBox.Size = new System.Drawing.Size(504, 29);
             this.DSROMBox.TabIndex = 31;
@@ -614,7 +615,7 @@
             // DSROMButton
             // 
             this.DSROMButton.Location = new System.Drawing.Point(224, 145);
-            this.DSROMButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.DSROMButton.Margin = new System.Windows.Forms.Padding(2);
             this.DSROMButton.Name = "DSROMButton";
             this.DSROMButton.Size = new System.Drawing.Size(69, 25);
             this.DSROMButton.TabIndex = 30;
@@ -627,7 +628,7 @@
             this.DSEmulatorBox.Enabled = false;
             this.DSEmulatorBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DSEmulatorBox.Location = new System.Drawing.Point(9, 46);
-            this.DSEmulatorBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.DSEmulatorBox.Margin = new System.Windows.Forms.Padding(2);
             this.DSEmulatorBox.Name = "DSEmulatorBox";
             this.DSEmulatorBox.Size = new System.Drawing.Size(504, 29);
             this.DSEmulatorBox.TabIndex = 29;
@@ -635,7 +636,7 @@
             // DSEmulatorButton
             // 
             this.DSEmulatorButton.Location = new System.Drawing.Point(224, 75);
-            this.DSEmulatorButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.DSEmulatorButton.Margin = new System.Windows.Forms.Padding(2);
             this.DSEmulatorButton.Name = "DSEmulatorButton";
             this.DSEmulatorButton.Size = new System.Drawing.Size(69, 25);
             this.DSEmulatorButton.TabIndex = 28;
@@ -652,10 +653,10 @@
             this.DolphinTab.Controls.Add(this.DolphinEmulatorBox);
             this.DolphinTab.Controls.Add(this.DolphinEmulatorButton);
             this.DolphinTab.Location = new System.Drawing.Point(4, 22);
-            this.DolphinTab.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.DolphinTab.Margin = new System.Windows.Forms.Padding(2);
             this.DolphinTab.Name = "DolphinTab";
-            this.DolphinTab.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.DolphinTab.Size = new System.Drawing.Size(516, 198);
+            this.DolphinTab.Padding = new System.Windows.Forms.Padding(2);
+            this.DolphinTab.Size = new System.Drawing.Size(513, 193);
             this.DolphinTab.TabIndex = 4;
             this.DolphinTab.Text = "Dolphin";
             this.DolphinTab.UseVisualStyleBackColor = true;
@@ -685,7 +686,7 @@
             this.DolphinROMBox.Enabled = false;
             this.DolphinROMBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DolphinROMBox.Location = new System.Drawing.Point(9, 116);
-            this.DolphinROMBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.DolphinROMBox.Margin = new System.Windows.Forms.Padding(2);
             this.DolphinROMBox.Name = "DolphinROMBox";
             this.DolphinROMBox.Size = new System.Drawing.Size(504, 29);
             this.DolphinROMBox.TabIndex = 37;
@@ -693,7 +694,7 @@
             // DolphinROMButton
             // 
             this.DolphinROMButton.Location = new System.Drawing.Point(224, 145);
-            this.DolphinROMButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.DolphinROMButton.Margin = new System.Windows.Forms.Padding(2);
             this.DolphinROMButton.Name = "DolphinROMButton";
             this.DolphinROMButton.Size = new System.Drawing.Size(69, 25);
             this.DolphinROMButton.TabIndex = 36;
@@ -706,7 +707,7 @@
             this.DolphinEmulatorBox.Enabled = false;
             this.DolphinEmulatorBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DolphinEmulatorBox.Location = new System.Drawing.Point(9, 46);
-            this.DolphinEmulatorBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.DolphinEmulatorBox.Margin = new System.Windows.Forms.Padding(2);
             this.DolphinEmulatorBox.Name = "DolphinEmulatorBox";
             this.DolphinEmulatorBox.Size = new System.Drawing.Size(504, 29);
             this.DolphinEmulatorBox.TabIndex = 35;
@@ -714,7 +715,7 @@
             // DolphinEmulatorButton
             // 
             this.DolphinEmulatorButton.Location = new System.Drawing.Point(224, 75);
-            this.DolphinEmulatorButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.DolphinEmulatorButton.Margin = new System.Windows.Forms.Padding(2);
             this.DolphinEmulatorButton.Name = "DolphinEmulatorButton";
             this.DolphinEmulatorButton.Size = new System.Drawing.Size(69, 25);
             this.DolphinEmulatorButton.TabIndex = 34;
@@ -734,10 +735,10 @@
             this.PS2Tab.Controls.Add(this.PS2EmulatorBox);
             this.PS2Tab.Controls.Add(this.PS2EmulatorButton);
             this.PS2Tab.Location = new System.Drawing.Point(4, 22);
-            this.PS2Tab.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PS2Tab.Margin = new System.Windows.Forms.Padding(2);
             this.PS2Tab.Name = "PS2Tab";
-            this.PS2Tab.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.PS2Tab.Size = new System.Drawing.Size(516, 198);
+            this.PS2Tab.Padding = new System.Windows.Forms.Padding(2);
+            this.PS2Tab.Size = new System.Drawing.Size(513, 193);
             this.PS2Tab.TabIndex = 5;
             this.PS2Tab.Text = "PCSX2";
             this.PS2Tab.UseVisualStyleBackColor = true;
@@ -746,7 +747,7 @@
             // 
             this.PS2FullBootCheck.AutoSize = true;
             this.PS2FullBootCheck.Location = new System.Drawing.Point(145, 172);
-            this.PS2FullBootCheck.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PS2FullBootCheck.Margin = new System.Windows.Forms.Padding(2);
             this.PS2FullBootCheck.Name = "PS2FullBootCheck";
             this.PS2FullBootCheck.Size = new System.Drawing.Size(67, 17);
             this.PS2FullBootCheck.TabIndex = 24;
@@ -757,7 +758,7 @@
             // 
             this.PS2ShowEmulatorCheck.AutoSize = true;
             this.PS2ShowEmulatorCheck.Location = new System.Drawing.Point(290, 172);
-            this.PS2ShowEmulatorCheck.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PS2ShowEmulatorCheck.Margin = new System.Windows.Forms.Padding(2);
             this.PS2ShowEmulatorCheck.Name = "PS2ShowEmulatorCheck";
             this.PS2ShowEmulatorCheck.Size = new System.Drawing.Size(97, 17);
             this.PS2ShowEmulatorCheck.TabIndex = 23;
@@ -788,7 +789,7 @@
             // 
             this.PS2FullScreenCheck.AutoSize = true;
             this.PS2FullScreenCheck.Location = new System.Drawing.Point(214, 172);
-            this.PS2FullScreenCheck.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PS2FullScreenCheck.Margin = new System.Windows.Forms.Padding(2);
             this.PS2FullScreenCheck.Name = "PS2FullScreenCheck";
             this.PS2FullScreenCheck.Size = new System.Drawing.Size(74, 17);
             this.PS2FullScreenCheck.TabIndex = 20;
@@ -800,7 +801,7 @@
             this.PS2ROMBox.Enabled = false;
             this.PS2ROMBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PS2ROMBox.Location = new System.Drawing.Point(9, 99);
-            this.PS2ROMBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PS2ROMBox.Margin = new System.Windows.Forms.Padding(2);
             this.PS2ROMBox.Name = "PS2ROMBox";
             this.PS2ROMBox.Size = new System.Drawing.Size(504, 29);
             this.PS2ROMBox.TabIndex = 19;
@@ -808,7 +809,7 @@
             // PS2ROMButton
             // 
             this.PS2ROMButton.Location = new System.Drawing.Point(224, 128);
-            this.PS2ROMButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PS2ROMButton.Margin = new System.Windows.Forms.Padding(2);
             this.PS2ROMButton.Name = "PS2ROMButton";
             this.PS2ROMButton.Size = new System.Drawing.Size(69, 25);
             this.PS2ROMButton.TabIndex = 18;
@@ -821,7 +822,7 @@
             this.PS2EmulatorBox.Enabled = false;
             this.PS2EmulatorBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PS2EmulatorBox.Location = new System.Drawing.Point(9, 29);
-            this.PS2EmulatorBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PS2EmulatorBox.Margin = new System.Windows.Forms.Padding(2);
             this.PS2EmulatorBox.Name = "PS2EmulatorBox";
             this.PS2EmulatorBox.Size = new System.Drawing.Size(504, 29);
             this.PS2EmulatorBox.TabIndex = 17;
@@ -829,7 +830,7 @@
             // PS2EmulatorButton
             // 
             this.PS2EmulatorButton.Location = new System.Drawing.Point(224, 58);
-            this.PS2EmulatorButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PS2EmulatorButton.Margin = new System.Windows.Forms.Padding(2);
             this.PS2EmulatorButton.Name = "PS2EmulatorButton";
             this.PS2EmulatorButton.Size = new System.Drawing.Size(69, 25);
             this.PS2EmulatorButton.TabIndex = 16;
@@ -846,10 +847,10 @@
             this.PSPTab.Controls.Add(this.PSPEmulatorBox);
             this.PSPTab.Controls.Add(this.PSPEmulatorButton);
             this.PSPTab.Location = new System.Drawing.Point(4, 22);
-            this.PSPTab.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PSPTab.Margin = new System.Windows.Forms.Padding(2);
             this.PSPTab.Name = "PSPTab";
-            this.PSPTab.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.PSPTab.Size = new System.Drawing.Size(516, 198);
+            this.PSPTab.Padding = new System.Windows.Forms.Padding(2);
+            this.PSPTab.Size = new System.Drawing.Size(513, 193);
             this.PSPTab.TabIndex = 6;
             this.PSPTab.Text = "PPSSPP";
             this.PSPTab.UseVisualStyleBackColor = true;
@@ -879,7 +880,7 @@
             this.PSPROMBox.Enabled = false;
             this.PSPROMBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PSPROMBox.Location = new System.Drawing.Point(9, 116);
-            this.PSPROMBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PSPROMBox.Margin = new System.Windows.Forms.Padding(2);
             this.PSPROMBox.Name = "PSPROMBox";
             this.PSPROMBox.Size = new System.Drawing.Size(504, 29);
             this.PSPROMBox.TabIndex = 43;
@@ -887,7 +888,7 @@
             // PSPROMButton
             // 
             this.PSPROMButton.Location = new System.Drawing.Point(224, 145);
-            this.PSPROMButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PSPROMButton.Margin = new System.Windows.Forms.Padding(2);
             this.PSPROMButton.Name = "PSPROMButton";
             this.PSPROMButton.Size = new System.Drawing.Size(69, 25);
             this.PSPROMButton.TabIndex = 42;
@@ -900,7 +901,7 @@
             this.PSPEmulatorBox.Enabled = false;
             this.PSPEmulatorBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PSPEmulatorBox.Location = new System.Drawing.Point(9, 46);
-            this.PSPEmulatorBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PSPEmulatorBox.Margin = new System.Windows.Forms.Padding(2);
             this.PSPEmulatorBox.Name = "PSPEmulatorBox";
             this.PSPEmulatorBox.Size = new System.Drawing.Size(504, 29);
             this.PSPEmulatorBox.TabIndex = 41;
@@ -908,7 +909,7 @@
             // PSPEmulatorButton
             // 
             this.PSPEmulatorButton.Location = new System.Drawing.Point(224, 75);
-            this.PSPEmulatorButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PSPEmulatorButton.Margin = new System.Windows.Forms.Padding(2);
             this.PSPEmulatorButton.Name = "PSPEmulatorButton";
             this.PSPEmulatorButton.Size = new System.Drawing.Size(69, 25);
             this.PSPEmulatorButton.TabIndex = 40;
@@ -926,10 +927,10 @@
             this.WiiUTab.Controls.Add(this.CEMUEmulatorBox);
             this.WiiUTab.Controls.Add(this.CEMUEmulatorButton);
             this.WiiUTab.Location = new System.Drawing.Point(4, 22);
-            this.WiiUTab.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.WiiUTab.Margin = new System.Windows.Forms.Padding(2);
             this.WiiUTab.Name = "WiiUTab";
-            this.WiiUTab.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.WiiUTab.Size = new System.Drawing.Size(516, 198);
+            this.WiiUTab.Padding = new System.Windows.Forms.Padding(2);
+            this.WiiUTab.Size = new System.Drawing.Size(513, 193);
             this.WiiUTab.TabIndex = 7;
             this.WiiUTab.Text = "CEMU";
             this.WiiUTab.UseVisualStyleBackColor = true;
@@ -958,7 +959,7 @@
             // 
             this.CEMUFullscreenCheck.AutoSize = true;
             this.CEMUFullscreenCheck.Location = new System.Drawing.Point(221, 172);
-            this.CEMUFullscreenCheck.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.CEMUFullscreenCheck.Margin = new System.Windows.Forms.Padding(2);
             this.CEMUFullscreenCheck.Name = "CEMUFullscreenCheck";
             this.CEMUFullscreenCheck.Size = new System.Drawing.Size(74, 17);
             this.CEMUFullscreenCheck.TabIndex = 20;
@@ -970,7 +971,7 @@
             this.CEMUROMBox.Enabled = false;
             this.CEMUROMBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CEMUROMBox.Location = new System.Drawing.Point(9, 99);
-            this.CEMUROMBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.CEMUROMBox.Margin = new System.Windows.Forms.Padding(2);
             this.CEMUROMBox.Name = "CEMUROMBox";
             this.CEMUROMBox.Size = new System.Drawing.Size(504, 29);
             this.CEMUROMBox.TabIndex = 19;
@@ -978,7 +979,7 @@
             // CEMUROMButton
             // 
             this.CEMUROMButton.Location = new System.Drawing.Point(224, 128);
-            this.CEMUROMButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.CEMUROMButton.Margin = new System.Windows.Forms.Padding(2);
             this.CEMUROMButton.Name = "CEMUROMButton";
             this.CEMUROMButton.Size = new System.Drawing.Size(69, 25);
             this.CEMUROMButton.TabIndex = 18;
@@ -991,7 +992,7 @@
             this.CEMUEmulatorBox.Enabled = false;
             this.CEMUEmulatorBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CEMUEmulatorBox.Location = new System.Drawing.Point(9, 29);
-            this.CEMUEmulatorBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.CEMUEmulatorBox.Margin = new System.Windows.Forms.Padding(2);
             this.CEMUEmulatorBox.Name = "CEMUEmulatorBox";
             this.CEMUEmulatorBox.Size = new System.Drawing.Size(504, 29);
             this.CEMUEmulatorBox.TabIndex = 17;
@@ -999,7 +1000,7 @@
             // CEMUEmulatorButton
             // 
             this.CEMUEmulatorButton.Location = new System.Drawing.Point(224, 58);
-            this.CEMUEmulatorButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.CEMUEmulatorButton.Margin = new System.Windows.Forms.Padding(2);
             this.CEMUEmulatorButton.Name = "CEMUEmulatorButton";
             this.CEMUEmulatorButton.Size = new System.Drawing.Size(69, 25);
             this.CEMUEmulatorButton.TabIndex = 16;
@@ -1012,7 +1013,7 @@
             this.CompleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.CompleteButton.Location = new System.Drawing.Point(230, 253);
-            this.CompleteButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.CompleteButton.Margin = new System.Windows.Forms.Padding(2);
             this.CompleteButton.Name = "CompleteButton";
             this.CompleteButton.Size = new System.Drawing.Size(69, 25);
             this.CompleteButton.TabIndex = 8;
@@ -1028,7 +1029,7 @@
             this.Controls.Add(this.CompleteButton);
             this.Controls.Add(this.Tabs);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "AddGameOptions";
             this.Text = "Add An Entry";
             this.Tabs.ResumeLayout(false);
@@ -1139,5 +1140,6 @@
         private System.Windows.Forms.Button CEMUROMButton;
         private System.Windows.Forms.TextBox CEMUEmulatorBox;
         private System.Windows.Forms.Button CEMUEmulatorButton;
+        private System.Windows.Forms.OpenFileDialog ROMFileDialog;
     }
 }
