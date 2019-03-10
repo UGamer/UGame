@@ -35,9 +35,9 @@
             this.SaveButton = new System.Windows.Forms.ToolStripButton();
             this.FileDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.SavePanel = new System.Windows.Forms.Panel();
-            this.SaveNameLabel = new System.Windows.Forms.Label();
-            this.SaveFileNameBox = new System.Windows.Forms.TextBox();
             this.ConfirmSaveButton = new System.Windows.Forms.Button();
+            this.SaveFileNameBox = new System.Windows.Forms.TextBox();
+            this.SaveNameLabel = new System.Windows.Forms.Label();
             this.LoadFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.toolStrip1.SuspendLayout();
             this.SavePanel.SuspendLayout();
@@ -52,6 +52,7 @@
             this.NotepadArea.Location = new System.Drawing.Point(12, 28);
             this.NotepadArea.Multiline = true;
             this.NotepadArea.Name = "NotepadArea";
+            this.NotepadArea.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.NotepadArea.Size = new System.Drawing.Size(775, 410);
             this.NotepadArea.TabIndex = 1;
             // 
@@ -88,6 +89,9 @@
             // 
             // SavePanel
             // 
+            this.SavePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.SavePanel.Controls.Add(this.ConfirmSaveButton);
             this.SavePanel.Controls.Add(this.SaveFileNameBox);
             this.SavePanel.Controls.Add(this.SaveNameLabel);
@@ -96,22 +100,6 @@
             this.SavePanel.Size = new System.Drawing.Size(315, 85);
             this.SavePanel.TabIndex = 3;
             this.SavePanel.Visible = false;
-            // 
-            // SaveNameLabel
-            // 
-            this.SaveNameLabel.AutoSize = true;
-            this.SaveNameLabel.Location = new System.Drawing.Point(71, 10);
-            this.SaveNameLabel.Name = "SaveNameLabel";
-            this.SaveNameLabel.Size = new System.Drawing.Size(175, 13);
-            this.SaveNameLabel.TabIndex = 0;
-            this.SaveNameLabel.Text = "What would you like to call this file?";
-            // 
-            // SaveFileNameBox
-            // 
-            this.SaveFileNameBox.Location = new System.Drawing.Point(12, 26);
-            this.SaveFileNameBox.Name = "SaveFileNameBox";
-            this.SaveFileNameBox.Size = new System.Drawing.Size(290, 20);
-            this.SaveFileNameBox.TabIndex = 1;
             // 
             // ConfirmSaveButton
             // 
@@ -122,6 +110,22 @@
             this.ConfirmSaveButton.Text = "Confirm";
             this.ConfirmSaveButton.UseVisualStyleBackColor = true;
             this.ConfirmSaveButton.Click += new System.EventHandler(this.ConfirmSaveButton_Click);
+            // 
+            // SaveFileNameBox
+            // 
+            this.SaveFileNameBox.Location = new System.Drawing.Point(12, 26);
+            this.SaveFileNameBox.Name = "SaveFileNameBox";
+            this.SaveFileNameBox.Size = new System.Drawing.Size(290, 20);
+            this.SaveFileNameBox.TabIndex = 1;
+            // 
+            // SaveNameLabel
+            // 
+            this.SaveNameLabel.AutoSize = true;
+            this.SaveNameLabel.Location = new System.Drawing.Point(71, 10);
+            this.SaveNameLabel.Name = "SaveNameLabel";
+            this.SaveNameLabel.Size = new System.Drawing.Size(175, 13);
+            this.SaveNameLabel.TabIndex = 0;
+            this.SaveNameLabel.Text = "What would you like to call this file?";
             // 
             // LoadFileDialog
             // 
@@ -136,6 +140,7 @@
             this.Controls.Add(this.SavePanel);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.NotepadArea);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Notepad";
             this.Text = "Notepad";
             this.TopMost = true;

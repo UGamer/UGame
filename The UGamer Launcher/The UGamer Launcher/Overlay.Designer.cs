@@ -112,6 +112,7 @@
             // 
             // ScreenshotsButton
             // 
+            this.ScreenshotsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ScreenshotsButton.Location = new System.Drawing.Point(698, 4);
             this.ScreenshotsButton.Name = "ScreenshotsButton";
             this.ScreenshotsButton.Size = new System.Drawing.Size(90, 23);

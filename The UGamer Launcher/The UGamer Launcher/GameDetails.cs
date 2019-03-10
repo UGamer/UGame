@@ -529,37 +529,6 @@ namespace The_UGamer_Launcher
             ingame.Close();
         }
 
-        FormWindowState LastWindowState = FormWindowState.Normal;
-        private void GameDetails_Resize(object sender, EventArgs e)
-        {
-            // When window state changes
-            if (WindowState != LastWindowState)
-            {
-                LastWindowState = WindowState;
-
-                if (WindowState == FormWindowState.Maximized)
-                {
-
-                    browserDock.Visible = true;
-                    BrowserLinksDGV.Visible = true;
-                    // Maximized!
-                }
-                if (WindowState == FormWindowState.Normal)
-                {
-
-                    browserDock.Visible = false;
-                    BrowserLinksDGV.Visible = false;
-                    // Restored!
-                }
-                if (WindowState == FormWindowState.Minimized)
-                {
-                    browserDock.Visible = false;
-                    BrowserLinksDGV.Visible = false;
-                    // Restored!
-                }
-            }
-        }
-
         private void setURLs(string news)
         {
             string allLinks = news;
@@ -853,7 +822,6 @@ namespace The_UGamer_Launcher
         private void BackButton_Click(object sender, EventArgs e)
         {
             BrowserButton.Visible = true;
-            BackButton.Visible = false;
 
             TrackTimeButton.Visible = true;
             gamePicture.Visible = true;
@@ -865,11 +833,6 @@ namespace The_UGamer_Launcher
             panel1.Visible = true;
             notesLabel.Visible = true;
             notesBox.Visible = true;
-
-            browserDock.Visible = false;
-            BrowserLinksDGV.Visible = false;
-
-            browserDock.Size = browserSize;
 
         }
 
@@ -884,26 +847,6 @@ namespace The_UGamer_Launcher
             // TODO: This line of code loads data into the 'tempTableDataSet.TempTable' table. You can move, or remove it, as needed.
             this.tempTableTableAdapter.Fill(this.tempTableDataSet.TempTable);
 
-        }
-
-        private void BrowserLinksDGV_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            string titleValue;
-            string urlToPass = "";
-            try
-            {
-                object value = BrowserLinksDGV.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
-                titleValue = value.ToString();
-                
-
-                for (int index = 0; index < linkCount; index++)
-                {
-                    if (links[0, index] == titleValue)
-                        urlToPass = links[1, index];
-                }
-                ChangeURL(urlToPass);
-            }
-            catch (ArgumentOutOfRangeException f) { }
         }
 
         private void ChangeURL(string url)

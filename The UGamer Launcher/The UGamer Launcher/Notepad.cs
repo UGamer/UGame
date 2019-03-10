@@ -75,6 +75,20 @@ namespace The_UGamer_Launcher
             {
                 NotepadArea.Text = File.ReadAllText(LoadFileDialog.FileName, Encoding.UTF8);
             }
+
+            // Figures out where to start
+            int indexOfPath = LoadFileDialog.FileName.IndexOf(titleFriendly + "\\");
+            string fileDialogCopy = LoadFileDialog.FileName;
+            fileDialogCopy = fileDialogCopy.Substring(indexOfPath);
+            int indexOfName = fileDialogCopy.IndexOf("\\");
+            
+
+            // 
+            indexOfName += indexOfPath + 1;
+            string loadedFile = LoadFileDialog.FileName.Substring(indexOfName);
+            loadedFile = loadedFile.Substring(0, loadedFile.Length - 4);
+
+            SaveFileNameBox.Text = loadedFile;
         }
     }
 }

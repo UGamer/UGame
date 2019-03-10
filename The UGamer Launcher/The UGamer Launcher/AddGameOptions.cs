@@ -113,7 +113,7 @@ namespace The_UGamer_Launcher
                             finalReturn += " --fullscreen \"" + HiganROMBox.Text + "\"";
                         }
                         else
-                            finalReturn += " - " + HiganROMBox.Text;
+                            finalReturn += " - \"" + HiganROMBox.Text + "\"";
 
                         exit = true;
                     }
@@ -188,7 +188,7 @@ namespace The_UGamer_Launcher
                     finalReturn = DolphinEmulatorBox.Text;
                     if (DolphinROMBox.Text != "")
                     {
-                        finalReturn += " -e \"" + DolphinROMBox.Text + "\" -nogui";
+                        finalReturn += " --exec=\"" + DolphinROMBox.Text + "\"";
                         exit = true;
                     }
                     else
@@ -206,14 +206,14 @@ namespace The_UGamer_Launcher
                     finalReturn = PS2EmulatorBox.Text;
                     if (PS2ROMBox.Text != "")
                     {
-                        if (PS2ShowEmulatorCheck.Checked == true)
+                        finalReturn += " \"" + PS2ROMBox.Text + "\"";
+
+                        if (PS2ShowEmulatorCheck.Checked == false)
                             finalReturn += " --nogui";
                         
                         if (PS2FullBootCheck.Checked == true)
                             finalReturn += " --fullboot";
                         
-                        finalReturn += " - \"" + PS2ROMBox.Text + "\"";
-
                         if (PS2FullScreenCheck.Checked == true)
                             finalReturn += " --fullscreen";
 

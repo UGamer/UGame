@@ -46,20 +46,15 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.launchLabel = new System.Windows.Forms.Label();
             this.stopTime = new System.Windows.Forms.Button();
-            this.browserDock = new System.Windows.Forms.Panel();
             this.PauseTimeButton = new System.Windows.Forms.Button();
             this.discardButton = new System.Windows.Forms.Button();
             this.BrowserButton = new System.Windows.Forms.Button();
-            this.BackButton = new System.Windows.Forms.Button();
             this.TrackTimeButton = new System.Windows.Forms.Button();
-            this.BrowserLinksDGV = new System.Windows.Forms.DataGridView();
-            this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tempTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tempTableDataSet = new The_UGamer_Launcher.TempTableDataSet();
             this.tempTableTableAdapter = new The_UGamer_Launcher.TempTableDataSetTableAdapters.TempTableTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.gamePicture)).BeginInit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.BrowserLinksDGV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tempTableBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tempTableDataSet)).BeginInit();
             this.SuspendLayout();
@@ -220,6 +215,7 @@
             this.notesBox.Multiline = true;
             this.notesBox.Name = "notesBox";
             this.notesBox.ReadOnly = true;
+            this.notesBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.notesBox.Size = new System.Drawing.Size(334, 62);
             this.notesBox.TabIndex = 14;
             // 
@@ -276,19 +272,6 @@
             this.stopTime.Visible = false;
             this.stopTime.Click += new System.EventHandler(this.stopTime_Click);
             // 
-            // browserDock
-            // 
-            this.browserDock.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.browserDock.AutoScroll = true;
-            this.browserDock.BackColor = System.Drawing.Color.Transparent;
-            this.browserDock.Location = new System.Drawing.Point(8, 410);
-            this.browserDock.Name = "browserDock";
-            this.browserDock.Size = new System.Drawing.Size(659, 0);
-            this.browserDock.TabIndex = 22;
-            this.browserDock.Visible = false;
-            // 
             // PauseTimeButton
             // 
             this.PauseTimeButton.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -340,23 +323,6 @@
             this.BrowserButton.UseVisualStyleBackColor = false;
             this.BrowserButton.Click += new System.EventHandler(this.BrowserButton_Click);
             // 
-            // BackButton
-            // 
-            this.BackButton.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.BackButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.BackButton.FlatAppearance.BorderSize = 2;
-            this.BackButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BackButton.ForeColor = System.Drawing.SystemColors.Control;
-            this.BackButton.Location = new System.Drawing.Point(8, 8);
-            this.BackButton.Margin = new System.Windows.Forms.Padding(2);
-            this.BackButton.Name = "BackButton";
-            this.BackButton.Size = new System.Drawing.Size(28, 28);
-            this.BackButton.TabIndex = 29;
-            this.BackButton.Text = "←";
-            this.BackButton.UseVisualStyleBackColor = false;
-            this.BackButton.Visible = false;
-            this.BackButton.Click += new System.EventHandler(this.BackButton_Click);
-            // 
             // TrackTimeButton
             // 
             this.TrackTimeButton.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -372,34 +338,6 @@
             this.TrackTimeButton.Text = "Track Time";
             this.TrackTimeButton.UseVisualStyleBackColor = false;
             this.TrackTimeButton.Click += new System.EventHandler(this.TrackTimeButton_Click);
-            // 
-            // BrowserLinksDGV
-            // 
-            this.BrowserLinksDGV.AllowUserToAddRows = false;
-            this.BrowserLinksDGV.AllowUserToDeleteRows = false;
-            this.BrowserLinksDGV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BrowserLinksDGV.AutoGenerateColumns = false;
-            this.BrowserLinksDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.BrowserLinksDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.titleDataGridViewTextBoxColumn});
-            this.BrowserLinksDGV.DataSource = this.tempTableBindingSource;
-            this.BrowserLinksDGV.Location = new System.Drawing.Point(686, 282);
-            this.BrowserLinksDGV.Margin = new System.Windows.Forms.Padding(2);
-            this.BrowserLinksDGV.Name = "BrowserLinksDGV";
-            this.BrowserLinksDGV.ReadOnly = true;
-            this.BrowserLinksDGV.RowTemplate.Height = 28;
-            this.BrowserLinksDGV.Size = new System.Drawing.Size(160, 122);
-            this.BrowserLinksDGV.TabIndex = 31;
-            this.BrowserLinksDGV.Visible = false;
-            this.BrowserLinksDGV.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.BrowserLinksDGV_CellDoubleClick);
-            // 
-            // titleDataGridViewTextBoxColumn
-            // 
-            this.titleDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.titleDataGridViewTextBoxColumn.DataPropertyName = "Title";
-            this.titleDataGridViewTextBoxColumn.HeaderText = "Title";
-            this.titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
-            this.titleDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // tempTableBindingSource
             // 
@@ -422,13 +360,11 @@
             this.AutoScroll = true;
             this.AutoSize = true;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(854, 412);
+            this.ClientSize = new System.Drawing.Size(679, 412);
             this.Controls.Add(this.TrackTimeButton);
-            this.Controls.Add(this.BackButton);
             this.Controls.Add(this.BrowserButton);
             this.Controls.Add(this.discardButton);
             this.Controls.Add(this.PauseTimeButton);
-            this.Controls.Add(this.browserDock);
             this.Controls.Add(this.stopTime);
             this.Controls.Add(this.launchLabel);
             this.Controls.Add(this.nameLabel);
@@ -439,18 +375,15 @@
             this.Controls.Add(this.noImageText);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.gamePicture);
-            this.Controls.Add(this.BrowserLinksDGV);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "GameDetails";
             this.Text = "GameDetails";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GameDetails_FormClosing);
             this.Load += new System.EventHandler(this.GameDetails_Load);
-            this.Resize += new System.EventHandler(this.GameDetails_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.gamePicture)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.BrowserLinksDGV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tempTableBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tempTableDataSet)).EndInit();
             this.ResumeLayout(false);
@@ -476,16 +409,12 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label launchLabel;
         private System.Windows.Forms.Button stopTime;
-        private System.Windows.Forms.Panel browserDock;
         private System.Windows.Forms.Button PauseTimeButton;
         private System.Windows.Forms.Button discardButton;
         private System.Windows.Forms.Button BrowserButton;
-        private System.Windows.Forms.Button BackButton;
         private System.Windows.Forms.Button TrackTimeButton;
-        private System.Windows.Forms.DataGridView BrowserLinksDGV;
         private TempTableDataSet tempTableDataSet;
         private System.Windows.Forms.BindingSource tempTableBindingSource;
         private TempTableDataSetTableAdapters.TempTableTableAdapter tempTableTableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn titleDataGridViewTextBoxColumn;
     }
 }

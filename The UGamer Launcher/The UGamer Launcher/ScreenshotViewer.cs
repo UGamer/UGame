@@ -43,6 +43,44 @@ namespace The_UGamer_Launcher
                 files = Directory.GetFiles("Screenshots\\" + titleFriendly);
                 FocusedPictureBox.BackgroundImage = Image.FromFile(files[0]);
 
+                int gameIndex = files[0].IndexOf("Screenshots\\");
+
+                string fileName = files[0];
+                string gameName = files[0];
+
+                gameName = gameName.Substring(gameIndex + 12);
+
+                int gameLength = gameName.IndexOf("\\");
+                gameName = gameName.Substring(0, gameLength);
+
+                fileName = fileName.Substring(gameIndex + gameName.Length + 13);
+                string type = ".jpg";
+                int getRidOfExtension = fileName.IndexOf(".jpg");
+
+                if (getRidOfExtension == -1)
+                {
+                    getRidOfExtension = fileName.IndexOf(".png");
+                    type = ".png";
+                }
+
+                if (getRidOfExtension == -1)
+                    getRidOfExtension = fileName.IndexOf(".jpeg");
+                if (getRidOfExtension == -1)
+                    getRidOfExtension = fileName.IndexOf(".gif");
+
+                string extension = fileName;
+                int length = fileName.Length;
+                int extensionIndex = extension.IndexOf(type);
+                extension = extension.Substring(0, type.Length);
+                length -= extension.Length;
+                fileName = fileName.Substring(0, length);
+
+                string timeTaken = File.GetCreationTime(files[0]).ToString();
+
+                FileNameLabel.Text = fileName;
+                GameNameLabel.Text = gameName;
+                TimeTakenLabel.Text = timeTaken;
+
                 picturePanel = new Panel[files.Length];
                 pictureBox = new PictureBox[files.Length];
                 pictureLabel = new Label[files.Length];
@@ -132,6 +170,44 @@ namespace The_UGamer_Launcher
             FileNameLabel.Text = fileName;
             GameNameLabel.Text = gameName;
             TimeTakenLabel.Text = timeTaken;
+        }
+
+        private void ExpandButton_Click(object sender, EventArgs e)
+        {
+            ImagesPanel.Visible = false;
+            ChooseGameCombo.Visible = false;
+            DetailsPanel.Visible = false;
+
+
+            BackButton.Visible = true;
+
+            Size newFormSize = new Size(816, 535);
+            Size newSize = new Size(775, 436);
+            Point newPoint = new Point(13, 14);
+
+            this.Size = newFormSize;
+            FocusedPictureBox.Location = newPoint;
+            FocusedPictureBox.Size = newSize;
+            // FocusedPictureBox.Anchor = AnchorStyles.Top & AnchorStyles.Left & AnchorStyles.Bottom & AnchorStyles.Right;
+        }
+
+        private void BackButton_Click(object sender, EventArgs e)
+        {
+            ImagesPanel.Visible = true;
+            ChooseGameCombo.Visible = true;
+            DetailsPanel.Visible = true;
+
+            BackButton.Visible = false;
+
+            Size newFormSize = new Size(816, 597);
+            // FocusedPictureBox.Anchor = AnchorStyles.None;
+            Size newSize = new Size(539, 302);
+            Point newPoint = new Point(13, 41);
+
+            this.Size = newFormSize;
+            FocusedPictureBox.Location = newPoint;
+            FocusedPictureBox.Size = newSize;
+            // FocusedPictureBox.Anchor = AnchorStyles.Top & AnchorStyles.Left & AnchorStyles.Bottom & AnchorStyles.Right;
         }
     }
 }

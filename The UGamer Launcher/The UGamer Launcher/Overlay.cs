@@ -27,6 +27,8 @@ namespace The_UGamer_Launcher
         string[,] links;
         int linkCount;
 
+        bool overlayVisible = true;
+
         public System.Windows.Forms.Timer t;
         int playTimeCounter = 0;
         bool isPaused = true;
@@ -120,7 +122,7 @@ namespace The_UGamer_Launcher
             t.Start();
 
             shiftTimer = new System.Windows.Forms.Timer();
-            shiftTimer.Interval = 500;
+            shiftTimer.Interval = 200;
             shiftTimer.Tick += new EventHandler(this.shiftTimer_tick);
         }
 
@@ -186,6 +188,8 @@ namespace The_UGamer_Launcher
                         notes.Hide();
                     if (screenshotsOpen == true)
                         screenshotView.Hide();
+
+                    overlayVisible = false;
                     this.Hide();
                     flag = false;
                 }
@@ -197,6 +201,8 @@ namespace The_UGamer_Launcher
                         notes.Show();
                     if (screenshotsOpen == true)
                         screenshotView.Show();
+
+                    overlayVisible = true;
                     this.Show();
                     flag = true;
                 }
@@ -260,7 +266,7 @@ namespace The_UGamer_Launcher
                         captureBitmap.Save(folderPath + fileName + ".jpg", ImageFormat.Jpeg);
                         ScreenshotLabel.Visible = true;
                         screenshotTimer = new System.Windows.Forms.Timer();
-                        screenshotTimer.Interval = 5000;
+                        screenshotTimer.Interval = 2000;
                         screenshotTimer.Tick += new EventHandler(this.screenshotTimer_tick);
                         screenshotTimer.Start();
                     }
@@ -270,21 +276,15 @@ namespace The_UGamer_Launcher
                         captureBitmap.Save(folderPath + fileName + ".jpg", ImageFormat.Jpeg);
                         ScreenshotLabel.Visible = true;
                         screenshotTimer = new System.Windows.Forms.Timer();
-                        screenshotTimer.Interval = 5000;
+                        screenshotTimer.Interval = 2000;
                         screenshotTimer.Tick += new EventHandler(this.screenshotTimer_tick);
                         screenshotTimer.Start();
                     }
-                    
+
 
                     //Displaying the Successful Result
 
                     try { this.Show(); }
-                    catch (NullReferenceException f) { }
-
-                    try { openBrowser.Show(); }
-                    catch (NullReferenceException f) { }
-
-                    try { notes.Show(); }
                     catch (NullReferenceException f) { }
                 }
 
@@ -301,6 +301,12 @@ namespace The_UGamer_Launcher
         {
             ScreenshotLabel.Visible = false;
             screenshotTimer.Stop();
+
+            if (overlayVisible == false)
+            {
+                try { this.Hide(); }
+                catch (NullReferenceException f) { }
+            }
         }
 
         private void BrowserButton_Click(object sender, EventArgs e)
@@ -335,13 +341,11 @@ namespace The_UGamer_Launcher
             {
                 t.Stop();
                 details.PauseTime();
-                PauseButton.Text = "Pause Playing";
             }
             else
             {
                 t.Start();
                 details.PauseTime();
-                PauseButton.Text = "Resume Playing";
             }
         }
 
@@ -354,7 +358,7 @@ namespace The_UGamer_Launcher
         {
             screenshotView = new ScreenshotViewer(titleFriendly);
             screenshotView.Show();
-            screenshotsOpen = false;
+            screenshotsOpen = true;
             screenshotView.FormClosing += new FormClosingEventHandler(this.screenshotView_FormClosing);
         }
 
