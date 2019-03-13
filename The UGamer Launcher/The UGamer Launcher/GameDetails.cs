@@ -779,6 +779,8 @@ namespace The_UGamer_Launcher
                 isPaused = false;
                 PauseTimeButton.Text = "Pause Playing";
                 discardButton.Visible = false;
+                if (justTrack == true)
+                    TrackTimeButton.Visible = true;
             }
             else
             {

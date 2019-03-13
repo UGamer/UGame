@@ -19,6 +19,7 @@ namespace The_UGamer_Launcher
         Panel[] picturePanel;
         PictureBox[] pictureBox;
         Label[] pictureLabel;
+        int currentImage = 0;
 
         int xPosPanel = 3;
         int yPosPanel = 0;
@@ -132,6 +133,8 @@ namespace The_UGamer_Launcher
             string tagString = tempPic.Tag.ToString();
             int index = Convert.ToInt32(tagString);
             FocusedPictureBox.BackgroundImage = Image.FromFile(files[index]);
+            currentImage = index;
+            FocusedPictureBox.Tag = tagString;
 
             int gameIndex = files[index].IndexOf("Screenshots\\");
 
@@ -170,6 +173,7 @@ namespace The_UGamer_Launcher
             FileNameLabel.Text = fileName;
             GameNameLabel.Text = gameName;
             TimeTakenLabel.Text = timeTaken;
+            
         }
 
         private void ExpandButton_Click(object sender, EventArgs e)
@@ -177,7 +181,6 @@ namespace The_UGamer_Launcher
             ImagesPanel.Visible = false;
             ChooseGameCombo.Visible = false;
             DetailsPanel.Visible = false;
-
 
             BackButton.Visible = true;
 
@@ -188,7 +191,6 @@ namespace The_UGamer_Launcher
             this.Size = newFormSize;
             FocusedPictureBox.Location = newPoint;
             FocusedPictureBox.Size = newSize;
-            // FocusedPictureBox.Anchor = AnchorStyles.Top & AnchorStyles.Left & AnchorStyles.Bottom & AnchorStyles.Right;
         }
 
         private void BackButton_Click(object sender, EventArgs e)
@@ -200,14 +202,139 @@ namespace The_UGamer_Launcher
             BackButton.Visible = false;
 
             Size newFormSize = new Size(816, 597);
-            // FocusedPictureBox.Anchor = AnchorStyles.None;
             Size newSize = new Size(539, 302);
             Point newPoint = new Point(13, 41);
 
             this.Size = newFormSize;
             FocusedPictureBox.Location = newPoint;
             FocusedPictureBox.Size = newSize;
-            // FocusedPictureBox.Anchor = AnchorStyles.Top & AnchorStyles.Left & AnchorStyles.Bottom & AnchorStyles.Right;
+        }
+
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            string message = "Are you sure you want to delete this picture?";
+            string caption = "Are you sure?";
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            DialogResult result = MessageBox.Show(message, caption, buttons);
+            if (result == DialogResult.Yes)
+            {
+                int index;
+                try
+                {
+                    FocusedPictureBox.BackgroundImage = Image.FromFile(files[currentImage + 1]);
+
+                    index = currentImage + 1;
+
+                    int gameIndex = files[index].IndexOf("Screenshots\\");
+
+                    string fileName = files[index];
+                    string gameName = files[index];
+
+                    gameName = gameName.Substring(gameIndex + 12);
+
+                    int gameLength = gameName.IndexOf("\\");
+                    gameName = gameName.Substring(0, gameLength);
+
+                    fileName = fileName.Substring(gameIndex + gameName.Length + 13);
+                    string type = ".jpg";
+                    int getRidOfExtension = fileName.IndexOf(".jpg");
+
+                    if (getRidOfExtension == -1)
+                    {
+                        getRidOfExtension = fileName.IndexOf(".png");
+                        type = ".png";
+                    }
+
+                    if (getRidOfExtension == -1)
+                        getRidOfExtension = fileName.IndexOf(".jpeg");
+                    if (getRidOfExtension == -1)
+                        getRidOfExtension = fileName.IndexOf(".gif");
+
+                    string extension = fileName;
+                    int length = fileName.Length;
+                    int extensionIndex = extension.IndexOf(type);
+                    extension = extension.Substring(0, type.Length);
+                    length -= extension.Length;
+                    fileName = fileName.Substring(0, length);
+
+                    string timeTaken = File.GetCreationTime(files[index]).ToString();
+
+                    FileNameLabel.Text = fileName;
+                    GameNameLabel.Text = gameName;
+                    TimeTakenLabel.Text = timeTaken;
+
+                    File.Delete(files[currentImage]);
+                    Controls.Remove(picturePanel[currentImage]);
+                    FocusedPictureBox.Tag = index;
+                }
+                catch
+                {
+                    try
+                    {
+                        FocusedPictureBox.BackgroundImage = Image.FromFile(files[currentImage - 1]);
+                        index = currentImage - 1;
+
+                        int gameIndex = files[index].IndexOf("Screenshots\\");
+
+                        string fileName = files[index];
+                        string gameName = files[index];
+
+                        gameName = gameName.Substring(gameIndex + 12);
+
+                        int gameLength = gameName.IndexOf("\\");
+                        gameName = gameName.Substring(0, gameLength);
+
+                        fileName = fileName.Substring(gameIndex + gameName.Length + 13);
+                        string type = ".jpg";
+                        int getRidOfExtension = fileName.IndexOf(".jpg");
+
+                        if (getRidOfExtension == -1)
+                        {
+                            getRidOfExtension = fileName.IndexOf(".png");
+                            type = ".png";
+                        }
+
+                        if (getRidOfExtension == -1)
+                            getRidOfExtension = fileName.IndexOf(".jpeg");
+                        if (getRidOfExtension == -1)
+                            getRidOfExtension = fileName.IndexOf(".gif");
+
+                        string extension = fileName;
+                        int length = fileName.Length;
+                        int extensionIndex = extension.IndexOf(type);
+                        extension = extension.Substring(0, type.Length);
+                        length -= extension.Length;
+                        fileName = fileName.Substring(0, length);
+
+                        string timeTaken = File.GetCreationTime(files[index]).ToString();
+
+                        FileNameLabel.Text = fileName;
+                        GameNameLabel.Text = gameName;
+                        TimeTakenLabel.Text = timeTaken;
+
+                        File.Delete(files[currentImage]);
+                        Controls.Remove(picturePanel[currentImage]);
+                        FocusedPictureBox.Tag = index;
+                    }
+                    catch
+                    {
+                        FocusedPictureBox.BackgroundImage = Image.FromFile("Screenshots\\Minecraft (Windows 10)\\Super Mario Party.jpg");
+                        
+                        FileNameLabel.Text = "";
+                        GameNameLabel.Text = "";
+                        TimeTakenLabel.Text = "";
+
+                        Controls.Remove(picturePanel[currentImage]);
+                        File.Delete(files[currentImage]);
+                    }
+                }
+                
+                
+            }
+            else
+            {
+
+            }
         }
     }
 }

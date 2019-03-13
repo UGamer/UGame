@@ -376,6 +376,11 @@ namespace The_UGamer_Launcher
                 try
                 {
                     obtainedDatePicker.Text = obtainedEntry;
+                    if (obtainedEntry == "" || obtainedEntry == " ")
+                        IgnoreObtained.Checked = true;
+                    else
+                        IgnoreObtained.Checked = false;
+
                 }
                 catch (FormatException h)
                 {
@@ -385,6 +390,10 @@ namespace The_UGamer_Launcher
                 try
                 {
                     startDatePicker.Text = startDateEntry;
+                    if (startDateEntry == "" || startDateEntry == " ")
+                        IgnoreStart.Checked = true;
+                    else
+                        IgnoreStart.Checked = false;
                 }
                 catch (FormatException f)
                 {
@@ -394,6 +403,10 @@ namespace The_UGamer_Launcher
                 try
                 {
                     endDatePicker.Text = endDateEntry;
+                    if (endDateEntry == "" || endDateEntry == " ")
+                        IgnoreEnd.Checked = true;
+                    else
+                        IgnoreEnd.Checked = false;
                 }
                 catch (FormatException g)
                 {

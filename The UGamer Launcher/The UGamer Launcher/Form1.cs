@@ -9,6 +9,7 @@ using CefSharp;
 using CefSharp.WinForms;
 using System.ComponentModel;
 using System.Data.OleDb;
+using System.Data.SqlClient;
 using System.Collections.Generic;
 using System.Threading;
 using System.Collections;
@@ -24,7 +25,8 @@ namespace The_UGamer_Launcher
         public Thread imageCheck;
         private bool displayData = false;
         DataTable newTable;
-
+        
+        
         private static string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Collection.accdb";
         private OleDbConnection con = new OleDbConnection(connectionString);
 
@@ -207,6 +209,8 @@ namespace The_UGamer_Launcher
             NotificationSystem();
             ImageNotificationSystem();
             addEntryButton.Text = "Notifications (" + globalNotificationTable.Rows.Count.ToString() + ")";
+
+            NotificationsDGV.Sort(NotificationsDGV.Columns[0], ListSortDirection.Descending);
         }
 
         delegate void StringArgReturningVoidDelegate(string text);
@@ -1046,6 +1050,7 @@ namespace The_UGamer_Launcher
 
             NotificationSystem();
             ImageNotificationSystem();
+            NotificationsDGV.Sort(NotificationsDGV.Columns[0], ListSortDirection.Descending);
         }
 
         private void toolStripButton2_Click(object sender, EventArgs e)
@@ -1290,33 +1295,48 @@ namespace The_UGamer_Launcher
             // con.Open();
             string changeValue;
             string titleValue;
-            try
+            if (e.ColumnIndex == 4)
             {
-                object value = NotificationsDGV.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
-                object value2 = NotificationsDGV.Rows[e.RowIndex].Cells[3].Value;
-                titleValue = value2.ToString();
-                changeValue = value.ToString();
-                if (changeValue == "Change")
+                try
                 {
-                    EditSpecificEntry(titleValue);
-                    RemoveFromNotifications(titleValue);
-                }
-                if (changeValue == "Dismiss")
-                {
-                    RemoveFromNotifications(titleValue);
-                }
-                // PLEASE PUT 
-                OleDbCommand refreshCmd = new OleDbCommand("SELECT * FROM Notifications", con);
-                con.Open();
-                refreshCmd.CommandType = CommandType.Text;
-                OleDbDataAdapter da = new OleDbDataAdapter(refreshCmd);
-                DataTable newTableNotif = new DataTable();
-                da.Fill(newTableNotif);
-                con.Close();
+                    object value = NotificationsDGV.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+                    object value2 = NotificationsDGV.Rows[e.RowIndex].Cells[3].Value;
+                    titleValue = value2.ToString();
+                    changeValue = value.ToString();
+                    if (changeValue == "Change")
+                    {
+                        EditSpecificEntry(titleValue);
+                        RemoveFromNotifications(titleValue);
+                    }
+                    if (changeValue == "Dismiss")
+                    {
+                        RemoveFromNotifications(titleValue);
+                    }
+                    // PLEASE PUT 
+                    OleDbCommand refreshCmd = new OleDbCommand("SELECT * FROM Notifications", con);
+                    con.Open();
+                    refreshCmd.CommandType = CommandType.Text;
+                    OleDbDataAdapter da = new OleDbDataAdapter(refreshCmd);
+                    DataTable newTableNotif = new DataTable();
+                    da.Fill(newTableNotif);
+                    con.Close();
 
-                globalNotificationTable = newTableNotif;
+                    globalNotificationTable = newTableNotif;
+                }
+                catch (ArgumentOutOfRangeException f) { }
             }
-            catch (ArgumentOutOfRangeException f) { }
+            else if (e.ColumnIndex == 3)
+            {
+                string titleValue2;
+                try
+                {
+                    object value = NotificationsDGV.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+                    titleValue2 = value.ToString();
+                    dataScan(titleValue2);
+                }
+                catch (ArgumentOutOfRangeException f) { }
+            }
+            
             
         }
 
