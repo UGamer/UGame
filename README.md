@@ -35,10 +35,11 @@ You can watch a tutorial series on how to work the launcher here: https://www.yo
 
 Thank you to all who helped in this project.
 
-### Packages
+### Projects Used
 
 * [StackBlur](https://github.com/victoriqueko/StackBlur) - Package used to blur backgrounds.
 * [CefSharp](https://github.com/cefsharp/CefSharp/) - Used to embed Chromium into the launcher.
+* [EasyRP](https://github.com/Pizzabelly/EasyRP) - Adds Discord Rich Presence to the launcher.
 
 ### Artwork
 
