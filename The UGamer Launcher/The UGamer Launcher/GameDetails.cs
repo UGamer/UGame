@@ -173,6 +173,9 @@ namespace The_UGamer_Launcher
             TrackTime(true);
         }
 
+        ProcessStartInfo discordRichPresenceStartInfo = new ProcessStartInfo("easyrp.exe");
+        Process discordRichPresence = new Process();
+
         private void TrackTime(bool executeLaunch)
         {
             ingame = new Overlay(title, links, linkCount, this);
@@ -238,6 +241,18 @@ namespace The_UGamer_Launcher
                 gameTime.Start();
                 ingame.Show();
             }
+
+            TimeSpan t = DateTime.UtcNow - new DateTime(1970, 1, 1);
+            richStartTimeStamp = (int)t.TotalSeconds;
+            string richPresenceConfig = "[Identifiers]\nClientID=556202672236003329\n\n[State]\nState=Playing\nDetails=" + title +
+                "\nStartTimestamp=" + richStartTimeStamp + "\nEndTimestamp=\n\n\n[Images]\nLargeImage=default\nLargeImageTooltip=\nSmallImage=play\nSmallImageTooltip=";
+
+            TextWriter tw = new StreamWriter("config.ini");
+            tw.WriteLine(richPresenceConfig);
+            tw.Close();
+
+            discordRichPresenceStartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            discordRichPresence = Process.Start(discordRichPresenceStartInfo);
 
             button1.Visible = false;
             TrackTimeButton.Visible = false;
@@ -527,6 +542,8 @@ namespace The_UGamer_Launcher
             con.Close();
 
             ingame.Close();
+            discordRichPresence.CloseMainWindow();
+            discordRichPresence.Close();
         }
 
         private void setURLs(string news)
@@ -742,6 +759,9 @@ namespace The_UGamer_Launcher
             PauseTime();
         }
 
+        int richStartTimeStamp;
+        int richEndTimeStamp;
+
         public void PauseTime()
         {
             if (isPaused == false)
@@ -751,6 +771,15 @@ namespace The_UGamer_Launcher
                 PauseTimeButton.Text = "Resume Playing";
                 ingame.t.Stop();
                 ingame.PauseButton.Text = "Resume Playing";
+                
+                TimeSpan t = DateTime.UtcNow - new DateTime(1970, 1, 1);
+                richEndTimeStamp = (int)t.TotalSeconds;
+                string richPresenceConfig = "[Identifiers]\nClientID=556202672236003329\n\n[State]\nState=Paused\nDetails=" + title +
+                    "\nStartTimestamp=\nEndTimestamp=\n\n\n[Images]\nLargeImage=default\nLargeImageTooltip=\nSmallImage=pause\nSmallImageTooltip=";
+
+                TextWriter tw = new StreamWriter("config.ini");
+                tw.WriteLine(richPresenceConfig);
+                tw.Close();
             }
             else
             {
@@ -759,6 +788,18 @@ namespace The_UGamer_Launcher
                 PauseTimeButton.Text = "Pause Playing";
                 ingame.t.Start();
                 ingame.PauseButton.Text = "Pause Playing";
+
+                int timePlayed = richEndTimeStamp - richStartTimeStamp;
+
+                TimeSpan t = DateTime.UtcNow - new DateTime(1970, 1, 1);
+                richStartTimeStamp = (int)t.TotalSeconds - timePlayed;
+                string richPresenceConfig = "[Identifiers]\nClientID=556202672236003329\n\n[State]\nState=Playing\nDetails=" + title +
+                    "\nStartTimestamp=" + richStartTimeStamp + "\nEndTimestamp=\n\n\n[Images]\nLargeImage=default\nLargeImageTooltip=\nSmallImage=play\nSmallImageTooltip=";
+                
+
+                TextWriter tw = new StreamWriter("config.ini");
+                tw.WriteLine(richPresenceConfig);
+                tw.Close();
             }
         }
 
@@ -788,6 +829,8 @@ namespace The_UGamer_Launcher
                 return;
             }
             ingame.Close();
+            discordRichPresence.CloseMainWindow();
+            discordRichPresence.Close();
         }
 
         private void BrowserButton_Click(object sender, EventArgs e)
