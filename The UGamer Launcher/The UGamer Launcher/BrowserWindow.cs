@@ -49,9 +49,7 @@ namespace The_UGamer_Launcher
 
         private void InitializeBrowser()
         {
-            CefSettings settings = new CefSettings();
-            // Initialize cef with the provided settings
-            Cef.Initialize(settings);
+            
 
             try
             {

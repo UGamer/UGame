@@ -36,11 +36,33 @@ namespace The_UGamer_Launcher
         private string notifMessage;
         private string actionString;
 
+        string rootPath;
 
         public Form1()
         {
             // Starts up the program.
             InitializeComponent();
+
+            CefSettings settings = new CefSettings();
+            // Initialize cef with the provided settings
+            Cef.Initialize(settings);
+            
+            rootPath = Directory.GetCurrentDirectory();
+
+            Uri homePage = new Uri(rootPath + "\\Pages\\home.html");
+            PagesBrowser.Url = homePage;
+
+            string[] filesInPages = Directory.GetFiles("Pages");
+
+            for (int index = 0; index < filesInPages.Length; index++)
+            {
+                if (filesInPages[index].IndexOf(".html") != -1)
+                {
+                    int pageIndex = filesInPages[index].IndexOf("Pages\\");
+                    WebPageBox.Items.Add(filesInPages[index].Substring(pageIndex + 6));
+
+                }
+            }
 
             try
             {
@@ -771,6 +793,9 @@ namespace The_UGamer_Launcher
 
         private void addEntryButton_Click(object sender, EventArgs e)
         {
+            PagesButton.Text = "Pages";
+            PagesBoxButton.Visible = false;
+            WebPageBox.Visible = false;
             if (displayData == true)
             {
                 NotificationsDGV.Visible = false;
@@ -1459,6 +1484,35 @@ namespace The_UGamer_Launcher
         private void hideEntryToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.dataTable.Rows.RemoveAt(this.rowIndex);
+        }
+
+        private void PagesButton_Click(object sender, EventArgs e)
+        {
+            if (PagesButton.Text == "Pages")
+            {
+                PagesBrowser.Visible = true;
+                PagesBoxButton.Visible = true;
+                WebPageBox.Visible = true;
+                dataTable.Visible = false;
+                NotificationsDGV.Visible = false;
+                PagesButton.Text = "Collection";
+                addEntryButton.Text = "Notifications (" + NotificationsDGV.Rows.Count + ")";
+            }
+            else
+            {
+                PagesBrowser.Visible = false;
+                PagesBoxButton.Visible = false;
+                WebPageBox.Visible = false;
+                dataTable.Visible = true;
+                PagesButton.Text = "Pages";
+            }
+        }
+
+        private void PagesBoxButton_Click(object sender, EventArgs e)
+        {
+            string nextPage = WebPageBox.Text;
+            Uri nextPageURL = new Uri(rootPath + "\\Pages\\" + nextPage);
+            PagesBrowser.Url = nextPageURL;
         }
     }
 }
