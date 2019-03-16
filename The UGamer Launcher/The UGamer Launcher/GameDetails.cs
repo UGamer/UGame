@@ -251,7 +251,8 @@ namespace The_UGamer_Launcher
             tw.WriteLine(richPresenceConfig);
             tw.Close();
 
-            discordRichPresenceStartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            // discordRichPresenceStartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            discordRichPresenceStartInfo.WindowStyle = ProcessWindowStyle.Minimized;
             discordRichPresence = Process.Start(discordRichPresenceStartInfo);
 
             button1.Visible = false;
@@ -276,22 +277,24 @@ namespace The_UGamer_Launcher
                 return false;
         }
 
-        private bool hasArgsMethod(string p)
+        private static bool hasArgsMethod(string p)
         {
+            bool returnValue = true;
             try
             {
                 int exeLoc = p.IndexOf(".exe");
                 string lookForArgs = p.Substring(exeLoc);
 
-                if (lookForArgs.IndexOf("-") == -1)
-                    return false;
-                else
-                    return true;
+                if (lookForArgs.IndexOf("-") == -1 && lookForArgs.IndexOf("\"") == -1)
+                    returnValue = false;
+
             }
             catch (ArgumentOutOfRangeException e)
             {
-                return false;
+                returnValue = false;
             }
+
+            return returnValue;
         }
 
         private Image detailedImageAssign(string input2)
@@ -542,6 +545,7 @@ namespace The_UGamer_Launcher
             con.Close();
 
             ingame.Close();
+
             discordRichPresence.CloseMainWindow();
             discordRichPresence.Close();
         }

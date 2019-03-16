@@ -944,20 +944,22 @@ namespace The_UGamer_Launcher
 
         private static bool hasArgsMethod(string p)
         {
+            bool returnValue = true;
             try
             {
                 int exeLoc = p.IndexOf(".exe");
                 string lookForArgs = p.Substring(exeLoc);
 
-                if (lookForArgs.IndexOf("-") == -1)
-                    return false;
-                else
-                    return true;
+                if (lookForArgs.IndexOf("-") == -1 && lookForArgs.IndexOf("\"") == -1)
+                    returnValue = false;
+                
             }
             catch (ArgumentOutOfRangeException e)
             {
-                return false;
+                returnValue = false;
             }
+
+            return returnValue;
         }
 
         public Image ThemeAssign(string input2)
