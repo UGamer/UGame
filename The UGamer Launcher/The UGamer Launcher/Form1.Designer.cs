@@ -106,9 +106,9 @@
             this.collectionDataSet5 = new The_UGamer_Launcher.CollectionDataSet5();
             this.collectionDataSet5BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.PagesButton = new System.Windows.Forms.Button();
-            this.PagesBrowser = new System.Windows.Forms.WebBrowser();
             this.WebPageBox = new System.Windows.Forms.ComboBox();
             this.PagesBoxButton = new System.Windows.Forms.Button();
+            this.BrowserDock = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet)).BeginInit();
@@ -741,16 +741,6 @@
             this.PagesButton.UseVisualStyleBackColor = false;
             this.PagesButton.Click += new System.EventHandler(this.PagesButton_Click);
             // 
-            // PagesBrowser
-            // 
-            this.PagesBrowser.Location = new System.Drawing.Point(22, 65);
-            this.PagesBrowser.MinimumSize = new System.Drawing.Size(20, 20);
-            this.PagesBrowser.Name = "PagesBrowser";
-            this.PagesBrowser.Size = new System.Drawing.Size(1291, 476);
-            this.PagesBrowser.TabIndex = 23;
-            this.PagesBrowser.Url = new System.Uri("", System.UriKind.Relative);
-            this.PagesBrowser.Visible = false;
-            // 
             // WebPageBox
             // 
             this.WebPageBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -772,14 +762,24 @@
             this.PagesBoxButton.Visible = false;
             this.PagesBoxButton.Click += new System.EventHandler(this.PagesBoxButton_Click);
             // 
+            // BrowserDock
+            // 
+            this.BrowserDock.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BrowserDock.Location = new System.Drawing.Point(22, 64);
+            this.BrowserDock.Name = "BrowserDock";
+            this.BrowserDock.Size = new System.Drawing.Size(1291, 477);
+            this.BrowserDock.TabIndex = 26;
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1333, 652);
+            this.Controls.Add(this.BrowserDock);
             this.Controls.Add(this.PagesBoxButton);
             this.Controls.Add(this.WebPageBox);
-            this.Controls.Add(this.PagesBrowser);
             this.Controls.Add(this.PagesButton);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.searchBox);
@@ -900,9 +900,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn notesCommentsDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn launchDataGridViewTextBoxColumn;
         private System.Windows.Forms.Button PagesButton;
-        private System.Windows.Forms.WebBrowser PagesBrowser;
         private System.Windows.Forms.ComboBox WebPageBox;
         private System.Windows.Forms.Button PagesBoxButton;
+        private System.Windows.Forms.Panel BrowserDock;
     }
 }
 

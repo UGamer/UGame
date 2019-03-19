@@ -47,10 +47,6 @@ namespace The_UGamer_Launcher
             // Initialize cef with the provided settings
             Cef.Initialize(settings);
             
-            rootPath = Directory.GetCurrentDirectory();
-
-            Uri homePage = new Uri(rootPath + "\\Pages\\home.html");
-            PagesBrowser.Url = homePage;
 
             string[] filesInPages = Directory.GetFiles("Pages");
 
@@ -219,9 +215,7 @@ namespace The_UGamer_Launcher
             {
                 columnSource.Add(new CategoryColumn() { Name = "blah" });
             }
-
             
-
             dataTable.SortCompare += customSortCompare;
 
             dataTable.Visible = true;
@@ -233,7 +227,20 @@ namespace The_UGamer_Launcher
             addEntryButton.Text = "Notifications (" + globalNotificationTable.Rows.Count.ToString() + ")";
 
             NotificationsDGV.Sort(NotificationsDGV.Columns[0], ListSortDirection.Descending);
+
+            PagesBrowser = new ChromiumWebBrowser(rootPath + "\\Pages\\home.html");
+            
+            BrowserDock.Visible = false;
+            PagesBrowser.Size = new Size(1291, 476);
+            this.BrowserDock.Controls.Add(PagesBrowser);
+            PagesBrowser.Dock = DockStyle.Fill;
+            
+            rootPath = Directory.GetCurrentDirectory();
+
+            PagesBrowser.Load(rootPath + "\\Pages\\home.html");
         }
+
+        ChromiumWebBrowser PagesBrowser;
 
         delegate void StringArgReturningVoidDelegate(string text);
 
@@ -794,6 +801,7 @@ namespace The_UGamer_Launcher
         private void addEntryButton_Click(object sender, EventArgs e)
         {
             PagesButton.Text = "Pages";
+            BrowserDock.Visible = false;
             PagesBoxButton.Visible = false;
             WebPageBox.Visible = false;
             if (displayData == true)
@@ -1492,6 +1500,7 @@ namespace The_UGamer_Launcher
         {
             if (PagesButton.Text == "Pages")
             {
+                BrowserDock.Visible = true;
                 PagesBrowser.Visible = true;
                 PagesBoxButton.Visible = true;
                 WebPageBox.Visible = true;
@@ -1502,6 +1511,7 @@ namespace The_UGamer_Launcher
             }
             else
             {
+                BrowserDock.Visible = false;
                 PagesBrowser.Visible = false;
                 PagesBoxButton.Visible = false;
                 WebPageBox.Visible = false;
@@ -1513,8 +1523,7 @@ namespace The_UGamer_Launcher
         private void PagesBoxButton_Click(object sender, EventArgs e)
         {
             string nextPage = WebPageBox.Text;
-            Uri nextPageURL = new Uri(rootPath + "\\Pages\\" + nextPage);
-            PagesBrowser.Url = nextPageURL;
+            PagesBrowser.Load(rootPath + "\\Pages\\" + nextPage);
         }
     }
 }
