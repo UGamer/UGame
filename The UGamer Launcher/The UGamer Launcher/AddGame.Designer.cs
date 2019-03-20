@@ -327,7 +327,8 @@
             "On Hold",
             "Plan to Play",
             "Playing",
-            "Start Over"});
+            "Start Over",
+            "Want"});
             this.statusBox.Location = new System.Drawing.Point(104, 58);
             this.statusBox.Name = "statusBox";
             this.statusBox.Size = new System.Drawing.Size(415, 21);

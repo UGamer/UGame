@@ -43,11 +43,6 @@ namespace The_UGamer_Launcher
             // Starts up the program.
             InitializeComponent();
 
-            CefSettings settings = new CefSettings();
-            // Initialize cef with the provided settings
-            Cef.Initialize(settings);
-            
-
             string[] filesInPages = Directory.GetFiles("Pages");
 
             for (int index = 0; index < filesInPages.Length; index++)
@@ -294,7 +289,8 @@ namespace The_UGamer_Launcher
                     row[statusIndex].ToString() == "On Hold" ||
                     row[statusIndex].ToString() == "Plan to Play" ||
                     row[statusIndex].ToString() == "Start Over" ||
-                    row[statusIndex].ToString() == "Don't Have") &&
+                    row[statusIndex].ToString() == "Don't Have" || 
+                    row[statusIndex].ToString() == "Want") &&
                     (row[lastPlayedIndex].ToString() == todayString))
                 {
                     for (int index = 0; index < notificationTable.Rows.Count; index++)
