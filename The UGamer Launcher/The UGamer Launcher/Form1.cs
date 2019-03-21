@@ -1138,6 +1138,14 @@ namespace The_UGamer_Launcher
             gameCountText.Text = "Eh";
         }
 
+        private void playTimeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dataTable.SortOrder == System.Windows.Forms.SortOrder.Descending)
+                dataTable.Sort(dataTable.Columns[4], ListSortDirection.Ascending);
+            if (dataTable.SortOrder == System.Windows.Forms.SortOrder.Ascending)
+                dataTable.Sort(dataTable.Columns[4], ListSortDirection.Descending);
+        }
+
         private void EntriesToolTipButton_Click_1(object sender, EventArgs e)
         {
             bool refresh = false;
@@ -1521,5 +1529,6 @@ namespace The_UGamer_Launcher
             string nextPage = WebPageBox.Text;
             PagesBrowser.Load(rootPath + "\\Pages\\" + nextPage);
         }
+
     }
 }

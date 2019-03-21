@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.dataTable = new System.Windows.Forms.DataGridView();
             this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -109,6 +109,8 @@
             this.WebPageBox = new System.Windows.Forms.ComboBox();
             this.PagesBoxButton = new System.Windows.Forms.Button();
             this.BrowserDock = new System.Windows.Forms.Panel();
+            this.sortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.playTimeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet)).BeginInit();
@@ -195,8 +197,8 @@
             // PlayTime
             // 
             this.PlayTime.DataPropertyName = "PlayTime";
-            dataGridViewCellStyle1.NullValue = null;
-            this.PlayTime.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.NullValue = null;
+            this.PlayTime.DefaultCellStyle = dataGridViewCellStyle2;
             this.PlayTime.HeaderText = "Time Played";
             this.PlayTime.Name = "PlayTime";
             this.PlayTime.ReadOnly = true;
@@ -451,7 +453,8 @@
             this.ViewToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.ViewToolStripButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.FilterButton,
-            this.openBrowserToolStripMenuItem});
+            this.openBrowserToolStripMenuItem,
+            this.sortToolStripMenuItem});
             this.ViewToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("ViewToolStripButton.Image")));
             this.ViewToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ViewToolStripButton.Name = "ViewToolStripButton";
@@ -472,7 +475,7 @@
             this.toolStripSeparator1,
             this.SaveFilters});
             this.FilterButton.Name = "FilterButton";
-            this.FilterButton.Size = new System.Drawing.Size(148, 22);
+            this.FilterButton.Size = new System.Drawing.Size(180, 22);
             this.FilterButton.Text = "Filter";
             this.FilterButton.DropDownClosed += new System.EventHandler(this.FilterButton_DropDownClosed);
             // 
@@ -577,7 +580,7 @@
             // openBrowserToolStripMenuItem
             // 
             this.openBrowserToolStripMenuItem.Name = "openBrowserToolStripMenuItem";
-            this.openBrowserToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.openBrowserToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openBrowserToolStripMenuItem.Text = "Open Browser";
             this.openBrowserToolStripMenuItem.Click += new System.EventHandler(this.openBrowserToolStripMenuItem_Click);
             // 
@@ -772,6 +775,21 @@
             this.BrowserDock.Size = new System.Drawing.Size(1291, 477);
             this.BrowserDock.TabIndex = 26;
             // 
+            // sortToolStripMenuItem
+            // 
+            this.sortToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.playTimeToolStripMenuItem});
+            this.sortToolStripMenuItem.Name = "sortToolStripMenuItem";
+            this.sortToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sortToolStripMenuItem.Text = "Sort";
+            // 
+            // playTimeToolStripMenuItem
+            // 
+            this.playTimeToolStripMenuItem.Name = "playTimeToolStripMenuItem";
+            this.playTimeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.playTimeToolStripMenuItem.Text = "Play Time";
+            this.playTimeToolStripMenuItem.Click += new System.EventHandler(this.playTimeToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -903,6 +921,8 @@
         private System.Windows.Forms.ComboBox WebPageBox;
         private System.Windows.Forms.Button PagesBoxButton;
         private System.Windows.Forms.Panel BrowserDock;
+        private System.Windows.Forms.ToolStripMenuItem sortToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem playTimeToolStripMenuItem;
     }
 }
 
