@@ -1057,6 +1057,8 @@ namespace The_UGamer_Launcher
             da.Fill(newTable);
             dataTable.DataSource = newTable;
             dataTable.Sort(dataTable.Columns[0], ListSortDirection.Ascending);
+            SteamDGV.DataSource = newTable;
+            SteamDGV.Sort(SteamDGV.Columns[0], ListSortDirection.Ascending);
             con.Close();
 
             int entryCount = dataTable.Rows.Count;
@@ -1529,6 +1531,265 @@ namespace The_UGamer_Launcher
             string nextPage = WebPageBox.Text;
             PagesBrowser.Load(rootPath + "\\Pages\\" + nextPage);
         }
+        
+        private void originalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dataTable.Visible = true;
+            NotificationsDGV.Visible = false;
+            Panel_Pages.Visible = false;
+            SteamView.Visible = false;
+        }
 
+        private void steamLikeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dataTable.Visible = false;
+            NotificationsDGV.Visible = false;
+            Panel_Pages.Visible = false;
+            SteamView.Visible = true;
+
+            string input2 = dataTable.Rows[0].Cells[0].Value.ToString();
+            Regex pathFix = new Regex(@"T:\\");
+
+            // This section fixes the title so it can be translated to an image file.
+            Regex rgxFix1 = new Regex("/");
+            Regex rgxFix2 = new Regex(":");
+            Regex rgxFix3 = new Regex(".*");
+            Regex rgxFix4 = new Regex(".?");
+            Regex rgxFix5 = new Regex("\"");
+            Regex rgxFix6 = new Regex("<");
+            Regex rgxFix7 = new Regex(">");
+            Regex rgxFix8 = new Regex("|");
+
+            if (input2.IndexOf("\\") != -1)
+                input2 = pathFix.Replace(dataTable.Rows[0].Cells[0].Value.ToString(), "/");
+            if (input2.IndexOf("/") != -1)
+                input2 = rgxFix1.Replace(input2, "");
+            if (input2.IndexOf(":") != -1)
+                input2 = rgxFix2.Replace(input2, "");
+            if (input2.IndexOf("*") != -1)
+                input2 = rgxFix3.Replace(input2, "");
+            if (input2.IndexOf("?") != -1)
+                input2 = rgxFix4.Replace(input2, "");
+            if (input2.IndexOf("\"") != -1)
+                input2 = rgxFix5.Replace(input2, "");
+            if (input2.IndexOf("<") != -1)
+                input2 = rgxFix6.Replace(input2, "");
+            if (input2.IndexOf(">") != -1)
+                input2 = rgxFix7.Replace(input2, "");
+            if (input2.IndexOf("|") != -1)
+                input2 = rgxFix8.Replace(input2, "");
+
+            try
+            {
+                SteamGameIcon.Visible = true;
+                SteamGameIcon.BackgroundImage = Image.FromFile("Resources\\Icons\\" + input2 + ".ico");
+            }
+            catch (FileNotFoundException f)
+            {
+                SteamGameIcon.Visible = false;
+            }
+
+            SteamDetailPanel.BackgroundImage = backgroundImageAssign(input2);
+            Image image = SteamDetailPanel.BackgroundImage;
+            Bitmap bg = new Bitmap(image);
+            var radius = 20;
+            try
+            {
+                StackBlur.StackBlur.Process(bg, radius);
+                SteamDetailPanel.BackgroundImage = bg;
+            }
+            catch
+            {
+                SteamDetailPanel.BackgroundImage = backgroundImageAssign(input2);
+            }
+
+            SteamDetailPanel.BackgroundImage = Image.FromFile("Resources\\DONT TOUCH.png");
+
+            SteamGameNameLabel.Text = dataTable.Rows[0].Cells[0].Value.ToString();
+
+            if (dataTable.Rows[0].Cells[4].Value.ToString() != "00h:00m:00s")
+                SteamTimeLabel.Text = "You've played: " + dataTable.Rows[0].Cells[4].Value.ToString();
+            else
+                SteamTimeLabel.Text = "";
+
+            if (dataTable.Rows[0].Cells[7].Value.ToString() != "" && dataTable.Rows[0].Cells[7].Value.ToString() != " ")
+                SteamLastPlayedLabel.Text = "Last Played: " + dataTable.Rows[0].Cells[7].Value.ToString();
+            else
+                SteamLastPlayedLabel.Text = "";
+        }
+
+        private void SteamDGV_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            string titleValue;
+            try
+            {
+                object value = SteamDGV.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+                titleValue = value.ToString();
+
+                OleDbCommand cmd = new OleDbCommand("SELECT * FROM Table1", con);
+                con.Open();
+                cmd.CommandType = CommandType.Text;
+                OleDbDataAdapter da = new OleDbDataAdapter(cmd);
+                newTable = new DataTable();
+                da.Fill(newTable);
+
+                con.Close();
+                
+                string[] table = new string[newTable.Rows.Count];
+                for (int index = 0; index < newTable.Rows.Count; index++)
+                {
+                    table[index] = newTable.Rows[index][1].ToString();
+                }
+                
+                int y = 0, z = 0;
+
+                for (int x = 0; x < newTable.Rows.Count; x++)
+                    if (titleValue == table[x])
+                    {
+                        z = x;
+                        y = 1;
+                    }
+                
+                if (y == 1)
+                {
+                    string input2 = titleValue;
+                    Regex pathFix = new Regex(@"T:\\");
+
+                    // This section fixes the title so it can be translated to an image file.
+                    Regex rgxFix1 = new Regex("/");
+                    Regex rgxFix2 = new Regex(":");
+                    Regex rgxFix3 = new Regex(".*");
+                    Regex rgxFix4 = new Regex(".?");
+                    Regex rgxFix5 = new Regex("\"");
+                    Regex rgxFix6 = new Regex("<");
+                    Regex rgxFix7 = new Regex(">");
+                    Regex rgxFix8 = new Regex("|");
+
+                    if (input2.IndexOf("\\") != -1)
+                        input2 = pathFix.Replace(titleValue, "/");
+                    if (input2.IndexOf("/") != -1)
+                        input2 = rgxFix1.Replace(input2, "");
+                    if (input2.IndexOf(":") != -1)
+                        input2 = rgxFix2.Replace(input2, "");
+                    if (input2.IndexOf("*") != -1)
+                        input2 = rgxFix3.Replace(input2, "");
+                    if (input2.IndexOf("?") != -1)
+                        input2 = rgxFix4.Replace(input2, "");
+                    if (input2.IndexOf("\"") != -1)
+                        input2 = rgxFix5.Replace(input2, "");
+                    if (input2.IndexOf("<") != -1)
+                        input2 = rgxFix6.Replace(input2, "");
+                    if (input2.IndexOf(">") != -1)
+                        input2 = rgxFix7.Replace(input2, "");
+                    if (input2.IndexOf("|") != -1)
+                        input2 = rgxFix8.Replace(input2, "");
+
+                    try
+                    {
+                        SteamGameIcon.Visible = true;
+                        SteamGameIcon.BackgroundImage = Image.FromFile("Resources\\Icons\\" + input2 + ".ico");
+                    }
+                    catch (FileNotFoundException f)
+                    {
+                        SteamGameIcon.Visible = false;
+                    }
+
+                    SteamDetailPanel.BackgroundImage = backgroundImageAssign(input2);
+                    Image image = SteamDetailPanel.BackgroundImage;
+                    Bitmap bg = new Bitmap(image);
+                    var radius = 20;
+                    try
+                    {
+                        StackBlur.StackBlur.Process(bg, radius);
+                        SteamDetailPanel.BackgroundImage = bg;
+                    }
+                    catch
+                    {
+                        SteamDetailPanel.BackgroundImage = backgroundImageAssign(input2);
+                    }
+
+                    SteamGameNameLabel.Text = newTable.Rows[z][1].ToString();
+
+
+                    if (newTable.Rows[z][5].ToString() != "00h:00m:00s")
+                        SteamTimeLabel.Text = "You've played: " + newTable.Rows[z][5];
+                    else
+                        SteamTimeLabel.Text = "";
+
+                    if (newTable.Rows[z][8].ToString() != "" && newTable.Rows[z][8].ToString() != " ")
+                        SteamLastPlayedLabel.Text = "Last Played: " + newTable.Rows[z][8];
+                    else
+                        SteamLastPlayedLabel.Text = "";
+
+                    SteamPlayButton.Tag = newTable.Rows[z][10];
+                }
+            }
+            catch (ArgumentOutOfRangeException f) { }
+        }
+
+        private Bitmap backgroundImageAssign(string input2)
+        {
+            Image background;
+            Bitmap bg;
+            try
+            {
+                background = Image.FromFile("Resources/BG/" + input2 + ".png");
+                bg = new Bitmap(background);
+                return bg;
+            }
+            catch (FileNotFoundException e)
+            {
+                try
+                {
+                    background = Image.FromFile("Resources/BG/" + input2 + ".jpg");
+                    bg = new Bitmap(background);
+                    return bg;
+                }
+                catch (FileNotFoundException f)
+                {
+                    try
+                    {
+                        background = Image.FromFile("Resources/BG/" + input2 + ".jpeg");
+                        bg = new Bitmap(background);
+                        return bg;
+                    }
+                    catch (FileNotFoundException g)
+                    {
+                        try
+                        {
+                            background = Image.FromFile("Resources/BG/" + input2 + ".gif");
+                            bg = new Bitmap(background);
+                            return bg;
+                        }
+                        catch (FileNotFoundException h)
+                        {
+                            background = Image.FromFile("Resources/DONT TOUCH.png");
+                            bg = new Bitmap(background);
+                            return bg;
+                        }
+                    }
+                }
+            }
+        }
+
+        bool openGame = false;
+        GameDetails launcher;
+
+        private void SteamPlayButton_Click(object sender, EventArgs e)
+        {
+            if (openGame == false)
+            {
+                launcher = new GameDetails();
+                launcher.title = SteamGameNameLabel.Text;
+                launcher.launchLabel.Text = SteamPlayButton.Tag.ToString();
+                launcher.TrackTime(true);
+                openGame = true;
+            }
+            else
+            {
+                launcher.stopTimeMethod();
+                openGame = false;
+            }
+        }
     }
 }

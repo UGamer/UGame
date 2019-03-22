@@ -23,7 +23,7 @@ namespace The_UGamer_Launcher
         private bool didPlay = false;
         private bool isPaused = false;
         private bool hasImage = true;
-        private string title;
+        public string title;
         string newsUrl;
         string wikiUrl;
         private Size browserSize = new Size(659, 88);
@@ -176,7 +176,7 @@ namespace The_UGamer_Launcher
         ProcessStartInfo discordRichPresenceStartInfo = new ProcessStartInfo("easyrp.exe");
         Process discordRichPresence = new Process();
 
-        private void TrackTime(bool executeLaunch)
+        public void TrackTime(bool executeLaunch)
         {
             ingame = new Overlay(title, links, linkCount, this);
             string launchString3 = launchLabel.Text;
@@ -387,7 +387,7 @@ namespace The_UGamer_Launcher
             stopTimeMethod();
         }
 
-        private void stopTimeMethod()
+        public void stopTimeMethod()
         {
             // timePlaying.Abort();
             // ingame.Close();

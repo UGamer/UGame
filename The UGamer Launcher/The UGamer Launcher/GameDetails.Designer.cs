@@ -407,7 +407,7 @@
         private System.Windows.Forms.TextBox notesBox;
         private System.Windows.Forms.TextBox noImageText;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label launchLabel;
+        public System.Windows.Forms.Label launchLabel;
         private System.Windows.Forms.Button stopTime;
         private System.Windows.Forms.Button PauseTimeButton;
         private System.Windows.Forms.Button discardButton;
