@@ -392,7 +392,7 @@ namespace The_UGamer_Launcher
                                 bg = new Bitmap(background);
                                 return bg;
                             }
-                            catch (FileNotFoundException i)
+                            catch
                             {
                                 bg = new Bitmap(backup);
                                 return bg;

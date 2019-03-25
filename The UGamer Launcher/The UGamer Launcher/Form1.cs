@@ -471,6 +471,9 @@ namespace The_UGamer_Launcher
                 {
                     if (bgMissing == false)
                         bgMissing = File.Exists(bgPaths[index]);
+
+                    if (bgMissing == false)
+                        bgMissing = Directory.Exists("Resources\\BG\\" + input2);
                 }
 
                 for (index = 0; (index < detailPaths.Length) && (detailMissing == false); index++)
@@ -1763,9 +1766,21 @@ namespace The_UGamer_Launcher
                         }
                         catch (FileNotFoundException h)
                         {
-                            background = Image.FromFile("Resources/DONT TOUCH.png");
-                            bg = new Bitmap(background);
-                            return bg;
+                            try
+                            {
+                                string[] files = Directory.GetFiles("Resources/BG/" + input2);
+                                int numOfFiles = files.Length;
+                                Random randomPicture = new Random();
+                                int fileToUse = randomPicture.Next(0, numOfFiles);
+                                background = Image.FromFile(files[fileToUse]);
+                                bg = new Bitmap(background);
+                                return bg;
+                            }
+                            catch
+                            {
+                                bg = new Bitmap("Resources\\DONT TOUCH.png");
+                                return bg;
+                            }
                         }
                     }
                 }
