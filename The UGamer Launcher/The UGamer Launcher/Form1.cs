@@ -1467,7 +1467,7 @@ namespace The_UGamer_Launcher
             links[1, 0] = "google.com";
             links[0, 1] = "YouTube Music";
             links[1, 1] = "music.youtube.com";
-            BrowserWindow detailedBrowser = new BrowserWindow(links, 2);
+            BrowserWindow detailedBrowser = new BrowserWindow(links, 2, "UGame Launcher");
             detailedBrowser.Show();
         }
 

@@ -31,7 +31,7 @@ namespace The_UGamer_Launcher
         private bool justTrack = false;
         private bool bothButton = false;
         string[,] links;
-        string allLinks = "";
+        public string allLinks = "";
         int linkCount = 0;
 
         private static string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Collection.accdb";
@@ -253,8 +253,16 @@ namespace The_UGamer_Launcher
 
             // discordRichPresenceStartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             discordRichPresenceStartInfo.WindowStyle = ProcessWindowStyle.Minimized;
-            discordRichPresence = Process.Start(discordRichPresenceStartInfo);
+            try
+            {
+                discordRichPresence = Process.Start(discordRichPresenceStartInfo);
+                
+            }
+            catch
+            {
 
+            }
+            
             button1.Visible = false;
             TrackTimeButton.Visible = false;
             stopTime.Visible = true;
@@ -374,8 +382,21 @@ namespace The_UGamer_Launcher
                         }
                         catch (FileNotFoundException h)
                         {
-                            bg = new Bitmap(backup);
-                            return bg;
+                            try
+                            {
+                                string[] files = Directory.GetFiles("Resources/BG/" + input2);
+                                int numOfFiles = files.Length;
+                                Random randomPicture = new Random();
+                                int fileToUse = randomPicture.Next(0, numOfFiles);
+                                background = Image.FromFile(files[fileToUse]);
+                                bg = new Bitmap(background);
+                                return bg;
+                            }
+                            catch (FileNotFoundException i)
+                            {
+                                bg = new Bitmap(backup);
+                                return bg;
+                            }
                         }
                     }
                 }
@@ -439,7 +460,7 @@ namespace The_UGamer_Launcher
             string caption = "Play Time";
             
             OleDbCommand delCmd = new OleDbCommand("DELETE FROM Table1 WHERE Title=\"" + nameLabel.Text + "\";", con);
-            OleDbCommand cmd = new OleDbCommand("INSERT INTO Table1 (Title, Platform, Status, Rating, PlayTime, Obtained, StartDate, EndDate, Notes, Launch) VALUES (@Title, @Platform, @Status, @Rating, @PlayTime, @Obtained, @StartDate, @EndDate, @Notes, @Launch);", con);
+            OleDbCommand cmd = new OleDbCommand("INSERT INTO Table1 (Title, Platform, Status, Rating, PlayTime, Obtained, StartDate, EndDate, Notes, Launch, News, Wiki) VALUES (@Title, @Platform, @Status, @Rating, @PlayTime, @Obtained, @StartDate, @EndDate, @Notes, @Launch, @News, @Wiki);", con);
 
             con.Open();
 
@@ -513,6 +534,10 @@ namespace The_UGamer_Launcher
 
             string launchCode = launchLabel.Text;
 
+            // GET RID OF THIS WHEN DOING FILTERS
+            wikiUrl = "";// GET RID OF THIS WHEN DOING FILTERS
+            // GET RID OF THIS WHEN DOING FILTERS
+
             cmd.Parameters.AddWithValue("@Title", nameLabel.Text);
             cmd.Parameters.AddWithValue("@Platform", platform);
             cmd.Parameters.AddWithValue("@Status", status);
@@ -546,8 +571,15 @@ namespace The_UGamer_Launcher
 
             ingame.Close();
 
-            discordRichPresence.CloseMainWindow();
-            discordRichPresence.Close();
+            try
+            {
+                discordRichPresence.CloseMainWindow();
+                discordRichPresence.Close();
+            }
+            catch
+            {
+
+            }
         }
 
         private void setURLs(string news)
@@ -864,7 +896,7 @@ namespace The_UGamer_Launcher
             */
             // =================== This is all the old code. ===================
 
-            BrowserWindow detailedBrowser = new BrowserWindow(links, linkCount);
+            BrowserWindow detailedBrowser = new BrowserWindow(links, linkCount, title, this);
             detailedBrowser.Show();
         }
 
@@ -896,11 +928,6 @@ namespace The_UGamer_Launcher
             // TODO: This line of code loads data into the 'tempTableDataSet.TempTable' table. You can move, or remove it, as needed.
             this.tempTableTableAdapter.Fill(this.tempTableDataSet.TempTable);
 
-        }
-
-        private void ChangeURL(string url)
-        {
-            chromeBrowser.Load(url);
         }
     }
 }

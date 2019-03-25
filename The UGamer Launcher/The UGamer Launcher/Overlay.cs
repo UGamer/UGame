@@ -176,7 +176,7 @@ namespace The_UGamer_Launcher
             shiftTimer.Stop();
         }
 
-            void gkh_KeyDown(object sender, KeyEventArgs e)
+        void gkh_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Tab && shiftDown == true)
             {
@@ -311,7 +311,7 @@ namespace The_UGamer_Launcher
 
         private void BrowserButton_Click(object sender, EventArgs e)
         {
-            openBrowser = new BrowserWindow(links, linkCount);
+            openBrowser = new BrowserWindow(links, linkCount, title, details);
             openBrowser.Show();
             browserOpen = true;
             openBrowser.FormClosing += new FormClosingEventHandler(this.openBrowser_FormClosing);

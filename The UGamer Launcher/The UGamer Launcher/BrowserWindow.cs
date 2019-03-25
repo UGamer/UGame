@@ -1,6 +1,7 @@
 ﻿using CefSharp;
 using CefSharp.WinForms;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,6 +18,7 @@ namespace The_UGamer_Launcher
     {
         private string[,] links;
         private int linkCount;
+        string title;
         ToolStripButton[] linkButton;
 
         private string currentURL;
@@ -25,12 +27,29 @@ namespace The_UGamer_Launcher
         
         globalKeyboardHook gkh = new globalKeyboardHook();
 
+        GameDetails details;
 
-        public BrowserWindow(string[,] links, int linkCount)
+        public BrowserWindow(string[,] links, int linkCount, string title)
         {
             InitializeComponent();
             this.links = links;
             this.linkCount = linkCount;
+            this.title = title;
+            InitializeBrowser();
+            InitializeLinks();
+            InitializeDesign();
+
+            gkh.HookedKeys.Add(Keys.MediaPlayPause);
+            gkh.KeyDown += new KeyEventHandler(gkh_KeyDown);
+        }
+
+        public BrowserWindow(string[,] links, int linkCount, string title, GameDetails detailsWindow)
+        {
+            InitializeComponent();
+            this.links = links;
+            this.linkCount = linkCount;
+            this.title = title;
+            this.details = detailsWindow;
             InitializeBrowser();
             InitializeLinks();
             InitializeDesign();
@@ -49,7 +68,6 @@ namespace The_UGamer_Launcher
 
         private void InitializeBrowser()
         {
-
             try
             {
                 Browser = new ChromiumWebBrowser(links[1, 0]);
@@ -64,9 +82,11 @@ namespace The_UGamer_Launcher
             // Add it to the form and fill it to the form window.
             Size browserSize = new Size(801, 389);
             Browser.Size = browserSize;
+            Browser.Parent = tabControl1.SelectedTab;
             Browser.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Top);
-            this.BrowserDock.Controls.Add(Browser);
+            this.TabPage1.Controls.Add(Browser);
             Browser.AddressChanged += Browser_AddressChanged;
+            Browser.TitleChanged += Browser_TitleChanged;
         }
 
         void Browser_AddressChanged(object sender, AddressChangedEventArgs e)
@@ -99,15 +119,42 @@ namespace The_UGamer_Launcher
         private void linkButton_Click(object sender, EventArgs e)
         {
             string linkTitle = sender.ToString();
+            ToolStripButton tempButton = (ToolStripButton)sender;
             for (int index = 0; index < linkCount; index++)
                 if (links[0, index] == linkTitle)
-                    Browser.Load(links[1, index]);
+                {
+                    ChromiumWebBrowser chrome = tabControl1.SelectedTab.Controls[0] as ChromiumWebBrowser;
+                    chrome.Load(links[1, index]);
+                }
+                else if (tempButton.Tag.ToString() != "")
+                {
+                    ChromiumWebBrowser chrome = tabControl1.SelectedTab.Controls[0] as ChromiumWebBrowser;
+                    chrome.Load(tempButton.Tag.ToString());
+                }
         }
 
         private void Search()
         {
             currentURL = AddressBox.Text;
-            Browser.Load(currentURL);
+            if (currentURL.IndexOf(" ") == -1)
+            {
+                if (currentURL.IndexOf(".co") == -1)
+                {
+                    ChromiumWebBrowser chrome = tabControl1.SelectedTab.Controls[0] as ChromiumWebBrowser;
+                    chrome.Load("https://www.google.com/search?q=" + currentURL);
+                }
+                else
+                {
+                    ChromiumWebBrowser chrome = tabControl1.SelectedTab.Controls[0] as ChromiumWebBrowser;
+                    chrome.Load(currentURL);
+                }
+                
+            }
+            else
+            {
+                ChromiumWebBrowser chrome = tabControl1.SelectedTab.Controls[0] as ChromiumWebBrowser;
+                chrome.Load("https://www.google.com/search?q=" + currentURL);
+            }
         }
 
         private void SearchButton_Click(object sender, EventArgs e)
@@ -128,15 +175,19 @@ namespace The_UGamer_Launcher
 
         private void BackButton_Click(object sender, EventArgs e)
         {
-            if (Browser.CanGoBack)
+            ChromiumWebBrowser chrome = tabControl1.SelectedTab.Controls[0] as ChromiumWebBrowser;
+
+            if (chrome.CanGoBack)
             {
-                Browser.Back();
+                chrome.Back();
             }
         }
 
         private void RefreshButton_Click(object sender, EventArgs e)
         {
-            Browser.Refresh();
+            ChromiumWebBrowser chrome = tabControl1.SelectedTab.Controls[0] as ChromiumWebBrowser;
+
+            chrome.Refresh();
         }
 
         private void BrowserWindow_FormClosing(object sender, FormClosingEventArgs e)
@@ -146,10 +197,74 @@ namespace The_UGamer_Launcher
 
         private void ForwardButton_Click(object sender, EventArgs e)
         {
-            if (Browser.CanGoForward)
+            ChromiumWebBrowser chrome = tabControl1.SelectedTab.Controls[0] as ChromiumWebBrowser;
+
+            if (chrome.CanGoForward)
             {
-                Browser.Forward();
+                chrome.Forward();
             }
+        }
+
+        private void NewTabButton_Click(object sender, EventArgs e)
+        {
+            creationCheck = true;
+            TabPage newPage = new TabPage();
+            newPage.Text = "New Tab";
+            tabControl1.Controls.Add(newPage);
+            tabControl1.SelectTab(tabControl1.TabCount - 1);
+
+            ChromiumWebBrowser chrome = new ChromiumWebBrowser("www.google.com");
+            chrome.Parent = newPage;
+            chrome.Dock = DockStyle.Fill;
+            AddressBox.Text = "www.google.com";
+            chrome.AddressChanged += Browser_AddressChanged;
+            chrome.TitleChanged += Browser_TitleChanged;
+            creationCheck = false;
+        }
+
+        private void Browser_TitleChanged(object sender, TitleChangedEventArgs e)
+        {
+            this.Invoke(new MethodInvoker(() =>
+            {
+                tabControl1.SelectedTab.Text = e.Title;
+            }));
+        }
+
+        bool creationCheck = false;
+
+        private void tabControl1_Selected(object sender, TabControlEventArgs e)
+        {
+            if (creationCheck == false)
+            {
+                ChromiumWebBrowser chrome = tabControl1.SelectedTab.Controls[0] as ChromiumWebBrowser;
+                AddressBox.Text = chrome.Address;
+            }
+            creationCheck = false;
+        }
+
+        ArrayList addedLinks = new ArrayList();
+        ArrayList addedLinkNames = new ArrayList();
+
+        private void FavoriteButton_Click(object sender, EventArgs e)
+        {
+            ChromiumWebBrowser chrome = tabControl1.SelectedTab.Controls[0] as ChromiumWebBrowser;
+            AddLinks newLink = new AddLinks(chrome.Address, title, tabControl1.SelectedTab.Text);
+            newLink.Show();
+            newLink.FormClosed += newLink_FormClosed;
+            this.newLink = newLink;
+        }
+
+        AddLinks newLink;
+
+        private void newLink_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ToolStripButton newLinkButton = new ToolStripButton();
+            newLinkButton.Text = newLink.linkTitle;
+            newLinkButton.Tag = newLink.linkURL;
+            newLinkButton.Click += linkButton_Click;
+            LinksBar.Items.Add(newLinkButton);
+
+            details.allLinks += newLink.newsString;
         }
     }
 }
