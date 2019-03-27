@@ -63,10 +63,21 @@ namespace The_UGamer_Launcher
 
             try
             {
-                File.Delete("Resources/Theme/logoUSING.png");
                 File.Delete("Resources/Theme/backgroundImageUSING.png");
+                File.Delete("Resources/Theme/logoUSING.png");
             }
-            catch (FileNotFoundException e) { }
+            catch (FileNotFoundException e)
+            {
+                try
+                {
+                    File.Delete("Resources/Theme/backgroundImageUSING.gif");
+                    File.Delete("Resources/Theme/logoUSING.png");
+                }
+                catch
+                {
+
+                }
+            }
 
             try
             {
@@ -94,8 +105,9 @@ namespace The_UGamer_Launcher
                     {
                         try
                         {
-                            File.Copy("Resources/Theme/backgroundImage.gif", "Resources/Theme/backgroundImageUSING.png");
-                            this.BackgroundImage = ThemeAssign("backgroundImageUSING");
+                            File.Copy("Resources/Theme/backgroundImage.gif", "Resources/Theme/backgroundImageUSING.gif");
+                            GIFBackground.Image = ThemeAssign("backgroundImageUSING");
+                            GIFBackground.Visible = true;
                             File.Delete("Resources/Theme/backgroundImage.gif");
                         }
                         catch (FileNotFoundException h) { }
@@ -1104,7 +1116,15 @@ namespace The_UGamer_Launcher
             }
             catch
             {
+                try
+                {
+                    File.Copy("Resources/Theme/backgroundImageUSING.png", "Resources/Theme/backgroundImage.gif");
+                    File.Copy("Resources/Theme/logoUSING.png", "Resources/Theme/logo.png");
+                }
+                catch
+                {
 
+                }
             }
         }
 
@@ -1509,22 +1529,28 @@ namespace The_UGamer_Launcher
         {
             if (PagesButton.Text == "Pages")
             {
+                Panel_Pages.Visible = true;
                 BrowserDock.Visible = true;
                 PagesBrowser.Visible = true;
                 PagesBoxButton.Visible = true;
                 WebPageBox.Visible = true;
+
                 dataTable.Visible = false;
                 NotificationsDGV.Visible = false;
+                SteamView.Visible = false;
+
                 PagesButton.Text = "Collection";
                 addEntryButton.Text = "Notifications (" + NotificationsDGV.Rows.Count + ")";
             }
             else
             {
+                Panel_Pages.Visible = false;
                 BrowserDock.Visible = false;
                 PagesBrowser.Visible = false;
                 PagesBoxButton.Visible = false;
                 WebPageBox.Visible = false;
                 dataTable.Visible = true;
+                SteamView.Visible = false;
                 PagesButton.Text = "Pages";
             }
         }

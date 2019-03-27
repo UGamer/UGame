@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.dataTable = new System.Windows.Forms.DataGridView();
             this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -78,6 +78,9 @@
             this.CategoriesBox = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.SaveFilters = new System.Windows.Forms.ToolStripMenuItem();
+            this.layoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.originalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.steamLikeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openBrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.playTimeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -114,23 +117,21 @@
             this.SteamDGV = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SteamView = new System.Windows.Forms.Panel();
-            this.SteamViewHeaderPanel = new System.Windows.Forms.Panel();
-            this.Steam_EntriesButton = new System.Windows.Forms.Button();
-            this.Steam_LibraryButton = new System.Windows.Forms.Button();
-            this.Steam_BrowserButton = new System.Windows.Forms.Button();
-            this.Steam_UserButton = new System.Windows.Forms.Button();
-            this.layoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.originalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.steamLikeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.Panel_Pages = new System.Windows.Forms.Panel();
-            this.SteamGameIcon = new System.Windows.Forms.PictureBox();
             this.SteamDetailPanel = new System.Windows.Forms.Panel();
-            this.SteamGameNameLabel = new System.Windows.Forms.Label();
-            this.SteamPlayButton = new System.Windows.Forms.Button();
-            this.SteamTrackButton = new System.Windows.Forms.Button();
-            this.SteamTimeLabel = new System.Windows.Forms.Label();
-            this.SteamLastPlayedLabel = new System.Windows.Forms.Label();
             this.SteamInfoButton = new System.Windows.Forms.Button();
+            this.SteamLastPlayedLabel = new System.Windows.Forms.Label();
+            this.SteamTimeLabel = new System.Windows.Forms.Label();
+            this.SteamTrackButton = new System.Windows.Forms.Button();
+            this.SteamPlayButton = new System.Windows.Forms.Button();
+            this.SteamGameNameLabel = new System.Windows.Forms.Label();
+            this.SteamGameIcon = new System.Windows.Forms.PictureBox();
+            this.SteamViewHeaderPanel = new System.Windows.Forms.Panel();
+            this.Steam_UserButton = new System.Windows.Forms.Button();
+            this.Steam_BrowserButton = new System.Windows.Forms.Button();
+            this.Steam_LibraryButton = new System.Windows.Forms.Button();
+            this.Steam_EntriesButton = new System.Windows.Forms.Button();
+            this.Panel_Pages = new System.Windows.Forms.Panel();
+            this.GIFBackground = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet)).BeginInit();
@@ -153,10 +154,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet5BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SteamDGV)).BeginInit();
             this.SteamView.SuspendLayout();
+            this.SteamDetailPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SteamGameIcon)).BeginInit();
             this.SteamViewHeaderPanel.SuspendLayout();
             this.Panel_Pages.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.SteamGameIcon)).BeginInit();
-            this.SteamDetailPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.GIFBackground)).BeginInit();
             this.SuspendLayout();
             // 
             // dataTable
@@ -223,8 +225,8 @@
             // PlayTime
             // 
             this.PlayTime.DataPropertyName = "PlayTime";
-            dataGridViewCellStyle5.NullValue = null;
-            this.PlayTime.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.NullValue = null;
+            this.PlayTime.DefaultCellStyle = dataGridViewCellStyle1;
             this.PlayTime.HeaderText = "Time Played";
             this.PlayTime.Name = "PlayTime";
             this.PlayTime.ReadOnly = true;
@@ -502,7 +504,7 @@
             this.toolStripSeparator1,
             this.SaveFilters});
             this.FilterButton.Name = "FilterButton";
-            this.FilterButton.Size = new System.Drawing.Size(180, 22);
+            this.FilterButton.Size = new System.Drawing.Size(148, 22);
             this.FilterButton.Text = "Filter";
             this.FilterButton.DropDownClosed += new System.EventHandler(this.FilterButton_DropDownClosed);
             // 
@@ -604,10 +606,33 @@
             this.SaveFilters.Size = new System.Drawing.Size(146, 22);
             this.SaveFilters.Text = "Save + Apply";
             // 
+            // layoutToolStripMenuItem
+            // 
+            this.layoutToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.originalToolStripMenuItem,
+            this.steamLikeToolStripMenuItem});
+            this.layoutToolStripMenuItem.Name = "layoutToolStripMenuItem";
+            this.layoutToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.layoutToolStripMenuItem.Text = "Layout";
+            // 
+            // originalToolStripMenuItem
+            // 
+            this.originalToolStripMenuItem.Name = "originalToolStripMenuItem";
+            this.originalToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.originalToolStripMenuItem.Text = "Original";
+            this.originalToolStripMenuItem.Click += new System.EventHandler(this.originalToolStripMenuItem_Click);
+            // 
+            // steamLikeToolStripMenuItem
+            // 
+            this.steamLikeToolStripMenuItem.Name = "steamLikeToolStripMenuItem";
+            this.steamLikeToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.steamLikeToolStripMenuItem.Text = "Steam-Like";
+            this.steamLikeToolStripMenuItem.Click += new System.EventHandler(this.steamLikeToolStripMenuItem_Click);
+            // 
             // openBrowserToolStripMenuItem
             // 
             this.openBrowserToolStripMenuItem.Name = "openBrowserToolStripMenuItem";
-            this.openBrowserToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openBrowserToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.openBrowserToolStripMenuItem.Text = "Open Browser";
             this.openBrowserToolStripMenuItem.Click += new System.EventHandler(this.openBrowserToolStripMenuItem_Click);
             // 
@@ -616,13 +641,13 @@
             this.sortToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.playTimeToolStripMenuItem});
             this.sortToolStripMenuItem.Name = "sortToolStripMenuItem";
-            this.sortToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sortToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.sortToolStripMenuItem.Text = "Sort";
             // 
             // playTimeToolStripMenuItem
             // 
             this.playTimeToolStripMenuItem.Name = "playTimeToolStripMenuItem";
-            this.playTimeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.playTimeToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.playTimeToolStripMenuItem.Text = "Play Time";
             this.playTimeToolStripMenuItem.Click += new System.EventHandler(this.playTimeToolStripMenuItem_Click);
             // 
@@ -814,7 +839,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.BrowserDock.Location = new System.Drawing.Point(0, 36);
             this.BrowserDock.Name = "BrowserDock";
-            this.BrowserDock.Size = new System.Drawing.Size(1849, 531);
+            this.BrowserDock.Size = new System.Drawing.Size(1291, 477);
             this.BrowserDock.TabIndex = 26;
             // 
             // SteamDGV
@@ -855,95 +880,6 @@
             this.SteamView.TabIndex = 27;
             this.SteamView.Visible = false;
             // 
-            // SteamViewHeaderPanel
-            // 
-            this.SteamViewHeaderPanel.Controls.Add(this.Steam_UserButton);
-            this.SteamViewHeaderPanel.Controls.Add(this.Steam_BrowserButton);
-            this.SteamViewHeaderPanel.Controls.Add(this.Steam_LibraryButton);
-            this.SteamViewHeaderPanel.Controls.Add(this.Steam_EntriesButton);
-            this.SteamViewHeaderPanel.Location = new System.Drawing.Point(0, 0);
-            this.SteamViewHeaderPanel.Name = "SteamViewHeaderPanel";
-            this.SteamViewHeaderPanel.Size = new System.Drawing.Size(1291, 40);
-            this.SteamViewHeaderPanel.TabIndex = 28;
-            // 
-            // Steam_EntriesButton
-            // 
-            this.Steam_EntriesButton.Location = new System.Drawing.Point(265, 3);
-            this.Steam_EntriesButton.Name = "Steam_EntriesButton";
-            this.Steam_EntriesButton.Size = new System.Drawing.Size(142, 34);
-            this.Steam_EntriesButton.TabIndex = 0;
-            this.Steam_EntriesButton.Text = "ENTRIES";
-            this.Steam_EntriesButton.UseVisualStyleBackColor = true;
-            // 
-            // Steam_LibraryButton
-            // 
-            this.Steam_LibraryButton.Location = new System.Drawing.Point(413, 3);
-            this.Steam_LibraryButton.Name = "Steam_LibraryButton";
-            this.Steam_LibraryButton.Size = new System.Drawing.Size(142, 34);
-            this.Steam_LibraryButton.TabIndex = 1;
-            this.Steam_LibraryButton.Text = "LIBRARY";
-            this.Steam_LibraryButton.UseVisualStyleBackColor = true;
-            // 
-            // Steam_BrowserButton
-            // 
-            this.Steam_BrowserButton.Location = new System.Drawing.Point(561, 3);
-            this.Steam_BrowserButton.Name = "Steam_BrowserButton";
-            this.Steam_BrowserButton.Size = new System.Drawing.Size(142, 34);
-            this.Steam_BrowserButton.TabIndex = 2;
-            this.Steam_BrowserButton.Text = "BROWSER";
-            this.Steam_BrowserButton.UseVisualStyleBackColor = true;
-            // 
-            // Steam_UserButton
-            // 
-            this.Steam_UserButton.Location = new System.Drawing.Point(709, 3);
-            this.Steam_UserButton.Name = "Steam_UserButton";
-            this.Steam_UserButton.Size = new System.Drawing.Size(142, 34);
-            this.Steam_UserButton.TabIndex = 3;
-            this.Steam_UserButton.Text = "USER";
-            this.Steam_UserButton.UseVisualStyleBackColor = true;
-            // 
-            // layoutToolStripMenuItem
-            // 
-            this.layoutToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.originalToolStripMenuItem,
-            this.steamLikeToolStripMenuItem});
-            this.layoutToolStripMenuItem.Name = "layoutToolStripMenuItem";
-            this.layoutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.layoutToolStripMenuItem.Text = "Layout";
-            // 
-            // originalToolStripMenuItem
-            // 
-            this.originalToolStripMenuItem.Name = "originalToolStripMenuItem";
-            this.originalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.originalToolStripMenuItem.Text = "Original";
-            this.originalToolStripMenuItem.Click += new System.EventHandler(this.originalToolStripMenuItem_Click);
-            // 
-            // steamLikeToolStripMenuItem
-            // 
-            this.steamLikeToolStripMenuItem.Name = "steamLikeToolStripMenuItem";
-            this.steamLikeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.steamLikeToolStripMenuItem.Text = "Steam-Like";
-            this.steamLikeToolStripMenuItem.Click += new System.EventHandler(this.steamLikeToolStripMenuItem_Click);
-            // 
-            // Panel_Pages
-            // 
-            this.Panel_Pages.Controls.Add(this.WebPageBox);
-            this.Panel_Pages.Controls.Add(this.PagesBoxButton);
-            this.Panel_Pages.Controls.Add(this.BrowserDock);
-            this.Panel_Pages.Location = new System.Drawing.Point(22, 28);
-            this.Panel_Pages.Name = "Panel_Pages";
-            this.Panel_Pages.Size = new System.Drawing.Size(1291, 513);
-            this.Panel_Pages.TabIndex = 4;
-            // 
-            // SteamGameIcon
-            // 
-            this.SteamGameIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.SteamGameIcon.Location = new System.Drawing.Point(18, 22);
-            this.SteamGameIcon.Name = "SteamGameIcon";
-            this.SteamGameIcon.Size = new System.Drawing.Size(50, 50);
-            this.SteamGameIcon.TabIndex = 29;
-            this.SteamGameIcon.TabStop = false;
-            // 
             // SteamDetailPanel
             // 
             this.SteamDetailPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
@@ -959,44 +895,14 @@
             this.SteamDetailPanel.Size = new System.Drawing.Size(1029, 474);
             this.SteamDetailPanel.TabIndex = 30;
             // 
-            // SteamGameNameLabel
+            // SteamInfoButton
             // 
-            this.SteamGameNameLabel.AutoSize = true;
-            this.SteamGameNameLabel.Font = new System.Drawing.Font("Century Gothic", 27.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SteamGameNameLabel.Location = new System.Drawing.Point(75, 22);
-            this.SteamGameNameLabel.Name = "SteamGameNameLabel";
-            this.SteamGameNameLabel.Size = new System.Drawing.Size(131, 46);
-            this.SteamGameNameLabel.TabIndex = 30;
-            this.SteamGameNameLabel.Text = "label1";
-            // 
-            // SteamPlayButton
-            // 
-            this.SteamPlayButton.Location = new System.Drawing.Point(18, 79);
-            this.SteamPlayButton.Name = "SteamPlayButton";
-            this.SteamPlayButton.Size = new System.Drawing.Size(75, 23);
-            this.SteamPlayButton.TabIndex = 31;
-            this.SteamPlayButton.Text = "► Play";
-            this.SteamPlayButton.UseVisualStyleBackColor = true;
-            this.SteamPlayButton.Click += new System.EventHandler(this.SteamPlayButton_Click);
-            // 
-            // SteamTrackButton
-            // 
-            this.SteamTrackButton.Location = new System.Drawing.Point(18, 108);
-            this.SteamTrackButton.Name = "SteamTrackButton";
-            this.SteamTrackButton.Size = new System.Drawing.Size(75, 23);
-            this.SteamTrackButton.TabIndex = 32;
-            this.SteamTrackButton.Text = "🕑 Track";
-            this.SteamTrackButton.UseVisualStyleBackColor = true;
-            // 
-            // SteamTimeLabel
-            // 
-            this.SteamTimeLabel.AutoSize = true;
-            this.SteamTimeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SteamTimeLabel.Location = new System.Drawing.Point(99, 80);
-            this.SteamTimeLabel.Name = "SteamTimeLabel";
-            this.SteamTimeLabel.Size = new System.Drawing.Size(46, 18);
-            this.SteamTimeLabel.TabIndex = 33;
-            this.SteamTimeLabel.Text = "label1";
+            this.SteamInfoButton.Location = new System.Drawing.Point(961, 18);
+            this.SteamInfoButton.Name = "SteamInfoButton";
+            this.SteamInfoButton.Size = new System.Drawing.Size(50, 50);
+            this.SteamInfoButton.TabIndex = 35;
+            this.SteamInfoButton.Text = "button3";
+            this.SteamInfoButton.UseVisualStyleBackColor = true;
             // 
             // SteamLastPlayedLabel
             // 
@@ -1008,14 +914,122 @@
             this.SteamLastPlayedLabel.TabIndex = 34;
             this.SteamLastPlayedLabel.Text = "label2";
             // 
-            // SteamInfoButton
+            // SteamTimeLabel
             // 
-            this.SteamInfoButton.Location = new System.Drawing.Point(961, 18);
-            this.SteamInfoButton.Name = "SteamInfoButton";
-            this.SteamInfoButton.Size = new System.Drawing.Size(50, 50);
-            this.SteamInfoButton.TabIndex = 35;
-            this.SteamInfoButton.Text = "button3";
-            this.SteamInfoButton.UseVisualStyleBackColor = true;
+            this.SteamTimeLabel.AutoSize = true;
+            this.SteamTimeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SteamTimeLabel.Location = new System.Drawing.Point(99, 80);
+            this.SteamTimeLabel.Name = "SteamTimeLabel";
+            this.SteamTimeLabel.Size = new System.Drawing.Size(46, 18);
+            this.SteamTimeLabel.TabIndex = 33;
+            this.SteamTimeLabel.Text = "label1";
+            // 
+            // SteamTrackButton
+            // 
+            this.SteamTrackButton.Location = new System.Drawing.Point(18, 108);
+            this.SteamTrackButton.Name = "SteamTrackButton";
+            this.SteamTrackButton.Size = new System.Drawing.Size(75, 23);
+            this.SteamTrackButton.TabIndex = 32;
+            this.SteamTrackButton.Text = "🕑 Track";
+            this.SteamTrackButton.UseVisualStyleBackColor = true;
+            // 
+            // SteamPlayButton
+            // 
+            this.SteamPlayButton.Location = new System.Drawing.Point(18, 79);
+            this.SteamPlayButton.Name = "SteamPlayButton";
+            this.SteamPlayButton.Size = new System.Drawing.Size(75, 23);
+            this.SteamPlayButton.TabIndex = 31;
+            this.SteamPlayButton.Text = "► Play";
+            this.SteamPlayButton.UseVisualStyleBackColor = true;
+            this.SteamPlayButton.Click += new System.EventHandler(this.SteamPlayButton_Click);
+            // 
+            // SteamGameNameLabel
+            // 
+            this.SteamGameNameLabel.AutoSize = true;
+            this.SteamGameNameLabel.Font = new System.Drawing.Font("Century Gothic", 27.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SteamGameNameLabel.Location = new System.Drawing.Point(75, 22);
+            this.SteamGameNameLabel.Name = "SteamGameNameLabel";
+            this.SteamGameNameLabel.Size = new System.Drawing.Size(131, 46);
+            this.SteamGameNameLabel.TabIndex = 30;
+            this.SteamGameNameLabel.Text = "label1";
+            // 
+            // SteamGameIcon
+            // 
+            this.SteamGameIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.SteamGameIcon.Location = new System.Drawing.Point(18, 22);
+            this.SteamGameIcon.Name = "SteamGameIcon";
+            this.SteamGameIcon.Size = new System.Drawing.Size(50, 50);
+            this.SteamGameIcon.TabIndex = 29;
+            this.SteamGameIcon.TabStop = false;
+            // 
+            // SteamViewHeaderPanel
+            // 
+            this.SteamViewHeaderPanel.Controls.Add(this.Steam_UserButton);
+            this.SteamViewHeaderPanel.Controls.Add(this.Steam_BrowserButton);
+            this.SteamViewHeaderPanel.Controls.Add(this.Steam_LibraryButton);
+            this.SteamViewHeaderPanel.Controls.Add(this.Steam_EntriesButton);
+            this.SteamViewHeaderPanel.Location = new System.Drawing.Point(0, 0);
+            this.SteamViewHeaderPanel.Name = "SteamViewHeaderPanel";
+            this.SteamViewHeaderPanel.Size = new System.Drawing.Size(1291, 40);
+            this.SteamViewHeaderPanel.TabIndex = 28;
+            // 
+            // Steam_UserButton
+            // 
+            this.Steam_UserButton.Location = new System.Drawing.Point(709, 3);
+            this.Steam_UserButton.Name = "Steam_UserButton";
+            this.Steam_UserButton.Size = new System.Drawing.Size(142, 34);
+            this.Steam_UserButton.TabIndex = 3;
+            this.Steam_UserButton.Text = "USER";
+            this.Steam_UserButton.UseVisualStyleBackColor = true;
+            // 
+            // Steam_BrowserButton
+            // 
+            this.Steam_BrowserButton.Location = new System.Drawing.Point(561, 3);
+            this.Steam_BrowserButton.Name = "Steam_BrowserButton";
+            this.Steam_BrowserButton.Size = new System.Drawing.Size(142, 34);
+            this.Steam_BrowserButton.TabIndex = 2;
+            this.Steam_BrowserButton.Text = "BROWSER";
+            this.Steam_BrowserButton.UseVisualStyleBackColor = true;
+            // 
+            // Steam_LibraryButton
+            // 
+            this.Steam_LibraryButton.Location = new System.Drawing.Point(413, 3);
+            this.Steam_LibraryButton.Name = "Steam_LibraryButton";
+            this.Steam_LibraryButton.Size = new System.Drawing.Size(142, 34);
+            this.Steam_LibraryButton.TabIndex = 1;
+            this.Steam_LibraryButton.Text = "LIBRARY";
+            this.Steam_LibraryButton.UseVisualStyleBackColor = true;
+            // 
+            // Steam_EntriesButton
+            // 
+            this.Steam_EntriesButton.Location = new System.Drawing.Point(265, 3);
+            this.Steam_EntriesButton.Name = "Steam_EntriesButton";
+            this.Steam_EntriesButton.Size = new System.Drawing.Size(142, 34);
+            this.Steam_EntriesButton.TabIndex = 0;
+            this.Steam_EntriesButton.Text = "ENTRIES";
+            this.Steam_EntriesButton.UseVisualStyleBackColor = true;
+            // 
+            // Panel_Pages
+            // 
+            this.Panel_Pages.Controls.Add(this.WebPageBox);
+            this.Panel_Pages.Controls.Add(this.PagesBoxButton);
+            this.Panel_Pages.Controls.Add(this.BrowserDock);
+            this.Panel_Pages.Location = new System.Drawing.Point(22, 28);
+            this.Panel_Pages.Name = "Panel_Pages";
+            this.Panel_Pages.Size = new System.Drawing.Size(1291, 513);
+            this.Panel_Pages.TabIndex = 4;
+            this.Panel_Pages.Visible = false;
+            // 
+            // GIFBackground
+            // 
+            this.GIFBackground.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.GIFBackground.Location = new System.Drawing.Point(0, 0);
+            this.GIFBackground.Name = "GIFBackground";
+            this.GIFBackground.Size = new System.Drawing.Size(1333, 652);
+            this.GIFBackground.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.GIFBackground.TabIndex = 28;
+            this.GIFBackground.TabStop = false;
+            this.GIFBackground.Visible = false;
             // 
             // Form1
             // 
@@ -1030,12 +1044,13 @@
             this.Controls.Add(this.addEntryButton);
             this.Controls.Add(this.gameCountText);
             this.Controls.Add(this.logo);
+            this.Controls.Add(this.driverInstall);
             this.Controls.Add(this.SteamView);
             this.Controls.Add(this.Panel_Pages);
             this.Controls.Add(this.dataTable);
             this.Controls.Add(this.driverWarning);
             this.Controls.Add(this.NotificationsDGV);
-            this.Controls.Add(this.driverInstall);
+            this.Controls.Add(this.GIFBackground);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
@@ -1065,11 +1080,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet5BindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SteamDGV)).EndInit();
             this.SteamView.ResumeLayout(false);
-            this.SteamViewHeaderPanel.ResumeLayout(false);
-            this.Panel_Pages.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.SteamGameIcon)).EndInit();
             this.SteamDetailPanel.ResumeLayout(false);
             this.SteamDetailPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SteamGameIcon)).EndInit();
+            this.SteamViewHeaderPanel.ResumeLayout(false);
+            this.Panel_Pages.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.GIFBackground)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1176,6 +1192,7 @@
         private System.Windows.Forms.Label SteamGameNameLabel;
         private System.Windows.Forms.PictureBox SteamGameIcon;
         private System.Windows.Forms.Button SteamInfoButton;
+        private System.Windows.Forms.PictureBox GIFBackground;
     }
 }
 

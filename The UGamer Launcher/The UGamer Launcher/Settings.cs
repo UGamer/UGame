@@ -35,6 +35,18 @@ namespace The_UGamer_Launcher
                 this.BackgroundImage = ThemeAssign("backgroundImageUSING");
             }
             catch (FileNotFoundException f) { }
+
+            string[] themeFolders = Directory.GetDirectories(@"Resources\Theme\Presets\");
+            string[] themeNames = new string[themeFolders.Length];
+
+            int presetsIndex = themeFolders[0].IndexOf(@"Presets\");
+            
+            for (int index = 0; index < themeFolders.Length; index++)
+            {
+                themeNames[index] = themeFolders[index].Substring(presetsIndex + 8);
+            }
+
+            themeSelect.DataSource = themeNames;
         }
 
         private void saveApply_Click(object sender, EventArgs e)
@@ -53,12 +65,20 @@ namespace The_UGamer_Launcher
                 newLogo = ThemeAssign("Presets/" + themePath + "/logo");
                 newIcon = IconAssign("Presets/" + themePath + "/icon");
 
+                /*
                 var savedBG = new Bitmap(newBG);
                 var savedLogo = new Bitmap(newLogo);
                 
                 savedBG.Save(filePath1, ImageFormat.Png);
                 savedLogo.Save(filePath2, ImageFormat.Png);
-                refresh = true;
+                */
+                
+                if (newBG.RawFormat == ImageFormat.Gif)
+                this.Text = ".GIF";
+
+                // File.Copy();
+
+                // refresh = true;
                 NoChangesLabel.Visible = false;
             }
 
