@@ -892,7 +892,7 @@
             this.SteamDetailPanel.Controls.Add(this.SteamGameIcon);
             this.SteamDetailPanel.Location = new System.Drawing.Point(262, 39);
             this.SteamDetailPanel.Name = "SteamDetailPanel";
-            this.SteamDetailPanel.Size = new System.Drawing.Size(1029, 474);
+            this.SteamDetailPanel.Size = new System.Drawing.Size(1008, 474);
             this.SteamDetailPanel.TabIndex = 30;
             // 
             // SteamInfoButton
@@ -1011,6 +1011,9 @@
             // 
             // Panel_Pages
             // 
+            this.Panel_Pages.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.Panel_Pages.Controls.Add(this.WebPageBox);
             this.Panel_Pages.Controls.Add(this.PagesBoxButton);
             this.Panel_Pages.Controls.Add(this.BrowserDock);
@@ -1045,12 +1048,12 @@
             this.Controls.Add(this.gameCountText);
             this.Controls.Add(this.logo);
             this.Controls.Add(this.driverInstall);
-            this.Controls.Add(this.SteamView);
             this.Controls.Add(this.Panel_Pages);
             this.Controls.Add(this.dataTable);
             this.Controls.Add(this.driverWarning);
             this.Controls.Add(this.NotificationsDGV);
             this.Controls.Add(this.GIFBackground);
+            this.Controls.Add(this.SteamView);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
