@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.dataTable = new System.Windows.Forms.DataGridView();
             this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -225,8 +225,8 @@
             // PlayTime
             // 
             this.PlayTime.DataPropertyName = "PlayTime";
-            dataGridViewCellStyle1.NullValue = null;
-            this.PlayTime.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.NullValue = null;
+            this.PlayTime.DefaultCellStyle = dataGridViewCellStyle2;
             this.PlayTime.HeaderText = "Time Played";
             this.PlayTime.Name = "PlayTime";
             this.PlayTime.ReadOnly = true;

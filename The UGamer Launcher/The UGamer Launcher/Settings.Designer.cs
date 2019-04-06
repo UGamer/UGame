@@ -168,10 +168,10 @@
             this.ThemesTab.Controls.Add(this.saveApply);
             this.ThemesTab.Controls.Add(this.label1);
             this.ThemesTab.Controls.Add(this.themeDetails);
-            this.ThemesTab.Location = new System.Drawing.Point(4, 24);
+            this.ThemesTab.Location = new System.Drawing.Point(4, 22);
             this.ThemesTab.Name = "ThemesTab";
             this.ThemesTab.Padding = new System.Windows.Forms.Padding(3);
-            this.ThemesTab.Size = new System.Drawing.Size(329, 142);
+            this.ThemesTab.Size = new System.Drawing.Size(329, 144);
             this.ThemesTab.TabIndex = 0;
             this.ThemesTab.Text = "Themes";
             // 
@@ -187,10 +187,10 @@
             this.DataTab.Controls.Add(this.label2);
             this.DataTab.Controls.Add(this.ColumnAddButton);
             this.DataTab.Controls.Add(this.ColumnNameBox);
-            this.DataTab.Location = new System.Drawing.Point(4, 24);
+            this.DataTab.Location = new System.Drawing.Point(4, 22);
             this.DataTab.Name = "DataTab";
             this.DataTab.Padding = new System.Windows.Forms.Padding(3);
-            this.DataTab.Size = new System.Drawing.Size(329, 142);
+            this.DataTab.Size = new System.Drawing.Size(329, 144);
             this.DataTab.TabIndex = 1;
             this.DataTab.Text = "Data";
             this.DataTab.UseVisualStyleBackColor = true;
@@ -293,10 +293,10 @@
             // InGameTab
             // 
             this.InGameTab.Controls.Add(this.CheckOverlayEnable);
-            this.InGameTab.Location = new System.Drawing.Point(4, 24);
+            this.InGameTab.Location = new System.Drawing.Point(4, 22);
             this.InGameTab.Name = "InGameTab";
             this.InGameTab.Padding = new System.Windows.Forms.Padding(3);
-            this.InGameTab.Size = new System.Drawing.Size(329, 142);
+            this.InGameTab.Size = new System.Drawing.Size(329, 144);
             this.InGameTab.TabIndex = 2;
             this.InGameTab.Text = "In-Game";
             this.InGameTab.UseVisualStyleBackColor = true;
