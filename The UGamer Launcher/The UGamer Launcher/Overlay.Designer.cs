@@ -36,6 +36,9 @@
             this.ScreenshotLabel = new System.Windows.Forms.Label();
             this.PauseButton = new System.Windows.Forms.Button();
             this.ScreenshotsButton = new System.Windows.Forms.Button();
+            this.LockButton = new System.Windows.Forms.Button();
+            this.OpacityBar = new System.Windows.Forms.TrackBar();
+            ((System.ComponentModel.ISupportInitialize)(this.OpacityBar)).BeginInit();
             this.SuspendLayout();
             // 
             // NameLabel
@@ -92,7 +95,7 @@
             // 
             this.ScreenshotLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ScreenshotLabel.AutoSize = true;
-            this.ScreenshotLabel.Location = new System.Drawing.Point(582, 9);
+            this.ScreenshotLabel.Location = new System.Drawing.Point(448, 9);
             this.ScreenshotLabel.Name = "ScreenshotLabel";
             this.ScreenshotLabel.Size = new System.Drawing.Size(110, 13);
             this.ScreenshotLabel.TabIndex = 5;
@@ -113,7 +116,7 @@
             // ScreenshotsButton
             // 
             this.ScreenshotsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ScreenshotsButton.Location = new System.Drawing.Point(698, 4);
+            this.ScreenshotsButton.Location = new System.Drawing.Point(564, 4);
             this.ScreenshotsButton.Name = "ScreenshotsButton";
             this.ScreenshotsButton.Size = new System.Drawing.Size(90, 23);
             this.ScreenshotsButton.TabIndex = 7;
@@ -121,12 +124,38 @@
             this.ScreenshotsButton.UseVisualStyleBackColor = true;
             this.ScreenshotsButton.Click += new System.EventHandler(this.ScreenshotsButton_Click);
             // 
+            // LockButton
+            // 
+            this.LockButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.LockButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.LockButton.Font = new System.Drawing.Font("Chiller", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LockButton.Location = new System.Drawing.Point(770, 4);
+            this.LockButton.Name = "LockButton";
+            this.LockButton.Size = new System.Drawing.Size(27, 23);
+            this.LockButton.TabIndex = 8;
+            this.LockButton.UseVisualStyleBackColor = true;
+            this.LockButton.Click += new System.EventHandler(this.LockButton_Click);
+            // 
+            // OpacityBar
+            // 
+            this.OpacityBar.Location = new System.Drawing.Point(660, 4);
+            this.OpacityBar.Maximum = 100;
+            this.OpacityBar.Minimum = 10;
+            this.OpacityBar.Name = "OpacityBar";
+            this.OpacityBar.Size = new System.Drawing.Size(104, 45);
+            this.OpacityBar.TabIndex = 9;
+            this.OpacityBar.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.OpacityBar.Value = 100;
+            this.OpacityBar.ValueChanged += new System.EventHandler(this.OpacityBar_ValueChanged);
+            // 
             // Overlay
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(800, 128);
+            this.Controls.Add(this.OpacityBar);
+            this.Controls.Add(this.LockButton);
             this.Controls.Add(this.ScreenshotsButton);
             this.Controls.Add(this.PauseButton);
             this.Controls.Add(this.ScreenshotLabel);
@@ -141,6 +170,7 @@
             this.Text = "Overlay";
             this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Overlay_FormClosing);
+            ((System.ComponentModel.ISupportInitialize)(this.OpacityBar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -156,5 +186,7 @@
         private System.Windows.Forms.Label ScreenshotLabel;
         public System.Windows.Forms.Button PauseButton;
         private System.Windows.Forms.Button ScreenshotsButton;
+        private System.Windows.Forms.Button LockButton;
+        private System.Windows.Forms.TrackBar OpacityBar;
     }
 }

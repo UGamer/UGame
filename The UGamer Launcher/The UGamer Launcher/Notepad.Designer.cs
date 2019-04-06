@@ -39,8 +39,11 @@
             this.SaveFileNameBox = new System.Windows.Forms.TextBox();
             this.SaveNameLabel = new System.Windows.Forms.Label();
             this.LoadFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.LockButton = new System.Windows.Forms.Button();
+            this.OpacityBar = new System.Windows.Forms.TrackBar();
             this.toolStrip1.SuspendLayout();
             this.SavePanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.OpacityBar)).BeginInit();
             this.SuspendLayout();
             // 
             // NotepadArea
@@ -132,14 +135,39 @@
             this.LoadFileDialog.Filter = "Text File|*.txt";
             this.LoadFileDialog.InitialDirectory = "Notes";
             // 
+            // LockButton
+            // 
+            this.LockButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.LockButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.LockButton.Location = new System.Drawing.Point(761, 2);
+            this.LockButton.Name = "LockButton";
+            this.LockButton.Size = new System.Drawing.Size(27, 23);
+            this.LockButton.TabIndex = 10;
+            this.LockButton.UseVisualStyleBackColor = true;
+            this.LockButton.Click += new System.EventHandler(this.LockButton_Click);
+            // 
+            // OpacityBar
+            // 
+            this.OpacityBar.Location = new System.Drawing.Point(651, 2);
+            this.OpacityBar.Maximum = 100;
+            this.OpacityBar.Minimum = 10;
+            this.OpacityBar.Name = "OpacityBar";
+            this.OpacityBar.Size = new System.Drawing.Size(104, 45);
+            this.OpacityBar.TabIndex = 11;
+            this.OpacityBar.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.OpacityBar.Value = 100;
+            this.OpacityBar.ValueChanged += new System.EventHandler(this.OpacityBar_ValueChanged);
+            // 
             // Notepad
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.SavePanel);
-            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.NotepadArea);
+            this.Controls.Add(this.OpacityBar);
+            this.Controls.Add(this.LockButton);
+            this.Controls.Add(this.toolStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Notepad";
             this.Text = "Notepad";
@@ -148,6 +176,7 @@
             this.toolStrip1.PerformLayout();
             this.SavePanel.ResumeLayout(false);
             this.SavePanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.OpacityBar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -165,5 +194,7 @@
         private System.Windows.Forms.TextBox SaveFileNameBox;
         private System.Windows.Forms.Label SaveNameLabel;
         private System.Windows.Forms.OpenFileDialog LoadFileDialog;
+        private System.Windows.Forms.Button LockButton;
+        private System.Windows.Forms.TrackBar OpacityBar;
     }
 }

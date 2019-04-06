@@ -49,9 +49,12 @@ namespace The_UGamer_Launcher
         ScreenshotViewer screenshotView;
         bool screenshotsOpen = false;
 
+        bool locked = false;
+
         public Overlay(string name, string[,] links, int linkCount, GameDetails details)
         {
             InitializeComponent();
+            LockButton.BackgroundImage = Image.FromFile("Resources\\Theme\\Unlock.png");
             this.details = details;
             title = name;
             this.links = links;
@@ -182,28 +185,32 @@ namespace The_UGamer_Launcher
             {
                 if (flag)
                 {
-                    if (browserOpen == true)
+                    if (browserOpen == true && openBrowser.locked == false)
                         openBrowser.Hide();
-                    if (notesOpen == true)
+                    if (notesOpen == true && notes.locked == false)
                         notes.Hide();
-                    if (screenshotsOpen == true)
+                    if (screenshotsOpen == true && screenshotView.locked == false)
                         screenshotView.Hide();
 
                     overlayVisible = false;
-                    this.Hide();
+
+                    if (locked == false)
+                        this.Hide();
                     flag = false;
                 }
                 else
                 {
-                    if (browserOpen == true)
+                    if (browserOpen == true && openBrowser.locked == false)
                         openBrowser.Show();
-                    if (notesOpen == true)
+                    if (notesOpen == true && notes.locked == false)
                         notes.Show();
-                    if (screenshotsOpen == true)
+                    if (screenshotsOpen == true && screenshotView.locked == false)
                         screenshotView.Show();
 
                     overlayVisible = true;
-                    this.Show();
+
+                    if (locked == false)
+                        this.Show();
                     flag = true;
                 }
 
@@ -302,7 +309,7 @@ namespace The_UGamer_Launcher
             ScreenshotLabel.Visible = false;
             screenshotTimer.Stop();
 
-            if (overlayVisible == false)
+            if (overlayVisible == false && locked == false)
             {
                 try { this.Hide(); }
                 catch (NullReferenceException f) { }
@@ -365,6 +372,27 @@ namespace The_UGamer_Launcher
         private void screenshotView_FormClosing(object sender, FormClosingEventArgs e)
         {
             screenshotsOpen = false;
+        }
+
+        private void LockButton_Click(object sender, EventArgs e)
+        {
+            if (locked == false)
+            {
+                locked = true;
+                LockButton.BackgroundImage = Image.FromFile("Resources\\Theme\\Lock.png");
+            }
+            else
+            {
+                locked = false;
+                LockButton.BackgroundImage = Image.FromFile("Resources\\Theme\\Unlock.png");
+            }
+        }
+
+        private void OpacityBar_ValueChanged(object sender, EventArgs e)
+        {
+            double opacityValue = Convert.ToDouble(OpacityBar.Value);
+            opacityValue /= 100;
+            this.Opacity = opacityValue;
         }
     }
 }

@@ -29,6 +29,7 @@ namespace The_UGamer_Launcher
         {
             this.titleFriendly = titleFriendly;
             InitializeComponent();
+            LockButton.BackgroundImage = Image.FromFile("Resources\\Theme\\Unlock.png");
             InitializeImages();
             InitializeDesign();
         }
@@ -335,6 +336,29 @@ namespace The_UGamer_Launcher
             {
 
             }
+        }
+
+        public bool locked = false;
+
+        private void LockButton_Click(object sender, EventArgs e)
+        {
+            if (locked == false)
+            {
+                locked = true;
+                LockButton.BackgroundImage = Image.FromFile("Resources\\Theme\\Lock.png");
+            }
+            else
+            {
+                locked = false;
+                LockButton.BackgroundImage = Image.FromFile("Resources\\Theme\\Unlock.png");
+            }
+        }
+
+        private void OpacityBar_ValueChanged(object sender, EventArgs e)
+        {
+            double opacityValue = Convert.ToDouble(OpacityBar.Value);
+            opacityValue /= 100;
+            this.Opacity = opacityValue;
         }
     }
 }
