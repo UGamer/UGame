@@ -39,6 +39,7 @@ Thank you to all who helped in this project.
 
 * [StackBlur](https://github.com/victoriqueko/StackBlur) - Package used to blur backgrounds.
 * [CefSharp](https://github.com/cefsharp/CefSharp/) - Used to embed Chromium into the launcher.
+  Copyright © The CefSharp Authors. All rights reserved.
 * [EasyRP](https://github.com/Pizzabelly/EasyRP) - Adds Discord Rich Presence to the launcher.
 
 ### Artwork
