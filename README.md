@@ -1,12 +1,12 @@
-# ![Logo](https://i.imgur.com/3uhZTqu.png)
+# ![Logo](https://i.imgur.com/5gdwf0z.png)
 
-# UGame Launcher
+# UGame
 
 A performance-lightweight launcher that comes with more details and customizability than Steam.
 
 ## History
 
-The "UGame Launcher" was created with the idea of having all of your games in one place from across numerous different platforms. This includes games from Steam, Origin, uPlay, Epic Games, other PC games (League, Minecraft), and games from any platform you can think of.
+UGame was created with the idea of having all of your games in one place from across numerous different platforms. This includes games from Steam, Origin, uPlay, Epic Games, other PC games (League, Minecraft), and games from any platform you can think of.
 
 ## Getting Started
 
