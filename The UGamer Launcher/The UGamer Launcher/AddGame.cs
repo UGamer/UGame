@@ -27,6 +27,9 @@ namespace The_UGamer_Launcher
         public AddGame(Form1 parent, bool refreshSignal)
         {
             InitializeComponent();
+            obtainedDatePicker.Value = DateTime.Now;
+            startDatePicker.Value = DateTime.Now;
+            endDatePicker.Value = DateTime.Now;
             frm1 = parent;
             try
             {

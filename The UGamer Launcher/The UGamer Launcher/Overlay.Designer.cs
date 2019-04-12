@@ -44,6 +44,7 @@
             // NameLabel
             // 
             this.NameLabel.AutoSize = true;
+            this.NameLabel.BackColor = System.Drawing.Color.Transparent;
             this.NameLabel.Font = new System.Drawing.Font("Century Gothic", 48F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NameLabel.Location = new System.Drawing.Point(13, 13);
             this.NameLabel.Name = "NameLabel";
@@ -95,7 +96,7 @@
             // 
             this.ScreenshotLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ScreenshotLabel.AutoSize = true;
-            this.ScreenshotLabel.Location = new System.Drawing.Point(448, 9);
+            this.ScreenshotLabel.Location = new System.Drawing.Point(560, 9);
             this.ScreenshotLabel.Name = "ScreenshotLabel";
             this.ScreenshotLabel.Size = new System.Drawing.Size(110, 13);
             this.ScreenshotLabel.TabIndex = 5;
@@ -116,7 +117,7 @@
             // ScreenshotsButton
             // 
             this.ScreenshotsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ScreenshotsButton.Location = new System.Drawing.Point(564, 4);
+            this.ScreenshotsButton.Location = new System.Drawing.Point(676, 4);
             this.ScreenshotsButton.Name = "ScreenshotsButton";
             this.ScreenshotsButton.Size = new System.Drawing.Size(90, 23);
             this.ScreenshotsButton.TabIndex = 7;
@@ -138,7 +139,8 @@
             // 
             // OpacityBar
             // 
-            this.OpacityBar.Location = new System.Drawing.Point(660, 4);
+            this.OpacityBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.OpacityBar.Location = new System.Drawing.Point(409, 97);
             this.OpacityBar.Maximum = 100;
             this.OpacityBar.Minimum = 10;
             this.OpacityBar.Name = "OpacityBar";
