@@ -576,10 +576,7 @@ namespace The_UGamer_Launcher
                 discordRichPresence.CloseMainWindow();
                 discordRichPresence.Close();
             }
-            catch
-            {
-
-            }
+            catch { }
         }
 
         private void setURLs(string news)
