@@ -1064,6 +1064,7 @@ namespace The_UGamer_Launcher
             dataTable.DataSource = null;
             dataTable.Update();
             dataTable.Refresh();
+
             OleDbCommand cmd = new OleDbCommand("SELECT * FROM Table1", con);
             con.Open();
             cmd.CommandType = CommandType.Text;
@@ -1071,9 +1072,12 @@ namespace The_UGamer_Launcher
             DataTable newTable = new DataTable();
             da.Fill(newTable);
             dataTable.DataSource = newTable;
+
             dataTable.Sort(dataTable.Columns[0], ListSortDirection.Ascending);
+
             SteamDGV.DataSource = newTable;
             SteamDGV.Sort(SteamDGV.Columns[0], ListSortDirection.Ascending);
+
             con.Close();
 
             int entryCount = dataTable.Rows.Count;

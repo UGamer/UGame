@@ -85,6 +85,7 @@ namespace The_UGamer_Launcher
             Size browserSize = new Size(801, 389);
             Browser.Size = browserSize;
             Browser.Parent = tabControl1.SelectedTab;
+            Browser.Dock = DockStyle.Fill;
             Browser.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Top);
             this.TabPage1.Controls.Add(Browser);
             Browser.AddressChanged += Browser_AddressChanged;
