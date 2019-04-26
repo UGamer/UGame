@@ -20,8 +20,6 @@ namespace The_UGamer_Launcher
             InitializeComponent();
         }
 
-        
-
         private void SteamCodeLabel_Click(object sender, EventArgs e)
         {
 

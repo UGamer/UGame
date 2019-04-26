@@ -24,6 +24,12 @@ namespace The_UGamer_Launcher
         {
             InitializeComponent();
             frm1 = parent;
+
+            NotesButton.Click += DirectoryBrowse_Click;
+            PagesButton.Click += DirectoryBrowse_Click;
+            ResourcesButton.Click += DirectoryBrowse_Click;
+            ScreenshotButton.Click += DirectoryBrowse_Click;
+            UserDataButton.Click += DirectoryBrowse_Click;
         }
 
         private void Settings_Load(object sender, EventArgs e)
@@ -153,10 +159,6 @@ namespace The_UGamer_Launcher
                 Process.Start(Application.ExecutablePath);
                 Application.Exit();
             }
-            else
-            {
-
-            }
         }
 
         private void ColumnAddButton_Click(object sender, EventArgs e)
@@ -184,10 +186,37 @@ namespace The_UGamer_Launcher
             cmd.ExecuteNonQuery();
             con.Close();
         }
+        
+        private void DirectoryBrowse_Click(object sender, EventArgs e)
+        {
+            Button tempButton = (Button)sender;
+            string boxName = tempButton.Tag.ToString();
+            string path = "";
+
+            DialogResult result = FolderBrowseDialog.ShowDialog();
+            if (result == DialogResult.OK) // Test result.
+                path = FolderBrowseDialog.SelectedPath;
+
+            if (boxName == "Notes")
+                NotesBox.Text = path;
+            else if (boxName == "Pages")
+                PagesBox.Text = path;
+            else if (boxName == "Resources")
+                ResourcesBox.Text = path;
+            else if (boxName == "Screenshots")
+                ScreenshotBox.Text = path;
+            else if (boxName == "User Data")
+                UserDataBox.Text = path;
+
+            refresh = true;
+        }
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
+            if (refresh == true)
+            {
 
+            }
         }
     }
 }
