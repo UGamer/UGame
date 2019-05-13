@@ -20,13 +20,8 @@ namespace The_UGamer_Launcher
         private int linkCount;
         string title;
         ToolStripButton[] linkButton;
-
         private string currentURL;
-
         ChromiumWebBrowser Browser;
-        
-        globalKeyboardHook gkh = new globalKeyboardHook();
-
         GameDetails details;
 
         public BrowserWindow(string[,] links, int linkCount, string title)
@@ -40,9 +35,6 @@ namespace The_UGamer_Launcher
             InitializeBrowser();
             InitializeLinks();
             InitializeDesign();
-
-            gkh.HookedKeys.Add(Keys.MediaPlayPause);
-            gkh.KeyDown += new KeyEventHandler(gkh_KeyDown);
         }
 
         public BrowserWindow(string[,] links, int linkCount, string title, GameDetails detailsWindow)
@@ -55,17 +47,6 @@ namespace The_UGamer_Launcher
             InitializeBrowser();
             InitializeLinks();
             InitializeDesign();
-            
-            gkh.HookedKeys.Add(Keys.MediaPlayPause);
-            gkh.KeyDown += new KeyEventHandler(gkh_KeyDown);
-        }
-        
-        private void gkh_KeyDown(object sender, KeyEventArgs e)
-        {
-            KeyEvent key = new KeyEvent();
-            key.WindowsKeyCode = 20;
-            // SendKeys.Send(" ");
-            Browser.GetBrowser().GetHost().SendKeyEvent(key);
         }
 
         private void InitializeBrowser()
