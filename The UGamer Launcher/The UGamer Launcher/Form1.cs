@@ -73,10 +73,7 @@ namespace The_UGamer_Launcher
                     File.Delete("Resources/Theme/backgroundImageUSING.gif");
                     File.Delete("Resources/Theme/logoUSING.png");
                 }
-                catch
-                {
-
-                }
+                catch { }
             }
 
             try
@@ -145,9 +142,7 @@ namespace The_UGamer_Launcher
                             logo.BackgroundImage = ThemeAssign("logoUSING");
                             File.Delete("Resources/Theme/logo.gif");
                         }
-                        catch (FileNotFoundException h)
-                        {
-                        }
+                        catch (FileNotFoundException h) { }
                     }
                 }
             }
@@ -1186,7 +1181,17 @@ namespace The_UGamer_Launcher
         private void gameWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (gameWindow.refresh == true)
-                RefreshGrid();
+            {
+                for (int index = 0; index < dataTable.Rows.Count; index++)
+                {
+                    if (dataTable.Rows[index].Cells[0].Value.ToString() == gameWindow.title)
+                    {
+                        dataTable.Rows[index].Cells[4].Value = gameWindow.timePlayed;
+                        dataTable.Rows[index].Cells[6].Value = gameWindow.startDate;
+                        dataTable.Rows[index].Cells[7].Value = gameWindow.lastPlayed;
+                    }
+                }
+            }
         }
 
         private void addGame_FormClosed(object sender, FormClosedEventArgs e)
@@ -1502,14 +1507,18 @@ namespace The_UGamer_Launcher
 
         private void dataTable_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
+            try
             {
-                this.dataTable.Rows[e.RowIndex].Selected = true;
-                this.rowIndex = e.RowIndex;
-                this.dataTable.CurrentCell = this.dataTable.Rows[e.RowIndex].Cells[0];
-                this.DatabaseContextMenu.Show(this.dataTable, e.Location);
-                DatabaseContextMenu.Show(Cursor.Position);
+                if (e.Button == MouseButtons.Right)
+                {
+                    this.dataTable.Rows[e.RowIndex].Selected = true;
+                    this.rowIndex = e.RowIndex;
+                    this.dataTable.CurrentCell = this.dataTable.Rows[e.RowIndex].Cells[1];
+                    this.DatabaseContextMenu.Show(this.dataTable, e.Location);
+                    DatabaseContextMenu.Show(Cursor.Position);
+                }
             }
+            catch { }
         }
 
         private void editEntryToolStripMenuItem_Click(object sender, EventArgs e)

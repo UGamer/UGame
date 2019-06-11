@@ -23,7 +23,6 @@ namespace The_UGamer_Launcher
         private bool didPlay = false;
         private bool isPaused = false;
         private bool hasImage = true;
-        public string title;
         string newsUrl;
         string wikiUrl;
         private Size browserSize = new Size(659, 88);
@@ -34,12 +33,20 @@ namespace The_UGamer_Launcher
         public string allLinks = "";
         int linkCount = 0;
 
+        public string title;
+        public string timePlayed;
+        public string startDate;
+        public string lastPlayed;
+
+        int rowIndex;
+
         private static string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Collection.accdb";
         private OleDbConnection con = new OleDbConnection(connectionString);
 
         // Starts up a detail form.
         public GameDetails()
         {
+
             InitializeComponent();
             if (noImageText.Visible == true)
             {
@@ -507,7 +514,7 @@ namespace The_UGamer_Launcher
             if (newSeconds < 10)
                 newSecondsString = "0" + newSeconds;
 
-            string timePlayed = newHoursString + "h:" + newMinutesString + "m:" + newSecondsString + "s";
+            timePlayed = newHoursString + "h:" + newMinutesString + "m:" + newSecondsString + "s";
 
             string obtained = obtainedLabel.Text.Substring(10);
 
@@ -531,6 +538,9 @@ namespace The_UGamer_Launcher
             string endDate1 = today2.ToString("u");
             string endDate2 = endDate1.Substring(0, 10);
             endDate2 = dateFix.Replace(endDate2, "/");
+
+            this.startDate = startDate2;
+            lastPlayed = endDate2;
 
             string launchCode = launchLabel.Text;
 
@@ -853,8 +863,7 @@ namespace The_UGamer_Launcher
                 isPaused = false;
                 PauseTimeButton.Text = "Pause Playing";
                 discardButton.Visible = false;
-                if (justTrack == true)
-                    TrackTimeButton.Visible = true;
+                TrackTimeButton.Visible = true;
             }
             else
             {
@@ -862,8 +871,11 @@ namespace The_UGamer_Launcher
                 return;
             }
             ingame.Close();
-            discordRichPresence.CloseMainWindow();
-            discordRichPresence.Close();
+            try
+            {
+                discordRichPresence.CloseMainWindow();
+                discordRichPresence.Close();
+            } catch { }
         }
 
         private void BrowserButton_Click(object sender, EventArgs e)

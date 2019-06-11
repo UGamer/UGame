@@ -345,15 +345,12 @@ namespace The_UGamer_Launcher
         private void PauseButton_Click(object sender, EventArgs e)
         {
             if (isPaused == false)
-            {
                 t.Stop();
-                details.PauseTime();
-            }
             else
-            {
                 t.Start();
-                details.PauseTime();
-            }
+
+            details.PauseTime();
+            Lock();
         }
 
         private void Overlay_FormClosing(object sender, FormClosingEventArgs e)
@@ -375,6 +372,11 @@ namespace The_UGamer_Launcher
         }
 
         private void LockButton_Click(object sender, EventArgs e)
+        {
+            Lock();
+        }
+
+        private void Lock()
         {
             if (locked == false)
             {

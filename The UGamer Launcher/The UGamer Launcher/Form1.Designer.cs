@@ -29,19 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataTable = new System.Windows.Forms.DataGridView();
-            this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.platformDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.statusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ratingDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PlayTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.obtainedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.startDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.endDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.notesCommentsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.launchDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.table1BindingSource5 = new System.Windows.Forms.BindingSource(this.components);
             this.collectionDataSet = new The_UGamer_Launcher.CollectionDataSet();
             this.driverInstall = new System.Windows.Forms.WebBrowser();
@@ -92,24 +82,13 @@
             this.actionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.notificationsBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.notificationsSet = new The_UGamer_Launcher.NotificationsSet();
-            this.notificationsTableAdapter1 = new The_UGamer_Launcher.NotificationsSetTableAdapters.NotificationsTableAdapter();
             this.table1BindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.table1BindingSource3 = new System.Windows.Forms.BindingSource(this.components);
             this.table1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.table1BindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.notificationDataSet = new The_UGamer_Launcher.NotificationDataSet();
-            this.notificationsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.notificationsTableAdapter = new The_UGamer_Launcher.NotificationDataSetTableAdapters.NotificationsTableAdapter();
-            this.table1TableAdapter = new The_UGamer_Launcher.CollectionDataSetTableAdapters.Table1TableAdapter();
-            this.collectionDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.DatabaseContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editEntryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hideEntryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.table1BindingSource4 = new System.Windows.Forms.BindingSource(this.components);
-            this.collectionDataSet4 = new The_UGamer_Launcher.CollectionDataSet4();
-            this.table1TableAdapter2 = new The_UGamer_Launcher.CollectionDataSet4TableAdapters.Table1TableAdapter();
-            this.collectionDataSet5 = new The_UGamer_Launcher.CollectionDataSet5();
-            this.collectionDataSet5BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.PagesButton = new System.Windows.Forms.Button();
             this.WebPageBox = new System.Windows.Forms.ComboBox();
             this.PagesBoxButton = new System.Windows.Forms.Button();
@@ -132,6 +111,27 @@
             this.Steam_EntriesButton = new System.Windows.Forms.Button();
             this.Panel_Pages = new System.Windows.Forms.Panel();
             this.GIFBackground = new System.Windows.Forms.PictureBox();
+            this.notificationsTableAdapter1 = new The_UGamer_Launcher.NotificationsSetTableAdapters.NotificationsTableAdapter();
+            this.notificationDataSet = new The_UGamer_Launcher.NotificationDataSet();
+            this.notificationsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.notificationsTableAdapter = new The_UGamer_Launcher.NotificationDataSetTableAdapters.NotificationsTableAdapter();
+            this.table1TableAdapter = new The_UGamer_Launcher.CollectionDataSetTableAdapters.Table1TableAdapter();
+            this.collectionDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.table1BindingSource4 = new System.Windows.Forms.BindingSource(this.components);
+            this.collectionDataSet4 = new The_UGamer_Launcher.CollectionDataSet4();
+            this.table1TableAdapter2 = new The_UGamer_Launcher.CollectionDataSet4TableAdapters.Table1TableAdapter();
+            this.collectionDataSet5 = new The_UGamer_Launcher.CollectionDataSet5();
+            this.collectionDataSet5BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.platformDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.statusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ratingDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PlayTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.obtainedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.startDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.endDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.notesCommentsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.launchDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet)).BeginInit();
@@ -144,14 +144,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.notificationDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.notificationsBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSetBindingSource)).BeginInit();
             this.DatabaseContextMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet5BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SteamDGV)).BeginInit();
             this.SteamView.SuspendLayout();
             this.SteamDetailPanel.SuspendLayout();
@@ -159,6 +152,13 @@
             this.SteamViewHeaderPanel.SuspendLayout();
             this.Panel_Pages.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GIFBackground)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.notificationDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.notificationsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSetBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet5BindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // dataTable
@@ -185,91 +185,12 @@
             this.dataTable.Location = new System.Drawing.Point(22, 28);
             this.dataTable.Name = "dataTable";
             this.dataTable.ReadOnly = true;
+            this.dataTable.RowHeadersVisible = false;
             this.dataTable.Size = new System.Drawing.Size(1291, 513);
             this.dataTable.TabIndex = 9;
             this.dataTable.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataTable_CellDoubleClick);
             this.dataTable.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataTable_CellMouseUp);
             this.dataTable.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.customSortCompare);
-            // 
-            // titleDataGridViewTextBoxColumn
-            // 
-            this.titleDataGridViewTextBoxColumn.DataPropertyName = "Title";
-            this.titleDataGridViewTextBoxColumn.HeaderText = "Title";
-            this.titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
-            this.titleDataGridViewTextBoxColumn.ReadOnly = true;
-            this.titleDataGridViewTextBoxColumn.Width = 219;
-            // 
-            // platformDataGridViewTextBoxColumn
-            // 
-            this.platformDataGridViewTextBoxColumn.DataPropertyName = "Platform";
-            this.platformDataGridViewTextBoxColumn.HeaderText = "Platform";
-            this.platformDataGridViewTextBoxColumn.Name = "platformDataGridViewTextBoxColumn";
-            this.platformDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // statusDataGridViewTextBoxColumn
-            // 
-            this.statusDataGridViewTextBoxColumn.DataPropertyName = "Status";
-            this.statusDataGridViewTextBoxColumn.HeaderText = "Status";
-            this.statusDataGridViewTextBoxColumn.Name = "statusDataGridViewTextBoxColumn";
-            this.statusDataGridViewTextBoxColumn.ReadOnly = true;
-            this.statusDataGridViewTextBoxColumn.Width = 90;
-            // 
-            // ratingDataGridViewTextBoxColumn
-            // 
-            this.ratingDataGridViewTextBoxColumn.DataPropertyName = "Rating";
-            this.ratingDataGridViewTextBoxColumn.HeaderText = "Rating";
-            this.ratingDataGridViewTextBoxColumn.Name = "ratingDataGridViewTextBoxColumn";
-            this.ratingDataGridViewTextBoxColumn.ReadOnly = true;
-            this.ratingDataGridViewTextBoxColumn.Width = 70;
-            // 
-            // PlayTime
-            // 
-            this.PlayTime.DataPropertyName = "PlayTime";
-            dataGridViewCellStyle2.NullValue = null;
-            this.PlayTime.DefaultCellStyle = dataGridViewCellStyle2;
-            this.PlayTime.HeaderText = "Time Played";
-            this.PlayTime.Name = "PlayTime";
-            this.PlayTime.ReadOnly = true;
-            // 
-            // obtainedDataGridViewTextBoxColumn
-            // 
-            this.obtainedDataGridViewTextBoxColumn.DataPropertyName = "Obtained";
-            this.obtainedDataGridViewTextBoxColumn.HeaderText = "Obtained";
-            this.obtainedDataGridViewTextBoxColumn.Name = "obtainedDataGridViewTextBoxColumn";
-            this.obtainedDataGridViewTextBoxColumn.ReadOnly = true;
-            this.obtainedDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // startDateDataGridViewTextBoxColumn
-            // 
-            this.startDateDataGridViewTextBoxColumn.DataPropertyName = "StartDate";
-            this.startDateDataGridViewTextBoxColumn.HeaderText = "Start Date";
-            this.startDateDataGridViewTextBoxColumn.Name = "startDateDataGridViewTextBoxColumn";
-            this.startDateDataGridViewTextBoxColumn.ReadOnly = true;
-            this.startDateDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // endDateDataGridViewTextBoxColumn
-            // 
-            this.endDateDataGridViewTextBoxColumn.DataPropertyName = "EndDate";
-            this.endDateDataGridViewTextBoxColumn.HeaderText = "Last Played";
-            this.endDateDataGridViewTextBoxColumn.Name = "endDateDataGridViewTextBoxColumn";
-            this.endDateDataGridViewTextBoxColumn.ReadOnly = true;
-            this.endDateDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // notesCommentsDataGridViewTextBoxColumn
-            // 
-            this.notesCommentsDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.notesCommentsDataGridViewTextBoxColumn.DataPropertyName = "Notes";
-            this.notesCommentsDataGridViewTextBoxColumn.HeaderText = "Notes/Comments";
-            this.notesCommentsDataGridViewTextBoxColumn.Name = "notesCommentsDataGridViewTextBoxColumn";
-            this.notesCommentsDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // launchDataGridViewTextBoxColumn
-            // 
-            this.launchDataGridViewTextBoxColumn.DataPropertyName = "Launch";
-            this.launchDataGridViewTextBoxColumn.HeaderText = "Launch";
-            this.launchDataGridViewTextBoxColumn.Name = "launchDataGridViewTextBoxColumn";
-            this.launchDataGridViewTextBoxColumn.ReadOnly = true;
-            this.launchDataGridViewTextBoxColumn.Visible = false;
             // 
             // table1BindingSource5
             // 
@@ -721,33 +642,6 @@
             this.notificationsSet.DataSetName = "NotificationsSet";
             this.notificationsSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // notificationsTableAdapter1
-            // 
-            this.notificationsTableAdapter1.ClearBeforeFill = true;
-            // 
-            // notificationDataSet
-            // 
-            this.notificationDataSet.DataSetName = "NotificationDataSet";
-            this.notificationDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // notificationsBindingSource
-            // 
-            this.notificationsBindingSource.DataMember = "Notifications";
-            this.notificationsBindingSource.DataSource = this.notificationDataSet;
-            // 
-            // notificationsTableAdapter
-            // 
-            this.notificationsTableAdapter.ClearBeforeFill = true;
-            // 
-            // table1TableAdapter
-            // 
-            this.table1TableAdapter.ClearBeforeFill = true;
-            // 
-            // collectionDataSetBindingSource
-            // 
-            this.collectionDataSetBindingSource.DataSource = this.collectionDataSet;
-            this.collectionDataSetBindingSource.Position = 0;
-            // 
             // DatabaseContextMenu
             // 
             this.DatabaseContextMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
@@ -770,30 +664,6 @@
             this.hideEntryToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
             this.hideEntryToolStripMenuItem.Text = "Hide Entry...";
             this.hideEntryToolStripMenuItem.Click += new System.EventHandler(this.hideEntryToolStripMenuItem_Click);
-            // 
-            // table1BindingSource4
-            // 
-            this.table1BindingSource4.DataMember = "Table1";
-            this.table1BindingSource4.DataSource = this.collectionDataSet4;
-            // 
-            // collectionDataSet4
-            // 
-            this.collectionDataSet4.DataSetName = "CollectionDataSet4";
-            this.collectionDataSet4.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // table1TableAdapter2
-            // 
-            this.table1TableAdapter2.ClearBeforeFill = true;
-            // 
-            // collectionDataSet5
-            // 
-            this.collectionDataSet5.DataSetName = "CollectionDataSet5";
-            this.collectionDataSet5.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // collectionDataSet5BindingSource
-            // 
-            this.collectionDataSet5BindingSource.DataSource = this.collectionDataSet5;
-            this.collectionDataSet5BindingSource.Position = 0;
             // 
             // PagesButton
             // 
@@ -1034,6 +904,137 @@
             this.GIFBackground.TabStop = false;
             this.GIFBackground.Visible = false;
             // 
+            // notificationsTableAdapter1
+            // 
+            this.notificationsTableAdapter1.ClearBeforeFill = true;
+            // 
+            // notificationDataSet
+            // 
+            this.notificationDataSet.DataSetName = "NotificationDataSet";
+            this.notificationDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // notificationsBindingSource
+            // 
+            this.notificationsBindingSource.DataMember = "Notifications";
+            this.notificationsBindingSource.DataSource = this.notificationDataSet;
+            // 
+            // notificationsTableAdapter
+            // 
+            this.notificationsTableAdapter.ClearBeforeFill = true;
+            // 
+            // table1TableAdapter
+            // 
+            this.table1TableAdapter.ClearBeforeFill = true;
+            // 
+            // collectionDataSetBindingSource
+            // 
+            this.collectionDataSetBindingSource.DataSource = this.collectionDataSet;
+            this.collectionDataSetBindingSource.Position = 0;
+            // 
+            // table1BindingSource4
+            // 
+            this.table1BindingSource4.DataMember = "Table1";
+            this.table1BindingSource4.DataSource = this.collectionDataSet4;
+            // 
+            // collectionDataSet4
+            // 
+            this.collectionDataSet4.DataSetName = "CollectionDataSet4";
+            this.collectionDataSet4.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // table1TableAdapter2
+            // 
+            this.table1TableAdapter2.ClearBeforeFill = true;
+            // 
+            // collectionDataSet5
+            // 
+            this.collectionDataSet5.DataSetName = "CollectionDataSet5";
+            this.collectionDataSet5.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // collectionDataSet5BindingSource
+            // 
+            this.collectionDataSet5BindingSource.DataSource = this.collectionDataSet5;
+            this.collectionDataSet5BindingSource.Position = 0;
+            // 
+            // titleDataGridViewTextBoxColumn
+            // 
+            this.titleDataGridViewTextBoxColumn.DataPropertyName = "Title";
+            this.titleDataGridViewTextBoxColumn.HeaderText = "Title";
+            this.titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
+            this.titleDataGridViewTextBoxColumn.ReadOnly = true;
+            this.titleDataGridViewTextBoxColumn.Width = 219;
+            // 
+            // platformDataGridViewTextBoxColumn
+            // 
+            this.platformDataGridViewTextBoxColumn.DataPropertyName = "Platform";
+            this.platformDataGridViewTextBoxColumn.HeaderText = "Platform";
+            this.platformDataGridViewTextBoxColumn.Name = "platformDataGridViewTextBoxColumn";
+            this.platformDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // statusDataGridViewTextBoxColumn
+            // 
+            this.statusDataGridViewTextBoxColumn.DataPropertyName = "Status";
+            this.statusDataGridViewTextBoxColumn.HeaderText = "Status";
+            this.statusDataGridViewTextBoxColumn.Name = "statusDataGridViewTextBoxColumn";
+            this.statusDataGridViewTextBoxColumn.ReadOnly = true;
+            this.statusDataGridViewTextBoxColumn.Width = 90;
+            // 
+            // ratingDataGridViewTextBoxColumn
+            // 
+            this.ratingDataGridViewTextBoxColumn.DataPropertyName = "Rating";
+            this.ratingDataGridViewTextBoxColumn.HeaderText = "Rating";
+            this.ratingDataGridViewTextBoxColumn.Name = "ratingDataGridViewTextBoxColumn";
+            this.ratingDataGridViewTextBoxColumn.ReadOnly = true;
+            this.ratingDataGridViewTextBoxColumn.Width = 70;
+            // 
+            // PlayTime
+            // 
+            this.PlayTime.DataPropertyName = "PlayTime";
+            dataGridViewCellStyle1.NullValue = null;
+            this.PlayTime.DefaultCellStyle = dataGridViewCellStyle1;
+            this.PlayTime.HeaderText = "Time Played";
+            this.PlayTime.Name = "PlayTime";
+            this.PlayTime.ReadOnly = true;
+            // 
+            // obtainedDataGridViewTextBoxColumn
+            // 
+            this.obtainedDataGridViewTextBoxColumn.DataPropertyName = "Obtained";
+            this.obtainedDataGridViewTextBoxColumn.HeaderText = "Obtained";
+            this.obtainedDataGridViewTextBoxColumn.Name = "obtainedDataGridViewTextBoxColumn";
+            this.obtainedDataGridViewTextBoxColumn.ReadOnly = true;
+            this.obtainedDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // startDateDataGridViewTextBoxColumn
+            // 
+            this.startDateDataGridViewTextBoxColumn.DataPropertyName = "StartDate";
+            this.startDateDataGridViewTextBoxColumn.HeaderText = "Start Date";
+            this.startDateDataGridViewTextBoxColumn.Name = "startDateDataGridViewTextBoxColumn";
+            this.startDateDataGridViewTextBoxColumn.ReadOnly = true;
+            this.startDateDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // endDateDataGridViewTextBoxColumn
+            // 
+            this.endDateDataGridViewTextBoxColumn.DataPropertyName = "EndDate";
+            this.endDateDataGridViewTextBoxColumn.HeaderText = "Last Played";
+            this.endDateDataGridViewTextBoxColumn.Name = "endDateDataGridViewTextBoxColumn";
+            this.endDateDataGridViewTextBoxColumn.ReadOnly = true;
+            this.endDateDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // notesCommentsDataGridViewTextBoxColumn
+            // 
+            this.notesCommentsDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.notesCommentsDataGridViewTextBoxColumn.DataPropertyName = "Notes";
+            this.notesCommentsDataGridViewTextBoxColumn.HeaderText = "Notes/Comments";
+            this.notesCommentsDataGridViewTextBoxColumn.Name = "notesCommentsDataGridViewTextBoxColumn";
+            this.notesCommentsDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // launchDataGridViewTextBoxColumn
+            // 
+            this.launchDataGridViewTextBoxColumn.DataPropertyName = "Launch";
+            this.launchDataGridViewTextBoxColumn.HeaderText = "Launch";
+            this.launchDataGridViewTextBoxColumn.Name = "launchDataGridViewTextBoxColumn";
+            this.launchDataGridViewTextBoxColumn.ReadOnly = true;
+            this.launchDataGridViewTextBoxColumn.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1073,14 +1074,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.notificationDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.notificationsBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSetBindingSource)).EndInit();
             this.DatabaseContextMenu.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet5BindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SteamDGV)).EndInit();
             this.SteamView.ResumeLayout(false);
             this.SteamDetailPanel.ResumeLayout(false);
@@ -1089,6 +1083,13 @@
             this.SteamViewHeaderPanel.ResumeLayout(false);
             this.Panel_Pages.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.GIFBackground)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.notificationDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.notificationsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSetBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.collectionDataSet5BindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1159,16 +1160,6 @@
         private System.Windows.Forms.ToolStripMenuItem hideEntryToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem canLaunchToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cantLaunchToolStripMenuItem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn titleDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn platformDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn statusDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ratingDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PlayTime;
-        private System.Windows.Forms.DataGridViewTextBoxColumn obtainedDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn startDateDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn endDateDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn notesCommentsDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn launchDataGridViewTextBoxColumn;
         private System.Windows.Forms.Button PagesButton;
         private System.Windows.Forms.ComboBox WebPageBox;
         private System.Windows.Forms.Button PagesBoxButton;
@@ -1196,6 +1187,16 @@
         private System.Windows.Forms.PictureBox SteamGameIcon;
         private System.Windows.Forms.Button SteamInfoButton;
         private System.Windows.Forms.PictureBox GIFBackground;
+        private System.Windows.Forms.DataGridViewTextBoxColumn titleDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn platformDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn statusDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ratingDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PlayTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn obtainedDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn startDateDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn endDateDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn notesCommentsDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn launchDataGridViewTextBoxColumn;
     }
 }
 
