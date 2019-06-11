@@ -1,2 +1,0 @@
-NoLongerPlaying - (Playing) to (On Hold, Dropped, Start Over, On and Off, Completed)
-NowPlaying - (Dropped, Never Started, On Hold, Plan to Play, Start Over, Don't Have) to (Playing)
