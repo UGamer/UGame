@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StackBlur;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -32,7 +33,7 @@ namespace UGame
 
         static string connectionString;
         static SqlConnection con;
-        public SqlCommand cmd;
+        public SqlCommand updateCmd;
 
         int rowIndex;
         public int id;
@@ -87,8 +88,9 @@ namespace UGame
 
         public GameTab(MainForm refer, int rowIndex, int tabCount, int id)
         {
-            connectionString = connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"" + refer.mdfPath + "\";Integrated Security=True"; ;
+            connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"" + refer.mdfPath + "\";Integrated Security=True";
             con = new SqlConnection(connectionString);
+
             this.refer = refer;
             tabIndex = tabCount - 2;
 
@@ -125,13 +127,13 @@ namespace UGame
             releaseDate = refer.dataTable.Rows[rowIndex]["ReleaseDate"].ToString();
             genre = refer.dataTable.Rows[rowIndex]["Genre"].ToString();
             playerCount = refer.dataTable.Rows[rowIndex]["PlayerCount"].ToString();
-            try { price = Convert.ToDecimal(refer.dataTable.Rows[rowIndex]["Price"]); } catch { price = -999; }
+            try { price = Convert.ToDecimal(refer.dataTable.Rows[rowIndex]["Price"]); } catch { price = -1; }
             gameDesc = refer.dataTable.Rows[rowIndex]["GameDesc"].ToString();
 
 
             launchCode = refer.dataTable.Rows[rowIndex]["Launch"].ToString();
-            try { blur = Convert.ToBoolean(refer.dataTable.Rows[rowIndex]["Blur"]); } catch { blur = false; }
-            try { useOverlay = Convert.ToBoolean(refer.dataTable.Rows[rowIndex]["Overlay"]); } catch { useOverlay = false; }
+            try { blur = Convert.ToBoolean(refer.dataTable.Rows[rowIndex]["Blur"]); } catch { blur = true; }
+            try { useOverlay = Convert.ToBoolean(refer.dataTable.Rows[rowIndex]["Overlay"]); } catch { useOverlay = true; }
             
             con.Close();
 
@@ -140,15 +142,27 @@ namespace UGame
 
         private void TabCreation()
         {
+            Image bgImage = null;
             gameTab.Text = title;
             gameTab.BackColor = Color.White;
-            try { gameTab.BackgroundImage = Image.FromFile("resources\\bg\\" + title + ".png"); }
-            catch { try { gameTab.BackgroundImage = Image.FromFile("resources\\bg\\" + title + ".jpg"); }
-            catch { try { gameTab.BackgroundImage = Image.FromFile("resources\\bg\\" + title + ".jpeg"); }
-            catch { try { gameTab.BackgroundImage = Image.FromFile("resources\\bg\\" + title + ".gif"); }
-            catch { try { gameTab.BackgroundImage = Image.FromFile("resources\\bg\\" + title + ".jfif"); }
+            try { bgImage = Image.FromFile("resources\\bg\\" + title + ".png"); }
+            catch { try { bgImage = Image.FromFile("resources\\bg\\" + title + ".jpg"); }
+            catch { try { bgImage = Image.FromFile("resources\\bg\\" + title + ".jpeg"); }
+            catch { try { bgImage = Image.FromFile("resources\\bg\\" + title + ".gif"); }
+            catch { try { bgImage = Image.FromFile("resources\\bg\\" + title + ".jfif"); }
             catch { } } } } }
-            gameTab.BackgroundImageLayout = ImageLayout.Stretch;
+            try
+            {
+                Bitmap bg = new Bitmap(bgImage);
+                if (blur)
+                {
+                    var radius = 20;
+                    StackBlur.StackBlur.Process(bg, radius);
+                }
+                gameTab.BackgroundImage = bg;
+                gameTab.BackgroundImageLayout = ImageLayout.Stretch;
+            }
+            catch { }
 
             detailsBox.Location = new Point(7, 7);
             detailsBox.Size = new Size(351, 351);
@@ -172,7 +186,7 @@ namespace UGame
             iconBox.BackgroundImageLayout = ImageLayout.Zoom;
             iconBox.BackColor = Color.Transparent;
 
-            titleBox.Location = new Point(440, 7);
+            titleBox.Location = new Point(440, 14);
             titleBox.Size = new Size(593, 68);
             titleBox.BorderStyle = BorderStyle.None;
             titleBox.Font = new Font("Century Gothic", 32);
@@ -378,10 +392,42 @@ namespace UGame
         {
             if (save)
             {
-                // WRITE EVERYTHING TO THE DATABASE
+                totalSeconds += seconds + (minutes * 60) + (hours * 3600);
 
-                int totalSeconds = seconds + (minutes * 60) + (hours * 3600);
-                UpdateFields(totalSeconds);
+                int hour; int min; int sec;
+                
+                min = totalSeconds / 60;
+                sec = totalSeconds % 60;
+                hour = min / 60;
+                min %= 60;
+
+                string hourString = "0"; string minString = "0"; string secString = "0";
+                if (hour < 10)
+                    hourString += hour;
+                else
+                    hourString = hour.ToString();
+                hourString += "h:";
+                
+                if (min < 10)
+                    minString += min;
+                else
+                    minString = min.ToString();
+                minString += "m:";
+
+                if (sec < 10)
+                    secString += sec;
+                else
+                    secString = sec.ToString();
+                secString += "s";
+
+                timePlayed = hourString + minString + secString;
+
+                // WRITE EVERYTHING TO THE DATABASE
+                updateCmd = new SqlCommand("UPDATE Games SET TimePlayed = '" + timePlayed + "', Seconds = " + totalSeconds + ", LastPlayed = CAST('" + lastPlayed.ToString() + "' AS DATETIME) WHERE Id = " + id + ";", con);
+                // WRITE EVERYTHING TO THE DATABASE
+                con.Open();
+                updateCmd.ExecuteNonQuery();
+                con.Close();
 
                 gameSummary = new GameSummary(title, totalSeconds);
                 gameSummary.Show();
@@ -409,11 +455,6 @@ namespace UGame
                 timer.Start();
                 SetText("Pause Playing", ref button2);
             }
-        }
-
-        private void UpdateFields(int playSeconds)
-        {
-            totalSeconds += playSeconds;
         }
 
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)

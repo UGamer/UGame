@@ -47,7 +47,10 @@ namespace UGame
 
         private void chromeBrowser_AddressChanged(object sender, AddressChangedEventArgs e)
         {
-            AddressBar.Text = chromeBrowser.Address;
+            this.Invoke(new MethodInvoker(() =>
+            {
+                AddressBar.Text = e.Address;
+            }));
         }
 
         private void SearchButton_Click(object sender, EventArgs e)

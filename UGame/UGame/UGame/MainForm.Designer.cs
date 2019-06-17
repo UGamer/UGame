@@ -90,6 +90,9 @@
             this.DatabasePictureButton = new System.Windows.Forms.ToolStripMenuItem();
             this.InternetPictureButton = new System.Windows.Forms.ToolStripMenuItem();
             this.PictureDialog = new System.Windows.Forms.OpenFileDialog();
+            this.GamesDGVContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.EditEntryButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteEntryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainTabs.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.GamesTabs.SuspendLayout();
@@ -103,6 +106,7 @@
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.PictureContextMenu.SuspendLayout();
+            this.GamesDGVContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainTabs
@@ -164,7 +168,7 @@
             this.GamesDGV.RowHeadersVisible = false;
             this.GamesDGV.Size = new System.Drawing.Size(1033, 525);
             this.GamesDGV.TabIndex = 0;
-            this.GamesDGV.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GamesDGV_CellDoubleClick);
+            this.GamesDGV.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.GamesDGV_CellMouseUp);
             this.GamesDGV.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyUp);
             // 
             // GamesEntriesTab
@@ -337,6 +341,8 @@
             // ReleaseDateCheck
             // 
             this.ReleaseDateCheck.AutoSize = true;
+            this.ReleaseDateCheck.Checked = true;
+            this.ReleaseDateCheck.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ReleaseDateCheck.Location = new System.Drawing.Point(266, 408);
             this.ReleaseDateCheck.Name = "ReleaseDateCheck";
             this.ReleaseDateCheck.Size = new System.Drawing.Size(56, 17);
@@ -384,6 +390,8 @@
             // LastPlayedCheck
             // 
             this.LastPlayedCheck.AutoSize = true;
+            this.LastPlayedCheck.Checked = true;
+            this.LastPlayedCheck.CheckState = System.Windows.Forms.CheckState.Checked;
             this.LastPlayedCheck.Location = new System.Drawing.Point(267, 231);
             this.LastPlayedCheck.Name = "LastPlayedCheck";
             this.LastPlayedCheck.Size = new System.Drawing.Size(56, 17);
@@ -401,6 +409,8 @@
             // StartDateCheck
             // 
             this.StartDateCheck.AutoSize = true;
+            this.StartDateCheck.Checked = true;
+            this.StartDateCheck.CheckState = System.Windows.Forms.CheckState.Checked;
             this.StartDateCheck.Location = new System.Drawing.Point(267, 199);
             this.StartDateCheck.Name = "StartDateCheck";
             this.StartDateCheck.Size = new System.Drawing.Size(56, 17);
@@ -418,6 +428,8 @@
             // ObtainedCheck
             // 
             this.ObtainedCheck.AutoSize = true;
+            this.ObtainedCheck.Checked = true;
+            this.ObtainedCheck.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ObtainedCheck.Location = new System.Drawing.Point(267, 167);
             this.ObtainedCheck.Name = "ObtainedCheck";
             this.ObtainedCheck.Size = new System.Drawing.Size(56, 17);
@@ -602,6 +614,7 @@
             this.EditButton.TabIndex = 1;
             this.EditButton.Text = "EDIT";
             this.EditButton.UseVisualStyleBackColor = true;
+            this.EditButton.Click += new System.EventHandler(this.EditButton_Click);
             // 
             // AddButton
             // 
@@ -693,6 +706,27 @@
             this.PictureDialog.FileName = "openFileDialog1";
             this.PictureDialog.Filter = "Image Files(*.PNG;*.JPG;*.JPEG;*.GIF)|*.PNG;*.JPG;*.JPEG;*.GIF";
             // 
+            // GamesDGVContextMenu
+            // 
+            this.GamesDGVContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.EditEntryButton,
+            this.deleteEntryToolStripMenuItem});
+            this.GamesDGVContextMenu.Name = "GamesDGVContextMenu";
+            this.GamesDGVContextMenu.Size = new System.Drawing.Size(138, 48);
+            // 
+            // EditEntryButton
+            // 
+            this.EditEntryButton.Name = "EditEntryButton";
+            this.EditEntryButton.Size = new System.Drawing.Size(137, 22);
+            this.EditEntryButton.Text = "Edit Entry";
+            this.EditEntryButton.Click += new System.EventHandler(this.EditEntryButton_Click);
+            // 
+            // deleteEntryToolStripMenuItem
+            // 
+            this.deleteEntryToolStripMenuItem.Name = "deleteEntryToolStripMenuItem";
+            this.deleteEntryToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.deleteEntryToolStripMenuItem.Text = "Delete Entry";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -717,6 +751,7 @@
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.PictureContextMenu.ResumeLayout(false);
+            this.GamesDGVContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -784,6 +819,9 @@
         private System.Windows.Forms.ToolStripMenuItem DatabasePictureButton;
         private System.Windows.Forms.ToolStripMenuItem InternetPictureButton;
         private System.Windows.Forms.OpenFileDialog PictureDialog;
+        private System.Windows.Forms.ContextMenuStrip GamesDGVContextMenu;
+        private System.Windows.Forms.ToolStripMenuItem EditEntryButton;
+        private System.Windows.Forms.ToolStripMenuItem deleteEntryToolStripMenuItem;
     }
 }
 

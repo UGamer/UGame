@@ -30,7 +30,8 @@ namespace UGame
         public SqlCommand selectCmd;
         public SqlCommand insertCmd;
         public DataTable dataTable;
-        
+
+        int rowIndex;
         int currentRow = 0;
 
         public string urlString = "";
@@ -82,19 +83,23 @@ namespace UGame
             dataRow["Rating"] = 9;
             dataRow["TimePlayed"] = "5000h:00m:00s";
             dataRow["Seconds"] = 18000000;
+            dataRow["Obtained"] = new DateTime(1753, 1, 1);
             dataRow["LastPlayed"] = DateTime.Now;
 
             dataTable.Rows.Add(dataRow);
             // TEMPORARY DATA FOR TESTING
 
 
+            GamesDGV.DataSource = dataTable;
             for (int index = 0; index < dataTable.Rows.Count; index++)
             {
-                try { dataTable.Rows[index][0] = Image.FromFile("resources\\icons\\" + dataTable.Rows[index]["Title"] + ".png"); } catch { dataTable.Rows[index][0] = Image.FromFile("resources\\unknown.png"); }
+                try { GamesDGV.Rows[index].Cells[0].Value = Image.FromFile("resources\\icons\\" + dataTable.Rows[index]["Title"] + ".png"); } catch { GamesDGV.Rows[index].Cells[0].Value = Image.FromFile("resources\\unknown.png"); }
+
                 
+                if (GamesDGV.Rows[index].Cells["Obtained"].Value.ToString() == "1/1/1753")
+                    GamesDGV.Rows[index].Cells["Obtained"].Value = DateTime.Now;
             }
 
-            GamesDGV.DataSource = dataTable;
             ((DataGridViewImageColumn)GamesDGV.Columns[0]).ImageLayout = DataGridViewImageCellLayout.Zoom;
             GamesDGV.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
@@ -162,7 +167,28 @@ namespace UGame
         {
             currentRow = e.RowIndex;
         }
-        
+
+        private void GamesDGV_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            try
+            {
+                if (e.Button == MouseButtons.Right)
+                {
+                    this.GamesDGV.Rows[e.RowIndex].Selected = true;
+                    this.rowIndex = e.RowIndex;
+                    this.GamesDGV.CurrentCell = this.GamesDGV.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                    this.GamesDGVContextMenu.Show(this.GamesDGV, e.Location);
+                    GamesDGVContextMenu.Show(Cursor.Position);
+                }
+            }
+            catch { }
+        }
+
+        private void EditEntryButton_Click(object sender, EventArgs e)
+        {
+            EditEntry(rowIndex);
+        }
+
         /// <summary>
         /// The next section of code deals with the entry system.
         /// </summary>
@@ -225,17 +251,17 @@ namespace UGame
             insertCmd.Parameters.AddWithValue("@TimePlayed", timePlayed);
             insertCmd.Parameters.AddWithValue("@Seconds", totalSeconds);
 
-            if (ObtainedCheck.Checked)
+            if (!ObtainedCheck.Checked)
                 insertCmd.Parameters.AddWithValue("@Obtained", ObtainedDatePicker.Value);
             else
                 insertCmd.Parameters.AddWithValue("@Obtained", nullDT);
 
-            if (StartDateCheck.Checked)
+            if (!StartDateCheck.Checked)
                 insertCmd.Parameters.AddWithValue("@StartDate", StartDatePicker.Value);
             else
                 insertCmd.Parameters.AddWithValue("@StartDate", nullDT);
 
-            if (LastPlayedCheck.Checked)
+            if (!LastPlayedCheck.Checked)
                 insertCmd.Parameters.AddWithValue("@LastPlayed", LastPlayedDatePicker.Value);
             else
                 insertCmd.Parameters.AddWithValue("@LastPlayed", nullDT);
@@ -248,7 +274,7 @@ namespace UGame
             insertCmd.Parameters.AddWithValue("@ReleaseDate", releaseDate);
             insertCmd.Parameters.AddWithValue("@Genre", GenreBox.Text);
             insertCmd.Parameters.AddWithValue("@PlayerCount", PlayerCountBox.Text);
-            try { insertCmd.Parameters.AddWithValue("@Price", Convert.ToDecimal(PriceBox.Text)); } catch { insertCmd.Parameters.AddWithValue("@Price", -1); }
+            try { insertCmd.Parameters.AddWithValue("@Price", Convert.ToDecimal(PriceBox.Text)); } catch { try { insertCmd.Parameters.AddWithValue("@Price", Convert.ToDecimal(PriceBox.Text.Substring(1))); } catch { insertCmd.Parameters.AddWithValue("@Price", -1); } }
             insertCmd.Parameters.AddWithValue("@GameDesc", GameDescBox.Text);
             insertCmd.Parameters.AddWithValue("@Launch", launchString);
             insertCmd.Parameters.AddWithValue("@Blur", BlurCheck.Checked.ToString());
@@ -283,6 +309,105 @@ namespace UGame
 
             highestId++;
             index++;
+        }
+
+        public void EditEntry(int rowIndex)
+        {
+            Clear();
+
+            string playTime = dataTable.Rows[rowIndex]["TimePlayed"].ToString();
+
+            int hours = Convert.ToInt32(playTime.Substring(0, playTime.IndexOf("h")));
+            int minutes = Convert.ToInt32(playTime.Substring(playTime.IndexOf("h:") + 2, 2));
+            int seconds = Convert.ToInt32(playTime.Substring(playTime.IndexOf("m:") + 2, 2));
+
+            int year; int month; int day;
+
+            string obt = dataTable.Rows[rowIndex]["Obtained"].ToString();
+            try
+            {
+                year = Convert.ToInt32(obt.Substring(0, 4));
+                month = Convert.ToInt32(obt.Substring(5, 2));
+                day = Convert.ToInt32(obt.Substring(8, 2));
+            }
+            catch
+            {
+                year = DateTime.Now.Year;
+                month = DateTime.Now.Month;
+                day = DateTime.Now.Day;
+            }
+            DateTime obtained = new DateTime(year, month, day);
+
+            string str = dataTable.Rows[rowIndex]["StartDate"].ToString();
+            try
+            {
+                year = Convert.ToInt32(str.Substring(0, 4));
+                month = Convert.ToInt32(str.Substring(5, 2));
+                day = Convert.ToInt32(str.Substring(8, 2));
+            }
+            catch
+            {
+                year = DateTime.Now.Year;
+                month = DateTime.Now.Month;
+                day = DateTime.Now.Day;
+            }
+            DateTime startDate = new DateTime(year, month, day);
+
+            string lst = dataTable.Rows[rowIndex]["LastPlayed"].ToString();
+            try
+            {
+                year = Convert.ToInt32(lst.Substring(0, 4));
+                month = Convert.ToInt32(lst.Substring(5, 2));
+                day = Convert.ToInt32(lst.Substring(8, 2));
+            }
+            catch
+            {
+                year = DateTime.Now.Year;
+                month = DateTime.Now.Month;
+                day = DateTime.Now.Day;
+            }
+            DateTime lastPlayed = new DateTime(year, month, day);
+
+            TitleBox.Text = dataTable.Rows[rowIndex]["Title"].ToString();
+            PlatformBox.Text = dataTable.Rows[rowIndex]["Platform"].ToString();
+            StatusBox.Text = dataTable.Rows[rowIndex]["Status"].ToString();
+            RatingBar.Value = Convert.ToInt32(dataTable.Rows[rowIndex]["Rating"]);
+            if (hours != 0) TimeHoursBox.Text = hours.ToString(); else TimeHoursBox.Text = "";
+            if (minutes != 0) TimeMinutesBox.Text = minutes.ToString(); else TimeMinutesBox.Text = "";
+            if (seconds != 0) TimeSecondsBox.Text = seconds.ToString(); else TimeSecondsBox.Text = "";
+
+            ObtainedCheck.Checked = false;
+            StartDateCheck.Checked = false;
+            LastPlayedCheck.Checked = false;
+
+            ObtainedDatePicker.Value = DateTime.Now;
+            StartDatePicker.Value = DateTime.Now;
+            LastPlayedDatePicker.Value = DateTime.Now;
+
+            if (dataTable.Rows[rowIndex]["Obtained"].ToString() == " ")
+                ObtainedCheck.Checked = true;
+            else
+                ObtainedDatePicker.Value = obtained;
+
+            if (dataTable.Rows[rowIndex]["StartDate"].ToString() == " ")
+                StartDateCheck.Checked = true;
+            else
+                StartDatePicker.Value = startDate;
+            
+            if (dataTable.Rows[rowIndex]["LastPlayed"].ToString() == " ")
+                LastPlayedCheck.Checked = true;
+            else
+                LastPlayedDatePicker.Value = lastPlayed;
+
+            NotesBox.Text = dataTable.Rows[rowIndex]["Notes"].ToString();
+            launchString = "[Title]Default[URL]" + dataTable.Rows[rowIndex]["Launch"].ToString();
+            urlString = dataTable.Rows[index]["URLs"].ToString();
+            try { DetailsBox.BackgroundImage = Image.FromFile(resourcePath + "\\details\\" + TitleBox.Text + ".png"); } catch { try { DetailsBox.BackgroundImage = Image.FromFile(resourcePath + "\\details\\" + TitleBox.Text + ".jpg"); } catch { try { DetailsBox.BackgroundImage = Image.FromFile(resourcePath + "\\details\\" + TitleBox.Text + ".jpeg"); } catch { try { DetailsBox.BackgroundImage = Image.FromFile(resourcePath + "\\details\\" + TitleBox.Text + ".gif"); } catch { } } } }
+            try { IconBox.BackgroundImage = Image.FromFile(resourcePath + "\\icons\\" + TitleBox.Text + ".png"); } catch { try { IconBox.BackgroundImage = Image.FromFile(resourcePath + "\\icons\\" + TitleBox.Text + ".jpg"); } catch { try { IconBox.BackgroundImage = Image.FromFile(resourcePath + "\\icons\\" + TitleBox.Text + ".jpeg"); } catch { try { IconBox.BackgroundImage = Image.FromFile(resourcePath + "\\icons\\" + TitleBox.Text + ".gif"); } catch { } } } }
+            try { BgBox.BackgroundImage = Image.FromFile(resourcePath + "\\bg\\" + TitleBox.Text + ".png"); } catch { try { BgBox.BackgroundImage = Image.FromFile(resourcePath + "\\BG\\" + TitleBox.Text + ".jpg"); } catch { try { BgBox.BackgroundImage = Image.FromFile(resourcePath + "\\BG\\" + TitleBox.Text + ".jpeg"); } catch { try { BgBox.BackgroundImage = Image.FromFile(resourcePath + "\\BG\\" + TitleBox.Text + ".gif"); } catch { } } } }
+
+            TabPage entriesTab = GamesEntriesTab;
+            GamesTabs.SelectedTab = entriesTab;
         }
 
         private void Clear()
@@ -329,7 +454,12 @@ namespace UGame
         {
             AddEntry();   
         }
-        
+
+        private void EditButton_Click(object sender, EventArgs e)
+        {
+            // EditEntry();
+        }
+
         private void ClearButton_Click(object sender, EventArgs e)
         {
             Clear();
@@ -477,5 +607,8 @@ namespace UGame
                     IconBox.BackgroundImage = Image.FromFile(resourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + fileExt);
             }
         }
+
+        
+        
     }
 }
