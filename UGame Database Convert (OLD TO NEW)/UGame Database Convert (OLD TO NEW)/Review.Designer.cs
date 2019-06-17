@@ -1,6 +1,6 @@
-﻿namespace UGame
+﻿namespace UGame_Database_Convert__OLD_TO_NEW_
 {
-    partial class MainForm
+    partial class Review
     {
         /// <summary>
         /// Required designer variable.
@@ -28,13 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Review));
             this.MainTabs = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.GamesTabs = new System.Windows.Forms.TabControl();
-            this.GamesListTab = new System.Windows.Forms.TabPage();
-            this.GamesDGV = new System.Windows.Forms.DataGridView();
             this.GamesEntriesTab = new System.Windows.Forms.TabPage();
+            this.BgBox = new System.Windows.Forms.PictureBox();
+            this.IconBox = new System.Windows.Forms.PictureBox();
+            this.DetailsBox = new System.Windows.Forms.PictureBox();
+            this.SearchDatabaseButton = new System.Windows.Forms.Button();
             this.OverlayCheck = new System.Windows.Forms.CheckBox();
             this.BlurCheck = new System.Windows.Forms.CheckBox();
             this.FiltersBox = new System.Windows.Forms.TextBox();
@@ -71,37 +74,33 @@
             this.TitleBox = new System.Windows.Forms.TextBox();
             this.EntryLabels = new System.Windows.Forms.TextBox();
             this.ClearButton = new System.Windows.Forms.Button();
-            this.DeleteButton = new System.Windows.Forms.Button();
-            this.ReplaceButton = new System.Windows.Forms.Button();
-            this.EditButton = new System.Windows.Forms.Button();
             this.AddButton = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.PictureContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ClearPictureButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.LocalPictureButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.DatabasePictureButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.InternetPictureButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.PictureDialog = new System.Windows.Forms.OpenFileDialog();
             this.MainTabs.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.GamesTabs.SuspendLayout();
-            this.GamesListTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.GamesDGV)).BeginInit();
             this.GamesEntriesTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BgBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.IconBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DetailsBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RatingBar)).BeginInit();
-            this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.PictureContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainTabs
             // 
-            this.MainTabs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.MainTabs.Controls.Add(this.tabPage1);
-            this.MainTabs.Controls.Add(this.tabPage2);
-            this.MainTabs.Controls.Add(this.tabPage3);
-            this.MainTabs.Location = new System.Drawing.Point(0, 28);
+            this.MainTabs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MainTabs.Location = new System.Drawing.Point(0, 0);
             this.MainTabs.Name = "MainTabs";
             this.MainTabs.SelectedIndex = 0;
-            this.MainTabs.Size = new System.Drawing.Size(1061, 589);
+            this.MainTabs.Size = new System.Drawing.Size(1061, 617);
             this.MainTabs.TabIndex = 0;
             // 
             // tabPage1
@@ -110,50 +109,28 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1053, 563);
+            this.tabPage1.Size = new System.Drawing.Size(1053, 591);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Games";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // GamesTabs
             // 
-            this.GamesTabs.Controls.Add(this.GamesListTab);
             this.GamesTabs.Controls.Add(this.GamesEntriesTab);
+            this.GamesTabs.Controls.Add(this.tabPage2);
             this.GamesTabs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.GamesTabs.Location = new System.Drawing.Point(3, 3);
             this.GamesTabs.Name = "GamesTabs";
             this.GamesTabs.SelectedIndex = 0;
-            this.GamesTabs.Size = new System.Drawing.Size(1047, 557);
+            this.GamesTabs.Size = new System.Drawing.Size(1047, 585);
             this.GamesTabs.TabIndex = 0;
-            // 
-            // GamesListTab
-            // 
-            this.GamesListTab.Controls.Add(this.GamesDGV);
-            this.GamesListTab.Location = new System.Drawing.Point(4, 22);
-            this.GamesListTab.Name = "GamesListTab";
-            this.GamesListTab.Padding = new System.Windows.Forms.Padding(3);
-            this.GamesListTab.Size = new System.Drawing.Size(1039, 531);
-            this.GamesListTab.TabIndex = 0;
-            this.GamesListTab.Text = "[LIST]";
-            this.GamesListTab.UseVisualStyleBackColor = true;
-            // 
-            // GamesDGV
-            // 
-            this.GamesDGV.AllowUserToAddRows = false;
-            this.GamesDGV.AllowUserToDeleteRows = false;
-            this.GamesDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.GamesDGV.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.GamesDGV.Location = new System.Drawing.Point(3, 3);
-            this.GamesDGV.Name = "GamesDGV";
-            this.GamesDGV.ReadOnly = true;
-            this.GamesDGV.RowHeadersVisible = false;
-            this.GamesDGV.Size = new System.Drawing.Size(1033, 525);
-            this.GamesDGV.TabIndex = 0;
-            this.GamesDGV.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GamesDGV_CellDoubleClick);
-            this.GamesDGV.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyUp);
             // 
             // GamesEntriesTab
             // 
+            this.GamesEntriesTab.Controls.Add(this.BgBox);
+            this.GamesEntriesTab.Controls.Add(this.IconBox);
+            this.GamesEntriesTab.Controls.Add(this.DetailsBox);
+            this.GamesEntriesTab.Controls.Add(this.SearchDatabaseButton);
             this.GamesEntriesTab.Controls.Add(this.OverlayCheck);
             this.GamesEntriesTab.Controls.Add(this.BlurCheck);
             this.GamesEntriesTab.Controls.Add(this.FiltersBox);
@@ -190,17 +167,57 @@
             this.GamesEntriesTab.Controls.Add(this.TitleBox);
             this.GamesEntriesTab.Controls.Add(this.EntryLabels);
             this.GamesEntriesTab.Controls.Add(this.ClearButton);
-            this.GamesEntriesTab.Controls.Add(this.DeleteButton);
-            this.GamesEntriesTab.Controls.Add(this.ReplaceButton);
-            this.GamesEntriesTab.Controls.Add(this.EditButton);
             this.GamesEntriesTab.Controls.Add(this.AddButton);
             this.GamesEntriesTab.Location = new System.Drawing.Point(4, 22);
             this.GamesEntriesTab.Name = "GamesEntriesTab";
             this.GamesEntriesTab.Padding = new System.Windows.Forms.Padding(3);
-            this.GamesEntriesTab.Size = new System.Drawing.Size(1039, 531);
+            this.GamesEntriesTab.Size = new System.Drawing.Size(1039, 559);
             this.GamesEntriesTab.TabIndex = 1;
             this.GamesEntriesTab.Text = "[ENTRIES]";
             this.GamesEntriesTab.UseVisualStyleBackColor = true;
+            // 
+            // BgBox
+            // 
+            this.BgBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BgBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.BgBox.Location = new System.Drawing.Point(885, 427);
+            this.BgBox.Name = "BgBox";
+            this.BgBox.Size = new System.Drawing.Size(148, 95);
+            this.BgBox.TabIndex = 43;
+            this.BgBox.TabStop = false;
+            this.BgBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BgBox_MouseUp);
+            // 
+            // IconBox
+            // 
+            this.IconBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.IconBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.IconBox.Location = new System.Drawing.Point(885, 273);
+            this.IconBox.Name = "IconBox";
+            this.IconBox.Size = new System.Drawing.Size(148, 148);
+            this.IconBox.TabIndex = 42;
+            this.IconBox.TabStop = false;
+            this.IconBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.IconBox_MouseUp);
+            // 
+            // DetailsBox
+            // 
+            this.DetailsBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.DetailsBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.DetailsBox.Location = new System.Drawing.Point(631, 273);
+            this.DetailsBox.Name = "DetailsBox";
+            this.DetailsBox.Size = new System.Drawing.Size(248, 248);
+            this.DetailsBox.TabIndex = 41;
+            this.DetailsBox.TabStop = false;
+            this.DetailsBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.DetailsBox_MouseUp);
+            // 
+            // SearchDatabaseButton
+            // 
+            this.SearchDatabaseButton.Location = new System.Drawing.Point(7, 424);
+            this.SearchDatabaseButton.Name = "SearchDatabaseButton";
+            this.SearchDatabaseButton.Size = new System.Drawing.Size(146, 44);
+            this.SearchDatabaseButton.TabIndex = 40;
+            this.SearchDatabaseButton.Text = "SEARCH DATABASE";
+            this.SearchDatabaseButton.UseVisualStyleBackColor = true;
+            this.SearchDatabaseButton.Click += new System.EventHandler(this.SearchDatabaseButton_Click);
             // 
             // OverlayCheck
             // 
@@ -332,11 +349,11 @@
             this.LastPlayedDatePicker.Size = new System.Drawing.Size(287, 20);
             this.LastPlayedDatePicker.TabIndex = 24;
             // 
-            // StartCheck
+            // StartDateCheck
             // 
             this.StartDateCheck.AutoSize = true;
             this.StartDateCheck.Location = new System.Drawing.Point(267, 199);
-            this.StartDateCheck.Name = "StartCheck";
+            this.StartDateCheck.Name = "StartDateCheck";
             this.StartDateCheck.Size = new System.Drawing.Size(56, 17);
             this.StartDateCheck.TabIndex = 23;
             this.StartDateCheck.Text = "Ignore";
@@ -462,7 +479,6 @@
             // 
             // PlatformBox
             // 
-            this.PlatformBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.PlatformBox.FormattingEnabled = true;
             this.PlatformBox.Location = new System.Drawing.Point(267, 37);
             this.PlatformBox.Name = "PlatformBox";
@@ -509,35 +525,6 @@
             this.ClearButton.UseVisualStyleBackColor = true;
             this.ClearButton.Click += new System.EventHandler(this.ClearButton_Click);
             // 
-            // DeleteButton
-            // 
-            this.DeleteButton.Location = new System.Drawing.Point(7, 157);
-            this.DeleteButton.Name = "DeleteButton";
-            this.DeleteButton.Size = new System.Drawing.Size(146, 44);
-            this.DeleteButton.TabIndex = 3;
-            this.DeleteButton.Text = "DELETE";
-            this.DeleteButton.UseVisualStyleBackColor = true;
-            this.DeleteButton.Visible = false;
-            // 
-            // ReplaceButton
-            // 
-            this.ReplaceButton.Location = new System.Drawing.Point(7, 107);
-            this.ReplaceButton.Name = "ReplaceButton";
-            this.ReplaceButton.Size = new System.Drawing.Size(146, 44);
-            this.ReplaceButton.TabIndex = 2;
-            this.ReplaceButton.Text = "APPLY CHANGES";
-            this.ReplaceButton.UseVisualStyleBackColor = true;
-            this.ReplaceButton.Visible = false;
-            // 
-            // EditButton
-            // 
-            this.EditButton.Location = new System.Drawing.Point(7, 57);
-            this.EditButton.Name = "EditButton";
-            this.EditButton.Size = new System.Drawing.Size(146, 44);
-            this.EditButton.TabIndex = 1;
-            this.EditButton.Text = "EDIT";
-            this.EditButton.UseVisualStyleBackColor = true;
-            // 
             // AddButton
             // 
             this.AddButton.Location = new System.Drawing.Point(7, 7);
@@ -550,64 +537,74 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.dataGridView2);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1053, 563);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Consoles";
+            this.tabPage2.Size = new System.Drawing.Size(1039, 559);
+            this.tabPage2.TabIndex = 2;
+            this.tabPage2.Text = "Images for Game";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // dataGridView2
+            // PictureContextMenu
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.dataGridView2.Location = new System.Drawing.Point(3, 3);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(229, 557);
-            this.dataGridView2.TabIndex = 0;
+            this.PictureContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ClearPictureButton,
+            this.LocalPictureButton,
+            this.DatabasePictureButton,
+            this.InternetPictureButton});
+            this.PictureContextMenu.Name = "PictureContextMenu";
+            this.PictureContextMenu.Size = new System.Drawing.Size(181, 114);
             // 
-            // tabPage3
+            // ClearPictureButton
             // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1053, 563);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Notifications";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.ClearPictureButton.Name = "ClearPictureButton";
+            this.ClearPictureButton.Size = new System.Drawing.Size(145, 22);
+            this.ClearPictureButton.Text = "Clear Picture";
             // 
-            // toolStrip1
+            // LocalPictureButton
             // 
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1061, 25);
-            this.toolStrip1.TabIndex = 1;
-            this.toolStrip1.Text = "toolStrip1";
+            this.LocalPictureButton.Name = "LocalPictureButton";
+            this.LocalPictureButton.Size = new System.Drawing.Size(145, 22);
+            this.LocalPictureButton.Text = "Use Local File";
+            this.LocalPictureButton.Click += new System.EventHandler(this.LocalPictureButton_Click);
             // 
-            // MainForm
+            // DatabasePictureButton
+            // 
+            this.DatabasePictureButton.Name = "DatabasePictureButton";
+            this.DatabasePictureButton.Size = new System.Drawing.Size(180, 22);
+            this.DatabasePictureButton.Text = "Use Database";
+            this.DatabasePictureButton.Click += new System.EventHandler(this.DatabasePictureButton_Click);
+            // 
+            // InternetPictureButton
+            // 
+            this.InternetPictureButton.Name = "InternetPictureButton";
+            this.InternetPictureButton.Size = new System.Drawing.Size(145, 22);
+            this.InternetPictureButton.Text = "Use Internet";
+            // 
+            // PictureDialog
+            // 
+            this.PictureDialog.FileName = "PictureDialog";
+            this.PictureDialog.Filter = "Image Files(*.PNG;*.JPG;*.JPEG;*.GIF)|*.PNG;*.JPG;*.JPEG;*.GIF";
+            // 
+            // Review
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1061, 617);
-            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.MainTabs);
-            this.Name = "MainForm";
-            this.Text = "UGame";
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyUp);
+            this.Name = "Review";
+            this.Text = "Review for \"GAME\" (0/1)";
             this.MainTabs.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.GamesTabs.ResumeLayout(false);
-            this.GamesListTab.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.GamesDGV)).EndInit();
             this.GamesEntriesTab.ResumeLayout(false);
             this.GamesEntriesTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BgBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.IconBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DetailsBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.RatingBar)).EndInit();
-            this.tabPage2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.PictureContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -615,54 +612,56 @@
 
         private System.Windows.Forms.TabControl MainTabs;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabControl GamesTabs;
-        private System.Windows.Forms.TabPage GamesListTab;
-        private System.Windows.Forms.DataGridView GamesDGV;
         private System.Windows.Forms.TabPage GamesEntriesTab;
-        private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.Button DeleteButton;
-        private System.Windows.Forms.Button ReplaceButton;
-        private System.Windows.Forms.Button EditButton;
         private System.Windows.Forms.Button AddButton;
         private System.Windows.Forms.TextBox EntryLabels;
         private System.Windows.Forms.Button ClearButton;
-        private System.Windows.Forms.TextBox TitleBox;
-        private System.Windows.Forms.TextBox RatingBox;
-        private System.Windows.Forms.TrackBar RatingBar;
-        private System.Windows.Forms.ComboBox StatusBox;
-        private System.Windows.Forms.ComboBox PlatformBox;
+        public System.Windows.Forms.TextBox TitleBox;
+        public System.Windows.Forms.TextBox RatingBox;
+        public System.Windows.Forms.TrackBar RatingBar;
+        public System.Windows.Forms.ComboBox StatusBox;
+        public System.Windows.Forms.ComboBox PlatformBox;
         private System.Windows.Forms.TextBox EntryLabels2;
-        private System.Windows.Forms.TextBox PublishersBox;
-        private System.Windows.Forms.TextBox DevelopersBox;
-        private System.Windows.Forms.TextBox GameDescBox;
-        private System.Windows.Forms.TextBox NotesBox;
-        private System.Windows.Forms.CheckBox LastPlayedCheck;
-        private System.Windows.Forms.DateTimePicker LastPlayedDatePicker;
-        private System.Windows.Forms.CheckBox StartDateCheck;
-        private System.Windows.Forms.DateTimePicker StartDatePicker;
-        private System.Windows.Forms.CheckBox ObtainedCheck;
-        private System.Windows.Forms.DateTimePicker ObtainedDatePicker;
+        public System.Windows.Forms.TextBox PublishersBox;
+        public System.Windows.Forms.TextBox DevelopersBox;
+        public System.Windows.Forms.TextBox GameDescBox;
+        public System.Windows.Forms.TextBox NotesBox;
+        public System.Windows.Forms.CheckBox LastPlayedCheck;
+        public System.Windows.Forms.DateTimePicker LastPlayedDatePicker;
+        public System.Windows.Forms.CheckBox StartDateCheck;
+        public System.Windows.Forms.DateTimePicker StartDatePicker;
+        public System.Windows.Forms.CheckBox ObtainedCheck;
+        public System.Windows.Forms.DateTimePicker ObtainedDatePicker;
         private System.Windows.Forms.Button AddTimeButton;
         private System.Windows.Forms.Label TimeSecondsLabel;
-        private System.Windows.Forms.TextBox TimeSecondsBox;
+        public System.Windows.Forms.TextBox TimeSecondsBox;
         private System.Windows.Forms.Label TimeMinutesLabel;
-        private System.Windows.Forms.TextBox TimeMinutesBox;
+        public System.Windows.Forms.TextBox TimeMinutesBox;
         private System.Windows.Forms.Label TimeHoursLabel;
-        private System.Windows.Forms.TextBox TimeHoursBox;
+        public System.Windows.Forms.TextBox TimeHoursBox;
         private System.Windows.Forms.Label RatingLabel;
-        private System.Windows.Forms.CheckBox OverlayCheck;
-        private System.Windows.Forms.CheckBox BlurCheck;
-        private System.Windows.Forms.TextBox FiltersBox;
+        public System.Windows.Forms.CheckBox OverlayCheck;
+        public System.Windows.Forms.CheckBox BlurCheck;
+        public System.Windows.Forms.TextBox FiltersBox;
         private System.Windows.Forms.Button URLButton;
         private System.Windows.Forms.Button LaunchButton;
-        private System.Windows.Forms.TextBox PriceBox;
-        private System.Windows.Forms.TextBox PlayerCountBox;
-        private System.Windows.Forms.TextBox GenreBox;
-        private System.Windows.Forms.CheckBox ReleaseDateCheck;
-        private System.Windows.Forms.DateTimePicker ReleaseDatePicker;
+        public System.Windows.Forms.TextBox PriceBox;
+        public System.Windows.Forms.TextBox PlayerCountBox;
+        public System.Windows.Forms.TextBox GenreBox;
+        public System.Windows.Forms.CheckBox ReleaseDateCheck;
+        public System.Windows.Forms.DateTimePicker ReleaseDatePicker;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Button SearchDatabaseButton;
+        private System.Windows.Forms.PictureBox DetailsBox;
+        private System.Windows.Forms.PictureBox BgBox;
+        private System.Windows.Forms.PictureBox IconBox;
+        private System.Windows.Forms.ContextMenuStrip PictureContextMenu;
+        private System.Windows.Forms.ToolStripMenuItem ClearPictureButton;
+        private System.Windows.Forms.ToolStripMenuItem LocalPictureButton;
+        private System.Windows.Forms.ToolStripMenuItem DatabasePictureButton;
+        private System.Windows.Forms.ToolStripMenuItem InternetPictureButton;
+        private System.Windows.Forms.OpenFileDialog PictureDialog;
     }
 }
 

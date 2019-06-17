@@ -30,20 +30,24 @@ namespace UGame
         string minutesString;
         string secondsString;
 
-        static string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\deboltm\\Documents\\GitHub\\UGame\\UGame\\UGame\\UGame\\bin\\Debug\\UGameDB.mdf\";Integrated Security=True";
+        static string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"E:\\Projects\\UGame\\recode\\UGame\\UGame\\UGame\\bin\\Debug\\UGameDB.mdf\";Integrated Security=True";
         static SqlConnection con = new SqlConnection(connectionString);
         public SqlCommand cmd;
 
         int rowIndex;
-        public string title;
+        public int id;
+        string title;
         public string platform;
         public string status;
         public int rating;
         public string timePlayed;
-        public string obtainedDate;
-        public string startDate;
-        public string lastPlayed;
+        int totalSeconds;
+        public DateTime obtained = new DateTime(1753, 1, 1, 0, 0, 0);
+        public DateTime startDate = new DateTime(1753, 1, 1, 0, 0, 0);
+        public DateTime lastPlayed = new DateTime(1753, 1, 1, 0, 0, 0);
         public string notes;
+
+        public string filterString;
         public string[] filters;
 
         public string developer;
@@ -51,11 +55,14 @@ namespace UGame
         public string releaseDate;
         public string genre;
         public string playerCount;
-        public string price;
-        public string description;
+        public decimal price;
+        public string gameDesc;
 
-        public string[] URLs;
-        public string launchCode;
+        public string urlString;
+        public string[,] URLs;
+        string launchCode;
+        bool blur;
+        bool useOverlay;
 
         public int screenshotCount;
         GameSummary gameSummary;
@@ -66,45 +73,66 @@ namespace UGame
         TextBox titleBox = new TextBox();
         Button button1 = new Button();
         Button button2 = new Button();
-        Button Button3 = new Button();
+        Button button3 = new Button();
         Button infoButton = new Button();
+        Panel infoPanel = new Panel();
+        Label platformLabel = new Label();
+        Label ratingLabel = new Label();
+        Label timePlayedLabel = new Label();
+        Button calcTimeButton = new Button();
+        Label lastPlayedLabel = new Label();
 
-        public GameTab(MainForm refer, int rowIndex, int tabCount)
+        static int xPos = 14;
+        Point[] labelLocation = { new Point(xPos, 21), new Point(xPos, 53), new Point(xPos, 85), new Point(xPos, 117) };
+
+        public GameTab(MainForm refer, int rowIndex, int tabCount, int id)
         {
+            
             this.refer = refer;
             tabIndex = tabCount - 2;
 
             this.rowIndex = rowIndex;
+            this.id = id;
 
             con.Open();
-
-
-            title = refer.dataTable.Rows[rowIndex][1].ToString();
-            platform = "PC";
-
-            status = "Playing";
-            rating = 10;
-            timePlayed = "5000h:30m:45s";
-            obtainedDate = "2011/07/11";
-            startDate = "2010/06/01";
-            lastPlayed = "2019/06/10";
-            notes = "Best game of all time.";
             
+            title = refer.dataTable.Rows[rowIndex]["Title"].ToString();
+            platform = refer.dataTable.Rows[rowIndex]["Platform"].ToString();
+
+            status = refer.dataTable.Rows[rowIndex]["Status"].ToString();
+            try { rating = Convert.ToInt32(refer.dataTable.Rows[rowIndex]["Rating"]); } catch { }
+            timePlayed = refer.dataTable.Rows[rowIndex]["TimePlayed"].ToString();
+            try { totalSeconds = Convert.ToInt32(refer.dataTable.Rows[rowIndex]["Seconds"]); } catch { }
+            try { obtained = Convert.ToDateTime(refer.dataTable.Rows[rowIndex]["Obtained"]); } catch { }
+            try { startDate = Convert.ToDateTime(refer.dataTable.Rows[rowIndex]["StartDate"]); } catch { }
+            try { lastPlayed = Convert.ToDateTime(refer.dataTable.Rows[rowIndex]["LastPlayed"]); } catch { }
+            notes = refer.dataTable.Rows[rowIndex]["Notes"].ToString();
+
+            urlString = refer.dataTable.Rows[rowIndex]["URLs"].ToString();
+            // NEED TO PROPERLY IMPLEMENT URLS
+            URLs = new string[1,2];
+            URLs[0, 0] = urlString;
+            URLs[0, 1] = urlString;
+
+            filterString = refer.dataTable.Rows[rowIndex]["Filters"].ToString();
+            // NEED TO PROPERLY IMPLEMENT FILTERS
             filters = new string[1];
-            filters[0] = "Favorites";
+            filters[0] = filterString;
 
-            developer = "Mojang";
-            publisher = "Microsoft";
-            releaseDate = "2009/05/20";
-            genre = "Adventure, Action, Sandbox";
-            playerCount = "1-4";
-            price = "$29.95";
-            description = "";
+            developer = refer.dataTable.Rows[rowIndex]["Developers"].ToString();
+            publisher = refer.dataTable.Rows[rowIndex]["Publishers"].ToString();
+            releaseDate = refer.dataTable.Rows[rowIndex]["ReleaseDate"].ToString();
+            genre = refer.dataTable.Rows[rowIndex]["Genre"].ToString();
+            playerCount = refer.dataTable.Rows[rowIndex]["PlayerCount"].ToString();
+            try { price = Convert.ToDecimal(refer.dataTable.Rows[rowIndex]["Price"]); } catch { price = -999; }
+            gameDesc = refer.dataTable.Rows[rowIndex]["GameDesc"].ToString();
 
-            URLs = new string[1];
-            URLs[0] = "[Title]Minecraft.net[URL]minecraft.net";
 
-            launchCode = "C:\\Users\\deboltm\\Downloads\\Minecraft.exe";
+            launchCode = refer.dataTable.Rows[rowIndex]["Launch"].ToString();
+            try { blur = Convert.ToBoolean(refer.dataTable.Rows[rowIndex]["Blur"]); } catch { blur = false; }
+            try { useOverlay = Convert.ToBoolean(refer.dataTable.Rows[rowIndex]["Overlay"]); } catch { useOverlay = false; }
+            
+            con.Close();
 
             TabCreation();
         }
@@ -167,23 +195,91 @@ namespace UGame
             button2.Tag = rowIndex;
             button2.Click += Button2_Click;
 
-            Button3.Location = new Point(731, 82);
-            Button3.Size = new Size(177, 34);
-            Button3.Text = "Launch";
-            Button3.UseVisualStyleBackColor = true;
-            Button3.Tag = rowIndex;
-            Button3.Click += Button3_Click;
+            button3.Location = new Point(731, 82);
+            button3.Size = new Size(177, 34);
+            button3.Text = "Launch";
+            button3.UseVisualStyleBackColor = true;
+            button3.Tag = rowIndex;
+            button3.Click += Button3_Click;
+
+            infoButton.Location = new Point(958, 82);
+            infoButton.Size = new Size(75, 34);
+            infoButton.Text = "More Info";
+            infoButton.UseVisualStyleBackColor = true;
+            infoButton.Tag = rowIndex;
+            infoButton.Click += InfoButton_Click;
+
+            infoPanel.Location = new Point(365, 122);
+            infoPanel.Size = new Size(668, 236);
+
+            int locIndex = 0;
+            Font labelFont = new Font("Century Gothic", 12);
+            if (platform != "")
+            {
+                platformLabel.Location = labelLocation[locIndex];
+                platformLabel.Font = labelFont;
+                platformLabel.AutoSize = true;
+                platformLabel.Text = "Platform: " + platform;
+                locIndex++;
+            }
+
+            if (rating != 0)
+            {
+                ratingLabel.Location = labelLocation[locIndex];
+                ratingLabel.Font = labelFont;
+                ratingLabel.AutoSize = true;
+                ratingLabel.Text = "Rating: ";
+                for (int starNum = 0; starNum < rating; starNum++)
+                    ratingLabel.Text += "★";
+                for (int emptyNum = 0; emptyNum < 10 - rating; emptyNum++)
+                    ratingLabel.Text += "☆";
+                ratingLabel.Text += " (" + rating + "/10)";
+                locIndex++;
+            }
+
+            if (timePlayed != "")
+            {
+                timePlayedLabel.Location = labelLocation[locIndex];
+                timePlayedLabel.Font = labelFont;
+                timePlayedLabel.AutoSize = true;
+                timePlayedLabel.Text = "Time Played          : " + timePlayed;
+
+                calcTimeButton.Location = new Point(116, labelLocation[locIndex].Y);
+                calcTimeButton.Size = new Size(26, 26);
+                calcTimeButton.UseVisualStyleBackColor = true;
+                calcTimeButton.Text = "...";
+                calcTimeButton.Click += CalcTimeButton_Click;
+
+                locIndex++;
+            }
+
+            if (lastPlayed.ToString() != "1/1/0001 12:00:00 AM")
+            {
+                lastPlayedLabel.Location = labelLocation[locIndex];
+                lastPlayedLabel.Font = labelFont;
+                lastPlayedLabel.AutoSize = true;
+                lastPlayedLabel.Text = "Last Played: " + lastPlayed;
+            }
 
             gameTab.Controls.Add(detailsBox);
             gameTab.Controls.Add(iconBox);
             gameTab.Controls.Add(titleBox);
             gameTab.Controls.Add(button1);
             gameTab.Controls.Add(button2);
-            gameTab.Controls.Add(Button3);
+            gameTab.Controls.Add(button3);
+            gameTab.Controls.Add(infoButton);
+            gameTab.Controls.Add(infoPanel);
+
+            infoPanel.Controls.Add(platformLabel);
+            infoPanel.Controls.Add(ratingLabel);
+            infoPanel.Controls.Add(timePlayedLabel);
+            infoPanel.Controls.Add(calcTimeButton);
+            infoPanel.Controls.SetChildIndex(calcTimeButton, 0);
+            infoPanel.Controls.Add(lastPlayedLabel);
 
             refer.AddGameTab(gameTab);
         }
-
+        
         public void Launch()
         {
             bool isExe = false;
@@ -250,9 +346,10 @@ namespace UGame
             minutes = 0;
             seconds = 0;
 
+            gameTab.Text = "(...) " + title;
             SetText("Stop Playing (00h:00m:00s)", ref button1);
             SetText("Pause Playing", ref button2);
-            SetText("Discard Session", ref Button3);
+            SetText("Discard Session", ref button3);
 
             // OVERLAY STUFF
 
@@ -283,6 +380,7 @@ namespace UGame
                 // WRITE EVERYTHING TO THE DATABASE
 
                 int totalSeconds = seconds + (minutes * 60) + (hours * 3600);
+                UpdateFields(totalSeconds);
 
                 gameSummary = new GameSummary(title, totalSeconds);
                 gameSummary.Show();
@@ -290,9 +388,12 @@ namespace UGame
 
             timer.Stop();
 
+            gameTab.Text = title;
+
+
             SetText("Launch & Track", ref button1);
             SetText("Track", ref button2);
-            SetText("Launch", ref Button3);
+            SetText("Launch", ref button3);
         }
 
         private void PauseResume()
@@ -307,6 +408,11 @@ namespace UGame
                 timer.Start();
                 SetText("Pause Playing", ref button2);
             }
+        }
+
+        private void UpdateFields(int playSeconds)
+        {
+            totalSeconds += playSeconds;
         }
 
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
@@ -373,7 +479,7 @@ namespace UGame
 
         private void Button3_Click(object sender, EventArgs e)
         {
-            if (Button3.Text == "Launch")
+            if (button3.Text == "Launch")
             {
                 Button tempButton = (Button)sender;
                 int tabIndex = Convert.ToInt32(tempButton.Tag);
@@ -383,6 +489,48 @@ namespace UGame
             {
                 Stop(false);
             }
+        }
+
+        private void InfoButton_Click(object sender, EventArgs e) // IMPROVE TO HIDE FIELDS WHEN A VALUE IS NOT WORTH SHOWING (EX: NULL, RATING = 0, etc.)
+        {
+            string caption = "Info on \"" + title + "\"";
+            string message = "Title: " + title + "\nPlatform: " + platform + "\nStatus: " + status + "\nRating: " + rating + "\nTime Played: " + timePlayed + "\nObtained: ";
+            
+            if (obtained.ToString() != "1/1/1753 12:00:00 AM")
+                message += obtained;
+
+            message += "\nStarted: ";
+            if (startDate.ToString() != "1/1/1753 12:00:00 AM")
+                message += startDate;
+
+            message += "\nLast Played: ";
+            if (lastPlayed.ToString() != "1/1/1753 12:00:00 AM")
+                message += lastPlayed;
+
+            message += "\nNotes: " + notes + "\nFilters: " + filterString + "\nDevelopers: " + developer + "\nRelease Date: " + releaseDate + "\nGenre: " + genre + "\nPublishers: " + publisher + "\nPlayer Count: " + playerCount + "\nPrice: ";
+
+            if (price > 0)
+            {
+                message += "$" + price.ToString("d2");
+            }
+            else if (price == 0)
+            {
+                message += "Free";
+            }
+
+            message += "\nGame Description: " + gameDesc;
+
+            MessageBox.Show(message, caption);
+        }
+
+        private void CalcTimeButton_Click(object sender, EventArgs e)
+        {
+            string caption = "Time Calculations for \"" + title + "\"";
+            string message = "Total Seconds: " + totalSeconds + "\nTotal Minutes: " + totalSeconds / 60 + "\nTotal Hours: " + totalSeconds / 3600 + 
+                "\nTotal Days: " + totalSeconds / 86400 + "\nTotal Weeks: " + totalSeconds / 604800 + "\nTotal Months: ~" + totalSeconds / 2592000 + 
+                "\nTotal Years: " + totalSeconds / 31557600;
+
+            MessageBox.Show(message, caption);
         }
 
         delegate void SetTextCallback(string text, ref Button button);
