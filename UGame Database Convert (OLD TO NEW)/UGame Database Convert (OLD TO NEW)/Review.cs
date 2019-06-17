@@ -473,22 +473,22 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
             string part = "";
 
             string url = "https://google.com/search?q=";
-            while (TitleBox.Text.IndexOf(" ") != -1)
+            while (segment.IndexOf(" ") != -1)
             {
                 try
                 {
                     Console.WriteLine(segment);
-                    try
+                    // try
                     {
                         part = segment.Substring(0, segment.IndexOf(" "));
                         segment = segment.Substring(segment.IndexOf(" ") + 1);
 
                         url += part + "%";
                     }
-                    catch
+                    // catch
                     {
-                        url += part;
-                        segment = "";
+                        // url += segment;
+                        // segment = "";
                     }
                     
                 }
