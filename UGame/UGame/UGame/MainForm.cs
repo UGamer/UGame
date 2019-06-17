@@ -597,7 +597,7 @@ namespace UGame
                 WebClient webClient = new WebClient();
                 byte[] imageBytes = webClient.DownloadData(url);
 
-                File.WriteAllBytes(resourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + fileExt, imageBytes);
+                try { File.WriteAllBytes(resourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + fileExt, imageBytes); } catch { File.WriteAllBytes(resourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + ".jpg", imageBytes); }
 
                 if (PictureContextMenu.Tag.ToString() == "details\\")
                     DetailsBox.BackgroundImage = Image.FromFile(resourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + fileExt);

@@ -34,6 +34,7 @@ namespace UGame
             BrowserDock.Controls.Add(chromeBrowser);
             chromeBrowser.Dock = DockStyle.Fill;
             chromeBrowser.AddressChanged += chromeBrowser_AddressChanged;
+            chromeBrowser.MenuHandler = new MenuHandler();
         }
 
         private void DownloadButton_Click(object sender, EventArgs e)
