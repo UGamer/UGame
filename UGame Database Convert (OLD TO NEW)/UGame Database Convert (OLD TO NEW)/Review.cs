@@ -12,6 +12,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,7 +38,7 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
         public string launchString = "";
 
         string oldResourcePath;
-        string newResourcePath;
+        public string newResourcePath;
 
         public Review(Start refer, DataTable newTable, SqlConnection newCon)
         {
@@ -448,38 +449,73 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
                 }
             }
         }
-
+        
         private void DatabasePictureButton_Click(object sender, EventArgs e)
         {
             DGVForm dgvForm = new DGVForm("Images", PictureContextMenu.Tag.ToString(), this);
             
             if (dgvForm.ShowDialog() == DialogResult.OK)
             {
-                CutOrCopy cutOrCopy = new CutOrCopy();
+                if (PictureContextMenu.Tag.ToString() == "details\\")
+                    DetailsBox.BackgroundImage = Image.FromFile(newResourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + dgvForm.fileExt);
+                else if (PictureContextMenu.Tag.ToString() == "bg\\")
+                    BgBox.BackgroundImage = Image.FromFile(newResourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + dgvForm.fileExt);
+                else if (PictureContextMenu.Tag.ToString() == "icons\\")
+                    IconBox.BackgroundImage = Image.FromFile(newResourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + dgvForm.fileExt);
+            }
+        }
 
-                DialogResult dialogResult = cutOrCopy.ShowDialog();
-                string fileExt = Path.GetExtension(PictureDialog.FileName);
+        private void InternetPictureButton_Click(object sender, EventArgs e)
+        {
+            ArrayList titleParts = new ArrayList();
 
-                if (dialogResult == DialogResult.Yes)
+            string segment = TitleBox.Text;
+            string part = "";
+
+            string url = "https://google.com/search?q=";
+            while (TitleBox.Text.IndexOf(" ") != -1)
+            {
+                try
                 {
-                    File.Copy(PictureDialog.FileName, newResourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + fileExt);
-                    if (PictureContextMenu.Tag.ToString() == "details\\")
-                        DetailsBox.BackgroundImage = Image.FromFile(newResourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + fileExt);
-                    else if (PictureContextMenu.Tag.ToString() == "icons\\")
-                        IconBox.BackgroundImage = Image.FromFile(newResourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + fileExt);
-                    else if (PictureContextMenu.Tag.ToString() == "bg\\")
-                        BgBox.BackgroundImage = Image.FromFile(newResourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + fileExt);
+                    Console.WriteLine(segment);
+                    try
+                    {
+                        part = segment.Substring(0, segment.IndexOf(" "));
+                        segment = segment.Substring(segment.IndexOf(" ") + 1);
+
+                        url += part + "%";
+                    }
+                    catch
+                    {
+                        url += part;
+                        segment = "";
+                    }
+                    
                 }
-                else if (dialogResult == DialogResult.No)
-                {
-                    File.Move(PictureDialog.FileName, newResourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + fileExt);
-                    if (PictureContextMenu.Tag.ToString() == "details\\")
-                        DetailsBox.BackgroundImage = Image.FromFile(newResourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + fileExt);
-                    else if (PictureContextMenu.Tag.ToString() == "icons\\")
-                        IconBox.BackgroundImage = Image.FromFile(newResourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + fileExt);
-                    else if (PictureContextMenu.Tag.ToString() == "bg\\")
-                        BgBox.BackgroundImage = Image.FromFile(newResourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + fileExt);
-                }
+                catch { }
+                
+            }
+            url += "&source=lnms&tbm=isch";
+
+
+            Browser browser = new Browser(url);
+            DialogResult dialogResult = browser.ShowDialog();
+
+            if (dialogResult == DialogResult.Yes)
+            {
+                string fileExt = browser.url.Substring(browser.url.IndexOf(".") + 1);
+
+                WebClient webClient = new WebClient();
+                byte[] imageBytes = webClient.DownloadData(url);
+
+                File.WriteAllBytes(newResourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + fileExt, imageBytes);
+
+                if (PictureContextMenu.Tag.ToString() == "details\\")
+                    DetailsBox.BackgroundImage = Image.FromFile(newResourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + fileExt);
+                else if (PictureContextMenu.Tag.ToString() == "bg\\")
+                    BgBox.BackgroundImage = Image.FromFile(newResourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + fileExt);
+                else if (PictureContextMenu.Tag.ToString() == "icons\\")
+                    IconBox.BackgroundImage = Image.FromFile(newResourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + fileExt);
             }
         }
     }

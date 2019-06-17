@@ -24,10 +24,10 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
         DataTable dataTable;
         ArrayList titles;
         ArrayList secondColumn;
-
-        string[] currentImage = { "bg", "details", "icons" };
+        
         int imageTypeIndex = 0;
         WebClient webClient = new WebClient();
+        public string fileExt;
 
         public DGVForm(string type, string data, Review refer)
         {
@@ -66,94 +66,90 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
                 this.Text = "Image Selector";
                 MessageBox.Show("Please pick an image to use.");
 
-                dataTable.Columns.Add(); // url
-                dataTable.Columns.Add("", typeof(Image)); // image
-                dataTable.Columns.Add();
-                /*
-                dataTable.Columns.Add("", typeof(Image));
-                dataTable.Columns.Add();
-                dataTable.Columns.Add("", typeof(Image));
-                */
-
                 ImageDatabase();
-            }
-            else if (type == "ImagesChoice")
-            {
-            Console.WriteLine(refer.TitleBox.Text);
-                dataTable.Columns.Add("Title");
-                TitleDatabase();
-
-                this.Text = "Title Selector";
-                MessageBox.Show("Please pick a title to use.");
             }
         }
 
         private async void ImageDatabase()
         {
-            DGVForm imageChoice = new DGVForm("ImagesChoice", "", refer);
-            DialogResult dialogResult = imageChoice.ShowDialog();
-
-            string title = "";
-            if (dialogResult == DialogResult.Yes)
-            {
-                title = imageChoice.data;
-            }
-
             var igdb = IGDB.Client.Create("6588e966357049df69fa0ec8bd422e92");
-            var games = await igdb.QueryAsync<Game>(IGDB.Client.Endpoints.Games, query: "fields name,artworks.image_id; where name = " + title + ";");
-            var artworkImageId = games.First().Artworks.Values.First().ImageId;
-            
-            // Thumbnail
-            var thumb = IGDB.ImageHelper.GetImageUrl(imageId: artworkImageId, size: ImageSize.Thumb, retina: false);
-            var thumb2X = IGDB.ImageHelper.GetImageUrl(imageId: artworkImageId, size: ImageSize.Thumb, retina: true);
+            Console.WriteLine(refer.TitleBox.Text);
+            var games = await igdb.QueryAsync<Game>(IGDB.Client.Endpoints.Games, query: "search \"" + refer.TitleBox.Text + "\"; fields screenshots.image_id,artworks.image_id,cover.image_id; limit 25;");//
 
-            // Covers
-            var coverSmall = IGDB.ImageHelper.GetImageUrl(imageId: artworkImageId, size: ImageSize.CoverSmall, retina: false);
-
-            var screenshotLarge = IGDB.ImageHelper.GetImageUrl(imageId: artworkImageId, size: ImageSize.ScreenshotBig, retina: false);
-
-            string fileExt = coverSmall.Substring(screenshotLarge.IndexOf(".", screenshotLarge.Length - 5));
-            
-            string url = coverSmall;
-            Image image;
-
-            byte[] imageBytes = webClient.DownloadData("https:" + screenshotLarge);
-
-            using (MemoryStream memstr = new MemoryStream(imageBytes))
-            {
-                image = Image.FromStream(memstr);
-            }
-
-            int imgCount = 0;
-            int row = 1;
+            ArrayList artworkImageId = new ArrayList();
             int col = 1;
+            for (int x = 0; x < games.Length; x++)
+            {
+                dataTable.Columns.Add(); // url
+                dataTable.Columns.Add(refer.TitleBox.Text + " [" + x + "]", typeof(Image));
+                
+                try { artworkImageId.Add(games[x].Cover.Value.ImageId); } catch { }
 
-            DataRow dRow = dataTable.NewRow();
+                int artworksCount;
+                try { artworksCount = games[x].Artworks.Values.Length; } catch { artworksCount = 0; }
+                for (int y = 0; y < artworksCount; y++)
+                {
+                    try { artworkImageId.Add(games[x].Artworks.Values[y].ImageId); } catch { }
+                }
+
+                int screenshotCount;
+                try { screenshotCount = games[x].Screenshots.Values.Length; } catch { screenshotCount = 0; }
+                for (int y = 0; y < screenshotCount; y++)
+                {
+                    try { artworkImageId.Add(games[x].Screenshots.Values[y].ImageId); } catch { }
+                }
+            }
+
             dataTable.Rows.Add();
-
-            dRow[col - 1] = "https:" + screenshotLarge;
-            dRow[col] = image;
-
-            dataTable.Rows.Add(dRow);
-            row++; col++;
-
-            DGV.DataSource = dataTable;
-        }
-
-        private async void TitleDatabase()
-        {
-            var igdb = IGDB.Client.Create("6588e966357049df69fa0ec8bd422e92");
-            var games = await igdb.QueryAsync<Game>(IGDB.Client.Endpoints.Games, query: "search \"" + refer.TitleBox.Text + "\";fields name;");
-
             DataRow dRow;
-            for (int index = 0; index < games.Length; index++)
+            for (int index = 0; index < artworkImageId.Count; index++)
             {
                 dRow = dataTable.NewRow();
-                dRow[0] = games[index].Name;
+                // Thumbnail
+                var thumb = IGDB.ImageHelper.GetImageUrl(imageId: artworkImageId[index].ToString(), size: ImageSize.Thumb, retina: false);
+                var thumb2X = IGDB.ImageHelper.GetImageUrl(imageId: artworkImageId[index].ToString(), size: ImageSize.Thumb, retina: true);
+                
+                // Covers
+                var cover = IGDB.ImageHelper.GetImageUrl(imageId: artworkImageId[index].ToString(), size: ImageSize.HD720, retina: false);
+
+                var screenshot = IGDB.ImageHelper.GetImageUrl(imageId: artworkImageId[index].ToString(), size: ImageSize.ScreenshotBig, retina: false);
+
+                string fileExt = cover.Substring(cover.IndexOf(".", cover.Length - 5));
+                
+                Image image;
+
+                byte[] imageBytes = webClient.DownloadData("https:" + cover);
+
+                Console.WriteLine(cover);
+
+                using (MemoryStream memstr = new MemoryStream(imageBytes))
+                {
+                    image = Image.FromStream(memstr);
+                }
+
+                dRow[col - 1] = "https:" + cover;
+                dRow[col] = image;
+
                 dataTable.Rows.Add(dRow);
+                dataTable.Rows.Add();
+            }
+            
+            DGV.DataSource = dataTable;
+            int u = 1;
+            for (int index = 0; index < games.Length; index++)
+            {
+                ((DataGridViewImageColumn)DGV.Columns[u]).ImageLayout = DataGridViewImageCellLayout.Zoom;
+                DGV.Columns[u].Width = 500;
+                DGV.Columns[u - 1].Visible = false;
+                u += 2;
             }
 
-            DGV.DataSource = dataTable;
+            u = 1;
+            for (int index = 0; index < artworkImageId.Count; index++)
+            {
+                DGV.Rows[u].Height = 300;
+                u += 2;
+            }
         }
 
         private async void SearchDatabase()
@@ -486,7 +482,7 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
 
         private void DGV_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
+            // try
             {
                 if (type == "DB")
                 {
@@ -509,45 +505,41 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
                     refer.GenreBox.Text = DGV.Rows[e.RowIndex].Cells["Genre"].Value.ToString();
                     refer.GameDescBox.Text = DGV.Rows[e.RowIndex].Cells["Description"].Value.ToString();
                 }
-                else if (type.IndexOf("Images") != -1)
+                else if (type == "Images")
                 {
                     string remoteFileUrl = DGV.Rows[e.RowIndex].Cells[0].Value.ToString();
-                    string fileExt = remoteFileUrl;
+                    fileExt = remoteFileUrl;
 
                     while (fileExt.IndexOf(".") != -1)
                         fileExt = fileExt.Substring(fileExt.IndexOf(".") + 1);
+                    
+                    byte[] imageBytes = webClient.DownloadData(remoteFileUrl);
 
-                    string localFileName = "resources\\" + currentImage[imageTypeIndex] + "\\" + refer.TitleBox.Text + "." + fileExt;
+                    File.WriteAllBytes(refer.newResourcePath + data + refer.TitleBox.Text + "." + fileExt, imageBytes);
 
-                    webClient.DownloadFile(remoteFileUrl, localFileName);
-                    byte[] imageBytes = webClient.DownloadData("https:" + remoteFileUrl);
-                    File.WriteAllBytes("temp\\0.jpg", imageBytes);
-
-                    this.Close();
-                }
-                else if (type.IndexOf("ImagesChoice") != -1)
-                {
-                    this.DialogResult = DialogResult.Yes;
-                    data = DGV.Rows[e.RowIndex].Cells["Title"].Value.ToString();
+                    this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
             }
-            catch { }
+            // catch { }
         }
 
         private void DGVForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            string returnString = "";
-
-            for (int index = 0; index < dataTable.Rows.Count; index++)
+            if (type == "Launch" || type == "URLs")
             {
-                returnString += "[Title]" + dataTable.Rows[index][0] + "[URL]" + dataTable.Rows[index][1];
-            }
+                string returnString = "";
 
-            if (type == "Launch")
-                refer.launchString = returnString;
-            else if (type == "URLs")
-                refer.urlString = returnString;
+                for (int index = 0; index < dataTable.Rows.Count; index++)
+                {
+                    returnString += "[Title]" + dataTable.Rows[index][0] + "[URL]" + dataTable.Rows[index][1];
+                }
+
+                if (type == "Launch")
+                    refer.launchString = returnString;
+                else if (type == "URLs")
+                    refer.urlString = returnString;
+            }
         }
     }
 }

@@ -558,13 +558,13 @@
             // ClearPictureButton
             // 
             this.ClearPictureButton.Name = "ClearPictureButton";
-            this.ClearPictureButton.Size = new System.Drawing.Size(145, 22);
+            this.ClearPictureButton.Size = new System.Drawing.Size(180, 22);
             this.ClearPictureButton.Text = "Clear Picture";
             // 
             // LocalPictureButton
             // 
             this.LocalPictureButton.Name = "LocalPictureButton";
-            this.LocalPictureButton.Size = new System.Drawing.Size(145, 22);
+            this.LocalPictureButton.Size = new System.Drawing.Size(180, 22);
             this.LocalPictureButton.Text = "Use Local File";
             this.LocalPictureButton.Click += new System.EventHandler(this.LocalPictureButton_Click);
             // 
@@ -578,8 +578,9 @@
             // InternetPictureButton
             // 
             this.InternetPictureButton.Name = "InternetPictureButton";
-            this.InternetPictureButton.Size = new System.Drawing.Size(145, 22);
+            this.InternetPictureButton.Size = new System.Drawing.Size(180, 22);
             this.InternetPictureButton.Text = "Use Internet";
+            this.InternetPictureButton.Click += new System.EventHandler(this.InternetPictureButton_Click);
             // 
             // PictureDialog
             // 
