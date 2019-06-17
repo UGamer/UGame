@@ -45,7 +45,7 @@
             this.OldFileBox.Name = "OldFileBox";
             this.OldFileBox.Size = new System.Drawing.Size(658, 20);
             this.OldFileBox.TabIndex = 0;
-            this.OldFileBox.Text = "E:\\Tools\\UGame Launcher\\Collection.accdb";
+            this.OldFileBox.Text = "C:\\Users\\deboltm\\Desktop\\UGame (Old)\\Collection.accdb";
             // 
             // OldFileButton
             // 
@@ -73,7 +73,7 @@
             this.NewFileBox.Name = "NewFileBox";
             this.NewFileBox.Size = new System.Drawing.Size(658, 20);
             this.NewFileBox.TabIndex = 2;
-            this.NewFileBox.Text = "E:\\Projects\\UGame\\recode\\UGame\\UGame\\UGame\\bin\\Debug\\UGameDB.mdf";
+            this.NewFileBox.Text = "C:\\Users\\deboltm\\Documents\\GitHub\\UGame\\UGame\\UGame\\UGame\\bin\\Debug\\UGameDB.mdf";
             // 
             // HelpBox
             // 

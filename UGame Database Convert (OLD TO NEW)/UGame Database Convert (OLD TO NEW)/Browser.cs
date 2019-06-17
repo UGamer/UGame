@@ -33,5 +33,10 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
 
             this.Close();
         }
+
+        private void SearchButton_Click(object sender, EventArgs e)
+        {
+            WebBrowser.Url = new Uri(AddressBar.Text);
+        }
     }
 }

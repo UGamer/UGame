@@ -1,4 +1,4 @@
-﻿namespace UGame_Database_Convert__OLD_TO_NEW_
+﻿namespace UGame
 {
     partial class Browser
     {
@@ -28,24 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.WebBrowser = new System.Windows.Forms.WebBrowser();
             this.DownloadButton = new System.Windows.Forms.Button();
             this.AddressBar = new System.Windows.Forms.TextBox();
             this.SearchButton = new System.Windows.Forms.Button();
+            this.BrowserDock = new System.Windows.Forms.Panel();
             this.SuspendLayout();
-            // 
-            // WebBrowser
-            // 
-            this.WebBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.WebBrowser.Location = new System.Drawing.Point(0, 34);
-            this.WebBrowser.MinimumSize = new System.Drawing.Size(20, 20);
-            this.WebBrowser.Name = "WebBrowser";
-            this.WebBrowser.Size = new System.Drawing.Size(800, 416);
-            this.WebBrowser.TabIndex = 0;
-            this.WebBrowser.Url = new System.Uri("https://www.google.com", System.UriKind.Absolute);
-            this.WebBrowser.Navigated += new System.Windows.Forms.WebBrowserNavigatedEventHandler(this.WebBrowser_Navigated);
             // 
             // DownloadButton
             // 
@@ -74,27 +61,37 @@
             this.SearchButton.UseVisualStyleBackColor = true;
             this.SearchButton.Click += new System.EventHandler(this.SearchButton_Click);
             // 
+            // BrowserDock
+            // 
+            this.BrowserDock.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BrowserDock.Location = new System.Drawing.Point(0, 34);
+            this.BrowserDock.Name = "BrowserDock";
+            this.BrowserDock.Size = new System.Drawing.Size(800, 416);
+            this.BrowserDock.TabIndex = 4;
+            // 
             // Browser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.BrowserDock);
             this.Controls.Add(this.SearchButton);
             this.Controls.Add(this.AddressBar);
             this.Controls.Add(this.DownloadButton);
-            this.Controls.Add(this.WebBrowser);
             this.Name = "Browser";
             this.Text = "Browser";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Browser_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.WebBrowser WebBrowser;
         private System.Windows.Forms.Button DownloadButton;
         private System.Windows.Forms.TextBox AddressBar;
         private System.Windows.Forms.Button SearchButton;
+        private System.Windows.Forms.Panel BrowserDock;
     }
 }

@@ -1,18 +1,14 @@
-﻿CREATE TABLE [dbo].[Games]
-(
-	[Id] INT NOT NULL PRIMARY KEY, 
+﻿CREATE TABLE [dbo].[Games] (
+    [Id] INT NOT NULL PRIMARY KEY, 
     [Title] TEXT NOT NULL, 
     [Platform] TEXT NULL, 
     [Status] TEXT NULL, 
     [Rating] INT NULL, 
     [TimePlayed] TEXT NULL, 
     [Seconds] INT NOT NULL,
-    [Obtained] TEXT NULL,
-	[ObtainedDT] DATETIME NULL,
-	[Started] TEXT NULL,
-	[StartDT] DATETIME NULL,
-	[LastPlayed] TEXT NULL,
-	[LastPlayedDT] DATETIME NULL,
+    [Obtained] DATETIME NULL,
+	[Started] DATETIME NULL,
+	[LastPlayed] DATETIME NULL,
 	[Notes] TEXT NULL,
 	[URLs] TEXT NULL,
 	[Filters] TEXT NULL,
@@ -21,8 +17,10 @@
 	[ReleaseDate] TEXT NULL,
 	[Genre] TEXT NULL,
 	[PlayerCount] TEXT NULL,
-	[Price] TEXT NULL,
+	[Price] DECIMAL NULL,
 	[GameDesc] TEXT NULL,
 	[Launch] TEXT NULL,
-	[Blur] TEXT NOT NULL
-)
+	[Blur] TEXT NOT NULL,
+	[Overlay] TEXT NOT NULL
+);
+

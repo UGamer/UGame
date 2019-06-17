@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.MainTabs = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -35,6 +36,10 @@
             this.GamesListTab = new System.Windows.Forms.TabPage();
             this.GamesDGV = new System.Windows.Forms.DataGridView();
             this.GamesEntriesTab = new System.Windows.Forms.TabPage();
+            this.BgBox = new System.Windows.Forms.PictureBox();
+            this.IconBox = new System.Windows.Forms.PictureBox();
+            this.DetailsBox = new System.Windows.Forms.PictureBox();
+            this.SearchDatabaseButton = new System.Windows.Forms.Button();
             this.OverlayCheck = new System.Windows.Forms.CheckBox();
             this.BlurCheck = new System.Windows.Forms.CheckBox();
             this.FiltersBox = new System.Windows.Forms.TextBox();
@@ -79,15 +84,25 @@
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.PictureContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ClearPictureButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.LocalPictureButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.DatabasePictureButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.InternetPictureButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.PictureDialog = new System.Windows.Forms.OpenFileDialog();
             this.MainTabs.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.GamesTabs.SuspendLayout();
             this.GamesListTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GamesDGV)).BeginInit();
             this.GamesEntriesTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BgBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.IconBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DetailsBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RatingBar)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.PictureContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainTabs
@@ -154,6 +169,10 @@
             // 
             // GamesEntriesTab
             // 
+            this.GamesEntriesTab.Controls.Add(this.BgBox);
+            this.GamesEntriesTab.Controls.Add(this.IconBox);
+            this.GamesEntriesTab.Controls.Add(this.DetailsBox);
+            this.GamesEntriesTab.Controls.Add(this.SearchDatabaseButton);
             this.GamesEntriesTab.Controls.Add(this.OverlayCheck);
             this.GamesEntriesTab.Controls.Add(this.BlurCheck);
             this.GamesEntriesTab.Controls.Add(this.FiltersBox);
@@ -202,9 +221,54 @@
             this.GamesEntriesTab.Text = "[ENTRIES]";
             this.GamesEntriesTab.UseVisualStyleBackColor = true;
             // 
+            // BgBox
+            // 
+            this.BgBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BgBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.BgBox.Location = new System.Drawing.Point(890, 417);
+            this.BgBox.Name = "BgBox";
+            this.BgBox.Size = new System.Drawing.Size(143, 104);
+            this.BgBox.TabIndex = 43;
+            this.BgBox.TabStop = false;
+            this.BgBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BgBox_MouseUp);
+            // 
+            // IconBox
+            // 
+            this.IconBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.IconBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.IconBox.Location = new System.Drawing.Point(890, 268);
+            this.IconBox.Name = "IconBox";
+            this.IconBox.Size = new System.Drawing.Size(143, 143);
+            this.IconBox.TabIndex = 42;
+            this.IconBox.TabStop = false;
+            this.IconBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.IconBox_MouseUp);
+            // 
+            // DetailsBox
+            // 
+            this.DetailsBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.DetailsBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.DetailsBox.Location = new System.Drawing.Point(631, 268);
+            this.DetailsBox.Name = "DetailsBox";
+            this.DetailsBox.Size = new System.Drawing.Size(253, 253);
+            this.DetailsBox.TabIndex = 41;
+            this.DetailsBox.TabStop = false;
+            this.DetailsBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.DetailsBox_MouseUp);
+            // 
+            // SearchDatabaseButton
+            // 
+            this.SearchDatabaseButton.Location = new System.Drawing.Point(7, 423);
+            this.SearchDatabaseButton.Name = "SearchDatabaseButton";
+            this.SearchDatabaseButton.Size = new System.Drawing.Size(146, 44);
+            this.SearchDatabaseButton.TabIndex = 40;
+            this.SearchDatabaseButton.Text = "SEARCH DATABASE";
+            this.SearchDatabaseButton.UseVisualStyleBackColor = true;
+            this.SearchDatabaseButton.Click += new System.EventHandler(this.SearchDatabaseButton_Click);
+            // 
             // OverlayCheck
             // 
             this.OverlayCheck.AutoSize = true;
+            this.OverlayCheck.Checked = true;
+            this.OverlayCheck.CheckState = System.Windows.Forms.CheckState.Checked;
             this.OverlayCheck.Location = new System.Drawing.Point(724, 248);
             this.OverlayCheck.Name = "OverlayCheck";
             this.OverlayCheck.Size = new System.Drawing.Size(15, 14);
@@ -214,6 +278,8 @@
             // BlurCheck
             // 
             this.BlurCheck.AutoSize = true;
+            this.BlurCheck.Checked = true;
+            this.BlurCheck.CheckState = System.Windows.Forms.CheckState.Checked;
             this.BlurCheck.Location = new System.Drawing.Point(724, 210);
             this.BlurCheck.Name = "BlurCheck";
             this.BlurCheck.Size = new System.Drawing.Size(15, 14);
@@ -332,11 +398,11 @@
             this.LastPlayedDatePicker.Size = new System.Drawing.Size(287, 20);
             this.LastPlayedDatePicker.TabIndex = 24;
             // 
-            // StartCheck
+            // StartDateCheck
             // 
             this.StartDateCheck.AutoSize = true;
             this.StartDateCheck.Location = new System.Drawing.Point(267, 199);
-            this.StartDateCheck.Name = "StartCheck";
+            this.StartDateCheck.Name = "StartDateCheck";
             this.StartDateCheck.Size = new System.Drawing.Size(56, 17);
             this.StartDateCheck.TabIndex = 23;
             this.StartDateCheck.Text = "Ignore";
@@ -462,7 +528,6 @@
             // 
             // PlatformBox
             // 
-            this.PlatformBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.PlatformBox.FormattingEnabled = true;
             this.PlatformBox.Location = new System.Drawing.Point(267, 37);
             this.PlatformBox.Name = "PlatformBox";
@@ -586,6 +651,48 @@
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
+            // PictureContextMenu
+            // 
+            this.PictureContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ClearPictureButton,
+            this.LocalPictureButton,
+            this.DatabasePictureButton,
+            this.InternetPictureButton});
+            this.PictureContextMenu.Name = "PictureContextMenu";
+            this.PictureContextMenu.Size = new System.Drawing.Size(155, 92);
+            // 
+            // ClearPictureButton
+            // 
+            this.ClearPictureButton.Name = "ClearPictureButton";
+            this.ClearPictureButton.Size = new System.Drawing.Size(154, 22);
+            this.ClearPictureButton.Text = "Clear Picture";
+            // 
+            // LocalPictureButton
+            // 
+            this.LocalPictureButton.Name = "LocalPictureButton";
+            this.LocalPictureButton.Size = new System.Drawing.Size(154, 22);
+            this.LocalPictureButton.Text = "From Local File";
+            this.LocalPictureButton.Click += new System.EventHandler(this.LocalPictureButton_Click);
+            // 
+            // DatabasePictureButton
+            // 
+            this.DatabasePictureButton.Name = "DatabasePictureButton";
+            this.DatabasePictureButton.Size = new System.Drawing.Size(154, 22);
+            this.DatabasePictureButton.Text = "From Database";
+            this.DatabasePictureButton.Click += new System.EventHandler(this.DatabasePictureButton_Click);
+            // 
+            // InternetPictureButton
+            // 
+            this.InternetPictureButton.Name = "InternetPictureButton";
+            this.InternetPictureButton.Size = new System.Drawing.Size(154, 22);
+            this.InternetPictureButton.Text = "From Internet";
+            this.InternetPictureButton.Click += new System.EventHandler(this.InternetPictureButton_Click);
+            // 
+            // PictureDialog
+            // 
+            this.PictureDialog.FileName = "openFileDialog1";
+            this.PictureDialog.Filter = "Image Files(*.PNG;*.JPG;*.JPEG;*.GIF)|*.PNG;*.JPG;*.JPEG;*.GIF";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -603,9 +710,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.GamesDGV)).EndInit();
             this.GamesEntriesTab.ResumeLayout(false);
             this.GamesEntriesTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BgBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.IconBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DetailsBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.RatingBar)).EndInit();
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.PictureContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -629,15 +740,15 @@
         private System.Windows.Forms.Button AddButton;
         private System.Windows.Forms.TextBox EntryLabels;
         private System.Windows.Forms.Button ClearButton;
-        private System.Windows.Forms.TextBox TitleBox;
+        public System.Windows.Forms.TextBox TitleBox;
         private System.Windows.Forms.TextBox RatingBox;
         private System.Windows.Forms.TrackBar RatingBar;
         private System.Windows.Forms.ComboBox StatusBox;
-        private System.Windows.Forms.ComboBox PlatformBox;
+        public System.Windows.Forms.ComboBox PlatformBox;
         private System.Windows.Forms.TextBox EntryLabels2;
-        private System.Windows.Forms.TextBox PublishersBox;
-        private System.Windows.Forms.TextBox DevelopersBox;
-        private System.Windows.Forms.TextBox GameDescBox;
+        public System.Windows.Forms.TextBox PublishersBox;
+        public System.Windows.Forms.TextBox DevelopersBox;
+        public System.Windows.Forms.TextBox GameDescBox;
         private System.Windows.Forms.TextBox NotesBox;
         private System.Windows.Forms.CheckBox LastPlayedCheck;
         private System.Windows.Forms.DateTimePicker LastPlayedDatePicker;
@@ -660,9 +771,19 @@
         private System.Windows.Forms.Button LaunchButton;
         private System.Windows.Forms.TextBox PriceBox;
         private System.Windows.Forms.TextBox PlayerCountBox;
-        private System.Windows.Forms.TextBox GenreBox;
-        private System.Windows.Forms.CheckBox ReleaseDateCheck;
-        private System.Windows.Forms.DateTimePicker ReleaseDatePicker;
+        public System.Windows.Forms.TextBox GenreBox;
+        public System.Windows.Forms.CheckBox ReleaseDateCheck;
+        public System.Windows.Forms.DateTimePicker ReleaseDatePicker;
+        private System.Windows.Forms.Button SearchDatabaseButton;
+        private System.Windows.Forms.PictureBox BgBox;
+        private System.Windows.Forms.PictureBox IconBox;
+        private System.Windows.Forms.PictureBox DetailsBox;
+        private System.Windows.Forms.ContextMenuStrip PictureContextMenu;
+        private System.Windows.Forms.ToolStripMenuItem ClearPictureButton;
+        private System.Windows.Forms.ToolStripMenuItem LocalPictureButton;
+        private System.Windows.Forms.ToolStripMenuItem DatabasePictureButton;
+        private System.Windows.Forms.ToolStripMenuItem InternetPictureButton;
+        private System.Windows.Forms.OpenFileDialog PictureDialog;
     }
 }
 

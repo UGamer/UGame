@@ -478,38 +478,37 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
                 try
                 {
                     Console.WriteLine(segment);
-                    // try
+                    try
                     {
                         part = segment.Substring(0, segment.IndexOf(" "));
                         segment = segment.Substring(segment.IndexOf(" ") + 1);
 
-                        url += part + "%";
+                        url += part + "+";
                     }
-                    // catch
-                    {
-                        // url += segment;
-                        // segment = "";
-                    }
-                    
+                    catch { }
                 }
                 catch { }
-                
+                url += segment;
+                segment = "";
             }
             url += "&source=lnms&tbm=isch";
-
-
+            
             Browser browser = new Browser(url);
             DialogResult dialogResult = browser.ShowDialog();
 
             if (dialogResult == DialogResult.Yes)
             {
-                string fileExt = browser.url.Substring(browser.url.IndexOf(".") + 1);
+                string fileExt = browser.url;
+                while (fileExt.IndexOf(".") != -1)
+                {
+                    fileExt = fileExt.Substring(fileExt.IndexOf(".") + 1);
+                }
 
                 WebClient webClient = new WebClient();
                 byte[] imageBytes = webClient.DownloadData(url);
 
                 File.WriteAllBytes(newResourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + fileExt, imageBytes);
-
+                
                 if (PictureContextMenu.Tag.ToString() == "details\\")
                     DetailsBox.BackgroundImage = Image.FromFile(newResourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + fileExt);
                 else if (PictureContextMenu.Tag.ToString() == "bg\\")

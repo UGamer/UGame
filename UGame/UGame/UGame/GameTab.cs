@@ -30,8 +30,8 @@ namespace UGame
         string minutesString;
         string secondsString;
 
-        static string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"E:\\Projects\\UGame\\recode\\UGame\\UGame\\UGame\\bin\\Debug\\UGameDB.mdf\";Integrated Security=True";
-        static SqlConnection con = new SqlConnection(connectionString);
+        static string connectionString;
+        static SqlConnection con;
         public SqlCommand cmd;
 
         int rowIndex;
@@ -87,7 +87,8 @@ namespace UGame
 
         public GameTab(MainForm refer, int rowIndex, int tabCount, int id)
         {
-            
+            connectionString = connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"" + refer.mdfPath + "\";Integrated Security=True"; ;
+            con = new SqlConnection(connectionString);
             this.refer = refer;
             tabIndex = tabCount - 2;
 

@@ -9,7 +9,6 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,10 +21,8 @@ namespace UGame
         public List<GameTab> games = new List<GameTab>();
         public GameTab game;
         public WebBrowser BrowserLauncher = new WebBrowser();
-        public int index = 0;
-        int highestId;
-        public string mdfPath;
-        public static string connectionString;
+
+        static string connectionString;
         static SqlConnection con;
         public SqlCommand selectCmd;
         public SqlCommand insertCmd;
@@ -35,8 +32,6 @@ namespace UGame
 
         public string urlString = "";
         public string launchString = "";
-        
-        public string resourcePath = "resources\\";
 
         public MainForm()
         {
@@ -50,7 +45,7 @@ namespace UGame
                 Directory.CreateDirectory("resources\\bg");
             
             Uri location = new Uri(Assembly.GetEntryAssembly().GetName().CodeBase);
-            mdfPath = new FileInfo(location.AbsolutePath).Directory.FullName + "\\UGameDB.mdf";
+            string mdfPath = new FileInfo(location.AbsolutePath).Directory.FullName + "\\UGameDB.mdf";
             connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"" + mdfPath + "\";Integrated Security=True";
             con = new SqlConnection(connectionString);
 
@@ -87,14 +82,8 @@ namespace UGame
             dataTable.Rows.Add(dataRow);
             // TEMPORARY DATA FOR TESTING
 
-
-            for (int index = 0; index < dataTable.Rows.Count; index++)
-            {
-                try { dataTable.Rows[index][0] = Image.FromFile("resources\\icons\\" + dataTable.Rows[index]["Title"] + ".png"); } catch { dataTable.Rows[index][0] = Image.FromFile("resources\\unknown.png"); }
-                
-            }
-
             GamesDGV.DataSource = dataTable;
+
             ((DataGridViewImageColumn)GamesDGV.Columns[0]).ImageLayout = DataGridViewImageCellLayout.Zoom;
             GamesDGV.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
@@ -111,7 +100,7 @@ namespace UGame
         
         private void NewTab(int rowIndex)
         {
-            // try
+            try
             {
                 int id = Convert.ToInt32(GamesDGV.Rows[rowIndex].Cells["Id"].Value);
                 int index;
@@ -136,7 +125,7 @@ namespace UGame
                     GamesTabs.SelectedTab = games[index].gameTab;
                 }
             }
-            // catch { }
+            catch { }
         }
 
         public void AddGameTab(TabPage gameTab)
@@ -169,7 +158,7 @@ namespace UGame
 
         public void AddEntry()
         {
-            highestId = 0;
+            int highestId = 0;
 
             for (int index = 0; index < dataTable.Rows.Count; index++)
                 if (highestId < Convert.ToInt32(dataTable.Rows[index]["Id"]))
@@ -178,9 +167,13 @@ namespace UGame
             if (highestId == 0)
                 highestId--;
             
-            int hours; int minutes; int seconds;
+            int hours;
+            int minutes;
+            int seconds;
 
-            string hoursString = ""; string minutesString = ""; string secondsString = "";
+            string hoursString = "";
+            string minutesString = "";
+            string secondsString = "";
 
             try { hours = Convert.ToInt32(TimeHoursBox.Text); } catch { hours = 0; }
             try { minutes = Convert.ToInt32(TimeMinutesBox.Text); } catch { minutes = 0; }
@@ -209,11 +202,7 @@ namespace UGame
 
             DateTime nullDT = new DateTime(1753, 1, 1, 0, 0, 0);
 
-            string releaseDate;
-            if (!ReleaseDateCheck.Checked)
-                releaseDate = ReleaseDatePicker.Value.ToShortDateString();
-            else
-                releaseDate = nullDT.ToShortDateString();
+            string releaseDate = ReleaseDatePicker.Value.ToShortDateString();
 
             con.Open();
             
@@ -255,34 +244,7 @@ namespace UGame
             insertCmd.Parameters.AddWithValue("@Overlay", OverlayCheck.Checked.ToString());
 
             insertCmd.ExecuteNonQuery();
-
-            insertCmd.Parameters.RemoveAt("@Id");
-            insertCmd.Parameters.RemoveAt("@Title");
-            insertCmd.Parameters.RemoveAt("@Platform");
-            insertCmd.Parameters.RemoveAt("@Status");
-            insertCmd.Parameters.RemoveAt("@Rating");
-            insertCmd.Parameters.RemoveAt("@TimePlayed");
-            insertCmd.Parameters.RemoveAt("@Seconds");
-            insertCmd.Parameters.RemoveAt("@Obtained");
-            insertCmd.Parameters.RemoveAt("@StartDate");
-            insertCmd.Parameters.RemoveAt("@LastPlayed");
-            insertCmd.Parameters.RemoveAt("@Notes");
-            insertCmd.Parameters.RemoveAt("@URLs");
-            insertCmd.Parameters.RemoveAt("@Filters");
-            insertCmd.Parameters.RemoveAt("@Developers");
-            insertCmd.Parameters.RemoveAt("@Publishers");
-            insertCmd.Parameters.RemoveAt("@ReleaseDate");
-            insertCmd.Parameters.RemoveAt("@Genre");
-            insertCmd.Parameters.RemoveAt("@PlayerCount");
-            insertCmd.Parameters.RemoveAt("@Price");
-            insertCmd.Parameters.RemoveAt("@GameDesc");
-            insertCmd.Parameters.RemoveAt("@Launch");
-            insertCmd.Parameters.RemoveAt("@Blur");
-            insertCmd.Parameters.RemoveAt("@Overlay");
             con.Close();
-
-            highestId++;
-            index++;
         }
 
         private void Clear()
@@ -314,9 +276,6 @@ namespace UGame
             FiltersBox.Text = "";
             BlurCheck.Checked = true;
             OverlayCheck.Checked = true;
-            DetailsBox.BackgroundImage = null;
-            IconBox.BackgroundImage = null;
-            BgBox.BackgroundImage = null;
         }
 
         private void SearchDatabase()
@@ -355,127 +314,6 @@ namespace UGame
         private void SearchDatabaseButton_Click(object sender, EventArgs e)
         {
             SearchDatabase();
-        }
-
-        private void DetailsBox_MouseUp(object sender, MouseEventArgs e)
-        {
-            this.PictureContextMenu.Show(this.DetailsBox, e.Location);
-            PictureContextMenu.Tag = "details\\";
-            PictureContextMenu.Show(Cursor.Position);
-        }
-
-        private void IconBox_MouseUp(object sender, MouseEventArgs e)
-        {
-            this.PictureContextMenu.Show(this.IconBox, e.Location);
-            PictureContextMenu.Tag = "icons\\";
-            PictureContextMenu.Show(Cursor.Position);
-        }
-
-        private void BgBox_MouseUp(object sender, MouseEventArgs e)
-        {
-            this.PictureContextMenu.Show(this.BgBox, e.Location);
-            PictureContextMenu.Tag = "bg\\";
-            PictureContextMenu.Show(Cursor.Position);
-        }
-
-        private void LocalPictureButton_Click(object sender, EventArgs e)
-        {
-            if (PictureDialog.ShowDialog() == DialogResult.OK)
-            {
-                CutOrCopy cutOrCopy = new CutOrCopy();
-
-                DialogResult dialogResult = cutOrCopy.ShowDialog();
-                string fileExt = Path.GetExtension(PictureDialog.FileName);
-
-                if (dialogResult == DialogResult.Yes)
-                {
-                    File.Copy(PictureDialog.FileName, resourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + fileExt);
-                    if (PictureContextMenu.Tag.ToString() == "details\\")
-                        DetailsBox.BackgroundImage = Image.FromFile(resourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + fileExt);
-                    else if (PictureContextMenu.Tag.ToString() == "icons\\")
-                        IconBox.BackgroundImage = Image.FromFile(resourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + fileExt);
-                    else if (PictureContextMenu.Tag.ToString() == "bg\\")
-                        BgBox.BackgroundImage = Image.FromFile(resourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + fileExt);
-                }
-                else if (dialogResult == DialogResult.No)
-                {
-                    File.Move(PictureDialog.FileName, resourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + fileExt);
-                    if (PictureContextMenu.Tag.ToString() == "details\\")
-                        DetailsBox.BackgroundImage = Image.FromFile(resourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + fileExt);
-                    else if (PictureContextMenu.Tag.ToString() == "icons\\")
-                        IconBox.BackgroundImage = Image.FromFile(resourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + fileExt);
-                    else if (PictureContextMenu.Tag.ToString() == "bg\\")
-                        BgBox.BackgroundImage = Image.FromFile(resourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + fileExt);
-                }
-            }
-        }
-
-        private void DatabasePictureButton_Click(object sender, EventArgs e)
-        {
-            DGVForm dgvForm = new DGVForm("Images", PictureContextMenu.Tag.ToString(), this);
-
-            if (dgvForm.ShowDialog() == DialogResult.OK)
-            {
-                if (PictureContextMenu.Tag.ToString() == "details\\")
-                    DetailsBox.BackgroundImage = Image.FromFile(resourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + dgvForm.fileExt);
-                else if (PictureContextMenu.Tag.ToString() == "bg\\")
-                    BgBox.BackgroundImage = Image.FromFile(resourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + dgvForm.fileExt);
-                else if (PictureContextMenu.Tag.ToString() == "icons\\")
-                    IconBox.BackgroundImage = Image.FromFile(resourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + dgvForm.fileExt);
-            }
-        }
-
-        private void InternetPictureButton_Click(object sender, EventArgs e)
-        {
-            ArrayList titleParts = new ArrayList();
-
-            string segment = TitleBox.Text;
-            string part = "";
-
-            string url = "https://google.com/search?q=";
-            while (segment.IndexOf(" ") != -1)
-            {
-                try
-                {
-                    Console.WriteLine(segment);
-                    try
-                    {
-                        part = segment.Substring(0, segment.IndexOf(" "));
-                        segment = segment.Substring(segment.IndexOf(" ") + 1);
-
-                        url += part + "+";
-                    }
-                    catch { }
-                }
-                catch { }
-                url += segment;
-                segment = "";
-            }
-            url += "&source=lnms&tbm=isch";
-
-            Browser browser = new Browser(url);
-            DialogResult dialogResult = browser.ShowDialog();
-
-            if (dialogResult == DialogResult.Yes)
-            {
-                string fileExt = browser.url;
-                while (fileExt.IndexOf(".") != -1)
-                {
-                    fileExt = fileExt.Substring(fileExt.IndexOf(".") + 1);
-                }
-
-                WebClient webClient = new WebClient();
-                byte[] imageBytes = webClient.DownloadData(url);
-
-                File.WriteAllBytes(resourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + fileExt, imageBytes);
-
-                if (PictureContextMenu.Tag.ToString() == "details\\")
-                    DetailsBox.BackgroundImage = Image.FromFile(resourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + fileExt);
-                else if (PictureContextMenu.Tag.ToString() == "bg\\")
-                    BgBox.BackgroundImage = Image.FromFile(resourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + fileExt);
-                else if (PictureContextMenu.Tag.ToString() == "icons\\")
-                    IconBox.BackgroundImage = Image.FromFile(resourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + fileExt);
-            }
         }
     }
 }
