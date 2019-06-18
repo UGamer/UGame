@@ -64,7 +64,7 @@ namespace UGame
 
         private void FillDGV()
         {
-            con.Open();
+            try { con.Open(); } catch { MessageBox.Show("UGame could not retrieve the data from your database file. Exiting...", "Database Read Error"); }
             selectCmd.CommandType = CommandType.Text;
 
             SqlDataAdapter da = new SqlDataAdapter(selectCmd);

@@ -14,7 +14,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection;
-using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -39,6 +39,10 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
 
         string oldResourcePath;
         public string newResourcePath;
+        public string imageTitle;
+
+        public bool titleLock = false;
+        public bool platformLock = false;
 
         public Review(Start refer, DataTable newTable, SqlConnection newCon)
         {
@@ -312,12 +316,45 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
                 try { DetailsBox.BackgroundImage = Image.FromFile(oldResourcePath + "\\Details\\" + TitleBox.Text + ".png"); } catch { try { DetailsBox.BackgroundImage = Image.FromFile(oldResourcePath + "\\Details\\" + TitleBox.Text + ".jpg"); } catch { try { DetailsBox.BackgroundImage = Image.FromFile(oldResourcePath + "\\Details\\" + TitleBox.Text + ".jpeg"); } catch { try { DetailsBox.BackgroundImage = Image.FromFile(oldResourcePath + "\\Details\\" + TitleBox.Text + ".gif"); } catch { } } } }
                 try { IconBox.BackgroundImage = Bitmap.FromHicon(new Icon(oldResourcePath + "\\Icons\\" + TitleBox.Text + ".ico", new Size(48, 48)).Handle); } catch { }
                 try { BgBox.BackgroundImage = Image.FromFile(oldResourcePath + "\\BG\\" + TitleBox.Text + ".png"); } catch { try { BgBox.BackgroundImage = Image.FromFile(oldResourcePath + "\\BG\\" + TitleBox.Text + ".jpg"); } catch { try { BgBox.BackgroundImage = Image.FromFile(oldResourcePath + "\\BG\\" + TitleBox.Text + ".jpeg"); } catch { try { BgBox.BackgroundImage = Image.FromFile(oldResourcePath + "\\BG\\" + TitleBox.Text + ".gif"); } catch { } } } }
-                
+
+                imageTitle = TitleBox.Text;
+                Regex rgxFix1 = new Regex("/");
+                Regex rgxFix2 = new Regex(":");
+                Regex rgxFix3 = new Regex(".*");
+                Regex rgxFix4 = new Regex(".?");
+                Regex rgxFix5 = new Regex("\"");
+                Regex rgxFix6 = new Regex("<");
+                Regex rgxFix7 = new Regex(">");
+                Regex rgxFix8 = new Regex("|");
+                Regex rgxFix9 = new Regex(@"T:\\");
+
+                while (imageTitle.IndexOf("/") != -1)
+                    imageTitle = rgxFix1.Replace(imageTitle, "");
+                while (imageTitle.IndexOf(":") != -1)
+                    imageTitle = rgxFix2.Replace(imageTitle, "");
+                while (imageTitle.IndexOf("*") != -1)
+                    imageTitle = rgxFix3.Replace(imageTitle, "");
+                while (imageTitle.IndexOf("?") != -1)
+                    imageTitle = rgxFix4.Replace(imageTitle, "");
+                while (imageTitle.IndexOf("\"") != -1)
+                    imageTitle = rgxFix5.Replace(imageTitle, "");
+                while (imageTitle.IndexOf("<") != -1)
+                    imageTitle = rgxFix6.Replace(imageTitle, "");
+                while (imageTitle.IndexOf(">") != -1)
+                    imageTitle = rgxFix7.Replace(imageTitle, "");
+                while (imageTitle.IndexOf("|") != -1)
+                    imageTitle = rgxFix8.Replace(imageTitle, "");
+                while (imageTitle.IndexOf("\\") != -1)
+                    imageTitle = rgxFix9.Replace(imageTitle, "");
             }
         }
 
         private void Clear()
         {
+            titleLock = false;
+            platformLock = false;
+            LockTitleButton.BackgroundImage = UGame_Database_Convert__OLD_TO_NEW_.Properties.Resources.Unlock;
+            LockPlatformButton.BackgroundImage = UGame_Database_Convert__OLD_TO_NEW_.Properties.Resources.Unlock;
             TitleBox.Text = "";
             PlatformBox.Text = "";
             StatusBox.Text = "";
@@ -334,7 +371,7 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
             NotesBox.Text = "";
             DevelopersBox.Text = "";
             PublishersBox.Text = "";
-            ReleaseDateCheck.Checked = true;
+            ReleaseDateCheck.Checked = false;
             ReleaseDatePicker.Value = DateTime.Now;
             GenreBox.Text = "";
             PlayerCountBox.Text = "";
@@ -456,6 +493,8 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
             
             if (dgvForm.ShowDialog() == DialogResult.OK)
             {
+                
+
                 if (PictureContextMenu.Tag.ToString() == "details\\")
                     DetailsBox.BackgroundImage = Image.FromFile(newResourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + dgvForm.fileExt);
                 else if (PictureContextMenu.Tag.ToString() == "bg\\")
@@ -504,18 +543,58 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
                     fileExt = fileExt.Substring(fileExt.IndexOf(".") + 1);
                 }
 
-                WebClient webClient = new WebClient();
-                byte[] imageBytes = webClient.DownloadData(url);
+                using (var client = new WebClient())
+                {
+                    client.DownloadFile(browser.url, newResourcePath + PictureContextMenu.Tag.ToString() + imageTitle + "." + fileExt);
+                }
 
-                File.WriteAllBytes(newResourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + fileExt, imageBytes);
+                // File.WriteAllBytes(newResourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + fileExt, imageBytes);
                 
                 if (PictureContextMenu.Tag.ToString() == "details\\")
-                    DetailsBox.BackgroundImage = Image.FromFile(newResourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + fileExt);
+                    DetailsBox.BackgroundImage = Image.FromFile(newResourcePath + PictureContextMenu.Tag.ToString() + imageTitle + "." + fileExt);
                 else if (PictureContextMenu.Tag.ToString() == "bg\\")
-                    BgBox.BackgroundImage = Image.FromFile(newResourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + fileExt);
+                    BgBox.BackgroundImage = Image.FromFile(newResourcePath + PictureContextMenu.Tag.ToString() + imageTitle + "." + fileExt);
                 else if (PictureContextMenu.Tag.ToString() == "icons\\")
-                    IconBox.BackgroundImage = Image.FromFile(newResourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + fileExt);
+                    IconBox.BackgroundImage = Image.FromFile(newResourcePath + PictureContextMenu.Tag.ToString() + imageTitle + "." + fileExt);
             }
+        }
+
+        private void LockButton_Click(object sender, EventArgs e)
+        {
+            Button tempButton = (Button)sender;
+
+            if (tempButton.Tag.ToString() == "Title")
+            {
+                if (titleLock)
+                {
+                    titleLock = false;
+                    LockTitleButton.BackgroundImage = UGame_Database_Convert__OLD_TO_NEW_.Properties.Resources.Unlock;
+                }
+                else
+                {
+                    titleLock = true;
+                    LockTitleButton.BackgroundImage = UGame_Database_Convert__OLD_TO_NEW_.Properties.Resources.Lock;
+                }
+            }
+
+            if (tempButton.Tag.ToString() == "Platform")
+            {
+                if (platformLock)
+                {
+                    platformLock = false;
+                    LockPlatformButton.BackgroundImage = UGame_Database_Convert__OLD_TO_NEW_.Properties.Resources.Unlock;
+                }
+                else
+                {
+                    platformLock = true;
+                    LockPlatformButton.BackgroundImage = UGame_Database_Convert__OLD_TO_NEW_.Properties.Resources.Lock;
+                }
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            NextEntry();
         }
     }
 }

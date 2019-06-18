@@ -9,7 +9,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -198,8 +198,12 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
                     uniquePlatform = false;
                 }
                 platformsUsed.Remove("Test");
-                if (platform.IndexOf(",", platform.Length - 2) != -1)
-                    platform = platform.Substring(0, platform.Length - 2);
+                try
+                {
+                    if (platform.IndexOf(",", platform.Length - 2) != -1)
+                        platform = platform.Substring(0, platform.Length - 2);
+                }
+                catch { }
 
                 int companiesCount;
                 try { companiesCount = games[index].InvolvedCompanies.Values.Count(); } catch { companiesCount = 0; }
@@ -486,12 +490,14 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
             {
                 if (type == "DB")
                 {
-                    refer.TitleBox.Text = DGV.Rows[e.RowIndex].Cells["Title"].Value.ToString();
-                    refer.PlatformBox.Text = DGV.Rows[e.RowIndex].Cells["Platform"].Value.ToString();
+                    if (!refer.titleLock)
+                        refer.TitleBox.Text = DGV.Rows[e.RowIndex].Cells["Title"].Value.ToString();
+                    if (!refer.platformLock)
+                        refer.PlatformBox.Text = DGV.Rows[e.RowIndex].Cells["Platform"].Value.ToString();
                     refer.DevelopersBox.Text = DGV.Rows[e.RowIndex].Cells["Developers"].Value.ToString();
                     refer.PublishersBox.Text = DGV.Rows[e.RowIndex].Cells["Publishers"].Value.ToString();
                     
-                    if (DGV.Rows[e.RowIndex].Cells["Release Date"].Value.ToString() == "1/1/1753")
+                    if (DGV.Rows[e.RowIndex].Cells["Release Date"].Value.ToString() == "1753/1/1")
                     {
                         refer.ReleaseDatePicker.Value = DateTime.Now;
                         refer.ReleaseDateCheck.Checked = true;
@@ -515,7 +521,7 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
                     
                     byte[] imageBytes = webClient.DownloadData(remoteFileUrl);
 
-                    File.WriteAllBytes(refer.newResourcePath + data + refer.TitleBox.Text + "." + fileExt, imageBytes);
+                    File.WriteAllBytes(refer.newResourcePath + data + refer.imageTitle + "." + fileExt, imageBytes);
 
                     this.DialogResult = DialogResult.OK;
                     this.Close();
