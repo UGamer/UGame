@@ -125,6 +125,12 @@
       <DependentUpon>GameSummary.cs</DependentUpon>
     </Compile>
     <Compile Include="GameTab.cs" />
+    <Compile Include="LaunchChoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LaunchChoice.Designer.cs">
+      <DependentUpon>LaunchChoice.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -148,6 +154,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GameSummary.resx">
       <DependentUpon>GameSummary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LaunchChoice.resx">
+      <DependentUpon>LaunchChoice.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
