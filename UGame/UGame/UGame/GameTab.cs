@@ -10,7 +10,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
+using System.Text.RegularExpressions;
 using System.Timers;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -47,9 +47,8 @@ namespace UGame
         public DateTime startDate = new DateTime(1753, 1, 1, 0, 0, 0);
         public DateTime lastPlayed = new DateTime(1753, 1, 1, 0, 0, 0);
         public string notes;
-
-        public string filterString;
-        public string[] filters;
+        
+        public string filters;
 
         public string developer;
         public string publisher;
@@ -61,9 +60,13 @@ namespace UGame
 
         public string urlString;
         public string[,] URLs;
-        string launchCode;
+        int launchCount = 0;
+        string launchString;
+        public string[,] launchCodes;
         bool blur;
         bool useOverlay;
+
+        string imageTitle;
 
         public int screenshotCount;
         GameSummary gameSummary;
@@ -112,15 +115,30 @@ namespace UGame
             notes = refer.dataTable.Rows[rowIndex]["Notes"].ToString();
 
             urlString = refer.dataTable.Rows[rowIndex]["URLs"].ToString();
+            int urlCount = 0;
+            string segment = urlString;
+            while (segment.IndexOf("[Title]") != -1)
+            {
+                urlCount++;
+                segment = segment.Substring(segment.IndexOf("[Title]") + 7);
+            }
+            URLs = new string[urlCount, 2];
+            segment = urlString;
+            for (int index = 0; index < urlCount; index++)
+            {
+                segment = segment.Substring(segment.IndexOf("[Title]") + 7);
+
+                URLs[index, 0] = segment.Substring(0, segment.IndexOf("[URL]"));
+                segment = segment.Substring(segment.IndexOf("[URL]") + 5);
+                try { URLs[index, 1] = segment.Substring(0, segment.IndexOf("[Title]")); } catch { URLs[index, 1] = segment; }
+                try { segment = segment.Substring(segment.IndexOf("[Title]") + 7); } catch { segment = ""; }
+            }
+
             // NEED TO PROPERLY IMPLEMENT URLS
-            URLs = new string[1,2];
             URLs[0, 0] = urlString;
             URLs[0, 1] = urlString;
 
-            filterString = refer.dataTable.Rows[rowIndex]["Filters"].ToString();
-            // NEED TO PROPERLY IMPLEMENT FILTERS
-            filters = new string[1];
-            filters[0] = filterString;
+            filters = refer.dataTable.Rows[rowIndex]["Filters"].ToString();
 
             developer = refer.dataTable.Rows[rowIndex]["Developers"].ToString();
             publisher = refer.dataTable.Rows[rowIndex]["Publishers"].ToString();
@@ -130,13 +148,64 @@ namespace UGame
             try { price = Convert.ToDecimal(refer.dataTable.Rows[rowIndex]["Price"]); } catch { price = -1; }
             gameDesc = refer.dataTable.Rows[rowIndex]["GameDesc"].ToString();
 
+            // NEED TO PROPERLY IMPLEMENT LAUNCH CODES
+            launchString = refer.dataTable.Rows[rowIndex]["Launch"].ToString();
+            segment = launchString;
+            while (segment.IndexOf("[Title]") != -1)
+            {
+                launchCount++;
+                segment = segment.Substring(segment.IndexOf("[Title]") + 7);
+            }
+            launchCodes = new string[launchCount, 2];
+            segment = launchString;
+            for (int index = 0; index < launchCount; index++)
+            {
+                segment = segment.Substring(segment.IndexOf("[Title]") + 7);
 
-            launchCode = refer.dataTable.Rows[rowIndex]["Launch"].ToString();
+                launchCodes[index, 0] = segment.Substring(0, segment.IndexOf("[URL]"));
+                segment = segment.Substring(segment.IndexOf("[URL]") + 5);
+                try { launchCodes[index, 1] = segment.Substring(0, segment.IndexOf("[Title]")); } catch { launchCodes[index, 1] = segment; }
+                try { segment = segment.Substring(segment.IndexOf("[Title]") + 7); } catch { segment = ""; }
+            }
+
+
             try { blur = Convert.ToBoolean(refer.dataTable.Rows[rowIndex]["Blur"]); } catch { blur = true; }
             try { useOverlay = Convert.ToBoolean(refer.dataTable.Rows[rowIndex]["Overlay"]); } catch { useOverlay = true; }
             
             con.Close();
 
+
+            imageTitle = title;
+            Regex rgxFix1 = new Regex("/");
+            Regex rgxFix2 = new Regex(":");
+            Regex rgxFix3 = new Regex(".*");
+            Regex rgxFix4 = new Regex(".?");
+            Regex rgxFix5 = new Regex("\"");
+            Regex rgxFix6 = new Regex("<");
+            Regex rgxFix7 = new Regex(">");
+            Regex rgxFix8 = new Regex("|");
+            Regex rgxFix9 = new Regex(@"T:\\");
+
+            while (imageTitle.IndexOf("/") != -1)
+                imageTitle = rgxFix1.Replace(imageTitle, "");
+            while (imageTitle.IndexOf(":") != -1)
+                imageTitle = rgxFix2.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("*") != -1)
+                imageTitle = rgxFix3.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("?") != -1)
+                imageTitle = rgxFix4.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("\"") != -1)
+                imageTitle = rgxFix5.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("<") != -1)
+                imageTitle = rgxFix6.Replace(imageTitle, "");
+            while (imageTitle.IndexOf(">") != -1)
+                imageTitle = rgxFix7.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("|") != -1)
+                imageTitle = rgxFix8.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("\\") != -1)
+                imageTitle = rgxFix9.Replace(imageTitle, "");
+
+            Console.WriteLine(imageTitle);
             TabCreation();
         }
 
@@ -145,11 +214,11 @@ namespace UGame
             Image bgImage = null;
             gameTab.Text = title;
             gameTab.BackColor = Color.White;
-            try { bgImage = Image.FromFile("resources\\bg\\" + title + ".png"); }
-            catch { try { bgImage = Image.FromFile("resources\\bg\\" + title + ".jpg"); }
-            catch { try { bgImage = Image.FromFile("resources\\bg\\" + title + ".jpeg"); }
-            catch { try { bgImage = Image.FromFile("resources\\bg\\" + title + ".gif"); }
-            catch { try { bgImage = Image.FromFile("resources\\bg\\" + title + ".jfif"); }
+            try { bgImage = Image.FromFile("resources\\bg\\" + imageTitle + ".png"); }
+            catch { try { bgImage = Image.FromFile("resources\\bg\\" + imageTitle + ".jpg"); }
+            catch { try { bgImage = Image.FromFile("resources\\bg\\" + imageTitle + ".jpeg"); }
+            catch { try { bgImage = Image.FromFile("resources\\bg\\" + imageTitle + ".gif"); }
+            catch { try { bgImage = Image.FromFile("resources\\bg\\" + imageTitle + ".jfif"); }
             catch { } } } } }
             try
             {
@@ -166,25 +235,26 @@ namespace UGame
 
             detailsBox.Location = new Point(7, 7);
             detailsBox.Size = new Size(351, 351);
-            try { detailsBox.BackgroundImage = Image.FromFile("resources\\details\\" + title + ".png"); }
-            catch { try { detailsBox.BackgroundImage = Image.FromFile("resources\\details\\" + title + ".jpg"); }
-            catch { try { detailsBox.BackgroundImage = Image.FromFile("resources\\details\\" + title + ".jpeg"); }
-            catch { try { detailsBox.BackgroundImage = Image.FromFile("resources\\details\\" + title + ".gif"); }
-            catch { try { detailsBox.BackgroundImage = Image.FromFile("resources\\details\\" + title + ".jfif"); }
+            try { detailsBox.BackgroundImage = Image.FromFile("resources\\details\\" + imageTitle + ".png"); }
+            catch { try { detailsBox.BackgroundImage = Image.FromFile("resources\\details\\" + imageTitle + ".jpg"); }
+            catch { try { detailsBox.BackgroundImage = Image.FromFile("resources\\details\\" + imageTitle + ".jpeg"); }
+            catch { try { detailsBox.BackgroundImage = Image.FromFile("resources\\details\\" + imageTitle + ".gif"); }
+            catch { try { detailsBox.BackgroundImage = Image.FromFile("resources\\details\\" + imageTitle + ".jfif"); }
             catch { } } } } }
             detailsBox.BackgroundImageLayout = ImageLayout.Zoom;
             detailsBox.BackColor = Color.Transparent;
 
             iconBox.Location = new Point(365, 7);
             iconBox.Size = new Size(68, 68);
-            try { iconBox.BackgroundImage = Image.FromFile("resources\\icons\\" + title + ".png"); }
-            catch { try { iconBox.BackgroundImage = Image.FromFile("resources\\icons\\" + title + ".jpg"); }
-            catch { try { iconBox.BackgroundImage = Image.FromFile("resources\\icons\\" + title + ".jpeg"); }
-            catch { try { iconBox.BackgroundImage = Image.FromFile("resources\\icons\\" + title + ".gif"); }
-            catch { try { iconBox.BackgroundImage = Image.FromFile("resources\\icons\\" + title + ".jfif"); }
+            try { iconBox.BackgroundImage = Image.FromFile("resources\\icons\\" + imageTitle + ".png"); }
+            catch { try { iconBox.BackgroundImage = Image.FromFile("resources\\icons\\" + imageTitle + ".jpg"); }
+            catch { try { iconBox.BackgroundImage = Image.FromFile("resources\\icons\\" + imageTitle + ".jpeg"); }
+            catch { try { iconBox.BackgroundImage = Image.FromFile("resources\\icons\\" + imageTitle + ".gif"); }
+            catch { try { iconBox.BackgroundImage = Image.FromFile("resources\\icons\\" + imageTitle + ".jfif"); }
             catch { } } } } }
             iconBox.BackgroundImageLayout = ImageLayout.Zoom;
             iconBox.BackColor = Color.Transparent;
+
 
             titleBox.Location = new Point(440, 14);
             titleBox.Size = new Size(593, 68);
@@ -297,6 +367,21 @@ namespace UGame
         
         public void Launch()
         {
+            string launchCode = "";
+            if (launchCount > 1)
+            {
+                LaunchChoice launchChoice = new LaunchChoice(launchCodes);
+                DialogResult dialogResult = launchChoice.ShowDialog();
+                if (dialogResult == DialogResult.Yes)
+                {
+                    launchCode = launchCodes[launchChoice.index, 1];
+                }
+            }
+            else
+            {
+                launchCode = launchCodes[0, 1];
+            }
+
             bool isExe = false;
             bool hasArgs = false;
             ProcessStartInfo startInfo;
@@ -436,8 +521,7 @@ namespace UGame
             timer.Stop();
 
             gameTab.Text = title;
-
-
+            
             SetText("Launch & Track", ref button1);
             SetText("Track", ref button2);
             SetText("Launch", ref button3);
@@ -549,7 +633,7 @@ namespace UGame
             if (lastPlayed.ToString() != "1/1/1753 12:00:00 AM")
                 message += lastPlayed;
 
-            message += "\nNotes: " + notes + "\nFilters: " + filterString + "\nDevelopers: " + developer + "\nRelease Date: " + releaseDate + "\nGenre: " + genre + "\nPublishers: " + publisher + "\nPlayer Count: " + playerCount + "\nPrice: ";
+            message += "\nNotes: " + notes + "\nFilters: " + filters + "\nDevelopers: " + developer + "\nRelease Date: " + releaseDate + "\nGenre: " + genre + "\nPublishers: " + publisher + "\nPlayer Count: " + playerCount + "\nPrice: ";
 
             if (price > 0)
             {

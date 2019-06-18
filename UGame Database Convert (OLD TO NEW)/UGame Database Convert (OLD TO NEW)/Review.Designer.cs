@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Review));
             this.MainTabs = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.GamesTabs = new System.Windows.Forms.TabControl();
             this.GamesEntriesTab = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.LockPlatformButton = new System.Windows.Forms.Button();
             this.LockTitleButton = new System.Windows.Forms.Button();
             this.BgBox = new System.Windows.Forms.PictureBox();
@@ -60,6 +60,13 @@
             this.StartDatePicker = new System.Windows.Forms.DateTimePicker();
             this.ObtainedCheck = new System.Windows.Forms.CheckBox();
             this.ObtainedDatePicker = new System.Windows.Forms.DateTimePicker();
+            this.AddTimeButton = new System.Windows.Forms.Button();
+            this.TimeSecondsLabel = new System.Windows.Forms.Label();
+            this.TimeSecondsBox = new System.Windows.Forms.TextBox();
+            this.TimeMinutesLabel = new System.Windows.Forms.Label();
+            this.TimeMinutesBox = new System.Windows.Forms.TextBox();
+            this.TimeHoursLabel = new System.Windows.Forms.Label();
+            this.TimeHoursBox = new System.Windows.Forms.TextBox();
             this.RatingLabel = new System.Windows.Forms.Label();
             this.RatingBox = new System.Windows.Forms.TextBox();
             this.RatingBar = new System.Windows.Forms.TrackBar();
@@ -77,14 +84,6 @@
             this.DatabasePictureButton = new System.Windows.Forms.ToolStripMenuItem();
             this.InternetPictureButton = new System.Windows.Forms.ToolStripMenuItem();
             this.PictureDialog = new System.Windows.Forms.OpenFileDialog();
-            this.TimeSecondsLabel = new System.Windows.Forms.Label();
-            this.TimeMinutesBox = new System.Windows.Forms.TextBox();
-            this.TimeHoursLabel = new System.Windows.Forms.Label();
-            this.AddTimeButton = new System.Windows.Forms.Button();
-            this.TimeHoursBox = new System.Windows.Forms.TextBox();
-            this.TimeMinutesLabel = new System.Windows.Forms.Label();
-            this.TimeSecondsBox = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.MainTabs.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.GamesTabs.SuspendLayout();
@@ -181,6 +180,16 @@
             this.GamesEntriesTab.TabIndex = 1;
             this.GamesEntriesTab.Text = "[ENTRIES]";
             this.GamesEntriesTab.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(7, 55);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(146, 44);
+            this.button1.TabIndex = 46;
+            this.button1.Text = "NEXT";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // LockPlatformButton
             // 
@@ -346,7 +355,6 @@
             this.PublishersBox.Name = "PublishersBox";
             this.PublishersBox.Size = new System.Drawing.Size(347, 20);
             this.PublishersBox.TabIndex = 29;
-            this.PublishersBox.Visible = false;
             // 
             // DevelopersBox
             // 
@@ -354,7 +362,6 @@
             this.DevelopersBox.Name = "DevelopersBox";
             this.DevelopersBox.Size = new System.Drawing.Size(347, 20);
             this.DevelopersBox.TabIndex = 28;
-            this.DevelopersBox.Visible = false;
             // 
             // GameDescBox
             // 
@@ -424,6 +431,70 @@
             this.ObtainedDatePicker.Size = new System.Drawing.Size(287, 20);
             this.ObtainedDatePicker.TabIndex = 20;
             // 
+            // AddTimeButton
+            // 
+            this.AddTimeButton.Location = new System.Drawing.Point(619, 132);
+            this.AddTimeButton.Name = "AddTimeButton";
+            this.AddTimeButton.Size = new System.Drawing.Size(34, 22);
+            this.AddTimeButton.TabIndex = 19;
+            this.AddTimeButton.Text = "+";
+            this.AddTimeButton.UseVisualStyleBackColor = true;
+            this.AddTimeButton.Visible = false;
+            // 
+            // TimeSecondsLabel
+            // 
+            this.TimeSecondsLabel.AutoSize = true;
+            this.TimeSecondsLabel.Location = new System.Drawing.Point(565, 136);
+            this.TimeSecondsLabel.Name = "TimeSecondsLabel";
+            this.TimeSecondsLabel.Size = new System.Drawing.Size(47, 13);
+            this.TimeSecondsLabel.TabIndex = 18;
+            this.TimeSecondsLabel.Text = "seconds";
+            this.TimeSecondsLabel.Visible = false;
+            // 
+            // TimeSecondsBox
+            // 
+            this.TimeSecondsBox.Location = new System.Drawing.Point(508, 132);
+            this.TimeSecondsBox.Name = "TimeSecondsBox";
+            this.TimeSecondsBox.Size = new System.Drawing.Size(54, 20);
+            this.TimeSecondsBox.TabIndex = 17;
+            this.TimeSecondsBox.Visible = false;
+            // 
+            // TimeMinutesLabel
+            // 
+            this.TimeMinutesLabel.AutoSize = true;
+            this.TimeMinutesLabel.Location = new System.Drawing.Point(459, 136);
+            this.TimeMinutesLabel.Name = "TimeMinutesLabel";
+            this.TimeMinutesLabel.Size = new System.Drawing.Size(43, 13);
+            this.TimeMinutesLabel.TabIndex = 16;
+            this.TimeMinutesLabel.Text = "minutes";
+            this.TimeMinutesLabel.Visible = false;
+            // 
+            // TimeMinutesBox
+            // 
+            this.TimeMinutesBox.Location = new System.Drawing.Point(402, 132);
+            this.TimeMinutesBox.Name = "TimeMinutesBox";
+            this.TimeMinutesBox.Size = new System.Drawing.Size(54, 20);
+            this.TimeMinutesBox.TabIndex = 15;
+            this.TimeMinutesBox.Visible = false;
+            // 
+            // TimeHoursLabel
+            // 
+            this.TimeHoursLabel.AutoSize = true;
+            this.TimeHoursLabel.Location = new System.Drawing.Point(363, 136);
+            this.TimeHoursLabel.Name = "TimeHoursLabel";
+            this.TimeHoursLabel.Size = new System.Drawing.Size(33, 13);
+            this.TimeHoursLabel.TabIndex = 14;
+            this.TimeHoursLabel.Text = "hours";
+            this.TimeHoursLabel.Visible = false;
+            // 
+            // TimeHoursBox
+            // 
+            this.TimeHoursBox.Location = new System.Drawing.Point(306, 132);
+            this.TimeHoursBox.Name = "TimeHoursBox";
+            this.TimeHoursBox.Size = new System.Drawing.Size(54, 20);
+            this.TimeHoursBox.TabIndex = 13;
+            this.TimeHoursBox.Visible = false;
+            // 
             // RatingLabel
             // 
             this.RatingLabel.AutoSize = true;
@@ -482,8 +553,7 @@
             this.EntryLabels2.Name = "EntryLabels2";
             this.EntryLabels2.Size = new System.Drawing.Size(100, 521);
             this.EntryLabels2.TabIndex = 7;
-            this.EntryLabels2.Text = "Game Description: \r\n\r\n\r\n\r\n\r\nLaunch Codes: \r\n\r\nURLs: \r\n\r\nFilters: \r\n\r\nBlur Backgro" +
-    "und?: \r\n\r\nUse Overlay?: ";
+            this.EntryLabels2.Text = "\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nFilters: \r\n\r\nBlur Background?: \r\n\r\nUse Overlay?: ";
             // 
             // TitleBox
             // 
@@ -501,7 +571,9 @@
             this.EntryLabels.Name = "EntryLabels";
             this.EntryLabels.Size = new System.Drawing.Size(100, 521);
             this.EntryLabels.TabIndex = 5;
-            this.EntryLabels.Text = resources.GetString("EntryLabels.Text");
+            this.EntryLabels.Text = "* Title:\r\n\r\nPlatform:\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nObtained: \r\n\r\nStart Date: \r\n\r\nLast Played: \r" +
+    "\n\r\nNotes: \r\n\r\n\r\n\r\n\r\nDevelopers: \r\n\r\nPublishers: \r\n\r\n\r\n\r\nGenre: \r\n\r\nPlayer Count:" +
+    " \r\n\r\nPrice: ";
             // 
             // ClearButton
             // 
@@ -574,80 +646,6 @@
             // 
             this.PictureDialog.FileName = "PictureDialog";
             this.PictureDialog.Filter = "Image Files(*.PNG;*.JPG;*.JPEG;*.GIF)|*.PNG;*.JPG;*.JPEG;*.GIF";
-            // 
-            // TimeSecondsLabel
-            // 
-            this.TimeSecondsLabel.AutoSize = true;
-            this.TimeSecondsLabel.Location = new System.Drawing.Point(565, 136);
-            this.TimeSecondsLabel.Name = "TimeSecondsLabel";
-            this.TimeSecondsLabel.Size = new System.Drawing.Size(47, 13);
-            this.TimeSecondsLabel.TabIndex = 18;
-            this.TimeSecondsLabel.Text = "seconds";
-            this.TimeSecondsLabel.Visible = false;
-            // 
-            // TimeMinutesBox
-            // 
-            this.TimeMinutesBox.Location = new System.Drawing.Point(402, 132);
-            this.TimeMinutesBox.Name = "TimeMinutesBox";
-            this.TimeMinutesBox.Size = new System.Drawing.Size(54, 20);
-            this.TimeMinutesBox.TabIndex = 15;
-            this.TimeMinutesBox.Visible = false;
-            // 
-            // TimeHoursLabel
-            // 
-            this.TimeHoursLabel.AutoSize = true;
-            this.TimeHoursLabel.Location = new System.Drawing.Point(363, 136);
-            this.TimeHoursLabel.Name = "TimeHoursLabel";
-            this.TimeHoursLabel.Size = new System.Drawing.Size(33, 13);
-            this.TimeHoursLabel.TabIndex = 14;
-            this.TimeHoursLabel.Text = "hours";
-            this.TimeHoursLabel.Visible = false;
-            // 
-            // AddTimeButton
-            // 
-            this.AddTimeButton.Location = new System.Drawing.Point(619, 132);
-            this.AddTimeButton.Name = "AddTimeButton";
-            this.AddTimeButton.Size = new System.Drawing.Size(34, 22);
-            this.AddTimeButton.TabIndex = 19;
-            this.AddTimeButton.Text = "+";
-            this.AddTimeButton.UseVisualStyleBackColor = true;
-            this.AddTimeButton.Visible = false;
-            // 
-            // TimeHoursBox
-            // 
-            this.TimeHoursBox.Location = new System.Drawing.Point(306, 132);
-            this.TimeHoursBox.Name = "TimeHoursBox";
-            this.TimeHoursBox.Size = new System.Drawing.Size(54, 20);
-            this.TimeHoursBox.TabIndex = 13;
-            this.TimeHoursBox.Visible = false;
-            // 
-            // TimeMinutesLabel
-            // 
-            this.TimeMinutesLabel.AutoSize = true;
-            this.TimeMinutesLabel.Location = new System.Drawing.Point(459, 136);
-            this.TimeMinutesLabel.Name = "TimeMinutesLabel";
-            this.TimeMinutesLabel.Size = new System.Drawing.Size(43, 13);
-            this.TimeMinutesLabel.TabIndex = 16;
-            this.TimeMinutesLabel.Text = "minutes";
-            this.TimeMinutesLabel.Visible = false;
-            // 
-            // TimeSecondsBox
-            // 
-            this.TimeSecondsBox.Location = new System.Drawing.Point(508, 132);
-            this.TimeSecondsBox.Name = "TimeSecondsBox";
-            this.TimeSecondsBox.Size = new System.Drawing.Size(54, 20);
-            this.TimeSecondsBox.TabIndex = 17;
-            this.TimeSecondsBox.Visible = false;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(7, 55);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(146, 44);
-            this.button1.TabIndex = 46;
-            this.button1.Text = "NEXT";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Review
             // 

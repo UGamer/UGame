@@ -31,7 +31,7 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
         
         public DataTable newTable;
 
-        public int index = 0;
+        public int index = -1;
         int highestId;
 
         public string urlString = "";
@@ -208,8 +208,7 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
             refer.newCon.Close();
 
             highestId++;
-
-            index++;
+            
             NextEntry();
         }
 
@@ -221,6 +220,7 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
             }
             else
             {
+                index++;
                 this.Text = "Review for \"" + dataTable.Rows[index]["Title"] + "\" (" + (index + 1) + "/" + dataTable.Rows.Count + ")";
 
                 Clear();
@@ -313,9 +313,7 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
                 NotesBox.Text = dataTable.Rows[index]["Notes"].ToString();
                 launchString = "[Title]Default[URL]" + dataTable.Rows[index]["Launch"].ToString();
                 urlString = dataTable.Rows[index]["News"].ToString();
-                try { DetailsBox.BackgroundImage = Image.FromFile(oldResourcePath + "\\Details\\" + TitleBox.Text + ".png"); } catch { try { DetailsBox.BackgroundImage = Image.FromFile(oldResourcePath + "\\Details\\" + TitleBox.Text + ".jpg"); } catch { try { DetailsBox.BackgroundImage = Image.FromFile(oldResourcePath + "\\Details\\" + TitleBox.Text + ".jpeg"); } catch { try { DetailsBox.BackgroundImage = Image.FromFile(oldResourcePath + "\\Details\\" + TitleBox.Text + ".gif"); } catch { } } } }
-                try { IconBox.BackgroundImage = Bitmap.FromHicon(new Icon(oldResourcePath + "\\Icons\\" + TitleBox.Text + ".ico", new Size(48, 48)).Handle); } catch { }
-                try { BgBox.BackgroundImage = Image.FromFile(oldResourcePath + "\\BG\\" + TitleBox.Text + ".png"); } catch { try { BgBox.BackgroundImage = Image.FromFile(oldResourcePath + "\\BG\\" + TitleBox.Text + ".jpg"); } catch { try { BgBox.BackgroundImage = Image.FromFile(oldResourcePath + "\\BG\\" + TitleBox.Text + ".jpeg"); } catch { try { BgBox.BackgroundImage = Image.FromFile(oldResourcePath + "\\BG\\" + TitleBox.Text + ".gif"); } catch { } } } }
+                
 
                 imageTitle = TitleBox.Text;
                 Regex rgxFix1 = new Regex("/");
@@ -346,6 +344,10 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
                     imageTitle = rgxFix8.Replace(imageTitle, "");
                 while (imageTitle.IndexOf("\\") != -1)
                     imageTitle = rgxFix9.Replace(imageTitle, "");
+
+                try { DetailsBox.BackgroundImage = Image.FromFile(newResourcePath + "\\details\\" + imageTitle + ".png"); } catch { try { DetailsBox.BackgroundImage = Image.FromFile(newResourcePath + "\\details\\" + imageTitle + ".jpg"); } catch { try { DetailsBox.BackgroundImage = Image.FromFile(newResourcePath + "\\details\\" + imageTitle + ".jpeg"); } catch { try { DetailsBox.BackgroundImage = Image.FromFile(newResourcePath + "\\details\\" + imageTitle + ".gif"); } catch { } } } }
+                try { IconBox.BackgroundImage = Image.FromFile(newResourcePath + "\\icons\\" + imageTitle + ".png"); } catch { try { DetailsBox.BackgroundImage = Image.FromFile(newResourcePath + "\\icons\\" + imageTitle + ".jpg"); } catch { try { DetailsBox.BackgroundImage = Image.FromFile(newResourcePath + "\\icons\\" + imageTitle + ".jpeg"); } catch { try { DetailsBox.BackgroundImage = Image.FromFile(newResourcePath + "\\icons\\" + imageTitle + ".gif"); } catch { } } } }
+                try { BgBox.BackgroundImage = Image.FromFile(newResourcePath + "\\bg\\" + imageTitle + ".png"); } catch { try { BgBox.BackgroundImage = Image.FromFile(newResourcePath + "\\bg\\" + imageTitle + ".jpg"); } catch { try { BgBox.BackgroundImage = Image.FromFile(newResourcePath + "\\bg\\" + imageTitle + ".jpeg"); } catch { try { BgBox.BackgroundImage = Image.FromFile(newResourcePath + "\\bg\\" + imageTitle + ".gif"); } catch { } } } }
             }
         }
 
@@ -466,23 +468,23 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
 
                 if (dialogResult == DialogResult.Yes)
                 {
-                    File.Copy(PictureDialog.FileName, newResourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + fileExt);
+                    File.Copy(PictureDialog.FileName, newResourcePath + PictureContextMenu.Tag.ToString() + imageTitle + fileExt);
                     if (PictureContextMenu.Tag.ToString() == "details\\")
-                        DetailsBox.BackgroundImage = Image.FromFile(newResourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + fileExt);
+                        DetailsBox.BackgroundImage = Image.FromFile(newResourcePath + PictureContextMenu.Tag.ToString() + imageTitle + fileExt);
                     else if (PictureContextMenu.Tag.ToString() == "icons\\")
-                        IconBox.BackgroundImage = Image.FromFile(newResourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + fileExt);
+                        IconBox.BackgroundImage = Image.FromFile(newResourcePath + PictureContextMenu.Tag.ToString() + imageTitle + fileExt);
                     else if (PictureContextMenu.Tag.ToString() == "bg\\")
-                        BgBox.BackgroundImage = Image.FromFile(newResourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + fileExt);
+                        BgBox.BackgroundImage = Image.FromFile(newResourcePath + PictureContextMenu.Tag.ToString() + imageTitle + fileExt);
                 }
                 else if (dialogResult == DialogResult.No)
                 {
-                    File.Move(PictureDialog.FileName, newResourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + fileExt);
+                    File.Move(PictureDialog.FileName, newResourcePath + PictureContextMenu.Tag.ToString() + imageTitle + fileExt);
                     if (PictureContextMenu.Tag.ToString() == "details\\")
-                        DetailsBox.BackgroundImage = Image.FromFile(newResourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + fileExt);
+                        DetailsBox.BackgroundImage = Image.FromFile(newResourcePath + PictureContextMenu.Tag.ToString() + imageTitle + fileExt);
                     else if (PictureContextMenu.Tag.ToString() == "icons\\")
-                        IconBox.BackgroundImage = Image.FromFile(newResourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + fileExt);
+                        IconBox.BackgroundImage = Image.FromFile(newResourcePath + PictureContextMenu.Tag.ToString() + imageTitle + fileExt);
                     else if (PictureContextMenu.Tag.ToString() == "bg\\")
-                        BgBox.BackgroundImage = Image.FromFile(newResourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + fileExt);
+                        BgBox.BackgroundImage = Image.FromFile(newResourcePath + PictureContextMenu.Tag.ToString() + imageTitle + fileExt);
                 }
             }
         }
@@ -496,11 +498,11 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
                 
 
                 if (PictureContextMenu.Tag.ToString() == "details\\")
-                    DetailsBox.BackgroundImage = Image.FromFile(newResourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + dgvForm.fileExt);
+                    DetailsBox.BackgroundImage = Image.FromFile(newResourcePath + PictureContextMenu.Tag.ToString() + imageTitle + "." + dgvForm.fileExt);
                 else if (PictureContextMenu.Tag.ToString() == "bg\\")
-                    BgBox.BackgroundImage = Image.FromFile(newResourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + dgvForm.fileExt);
+                    BgBox.BackgroundImage = Image.FromFile(newResourcePath + PictureContextMenu.Tag.ToString() + imageTitle + "." + dgvForm.fileExt);
                 else if (PictureContextMenu.Tag.ToString() == "icons\\")
-                    IconBox.BackgroundImage = Image.FromFile(newResourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + dgvForm.fileExt);
+                    IconBox.BackgroundImage = Image.FromFile(newResourcePath + PictureContextMenu.Tag.ToString() + imageTitle + "." + dgvForm.fileExt);
             }
         }
 
@@ -530,6 +532,9 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
                 url += segment;
                 segment = "";
             }
+            if (PictureContextMenu.Tag.ToString() == "icons\\")
+                url += "+icon";
+
             url += "&source=lnms&tbm=isch";
             
             Browser browser = new Browser(url);
@@ -543,19 +548,20 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
                     fileExt = fileExt.Substring(fileExt.IndexOf(".") + 1);
                 }
 
+                string filePath = newResourcePath + PictureContextMenu.Tag.ToString() + imageTitle + "." + fileExt;
                 using (var client = new WebClient())
                 {
-                    client.DownloadFile(browser.url, newResourcePath + PictureContextMenu.Tag.ToString() + imageTitle + "." + fileExt);
+                    try { client.DownloadFile(browser.url, filePath); } catch { filePath = newResourcePath + PictureContextMenu.Tag.ToString() + imageTitle + ".jpg"; client.DownloadFile(browser.url, filePath); }
                 }
 
                 // File.WriteAllBytes(newResourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + fileExt, imageBytes);
                 
                 if (PictureContextMenu.Tag.ToString() == "details\\")
-                    DetailsBox.BackgroundImage = Image.FromFile(newResourcePath + PictureContextMenu.Tag.ToString() + imageTitle + "." + fileExt);
+                    DetailsBox.BackgroundImage = Image.FromFile(filePath);
                 else if (PictureContextMenu.Tag.ToString() == "bg\\")
-                    BgBox.BackgroundImage = Image.FromFile(newResourcePath + PictureContextMenu.Tag.ToString() + imageTitle + "." + fileExt);
+                    BgBox.BackgroundImage = Image.FromFile(filePath);
                 else if (PictureContextMenu.Tag.ToString() == "icons\\")
-                    IconBox.BackgroundImage = Image.FromFile(newResourcePath + PictureContextMenu.Tag.ToString() + imageTitle + "." + fileExt);
+                    IconBox.BackgroundImage = Image.FromFile(filePath);
             }
         }
 

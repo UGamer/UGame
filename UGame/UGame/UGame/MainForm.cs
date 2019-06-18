@@ -11,7 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection;
-using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -36,7 +36,8 @@ namespace UGame
 
         public string urlString = "";
         public string launchString = "";
-        
+
+        string imageTitle;
         public string resourcePath = "resources\\";
 
         public MainForm()
@@ -91,9 +92,45 @@ namespace UGame
 
 
             GamesDGV.DataSource = dataTable;
+
             for (int index = 0; index < dataTable.Rows.Count; index++)
             {
-                try { GamesDGV.Rows[index].Cells[0].Value = Image.FromFile("resources\\icons\\" + dataTable.Rows[index]["Title"] + ".png"); } catch { GamesDGV.Rows[index].Cells[0].Value = Image.FromFile("resources\\unknown.png"); }
+                imageTitle = dataTable.Rows[index]["Title"].ToString();
+                Regex rgxFix1 = new Regex("/");
+                Regex rgxFix2 = new Regex(":");
+                Regex rgxFix3 = new Regex(".*");
+                Regex rgxFix4 = new Regex(".?");
+                Regex rgxFix5 = new Regex("\"");
+                Regex rgxFix6 = new Regex("<");
+                Regex rgxFix7 = new Regex(">");
+                Regex rgxFix8 = new Regex("|");
+                Regex rgxFix9 = new Regex(@"T:\\");
+
+                while (imageTitle.IndexOf("/") != -1)
+                    imageTitle = rgxFix1.Replace(imageTitle, "");
+                while (imageTitle.IndexOf(":") != -1)
+                    imageTitle = rgxFix2.Replace(imageTitle, "");
+                while (imageTitle.IndexOf("*") != -1)
+                    imageTitle = rgxFix3.Replace(imageTitle, "");
+                while (imageTitle.IndexOf("?") != -1)
+                    imageTitle = rgxFix4.Replace(imageTitle, "");
+                while (imageTitle.IndexOf("\"") != -1)
+                    imageTitle = rgxFix5.Replace(imageTitle, "");
+                while (imageTitle.IndexOf("<") != -1)
+                    imageTitle = rgxFix6.Replace(imageTitle, "");
+                while (imageTitle.IndexOf(">") != -1)
+                    imageTitle = rgxFix7.Replace(imageTitle, "");
+                while (imageTitle.IndexOf("|") != -1)
+                    imageTitle = rgxFix8.Replace(imageTitle, "");
+                while (imageTitle.IndexOf("\\") != -1)
+                    imageTitle = rgxFix9.Replace(imageTitle, "");
+
+                try { GamesDGV.Rows[index].Cells[0].Value = Image.FromFile("resources\\icons\\" + imageTitle + ".png"); }
+                catch { try { GamesDGV.Rows[index].Cells[0].Value = Image.FromFile("resources\\icons\\" + imageTitle + ".jpg"); }
+                catch { try { GamesDGV.Rows[index].Cells[0].Value = Image.FromFile("resources\\icons\\" + imageTitle + ".jpeg"); }
+                catch { try { GamesDGV.Rows[index].Cells[0].Value = Image.FromFile("resources\\icons\\" + imageTitle + ".jfif"); }
+                catch { try { GamesDGV.Rows[index].Cells[0].Value = Image.FromFile("resources\\icons\\" + imageTitle + ".gif"); }
+                catch { GamesDGV.Rows[index].Cells[0].Value = Image.FromFile("resources\\unknown.png"); } } } } }
 
                 
                 if (GamesDGV.Rows[index].Cells["Obtained"].Value.ToString() == "1/1/1753")

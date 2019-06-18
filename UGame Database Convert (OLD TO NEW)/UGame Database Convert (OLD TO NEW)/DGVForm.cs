@@ -74,7 +74,7 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
         {
             var igdb = IGDB.Client.Create("6588e966357049df69fa0ec8bd422e92");
             Console.WriteLine(refer.TitleBox.Text);
-            var games = await igdb.QueryAsync<Game>(IGDB.Client.Endpoints.Games, query: "search \"" + refer.TitleBox.Text + "\"; fields screenshots.image_id,artworks.image_id,cover.image_id; limit 25;");//
+            var games = await igdb.QueryAsync<Game>(IGDB.Client.Endpoints.Games, query: "search \"" + refer.TitleBox.Text + "\"; fields screenshots.image_id,artworks.image_id,cover.image_id; limit 10;");//
 
             ArrayList artworkImageId = new ArrayList();
             int col = 1;

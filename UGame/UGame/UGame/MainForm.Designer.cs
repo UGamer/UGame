@@ -168,6 +168,8 @@
             this.GamesDGV.RowHeadersVisible = false;
             this.GamesDGV.Size = new System.Drawing.Size(1033, 525);
             this.GamesDGV.TabIndex = 0;
+            this.GamesDGV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GamesDGV_CellClick);
+            this.GamesDGV.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GamesDGV_CellDoubleClick);
             this.GamesDGV.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.GamesDGV_CellMouseUp);
             this.GamesDGV.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyUp);
             // 
