@@ -43,6 +43,9 @@ namespace UGame
         string imageTitle;
         public string resourcePath;
 
+        public bool titleLocked = false;
+        public bool platformLocked = false;
+
         public MainForm()
         {
             config = new Config();
@@ -70,7 +73,10 @@ namespace UGame
             
             InitializeComponent();
             FillDGV();
-            GamesDGV.Sort(GamesDGV.Columns["Title"], ListSortDirection.Ascending);
+            try { GamesDGV.Sort(GamesDGV.Columns["Title"], ListSortDirection.Ascending); } catch { }
+
+            LockPlatformButton.BackgroundImage = Image.FromFile(resourcePath + "Unlock.png");
+            LockTitleButton.BackgroundImage = Image.FromFile(resourcePath + "Unlock.png");
         }
 
         private void FillDGV()
@@ -148,24 +154,34 @@ namespace UGame
                     */
             }
 
-            ((DataGridViewImageColumn)GamesDGV.Columns[0]).ImageLayout = DataGridViewImageCellLayout.Zoom;
-            GamesDGV.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            try
+            {
+                ((DataGridViewImageColumn)GamesDGV.Columns[0]).ImageLayout = DataGridViewImageCellLayout.Zoom;
+                GamesDGV.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                GamesDGV.Columns["Title"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            }
+            catch { }
 
-            GamesDGV.Columns["Id"].Visible = false;
-            GamesDGV.Columns["Seconds"].Visible = false;
-            GamesDGV.Columns["Notes"].Visible = false;
-            GamesDGV.Columns["URLs"].Visible = false;
-            GamesDGV.Columns["Filters"].Visible = false;
-            GamesDGV.Columns["GameDesc"].Visible = false;
-            GamesDGV.Columns["Launch"].Visible = false;
-            GamesDGV.Columns["Blur"].Visible = false;
-            GamesDGV.Columns["Overlay"].Visible = false;
+            try
+            {
+                GamesDGV.Columns["Id"].Visible = false;
+                GamesDGV.Columns["Seconds"].Visible = false;
+                GamesDGV.Columns["Notes"].Visible = false;
+                GamesDGV.Columns["URLs"].Visible = false;
+                GamesDGV.Columns["Filters"].Visible = false;
+                GamesDGV.Columns["GameDesc"].Visible = false;
+                GamesDGV.Columns["Launch"].Visible = false;
+                GamesDGV.Columns["Blur"].Visible = false;
+                GamesDGV.Columns["Overlay"].Visible = false;
+
+                GamesDGV.Columns["TimePlayed"].HeaderText = "Time Played";
+                GamesDGV.Columns["StartDate"].HeaderText = "Start Date";
+                GamesDGV.Columns["LastPlayed"].HeaderText = "Last Played";
+                GamesDGV.Columns["ReleaseDate"].HeaderText = "Release Date";
+                GamesDGV.Columns["PlayerCount"].HeaderText = "Player Count";
+            }
+            catch { }
             
-            GamesDGV.Columns["TimePlayed"].HeaderText = "Time Played";
-            GamesDGV.Columns["StartDate"].HeaderText = "Start Date";
-            GamesDGV.Columns["LastPlayed"].HeaderText = "Last Played";
-            GamesDGV.Columns["ReleaseDate"].HeaderText = "Release Date";
-            GamesDGV.Columns["PlayerCount"].HeaderText = "Player Count";
         }
         
         private void NewTab(int rowIndex)
@@ -243,6 +259,27 @@ namespace UGame
         {
             EditEntry(rowIndex);
         }
+        
+        private void GamesTabs_MouseUp(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                if (e.Button == MouseButtons.Right)
+                {
+                    this.GameTabsContextMenu.Show(this.GamesTabs, e.Location);
+                    GameTabsContextMenu.Show(Cursor.Position);
+                }
+            }
+            catch { }
+        }
+
+        private void CloseTabButton_Click(object sender, EventArgs e)
+        {
+            if (GamesTabs.SelectedIndex != 0 && GamesTabs.SelectedIndex != 1)
+            {
+                GamesTabs.Controls.Remove(GamesTabs.SelectedTab);
+            }
+        }
 
         /// <summary>
         /// The next section of code deals with the entry system.
@@ -295,6 +332,7 @@ namespace UGame
                 releaseDate = ReleaseDatePicker.Value.ToShortDateString();
             else
                 releaseDate = nullDT.ToShortDateString();
+            
 
             con.Open();
             
@@ -370,6 +408,7 @@ namespace UGame
         {
             Clear();
             
+            editedId = Convert.ToInt32(GamesDGV.Rows[rowIndex].Cells["Id"].Value);
             string playTime = GamesDGV.Rows[rowIndex].Cells["TimePlayed"].Value.ToString();
 
             // This could be replaced by just pulling from "Seconds" and using division
@@ -467,13 +506,16 @@ namespace UGame
             if (!OverlayCheck.Checked)
                 overlayString = "False";
 
+            /*
             SqlCommand replaceCmd = new SqlCommand("UPDATE Games SET Title = '" + TitleBox.Text + "', Platform = '" + PlatformBox.Text + "', Status = '" + StatusBox.Text +
                 "', Rating = " + RatingBar.Value + ", TimePlayed = '" + timePlayed + "', Seconds = " + totalSec + ", Obtained = '" + ObtainedDatePicker.Value.ToString()
                  + "', StartDate = '" + StartDatePicker.Value.ToString() + "', LastPlayed = '" + LastPlayedDatePicker.Value.ToString() + "', Notes = '" + NotesBox.Text + 
-                 "', URLs = '" + urlString + "', Filters = '" + "', Developers = '" + DevelopersBox.Text + "', Publishers = '" + PublishersBox.Text + "', ReleaseDate = '" + 
+                 "', URLs = '" + urlString + "', Filters = '" + FiltersBox.Text + "', Developers = '" + DevelopersBox.Text + "', Publishers = '" + PublishersBox.Text + "', ReleaseDate = '" + 
                  ReleaseDatePicker.Value.ToString() + "', Genre = '" + GenreBox.Text + "', PlayerCount = '" + PlayerCountBox.Text + "', Price = " + 
                  Convert.ToDecimal(PriceBox.Text) + ", GameDesc = '" + GameDescBox.Text + "', Launch = '" + launchString + "', Blur = '" + blurString + "', Overlay = '" + 
                  overlayString + "' WHERE Id = " + editedId + ";", con);
+            */
+            SqlCommand replaceCmd = new SqlCommand("UPDATE Games SET Title = '" + TitleBox.Text + "' WHERE Id = " + editedId + ";", con);
 
             con.Open();
             replaceCmd.ExecuteNonQuery();
@@ -697,6 +739,50 @@ namespace UGame
             }
         }
 
-        
+        private void LockTitleButton_Click(object sender, EventArgs e)
+        {
+            if (titleLocked)
+            {
+                LockTitleButton.BackgroundImage = Image.FromFile(resourcePath + "Unlock.png");
+                titleLocked = false;
+            }
+            else
+            {
+                LockTitleButton.BackgroundImage = Image.FromFile(resourcePath + "Lock.png");
+                titleLocked = true;
+            }
+        }
+
+        private void LockPlatformButton_Click(object sender, EventArgs e)
+        {
+            if (platformLocked)
+            {
+                LockPlatformButton.BackgroundImage = Image.FromFile(resourcePath + "Unlock.png");
+                platformLocked = false;
+            }
+            else
+            {
+                LockPlatformButton.BackgroundImage = Image.FromFile(resourcePath + "Lock.png");
+                platformLocked = true;
+            }
+        }
+
+        private void AddTimeButton_Click(object sender, EventArgs e)
+        {
+            int oldHrs = Convert.ToInt32(TimeHoursBox.Text);
+            int oldMins = Convert.ToInt32(TimeMinutesBox.Text);
+            int oldSecs = Convert.ToInt32(TimeSecondsBox.Text);
+
+            AddTime addTime = new AddTime(this, oldHrs, oldMins, oldSecs);
+            DialogResult dialogResult = addTime.ShowDialog();
+            if (dialogResult == DialogResult.Yes) { }
+        }
+
+        private void GamesTabs_ControlRemoved(object sender, ControlEventArgs e)
+        {
+            int tabIndex = e.Control.TabIndex - 2;
+            games[tabIndex].Close();
+            games.RemoveAt(tabIndex);
+        }
     }
 }

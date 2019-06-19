@@ -198,8 +198,12 @@ namespace UGame
                     uniquePlatform = false;
                 }
                 platformsUsed.Remove("Test");
-                if (platform.IndexOf(",", platform.Length - 2) != -1)
-                    platform = platform.Substring(0, platform.Length - 2);
+                try
+                {
+                    if (platform.IndexOf(",", platform.Length - 2) != -1)
+                        platform = platform.Substring(0, platform.Length - 2);
+                }
+                catch { }
 
                 int companiesCount;
                 try { companiesCount = games[index].InvolvedCompanies.Values.Count(); } catch { companiesCount = 0; }
@@ -482,12 +486,16 @@ namespace UGame
 
         private void DGV_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            // try
+            try
             {
                 if (type == "DB")
                 {
-                    refer.TitleBox.Text = DGV.Rows[e.RowIndex].Cells["Title"].Value.ToString();
-                    refer.PlatformBox.Text = DGV.Rows[e.RowIndex].Cells["Platform"].Value.ToString();
+                    if (!refer.titleLocked)
+                        refer.TitleBox.Text = DGV.Rows[e.RowIndex].Cells["Title"].Value.ToString();
+
+                    if (!refer.platformLocked)
+                        refer.PlatformBox.Text = DGV.Rows[e.RowIndex].Cells["Platform"].Value.ToString();
+
                     refer.DevelopersBox.Text = DGV.Rows[e.RowIndex].Cells["Developers"].Value.ToString();
                     refer.PublishersBox.Text = DGV.Rows[e.RowIndex].Cells["Publishers"].Value.ToString();
 
@@ -521,7 +529,7 @@ namespace UGame
                     this.Close();
                 }
             }
-            // catch { }
+            catch { }
         }
 
         private void DGVForm_FormClosing(object sender, FormClosingEventArgs e)

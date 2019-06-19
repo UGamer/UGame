@@ -201,8 +201,7 @@ namespace UGame
                 imageTitle = rgxFix8.Replace(imageTitle, "");
             while (imageTitle.IndexOf("\\") != -1)
                 imageTitle = rgxFix9.Replace(imageTitle, "");
-
-            Console.WriteLine(imageTitle);
+            
             TabCreation();
         }
 
@@ -211,12 +210,24 @@ namespace UGame
             Image bgImage = null;
             gameTab.Text = title;
             gameTab.BackColor = Color.White;
-            try { bgImage = Image.FromFile(refer.config.resourcePath + "bg\\" + imageTitle + ".png"); }
+            try
+            {
+                string gameFolder = refer.config.resourcePath + "bg\\" + imageTitle;
+                if (Directory.Exists(gameFolder))
+                {
+                    string[] files = Directory.GetFiles(gameFolder);
+                    int numOfFiles = files.Length;
+                    Random randomPicture = new Random();
+                    int fileToUse = randomPicture.Next(0, numOfFiles);
+                    bgImage = Image.FromFile(files[fileToUse]);
+                }
+            }
+            catch { try { bgImage = Image.FromFile(refer.config.resourcePath + "bg\\" + imageTitle + ".png"); }
             catch { try { bgImage = Image.FromFile(refer.config.resourcePath + "bg\\" + imageTitle + ".jpg"); }
             catch { try { bgImage = Image.FromFile(refer.config.resourcePath + "bg\\" + imageTitle + ".jpeg"); }
             catch { try { bgImage = Image.FromFile(refer.config.resourcePath + "bg\\" + imageTitle + ".gif"); }
             catch { try { bgImage = Image.FromFile(refer.config.resourcePath + "bg\\" + imageTitle + ".jfif"); }
-            catch { } } } } }
+            catch { } } } } } }
             try
             {
                 Bitmap bg = new Bitmap(bgImage);
@@ -342,7 +353,7 @@ namespace UGame
                 lastPlayedLabel.AutoSize = true;
                 lastPlayedLabel.Text = "Last Played: " + lastPlayed;
             }
-
+           
             gameTab.Controls.Add(detailsBox);
             gameTab.Controls.Add(iconBox);
             gameTab.Controls.Add(titleBox);
@@ -361,7 +372,7 @@ namespace UGame
 
             refer.AddGameTab(gameTab);
         }
-        
+
         public void Launch()
         {
             string launchCode = "";
@@ -506,7 +517,7 @@ namespace UGame
                 secString += "s";
 
                 timePlayed = hourString + minString + secString;
-
+                
                 // WRITE EVERYTHING TO THE DATABASE
                 updateCmd = new SqlCommand("UPDATE Games SET TimePlayed = '" + timePlayed + "', Seconds = " + totalSeconds + ", LastPlayed = '" + DateTime.Now.ToString() + "' WHERE Id = " + id + ";", con);
                 
@@ -678,6 +689,29 @@ namespace UGame
             else
             {
                 button.Text = text;
+            }
+        }
+
+        public void Close()
+        {
+            if (button3.Text == "Discard Session")
+            {
+                string message = "Would you like to save the play session for \"" + titleBox.Text + "\"?";
+                string caption = "Closing Tab";
+
+                DialogResult dialogResult = MessageBox.Show(message, caption, MessageBoxButtons.YesNoCancel);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    Stop(true);
+                }
+                else if (dialogResult == DialogResult.No)
+                {
+                    Stop(false);
+                }
+                else
+                {
+
+                }
             }
         }
     }

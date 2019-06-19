@@ -36,6 +36,8 @@
             this.GamesListTab = new System.Windows.Forms.TabPage();
             this.GamesDGV = new System.Windows.Forms.DataGridView();
             this.GamesEntriesTab = new System.Windows.Forms.TabPage();
+            this.LockPlatformButton = new System.Windows.Forms.Button();
+            this.LockTitleButton = new System.Windows.Forms.Button();
             this.BgBox = new System.Windows.Forms.PictureBox();
             this.IconBox = new System.Windows.Forms.PictureBox();
             this.DetailsBox = new System.Windows.Forms.PictureBox();
@@ -93,6 +95,8 @@
             this.GamesDGVContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.EditEntryButton = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteEntryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.GameTabsContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.CloseTabButton = new System.Windows.Forms.ToolStripMenuItem();
             this.MainTabs.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.GamesTabs.SuspendLayout();
@@ -107,6 +111,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.PictureContextMenu.SuspendLayout();
             this.GamesDGVContextMenu.SuspendLayout();
+            this.GameTabsContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainTabs
@@ -144,6 +149,8 @@
             this.GamesTabs.SelectedIndex = 0;
             this.GamesTabs.Size = new System.Drawing.Size(1047, 557);
             this.GamesTabs.TabIndex = 0;
+            this.GamesTabs.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.GamesTabs_ControlRemoved);
+            this.GamesTabs.MouseUp += new System.Windows.Forms.MouseEventHandler(this.GamesTabs_MouseUp);
             // 
             // GamesListTab
             // 
@@ -176,6 +183,8 @@
             // 
             // GamesEntriesTab
             // 
+            this.GamesEntriesTab.Controls.Add(this.LockPlatformButton);
+            this.GamesEntriesTab.Controls.Add(this.LockTitleButton);
             this.GamesEntriesTab.Controls.Add(this.BgBox);
             this.GamesEntriesTab.Controls.Add(this.IconBox);
             this.GamesEntriesTab.Controls.Add(this.DetailsBox);
@@ -227,6 +236,26 @@
             this.GamesEntriesTab.TabIndex = 1;
             this.GamesEntriesTab.Text = "[ENTRIES]";
             this.GamesEntriesTab.UseVisualStyleBackColor = true;
+            // 
+            // LockPlatformButton
+            // 
+            this.LockPlatformButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.LockPlatformButton.Location = new System.Drawing.Point(236, 37);
+            this.LockPlatformButton.Name = "LockPlatformButton";
+            this.LockPlatformButton.Size = new System.Drawing.Size(20, 20);
+            this.LockPlatformButton.TabIndex = 45;
+            this.LockPlatformButton.UseVisualStyleBackColor = true;
+            this.LockPlatformButton.Click += new System.EventHandler(this.LockPlatformButton_Click);
+            // 
+            // LockTitleButton
+            // 
+            this.LockTitleButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.LockTitleButton.Location = new System.Drawing.Point(236, 5);
+            this.LockTitleButton.Name = "LockTitleButton";
+            this.LockTitleButton.Size = new System.Drawing.Size(20, 20);
+            this.LockTitleButton.TabIndex = 44;
+            this.LockTitleButton.UseVisualStyleBackColor = true;
+            this.LockTitleButton.Click += new System.EventHandler(this.LockTitleButton_Click);
             // 
             // BgBox
             // 
@@ -455,6 +484,7 @@
             this.AddTimeButton.TabIndex = 19;
             this.AddTimeButton.Text = "+";
             this.AddTimeButton.UseVisualStyleBackColor = true;
+            this.AddTimeButton.Click += new System.EventHandler(this.AddTimeButton_Click);
             // 
             // TimeSecondsLabel
             // 
@@ -731,6 +761,20 @@
             this.deleteEntryToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.deleteEntryToolStripMenuItem.Text = "Delete Entry";
             // 
+            // GameTabsContextMenu
+            // 
+            this.GameTabsContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CloseTabButton});
+            this.GameTabsContextMenu.Name = "GameTabsContextMenu";
+            this.GameTabsContextMenu.Size = new System.Drawing.Size(126, 26);
+            // 
+            // CloseTabButton
+            // 
+            this.CloseTabButton.Name = "CloseTabButton";
+            this.CloseTabButton.Size = new System.Drawing.Size(125, 22);
+            this.CloseTabButton.Text = "Close Tab";
+            this.CloseTabButton.Click += new System.EventHandler(this.CloseTabButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -756,6 +800,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.PictureContextMenu.ResumeLayout(false);
             this.GamesDGVContextMenu.ResumeLayout(false);
+            this.GameTabsContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -797,11 +842,11 @@
         private System.Windows.Forms.DateTimePicker ObtainedDatePicker;
         private System.Windows.Forms.Button AddTimeButton;
         private System.Windows.Forms.Label TimeSecondsLabel;
-        private System.Windows.Forms.TextBox TimeSecondsBox;
+        public System.Windows.Forms.TextBox TimeSecondsBox;
         private System.Windows.Forms.Label TimeMinutesLabel;
-        private System.Windows.Forms.TextBox TimeMinutesBox;
+        public System.Windows.Forms.TextBox TimeMinutesBox;
         private System.Windows.Forms.Label TimeHoursLabel;
-        private System.Windows.Forms.TextBox TimeHoursBox;
+        public System.Windows.Forms.TextBox TimeHoursBox;
         private System.Windows.Forms.Label RatingLabel;
         private System.Windows.Forms.CheckBox OverlayCheck;
         private System.Windows.Forms.CheckBox BlurCheck;
@@ -826,6 +871,10 @@
         private System.Windows.Forms.ContextMenuStrip GamesDGVContextMenu;
         private System.Windows.Forms.ToolStripMenuItem EditEntryButton;
         private System.Windows.Forms.ToolStripMenuItem deleteEntryToolStripMenuItem;
+        private System.Windows.Forms.Button LockPlatformButton;
+        private System.Windows.Forms.Button LockTitleButton;
+        private System.Windows.Forms.ContextMenuStrip GameTabsContextMenu;
+        private System.Windows.Forms.ToolStripMenuItem CloseTabButton;
     }
 }
 
