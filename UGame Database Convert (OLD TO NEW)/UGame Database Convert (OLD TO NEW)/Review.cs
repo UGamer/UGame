@@ -41,8 +41,8 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
         public string newResourcePath;
         public string imageTitle;
 
-        public bool titleLock = false;
-        public bool platformLock = false;
+        public bool titleLock = true;
+        public bool platformLock = true;
 
         public Review(Start refer, DataTable newTable, SqlConnection newCon)
         {
@@ -353,10 +353,10 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
 
         private void Clear()
         {
-            titleLock = false;
-            platformLock = false;
-            LockTitleButton.BackgroundImage = UGame_Database_Convert__OLD_TO_NEW_.Properties.Resources.Unlock;
-            LockPlatformButton.BackgroundImage = UGame_Database_Convert__OLD_TO_NEW_.Properties.Resources.Unlock;
+            titleLock = true;
+            platformLock = true;
+            LockTitleButton.BackgroundImage = UGame_Database_Convert__OLD_TO_NEW_.Properties.Resources.Lock;
+            LockPlatformButton.BackgroundImage = UGame_Database_Convert__OLD_TO_NEW_.Properties.Resources.Lock;
             TitleBox.Text = "";
             PlatformBox.Text = "";
             StatusBox.Text = "";
@@ -457,6 +457,21 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
             PictureContextMenu.Show(Cursor.Position);
         }
 
+        private void ClearPictureBox()
+        {
+            if (PictureContextMenu.Tag.ToString() == "details\\")
+                DetailsBox.BackgroundImage = null;
+            else if (PictureContextMenu.Tag.ToString() == "icons\\")
+                IconBox.BackgroundImage = null;
+            else if (PictureContextMenu.Tag.ToString() == "bg\\")
+                BgBox.BackgroundImage = null;
+        }
+
+        private void ClearPictureButton_Click(object sender, EventArgs e)
+        {
+            ClearPictureBox();
+        }
+
         private void LocalPictureButton_Click(object sender, EventArgs e)
         {
             if (PictureDialog.ShowDialog() == DialogResult.OK)
@@ -492,10 +507,10 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
         private void DatabasePictureButton_Click(object sender, EventArgs e)
         {
             DGVForm dgvForm = new DGVForm("Images", PictureContextMenu.Tag.ToString(), this);
-            
+            dgvForm.WindowState = FormWindowState.Maximized;
+
             if (dgvForm.ShowDialog() == DialogResult.OK)
             {
-                
 
                 if (PictureContextMenu.Tag.ToString() == "details\\")
                     DetailsBox.BackgroundImage = Image.FromFile(newResourcePath + PictureContextMenu.Tag.ToString() + imageTitle + "." + dgvForm.fileExt);
@@ -538,6 +553,7 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
             url += "&source=lnms&tbm=isch";
             
             Browser browser = new Browser(url);
+            browser.WindowState = FormWindowState.Maximized;
             DialogResult dialogResult = browser.ShowDialog();
 
             if (dialogResult == DialogResult.Yes)
@@ -601,6 +617,16 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
         private void button1_Click(object sender, EventArgs e)
         {
             NextEntry();
+        }
+
+        private void IndexButton_Click(object sender, EventArgs e)
+        {
+            int newIndex = Convert.ToInt32(IndexBox.Text);
+
+            for (; index < newIndex - 1;)
+            {
+                NextEntry();
+            }
         }
     }
 }

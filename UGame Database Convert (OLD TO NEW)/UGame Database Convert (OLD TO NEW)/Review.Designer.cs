@@ -84,6 +84,8 @@
             this.DatabasePictureButton = new System.Windows.Forms.ToolStripMenuItem();
             this.InternetPictureButton = new System.Windows.Forms.ToolStripMenuItem();
             this.PictureDialog = new System.Windows.Forms.OpenFileDialog();
+            this.IndexButton = new System.Windows.Forms.Button();
+            this.IndexBox = new System.Windows.Forms.TextBox();
             this.MainTabs.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.GamesTabs.SuspendLayout();
@@ -129,6 +131,8 @@
             // 
             // GamesEntriesTab
             // 
+            this.GamesEntriesTab.Controls.Add(this.IndexBox);
+            this.GamesEntriesTab.Controls.Add(this.IndexButton);
             this.GamesEntriesTab.Controls.Add(this.button1);
             this.GamesEntriesTab.Controls.Add(this.LockPlatformButton);
             this.GamesEntriesTab.Controls.Add(this.LockTitleButton);
@@ -193,7 +197,7 @@
             // 
             // LockPlatformButton
             // 
-            this.LockPlatformButton.BackgroundImage = global::UGame_Database_Convert__OLD_TO_NEW_.Properties.Resources.Unlock;
+            this.LockPlatformButton.BackgroundImage = global::UGame_Database_Convert__OLD_TO_NEW_.Properties.Resources.Lock;
             this.LockPlatformButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.LockPlatformButton.Location = new System.Drawing.Point(159, 36);
             this.LockPlatformButton.Name = "LockPlatformButton";
@@ -205,7 +209,7 @@
             // 
             // LockTitleButton
             // 
-            this.LockTitleButton.BackgroundImage = global::UGame_Database_Convert__OLD_TO_NEW_.Properties.Resources.Unlock;
+            this.LockTitleButton.BackgroundImage = global::UGame_Database_Convert__OLD_TO_NEW_.Properties.Resources.Lock;
             this.LockTitleButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.LockTitleButton.Location = new System.Drawing.Point(160, 7);
             this.LockTitleButton.Name = "LockTitleButton";
@@ -620,6 +624,7 @@
             this.ClearPictureButton.Name = "ClearPictureButton";
             this.ClearPictureButton.Size = new System.Drawing.Size(145, 22);
             this.ClearPictureButton.Text = "Clear Picture";
+            this.ClearPictureButton.Click += new System.EventHandler(this.ClearPictureButton_Click);
             // 
             // LocalPictureButton
             // 
@@ -646,6 +651,23 @@
             // 
             this.PictureDialog.FileName = "PictureDialog";
             this.PictureDialog.Filter = "Image Files(*.PNG;*.JPG;*.JPEG;*.GIF)|*.PNG;*.JPG;*.JPEG;*.GIF";
+            // 
+            // IndexButton
+            // 
+            this.IndexButton.Location = new System.Drawing.Point(78, 130);
+            this.IndexButton.Name = "IndexButton";
+            this.IndexButton.Size = new System.Drawing.Size(75, 23);
+            this.IndexButton.TabIndex = 47;
+            this.IndexButton.Text = "Skip";
+            this.IndexButton.UseVisualStyleBackColor = true;
+            this.IndexButton.Click += new System.EventHandler(this.IndexButton_Click);
+            // 
+            // IndexBox
+            // 
+            this.IndexBox.Location = new System.Drawing.Point(7, 131);
+            this.IndexBox.Name = "IndexBox";
+            this.IndexBox.Size = new System.Drawing.Size(65, 20);
+            this.IndexBox.TabIndex = 48;
             // 
             // Review
             // 
@@ -726,6 +748,8 @@
         private System.Windows.Forms.Label TimeHoursLabel;
         public System.Windows.Forms.TextBox TimeHoursBox;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox IndexBox;
+        private System.Windows.Forms.Button IndexButton;
     }
 }
 
