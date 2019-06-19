@@ -171,6 +171,7 @@
             this.GamesDGV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GamesDGV_CellClick);
             this.GamesDGV.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GamesDGV_CellDoubleClick);
             this.GamesDGV.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.GamesDGV_CellMouseUp);
+            this.GamesDGV.Sorted += new System.EventHandler(this.GamesDGV_Sorted);
             this.GamesDGV.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyUp);
             // 
             // GamesEntriesTab
@@ -607,6 +608,7 @@
             this.ReplaceButton.Text = "APPLY CHANGES";
             this.ReplaceButton.UseVisualStyleBackColor = true;
             this.ReplaceButton.Visible = false;
+            this.ReplaceButton.Click += new System.EventHandler(this.ReplaceButton_Click);
             // 
             // EditButton
             // 
@@ -766,7 +768,7 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabControl GamesTabs;
         private System.Windows.Forms.TabPage GamesListTab;
-        private System.Windows.Forms.DataGridView GamesDGV;
+        public System.Windows.Forms.DataGridView GamesDGV;
         private System.Windows.Forms.TabPage GamesEntriesTab;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.TabPage tabPage3;

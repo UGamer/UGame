@@ -91,7 +91,7 @@ namespace UGame
 
         public GameTab(MainForm refer, int rowIndex, int tabCount, int id)
         {
-            connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"" + refer.mdfPath + "\";Integrated Security=True";
+            connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"" + refer.config.databasePath + "\";Integrated Security=True";
             con = new SqlConnection(connectionString);
 
             this.refer = refer;
@@ -101,20 +101,20 @@ namespace UGame
             this.id = id;
 
             con.Open();
-            
-            title = refer.dataTable.Rows[rowIndex]["Title"].ToString();
-            platform = refer.dataTable.Rows[rowIndex]["Platform"].ToString();
 
-            status = refer.dataTable.Rows[rowIndex]["Status"].ToString();
-            try { rating = Convert.ToInt32(refer.dataTable.Rows[rowIndex]["Rating"]); } catch { }
-            timePlayed = refer.dataTable.Rows[rowIndex]["TimePlayed"].ToString();
-            try { totalSeconds = Convert.ToInt32(refer.dataTable.Rows[rowIndex]["Seconds"]); } catch { }
-            try { obtained = Convert.ToDateTime(refer.dataTable.Rows[rowIndex]["Obtained"]); } catch { }
-            try { startDate = Convert.ToDateTime(refer.dataTable.Rows[rowIndex]["StartDate"]); } catch { }
-            try { lastPlayed = Convert.ToDateTime(refer.dataTable.Rows[rowIndex]["LastPlayed"]); } catch { }
-            notes = refer.dataTable.Rows[rowIndex]["Notes"].ToString();
+            title = refer.GamesDGV.Rows[rowIndex].Cells["Title"].Value.ToString();
+            platform = refer.GamesDGV.Rows[rowIndex].Cells["Platform"].Value.ToString();
+            status = refer.GamesDGV.Rows[rowIndex].Cells["Status"].Value.ToString();
+            try { rating = Convert.ToInt32(refer.GamesDGV.Rows[rowIndex].Cells["Rating"].Value.ToString()); } catch { }
+            timePlayed = refer.GamesDGV.Rows[rowIndex].Cells["TimePlayed"].Value.ToString();
+            try { totalSeconds = Convert.ToInt32(refer.GamesDGV.Rows[rowIndex].Cells["Seconds"].Value.ToString()); } catch { }
+            try { obtained = Convert.ToDateTime(refer.GamesDGV.Rows[rowIndex].Cells["Obtained"].Value.ToString()); } catch { }
+            try { startDate = Convert.ToDateTime(refer.GamesDGV.Rows[rowIndex].Cells["StartDate"].Value.ToString()); } catch { }
+            try { lastPlayed = Convert.ToDateTime(refer.GamesDGV.Rows[rowIndex].Cells["LastPlayed"].Value.ToString()); } catch { }
+            notes = refer.GamesDGV.Rows[rowIndex].Cells["Notes"].Value.ToString();
 
-            urlString = refer.dataTable.Rows[rowIndex]["URLs"].ToString();
+            // URLs
+            urlString = refer.GamesDGV.Rows[rowIndex].Cells["URLs"].Value.ToString();
             int urlCount = 0;
             string segment = urlString;
             while (segment.IndexOf("[Title]") != -1)
@@ -134,22 +134,19 @@ namespace UGame
                 try { segment = segment.Substring(segment.IndexOf("[Title]") + 7); } catch { segment = ""; }
             }
 
-            // NEED TO PROPERLY IMPLEMENT URLS
-            URLs[0, 0] = urlString;
-            URLs[0, 1] = urlString;
+            // FILTERS
+            filters = refer.GamesDGV.Rows[rowIndex].Cells["Filters"].Value.ToString();
 
-            filters = refer.dataTable.Rows[rowIndex]["Filters"].ToString();
+            developer = refer.GamesDGV.Rows[rowIndex].Cells["Developers"].Value.ToString();
+            publisher = refer.GamesDGV.Rows[rowIndex].Cells["Publishers"].Value.ToString();
+            releaseDate = refer.GamesDGV.Rows[rowIndex].Cells["ReleaseDate"].Value.ToString();
+            genre = refer.GamesDGV.Rows[rowIndex].Cells["Genre"].Value.ToString();
+            playerCount = refer.GamesDGV.Rows[rowIndex].Cells["PlayerCount"].Value.ToString();
+            try { price = Convert.ToDecimal(refer.GamesDGV.Rows[rowIndex].Cells["Price"].Value.ToString()); } catch { price = -1; }
+            gameDesc = refer.GamesDGV.Rows[rowIndex].Cells["GameDesc"].Value.ToString();
 
-            developer = refer.dataTable.Rows[rowIndex]["Developers"].ToString();
-            publisher = refer.dataTable.Rows[rowIndex]["Publishers"].ToString();
-            releaseDate = refer.dataTable.Rows[rowIndex]["ReleaseDate"].ToString();
-            genre = refer.dataTable.Rows[rowIndex]["Genre"].ToString();
-            playerCount = refer.dataTable.Rows[rowIndex]["PlayerCount"].ToString();
-            try { price = Convert.ToDecimal(refer.dataTable.Rows[rowIndex]["Price"]); } catch { price = -1; }
-            gameDesc = refer.dataTable.Rows[rowIndex]["GameDesc"].ToString();
-
-            // NEED TO PROPERLY IMPLEMENT LAUNCH CODES
-            launchString = refer.dataTable.Rows[rowIndex]["Launch"].ToString();
+            // LAUNCH CODES
+            launchString = refer.GamesDGV.Rows[rowIndex].Cells["Launch"].Value.ToString();
             segment = launchString;
             while (segment.IndexOf("[Title]") != -1)
             {
@@ -169,8 +166,8 @@ namespace UGame
             }
 
 
-            try { blur = Convert.ToBoolean(refer.dataTable.Rows[rowIndex]["Blur"]); } catch { blur = true; }
-            try { useOverlay = Convert.ToBoolean(refer.dataTable.Rows[rowIndex]["Overlay"]); } catch { useOverlay = true; }
+            try { blur = Convert.ToBoolean(refer.GamesDGV.Rows[rowIndex].Cells["Blur"].Value.ToString()); } catch { blur = true; }
+            try { useOverlay = Convert.ToBoolean(refer.GamesDGV.Rows[rowIndex].Cells["Overlay"].Value.ToString()); } catch { useOverlay = true; }
             
             con.Close();
 
@@ -214,11 +211,11 @@ namespace UGame
             Image bgImage = null;
             gameTab.Text = title;
             gameTab.BackColor = Color.White;
-            try { bgImage = Image.FromFile("resources\\bg\\" + imageTitle + ".png"); }
-            catch { try { bgImage = Image.FromFile("resources\\bg\\" + imageTitle + ".jpg"); }
-            catch { try { bgImage = Image.FromFile("resources\\bg\\" + imageTitle + ".jpeg"); }
-            catch { try { bgImage = Image.FromFile("resources\\bg\\" + imageTitle + ".gif"); }
-            catch { try { bgImage = Image.FromFile("resources\\bg\\" + imageTitle + ".jfif"); }
+            try { bgImage = Image.FromFile(refer.config.resourcePath + "bg\\" + imageTitle + ".png"); }
+            catch { try { bgImage = Image.FromFile(refer.config.resourcePath + "bg\\" + imageTitle + ".jpg"); }
+            catch { try { bgImage = Image.FromFile(refer.config.resourcePath + "bg\\" + imageTitle + ".jpeg"); }
+            catch { try { bgImage = Image.FromFile(refer.config.resourcePath + "bg\\" + imageTitle + ".gif"); }
+            catch { try { bgImage = Image.FromFile(refer.config.resourcePath + "bg\\" + imageTitle + ".jfif"); }
             catch { } } } } }
             try
             {
@@ -235,22 +232,22 @@ namespace UGame
 
             detailsBox.Location = new Point(7, 7);
             detailsBox.Size = new Size(351, 351);
-            try { detailsBox.BackgroundImage = Image.FromFile("resources\\details\\" + imageTitle + ".png"); }
-            catch { try { detailsBox.BackgroundImage = Image.FromFile("resources\\details\\" + imageTitle + ".jpg"); }
-            catch { try { detailsBox.BackgroundImage = Image.FromFile("resources\\details\\" + imageTitle + ".jpeg"); }
-            catch { try { detailsBox.BackgroundImage = Image.FromFile("resources\\details\\" + imageTitle + ".gif"); }
-            catch { try { detailsBox.BackgroundImage = Image.FromFile("resources\\details\\" + imageTitle + ".jfif"); }
+            try { detailsBox.BackgroundImage = Image.FromFile(refer.config.resourcePath + "details\\" + imageTitle + ".png"); }
+            catch { try { detailsBox.BackgroundImage = Image.FromFile(refer.config.resourcePath + "details\\" + imageTitle + ".jpg"); }
+            catch { try { detailsBox.BackgroundImage = Image.FromFile(refer.config.resourcePath + "details\\" + imageTitle + ".jpeg"); }
+            catch { try { detailsBox.BackgroundImage = Image.FromFile(refer.config.resourcePath + "details\\" + imageTitle + ".gif"); }
+            catch { try { detailsBox.BackgroundImage = Image.FromFile(refer.config.resourcePath + "details\\" + imageTitle + ".jfif"); }
             catch { } } } } }
             detailsBox.BackgroundImageLayout = ImageLayout.Zoom;
             detailsBox.BackColor = Color.Transparent;
 
             iconBox.Location = new Point(365, 7);
             iconBox.Size = new Size(68, 68);
-            try { iconBox.BackgroundImage = Image.FromFile("resources\\icons\\" + imageTitle + ".png"); }
-            catch { try { iconBox.BackgroundImage = Image.FromFile("resources\\icons\\" + imageTitle + ".jpg"); }
-            catch { try { iconBox.BackgroundImage = Image.FromFile("resources\\icons\\" + imageTitle + ".jpeg"); }
-            catch { try { iconBox.BackgroundImage = Image.FromFile("resources\\icons\\" + imageTitle + ".gif"); }
-            catch { try { iconBox.BackgroundImage = Image.FromFile("resources\\icons\\" + imageTitle + ".jfif"); }
+            try { iconBox.BackgroundImage = Image.FromFile(refer.config.resourcePath + "icons\\" + imageTitle + ".png"); }
+            catch { try { iconBox.BackgroundImage = Image.FromFile(refer.config.resourcePath + "icons\\" + imageTitle + ".jpg"); }
+            catch { try { iconBox.BackgroundImage = Image.FromFile(refer.config.resourcePath + "icons\\" + imageTitle + ".jpeg"); }
+            catch { try { iconBox.BackgroundImage = Image.FromFile(refer.config.resourcePath + "icons\\" + imageTitle + ".gif"); }
+            catch { try { iconBox.BackgroundImage = Image.FromFile(refer.config.resourcePath + "icons\\" + imageTitle + ".jfif"); }
             catch { } } } } }
             iconBox.BackgroundImageLayout = ImageLayout.Zoom;
             iconBox.BackColor = Color.Transparent;
@@ -382,6 +379,8 @@ namespace UGame
                 launchCode = launchCodes[0, 1];
             }
 
+            Console.WriteLine(launchCode);
+
             bool isExe = false;
             bool hasArgs = false;
             ProcessStartInfo startInfo;
@@ -398,8 +397,8 @@ namespace UGame
                 int exeLoc = launchCode.IndexOf(".exe");
                 string lookForArgs = launchCode.Substring(exeLoc);
 
-                if (lookForArgs.IndexOf("-") == -1 && lookForArgs.IndexOf("\"") == -1)
-                    hasArgs = false;
+                if (lookForArgs.IndexOf("-") != -1 && lookForArgs.IndexOf("\"") != -1)
+                    hasArgs = true;
             }
             catch (ArgumentOutOfRangeException) { }
 
@@ -425,6 +424,7 @@ namespace UGame
                     startInfo = new ProcessStartInfo(launchCode);
                 }
 
+                Console.WriteLine(launchCode);
                 Process.Start(startInfo);
             }
             else
@@ -508,10 +508,14 @@ namespace UGame
                 timePlayed = hourString + minString + secString;
 
                 // WRITE EVERYTHING TO THE DATABASE
-                updateCmd = new SqlCommand("UPDATE Games SET TimePlayed = '" + timePlayed + "', Seconds = " + totalSeconds + ", LastPlayed = CAST('" + lastPlayed.ToString() + "' AS DATETIME) WHERE Id = " + id + ";", con);
+                updateCmd = new SqlCommand("UPDATE Games SET TimePlayed = '" + timePlayed + "', Seconds = " + totalSeconds + ", LastPlayed = '" + DateTime.Now.ToString() + "' WHERE Id = " + id + ";", con);
+                
                 // WRITE EVERYTHING TO THE DATABASE
                 con.Open();
-                updateCmd.ExecuteNonQuery();
+
+                // try
+                { updateCmd.ExecuteNonQuery(); }
+                // catch { con.Close(); MessageBox.Show("Update to entry failed.", "Update Failed"); }
                 con.Close();
 
                 gameSummary = new GameSummary(title, totalSeconds);
