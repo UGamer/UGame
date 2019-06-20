@@ -533,8 +533,8 @@ namespace UGame
                 // catch { con.Close(); MessageBox.Show("Update to entry failed.", "Update Failed"); }
                 con.Close();
 
-                timePlayedLabel.Text = timePlayed;
-                lastPlayedLabel.Text = lastPlayed.ToString();
+                timePlayedLabel.Text = "Time Played: " + timePlayed;
+                lastPlayedLabel.Text = "Last Played: " + lastPlayed.ToString();
 
                 for (int index = 0; index < refer.GamesDGV.Rows.Count; index++)
                 {

@@ -37,6 +37,7 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
 
         private void OldFileButton_Click(object sender, EventArgs e)
         {
+            FileDialog.FileName = "Collection.accdb";
             if (FileDialog.ShowDialog() == DialogResult.OK)
             {
                 OldFileBox.Text = FileDialog.FileName;
@@ -45,6 +46,7 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
 
         private void NewFileButton_Click(object sender, EventArgs e)
         {
+            FileDialog.FileName = "UGameDB.mdf";
             if (FileDialog.ShowDialog() == DialogResult.OK)
             {
                 NewFileBox.Text = FileDialog.FileName;

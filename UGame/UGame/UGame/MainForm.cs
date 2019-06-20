@@ -65,8 +65,10 @@ namespace UGame
                 if (!Directory.Exists("resources\\bg"))
                     Directory.CreateDirectory("resources\\bg");
             }
-            
-            connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"" + config.databasePath + "\";Integrated Security=True";
+
+            connectionString = "Data Source=.;AttachDbFilename=\"" + config.databasePath + "\";Integrated Security=True;Connect Timeout=30;User Instance=True";
+            // connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"" + config.databasePath + "\";Integrated Security=True";
+            // connectionString = "Data Source=(local)\\SQLEXPRESS; Initial Catalog='" + config.databasePath + "'; Integrated Security=SSPI";
             con = new SqlConnection(connectionString);
 
             selectCmd = new SqlCommand("SELECT * FROM Games", con);
@@ -88,8 +90,9 @@ namespace UGame
 
         private void FillDGV()
         {
-            try { con.Open(); }
-            catch
+            //try {
+                con.Open(); //}
+            // catch
             {
                 MessageBox.Show("UGame could not retrieve the data from your database file. Exiting...", "Database Read Error");
                 this.Close();
@@ -104,6 +107,7 @@ namespace UGame
             con.Close();
 
             GamesDGV.DataSource = dataTable;
+            GamesListTab.Text = "[LIST] " + dataTable.Rows.Count + "/" + dataTable.Rows.Count;
 
             for (int index = 0; index < dataTable.Rows.Count; index++)
             {
@@ -872,6 +876,11 @@ namespace UGame
             int tabIndex = e.Control.TabIndex - 2;
             games[tabIndex].Close();
             games.RemoveAt(tabIndex);
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            con.Close();
         }
     }
 }

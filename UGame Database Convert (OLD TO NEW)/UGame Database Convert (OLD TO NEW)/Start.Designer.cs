@@ -106,10 +106,6 @@
             this.QuickConvertCheck.Text = "Quick Convert";
             this.QuickConvertCheck.UseVisualStyleBackColor = true;
             // 
-            // FileDialog
-            // 
-            this.FileDialog.FileName = "openFileDialog1";
-            // 
             // Start
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);

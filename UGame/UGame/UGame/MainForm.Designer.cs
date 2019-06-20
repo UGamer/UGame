@@ -86,6 +86,7 @@
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.RefreshButton = new System.Windows.Forms.ToolStripButton();
             this.PictureContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ClearPictureButton = new System.Windows.Forms.ToolStripMenuItem();
             this.LocalPictureButton = new System.Windows.Forms.ToolStripMenuItem();
@@ -97,7 +98,6 @@
             this.deleteEntryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GameTabsContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.CloseTabButton = new System.Windows.Forms.ToolStripMenuItem();
-            this.RefreshButton = new System.Windows.Forms.ToolStripButton();
             this.MainTabs.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.GamesTabs.SuspendLayout();
@@ -702,6 +702,15 @@
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
+            // RefreshButton
+            // 
+            this.RefreshButton.Image = ((System.Drawing.Image)(resources.GetObject("RefreshButton.Image")));
+            this.RefreshButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.RefreshButton.Name = "RefreshButton";
+            this.RefreshButton.Size = new System.Drawing.Size(66, 22);
+            this.RefreshButton.Text = "Refresh";
+            this.RefreshButton.Click += new System.EventHandler(this.RefreshButton_Click);
+            // 
             // PictureContextMenu
             // 
             this.PictureContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -770,23 +779,14 @@
             this.GameTabsContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.CloseTabButton});
             this.GameTabsContextMenu.Name = "GameTabsContextMenu";
-            this.GameTabsContextMenu.Size = new System.Drawing.Size(125, 26);
+            this.GameTabsContextMenu.Size = new System.Drawing.Size(126, 26);
             // 
             // CloseTabButton
             // 
             this.CloseTabButton.Name = "CloseTabButton";
-            this.CloseTabButton.Size = new System.Drawing.Size(124, 22);
+            this.CloseTabButton.Size = new System.Drawing.Size(125, 22);
             this.CloseTabButton.Text = "Close Tab";
             this.CloseTabButton.Click += new System.EventHandler(this.CloseTabButton_Click);
-            // 
-            // RefreshButton
-            // 
-            this.RefreshButton.Image = ((System.Drawing.Image)(resources.GetObject("RefreshButton.Image")));
-            this.RefreshButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.RefreshButton.Name = "RefreshButton";
-            this.RefreshButton.Size = new System.Drawing.Size(66, 22);
-            this.RefreshButton.Text = "Refresh";
-            this.RefreshButton.Click += new System.EventHandler(this.RefreshButton_Click);
             // 
             // MainForm
             // 
@@ -797,6 +797,7 @@
             this.Controls.Add(this.MainTabs);
             this.Name = "MainForm";
             this.Text = "UGame";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyUp);
             this.MainTabs.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
