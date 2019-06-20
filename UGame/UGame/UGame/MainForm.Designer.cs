@@ -97,6 +97,7 @@
             this.deleteEntryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GameTabsContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.CloseTabButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.RefreshButton = new System.Windows.Forms.ToolStripButton();
             this.MainTabs.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.GamesTabs.SuspendLayout();
@@ -109,6 +110,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.RatingBar)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.toolStrip1.SuspendLayout();
             this.PictureContextMenu.SuspendLayout();
             this.GamesDGVContextMenu.SuspendLayout();
             this.GameTabsContextMenu.SuspendLayout();
@@ -692,6 +694,8 @@
             // 
             // toolStrip1
             // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.RefreshButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1061, 25);
@@ -766,14 +770,23 @@
             this.GameTabsContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.CloseTabButton});
             this.GameTabsContextMenu.Name = "GameTabsContextMenu";
-            this.GameTabsContextMenu.Size = new System.Drawing.Size(126, 26);
+            this.GameTabsContextMenu.Size = new System.Drawing.Size(125, 26);
             // 
             // CloseTabButton
             // 
             this.CloseTabButton.Name = "CloseTabButton";
-            this.CloseTabButton.Size = new System.Drawing.Size(125, 22);
+            this.CloseTabButton.Size = new System.Drawing.Size(124, 22);
             this.CloseTabButton.Text = "Close Tab";
             this.CloseTabButton.Click += new System.EventHandler(this.CloseTabButton_Click);
+            // 
+            // RefreshButton
+            // 
+            this.RefreshButton.Image = ((System.Drawing.Image)(resources.GetObject("RefreshButton.Image")));
+            this.RefreshButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.RefreshButton.Name = "RefreshButton";
+            this.RefreshButton.Size = new System.Drawing.Size(66, 22);
+            this.RefreshButton.Text = "Refresh";
+            this.RefreshButton.Click += new System.EventHandler(this.RefreshButton_Click);
             // 
             // MainForm
             // 
@@ -798,6 +811,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.RatingBar)).EndInit();
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.PictureContextMenu.ResumeLayout(false);
             this.GamesDGVContextMenu.ResumeLayout(false);
             this.GameTabsContextMenu.ResumeLayout(false);
@@ -875,6 +890,7 @@
         private System.Windows.Forms.Button LockTitleButton;
         private System.Windows.Forms.ContextMenuStrip GameTabsContextMenu;
         private System.Windows.Forms.ToolStripMenuItem CloseTabButton;
+        private System.Windows.Forms.ToolStripButton RefreshButton;
     }
 }
 

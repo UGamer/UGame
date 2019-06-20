@@ -131,7 +131,7 @@ namespace UGame
                 URLs[index, 0] = segment.Substring(0, segment.IndexOf("[URL]"));
                 segment = segment.Substring(segment.IndexOf("[URL]") + 5);
                 try { URLs[index, 1] = segment.Substring(0, segment.IndexOf("[Title]")); } catch { URLs[index, 1] = segment; }
-                try { segment = segment.Substring(segment.IndexOf("[Title]") + 7); } catch { segment = ""; }
+                try { segment = segment.Substring(segment.IndexOf("[Title]")); } catch { segment = ""; }
             }
 
             // FILTERS
@@ -221,6 +221,8 @@ namespace UGame
                     int fileToUse = randomPicture.Next(0, numOfFiles);
                     bgImage = Image.FromFile(files[fileToUse]);
                 }
+                else
+                    throw new Exception();
             }
             catch { try { bgImage = Image.FromFile(refer.config.resourcePath + "bg\\" + imageTitle + ".png"); }
             catch { try { bgImage = Image.FromFile(refer.config.resourcePath + "bg\\" + imageTitle + ".jpg"); }
@@ -517,9 +519,11 @@ namespace UGame
                 secString += "s";
 
                 timePlayed = hourString + minString + secString;
-                
+
+                DateTime lastPlayed = DateTime.Now;
+
                 // WRITE EVERYTHING TO THE DATABASE
-                updateCmd = new SqlCommand("UPDATE Games SET TimePlayed = '" + timePlayed + "', Seconds = " + totalSeconds + ", LastPlayed = '" + DateTime.Now.ToString() + "' WHERE Id = " + id + ";", con);
+                updateCmd = new SqlCommand("UPDATE Games SET TimePlayed = '" + timePlayed + "', Seconds = " + totalSeconds + ", LastPlayed = '" + lastPlayed.ToString() + "' WHERE Id = " + id + ";", con);
                 
                 // WRITE EVERYTHING TO THE DATABASE
                 con.Open();
@@ -528,6 +532,20 @@ namespace UGame
                 { updateCmd.ExecuteNonQuery(); }
                 // catch { con.Close(); MessageBox.Show("Update to entry failed.", "Update Failed"); }
                 con.Close();
+
+                timePlayedLabel.Text = timePlayed;
+                lastPlayedLabel.Text = lastPlayed.ToString();
+
+                for (int index = 0; index < refer.GamesDGV.Rows.Count; index++)
+                {
+                    if (Convert.ToInt32(refer.GamesDGV.Rows[index].Cells["Id"].Value) == id)
+                    {
+                        refer.GamesDGV.Rows[index].Cells["TimePlayed"].Value = timePlayed;
+                        refer.GamesDGV.Rows[index].Cells["Seconds"].Value = totalSeconds;
+                        refer.GamesDGV.Rows[index].Cells["LastPlayed"].Value = lastPlayed;
+                        break;
+                    }
+                }
 
                 gameSummary = new GameSummary(title, totalSeconds);
                 gameSummary.Show();
