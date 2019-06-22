@@ -5,9 +5,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.Sql;
+using System.Data.SQLite;
 using System.Data.OleDb;
-using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -24,10 +23,10 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
     {
         Start refer;
 
-        public SqlCommand insertCmd;
+        public SQLiteCommand insertCmd;
         public DataTable dataTable;
 
-        public SqlConnection newCon; 
+        public SQLiteConnection newCon; 
         
         public DataTable newTable;
 
@@ -44,7 +43,7 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
         public bool titleLock = true;
         public bool platformLock = true;
 
-        public Review(Start refer, DataTable newTable, SqlConnection newCon)
+        public Review(Start refer, DataTable newTable, SQLiteConnection newCon)
         {
             this.refer = refer;
             this.newTable = newTable;
@@ -65,22 +64,22 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
             da2.Fill(dataTable);
             oldCon.Close();
 
-            SqlCommand fillNewTable = new SqlCommand("SELECT * FROM Games", newCon);
+            SQLiteCommand fillNewTable = new SQLiteCommand("SELECT * FROM Games", newCon);
             newCon.Open();
             fillNewTable.CommandType = CommandType.Text;
-            SqlDataAdapter da3 = new SqlDataAdapter(fillNewTable);
+            SQLiteDataAdapter da3 = new SQLiteDataAdapter(fillNewTable);
             da3.Fill(newTable);
             newCon.Close();
 
             if (!refer.QuickConvertCheck.Checked)
             {
-                insertCmd = new SqlCommand("INSERT INTO Games ([Id], [Title], [Platform], [Status], [Rating], [TimePlayed], [Seconds], [Obtained], [StartDate], [LastPlayed], [Notes], [URLs], [Filters], [Developers], [Publishers], [ReleaseDate], [Genre], [PlayerCount], [Price], [GameDesc], [Launch], [Blur], [Overlay]) VALUES (@Id, @Title, @Platform, @Status, @Rating, @TimePlayed, @Seconds, @Obtained, @StartDate, @LastPlayed, @Notes, @URLs, @Filters, @Developers, @Publishers, @ReleaseDate, @Genre, @PlayerCount, @Price, @GameDesc, @Launch, @Blur, @Overlay);", refer.newCon);
+                insertCmd = new SQLiteCommand("INSERT INTO Games ([Id], [Title], [Platform], [Status], [Rating], [TimePlayed], [Seconds], [Obtained], [StartDate], [LastPlayed], [Notes], [URLs], [Filters], [Developers], [Publishers], [ReleaseDate], [Genre], [PlayerCount], [Price], [GameDesc], [Launch], [Blur], [Overlay], [Discord]) VALUES (@Id, @Title, @Platform, @Status, @Rating, @TimePlayed, @Seconds, @Obtained, @StartDate, @LastPlayed, @Notes, @URLs, @Filters, @Developers, @Publishers, @ReleaseDate, @Genre, @PlayerCount, @Price, @GameDesc, @Launch, @Blur, @Overlay, @Discord);", refer.newCon);
                 int index = 0;
                 this.Text = "Review for \"" + dataTable.Rows[index]["Title"] + "\" (" + (index + 1) + "/" + dataTable.Rows.Count + ")";
             }
             else
             {
-                insertCmd = new SqlCommand("INSERT INTO Games ([Id], [Title], [Platform], [Status], [Rating], [TimePlayed], [Seconds], [Obtained], [StartDate], [LastPlayed], [Notes], [URLs], [Launch], [Blur], [Overlay]) VALUES (@Id, @Title, @Platform, @Status, @Rating, @TimePlayed, @Seconds, @Obtained, @StartDate, @LastPlayed, @Notes, @URLs, @Launch, @Blur, @Overlay);", refer.newCon);
+                insertCmd = new SQLiteCommand("INSERT INTO Games ([Id], [Title], [Platform], [Status], [Rating], [TimePlayed], [Seconds], [Obtained], [StartDate], [LastPlayed], [Notes], [URLs], [Launch], [Blur], [Overlay]) VALUES (@Id, @Title, @Platform, @Status, @Rating, @TimePlayed, @Seconds, @Obtained, @StartDate, @LastPlayed, @Notes, @URLs, @Launch, @Blur, @Overlay);", refer.newCon);
 
 
             }
@@ -171,7 +170,12 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
             insertCmd.Parameters.AddWithValue("@Filters", filters);
             insertCmd.Parameters.AddWithValue("@Developers", developers);
             insertCmd.Parameters.AddWithValue("@Publishers", publishers);
-            insertCmd.Parameters.AddWithValue("@ReleaseDate", releaseDate);
+
+            if (!releaseCheck)
+                insertCmd.Parameters.AddWithValue("@ReleaseDate", releaseDateDT);
+            else
+                insertCmd.Parameters.AddWithValue("@ReleaseDate", nullDT);
+
             insertCmd.Parameters.AddWithValue("@Genre", genre);
             insertCmd.Parameters.AddWithValue("@PlayerCount", playerCount);
             insertCmd.Parameters.AddWithValue("@Price", price);
@@ -179,6 +183,7 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
             insertCmd.Parameters.AddWithValue("@Launch", launchString);
             insertCmd.Parameters.AddWithValue("@Blur", blur.ToString());
             insertCmd.Parameters.AddWithValue("@Overlay", overlay.ToString());
+            insertCmd.Parameters.AddWithValue("@Discord", "True");
 
             insertCmd.ExecuteNonQuery();
 
@@ -205,6 +210,7 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
             insertCmd.Parameters.RemoveAt("@Launch");
             insertCmd.Parameters.RemoveAt("@Blur");
             insertCmd.Parameters.RemoveAt("@Overlay");
+            insertCmd.Parameters.RemoveAt("@Discord");
             refer.newCon.Close();
 
             highestId++;
@@ -294,18 +300,18 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
                 StartDatePicker.Value = DateTime.Now;
                 LastPlayedDatePicker.Value = DateTime.Now;
 
-                if (dataTable.Rows[index]["Obtained"].ToString() == " ")
+                if (dataTable.Rows[index]["Obtained"].ToString() == " " || dataTable.Rows[index]["Obtained"].ToString() ==  "")
                     ObtainedCheck.Checked = true;
                 else
                     ObtainedDatePicker.Value = obtained;
 
-                if (dataTable.Rows[index]["StartDate"].ToString() == " ")
+                if (dataTable.Rows[index]["StartDate"].ToString() == " " || dataTable.Rows[index]["StartDate"].ToString() == "")
                     StartDateCheck.Checked = true;
                 else
                     StartDatePicker.Value = startDate;
 
 
-                if (dataTable.Rows[index]["EndDate"].ToString() == " ")
+                if (dataTable.Rows[index]["EndDate"].ToString() == " " || dataTable.Rows[index]["EndDate"].ToString() == "")
                     LastPlayedCheck.Checked = true;
                 else
                     LastPlayedDatePicker.Value = lastPlayed;

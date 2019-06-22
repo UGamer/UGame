@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.Sql;
-using System.Data.SqlClient;
+using System.Data.SQLite;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -28,9 +27,9 @@ namespace UGame
         int highestId;
         public string mdfPath;
         public static string connectionString;
-        static SqlConnection con;
-        public SqlCommand selectCmd;
-        public SqlCommand insertCmd;
+        public static SQLiteConnection con;
+        public SQLiteCommand selectCmd;
+        public SQLiteCommand insertCmd;
         public DataTable dataTable;
 
         int editedId = 0;
@@ -54,7 +53,7 @@ namespace UGame
 
             if (config.resourcePath == "")
             {
-                resourcePath = "resources\\";
+                config.resourcePath = "resources\\";
 
                 if (!Directory.Exists("resources"))
                     Directory.CreateDirectory("resources");
@@ -65,47 +64,36 @@ namespace UGame
                 if (!Directory.Exists("resources\\bg"))
                     Directory.CreateDirectory("resources\\bg");
             }
-
-            connectionString = "Data Source=.;AttachDbFilename=\"" + config.databasePath + "\";Integrated Security=True;Connect Timeout=30;User Instance=True";
-            // connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"" + config.databasePath + "\";Integrated Security=True";
-            // connectionString = "Data Source=(local)\\SQLEXPRESS; Initial Catalog='" + config.databasePath + "'; Integrated Security=SSPI";
-            con = new SqlConnection(connectionString);
-
-            selectCmd = new SqlCommand("SELECT * FROM Games", con);
-            insertCmd = new SqlCommand("INSERT INTO Games ([Id], [Title], [Platform], [Status], [Rating], [TimePlayed], [Seconds], [Obtained], [StartDate], [LastPlayed], [Notes], [URLs], [Filters], [Developers], [Publishers], [ReleaseDate], [Genre], [PlayerCount], [Price], [GameDesc], [Launch], [Blur], [Overlay]) VALUES (@Id, @Title, @Platform, @Status, @Rating, @TimePlayed, @Seconds, @Obtained, @StartDate, @LastPlayed, @Notes, @URLs, @Filters, @Developers, @Publishers, @ReleaseDate, @Genre, @PlayerCount, @Price, @GameDesc, @Launch, @Blur, @Overlay);", con);
             
+            connectionString = "Data Source=" + config.databasePath + ";Version=3;";
+            con = new SQLiteConnection(connectionString);
+            selectCmd = new SQLiteCommand("SELECT * FROM Games", con);
+            insertCmd = new SQLiteCommand("INSERT INTO Games ([Id], [Title], [Platform], [Status], [Rating], [TimePlayed], [Seconds], [Obtained], [StartDate], [LastPlayed], [Notes], [URLs], [Filters], [Developers], [Publishers], [ReleaseDate], [Genre], [PlayerCount], [Price], [GameDesc], [Launch], [Blur], [Overlay], [Discord]) VALUES (@Id, @Title, @Platform, @Status, @Rating, @TimePlayed, @Seconds, @Obtained, @StartDate, @LastPlayed, @Notes, @URLs, @Filters, @Developers, @Publishers, @ReleaseDate, @Genre, @PlayerCount, @Price, @GameDesc, @Launch, @Blur, @Overlay, @Discord);", con);
+            con.Open();
+
             InitializeComponent();
             InitializeTheme();
             FillDGV();
 
             try { GamesDGV.Sort(GamesDGV.Columns["Title"], ListSortDirection.Ascending); } catch { }
-            LockPlatformButton.BackgroundImage = Image.FromFile(resourcePath + "Unlock.png");
-            LockTitleButton.BackgroundImage = Image.FromFile(resourcePath + "Unlock.png");
         }
 
         private void InitializeTheme()
         {
             RefreshButton.Image = Image.FromFile(resourcePath + "refresh.png");
+
+            LockTitleButton.BackgroundImage = Image.FromFile(resourcePath + "Unlock.png");
+            LockPlatformButton.BackgroundImage = Image.FromFile(resourcePath + "Unlock.png");
         }
 
         private void FillDGV()
         {
-            //try {
-                con.Open(); //}
-            // catch
-            {
-                MessageBox.Show("UGame could not retrieve the data from your database file. Exiting...", "Database Read Error");
-                this.Close();
-            }
-
             selectCmd.CommandType = CommandType.Text;
-
-            SqlDataAdapter da = new SqlDataAdapter(selectCmd);
+            SQLiteDataAdapter da = new SQLiteDataAdapter(selectCmd);
             dataTable = new DataTable();
             dataTable.Columns.Add(" ", typeof(Image));
             da.Fill(dataTable);
-            con.Close();
-
+            
             GamesDGV.DataSource = dataTable;
             GamesListTab.Text = "[LIST] " + dataTable.Rows.Count + "/" + dataTable.Rows.Count;
 
@@ -141,22 +129,34 @@ namespace UGame
                 while (imageTitle.IndexOf("\\") != -1)
                     imageTitle = rgxFix9.Replace(imageTitle, "");
                 
-                try { GamesDGV.Rows[index].Cells[0].Value = Image.FromFile(config.resourcePath + "icons\\" + imageTitle + ".png"); }
-                catch { try { GamesDGV.Rows[index].Cells[0].Value = Image.FromFile(config.resourcePath + "icons\\" + imageTitle + ".jpg"); }
-                catch { try { GamesDGV.Rows[index].Cells[0].Value = Image.FromFile(config.resourcePath + "icons\\" + imageTitle + ".jpeg"); }
-                catch { try { GamesDGV.Rows[index].Cells[0].Value = Image.FromFile(config.resourcePath + "icons\\" + imageTitle + ".jfif"); }
-                catch { try { GamesDGV.Rows[index].Cells[0].Value = Image.FromFile(config.resourcePath + "icons\\" + imageTitle + ".gif"); }
-                catch { GamesDGV.Rows[index].Cells[0].Value = Image.FromFile(config.resourcePath + "unknown.png"); } } } } }
+                try
+                {
+                    try { GamesDGV.Rows[index].Cells[0].Value = Image.FromFile(config.resourcePath + "icons\\" + imageTitle + ".png"); }
+                    catch { try { GamesDGV.Rows[index].Cells[0].Value = Image.FromFile(config.resourcePath + "icons\\" + imageTitle + ".jpg"); }
+                    catch { try { GamesDGV.Rows[index].Cells[0].Value = Image.FromFile(config.resourcePath + "icons\\" + imageTitle + ".jpeg"); }
+                    catch { try { GamesDGV.Rows[index].Cells[0].Value = Image.FromFile(config.resourcePath + "icons\\" + imageTitle + ".jfif"); }
+                    catch { try { GamesDGV.Rows[index].Cells[0].Value = Image.FromFile(config.resourcePath + "icons\\" + imageTitle + ".gif"); }
+                    catch { GamesDGV.Rows[index].Cells[0].Value = Image.FromFile(config.resourcePath + "unknown.png"); } } } } }
+                }
+                catch { }
                 
-                if (Convert.ToDateTime(GamesDGV.Rows[index].Cells["Obtained"].Value) == new DateTime(1753, 1, 1))
-                    GamesDGV.Rows[index].Cells["Obtained"].Value = "";
+                // This code prevents editing entries with any date that has 1/1/1753. Need to find another way.
+                /*
+                try
+                {
+                    if (Convert.ToDateTime(GamesDGV.Rows[index].Cells["Obtained"].Value) == new DateTime(1753, 1, 1))
+                        GamesDGV.Rows[index].Cells["Obtained"].Value = "";
 
-                if (Convert.ToDateTime(GamesDGV.Rows[index].Cells["StartDate"].Value) == new DateTime(1753, 1, 1))
-                    GamesDGV.Rows[index].Cells["StartDate"].Value = "";
+                    if (Convert.ToDateTime(GamesDGV.Rows[index].Cells["StartDate"].Value) == new DateTime(1753, 1, 1))
+                        GamesDGV.Rows[index].Cells["StartDate"].Value = "";
 
-                if (Convert.ToDateTime(GamesDGV.Rows[index].Cells["LastPlayed"].Value) == new DateTime(1753, 1, 1))
-                    GamesDGV.Rows[index].Cells["LastPlayed"].Value = "";
-                
+                    if (Convert.ToDateTime(GamesDGV.Rows[index].Cells["LastPlayed"].Value) == new DateTime(1753, 1, 1))
+                        GamesDGV.Rows[index].Cells["LastPlayed"].Value = "";
+                }
+                catch { }
+                */
+
+
                 // This code results in an error for each cell with -1 for a price. Maybe just hide the text with a font color or something
                 // for -1 values?
                 /*
@@ -185,6 +185,7 @@ namespace UGame
                 GamesDGV.Columns["Launch"].Visible = false;
                 GamesDGV.Columns["Blur"].Visible = false;
                 GamesDGV.Columns["Overlay"].Visible = false;
+                GamesDGV.Columns["Discord"].Visible = false;
 
                 GamesDGV.Columns["TimePlayed"].HeaderText = "Time Played";
                 GamesDGV.Columns["StartDate"].HeaderText = "Start Date";
@@ -198,7 +199,7 @@ namespace UGame
         
         private void NewTab(int rowIndex)
         {
-            // try
+            try
             {
                 int id = Convert.ToInt32(GamesDGV.Rows[rowIndex].Cells["Id"].Value);
                 int index;
@@ -223,7 +224,7 @@ namespace UGame
                     GamesTabs.SelectedTab = games[index].gameTab;
                 }
             }
-            // catch { }
+            catch { }
         }
 
         public void AddGameTab(TabPage gameTab)
@@ -234,8 +235,7 @@ namespace UGame
 
         private void GamesDGV_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            // try {
-                NewTab(e.RowIndex); // } catch { }
+            try { NewTab(e.RowIndex); } catch { }
         }
 
         private void MainForm_KeyUp(object sender, KeyEventArgs e)
@@ -347,76 +347,92 @@ namespace UGame
 
             string releaseDate;
             if (!ReleaseDateCheck.Checked)
-                releaseDate = ReleaseDatePicker.Value.ToShortDateString();
+                releaseDate = ReleaseDatePicker.Value.ToString("yyyy-MM-dd HH:mm:ss");
             else
-                releaseDate = nullDT.ToShortDateString();
-            
+                releaseDate = nullDT.ToString("yyyy-MM-dd HH:mm:ss");
 
-            con.Open();
-            
-            insertCmd.Parameters.AddWithValue("@Id", highestId + 1);
-            insertCmd.Parameters.AddWithValue("@Title", TitleBox.Text);
-            insertCmd.Parameters.AddWithValue("@Platform", PlatformBox.Text);
-            insertCmd.Parameters.AddWithValue("@Status", StatusBox.Text);
-            insertCmd.Parameters.AddWithValue("@Rating", RatingBar.Value);
-            insertCmd.Parameters.AddWithValue("@TimePlayed", timePlayed);
-            insertCmd.Parameters.AddWithValue("@Seconds", totalSeconds);
+            /*
+            try { con.Open(); }
+            catch
+            {
+                File.Copy(config.databasePath, config.databasePath + ".mdf", true);
+                File.Delete(config.databasePath);
+                File.Copy(config.databasePath + ".mdf", config.databasePath, true);
+                File.Delete(config.databasePath + ".mdf");
+                con = new SqlConnection(connectionString);
+                con.Open();
+            }
+            */
 
-            if (!ObtainedCheck.Checked)
-                insertCmd.Parameters.AddWithValue("@Obtained", ObtainedDatePicker.Value);
-            else
-                insertCmd.Parameters.AddWithValue("@Obtained", nullDT);
+            try
+            {
+                insertCmd.Parameters.AddWithValue("@Id", highestId + 1);
+                insertCmd.Parameters.AddWithValue("@Title", TitleBox.Text);
+                insertCmd.Parameters.AddWithValue("@Platform", PlatformBox.Text);
+                insertCmd.Parameters.AddWithValue("@Status", StatusBox.Text);
+                insertCmd.Parameters.AddWithValue("@Rating", RatingBar.Value);
+                insertCmd.Parameters.AddWithValue("@TimePlayed", timePlayed);
+                insertCmd.Parameters.AddWithValue("@Seconds", totalSeconds);
 
-            if (!StartDateCheck.Checked)
-                insertCmd.Parameters.AddWithValue("@StartDate", StartDatePicker.Value);
-            else
-                insertCmd.Parameters.AddWithValue("@StartDate", nullDT);
+                if (!ObtainedCheck.Checked)
+                    insertCmd.Parameters.AddWithValue("@Obtained", ObtainedDatePicker.Value.ToString("yyyy-MM-dd HH:mm:ss"));
+                else
+                    insertCmd.Parameters.AddWithValue("@Obtained", nullDT.ToString("yyyy-MM-dd HH:mm:ss"));
 
-            if (!LastPlayedCheck.Checked)
-                insertCmd.Parameters.AddWithValue("@LastPlayed", LastPlayedDatePicker.Value);
-            else
-                insertCmd.Parameters.AddWithValue("@LastPlayed", nullDT);
+                if (!StartDateCheck.Checked)
+                    insertCmd.Parameters.AddWithValue("@StartDate", StartDatePicker.Value.ToString("yyyy-MM-dd HH:mm:ss"));
+                else
+                    insertCmd.Parameters.AddWithValue("@StartDate", nullDT.ToString("yyyy-MM-dd HH:mm:ss"));
 
-            insertCmd.Parameters.AddWithValue("@Notes", NotesBox.Text);
-            insertCmd.Parameters.AddWithValue("@URLs", urlString);
-            insertCmd.Parameters.AddWithValue("@Filters", FiltersBox.Text);
-            insertCmd.Parameters.AddWithValue("@Developers", DevelopersBox.Text);
-            insertCmd.Parameters.AddWithValue("@Publishers", PublishersBox.Text);
-            insertCmd.Parameters.AddWithValue("@ReleaseDate", releaseDate);
-            insertCmd.Parameters.AddWithValue("@Genre", GenreBox.Text);
-            insertCmd.Parameters.AddWithValue("@PlayerCount", PlayerCountBox.Text);
-            try { insertCmd.Parameters.AddWithValue("@Price", Convert.ToDecimal(PriceBox.Text)); } catch { try { insertCmd.Parameters.AddWithValue("@Price", Convert.ToDecimal(PriceBox.Text.Substring(1))); } catch { insertCmd.Parameters.AddWithValue("@Price", -1); } }
-            insertCmd.Parameters.AddWithValue("@GameDesc", GameDescBox.Text);
-            insertCmd.Parameters.AddWithValue("@Launch", launchString);
-            insertCmd.Parameters.AddWithValue("@Blur", BlurCheck.Checked.ToString());
-            insertCmd.Parameters.AddWithValue("@Overlay", OverlayCheck.Checked.ToString());
+                if (!LastPlayedCheck.Checked)
+                    insertCmd.Parameters.AddWithValue("@LastPlayed", LastPlayedDatePicker.Value.ToString("yyyy-MM-dd HH:mm:ss"));
+                else
+                    insertCmd.Parameters.AddWithValue("@LastPlayed", nullDT.ToString("yyyy-MM-dd HH:mm:ss"));
 
-            insertCmd.ExecuteNonQuery();
+                insertCmd.Parameters.AddWithValue("@Notes", NotesBox.Text);
+                insertCmd.Parameters.AddWithValue("@URLs", urlString);
+                insertCmd.Parameters.AddWithValue("@Filters", FiltersBox.Text);
+                insertCmd.Parameters.AddWithValue("@Developers", DevelopersBox.Text);
+                insertCmd.Parameters.AddWithValue("@Publishers", PublishersBox.Text);
+                insertCmd.Parameters.AddWithValue("@ReleaseDate", releaseDate);
+                insertCmd.Parameters.AddWithValue("@Genre", GenreBox.Text);
+                insertCmd.Parameters.AddWithValue("@PlayerCount", PlayerCountBox.Text);
+                try { insertCmd.Parameters.AddWithValue("@Price", Convert.ToDecimal(PriceBox.Text)); } catch { try { insertCmd.Parameters.AddWithValue("@Price", Convert.ToDecimal(PriceBox.Text.Substring(1))); } catch { insertCmd.Parameters.AddWithValue("@Price", -1); } }
+                insertCmd.Parameters.AddWithValue("@GameDesc", GameDescBox.Text);
+                insertCmd.Parameters.AddWithValue("@Launch", launchString);
+                insertCmd.Parameters.AddWithValue("@Blur", BlurCheck.Checked.ToString());
+                insertCmd.Parameters.AddWithValue("@Overlay", OverlayCheck.Checked.ToString());
+                insertCmd.Parameters.AddWithValue("@Discord", DiscordCheck.Checked.ToString());
 
-            insertCmd.Parameters.RemoveAt("@Id");
-            insertCmd.Parameters.RemoveAt("@Title");
-            insertCmd.Parameters.RemoveAt("@Platform");
-            insertCmd.Parameters.RemoveAt("@Status");
-            insertCmd.Parameters.RemoveAt("@Rating");
-            insertCmd.Parameters.RemoveAt("@TimePlayed");
-            insertCmd.Parameters.RemoveAt("@Seconds");
-            insertCmd.Parameters.RemoveAt("@Obtained");
-            insertCmd.Parameters.RemoveAt("@StartDate");
-            insertCmd.Parameters.RemoveAt("@LastPlayed");
-            insertCmd.Parameters.RemoveAt("@Notes");
-            insertCmd.Parameters.RemoveAt("@URLs");
-            insertCmd.Parameters.RemoveAt("@Filters");
-            insertCmd.Parameters.RemoveAt("@Developers");
-            insertCmd.Parameters.RemoveAt("@Publishers");
-            insertCmd.Parameters.RemoveAt("@ReleaseDate");
-            insertCmd.Parameters.RemoveAt("@Genre");
-            insertCmd.Parameters.RemoveAt("@PlayerCount");
-            insertCmd.Parameters.RemoveAt("@Price");
-            insertCmd.Parameters.RemoveAt("@GameDesc");
-            insertCmd.Parameters.RemoveAt("@Launch");
-            insertCmd.Parameters.RemoveAt("@Blur");
-            insertCmd.Parameters.RemoveAt("@Overlay");
-            con.Close();
+                insertCmd.ExecuteNonQuery();
+                MessageBox.Show("\"" + TitleBox.Text + "\" successfully added to collection.", "Successful Addition", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                insertCmd.Parameters.RemoveAt("@Id");
+                insertCmd.Parameters.RemoveAt("@Title");
+                insertCmd.Parameters.RemoveAt("@Platform");
+                insertCmd.Parameters.RemoveAt("@Status");
+                insertCmd.Parameters.RemoveAt("@Rating");
+                insertCmd.Parameters.RemoveAt("@TimePlayed");
+                insertCmd.Parameters.RemoveAt("@Seconds");
+                insertCmd.Parameters.RemoveAt("@Obtained");
+                insertCmd.Parameters.RemoveAt("@StartDate");
+                insertCmd.Parameters.RemoveAt("@LastPlayed");
+                insertCmd.Parameters.RemoveAt("@Notes");
+                insertCmd.Parameters.RemoveAt("@URLs");
+                insertCmd.Parameters.RemoveAt("@Filters");
+                insertCmd.Parameters.RemoveAt("@Developers");
+                insertCmd.Parameters.RemoveAt("@Publishers");
+                insertCmd.Parameters.RemoveAt("@ReleaseDate");
+                insertCmd.Parameters.RemoveAt("@Genre");
+                insertCmd.Parameters.RemoveAt("@PlayerCount");
+                insertCmd.Parameters.RemoveAt("@Price");
+                insertCmd.Parameters.RemoveAt("@GameDesc");
+                insertCmd.Parameters.RemoveAt("@Launch");
+                insertCmd.Parameters.RemoveAt("@Blur");
+                insertCmd.Parameters.RemoveAt("@Overlay");
+                insertCmd.Parameters.RemoveAt("@Discord");
+            }
+            catch { }
 
             highestId++;
             index++;
@@ -438,7 +454,8 @@ namespace UGame
             DateTime obtained = Convert.ToDateTime(GamesDGV.Rows[rowIndex].Cells["Obtained"].Value);
             DateTime startDate = Convert.ToDateTime(GamesDGV.Rows[rowIndex].Cells["StartDate"].Value);
             DateTime lastPlayed = Convert.ToDateTime(GamesDGV.Rows[rowIndex].Cells["LastPlayed"].Value);
-            
+            DateTime releaseDate = Convert.ToDateTime(GamesDGV.Rows[rowIndex].Cells["ReleaseDate"].Value);
+
             TitleBox.Text = GamesDGV.Rows[rowIndex].Cells["Title"].Value.ToString();
             PlatformBox.Text = GamesDGV.Rows[rowIndex].Cells["Platform"].Value.ToString();
             StatusBox.Text = GamesDGV.Rows[rowIndex].Cells["Status"].Value.ToString();
@@ -450,6 +467,7 @@ namespace UGame
             ObtainedCheck.Checked = false;
             StartDateCheck.Checked = false;
             LastPlayedCheck.Checked = false;
+            ReleaseDateCheck.Checked = false;
 
             if (Convert.ToDateTime(GamesDGV.Rows[rowIndex].Cells["Obtained"].Value) == new DateTime(1753, 1, 1))
                 ObtainedCheck.Checked = true;
@@ -462,9 +480,9 @@ namespace UGame
                 StartDatePicker.Value = startDate;
             
             if (Convert.ToDateTime(GamesDGV.Rows[rowIndex].Cells["LastPlayed"].Value) == new DateTime(1753, 1, 1))
-                LastPlayedCheck.Checked = true;
+                ReleaseDateCheck.Checked = true;
             else
-                LastPlayedDatePicker.Value = lastPlayed;
+                ReleaseDatePicker.Value = releaseDate;
 
             NotesBox.Text = GamesDGV.Rows[rowIndex].Cells["Notes"].Value.ToString();
             urlString = GamesDGV.Rows[rowIndex].Cells["URLs"].Value.ToString();
@@ -472,7 +490,13 @@ namespace UGame
             FiltersBox.Text = GamesDGV.Rows[rowIndex].Cells["Filters"].Value.ToString();
             DevelopersBox.Text = GamesDGV.Rows[rowIndex].Cells["Developers"].Value.ToString();
             PublishersBox.Text = GamesDGV.Rows[rowIndex].Cells["Publishers"].Value.ToString();
-            ReleaseDatePicker.Value = Convert.ToDateTime(GamesDGV.Rows[rowIndex].Cells["ReleaseDate"].Value);
+
+            if (Convert.ToDateTime(GamesDGV.Rows[rowIndex].Cells["ReleaseDate"].Value) == new DateTime(1753, 1, 1))
+                ReleaseDateCheck.Checked = true;
+            else
+                ReleaseDatePicker.Value = releaseDate;
+
+
             GenreBox.Text = GamesDGV.Rows[rowIndex].Cells["Genre"].Value.ToString();
             PlayerCountBox.Text = GamesDGV.Rows[rowIndex].Cells["PlayerCount"].Value.ToString();
 
@@ -487,6 +511,7 @@ namespace UGame
 
             BlurCheck.Checked = Convert.ToBoolean(GamesDGV.Rows[rowIndex].Cells["Blur"].Value);
             OverlayCheck.Checked = Convert.ToBoolean(GamesDGV.Rows[rowIndex].Cells["Overlay"].Value);
+            DiscordCheck.Checked = Convert.ToBoolean(GamesDGV.Rows[rowIndex].Cells["Discord"].Value);
 
             try { DetailsBox.BackgroundImage = Image.FromFile(resourcePath + "\\details\\" + TitleBox.Text + ".png"); } catch { try { DetailsBox.BackgroundImage = Image.FromFile(resourcePath + "\\details\\" + TitleBox.Text + ".jpg"); } catch { try { DetailsBox.BackgroundImage = Image.FromFile(resourcePath + "\\details\\" + TitleBox.Text + ".jpeg"); } catch { try { DetailsBox.BackgroundImage = Image.FromFile(resourcePath + "\\details\\" + TitleBox.Text + ".gif"); } catch { } } } }
             try { IconBox.BackgroundImage = Image.FromFile(resourcePath + "\\icons\\" + TitleBox.Text + ".png"); } catch { try { IconBox.BackgroundImage = Image.FromFile(resourcePath + "\\icons\\" + TitleBox.Text + ".jpg"); } catch { try { IconBox.BackgroundImage = Image.FromFile(resourcePath + "\\icons\\" + TitleBox.Text + ".jpeg"); } catch { try { IconBox.BackgroundImage = Image.FromFile(resourcePath + "\\icons\\" + TitleBox.Text + ".gif"); } catch { } } } }
@@ -503,7 +528,12 @@ namespace UGame
         {
             string hoursString = ""; string minutesString = ""; string secondsString = "";
             int hr, min, sec;
-            int totalSec = (Convert.ToInt32(TimeHoursBox.Text) * 3600) + (Convert.ToInt32(TimeMinutesBox.Text) * 60) + Convert.ToInt32(TimeSecondsBox.Text);
+
+            try { hr = Convert.ToInt32(TimeHoursBox.Text); } catch { hr = 0; }
+            try { min = Convert.ToInt32(TimeMinutesBox.Text); } catch { min = 0; }
+            try { sec = Convert.ToInt32(TimeSecondsBox.Text); } catch { sec = 0; }
+
+            int totalSec = (hr * 3600) + (min * 60) + sec;
             min = totalSec / 60;
             sec = totalSec % 60;
             hr = min / 60;
@@ -523,40 +553,59 @@ namespace UGame
 
             string timePlayed = hoursString + minutesString + secondsString;
 
-            string command = "UPDATE Games SET ";
-            command += "Title = '" + TitleBox.Text + "', ";
-            command += "Platform = '" + PlatformBox.Text + "', ";
-            command += "Status = '" + StatusBox.Text + "', ";
-            command += "Rating = " + RatingBar.Value + ", ";
-            command += "TimePlayed = '" + timePlayed + "', ";
-            command += "Seconds = " + totalSec + ", ";
-            command += "Obtained = '" + ObtainedDatePicker.Value.ToString() + "', ";
-            command += "StartDate = '" + StartDatePicker.Value.ToString() + "', ";
-            command += "LastPlayed = '" + LastPlayedDatePicker.Value.ToString() + "', ";
-            command += "Notes = '" + NotesBox.Text + "', ";
-            command += "URLs = '" + urlString + "', ";
-            command += "Filters = '" + FiltersBox.Text + "', ";
-            command += "Developers = '" + DevelopersBox.Text + "', ";
-            command += "Publishers = '" + PublishersBox.Text + "', ";
-            command += "ReleaseDate = '" + ReleaseDatePicker.Value.ToString() + "', ";
-            command += "Genre = '" + GenreBox.Text + "', ";
-            command += "PlayerCount = '" + PlayerCountBox.Text + "', ";
+            DateTime obtained, startDate, lastPlayed, releaseDate;
+            obtained = new DateTime(1753, 1, 1);
+            startDate = new DateTime(1753, 1, 1);
+            lastPlayed = new DateTime(1753, 1, 1);
+            releaseDate = new DateTime(1753, 1, 1);
+
+            if (!ObtainedCheck.Checked)
+                obtained = ObtainedDatePicker.Value;
+            if (!StartDateCheck.Checked)
+                startDate = StartDatePicker.Value;
+            if (!LastPlayedCheck.Checked)
+                lastPlayed = LastPlayedDatePicker.Value;
+            if (!ReleaseDateCheck.Checked)
+                releaseDate = ReleaseDatePicker.Value;
+
+            decimal price;
             if (PriceBox.Text != "")
-                command += "Price = " + Convert.ToDecimal(PriceBox.Text) + ", ";
+                price = Convert.ToDecimal(PriceBox.Text);
             else
-                command += "Price = -1, ";
-            command += "GameDesc = '" + GameDescBox.Text + "', ";
-            command += "Launch = '" + launchString + "', ";
-            command += "Blur = '" + BlurCheck.Checked.ToString() + "', ";
-            command += "Overlay = '" + OverlayCheck.Checked.ToString() + "' ";
+                price = -1;
 
-            command += "WHERE Id = " + editedId + ";";
+            string command = "UPDATE Games SET Title = @Title, Platform = @Platform, Status = @Status, Rating = @Rating, TimePlayed = @TimePlayed, " +
+                "Seconds = @Seconds, Obtained = @Obtained, StartDate = @StartDate, LastPlayed = @LastPlayed, Notes = @Notes, URLs = @URLs, " +
+                "Filters = @Filters, Developers = @Developers, Publishers = @Publishers, ReleaseDate = @ReleaseDate, Genre = @Genre, PlayerCount = @PlayerCount, " +
+                "Price = @Price, GameDesc = @GameDesc, Launch = @Launch, Blur = @Blur, Overlay = @Overlay, Discord = @Discord WHERE Id = " + editedId + ";";
+            
+            SQLiteCommand replaceCmd = new SQLiteCommand(command, con);
 
-            SqlCommand replaceCmd = new SqlCommand(command, con);
-
-            con.Open();
+            replaceCmd.Parameters.AddWithValue("@Title", TitleBox.Text);
+            replaceCmd.Parameters.AddWithValue("@Platform", PlatformBox.Text);
+            replaceCmd.Parameters.AddWithValue("@Status", StatusBox.Text);
+            replaceCmd.Parameters.AddWithValue("@Rating", RatingBar.Value);
+            replaceCmd.Parameters.AddWithValue("@TimePlayed", timePlayed);
+            replaceCmd.Parameters.AddWithValue("@Seconds", totalSec);
+            replaceCmd.Parameters.AddWithValue("@Obtained", obtained.ToString("yyyy-MM-dd HH:mm:ss"));
+            replaceCmd.Parameters.AddWithValue("@StartDate", startDate.ToString("yyyy-MM-dd HH:mm:ss"));
+            replaceCmd.Parameters.AddWithValue("@LastPlayed", lastPlayed.ToString("yyyy-MM-dd HH:mm:ss"));
+            replaceCmd.Parameters.AddWithValue("@Notes", NotesBox.Text);
+            replaceCmd.Parameters.AddWithValue("@URLs", urlString);
+            replaceCmd.Parameters.AddWithValue("@Filters", FiltersBox.Text);
+            replaceCmd.Parameters.AddWithValue("@Developers", DevelopersBox.Text);
+            replaceCmd.Parameters.AddWithValue("@Publishers", PublishersBox.Text);
+            replaceCmd.Parameters.AddWithValue("@ReleaseDate", releaseDate.ToString("yyyy-MM-dd HH:mm:ss"));
+            replaceCmd.Parameters.AddWithValue("@Genre", GenreBox.Text);
+            replaceCmd.Parameters.AddWithValue("@PlayerCount", PlayerCountBox.Text);
+            replaceCmd.Parameters.AddWithValue("@Price", price);
+            replaceCmd.Parameters.AddWithValue("@GameDesc", GameDescBox.Text);
+            replaceCmd.Parameters.AddWithValue("@Launch", launchString);
+            replaceCmd.Parameters.AddWithValue("@Blur", BlurCheck.Checked.ToString());
+            replaceCmd.Parameters.AddWithValue("@Overlay", OverlayCheck.Checked.ToString());
+            replaceCmd.Parameters.AddWithValue("@Discord", DiscordCheck.Checked.ToString());
             replaceCmd.ExecuteNonQuery();
-            con.Close();
+            MessageBox.Show("\"" + TitleBox.Text + "\" successfully edited.", "Successful Edit", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             ReplaceButton.Visible = false;
             DeleteButton.Visible = false;
@@ -613,7 +662,7 @@ namespace UGame
             GamesDGV.Rows[editedRow].Cells["PlayerCount"].Value = PlayerCountBox.Text;
 
             if (PriceBox.Text != "")
-                GamesDGV.Rows[editedRow].Cells["Price"].Value = Convert.ToDecimal(PlayerCountBox.Text);
+                GamesDGV.Rows[editedRow].Cells["Price"].Value = Convert.ToDecimal(PriceBox.Text);
             else
                 GamesDGV.Rows[editedRow].Cells["Price"].Value = -1;
         }
@@ -881,6 +930,26 @@ namespace UGame
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             con.Close();
+            
+            /*
+            if (File.Exists(config.databasePath + ".mdf"))
+            {
+                File.Delete(config.databasePath);
+                File.Copy(config.databasePath + ".mdf", config.databasePath);
+                File.Delete(config.databasePath + ".mdf");
+            }
+            */
+        }
+
+        public void UpdateTime(string timePlayed, int totalSeconds, DateTime lastPlayed, int id)
+        {
+            SQLiteCommand updateCmd = new SQLiteCommand("UPDATE Games SET TimePlayed = '" + timePlayed + "', Seconds = " + totalSeconds + ", LastPlayed = '" + lastPlayed.ToString("yyyy-MM-dd HH:mm:ss") + "' WHERE Id = " + id + ";", con);
+            updateCmd.ExecuteNonQuery();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

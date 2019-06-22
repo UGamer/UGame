@@ -12,23 +12,24 @@ namespace UGame
 {
     public partial class GameSummary : Form
     {
-        public GameSummary(string title, int totalSeconds)
+        public GameSummary(string title, int seconds, int minutes, int hours, Image icon, DateTime startTime, DateTime endTime)
         {
             InitializeComponent();
-            label1.Text = "You played \"" + title + "\" for ";
 
-            int minutes = totalSeconds / 60;
-            int seconds = totalSeconds % 60;
-            int hours = minutes / 60;
-            minutes %= 60;
+            IconBox.BackgroundImage = icon;
+            TitleLabel.Text = title;
 
+            TimePlayedLabel.Text = "Time Played from \"" + startTime.ToString() + "\" to \"" + endTime.ToString() + "\":";
+
+            int totalSeconds = seconds + (minutes * 60) + (hours * 3600);
             int totalMinutes = totalSeconds / 60;
 
-            textBox1.Text = hours + " hours, " + minutes + " minutes, and " + seconds + " seconds.";
-            textBox1.Text += "\n\n" + totalSeconds + " total seconds";
-            textBox1.Text += "\n" + totalMinutes + " total minutes";
-
-            textBox1.Text += "\n\n" + hours / 24 + " days";
+            string timeSummary = hours + " hours, " + minutes + " minutes, and " + seconds + " seconds.";
+            timeSummary += "\n\n" + totalSeconds + " total seconds";
+            timeSummary += "\n" + totalMinutes + " total minutes";
+            timeSummary += "\n\n" + hours / 24 + " days";
+            
+            TimeSummaryBox.Text = timeSummary;
         }
     }
 }

@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.Sql;
-using System.Data.SqlClient;
+using System.Data.SQLite;
 using System.Data.OleDb;
 using System.Drawing;
 using System.Linq;
@@ -24,10 +23,10 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
         public string newPath;
 
         public string oldConString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=";
-        string newConString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"";
+        string newConString = "Data Source=";
 
-        public SqlConnection newCon;
-        public SqlCommand insertCmd;
+        public SQLiteConnection newCon;
+        public SQLiteCommand insertCmd;
 
         public DataTable newTable = new DataTable();
         public DataTable gameTable = new DataTable();
@@ -59,12 +58,12 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
             newPath = NewFileBox.Text;
 
             oldConString += oldPath;
-            newConString += newPath + "\";Integrated Security=True";
+            newConString += newPath + ";Version=3;";
 
-            newCon = new SqlConnection(newConString);
+            newCon = new SQLiteConnection(newConString);
 
-            
-            SqlCommand fillNewTable = new SqlCommand("SELECT * FROM Games", newCon);
+
+            SQLiteCommand fillNewTable = new SQLiteCommand("SELECT * FROM Games", newCon);
 
             
 
@@ -72,7 +71,7 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
 
             if (!QuickConvertCheck.Checked)
             {
-                insertCmd = new SqlCommand("INSERT INTO Games ([Id], [Title], [Platform], [Status], [Rating], [TimePlayed], [Seconds], [Obtained], [StartDate], [LastPlayed], [Notes], [URLs], [Filters], [Developers], [Publishers], [ReleaseDate], [Genre], [PlayerCount], [Price], [GameDesc], [Launch], [Blur], [Overlay]) VALUES (@Id, @Title, @Platform, @Status, @Rating, @TimePlayed, @Seconds, @Obtained, @StartDate, @LastPlayed, @Notes, @URLs, @Filters, @Developers, @Publishers, @ReleaseDate, @Genre, @PlayerCount, @Price, @GameDesc, @Launch, @Blur, @Overlay);", newCon);
+                insertCmd = new SQLiteCommand("INSERT INTO Games ([Id], [Title], [Platform], [Status], [Rating], [TimePlayed], [Seconds], [Obtained], [StartDate], [LastPlayed], [Notes], [URLs], [Filters], [Developers], [Publishers], [ReleaseDate], [Genre], [PlayerCount], [Price], [GameDesc], [Launch], [Blur], [Overlay], [Discord]) VALUES (@Id, @Title, @Platform, @Status, @Rating, @TimePlayed, @Seconds, @Obtained, @StartDate, @LastPlayed, @Notes, @URLs, @Filters, @Developers, @Publishers, @ReleaseDate, @Genre, @PlayerCount, @Price, @GameDesc, @Launch, @Blur, @Overlay, @Discord);", newCon);
 
                 Review review = new Review(this, newTable, newCon);
                 int index = 0;
@@ -81,7 +80,7 @@ namespace UGame_Database_Convert__OLD_TO_NEW_
             }
             else
             {
-                insertCmd = new SqlCommand("INSERT INTO Games ([Id], [Title], [Platform], [Status], [Rating], [TimePlayed], [Seconds], [Obtained], [StartDate], [LastPlayed], [Notes], [URLs], [Launch], [Blur], [Overlay]) VALUES (@Id, @Title, @Platform, @Status, @Rating, @TimePlayed, @Seconds, @Obtained, @StartDate, @LastPlayed, @Notes, @URLs, @Launch, @Blur, @Overlay);", newCon);
+                insertCmd = new SQLiteCommand("INSERT INTO Games ([Id], [Title], [Platform], [Status], [Rating], [TimePlayed], [Seconds], [Obtained], [StartDate], [LastPlayed], [Notes], [URLs], [Launch], [Blur], [Overlay]) VALUES (@Id, @Title, @Platform, @Status, @Rating, @TimePlayed, @Seconds, @Obtained, @StartDate, @LastPlayed, @Notes, @URLs, @Launch, @Blur, @Overlay);", newCon);
 
                 
             }

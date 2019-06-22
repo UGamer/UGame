@@ -31,10 +31,6 @@ namespace UGame
         string minutesString;
         string secondsString;
 
-        static string connectionString;
-        static SqlConnection con;
-        public SqlCommand updateCmd;
-
         int rowIndex;
         public int id;
         string title;
@@ -47,9 +43,7 @@ namespace UGame
         public DateTime startDate = new DateTime(1753, 1, 1, 0, 0, 0);
         public DateTime lastPlayed = new DateTime(1753, 1, 1, 0, 0, 0);
         public string notes;
-        
         public string filters;
-
         public string developer;
         public string publisher;
         public string releaseDate;
@@ -57,7 +51,6 @@ namespace UGame
         public string playerCount;
         public decimal price;
         public string gameDesc;
-
         public string urlString;
         public string[,] URLs;
         int launchCount = 0;
@@ -69,6 +62,7 @@ namespace UGame
         string imageTitle;
 
         public int screenshotCount;
+        DateTime startTime;
         GameSummary gameSummary;
 
         public TabPage gameTab = new TabPage();
@@ -91,16 +85,12 @@ namespace UGame
 
         public GameTab(MainForm refer, int rowIndex, int tabCount, int id)
         {
-            connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"" + refer.config.databasePath + "\";Integrated Security=True";
-            con = new SqlConnection(connectionString);
 
             this.refer = refer;
             tabIndex = tabCount - 2;
 
             this.rowIndex = rowIndex;
             this.id = id;
-
-            con.Open();
 
             title = refer.GamesDGV.Rows[rowIndex].Cells["Title"].Value.ToString();
             platform = refer.GamesDGV.Rows[rowIndex].Cells["Platform"].Value.ToString();
@@ -169,9 +159,6 @@ namespace UGame
             try { blur = Convert.ToBoolean(refer.GamesDGV.Rows[rowIndex].Cells["Blur"].Value.ToString()); } catch { blur = true; }
             try { useOverlay = Convert.ToBoolean(refer.GamesDGV.Rows[rowIndex].Cells["Overlay"].Value.ToString()); } catch { useOverlay = true; }
             
-            con.Close();
-
-
             imageTitle = title;
             Regex rgxFix1 = new Regex("/");
             Regex rgxFix2 = new Regex(":");
@@ -272,6 +259,7 @@ namespace UGame
             titleBox.Font = new Font("Century Gothic", 32);
             titleBox.Text = title;
             titleBox.ReadOnly = true;
+            titleBox.ScrollBars = ScrollBars.Horizontal;
             titleBox.BackColor = Color.White;
 
             button1.Location = new Point(365, 82);
@@ -454,6 +442,7 @@ namespace UGame
             };
             timer.Elapsed += Timer_Elapsed;
 
+            startTime = DateTime.Now;
             timer.Start();
             hours = 0;
             minutes = 0;
@@ -523,17 +512,10 @@ namespace UGame
                 DateTime lastPlayed = DateTime.Now;
 
                 // WRITE EVERYTHING TO THE DATABASE
-                updateCmd = new SqlCommand("UPDATE Games SET TimePlayed = '" + timePlayed + "', Seconds = " + totalSeconds + ", LastPlayed = '" + lastPlayed.ToString() + "' WHERE Id = " + id + ";", con);
-                
+                refer.UpdateTime(timePlayed, totalSeconds, lastPlayed, id);
                 // WRITE EVERYTHING TO THE DATABASE
-                con.Open();
 
-                // try
-                { updateCmd.ExecuteNonQuery(); }
-                // catch { con.Close(); MessageBox.Show("Update to entry failed.", "Update Failed"); }
-                con.Close();
-
-                timePlayedLabel.Text = "Time Played: " + timePlayed;
+                timePlayedLabel.Text = "Time Played          : " + timePlayed;
                 lastPlayedLabel.Text = "Last Played: " + lastPlayed.ToString();
 
                 for (int index = 0; index < refer.GamesDGV.Rows.Count; index++)
@@ -547,7 +529,7 @@ namespace UGame
                     }
                 }
 
-                gameSummary = new GameSummary(title, totalSeconds);
+                gameSummary = new GameSummary(title, seconds, minutes, hours, iconBox.BackgroundImage, startTime, DateTime.Now);
                 gameSummary.Show();
             }
 

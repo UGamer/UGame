@@ -34,6 +34,8 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.GamesTabs = new System.Windows.Forms.TabControl();
             this.GamesListTab = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.GamesDGV = new System.Windows.Forms.DataGridView();
             this.GamesEntriesTab = new System.Windows.Forms.TabPage();
             this.LockPlatformButton = new System.Windows.Forms.Button();
@@ -98,6 +100,8 @@
             this.deleteEntryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GameTabsContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.CloseTabButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.DiscordCheck = new System.Windows.Forms.CheckBox();
+            this.DiscordStatusLabel = new System.Windows.Forms.Label();
             this.MainTabs.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.GamesTabs.SuspendLayout();
@@ -156,6 +160,8 @@
             // 
             // GamesListTab
             // 
+            this.GamesListTab.Controls.Add(this.button1);
+            this.GamesListTab.Controls.Add(this.textBox1);
             this.GamesListTab.Controls.Add(this.GamesDGV);
             this.GamesListTab.Location = new System.Drawing.Point(4, 22);
             this.GamesListTab.Name = "GamesListTab";
@@ -165,17 +171,34 @@
             this.GamesListTab.Text = "[LIST]";
             this.GamesListTab.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(392, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(4, 4);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(389, 20);
+            this.textBox1.TabIndex = 1;
+            // 
             // GamesDGV
             // 
             this.GamesDGV.AllowUserToAddRows = false;
             this.GamesDGV.AllowUserToDeleteRows = false;
             this.GamesDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.GamesDGV.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.GamesDGV.Location = new System.Drawing.Point(3, 3);
+            this.GamesDGV.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.GamesDGV.Location = new System.Drawing.Point(3, 27);
             this.GamesDGV.Name = "GamesDGV";
             this.GamesDGV.ReadOnly = true;
             this.GamesDGV.RowHeadersVisible = false;
-            this.GamesDGV.Size = new System.Drawing.Size(1033, 525);
+            this.GamesDGV.Size = new System.Drawing.Size(1033, 501);
             this.GamesDGV.TabIndex = 0;
             this.GamesDGV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GamesDGV_CellClick);
             this.GamesDGV.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GamesDGV_CellDoubleClick);
@@ -185,6 +208,8 @@
             // 
             // GamesEntriesTab
             // 
+            this.GamesEntriesTab.Controls.Add(this.DiscordStatusLabel);
+            this.GamesEntriesTab.Controls.Add(this.DiscordCheck);
             this.GamesEntriesTab.Controls.Add(this.LockPlatformButton);
             this.GamesEntriesTab.Controls.Add(this.LockTitleButton);
             this.GamesEntriesTab.Controls.Add(this.BgBox);
@@ -583,11 +608,13 @@
             // 
             // EntryLabels2
             // 
+            this.EntryLabels2.BackColor = System.Drawing.Color.White;
             this.EntryLabels2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.EntryLabels2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EntryLabels2.Location = new System.Drawing.Point(631, 7);
             this.EntryLabels2.Multiline = true;
             this.EntryLabels2.Name = "EntryLabels2";
+            this.EntryLabels2.ReadOnly = true;
             this.EntryLabels2.Size = new System.Drawing.Size(100, 521);
             this.EntryLabels2.TabIndex = 7;
             this.EntryLabels2.Text = "Game Description: \r\n\r\n\r\n\r\n\r\nLaunch Codes: \r\n\r\nURLs: \r\n\r\nFilters: \r\n\r\nBlur Backgro" +
@@ -602,11 +629,13 @@
             // 
             // EntryLabels
             // 
+            this.EntryLabels.BackColor = System.Drawing.Color.White;
             this.EntryLabels.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.EntryLabels.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EntryLabels.Location = new System.Drawing.Point(160, 7);
             this.EntryLabels.Multiline = true;
             this.EntryLabels.Name = "EntryLabels";
+            this.EntryLabels.ReadOnly = true;
             this.EntryLabels.Size = new System.Drawing.Size(100, 521);
             this.EntryLabels.TabIndex = 5;
             this.EntryLabels.Text = resources.GetString("EntryLabels.Text");
@@ -779,14 +808,35 @@
             this.GameTabsContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.CloseTabButton});
             this.GameTabsContextMenu.Name = "GameTabsContextMenu";
-            this.GameTabsContextMenu.Size = new System.Drawing.Size(126, 26);
+            this.GameTabsContextMenu.Size = new System.Drawing.Size(125, 26);
             // 
             // CloseTabButton
             // 
             this.CloseTabButton.Name = "CloseTabButton";
-            this.CloseTabButton.Size = new System.Drawing.Size(125, 22);
+            this.CloseTabButton.Size = new System.Drawing.Size(124, 22);
             this.CloseTabButton.Text = "Close Tab";
             this.CloseTabButton.Click += new System.EventHandler(this.CloseTabButton_Click);
+            // 
+            // DiscordCheck
+            // 
+            this.DiscordCheck.AutoSize = true;
+            this.DiscordCheck.Checked = true;
+            this.DiscordCheck.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.DiscordCheck.Location = new System.Drawing.Point(869, 210);
+            this.DiscordCheck.Name = "DiscordCheck";
+            this.DiscordCheck.Size = new System.Drawing.Size(15, 14);
+            this.DiscordCheck.TabIndex = 46;
+            this.DiscordCheck.UseVisualStyleBackColor = true;
+            // 
+            // DiscordStatusLabel
+            // 
+            this.DiscordStatusLabel.AutoSize = true;
+            this.DiscordStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DiscordStatusLabel.Location = new System.Drawing.Point(758, 201);
+            this.DiscordStatusLabel.Name = "DiscordStatusLabel";
+            this.DiscordStatusLabel.Size = new System.Drawing.Size(105, 32);
+            this.DiscordStatusLabel.TabIndex = 47;
+            this.DiscordStatusLabel.Text = "Show as \r\nDiscord Status?:";
             // 
             // MainForm
             // 
@@ -803,6 +853,7 @@
             this.tabPage1.ResumeLayout(false);
             this.GamesTabs.ResumeLayout(false);
             this.GamesListTab.ResumeLayout(false);
+            this.GamesListTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GamesDGV)).EndInit();
             this.GamesEntriesTab.ResumeLayout(false);
             this.GamesEntriesTab.PerformLayout();
@@ -892,6 +943,10 @@
         private System.Windows.Forms.ContextMenuStrip GameTabsContextMenu;
         private System.Windows.Forms.ToolStripMenuItem CloseTabButton;
         private System.Windows.Forms.ToolStripButton RefreshButton;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.CheckBox DiscordCheck;
+        private System.Windows.Forms.Label DiscordStatusLabel;
     }
 }
 
