@@ -19,7 +19,7 @@ namespace UGame
 {
     public class GameTab
     {
-        MainForm refer;
+        public MainForm refer;
         int tabIndex;
         System.Timers.Timer timer;
 
@@ -69,7 +69,7 @@ namespace UGame
         PictureBox detailsBox = new PictureBox();
         PictureBox iconBox = new PictureBox();
         TextBox titleBox = new TextBox();
-        Button button1 = new Button();
+        public Button button1 = new Button();
         Button button2 = new Button();
         Button button3 = new Button();
         Button infoButton = new Button();
@@ -83,9 +83,10 @@ namespace UGame
         static int xPos = 14;
         Point[] labelLocation = { new Point(xPos, 21), new Point(xPos, 53), new Point(xPos, 85), new Point(xPos, 117) };
 
+        Overlay overlay;
+
         public GameTab(MainForm refer, int rowIndex, int tabCount, int id)
         {
-
             this.refer = refer;
             tabIndex = tabCount - 2;
 
@@ -436,6 +437,9 @@ namespace UGame
 
         public void Track()
         {
+            overlay = new Overlay(title, iconBox.BackgroundImage, this);
+            overlay.Show();
+
             timer = new System.Timers.Timer
             {
                 Interval = 1000
@@ -449,9 +453,9 @@ namespace UGame
             seconds = 0;
 
             gameTab.Text = "(...) " + title;
-            SetText("Stop Playing (00h:00m:00s)", ref button1);
-            SetText("Pause Playing", ref button2);
-            SetText("Discard Session", ref button3);
+            button1.Text = "Stop Playing (00h:00m:00s)";
+            button2.Text = "Pause Playing";
+            button3.Text = "Discard Session";
 
             // OVERLAY STUFF
 
@@ -477,6 +481,12 @@ namespace UGame
 
         public void Stop(bool save)
         {
+            overlay.Close();
+
+            button1.Text = "Launch & Track";
+            button2.Text = "Track";
+            button3.Text = "Launch";
+
             if (save)
             {
                 totalSeconds += seconds + (minutes * 60) + (hours * 3600);
@@ -537,22 +547,21 @@ namespace UGame
 
             gameTab.Text = title;
             
-            SetText("Launch & Track", ref button1);
-            SetText("Track", ref button2);
-            SetText("Launch", ref button3);
         }
 
-        private void PauseResume()
+        public void PauseResume()
         {
             if (button2.Text == "Pause Playing")
             {
                 timer.Stop();
                 SetText("Resume Playing", ref button2);
+                overlay.PauseButton.Text = "Resume Playing";
             }
             else
             {
                 timer.Start();
                 SetText("Pause Playing", ref button2);
+                overlay.PauseButton.Text = "Pause Playing";
             }
         }
 

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddTime));
             this.TimeSecondsLabel = new System.Windows.Forms.Label();
             this.TimeSecondsBox = new System.Windows.Forms.TextBox();
             this.TimeMinutesLabel = new System.Windows.Forms.Label();
@@ -181,6 +182,7 @@
             this.Controls.Add(this.TimeMinutesBox);
             this.Controls.Add(this.TimeHoursLabel);
             this.Controls.Add(this.TimeHoursBox);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AddTime";
             this.Text = "AddTime";
             this.ResumeLayout(false);

@@ -1,8 +1,0 @@
-[User]
-FirstTime="False"
-UserName="Nanokip"
-DiscordRichPresence="False"
-
-[Directory]
-ResourcePath="resources\"
-DatabasePath="UGameDB.db"

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LaunchChoice));
             this.LaunchBox = new System.Windows.Forms.ComboBox();
             this.LaunchButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -58,6 +59,7 @@
             this.ClientSize = new System.Drawing.Size(284, 76);
             this.Controls.Add(this.LaunchButton);
             this.Controls.Add(this.LaunchBox);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "LaunchChoice";
             this.Text = "Launch Choice";
             this.ResumeLayout(false);

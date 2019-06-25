@@ -1,7 +1,0 @@
-TextColor="0, 0, 0"
-CellColor="255, 255, 255"
-GridColor="200, 200, 200"
-GridBgColor="50, 50, 50"
-ButtonColor="170, 170, 170"
-SideBarColor="30, 30, 30"
-ToolStripColor="170, 170, 170"

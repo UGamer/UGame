@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CutOrCopy));
             this.QuestionPicture = new System.Windows.Forms.PictureBox();
             this.QuestionLabel = new System.Windows.Forms.Label();
             this.CopyButton = new System.Windows.Forms.Button();
@@ -94,6 +95,7 @@
             this.Controls.Add(this.CopyButton);
             this.Controls.Add(this.QuestionLabel);
             this.Controls.Add(this.QuestionPicture);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CutOrCopy";
             this.Text = "Copy or Move?";
             ((System.ComponentModel.ISupportInitialize)(this.QuestionPicture)).EndInit();

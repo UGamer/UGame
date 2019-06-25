@@ -351,19 +351,6 @@ namespace UGame
             else
                 releaseDate = nullDT.ToString("yyyy-MM-dd HH:mm:ss");
 
-            /*
-            try { con.Open(); }
-            catch
-            {
-                File.Copy(config.databasePath, config.databasePath + ".mdf", true);
-                File.Delete(config.databasePath);
-                File.Copy(config.databasePath + ".mdf", config.databasePath, true);
-                File.Delete(config.databasePath + ".mdf");
-                con = new SqlConnection(connectionString);
-                con.Open();
-            }
-            */
-
             try
             {
                 insertCmd.Parameters.AddWithValue("@Id", highestId + 1);
@@ -930,15 +917,6 @@ namespace UGame
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             con.Close();
-            
-            /*
-            if (File.Exists(config.databasePath + ".mdf"))
-            {
-                File.Delete(config.databasePath);
-                File.Copy(config.databasePath + ".mdf", config.databasePath);
-                File.Delete(config.databasePath + ".mdf");
-            }
-            */
         }
 
         public void UpdateTime(string timePlayed, int totalSeconds, DateTime lastPlayed, int id)
@@ -950,6 +928,35 @@ namespace UGame
         private void button1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void SearchBox_TextChanged(object sender, EventArgs e)
+        {
+            DataView DV = new DataView(dataTable);
+            try { DV.RowFilter = string.Format("Title LIKE '%{0}%'", SearchBox.Text); }
+            catch { }
+
+            GamesDGV.DataSource = DV;
+
+            /*
+            bool columnFound = false;
+
+            for (int index = 0; index < GamesDGV.Columns.Count && columnFound == false; index++)
+            {
+                if (GamesDGV.Columns[index].HeaderText == sortColumn)
+                {
+                    columnFound = true;
+                    try
+                    {
+                        if (sortOrder == "Ascending")
+                            GamesDGV.Sort(GamesDGV.Columns[index], ListSortDirection.Ascending);
+                        else
+                            GamesDGV.Sort(GamesDGV.Columns[index], ListSortDirection.Descending);
+                    }
+                    catch { }
+                }
+            }
+            */
         }
     }
 }
