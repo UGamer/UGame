@@ -148,6 +148,7 @@
             this.NotesButton.Text = "NOTES";
             this.NotesButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.NotesButton.UseVisualStyleBackColor = true;
+            this.NotesButton.Click += new System.EventHandler(this.NotesButton_Click);
             // 
             // TasksButton
             // 

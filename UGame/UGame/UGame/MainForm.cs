@@ -199,7 +199,7 @@ namespace UGame
         
         private void NewTab(int rowIndex)
         {
-            try
+            //try
             {
                 int id = Convert.ToInt32(GamesDGV.Rows[rowIndex].Cells["Id"].Value);
                 int index;
@@ -224,7 +224,7 @@ namespace UGame
                     GamesTabs.SelectedTab = games[index].gameTab;
                 }
             }
-            catch { }
+            //catch { }
         }
 
         public void AddGameTab(TabPage gameTab)
@@ -235,7 +235,8 @@ namespace UGame
 
         private void GamesDGV_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            try { NewTab(e.RowIndex); } catch { }
+            //try {
+                NewTab(e.RowIndex); // } catch { }
         }
 
         private void MainForm_KeyUp(object sender, KeyEventArgs e)

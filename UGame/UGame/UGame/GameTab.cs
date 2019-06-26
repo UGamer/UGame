@@ -59,7 +59,7 @@ namespace UGame
         bool blur;
         bool useOverlay;
 
-        string imageTitle;
+        public string imageTitle;
 
         public int screenshotCount;
         DateTime startTime;
@@ -144,15 +144,19 @@ namespace UGame
                 launchCount++;
                 segment = segment.Substring(segment.IndexOf("[Title]") + 7);
             }
+
             launchCodes = new string[launchCount, 2];
-            segment = launchString;
+
+            segment = launchString.Substring(7);
+
             for (int index = 0; index < launchCount; index++)
             {
-                segment = segment.Substring(segment.IndexOf("[Title]") + 7);
-
                 launchCodes[index, 0] = segment.Substring(0, segment.IndexOf("[URL]"));
+
                 segment = segment.Substring(segment.IndexOf("[URL]") + 5);
+
                 try { launchCodes[index, 1] = segment.Substring(0, segment.IndexOf("[Title]")); } catch { launchCodes[index, 1] = segment; }
+
                 try { segment = segment.Substring(segment.IndexOf("[Title]") + 7); } catch { segment = ""; }
             }
 
@@ -369,7 +373,7 @@ namespace UGame
             string launchCode = "";
             if (launchCount > 1)
             {
-                LaunchChoice launchChoice = new LaunchChoice(launchCodes);
+                LaunchChoice launchChoice = new LaunchChoice(launchCodes, launchCount);
                 DialogResult dialogResult = launchChoice.ShowDialog();
                 if (dialogResult == DialogResult.Yes)
                 {

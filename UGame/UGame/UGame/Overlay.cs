@@ -23,6 +23,7 @@ namespace UGame
         Timer playTimer = new Timer();
 
         Browser browser;
+        Notes notes;
 
         public Overlay(string title, Image icon, GameTab refer)
         {
@@ -59,6 +60,7 @@ namespace UGame
             {
                 this.Show();
                 try { browser.Show(); } catch { }
+                try { notes.Show(); } catch { }
             }
 
             vanish.Start();
@@ -71,11 +73,14 @@ namespace UGame
                 if (this.Opacity != 0) 
                 { 
                     this.Opacity -= 0.05;
+                    try { browser.Opacity -= 0.05; } catch { }
+                    try { notes.Opacity -= 0.05; } catch { }
                 }
                 else
                 {
                     this.Hide();
                     try { browser.Hide(); } catch { }
+                    try { notes.Hide(); } catch { }
                     flag = false;
                     vanish.Stop();
                 }
@@ -85,6 +90,8 @@ namespace UGame
                 if (this.Opacity < 1.0)
                 {
                     this.Opacity += 0.05;
+                    try { browser.Opacity += 0.05; } catch { }
+                    try { notes.Opacity += 0.05; } catch { }
                 }
                 else
                 {
@@ -151,6 +158,19 @@ namespace UGame
                     browser = new Browser("https://www.google.com/");
                     browser.Show();
                 }
+            }
+        }
+
+        private void NotesButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                notes.Show();
+            }
+            catch
+            {
+                notes = new Notes(refer.imageTitle);
+                notes.Show();
             }
         }
 

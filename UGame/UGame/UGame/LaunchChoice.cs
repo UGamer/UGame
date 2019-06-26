@@ -14,11 +14,11 @@ namespace UGame
     {
         public int index = 0;
 
-        public LaunchChoice(string[,] launchTable)
+        public LaunchChoice(string[,] launchTable, int launchCount)
         {
             InitializeComponent();
 
-            for (int index = 0; index < launchTable.Length; )
+            for (int index = 0; index < launchCount; index++)
                 LaunchBox.Items.Add("[" + index + "] " + launchTable[index, 0]);
         }
 
