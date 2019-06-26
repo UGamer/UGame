@@ -60,6 +60,8 @@
             // 
             // AddressBar
             // 
+            this.AddressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.AddressBar.Location = new System.Drawing.Point(183, 7);
             this.AddressBar.Name = "AddressBar";
             this.AddressBar.Size = new System.Drawing.Size(624, 20);
@@ -67,6 +69,7 @@
             // 
             // SearchButton
             // 
+            this.SearchButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.SearchButton.Location = new System.Drawing.Point(807, 6);
             this.SearchButton.Name = "SearchButton";
             this.SearchButton.Size = new System.Drawing.Size(30, 22);
@@ -157,14 +160,19 @@
             // 
             // OpacitySlider
             // 
+            this.OpacitySlider.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.OpacitySlider.Location = new System.Drawing.Point(843, 5);
+            this.OpacitySlider.Maximum = 100;
+            this.OpacitySlider.Minimum = 5;
             this.OpacitySlider.Name = "OpacitySlider";
             this.OpacitySlider.Size = new System.Drawing.Size(104, 45);
             this.OpacitySlider.TabIndex = 8;
+            this.OpacitySlider.Value = 5;
             this.OpacitySlider.ValueChanged += new System.EventHandler(this.OpacitySlider_ValueChanged);
             // 
             // LockButton
             // 
+            this.LockButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.LockButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.LockButton.Location = new System.Drawing.Point(984, 5);
             this.LockButton.Name = "LockButton";
@@ -174,6 +182,7 @@
             // 
             // FavoriteButton
             // 
+            this.FavoriteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.FavoriteButton.Location = new System.Drawing.Point(954, 5);
             this.FavoriteButton.Name = "FavoriteButton";
             this.FavoriteButton.Size = new System.Drawing.Size(24, 22);

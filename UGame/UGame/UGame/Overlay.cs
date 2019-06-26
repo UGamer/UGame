@@ -55,6 +55,12 @@ namespace UGame
         
         private void gkh_KeyDown(object sender, KeyEventArgs e)
         {
+            if (!flag)
+            {
+                this.Show();
+                try { browser.Show(); } catch { }
+            }
+
             vanish.Start();
         }
 
@@ -64,7 +70,7 @@ namespace UGame
             { 
                 if (this.Opacity != 0) 
                 { 
-                    this.Opacity = this.Opacity - 0.01;
+                    this.Opacity -= 0.05;
                 }
                 else
                 {
@@ -76,11 +82,15 @@ namespace UGame
             } 
             else
             {
-                this.Opacity = 1;
-                this.Show();
-                try { browser.Show(); } catch { }
-                flag = true;
-                vanish.Stop();
+                if (this.Opacity < 1.0)
+                {
+                    this.Opacity += 0.05;
+                }
+                else
+                {
+                    flag = true;
+                    vanish.Stop();
+                }
             }
         }
 
