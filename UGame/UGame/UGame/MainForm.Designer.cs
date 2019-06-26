@@ -98,7 +98,7 @@
             this.PictureDialog = new System.Windows.Forms.OpenFileDialog();
             this.GamesDGVContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.EditEntryButton = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteEntryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.DeleteEntryButton = new System.Windows.Forms.ToolStripMenuItem();
             this.GameTabsContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.CloseTabButton = new System.Windows.Forms.ToolStripMenuItem();
             this.MainTabs.SuspendLayout();
@@ -671,6 +671,7 @@
             this.DeleteButton.Text = "DELETE";
             this.DeleteButton.UseVisualStyleBackColor = true;
             this.DeleteButton.Visible = false;
+            this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
             // ReplaceButton
             // 
@@ -799,34 +800,35 @@
             // 
             this.GamesDGVContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.EditEntryButton,
-            this.deleteEntryToolStripMenuItem});
+            this.DeleteEntryButton});
             this.GamesDGVContextMenu.Name = "GamesDGVContextMenu";
             this.GamesDGVContextMenu.Size = new System.Drawing.Size(138, 48);
             // 
             // EditEntryButton
             // 
             this.EditEntryButton.Name = "EditEntryButton";
-            this.EditEntryButton.Size = new System.Drawing.Size(137, 22);
+            this.EditEntryButton.Size = new System.Drawing.Size(152, 22);
             this.EditEntryButton.Text = "Edit Entry";
             this.EditEntryButton.Click += new System.EventHandler(this.EditEntryButton_Click);
             // 
-            // deleteEntryToolStripMenuItem
+            // DeleteEntryButton
             // 
-            this.deleteEntryToolStripMenuItem.Name = "deleteEntryToolStripMenuItem";
-            this.deleteEntryToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
-            this.deleteEntryToolStripMenuItem.Text = "Delete Entry";
+            this.DeleteEntryButton.Name = "DeleteEntryButton";
+            this.DeleteEntryButton.Size = new System.Drawing.Size(152, 22);
+            this.DeleteEntryButton.Text = "Delete Entry";
+            this.DeleteEntryButton.Click += new System.EventHandler(this.DeleteEntryButton_Click);
             // 
             // GameTabsContextMenu
             // 
             this.GameTabsContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.CloseTabButton});
             this.GameTabsContextMenu.Name = "GameTabsContextMenu";
-            this.GameTabsContextMenu.Size = new System.Drawing.Size(125, 26);
+            this.GameTabsContextMenu.Size = new System.Drawing.Size(126, 26);
             // 
             // CloseTabButton
             // 
             this.CloseTabButton.Name = "CloseTabButton";
-            this.CloseTabButton.Size = new System.Drawing.Size(124, 22);
+            this.CloseTabButton.Size = new System.Drawing.Size(125, 22);
             this.CloseTabButton.Text = "Close Tab";
             this.CloseTabButton.Click += new System.EventHandler(this.CloseTabButton_Click);
             // 
@@ -930,7 +932,7 @@
         private System.Windows.Forms.OpenFileDialog PictureDialog;
         private System.Windows.Forms.ContextMenuStrip GamesDGVContextMenu;
         private System.Windows.Forms.ToolStripMenuItem EditEntryButton;
-        private System.Windows.Forms.ToolStripMenuItem deleteEntryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem DeleteEntryButton;
         private System.Windows.Forms.Button LockPlatformButton;
         private System.Windows.Forms.Button LockTitleButton;
         private System.Windows.Forms.ContextMenuStrip GameTabsContextMenu;

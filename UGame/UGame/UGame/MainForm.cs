@@ -199,32 +199,28 @@ namespace UGame
         
         private void NewTab(int rowIndex)
         {
-            //try
+            int id = Convert.ToInt32(GamesDGV.Rows[rowIndex].Cells["Id"].Value);
+            int index;
+            bool make = true;
+            for (index = 0; index < games.Count; index++)
             {
-                int id = Convert.ToInt32(GamesDGV.Rows[rowIndex].Cells["Id"].Value);
-                int index;
-                bool make = true;
-                for (index = 0; index < games.Count; index++)
+                if (games[index].id == id)
                 {
-                    if (games[index].id == id)
-                    {
-                        make = false;
-                        break;
-                    }
-                }
-
-                if (make)
-                {
-                    game = new GameTab(this, rowIndex, GamesTabs.TabPages.Count, id);
-                    games.Add(game);
-                    GamesTabs.SelectedTab = game.gameTab;
-                }
-                else
-                {
-                    GamesTabs.SelectedTab = games[index].gameTab;
+                    make = false;
+                    break;
                 }
             }
-            //catch { }
+
+            if (make)
+            {
+                game = new GameTab(this, rowIndex, GamesTabs.TabPages.Count, id);
+                games.Add(game);
+                GamesTabs.SelectedTab = game.gameTab;
+            }
+            else
+            {
+                GamesTabs.SelectedTab = games[index].gameTab;
+            }
         }
 
         public void AddGameTab(TabPage gameTab)
@@ -235,8 +231,7 @@ namespace UGame
 
         private void GamesDGV_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            //try {
-                NewTab(e.RowIndex); // } catch { }
+            try { NewTab(e.RowIndex); } catch { }
         }
 
         private void MainForm_KeyUp(object sender, KeyEventArgs e)
@@ -272,7 +267,17 @@ namespace UGame
         {
             EditEntry(rowIndex);
         }
-        
+
+        private void DeleteEntryButton_Click(object sender, EventArgs e)
+        {
+            int deletedId = Convert.ToInt32(GamesDGV.Rows[rowIndex].Cells["Id"].Value);
+
+            SQLiteCommand deleteCommand = new SQLiteCommand("DELETE FROM Games WHERE Id = " + deletedId, con);
+            deleteCommand.ExecuteNonQuery();
+
+            GamesDGV.Rows.Remove(GamesDGV.Rows[rowIndex]);
+        }
+
         private void GamesTabs_MouseUp(object sender, MouseEventArgs e)
         {
             try
@@ -298,6 +303,15 @@ namespace UGame
         {
             FillDGV();
             try { GamesDGV.Sort(GamesDGV.Columns["Title"], ListSortDirection.Ascending); } catch { }
+        }
+
+        private void SearchBox_TextChanged(object sender, EventArgs e)
+        {
+            DataView DV = new DataView(dataTable);
+            try { DV.RowFilter = string.Format("Title LIKE '%{0}%'", SearchBox.Text); }
+            catch { }
+
+            GamesDGV.DataSource = DV;
         }
 
         /// <summary>
@@ -344,13 +358,34 @@ namespace UGame
 
             int totalSeconds = (hours * 3600) + (minutes * 60) + seconds;
 
-            DateTime nullDT = new DateTime(1753, 1, 1, 0, 0, 0);
+            string nullDT = "1753-01-01 00:00:00";
+            string obtained;
+            string startDate;
+            string lastPlayed;
+
+            if (!ObtainedCheck.Checked)
+                obtained = ObtainedDatePicker.Value.ToString("yyyy-MM-dd HH:mm:ss");
+            else
+                obtained = nullDT;
+
+            if (!StartDateCheck.Checked)
+                startDate = StartDatePicker.Value.ToString("yyyy-MM-dd HH:mm:ss");
+            else
+                startDate = nullDT;
+
+            if (!LastPlayedCheck.Checked)
+                lastPlayed = LastPlayedDatePicker.Value.ToString("yyyy-MM-dd HH:mm:ss");
+            else
+                lastPlayed = nullDT;
 
             string releaseDate;
             if (!ReleaseDateCheck.Checked)
                 releaseDate = ReleaseDatePicker.Value.ToString("yyyy-MM-dd HH:mm:ss");
             else
-                releaseDate = nullDT.ToString("yyyy-MM-dd HH:mm:ss");
+                releaseDate = nullDT;
+
+            decimal price;
+            try { price = Convert.ToDecimal(PriceBox.Text); } catch { try { price = Convert.ToDecimal(PriceBox.Text.Substring(1)); } catch { price = -1; } }
 
             try
             {
@@ -362,20 +397,9 @@ namespace UGame
                 insertCmd.Parameters.AddWithValue("@TimePlayed", timePlayed);
                 insertCmd.Parameters.AddWithValue("@Seconds", totalSeconds);
 
-                if (!ObtainedCheck.Checked)
-                    insertCmd.Parameters.AddWithValue("@Obtained", ObtainedDatePicker.Value.ToString("yyyy-MM-dd HH:mm:ss"));
-                else
-                    insertCmd.Parameters.AddWithValue("@Obtained", nullDT.ToString("yyyy-MM-dd HH:mm:ss"));
-
-                if (!StartDateCheck.Checked)
-                    insertCmd.Parameters.AddWithValue("@StartDate", StartDatePicker.Value.ToString("yyyy-MM-dd HH:mm:ss"));
-                else
-                    insertCmd.Parameters.AddWithValue("@StartDate", nullDT.ToString("yyyy-MM-dd HH:mm:ss"));
-
-                if (!LastPlayedCheck.Checked)
-                    insertCmd.Parameters.AddWithValue("@LastPlayed", LastPlayedDatePicker.Value.ToString("yyyy-MM-dd HH:mm:ss"));
-                else
-                    insertCmd.Parameters.AddWithValue("@LastPlayed", nullDT.ToString("yyyy-MM-dd HH:mm:ss"));
+                insertCmd.Parameters.AddWithValue("@Obtained", obtained);
+                insertCmd.Parameters.AddWithValue("@StartDate", startDate);
+                insertCmd.Parameters.AddWithValue("@LastPlayed", lastPlayed);
 
                 insertCmd.Parameters.AddWithValue("@Notes", NotesBox.Text);
                 insertCmd.Parameters.AddWithValue("@URLs", urlString);
@@ -385,7 +409,7 @@ namespace UGame
                 insertCmd.Parameters.AddWithValue("@ReleaseDate", releaseDate);
                 insertCmd.Parameters.AddWithValue("@Genre", GenreBox.Text);
                 insertCmd.Parameters.AddWithValue("@PlayerCount", PlayerCountBox.Text);
-                try { insertCmd.Parameters.AddWithValue("@Price", Convert.ToDecimal(PriceBox.Text)); } catch { try { insertCmd.Parameters.AddWithValue("@Price", Convert.ToDecimal(PriceBox.Text.Substring(1))); } catch { insertCmd.Parameters.AddWithValue("@Price", -1); } }
+                insertCmd.Parameters.AddWithValue("@Price", price);
                 insertCmd.Parameters.AddWithValue("@GameDesc", GameDescBox.Text);
                 insertCmd.Parameters.AddWithValue("@Launch", launchString);
                 insertCmd.Parameters.AddWithValue("@Blur", BlurCheck.Checked.ToString());
@@ -421,6 +445,35 @@ namespace UGame
                 insertCmd.Parameters.RemoveAt("@Discord");
             }
             catch { }
+
+            DataRow dRow = dataTable.NewRow();
+            
+            dRow["Id"] = highestId + 1;
+            dRow["Title"] = TitleBox.Text;
+            dRow["Platform"] = PlatformBox.Text;
+            dRow["Status"] = StatusBox.Text;
+            dRow["Rating"] = RatingBar;
+            dRow["TimePlayed"] = timePlayed;
+            dRow["Seconds"] = totalSeconds;
+            dRow["Obtained"] = obtained;
+            dRow["StartDate"] = startDate;
+            dRow["LastPlayed"] = lastPlayed;
+            dRow["Notes"] = NotesBox.Text;
+            dRow["URLs"] = urlString;
+            dRow["Filters"] = FiltersBox.Text;
+            dRow["Developers"] = DevelopersBox.Text;
+            dRow["Publishers"] = PublishersBox.Text;
+            dRow["ReleaseDate"] = releaseDate;
+            dRow["Genre"] = GenreBox.Text;
+            dRow["PlayerCount"] = PlayerCountBox.Text;
+            dRow["Price"] = price;
+            dRow["GameDesc"] = GameDescBox.Text;
+            dRow["Launch"] = launchString;
+            dRow["Blur"] = BlurCheck.ToString();
+            dRow["Overlay"] = OverlayCheck.ToString();
+            dRow["Discord"] = DiscordCheck.ToString();
+
+            dataTable.Rows.Add(dRow);
 
             highestId++;
             index++;
@@ -655,6 +708,13 @@ namespace UGame
                 GamesDGV.Rows[editedRow].Cells["Price"].Value = -1;
         }
 
+        /*
+        private void RemoveEntry(int rowIndex)
+        {
+            
+        }
+        */
+
         private void Clear()
         {
             TitleBox.Text = "";
@@ -708,6 +768,14 @@ namespace UGame
         private void ReplaceButton_Click(object sender, EventArgs e)
         {
             Replace();
+        }
+
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            SQLiteCommand deleteCommand = new SQLiteCommand("DELETE FROM Games WHERE Id = " + editedId, con);
+            deleteCommand.ExecuteNonQuery();
+
+            GamesDGV.Rows.Remove(GamesDGV.Rows[editedRow]);
         }
 
         private void ClearButton_Click(object sender, EventArgs e)
@@ -914,50 +982,16 @@ namespace UGame
             games[tabIndex].Close();
             games.RemoveAt(tabIndex);
         }
-
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            con.Close();
-        }
-
+        
         public void UpdateTime(string timePlayed, int totalSeconds, DateTime lastPlayed, int id)
         {
             SQLiteCommand updateCmd = new SQLiteCommand("UPDATE Games SET TimePlayed = '" + timePlayed + "', Seconds = " + totalSeconds + ", LastPlayed = '" + lastPlayed.ToString("yyyy-MM-dd HH:mm:ss") + "' WHERE Id = " + id + ";", con);
             updateCmd.ExecuteNonQuery();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-
-        }
-
-        private void SearchBox_TextChanged(object sender, EventArgs e)
-        {
-            DataView DV = new DataView(dataTable);
-            try { DV.RowFilter = string.Format("Title LIKE '%{0}%'", SearchBox.Text); }
-            catch { }
-
-            GamesDGV.DataSource = DV;
-
-            /*
-            bool columnFound = false;
-
-            for (int index = 0; index < GamesDGV.Columns.Count && columnFound == false; index++)
-            {
-                if (GamesDGV.Columns[index].HeaderText == sortColumn)
-                {
-                    columnFound = true;
-                    try
-                    {
-                        if (sortOrder == "Ascending")
-                            GamesDGV.Sort(GamesDGV.Columns[index], ListSortDirection.Ascending);
-                        else
-                            GamesDGV.Sort(GamesDGV.Columns[index], ListSortDirection.Descending);
-                    }
-                    catch { }
-                }
-            }
-            */
+            con.Close();
         }
     }
 }

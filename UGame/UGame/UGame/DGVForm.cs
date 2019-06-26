@@ -439,6 +439,8 @@ namespace UGame
 
         private void FillDGV()
         {
+            DGV.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
             dataTable = new DataTable();
             titles = new ArrayList();
             secondColumn = new ArrayList();
