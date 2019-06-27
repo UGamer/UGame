@@ -30,7 +30,8 @@ namespace UGame
         public static SQLiteConnection con;
         public SQLiteCommand selectCmd;
         public SQLiteCommand insertCmd;
-        public DataTable dataTable;
+        public DataTable gameTable;
+        public DataTable consoleTable;
 
         int editedId = 0;
         int editedRow = 0;
@@ -76,6 +77,9 @@ namespace UGame
             FillDGV();
 
             try { GamesDGV.Sort(GamesDGV.Columns["Title"], ListSortDirection.Ascending); } catch { }
+            try { ConsolesDGV.Sort(ConsolesDGV.Columns["Name"], ListSortDirection.Ascending); } catch { }
+
+            FillConsole(ConsolesDGV.Rows[0].Cells["Name"].Value.ToString());
         }
 
         private void InitializeTheme()
@@ -88,18 +92,22 @@ namespace UGame
 
         private void FillDGV()
         {
+            // This block of code constructs the dataTable and fills it.
             selectCmd.CommandType = CommandType.Text;
             SQLiteDataAdapter da = new SQLiteDataAdapter(selectCmd);
-            dataTable = new DataTable();
-            dataTable.Columns.Add(" ", typeof(Image));
-            da.Fill(dataTable);
+            gameTable = new DataTable();
+            gameTable.Columns.Add(" ", typeof(Image));
+            da.Fill(gameTable);
             
-            GamesDGV.DataSource = dataTable;
-            GamesListTab.Text = "[LIST] " + dataTable.Rows.Count + "/" + dataTable.Rows.Count;
+            GamesDGV.DataSource = gameTable;
+            GamesListTab.Text = "[LIST] " + gameTable.Rows.Count + "/" + gameTable.Rows.Count;
 
-            for (int index = 0; index < dataTable.Rows.Count; index++)
+            // This for loop assigns icons to each row in the DGV, and checks if any date value is
+            // equal to "1/1/1753" and if any price value is equal to -1. If true, the value is hidden.
+            // (WIP)
+            for (int index = 0; index < gameTable.Rows.Count; index++)
             {
-                imageTitle = dataTable.Rows[index]["Title"].ToString();
+                imageTitle = gameTable.Rows[index]["Title"].ToString();
                 Regex rgxFix1 = new Regex("/");
                 Regex rgxFix2 = new Regex(":");
                 Regex rgxFix3 = new Regex(".*");
@@ -166,6 +174,8 @@ namespace UGame
 
             }
 
+            // This try-catch block configures the image layout for the column and autosize mode for the icon
+            // column and title column.
             try
             {
                 ((DataGridViewImageColumn)GamesDGV.Columns[0]).ImageLayout = DataGridViewImageCellLayout.Zoom;
@@ -174,6 +184,7 @@ namespace UGame
             }
             catch { }
 
+            // This try-catch block hides fields in the DGV, and changes column header texts.
             try
             {
                 GamesDGV.Columns["Id"].Visible = false;
@@ -194,7 +205,42 @@ namespace UGame
                 GamesDGV.Columns["PlayerCount"].HeaderText = "Player Count";
             }
             catch { }
-            
+
+            // The code from hereon deals with filling the Consoles DGV
+            consoleTable = new DataTable();
+
+            consoleTable.Columns.Add("Name");
+
+            DataRow dRow;
+            ArrayList consolesAdded = new ArrayList();
+            bool newConsole = true;
+            string platform;
+            for (int index = 0; index < gameTable.Rows.Count; index++)
+            {
+                platform = gameTable.Rows[index]["Platform"].ToString();
+                for (int consoleIndex = 0; consoleIndex < consolesAdded.Count; consoleIndex++)
+                {
+                    if (platform == consolesAdded[consoleIndex].ToString())
+                    {
+                        newConsole = false;
+                        break;
+                    }
+                }
+                if (newConsole)
+                {
+                    consolesAdded.Add(platform);
+
+                    dRow = consoleTable.NewRow();
+
+                    dRow["Name"] = platform;
+
+                    consoleTable.Rows.Add(dRow);
+                }
+
+                newConsole = true;
+            }
+
+            ConsolesDGV.DataSource = consoleTable;
         }
         
         private void NewTab(int rowIndex)
@@ -307,11 +353,133 @@ namespace UGame
 
         private void SearchBox_TextChanged(object sender, EventArgs e)
         {
-            DataView DV = new DataView(dataTable);
+            DataView DV = new DataView(gameTable);
             try { DV.RowFilter = string.Format("Title LIKE '%{0}%'", SearchBox.Text); }
             catch { }
 
             GamesDGV.DataSource = DV;
+        }
+
+        /// <summary>
+        /// The next section of code deals with the consoles tab.
+        /// </summary>
+
+        private void FillConsole(string name)
+        {
+            try { ConsolePictureBox.BackgroundImage = Image.FromFile(config.resourcePath + "consoles\\" + name + ".png"); }
+            catch { try {  ConsolePictureBox.BackgroundImage = Image.FromFile(config.resourcePath + "consoles\\" + name + ".jpg"); }
+            catch { try {  ConsolePictureBox.BackgroundImage = Image.FromFile(config.resourcePath + "consoles\\" + name + ".jpeg"); }
+            catch { try {  ConsolePictureBox.BackgroundImage = Image.FromFile(config.resourcePath + "consoles\\" + name + ".jfif"); }
+            catch { try {  ConsolePictureBox.BackgroundImage = Image.FromFile(config.resourcePath + "consoles\\" + name + ".gif"); }
+            catch {  ConsolePictureBox.BackgroundImage = Image.FromFile(config.resourcePath + "unknown.png"); } } } } }
+
+            ConsoleNameBox.Text = name;
+
+            DataView DV = new DataView(gameTable);
+            try { DV.RowFilter = string.Format("Platform LIKE '%{0}%'", name); }
+            catch { }
+
+            ConsoleGamesDGV.DataSource = DV;
+
+            try
+            {
+                ((DataGridViewImageColumn)ConsoleGamesDGV.Columns[0]).ImageLayout = DataGridViewImageCellLayout.Zoom;
+                ConsoleGamesDGV.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                ConsoleGamesDGV.Columns["Title"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            }
+            catch { }
+
+            try
+            {
+                ConsoleGamesDGV.Columns["Id"].Visible = false;
+                ConsoleGamesDGV.Columns["Seconds"].Visible = false;
+                ConsoleGamesDGV.Columns["Notes"].Visible = false;
+                ConsoleGamesDGV.Columns["URLs"].Visible = false;
+                ConsoleGamesDGV.Columns["Filters"].Visible = false;
+                ConsoleGamesDGV.Columns["GameDesc"].Visible = false;
+                ConsoleGamesDGV.Columns["Launch"].Visible = false;
+                ConsoleGamesDGV.Columns["Blur"].Visible = false;
+                ConsoleGamesDGV.Columns["Overlay"].Visible = false;
+                ConsoleGamesDGV.Columns["Discord"].Visible = false;
+
+                ConsoleGamesDGV.Columns["TimePlayed"].HeaderText = "Time Played";
+                ConsoleGamesDGV.Columns["StartDate"].HeaderText = "Start Date";
+                ConsoleGamesDGV.Columns["LastPlayed"].HeaderText = "Last Played";
+                ConsoleGamesDGV.Columns["ReleaseDate"].HeaderText = "Release Date";
+                ConsoleGamesDGV.Columns["PlayerCount"].HeaderText = "Player Count";
+            }
+            catch { }
+            
+            try { ConsoleGamesDGV.Sort(ConsoleGamesDGV.Columns["Title"], ListSortDirection.Ascending); } catch { }
+        }
+
+        private void ConsolesDGV_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try { FillConsole(ConsolesDGV.Rows[e.RowIndex].Cells["Name"].Value.ToString()); } catch { }
+        }
+
+        private void NewConsoleGameTab(int rowIndex)
+        {
+            int id = Convert.ToInt32(ConsoleGamesDGV.Rows[rowIndex].Cells["Id"].Value);
+
+            int index;
+            for (index = 0; index < GamesDGV.Rows.Count; index++)
+            {
+                if (Convert.ToInt32(GamesDGV.Rows[index].Cells["Id"].Value) == id)
+                {
+                    rowIndex = index;
+                    break;
+                }
+            }
+
+            bool make = true;
+            for (index = 0; index < games.Count; index++)
+            {
+                if (games[index].id == id)
+                {
+                    make = false;
+                    break;
+                }
+            }
+
+            if (make)
+            {
+                game = new GameTab(this, rowIndex, GamesTabs.TabPages.Count, id);
+                games.Add(game);
+                GamesTabs.SelectedTab = game.gameTab;
+            }
+            else
+            {
+                GamesTabs.SelectedTab = games[index].gameTab;
+            }
+        }
+
+        private void ConsoleGamesDGV_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            NewConsoleGameTab(e.RowIndex);
+            
+            MainTabs.SelectedTab = GamesTab;
+        }
+
+        private void ConsoleGamesDGV_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            try
+            {
+                if (e.Button == MouseButtons.Right)
+                {
+                    this.ConsoleGamesDGV.Rows[e.RowIndex].Selected = true;
+                    this.rowIndex = e.RowIndex;
+                    this.ConsoleGamesDGV.CurrentCell = this.ConsoleGamesDGV.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                    this.ConsoleGamesDGVContextMenu.Show(this.ConsoleGamesDGV, e.Location);
+                    ConsoleGamesDGVContextMenu.Show(Cursor.Position);
+                }
+            }
+            catch { }
+        }
+
+        private void EditConsoleGameEntryButton_Click(object sender, EventArgs e)
+        {
+            EditConsoleGameEntry(rowIndex);
         }
 
         /// <summary>
@@ -322,9 +490,9 @@ namespace UGame
         {
             highestId = 0;
 
-            for (int index = 0; index < dataTable.Rows.Count; index++)
-                if (highestId < Convert.ToInt32(dataTable.Rows[index]["Id"]))
-                    highestId = Convert.ToInt32(dataTable.Rows[index]["Id"]);
+            for (int index = 0; index < gameTable.Rows.Count; index++)
+                if (highestId < Convert.ToInt32(gameTable.Rows[index]["Id"]))
+                    highestId = Convert.ToInt32(gameTable.Rows[index]["Id"]);
 
             if (highestId == 0)
                 highestId--;
@@ -446,7 +614,7 @@ namespace UGame
             }
             catch { }
 
-            DataRow dRow = dataTable.NewRow();
+            DataRow dRow = gameTable.NewRow();
             
             dRow["Id"] = highestId + 1;
             dRow["Title"] = TitleBox.Text;
@@ -473,7 +641,7 @@ namespace UGame
             dRow["Overlay"] = OverlayCheck.ToString();
             dRow["Discord"] = DiscordCheck.ToString();
 
-            dataTable.Rows.Add(dRow);
+            gameTable.Rows.Add(dRow);
 
             highestId++;
             index++;
@@ -563,6 +731,123 @@ namespace UGame
 
             TabPage entriesTab = GamesEntriesTab;
             GamesTabs.SelectedTab = entriesTab;
+        }
+
+        private void EditConsoleGameEntry(int rowIndex)
+        {
+            Clear();
+
+            editedId = Convert.ToInt32(ConsoleGamesDGV.Rows[rowIndex].Cells["Id"].Value);
+            editedRow = rowIndex;
+            string playTime = ConsoleGamesDGV.Rows[rowIndex].Cells["TimePlayed"].Value.ToString();
+
+            // This could be replaced by just pulling from "Seconds" and using division
+            int hours = Convert.ToInt32(playTime.Substring(0, playTime.IndexOf("h")));
+            int minutes = Convert.ToInt32(playTime.Substring(playTime.IndexOf("h:") + 2, 2));
+            int seconds = Convert.ToInt32(playTime.Substring(playTime.IndexOf("m:") + 2, 2));
+
+            DateTime obtained = Convert.ToDateTime(ConsoleGamesDGV.Rows[rowIndex].Cells["Obtained"].Value);
+            DateTime startDate = Convert.ToDateTime(ConsoleGamesDGV.Rows[rowIndex].Cells["StartDate"].Value);
+            DateTime lastPlayed = Convert.ToDateTime(ConsoleGamesDGV.Rows[rowIndex].Cells["LastPlayed"].Value);
+            DateTime releaseDate = Convert.ToDateTime(ConsoleGamesDGV.Rows[rowIndex].Cells["ReleaseDate"].Value);
+
+            TitleBox.Text = ConsoleGamesDGV.Rows[rowIndex].Cells["Title"].Value.ToString();
+            PlatformBox.Text = ConsoleGamesDGV.Rows[rowIndex].Cells["Platform"].Value.ToString();
+            StatusBox.Text = ConsoleGamesDGV.Rows[rowIndex].Cells["Status"].Value.ToString();
+            RatingBar.Value = Convert.ToInt32(ConsoleGamesDGV.Rows[rowIndex].Cells["Rating"].Value.ToString());
+            if (hours != 0) TimeHoursBox.Text = hours.ToString(); else TimeHoursBox.Text = "";
+            if (minutes != 0) TimeMinutesBox.Text = minutes.ToString(); else TimeMinutesBox.Text = "";
+            if (seconds != 0) TimeSecondsBox.Text = seconds.ToString(); else TimeSecondsBox.Text = "";
+
+            ObtainedCheck.Checked = false;
+            StartDateCheck.Checked = false;
+            LastPlayedCheck.Checked = false;
+            ReleaseDateCheck.Checked = false;
+
+            if (Convert.ToDateTime(ConsoleGamesDGV.Rows[rowIndex].Cells["Obtained"].Value) == new DateTime(1753, 1, 1))
+                ObtainedCheck.Checked = true;
+            else
+                ObtainedDatePicker.Value = obtained;
+
+            if (Convert.ToDateTime(ConsoleGamesDGV.Rows[rowIndex].Cells["StartDate"].Value) == new DateTime(1753, 1, 1))
+                StartDateCheck.Checked = true;
+            else
+                StartDatePicker.Value = startDate;
+
+            if (Convert.ToDateTime(ConsoleGamesDGV.Rows[rowIndex].Cells["LastPlayed"].Value) == new DateTime(1753, 1, 1))
+                ReleaseDateCheck.Checked = true;
+            else
+                ReleaseDatePicker.Value = releaseDate;
+
+            NotesBox.Text = ConsoleGamesDGV.Rows[rowIndex].Cells["Notes"].Value.ToString();
+            urlString = ConsoleGamesDGV.Rows[rowIndex].Cells["URLs"].Value.ToString();
+
+            FiltersBox.Text = ConsoleGamesDGV.Rows[rowIndex].Cells["Filters"].Value.ToString();
+            DevelopersBox.Text = ConsoleGamesDGV.Rows[rowIndex].Cells["Developers"].Value.ToString();
+            PublishersBox.Text = ConsoleGamesDGV.Rows[rowIndex].Cells["Publishers"].Value.ToString();
+
+            if (Convert.ToDateTime(ConsoleGamesDGV.Rows[rowIndex].Cells["ReleaseDate"].Value) == new DateTime(1753, 1, 1))
+                ReleaseDateCheck.Checked = true;
+            else
+                ReleaseDatePicker.Value = releaseDate;
+
+
+            GenreBox.Text = ConsoleGamesDGV.Rows[rowIndex].Cells["Genre"].Value.ToString();
+            PlayerCountBox.Text = ConsoleGamesDGV.Rows[rowIndex].Cells["PlayerCount"].Value.ToString();
+
+            if (ConsoleGamesDGV.Rows[rowIndex].Cells["Price"].Value.ToString() != "-1")
+                PriceBox.Text = ConsoleGamesDGV.Rows[rowIndex].Cells["Price"].Value.ToString();
+            else
+                PriceBox.Text = "";
+
+            GameDescBox.Text = ConsoleGamesDGV.Rows[rowIndex].Cells["GameDesc"].Value.ToString();
+
+            launchString = ConsoleGamesDGV.Rows[rowIndex].Cells["Launch"].Value.ToString();
+
+            BlurCheck.Checked = Convert.ToBoolean(ConsoleGamesDGV.Rows[rowIndex].Cells["Blur"].Value);
+            OverlayCheck.Checked = Convert.ToBoolean(ConsoleGamesDGV.Rows[rowIndex].Cells["Overlay"].Value);
+            DiscordCheck.Checked = Convert.ToBoolean(ConsoleGamesDGV.Rows[rowIndex].Cells["Discord"].Value);
+
+            imageTitle = TitleBox.Text;
+            Regex rgxFix1 = new Regex("/");
+            Regex rgxFix2 = new Regex(":");
+            Regex rgxFix3 = new Regex(".*");
+            Regex rgxFix4 = new Regex(".?");
+            Regex rgxFix5 = new Regex("\"");
+            Regex rgxFix6 = new Regex("<");
+            Regex rgxFix7 = new Regex(">");
+            Regex rgxFix8 = new Regex("|");
+            Regex rgxFix9 = new Regex(@"T:\\");
+
+            while (imageTitle.IndexOf("/") != -1)
+                imageTitle = rgxFix1.Replace(imageTitle, "");
+            while (imageTitle.IndexOf(":") != -1)
+                imageTitle = rgxFix2.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("*") != -1)
+                imageTitle = rgxFix3.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("?") != -1)
+                imageTitle = rgxFix4.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("\"") != -1)
+                imageTitle = rgxFix5.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("<") != -1)
+                imageTitle = rgxFix6.Replace(imageTitle, "");
+            while (imageTitle.IndexOf(">") != -1)
+                imageTitle = rgxFix7.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("|") != -1)
+                imageTitle = rgxFix8.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("\\") != -1)
+                imageTitle = rgxFix9.Replace(imageTitle, "");
+
+            try { DetailsBox.BackgroundImage = Image.FromFile(resourcePath + "\\details\\" + imageTitle + ".png"); } catch { try { DetailsBox.BackgroundImage = Image.FromFile(resourcePath + "\\details\\" + imageTitle + ".jpg"); } catch { try { DetailsBox.BackgroundImage = Image.FromFile(resourcePath + "\\details\\" + imageTitle + ".jpeg"); } catch { try { DetailsBox.BackgroundImage = Image.FromFile(resourcePath + "\\details\\" + imageTitle + ".gif"); } catch { } } } }
+            try { IconBox.BackgroundImage = Image.FromFile(resourcePath + "\\icons\\" + imageTitle + ".png"); } catch { try { IconBox.BackgroundImage = Image.FromFile(resourcePath + "\\icons\\" + imageTitle + ".jpg"); } catch { try { IconBox.BackgroundImage = Image.FromFile(resourcePath + "\\icons\\" + imageTitle + ".jpeg"); } catch { try { IconBox.BackgroundImage = Image.FromFile(resourcePath + "\\icons\\" + imageTitle + ".gif"); } catch { } } } }
+            try { BgBox.BackgroundImage = Image.FromFile(resourcePath + "\\bg\\" + imageTitle + ".png"); } catch { try { BgBox.BackgroundImage = Image.FromFile(resourcePath + "\\BG\\" + imageTitle + ".jpg"); } catch { try { BgBox.BackgroundImage = Image.FromFile(resourcePath + "\\BG\\" + imageTitle + ".jpeg"); } catch { try { BgBox.BackgroundImage = Image.FromFile(resourcePath + "\\BG\\" + imageTitle + ".gif"); } catch { } } } }
+
+            ReplaceButton.Visible = true;
+            DeleteButton.Visible = true;
+            
+            GamesTabs.SelectedTab = GamesEntriesTab;
+            
+            MainTabs.SelectedTab = GamesTab;
         }
 
         private void Replace()

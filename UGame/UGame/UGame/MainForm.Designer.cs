@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.MainTabs = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.GamesTab = new System.Windows.Forms.TabPage();
             this.GamesTabs = new System.Windows.Forms.TabControl();
             this.GamesListTab = new System.Windows.Forms.TabPage();
             this.SearchBox = new System.Windows.Forms.TextBox();
@@ -85,8 +85,9 @@
             this.ReplaceButton = new System.Windows.Forms.Button();
             this.EditButton = new System.Windows.Forms.Button();
             this.AddButton = new System.Windows.Forms.Button();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.ConsolesTab = new System.Windows.Forms.TabPage();
+            this.ConsolePictureBox = new System.Windows.Forms.PictureBox();
+            this.ConsolesDGV = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.RefreshButton = new System.Windows.Forms.ToolStripButton();
@@ -101,8 +102,14 @@
             this.DeleteEntryButton = new System.Windows.Forms.ToolStripMenuItem();
             this.GameTabsContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.CloseTabButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.ConsoleNameBox = new System.Windows.Forms.TextBox();
+            this.ConsoleDetailsBox = new System.Windows.Forms.TextBox();
+            this.ConsoleGamesDGV = new System.Windows.Forms.DataGridView();
+            this.ConsoleGamesDGVContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.EditConsoleGameEntryButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.DeleteConsoleGameEntryButton = new System.Windows.Forms.ToolStripMenuItem();
             this.MainTabs.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.GamesTab.SuspendLayout();
             this.GamesTabs.SuspendLayout();
             this.GamesListTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GamesDGV)).BeginInit();
@@ -111,12 +118,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.IconBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DetailsBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RatingBar)).BeginInit();
-            this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.ConsolesTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ConsolePictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ConsolesDGV)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.PictureContextMenu.SuspendLayout();
             this.GamesDGVContextMenu.SuspendLayout();
             this.GameTabsContextMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ConsoleGamesDGV)).BeginInit();
+            this.ConsoleGamesDGVContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainTabs
@@ -124,8 +134,8 @@
             this.MainTabs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.MainTabs.Controls.Add(this.tabPage1);
-            this.MainTabs.Controls.Add(this.tabPage2);
+            this.MainTabs.Controls.Add(this.GamesTab);
+            this.MainTabs.Controls.Add(this.ConsolesTab);
             this.MainTabs.Controls.Add(this.tabPage3);
             this.MainTabs.Location = new System.Drawing.Point(0, 28);
             this.MainTabs.Name = "MainTabs";
@@ -133,16 +143,16 @@
             this.MainTabs.Size = new System.Drawing.Size(1061, 589);
             this.MainTabs.TabIndex = 0;
             // 
-            // tabPage1
+            // GamesTab
             // 
-            this.tabPage1.Controls.Add(this.GamesTabs);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1053, 563);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Games";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.GamesTab.Controls.Add(this.GamesTabs);
+            this.GamesTab.Location = new System.Drawing.Point(4, 22);
+            this.GamesTab.Name = "GamesTab";
+            this.GamesTab.Padding = new System.Windows.Forms.Padding(3);
+            this.GamesTab.Size = new System.Drawing.Size(1053, 563);
+            this.GamesTab.TabIndex = 0;
+            this.GamesTab.Text = "Games";
+            this.GamesTab.UseVisualStyleBackColor = true;
             // 
             // GamesTabs
             // 
@@ -705,25 +715,44 @@
             this.AddButton.UseVisualStyleBackColor = true;
             this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
-            // tabPage2
+            // ConsolesTab
             // 
-            this.tabPage2.Controls.Add(this.dataGridView2);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1053, 563);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Consoles";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.ConsolesTab.Controls.Add(this.ConsoleGamesDGV);
+            this.ConsolesTab.Controls.Add(this.ConsoleDetailsBox);
+            this.ConsolesTab.Controls.Add(this.ConsoleNameBox);
+            this.ConsolesTab.Controls.Add(this.ConsolePictureBox);
+            this.ConsolesTab.Controls.Add(this.ConsolesDGV);
+            this.ConsolesTab.Location = new System.Drawing.Point(4, 22);
+            this.ConsolesTab.Name = "ConsolesTab";
+            this.ConsolesTab.Padding = new System.Windows.Forms.Padding(3);
+            this.ConsolesTab.Size = new System.Drawing.Size(1053, 563);
+            this.ConsolesTab.TabIndex = 1;
+            this.ConsolesTab.Text = "Consoles";
+            this.ConsolesTab.UseVisualStyleBackColor = true;
             // 
-            // dataGridView2
+            // ConsolePictureBox
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.dataGridView2.Location = new System.Drawing.Point(3, 3);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(229, 557);
-            this.dataGridView2.TabIndex = 0;
+            this.ConsolePictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.ConsolePictureBox.Location = new System.Drawing.Point(250, 17);
+            this.ConsolePictureBox.Name = "ConsolePictureBox";
+            this.ConsolePictureBox.Size = new System.Drawing.Size(250, 250);
+            this.ConsolePictureBox.TabIndex = 1;
+            this.ConsolePictureBox.TabStop = false;
+            // 
+            // ConsolesDGV
+            // 
+            this.ConsolesDGV.AllowUserToAddRows = false;
+            this.ConsolesDGV.AllowUserToDeleteRows = false;
+            this.ConsolesDGV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.ConsolesDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ConsolesDGV.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ConsolesDGV.Location = new System.Drawing.Point(3, 3);
+            this.ConsolesDGV.Name = "ConsolesDGV";
+            this.ConsolesDGV.ReadOnly = true;
+            this.ConsolesDGV.RowHeadersVisible = false;
+            this.ConsolesDGV.Size = new System.Drawing.Size(229, 557);
+            this.ConsolesDGV.TabIndex = 0;
+            this.ConsolesDGV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ConsolesDGV_CellClick);
             // 
             // tabPage3
             // 
@@ -807,14 +836,14 @@
             // EditEntryButton
             // 
             this.EditEntryButton.Name = "EditEntryButton";
-            this.EditEntryButton.Size = new System.Drawing.Size(152, 22);
+            this.EditEntryButton.Size = new System.Drawing.Size(137, 22);
             this.EditEntryButton.Text = "Edit Entry";
             this.EditEntryButton.Click += new System.EventHandler(this.EditEntryButton_Click);
             // 
             // DeleteEntryButton
             // 
             this.DeleteEntryButton.Name = "DeleteEntryButton";
-            this.DeleteEntryButton.Size = new System.Drawing.Size(152, 22);
+            this.DeleteEntryButton.Size = new System.Drawing.Size(137, 22);
             this.DeleteEntryButton.Text = "Delete Entry";
             this.DeleteEntryButton.Click += new System.EventHandler(this.DeleteEntryButton_Click);
             // 
@@ -832,6 +861,57 @@
             this.CloseTabButton.Text = "Close Tab";
             this.CloseTabButton.Click += new System.EventHandler(this.CloseTabButton_Click);
             // 
+            // ConsoleNameBox
+            // 
+            this.ConsoleNameBox.Font = new System.Drawing.Font("Century Gothic", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ConsoleNameBox.Location = new System.Drawing.Point(507, 17);
+            this.ConsoleNameBox.Name = "ConsoleNameBox";
+            this.ConsoleNameBox.Size = new System.Drawing.Size(538, 43);
+            this.ConsoleNameBox.TabIndex = 2;
+            // 
+            // ConsoleDetailsBox
+            // 
+            this.ConsoleDetailsBox.Location = new System.Drawing.Point(507, 67);
+            this.ConsoleDetailsBox.Multiline = true;
+            this.ConsoleDetailsBox.Name = "ConsoleDetailsBox";
+            this.ConsoleDetailsBox.Size = new System.Drawing.Size(538, 200);
+            this.ConsoleDetailsBox.TabIndex = 3;
+            // 
+            // ConsoleGamesDGV
+            // 
+            this.ConsoleGamesDGV.AllowUserToAddRows = false;
+            this.ConsoleGamesDGV.AllowUserToDeleteRows = false;
+            this.ConsoleGamesDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ConsoleGamesDGV.Location = new System.Drawing.Point(250, 274);
+            this.ConsoleGamesDGV.Name = "ConsoleGamesDGV";
+            this.ConsoleGamesDGV.ReadOnly = true;
+            this.ConsoleGamesDGV.RowHeadersVisible = false;
+            this.ConsoleGamesDGV.Size = new System.Drawing.Size(795, 286);
+            this.ConsoleGamesDGV.TabIndex = 4;
+            this.ConsoleGamesDGV.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ConsoleGamesDGV_CellDoubleClick);
+            this.ConsoleGamesDGV.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.ConsoleGamesDGV_CellMouseUp);
+            // 
+            // ConsoleGamesDGVContextMenu
+            // 
+            this.ConsoleGamesDGVContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.EditConsoleGameEntryButton,
+            this.DeleteConsoleGameEntryButton});
+            this.ConsoleGamesDGVContextMenu.Name = "GamesDGVContextMenu";
+            this.ConsoleGamesDGVContextMenu.Size = new System.Drawing.Size(138, 48);
+            // 
+            // EditConsoleGameEntryButton
+            // 
+            this.EditConsoleGameEntryButton.Name = "EditConsoleGameEntryButton";
+            this.EditConsoleGameEntryButton.Size = new System.Drawing.Size(137, 22);
+            this.EditConsoleGameEntryButton.Text = "Edit Entry";
+            this.EditConsoleGameEntryButton.Click += new System.EventHandler(this.EditConsoleGameEntryButton_Click);
+            // 
+            // DeleteConsoleGameEntryButton
+            // 
+            this.DeleteConsoleGameEntryButton.Name = "DeleteConsoleGameEntryButton";
+            this.DeleteConsoleGameEntryButton.Size = new System.Drawing.Size(137, 22);
+            this.DeleteConsoleGameEntryButton.Text = "Delete Entry";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -845,7 +925,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyUp);
             this.MainTabs.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
+            this.GamesTab.ResumeLayout(false);
             this.GamesTabs.ResumeLayout(false);
             this.GamesListTab.ResumeLayout(false);
             this.GamesListTab.PerformLayout();
@@ -856,13 +936,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.IconBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DetailsBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.RatingBar)).EndInit();
-            this.tabPage2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.ConsolesTab.ResumeLayout(false);
+            this.ConsolesTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ConsolePictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ConsolesDGV)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.PictureContextMenu.ResumeLayout(false);
             this.GamesDGVContextMenu.ResumeLayout(false);
             this.GameTabsContextMenu.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ConsoleGamesDGV)).EndInit();
+            this.ConsoleGamesDGVContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -871,13 +955,13 @@
         #endregion
 
         private System.Windows.Forms.TabControl MainTabs;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage GamesTab;
+        private System.Windows.Forms.TabPage ConsolesTab;
         private System.Windows.Forms.TabControl GamesTabs;
         private System.Windows.Forms.TabPage GamesListTab;
         public System.Windows.Forms.DataGridView GamesDGV;
         private System.Windows.Forms.TabPage GamesEntriesTab;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView ConsolesDGV;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.Button DeleteButton;
@@ -941,6 +1025,13 @@
         private System.Windows.Forms.TextBox SearchBox;
         private System.Windows.Forms.CheckBox DiscordCheck;
         private System.Windows.Forms.Label DiscordStatusLabel;
+        private System.Windows.Forms.PictureBox ConsolePictureBox;
+        private System.Windows.Forms.TextBox ConsoleDetailsBox;
+        private System.Windows.Forms.TextBox ConsoleNameBox;
+        private System.Windows.Forms.DataGridView ConsoleGamesDGV;
+        private System.Windows.Forms.ContextMenuStrip ConsoleGamesDGVContextMenu;
+        private System.Windows.Forms.ToolStripMenuItem EditConsoleGameEntryButton;
+        private System.Windows.Forms.ToolStripMenuItem DeleteConsoleGameEntryButton;
     }
 }
 
