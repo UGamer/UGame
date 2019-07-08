@@ -80,6 +80,8 @@ namespace UGame
             try { ConsolesDGV.Sort(ConsolesDGV.Columns["Name"], ListSortDirection.Ascending); } catch { }
 
             FillConsole(ConsolesDGV.Rows[0].Cells["Name"].Value.ToString());
+
+            GamesDGV.Focus();
         }
 
         private void InitializeTheme()
@@ -322,6 +324,11 @@ namespace UGame
             deleteCommand.ExecuteNonQuery();
 
             GamesDGV.Rows.Remove(GamesDGV.Rows[rowIndex]);
+
+            DataRow row = ((DataRowView)GamesDGV.Rows[editedRow].DataBoundItem).Row;
+            gameTable.Rows.Remove(row);
+
+            GamesListTab.Text = "[LIST] " + gameTable.Rows.Count + "/" + gameTable.Rows.Count;
         }
 
         private void GamesTabs_MouseUp(object sender, MouseEventArgs e)
@@ -645,6 +652,8 @@ namespace UGame
 
             highestId++;
             index++;
+
+            GamesListTab.Text = "[LIST] " + gameTable.Rows.Count + "/" + gameTable.Rows.Count;
         }
 
         public void EditEntry(int rowIndex)
@@ -991,6 +1000,37 @@ namespace UGame
                 GamesDGV.Rows[editedRow].Cells["Price"].Value = Convert.ToDecimal(PriceBox.Text);
             else
                 GamesDGV.Rows[editedRow].Cells["Price"].Value = -1;
+
+            DataRow dRow = gameTable.NewRow();
+
+            dRow["Id"] = highestId + 1;
+            dRow["Title"] = TitleBox.Text;
+            dRow["Platform"] = PlatformBox.Text;
+            dRow["Status"] = StatusBox.Text;
+            dRow["Rating"] = RatingBar.Value;
+            dRow["TimePlayed"] = timePlayed;
+            dRow["Seconds"] = totalSec;
+            dRow["Obtained"] = obtained;
+            dRow["StartDate"] = startDate;
+            dRow["LastPlayed"] = lastPlayed;
+            dRow["Notes"] = NotesBox.Text;
+            dRow["URLs"] = urlString;
+            dRow["Filters"] = FiltersBox.Text;
+            dRow["Developers"] = DevelopersBox.Text;
+            dRow["Publishers"] = PublishersBox.Text;
+            dRow["ReleaseDate"] = releaseDate;
+            dRow["Genre"] = GenreBox.Text;
+            dRow["PlayerCount"] = PlayerCountBox.Text;
+            dRow["Price"] = price;
+            dRow["GameDesc"] = GameDescBox.Text;
+            dRow["Launch"] = launchString;
+            dRow["Blur"] = BlurCheck.ToString();
+            dRow["Overlay"] = OverlayCheck.ToString();
+            dRow["Discord"] = DiscordCheck.ToString();
+
+            gameTable.Rows.Add(dRow);
+
+            highestId++;
         }
 
         /*
@@ -1061,6 +1101,11 @@ namespace UGame
             deleteCommand.ExecuteNonQuery();
 
             GamesDGV.Rows.Remove(GamesDGV.Rows[editedRow]);
+
+            DataRow row = ((DataRowView)GamesDGV.Rows[editedRow].DataBoundItem).Row;
+            gameTable.Rows.Remove(row);
+
+            GamesListTab.Text = "[LIST] " + gameTable.Rows.Count + "/" + gameTable.Rows.Count;
         }
 
         private void ClearButton_Click(object sender, EventArgs e)
@@ -1361,9 +1406,10 @@ namespace UGame
 
         private void AddTimeButton_Click(object sender, EventArgs e)
         {
-            int oldHrs = Convert.ToInt32(TimeHoursBox.Text);
-            int oldMins = Convert.ToInt32(TimeMinutesBox.Text);
-            int oldSecs = Convert.ToInt32(TimeSecondsBox.Text);
+            int oldHrs, oldMins, oldSecs;
+            try { oldHrs = Convert.ToInt32(TimeHoursBox.Text); } catch { oldHrs = 0; }
+            try { oldMins = Convert.ToInt32(TimeMinutesBox.Text); } catch { oldMins = 0; }
+            try { oldSecs = Convert.ToInt32(TimeSecondsBox.Text); } catch { oldSecs = 0; }
 
             AddTime addTime = new AddTime(this, oldHrs, oldMins, oldSecs);
             DialogResult dialogResult = addTime.ShowDialog();
@@ -1386,6 +1432,19 @@ namespace UGame
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             con.Close();
+        }
+
+        private void ConsolesDGV_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            try { FillConsole(ConsolesDGV.Rows[e.RowIndex].Cells["Name"].Value.ToString()); } catch { }
+        }
+
+        private void MainTabs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (MainTabs.SelectedTab.Text == "Games")
+                GamesDGV.Focus();
+            else if (MainTabs.SelectedTab.Text == "Consoles")
+                ConsolesDGV.Focus();
         }
     }
 }

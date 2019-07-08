@@ -370,6 +370,8 @@ namespace UGame
 
         public void Launch()
         {
+            bool launchable = true;
+
             string launchCode = "";
             if (launchCount > 1)
             {
@@ -382,60 +384,61 @@ namespace UGame
             }
             else
             {
-                launchCode = launchCodes[0, 1];
+                try { launchCode = launchCodes[0, 1]; } catch { launchable = false; }
             }
-
-            Console.WriteLine(launchCode);
-
-            bool isExe = false;
-            bool hasArgs = false;
-            ProcessStartInfo startInfo;
-
-            if (launchCode.IndexOf(".exe") != -1)
-                isExe = true;
-            else if (launchCode.IndexOf(".lnk") != -1)
-                isExe = true;
-            else if (launchCode.IndexOf(".bat") != -1)
-                isExe = true;
-
-            try
+            
+            if (launchable)
             {
-                int exeLoc = launchCode.IndexOf(".exe");
-                string lookForArgs = launchCode.Substring(exeLoc);
+                bool isExe = false;
+                bool hasArgs = false;
+                ProcessStartInfo startInfo;
 
-                if (lookForArgs.IndexOf("-") != -1 && lookForArgs.IndexOf("\"") != -1)
-                    hasArgs = true;
-            }
-            catch (ArgumentOutOfRangeException) { }
+                if (launchCode.IndexOf(".exe") != -1)
+                    isExe = true;
+                else if (launchCode.IndexOf(".lnk") != -1)
+                    isExe = true;
+                else if (launchCode.IndexOf(".bat") != -1)
+                    isExe = true;
 
-            if (isExe)
-            {
-                if (hasArgs)
+                try
                 {
-                    int getRidOfQuotes = launchCode.IndexOf("\"");
-                    if (getRidOfQuotes == 0)
-                    {
-                        launchCode.Substring(1);
-                        int secondQuote = launchCode.IndexOf("\"");
-                        launchCode.Substring(0, secondQuote);
-                    }
                     int exeLoc = launchCode.IndexOf(".exe");
-                    string fileName = launchCode.Substring(0, exeLoc + 5);
-                    string args = launchCode.Substring(exeLoc + 5);
+                    string lookForArgs = launchCode.Substring(exeLoc);
 
-                    startInfo = new ProcessStartInfo(fileName, args);
+                    if (lookForArgs.IndexOf("-") != -1 && lookForArgs.IndexOf("\"") != -1)
+                        hasArgs = true;
+                }
+                catch (ArgumentOutOfRangeException) { }
+
+                if (isExe)
+                {
+                    if (hasArgs)
+                    {
+                        int getRidOfQuotes = launchCode.IndexOf("\"");
+                        if (getRidOfQuotes == 0)
+                        {
+                            launchCode.Substring(1);
+                            int secondQuote = launchCode.IndexOf("\"");
+                            launchCode.Substring(0, secondQuote);
+                        }
+                        int exeLoc = launchCode.IndexOf(".exe");
+                        string fileName = launchCode.Substring(0, exeLoc + 5);
+                        string args = launchCode.Substring(exeLoc + 5);
+
+                        startInfo = new ProcessStartInfo(fileName, args);
+                    }
+                    else
+                    {
+                        startInfo = new ProcessStartInfo(launchCode);
+                    }
+
+                    Console.WriteLine(launchCode);
+                    Process.Start(startInfo);
                 }
                 else
                 {
-                    startInfo = new ProcessStartInfo(launchCode);
+                    refer.BrowserLauncher.Url = new Uri(launchCode);
                 }
-
-                Console.WriteLine(launchCode);
-                Process.Start(startInfo);
-            }
-            else
-            {
-                refer.BrowserLauncher.Url = new Uri(launchCode);
             }
         }
 

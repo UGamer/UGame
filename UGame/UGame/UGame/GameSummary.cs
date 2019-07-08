@@ -24,12 +24,45 @@ namespace UGame
             int totalSeconds = seconds + (minutes * 60) + (hours * 3600);
             int totalMinutes = totalSeconds / 60;
 
-            string timeSummary = hours + " hours, " + minutes + " minutes, and " + seconds + " seconds.";
-            timeSummary += "\n\n" + totalSeconds + " total seconds";
-            timeSummary += "\n" + totalMinutes + " total minutes";
-            timeSummary += "\n\n" + hours / 24 + " days";
-            
-            TimeSummaryBox.Text = timeSummary;
+            string hString, mString, sString, dString;
+            if (hours == 1)
+                hString = "hour, ";
+            else
+                hString = "hours, ";
+
+            if (minutes == 1)
+                mString = "minute, and ";
+            else
+                mString = "minutes, and ";
+
+            if (seconds == 1)
+                sString = " second.";
+            else
+                sString = " seconds.";
+
+            if (hours / 24 == 1)
+                dString = " day.";
+            else
+                dString = " days.";
+
+
+            TimeSummaryBox.AppendText(hours + hString + minutes + mString + seconds + sString);
+            TimeSummaryBox.AppendText(Environment.NewLine);
+            TimeSummaryBox.AppendText(Environment.NewLine);
+            TimeSummaryBox.AppendText(totalSeconds + " total" + sString);
+            TimeSummaryBox.AppendText(Environment.NewLine);
+
+            try { mString = mString.Substring(0, 7); } catch { mString = mString.Substring(0, 6); }
+            TimeSummaryBox.AppendText(totalMinutes + " total " + mString + ".");
+
+            TimeSummaryBox.AppendText(Environment.NewLine);
+            TimeSummaryBox.AppendText(Environment.NewLine);
+            TimeSummaryBox.AppendText(hours / 24 + dString);
+        }
+
+        private void OKButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

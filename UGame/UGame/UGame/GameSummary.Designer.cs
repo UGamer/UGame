@@ -75,10 +75,12 @@
             // TimeSummaryBox
             // 
             this.TimeSummaryBox.AcceptsReturn = true;
+            this.TimeSummaryBox.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TimeSummaryBox.Location = new System.Drawing.Point(16, 37);
             this.TimeSummaryBox.Multiline = true;
             this.TimeSummaryBox.Name = "TimeSummaryBox";
-            this.TimeSummaryBox.Size = new System.Drawing.Size(576, 77);
+            this.TimeSummaryBox.ReadOnly = true;
+            this.TimeSummaryBox.Size = new System.Drawing.Size(576, 277);
             this.TimeSummaryBox.TabIndex = 1;
             // 
             // TimePlayedLabel
@@ -101,6 +103,7 @@
             this.OKButton.TabIndex = 6;
             this.OKButton.Text = "OK";
             this.OKButton.UseVisualStyleBackColor = true;
+            this.OKButton.Click += new System.EventHandler(this.OKButton_Click);
             // 
             // TitleLabel
             // 
