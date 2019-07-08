@@ -277,7 +277,7 @@ namespace UGame
 
         private void GamesDGV_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            try { NewTab(e.RowIndex); } catch { }
+            NewTab(e.RowIndex);
         }
 
         private void MainForm_KeyUp(object sender, KeyEventArgs e)
@@ -620,7 +620,7 @@ namespace UGame
             dRow["Title"] = TitleBox.Text;
             dRow["Platform"] = PlatformBox.Text;
             dRow["Status"] = StatusBox.Text;
-            dRow["Rating"] = RatingBar;
+            dRow["Rating"] = RatingBar.Value;
             dRow["TimePlayed"] = timePlayed;
             dRow["Seconds"] = totalSeconds;
             dRow["Obtained"] = obtained;
@@ -1092,6 +1092,36 @@ namespace UGame
 
         private void DetailsBox_MouseUp(object sender, MouseEventArgs e)
         {
+            imageTitle = TitleBox.Text;
+            Regex rgxFix1 = new Regex("/");
+            Regex rgxFix2 = new Regex(":");
+            Regex rgxFix3 = new Regex(".*");
+            Regex rgxFix4 = new Regex(".?");
+            Regex rgxFix5 = new Regex("\"");
+            Regex rgxFix6 = new Regex("<");
+            Regex rgxFix7 = new Regex(">");
+            Regex rgxFix8 = new Regex("|");
+            Regex rgxFix9 = new Regex(@"T:\\");
+
+            while (imageTitle.IndexOf("/") != -1)
+                imageTitle = rgxFix1.Replace(imageTitle, "");
+            while (imageTitle.IndexOf(":") != -1)
+                imageTitle = rgxFix2.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("*") != -1)
+                imageTitle = rgxFix3.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("?") != -1)
+                imageTitle = rgxFix4.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("\"") != -1)
+                imageTitle = rgxFix5.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("<") != -1)
+                imageTitle = rgxFix6.Replace(imageTitle, "");
+            while (imageTitle.IndexOf(">") != -1)
+                imageTitle = rgxFix7.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("|") != -1)
+                imageTitle = rgxFix8.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("\\") != -1)
+                imageTitle = rgxFix9.Replace(imageTitle, "");
+
             this.PictureContextMenu.Show(this.DetailsBox, e.Location);
             PictureContextMenu.Tag = "details\\";
             PictureContextMenu.Show(Cursor.Position);
@@ -1099,6 +1129,36 @@ namespace UGame
 
         private void IconBox_MouseUp(object sender, MouseEventArgs e)
         {
+            imageTitle = TitleBox.Text;
+            Regex rgxFix1 = new Regex("/");
+            Regex rgxFix2 = new Regex(":");
+            Regex rgxFix3 = new Regex(".*");
+            Regex rgxFix4 = new Regex(".?");
+            Regex rgxFix5 = new Regex("\"");
+            Regex rgxFix6 = new Regex("<");
+            Regex rgxFix7 = new Regex(">");
+            Regex rgxFix8 = new Regex("|");
+            Regex rgxFix9 = new Regex(@"T:\\");
+
+            while (imageTitle.IndexOf("/") != -1)
+                imageTitle = rgxFix1.Replace(imageTitle, "");
+            while (imageTitle.IndexOf(":") != -1)
+                imageTitle = rgxFix2.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("*") != -1)
+                imageTitle = rgxFix3.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("?") != -1)
+                imageTitle = rgxFix4.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("\"") != -1)
+                imageTitle = rgxFix5.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("<") != -1)
+                imageTitle = rgxFix6.Replace(imageTitle, "");
+            while (imageTitle.IndexOf(">") != -1)
+                imageTitle = rgxFix7.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("|") != -1)
+                imageTitle = rgxFix8.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("\\") != -1)
+                imageTitle = rgxFix9.Replace(imageTitle, "");
+
             this.PictureContextMenu.Show(this.IconBox, e.Location);
             PictureContextMenu.Tag = "icons\\";
             PictureContextMenu.Show(Cursor.Position);
@@ -1106,6 +1166,36 @@ namespace UGame
 
         private void BgBox_MouseUp(object sender, MouseEventArgs e)
         {
+            imageTitle = TitleBox.Text;
+            Regex rgxFix1 = new Regex("/");
+            Regex rgxFix2 = new Regex(":");
+            Regex rgxFix3 = new Regex(".*");
+            Regex rgxFix4 = new Regex(".?");
+            Regex rgxFix5 = new Regex("\"");
+            Regex rgxFix6 = new Regex("<");
+            Regex rgxFix7 = new Regex(">");
+            Regex rgxFix8 = new Regex("|");
+            Regex rgxFix9 = new Regex(@"T:\\");
+
+            while (imageTitle.IndexOf("/") != -1)
+                imageTitle = rgxFix1.Replace(imageTitle, "");
+            while (imageTitle.IndexOf(":") != -1)
+                imageTitle = rgxFix2.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("*") != -1)
+                imageTitle = rgxFix3.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("?") != -1)
+                imageTitle = rgxFix4.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("\"") != -1)
+                imageTitle = rgxFix5.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("<") != -1)
+                imageTitle = rgxFix6.Replace(imageTitle, "");
+            while (imageTitle.IndexOf(">") != -1)
+                imageTitle = rgxFix7.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("|") != -1)
+                imageTitle = rgxFix8.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("\\") != -1)
+                imageTitle = rgxFix9.Replace(imageTitle, "");
+
             this.PictureContextMenu.Show(this.BgBox, e.Location);
             PictureContextMenu.Tag = "bg\\";
             PictureContextMenu.Show(Cursor.Position);
@@ -1146,15 +1236,15 @@ namespace UGame
         private void DatabasePictureButton_Click(object sender, EventArgs e)
         {
             DGVForm dgvForm = new DGVForm("Images", PictureContextMenu.Tag.ToString(), this);
-
+            
             if (dgvForm.ShowDialog() == DialogResult.OK)
             {
                 if (PictureContextMenu.Tag.ToString() == "details\\")
-                    DetailsBox.BackgroundImage = Image.FromFile(resourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + dgvForm.fileExt);
+                    DetailsBox.BackgroundImage = Image.FromFile(resourcePath + PictureContextMenu.Tag.ToString() + imageTitle + ".png");
                 else if (PictureContextMenu.Tag.ToString() == "bg\\")
-                    BgBox.BackgroundImage = Image.FromFile(resourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + dgvForm.fileExt);
+                    BgBox.BackgroundImage = Image.FromFile(resourcePath + PictureContextMenu.Tag.ToString() + imageTitle + ".png");
                 else if (PictureContextMenu.Tag.ToString() == "icons\\")
-                    IconBox.BackgroundImage = Image.FromFile(resourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + dgvForm.fileExt);
+                    IconBox.BackgroundImage = Image.FromFile(resourcePath + PictureContextMenu.Tag.ToString() + imageTitle + ".png");
             }
         }
 
@@ -1191,23 +1281,42 @@ namespace UGame
 
             if (dialogResult == DialogResult.Yes)
             {
+                /*
                 string fileExt = browser.url;
                 while (fileExt.IndexOf(".") != -1)
                 {
                     fileExt = fileExt.Substring(fileExt.IndexOf(".") + 1);
                 }
+                */
 
                 WebClient webClient = new WebClient();
-                byte[] imageBytes = webClient.DownloadData(url);
+                try
+                {
+                    byte[] imageBytes = webClient.DownloadData(browser.url);
 
-                try { File.WriteAllBytes(resourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + fileExt, imageBytes); } catch { File.WriteAllBytes(resourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + ".jpg", imageBytes); }
+                    // try { File.WriteAllBytes(resourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + fileExt, imageBytes); } catch { File.WriteAllBytes(resourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + ".jpg", imageBytes); }
+                    File.WriteAllBytes(resourcePath + PictureContextMenu.Tag.ToString() + imageTitle + ".png", imageBytes);
 
-                if (PictureContextMenu.Tag.ToString() == "details\\")
-                    DetailsBox.BackgroundImage = Image.FromFile(resourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + fileExt);
-                else if (PictureContextMenu.Tag.ToString() == "bg\\")
-                    BgBox.BackgroundImage = Image.FromFile(resourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + fileExt);
-                else if (PictureContextMenu.Tag.ToString() == "icons\\")
-                    IconBox.BackgroundImage = Image.FromFile(resourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + fileExt);
+                    /*
+                    if (PictureContextMenu.Tag.ToString() == "details\\")
+                        DetailsBox.BackgroundImage = Image.FromFile(resourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + fileExt);
+                    else if (PictureContextMenu.Tag.ToString() == "bg\\")
+                        BgBox.BackgroundImage = Image.FromFile(resourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + fileExt);
+                    else if (PictureContextMenu.Tag.ToString() == "icons\\")
+                        IconBox.BackgroundImage = Image.FromFile(resourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + fileExt);
+                        */
+
+                    if (PictureContextMenu.Tag.ToString() == "details\\")
+                        DetailsBox.BackgroundImage = Image.FromFile(resourcePath + PictureContextMenu.Tag.ToString() + imageTitle + ".png");
+                    else if (PictureContextMenu.Tag.ToString() == "bg\\")
+                        BgBox.BackgroundImage = Image.FromFile(resourcePath + PictureContextMenu.Tag.ToString() + imageTitle + ".png");
+                    else if (PictureContextMenu.Tag.ToString() == "icons\\")
+                        IconBox.BackgroundImage = Image.FromFile(resourcePath + PictureContextMenu.Tag.ToString() + imageTitle + ".png");
+                }
+                catch
+                {
+                    MessageBox.Show("Image download failed.");
+                }
             }
         }
 

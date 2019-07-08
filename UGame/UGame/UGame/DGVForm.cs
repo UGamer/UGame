@@ -488,7 +488,7 @@ namespace UGame
 
         private void DGV_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
+            // try
             {
                 if (type == "DB")
                 {
@@ -531,7 +531,7 @@ namespace UGame
                     this.Close();
                 }
             }
-            catch { }
+            // catch { }
         }
 
         private void DGVForm_FormClosing(object sender, FormClosingEventArgs e)

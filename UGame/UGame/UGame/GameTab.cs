@@ -147,7 +147,7 @@ namespace UGame
 
             launchCodes = new string[launchCount, 2];
 
-            segment = launchString.Substring(7);
+            try { segment = launchString.Substring(7); } catch { }
 
             for (int index = 0; index < launchCount; index++)
             {

@@ -14,12 +14,13 @@ namespace UGame
     public partial class Notes : Form
     {
         private string titleFriendly;
+        string resourcePath;
 
-        public Notes(string titleFriendly)
+        public Notes(string titleFriendly, string resourcePath)
         {
             this.titleFriendly = titleFriendly;
             InitializeComponent();
-            LockButton.BackgroundImage = Image.FromFile("Resources\\Theme\\Unlock.png");
+            LockButton.BackgroundImage = Image.FromFile(resourcePath + "Unlock.png");
             InitializeDesign();
         }
 
@@ -99,12 +100,12 @@ namespace UGame
             if (locked == false)
             {
                 locked = true;
-                LockButton.BackgroundImage = Image.FromFile("Resources\\Theme\\Lock.png");
+                LockButton.BackgroundImage = Image.FromFile(resourcePath +"Lock.png");
             }
             else
             {
                 locked = false;
-                LockButton.BackgroundImage = Image.FromFile("Resources\\Theme\\Unlock.png");
+                LockButton.BackgroundImage = Image.FromFile(resourcePath + "Unlock.png");
             }
         }
 

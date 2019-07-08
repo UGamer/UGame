@@ -17,7 +17,7 @@ namespace UGame
         static bool flag = true;
         Timer vanish = new Timer();
 
-        GameTab refer;
+        public GameTab refer;
         DateTime now;
         Timer systemClock = new Timer();
         Timer playTimer = new Timer();
@@ -169,7 +169,7 @@ namespace UGame
             }
             catch
             {
-                notes = new Notes(refer.imageTitle);
+                notes = new Notes(refer.imageTitle, refer.refer.config.resourcePath);
                 notes.Show();
             }
         }
