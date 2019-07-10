@@ -431,9 +431,9 @@ namespace UGame
                     {
                         startInfo = new ProcessStartInfo(launchCode);
                     }
-
-                    Console.WriteLine(launchCode);
-                    Process.Start(startInfo);
+                    
+                    try { Process.Start(startInfo); }
+                    catch (Win32Exception) { MessageBox.Show("Launch failed, game not found."); }
                 }
                 else
                 {
@@ -553,7 +553,7 @@ namespace UGame
             timer.Stop();
 
             gameTab.Text = title;
-            
+            button1.Text = "Launch & Track";
         }
 
         public void PauseResume()

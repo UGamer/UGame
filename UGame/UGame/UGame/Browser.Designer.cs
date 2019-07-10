@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Browser));
             this.DownloadButton = new System.Windows.Forms.Button();
             this.AddressBar = new System.Windows.Forms.TextBox();
@@ -43,9 +44,12 @@
             this.OpacitySlider = new System.Windows.Forms.TrackBar();
             this.LockButton = new System.Windows.Forms.Button();
             this.FavoriteButton = new System.Windows.Forms.Button();
+            this.TabContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.CloseTabButton = new System.Windows.Forms.ToolStripMenuItem();
             this.BrowserDock.SuspendLayout();
             this.Tabs.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.OpacitySlider)).BeginInit();
+            this.TabContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // DownloadButton
@@ -66,6 +70,7 @@
             this.AddressBar.Name = "AddressBar";
             this.AddressBar.Size = new System.Drawing.Size(624, 20);
             this.AddressBar.TabIndex = 2;
+            this.AddressBar.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AddressBar_KeyDown);
             // 
             // SearchButton
             // 
@@ -102,6 +107,7 @@
             this.Tabs.TabIndex = 1;
             this.Tabs.SelectedIndexChanged += new System.EventHandler(this.Tabs_SelectedIndexChanged);
             this.Tabs.Selected += new System.Windows.Forms.TabControlEventHandler(this.Tabs_Selected);
+            this.Tabs.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Tabs_MouseUp);
             // 
             // tabPage1
             // 
@@ -110,7 +116,7 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(1013, 437);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.Text = "Loading...";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
@@ -139,6 +145,7 @@
             this.BackButton.TabIndex = 5;
             this.BackButton.Text = "<--";
             this.BackButton.UseVisualStyleBackColor = true;
+            this.BackButton.Click += new System.EventHandler(this.BackButton_Click);
             // 
             // NextButton
             // 
@@ -148,6 +155,7 @@
             this.NextButton.TabIndex = 6;
             this.NextButton.Text = "-->";
             this.NextButton.UseVisualStyleBackColor = true;
+            this.NextButton.Click += new System.EventHandler(this.NextButton_Click);
             // 
             // RefreshButton
             // 
@@ -157,6 +165,7 @@
             this.RefreshButton.TabIndex = 7;
             this.RefreshButton.Text = "↺";
             this.RefreshButton.UseVisualStyleBackColor = true;
+            this.RefreshButton.Click += new System.EventHandler(this.RefreshButton_Click);
             // 
             // OpacitySlider
             // 
@@ -167,7 +176,7 @@
             this.OpacitySlider.Name = "OpacitySlider";
             this.OpacitySlider.Size = new System.Drawing.Size(104, 45);
             this.OpacitySlider.TabIndex = 8;
-            this.OpacitySlider.Value = 5;
+            this.OpacitySlider.Value = 100;
             this.OpacitySlider.ValueChanged += new System.EventHandler(this.OpacitySlider_ValueChanged);
             // 
             // LockButton
@@ -189,6 +198,20 @@
             this.FavoriteButton.TabIndex = 24;
             this.FavoriteButton.Text = "⭐";
             this.FavoriteButton.UseVisualStyleBackColor = true;
+            // 
+            // TabContextMenu
+            // 
+            this.TabContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CloseTabButton});
+            this.TabContextMenu.Name = "TabContextMenu";
+            this.TabContextMenu.Size = new System.Drawing.Size(126, 26);
+            // 
+            // CloseTabButton
+            // 
+            this.CloseTabButton.Name = "CloseTabButton";
+            this.CloseTabButton.Size = new System.Drawing.Size(125, 22);
+            this.CloseTabButton.Text = "Close Tab";
+            this.CloseTabButton.Click += new System.EventHandler(this.CloseTabButton_Click);
             // 
             // Browser
             // 
@@ -214,6 +237,7 @@
             this.BrowserDock.PerformLayout();
             this.Tabs.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.OpacitySlider)).EndInit();
+            this.TabContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -234,5 +258,7 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.ToolStrip BookmarkBar;
         private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.ContextMenuStrip TabContextMenu;
+        private System.Windows.Forms.ToolStripMenuItem CloseTabButton;
     }
 }

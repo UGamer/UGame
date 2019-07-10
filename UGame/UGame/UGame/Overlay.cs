@@ -150,12 +150,12 @@ namespace UGame
                 try
                 {
                     Console.WriteLine(refer.urlString);
-                    browser = new Browser(refer.urlString);
+                    browser = new Browser(refer.urlString, "Browser");
                     browser.Show();
                 }
                 catch
                 {
-                    browser = new Browser("https://www.google.com/");
+                    browser = new Browser("https://www.google.com/", "Browser");
                     browser.Show();
                 }
             }

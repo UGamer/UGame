@@ -15,11 +15,17 @@ namespace UGame
     {
         private string titleFriendly;
         string resourcePath;
+        NotesTextBox textBox;
 
         public Notes(string titleFriendly, string resourcePath)
         {
             this.titleFriendly = titleFriendly;
             InitializeComponent();
+
+            textBox = new NotesTextBox();
+            Controls.Add(textBox);
+            textBox.BringToFront();
+
             LockButton.BackgroundImage = Image.FromFile(resourcePath + "Unlock.png");
             InitializeDesign();
         }
@@ -55,7 +61,7 @@ namespace UGame
             try
             {
                 TextWriter tw = new StreamWriter(folderPath + fileName);
-                tw.WriteLine(NotepadArea.Text);
+                tw.WriteLine(textBox.Text);
                 tw.Close();
                 // File.WriteAllText(filename, logfiletextbox.Text);
                 MessageBox.Show("Saved to \"" + folderPath, "\".", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -64,7 +70,7 @@ namespace UGame
             {
                 Directory.CreateDirectory("Notes\\" + titleFriendly);
                 TextWriter tw = new StreamWriter(folderPath + fileName);
-                tw.WriteLine(NotepadArea.Text);
+                tw.WriteLine(textBox.Text);
                 tw.Close();
                 // File.WriteAllText(filename, logfiletextbox.Text);
                 MessageBox.Show("Saved to \"" + folderPath, "\".", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -75,7 +81,7 @@ namespace UGame
         {
             if (LoadFileDialog.ShowDialog() == DialogResult.OK)
             {
-                NotepadArea.Text = File.ReadAllText(LoadFileDialog.FileName, Encoding.UTF8);
+                textBox.Text = File.ReadAllText(LoadFileDialog.FileName, Encoding.UTF8);
             }
 
             // Figures out where to start

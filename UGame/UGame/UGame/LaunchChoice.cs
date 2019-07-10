@@ -20,6 +20,8 @@ namespace UGame
 
             for (int index = 0; index < launchCount; index++)
                 LaunchBox.Items.Add("[" + index + "] " + launchTable[index, 0]);
+
+            LaunchBox.Text = LaunchBox.Items[0].ToString();
         }
 
         private void LaunchButton_Click(object sender, EventArgs e)

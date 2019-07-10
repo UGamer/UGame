@@ -173,6 +173,9 @@
     <Compile Include="Notes.Designer.cs">
       <DependentUpon>Notes.cs</DependentUpon>
     </Compile>
+    <Compile Include="NotesTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Overlay.cs">
       <SubType>Form</SubType>
     </Compile>

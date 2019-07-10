@@ -76,7 +76,6 @@ namespace UGame
             InitializeTheme();
             FillDGV();
 
-            try { GamesDGV.Sort(GamesDGV.Columns["Title"], ListSortDirection.Ascending); } catch { }
             try { ConsolesDGV.Sort(ConsolesDGV.Columns["Name"], ListSortDirection.Ascending); } catch { }
 
             FillConsole(ConsolesDGV.Rows[0].Cells["Name"].Value.ToString());
@@ -208,6 +207,8 @@ namespace UGame
             }
             catch { }
 
+            try { GamesDGV.Sort(GamesDGV.Columns["Title"], ListSortDirection.Ascending); } catch { }
+
             // The code from hereon deals with filling the Consoles DGV
             consoleTable = new DataTable();
 
@@ -301,9 +302,12 @@ namespace UGame
             {
                 if (e.Button == MouseButtons.Right)
                 {
-                    this.GamesDGV.Rows[e.RowIndex].Selected = true;
+                    // this.GamesDGV.Rows[e.RowIndex].Selected = true;
                     this.rowIndex = e.RowIndex;
-                    this.GamesDGV.CurrentCell = this.GamesDGV.Rows[e.RowIndex].Cells[e.ColumnIndex];
+
+                    if (GamesDGV.SelectedRows.Count <= 1)
+                        GamesDGV.CurrentCell = GamesDGV.Rows[e.RowIndex].Cells[e.ColumnIndex];
+
                     this.GamesDGVContextMenu.Show(this.GamesDGV, e.Location);
                     GamesDGVContextMenu.Show(Cursor.Position);
                 }
@@ -318,15 +322,17 @@ namespace UGame
 
         private void DeleteEntryButton_Click(object sender, EventArgs e)
         {
-            int deletedId = Convert.ToInt32(GamesDGV.Rows[rowIndex].Cells["Id"].Value);
+            for (int index = 0; index < GamesDGV.SelectedRows.Count; index++)
+            {
+                Console.WriteLine(GamesDGV.SelectedRows[index].Cells["Title"].Value);
 
-            SQLiteCommand deleteCommand = new SQLiteCommand("DELETE FROM Games WHERE Id = " + deletedId, con);
-            deleteCommand.ExecuteNonQuery();
+                int deletedId = Convert.ToInt32(GamesDGV.SelectedRows[index].Cells["Id"].Value);
 
-            GamesDGV.Rows.Remove(GamesDGV.Rows[rowIndex]);
-
-            DataRow row = ((DataRowView)GamesDGV.Rows[editedRow].DataBoundItem).Row;
-            gameTable.Rows.Remove(row);
+                SQLiteCommand deleteCommand = new SQLiteCommand("DELETE FROM Games WHERE Id = " + deletedId, con);
+                deleteCommand.ExecuteNonQuery();
+            }
+            
+            FillDGV();
 
             GamesListTab.Text = "[LIST] " + gameTable.Rows.Count + "/" + gameTable.Rows.Count;
         }
@@ -1321,11 +1327,13 @@ namespace UGame
             }
             url += "&source=lnms&tbm=isch";
 
-            Browser browser = new Browser(url);
+            Browser browser = new Browser(url, "Download");
             DialogResult dialogResult = browser.ShowDialog();
 
             if (dialogResult == DialogResult.Yes)
             {
+                string downloadUrl = browser.downloadUrl;
+
                 /*
                 string fileExt = browser.url;
                 while (fileExt.IndexOf(".") != -1)
@@ -1337,20 +1345,12 @@ namespace UGame
                 WebClient webClient = new WebClient();
                 try
                 {
-                    byte[] imageBytes = webClient.DownloadData(browser.url);
+                    byte[] imageBytes = webClient.DownloadData(downloadUrl);
+                    Console.WriteLine(imageBytes.LongLength);
 
                     // try { File.WriteAllBytes(resourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + fileExt, imageBytes); } catch { File.WriteAllBytes(resourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + ".jpg", imageBytes); }
                     File.WriteAllBytes(resourcePath + PictureContextMenu.Tag.ToString() + imageTitle + ".png", imageBytes);
-
-                    /*
-                    if (PictureContextMenu.Tag.ToString() == "details\\")
-                        DetailsBox.BackgroundImage = Image.FromFile(resourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + fileExt);
-                    else if (PictureContextMenu.Tag.ToString() == "bg\\")
-                        BgBox.BackgroundImage = Image.FromFile(resourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + fileExt);
-                    else if (PictureContextMenu.Tag.ToString() == "icons\\")
-                        IconBox.BackgroundImage = Image.FromFile(resourcePath + PictureContextMenu.Tag.ToString() + TitleBox.Text + "." + fileExt);
-                        */
-
+                    
                     if (PictureContextMenu.Tag.ToString() == "details\\")
                         DetailsBox.BackgroundImage = Image.FromFile(resourcePath + PictureContextMenu.Tag.ToString() + imageTitle + ".png");
                     else if (PictureContextMenu.Tag.ToString() == "bg\\")

@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Notes));
-            this.NotepadArea = new System.Windows.Forms.TextBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.LoadButton = new System.Windows.Forms.ToolStripButton();
             this.SaveButton = new System.Windows.Forms.ToolStripButton();
@@ -45,19 +44,6 @@
             this.SavePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.OpacityBar)).BeginInit();
             this.SuspendLayout();
-            // 
-            // NotepadArea
-            // 
-            this.NotepadArea.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.NotepadArea.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NotepadArea.Location = new System.Drawing.Point(12, 28);
-            this.NotepadArea.Multiline = true;
-            this.NotepadArea.Name = "NotepadArea";
-            this.NotepadArea.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.NotepadArea.Size = new System.Drawing.Size(775, 410);
-            this.NotepadArea.TabIndex = 1;
             // 
             // toolStrip1
             // 
@@ -162,7 +148,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.SavePanel);
-            this.Controls.Add(this.NotepadArea);
             this.Controls.Add(this.OpacityBar);
             this.Controls.Add(this.LockButton);
             this.Controls.Add(this.toolStrip1);
@@ -181,8 +166,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox NotepadArea;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton LoadButton;
         private System.Windows.Forms.ToolStripButton SaveButton;
