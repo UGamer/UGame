@@ -161,6 +161,7 @@
             this.TasksButton.Text = "TASKS";
             this.TasksButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.TasksButton.UseVisualStyleBackColor = true;
+            this.TasksButton.Click += new System.EventHandler(this.TasksButton_Click);
             // 
             // AchievementsButton
             // 

@@ -1,4 +1,6 @@
-﻿using StackBlur;
+﻿using DiscordRPC;
+using DiscordRPC.Logging;
+using StackBlur;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -46,7 +48,7 @@ namespace UGame
         public string filters;
         public string developer;
         public string publisher;
-        public string releaseDate;
+        public DateTime releaseDate;
         public string genre;
         public string playerCount;
         public decimal price;
@@ -58,9 +60,10 @@ namespace UGame
         public string[,] launchCodes;
         bool blur;
         bool useOverlay;
+        bool discord;
 
         public string imageTitle;
-
+        DateTime tempStartDate;
         public int screenshotCount;
         DateTime startTime;
         GameSummary gameSummary;
@@ -85,6 +88,10 @@ namespace UGame
 
         bool tracking = false;
         Overlay overlay;
+        DiscordRpcClient discordRpc;
+        ulong rpcStart;
+        ulong rpcEnd;
+        int sessionTime;
 
         public GameTab(MainForm refer, int rowIndex, int tabCount, int id)
         {
@@ -100,11 +107,13 @@ namespace UGame
             try { rating = Convert.ToInt32(refer.GamesDGV.Rows[rowIndex].Cells["Rating"].Value.ToString()); } catch { }
             timePlayed = refer.GamesDGV.Rows[rowIndex].Cells["TimePlayed"].Value.ToString();
             try { totalSeconds = Convert.ToInt32(refer.GamesDGV.Rows[rowIndex].Cells["Seconds"].Value.ToString()); } catch { }
+
             try { obtained = Convert.ToDateTime(refer.GamesDGV.Rows[rowIndex].Cells["Obtained"].Value.ToString()); } catch { }
             try { startDate = Convert.ToDateTime(refer.GamesDGV.Rows[rowIndex].Cells["StartDate"].Value.ToString()); } catch { }
             try { lastPlayed = Convert.ToDateTime(refer.GamesDGV.Rows[rowIndex].Cells["LastPlayed"].Value.ToString()); } catch { }
+            try { releaseDate = Convert.ToDateTime(refer.GamesDGV.Rows[rowIndex].Cells["ReleaseDate"].Value.ToString()); } catch { }
             notes = refer.GamesDGV.Rows[rowIndex].Cells["Notes"].Value.ToString();
-
+            
             // URLs
             urlString = refer.GamesDGV.Rows[rowIndex].Cells["URLs"].Value.ToString();
             int urlCount = 0;
@@ -131,7 +140,6 @@ namespace UGame
 
             developer = refer.GamesDGV.Rows[rowIndex].Cells["Developers"].Value.ToString();
             publisher = refer.GamesDGV.Rows[rowIndex].Cells["Publishers"].Value.ToString();
-            releaseDate = refer.GamesDGV.Rows[rowIndex].Cells["ReleaseDate"].Value.ToString();
             genre = refer.GamesDGV.Rows[rowIndex].Cells["Genre"].Value.ToString();
             playerCount = refer.GamesDGV.Rows[rowIndex].Cells["PlayerCount"].Value.ToString();
             try { price = Convert.ToDecimal(refer.GamesDGV.Rows[rowIndex].Cells["Price"].Value.ToString()); } catch { price = -1; }
@@ -164,7 +172,17 @@ namespace UGame
 
             try { blur = Convert.ToBoolean(refer.GamesDGV.Rows[rowIndex].Cells["Blur"].Value.ToString()); } catch { blur = true; }
             try { useOverlay = Convert.ToBoolean(refer.GamesDGV.Rows[rowIndex].Cells["Overlay"].Value.ToString()); } catch { useOverlay = true; }
-            
+            try { discord = Convert.ToBoolean(refer.GamesDGV.Rows[rowIndex].Cells["Discord"].Value.ToString()); } catch { discord = true; }
+
+            if (obtained == new DateTime())
+                obtained = new DateTime(1753, 1, 1);
+            if (startDate == new DateTime())
+                startDate = new DateTime(1753, 1, 1);
+            if (lastPlayed == new DateTime())
+                lastPlayed = new DateTime(1753, 1, 1);
+            if (releaseDate == new DateTime())
+                releaseDate = new DateTime(1753, 1, 1);
+
             imageTitle = title;
             Regex rgxFix1 = new Regex("/");
             Regex rgxFix2 = new Regex(":");
@@ -457,8 +475,10 @@ namespace UGame
         {
             button1.Visible = true;
             button3.Visible = true;
-
             button2.Location = new Point(548, 82);
+
+            if (startDate == new DateTime(1753, 1, 1, 0, 0, 0))
+                tempStartDate = DateTime.Now;
 
             tracking = true;
 
@@ -482,30 +502,54 @@ namespace UGame
             button2.Text = "Pause Playing";
             button3.Text = "Discard Session";
 
-            // OVERLAY STUFF
+            if (discord)
+                InitRichPresence();
+        }
+
+        private void InitRichPresence()
+        {
+            discordRpc = new DiscordRpcClient("556202672236003329");
+            discordRpc.Logger = new ConsoleLogger() { Level = LogLevel.Warning };
+
+            discordRpc.OnReady += (sender, e) =>
+            {
+                Console.WriteLine("Received Ready from user {0}", e.User.Username);
+            };
+
+            discordRpc.OnPresenceUpdate += (sender, e) =>
+            {
+                Console.WriteLine("Received Update! {0}", e.Presence);
+            };
+
+            discordRpc.Initialize();
 
             /*
             TimeSpan t = DateTime.UtcNow - new DateTime(1970, 1, 1);
-            richStartTimeStamp = (int)t.TotalSeconds;
-            string richPresenceConfig = "[Identifiers]\nClientID=556202672236003329\n\n[State]\nState=Playing\nDetails=" + title +
-                "\nStartTimestamp=" + richStartTimeStamp + "\nEndTimestamp=\n\n\n[Images]\nLargeImage=default\nLargeImageTooltip=\nSmallImage=play\nSmallImageTooltip=";
-
-            TextWriter tw = new StreamWriter("config.ini");
-            tw.WriteLine(richPresenceConfig);
-            tw.Close();
-
-            // discordRichPresenceStartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            discordRichPresenceStartInfo.WindowStyle = ProcessWindowStyle.Minimized;
-            try
-            {
-                discordRichPresence = Process.Start(discordRichPresenceStartInfo);
-            }
-            catch { }
+            int startTime = (int)t.TotalSeconds;
             */
+
+            discordRpc.SetPresence(new RichPresence()
+            {
+                Details = title,
+                State = "Playing",
+                Timestamps = new Timestamps()
+                {
+                    Start = DateTime.Now
+                },
+
+                Assets = new Assets()
+                {
+                    LargeImageKey = "default",
+                    // LargeImageText = "Lachee's Discord IPC Library",
+                    SmallImageKey = "play",
+                    SmallImageText = "Playing"
+                }
+            });
         }
 
         public void Stop(bool save)
         {
+            discordRpc.Dispose();
             overlay.Close();
             tracking = false;
 
@@ -515,6 +559,11 @@ namespace UGame
 
             if (save)
             {
+                if (startDate == new DateTime(1753, 1, 1, 0, 0, 0))
+                    tempStartDate = DateTime.Now;
+
+                startDate = tempStartDate;
+
                 totalSeconds += seconds + (minutes * 60) + (hours * 3600);
 
                 int hour; int min; int sec;
@@ -548,7 +597,7 @@ namespace UGame
                 DateTime lastPlayed = DateTime.Now;
 
                 // WRITE EVERYTHING TO THE DATABASE
-                refer.UpdateTime(timePlayed, totalSeconds, lastPlayed, id);
+                refer.UpdateTime(timePlayed, totalSeconds, lastPlayed, id, startDate);
                 // WRITE EVERYTHING TO THE DATABASE
 
                 timePlayedLabel.Text = "Time Played          : " + timePlayed;
@@ -560,6 +609,7 @@ namespace UGame
                     {
                         refer.GamesDGV.Rows[index].Cells["TimePlayed"].Value = timePlayed;
                         refer.GamesDGV.Rows[index].Cells["Seconds"].Value = totalSeconds;
+                        refer.GamesDGV.Rows[index].Cells["StartDate"].Value = startDate;
                         refer.GamesDGV.Rows[index].Cells["LastPlayed"].Value = lastPlayed;
                         break;
                     }
@@ -579,18 +629,71 @@ namespace UGame
                 button2.Location = new Point(365, 82);
             }
         }
-
+        
         public void PauseResume()
         {
             if (button2.Text == "Pause Playing")
             {
                 timer.Stop();
+                
+                if (discord)
+                {
+                    TimeSpan t = DateTime.UtcNow - new DateTime(1970, 1, 1);
+                    rpcEnd = (ulong)t.TotalSeconds;
+
+                    discordRpc.SetPresence(new RichPresence()
+                    {
+                        Details = title,
+                        State = "Paused",
+                        Timestamps = new Timestamps()
+                        {
+                            Start = null,
+                            End = null
+                        },
+
+                        Assets = new Assets()
+                        {
+                            LargeImageKey = "default",
+                            // LargeImageText = "Lachee's Discord IPC Library",
+                            SmallImageKey = "pause",
+                            SmallImageText = "Paused"
+                        }
+                    });
+                }
+
                 SetText("Resume Playing", ref button2);
                 overlay.PauseButton.Text = "Resume Playing";
             }
             else
             {
                 timer.Start();
+
+                if (discord)
+                {
+                    ulong timePlayed = rpcEnd - rpcStart;
+                    TimeSpan t = DateTime.UtcNow - new DateTime(1970, 1, 1);
+                    rpcStart = (ulong)t.TotalSeconds - timePlayed;
+
+                    discordRpc.SetPresence(new RichPresence()
+                    {
+                        Details = title,
+                        State = "Playing",
+                        Timestamps = new Timestamps()
+                        {
+                            StartUnixMilliseconds = rpcStart,
+                            EndUnixMilliseconds = rpcEnd
+                        },
+
+                        Assets = new Assets()
+                        {
+                            LargeImageKey = "default",
+                            // LargeImageText = "Lachee's Discord IPC Library",
+                            SmallImageKey = "play",
+                            SmallImageText = "Playing"
+                        }
+                    });
+                }
+
                 SetText("Pause Playing", ref button2);
                 overlay.PauseButton.Text = "Pause Playing";
             }

@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Utilities;
@@ -24,14 +27,49 @@ namespace UGame
 
         Browser browser;
         Notes notes;
+        Tasks tasks;
+
+        string imageTitle;
 
         public Overlay(string title, Image icon, GameTab refer)
         {
+
             this.refer = refer;
+
+            string imageTitle = title;
+            Regex rgxFix1 = new Regex("/");
+            Regex rgxFix2 = new Regex(":");
+            Regex rgxFix3 = new Regex(".*");
+            Regex rgxFix4 = new Regex(".?");
+            Regex rgxFix5 = new Regex("\"");
+            Regex rgxFix6 = new Regex("<");
+            Regex rgxFix7 = new Regex(">");
+            Regex rgxFix8 = new Regex("|");
+            Regex rgxFix9 = new Regex(@"T:\\");
+
+            while (imageTitle.IndexOf("/") != -1)
+                imageTitle = rgxFix1.Replace(imageTitle, "");
+            while (imageTitle.IndexOf(":") != -1)
+                imageTitle = rgxFix2.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("*") != -1)
+                imageTitle = rgxFix3.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("?") != -1)
+                imageTitle = rgxFix4.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("\"") != -1)
+                imageTitle = rgxFix5.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("<") != -1)
+                imageTitle = rgxFix6.Replace(imageTitle, "");
+            while (imageTitle.IndexOf(">") != -1)
+                imageTitle = rgxFix7.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("|") != -1)
+                imageTitle = rgxFix8.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("\\") != -1)
+                imageTitle = rgxFix9.Replace(imageTitle, "");
             
             InitializeComponent();
 
             gkh.HookedKeys.Add(Keys.Home);
+            gkh.HookedKeys.Add(Keys.PrintScreen);
             gkh.KeyDown += new KeyEventHandler(gkh_KeyDown);
 
             vanish.Interval = 1;
@@ -56,14 +94,108 @@ namespace UGame
         
         private void gkh_KeyDown(object sender, KeyEventArgs e)
         {
-            if (!flag)
+            if (e.KeyData == Keys.Home)
             {
-                this.Show();
-                try { browser.Show(); } catch { }
-                try { notes.Show(); } catch { }
+                if (!flag)
+                {
+                    this.Show();
+                    try { browser.Show(); } catch { }
+                    try { notes.Show(); } catch { }
+                }
+                vanish.Start();
             }
+            
 
-            vanish.Start();
+            if (e.KeyData == Keys.PrintScreen)
+            {
+                try
+                {
+                    try { this.Hide(); }
+                    catch (NullReferenceException f) { }
+
+                    try { browser.Hide(); }
+                    catch (NullReferenceException f) { }
+
+                    try { notes.Hide(); }
+                    catch (NullReferenceException f) { }
+
+                    //Creating a new Bitmap object
+                    int screenWidth = Convert.ToInt32(Screen.PrimaryScreen.Bounds.Width.ToString());
+                    int screenHeight = Convert.ToInt32(Screen.PrimaryScreen.Bounds.Height.ToString());
+
+                    Bitmap captureBitmap = new Bitmap(screenWidth, screenHeight, PixelFormat.Format32bppArgb);
+
+
+                    //Creating a Rectangle object which will  
+
+                    //capture our Current Screen
+
+                    Rectangle captureRectangle = Screen.AllScreens[0].Bounds;
+
+
+                    //Creating a New Graphics Object
+
+                    Graphics captureGraphics = Graphics.FromImage(captureBitmap);
+
+
+                    //Copying Image from The Screen
+
+                    captureGraphics.CopyFromScreen(captureRectangle.Left, captureRectangle.Top, 0, 0, captureRectangle.Size);
+
+
+                    //Saving the Image File (I am here Saving it in My E drive).
+                    
+                    string folderPath = "Screenshots\\" + imageTitle + "\\";
+                    string fileName = "";
+                    int number = 1;
+                    bool dupe = true;
+
+                    for (dupe = true; dupe == true; number++)
+                    {
+                        fileName = "[" + imageTitle + "] " + number;
+                        dupe = File.Exists(folderPath + fileName + ".jpg");
+                    }
+
+                    dupe = true;
+
+                    try
+                    {
+                        captureBitmap.Save(folderPath + fileName + ".jpg", ImageFormat.Jpeg);
+                        /*
+                        ScreenshotLabel.Visible = true;
+                        screenshotTimer = new System.Windows.Forms.Timer();
+                        screenshotTimer.Interval = 2000;
+                        screenshotTimer.Tick += new EventHandler(this.screenshotTimer_tick);
+                        screenshotTimer.Start();
+                        */
+                    }
+                    catch
+                    {
+                        Directory.CreateDirectory("Screenshots\\" + imageTitle);
+                        captureBitmap.Save(folderPath + fileName + ".jpg", ImageFormat.Jpeg);
+                        /*
+                        ScreenshotLabel.Visible = true;
+                        screenshotTimer = new System.Windows.Forms.Timer();
+                        screenshotTimer.Interval = 2000;
+                        screenshotTimer.Tick += new EventHandler(this.screenshotTimer_tick);
+                        screenshotTimer.Start();
+                        */
+                    }
+
+
+                    //Displaying the Successful Result
+
+                    try { this.Show(); }
+                    catch (NullReferenceException f) { }
+                }
+
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+                e.Handled = true;
+            }
         }
 
         private void Vanish_Tick(object sender, EventArgs e)
@@ -177,6 +309,49 @@ namespace UGame
         private void Overlay_FormClosed(object sender, FormClosedEventArgs e)
         {
             gkh.HookedKeys.Remove(Keys.Home);
+        }
+
+        private void TasksButton_Click(object sender, EventArgs e)
+        {
+            string imageTitle = TitleLabel.Text;
+            Regex rgxFix1 = new Regex("/");
+            Regex rgxFix2 = new Regex(":");
+            Regex rgxFix3 = new Regex(".*");
+            Regex rgxFix4 = new Regex(".?");
+            Regex rgxFix5 = new Regex("\"");
+            Regex rgxFix6 = new Regex("<");
+            Regex rgxFix7 = new Regex(">");
+            Regex rgxFix8 = new Regex("|");
+            Regex rgxFix9 = new Regex(@"T:\\");
+
+            while (imageTitle.IndexOf("/") != -1)
+                imageTitle = rgxFix1.Replace(imageTitle, "");
+            while (imageTitle.IndexOf(":") != -1)
+                imageTitle = rgxFix2.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("*") != -1)
+                imageTitle = rgxFix3.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("?") != -1)
+                imageTitle = rgxFix4.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("\"") != -1)
+                imageTitle = rgxFix5.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("<") != -1)
+                imageTitle = rgxFix6.Replace(imageTitle, "");
+            while (imageTitle.IndexOf(">") != -1)
+                imageTitle = rgxFix7.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("|") != -1)
+                imageTitle = rgxFix8.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("\\") != -1)
+                imageTitle = rgxFix9.Replace(imageTitle, "");
+
+            try
+            {
+                tasks.Show();
+            }
+            catch
+            {
+                tasks = new Tasks(imageTitle);
+                tasks.Show();
+            }
         }
     }
 }

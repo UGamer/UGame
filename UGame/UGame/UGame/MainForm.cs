@@ -150,7 +150,6 @@ namespace UGame
                 catch { }
                 
                 // This code prevents editing entries with any date that has 1/1/1753. Need to find another way.
-                /*
                 try
                 {
                     if (Convert.ToDateTime(GamesDGV.Rows[index].Cells["Obtained"].Value) == new DateTime(1753, 1, 1))
@@ -163,15 +162,13 @@ namespace UGame
                         GamesDGV.Rows[index].Cells["LastPlayed"].Value = "";
                 }
                 catch { }
-                */
 
 
-                // This code results in an error for each cell with -1 for a price. Maybe just hide the text with a font color or something
-                // for -1 values?
-                /*
+                // Code works, but column doesn't sort properly. Same problem from UGame 1.0
                 if (Convert.ToDecimal(GamesDGV.Rows[index].Cells["Price"].Value) == -1)
-                    GamesDGV.Rows[index].Cells["Price"].Value = "S";
-                    */
+                    GamesDGV.Rows[index].Cells["Price"].Value = "";
+                else if (Convert.ToDecimal(GamesDGV.Rows[index].Cells["Price"].Value) == 0)
+                    GamesDGV.Rows[index].Cells["Price"].Value = "Free";
 
             }
 
@@ -664,9 +661,6 @@ namespace UGame
 
         public void EditEntry(int rowIndex)
         {
-            //
-            //
-            //
 
             Clear();
             
@@ -684,6 +678,17 @@ namespace UGame
             DateTime lastPlayed = Convert.ToDateTime(GamesDGV.Rows[rowIndex].Cells["LastPlayed"].Value);
             DateTime releaseDate = Convert.ToDateTime(GamesDGV.Rows[rowIndex].Cells["ReleaseDate"].Value);
 
+            if (obtained == new DateTime())
+                obtained = new DateTime(1753, 1, 1);
+            if (startDate == new DateTime())
+                startDate = new DateTime(1753, 1, 1);
+            if (lastPlayed == new DateTime())
+                lastPlayed = new DateTime(1753, 1, 1);
+            if (releaseDate == new DateTime())
+                releaseDate = new DateTime(1753, 1, 1);
+
+            Console.WriteLine(startDate);
+
             TitleBox.Text = GamesDGV.Rows[rowIndex].Cells["Title"].Value.ToString();
             PlatformBox.Text = GamesDGV.Rows[rowIndex].Cells["Platform"].Value.ToString();
             StatusBox.Text = GamesDGV.Rows[rowIndex].Cells["Status"].Value.ToString();
@@ -697,17 +702,17 @@ namespace UGame
             LastPlayedCheck.Checked = false;
             ReleaseDateCheck.Checked = false;
 
-            if (Convert.ToDateTime(GamesDGV.Rows[rowIndex].Cells["Obtained"].Value) == new DateTime(1753, 1, 1))
+            if (obtained == new DateTime(1753, 1, 1))
                 ObtainedCheck.Checked = true;
             else
                 ObtainedDatePicker.Value = obtained;
 
-            if (Convert.ToDateTime(GamesDGV.Rows[rowIndex].Cells["StartDate"].Value) == new DateTime(1753, 1, 1))
+            if (startDate == new DateTime(1753, 1, 1))
                 StartDateCheck.Checked = true;
             else
                 StartDatePicker.Value = startDate;
             
-            if (Convert.ToDateTime(GamesDGV.Rows[rowIndex].Cells["LastPlayed"].Value) == new DateTime(1753, 1, 1))
+            if (lastPlayed == new DateTime(1753, 1, 1))
                 LastPlayedCheck.Checked = true;
             else
                 LastPlayedDatePicker.Value = lastPlayed;
@@ -719,7 +724,7 @@ namespace UGame
             DevelopersBox.Text = GamesDGV.Rows[rowIndex].Cells["Developers"].Value.ToString();
             PublishersBox.Text = GamesDGV.Rows[rowIndex].Cells["Publishers"].Value.ToString();
 
-            if (Convert.ToDateTime(GamesDGV.Rows[rowIndex].Cells["ReleaseDate"].Value) == new DateTime(1753, 1, 1))
+            if (releaseDate == new DateTime(1753, 1, 1))
                 ReleaseDateCheck.Checked = true;
             else
                 ReleaseDatePicker.Value = releaseDate;
@@ -1448,9 +1453,9 @@ namespace UGame
             games.RemoveAt(tabIndex);
         }
         
-        public void UpdateTime(string timePlayed, int totalSeconds, DateTime lastPlayed, int id)
+        public void UpdateTime(string timePlayed, int totalSeconds, DateTime lastPlayed, int id, DateTime startDate)
         {
-            SQLiteCommand updateCmd = new SQLiteCommand("UPDATE Games SET TimePlayed = '" + timePlayed + "', Seconds = " + totalSeconds + ", LastPlayed = '" + lastPlayed.ToString("yyyy-MM-dd HH:mm:ss") + "' WHERE Id = " + id + ";", con);
+            SQLiteCommand updateCmd = new SQLiteCommand("UPDATE Games SET TimePlayed = '" + timePlayed + "', Seconds = " + totalSeconds + ", StartDate = '" + startDate.ToString("yyyy-MM-dd HH:mm:ss") + "', LastPlayed = '" + lastPlayed.ToString("yyyy-MM-dd HH:mm:ss") + "' WHERE Id = " + id + ";", con);
             updateCmd.ExecuteNonQuery();
         }
 
