@@ -280,7 +280,7 @@ namespace UGame
 
         private void GamesDGV_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            NewTab(e.RowIndex);
+            try { NewTab(e.RowIndex); } catch { }
         }
 
         private void MainForm_KeyUp(object sender, KeyEventArgs e)
