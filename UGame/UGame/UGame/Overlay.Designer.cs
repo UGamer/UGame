@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Overlay));
             this.IconBox = new System.Windows.Forms.PictureBox();
             this.TitleLabel = new System.Windows.Forms.Label();
             this.ClockLabel = new System.Windows.Forms.Label();
@@ -212,6 +213,7 @@
             this.Controls.Add(this.TitleLabel);
             this.Controls.Add(this.IconBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Overlay";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Overlay";

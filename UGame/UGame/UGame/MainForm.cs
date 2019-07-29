@@ -664,6 +664,10 @@ namespace UGame
 
         public void EditEntry(int rowIndex)
         {
+            //
+            //
+            //
+
             Clear();
             
             editedId = Convert.ToInt32(GamesDGV.Rows[rowIndex].Cells["Id"].Value);
@@ -704,9 +708,9 @@ namespace UGame
                 StartDatePicker.Value = startDate;
             
             if (Convert.ToDateTime(GamesDGV.Rows[rowIndex].Cells["LastPlayed"].Value) == new DateTime(1753, 1, 1))
-                ReleaseDateCheck.Checked = true;
+                LastPlayedCheck.Checked = true;
             else
-                ReleaseDatePicker.Value = releaseDate;
+                LastPlayedDatePicker.Value = lastPlayed;
 
             NotesBox.Text = GamesDGV.Rows[rowIndex].Cells["Notes"].Value.ToString();
             urlString = GamesDGV.Rows[rowIndex].Cells["URLs"].Value.ToString();
@@ -733,13 +737,43 @@ namespace UGame
 
             launchString = GamesDGV.Rows[rowIndex].Cells["Launch"].Value.ToString();
 
-            BlurCheck.Checked = Convert.ToBoolean(GamesDGV.Rows[rowIndex].Cells["Blur"].Value);
-            OverlayCheck.Checked = Convert.ToBoolean(GamesDGV.Rows[rowIndex].Cells["Overlay"].Value);
-            DiscordCheck.Checked = Convert.ToBoolean(GamesDGV.Rows[rowIndex].Cells["Discord"].Value);
+            try { BlurCheck.Checked = Convert.ToBoolean(GamesDGV.Rows[rowIndex].Cells["Blur"].Value); } catch { BlurCheck.Checked = true; }
+            try { OverlayCheck.Checked = Convert.ToBoolean(GamesDGV.Rows[rowIndex].Cells["Overlay"].Value); } catch { OverlayCheck.Checked = true; }
+            try { DiscordCheck.Checked = Convert.ToBoolean(GamesDGV.Rows[rowIndex].Cells["Discord"].Value); } catch { DiscordCheck.Checked = true; }
 
-            try { DetailsBox.BackgroundImage = Image.FromFile(resourcePath + "\\details\\" + TitleBox.Text + ".png"); } catch { try { DetailsBox.BackgroundImage = Image.FromFile(resourcePath + "\\details\\" + TitleBox.Text + ".jpg"); } catch { try { DetailsBox.BackgroundImage = Image.FromFile(resourcePath + "\\details\\" + TitleBox.Text + ".jpeg"); } catch { try { DetailsBox.BackgroundImage = Image.FromFile(resourcePath + "\\details\\" + TitleBox.Text + ".gif"); } catch { } } } }
-            try { IconBox.BackgroundImage = Image.FromFile(resourcePath + "\\icons\\" + TitleBox.Text + ".png"); } catch { try { IconBox.BackgroundImage = Image.FromFile(resourcePath + "\\icons\\" + TitleBox.Text + ".jpg"); } catch { try { IconBox.BackgroundImage = Image.FromFile(resourcePath + "\\icons\\" + TitleBox.Text + ".jpeg"); } catch { try { IconBox.BackgroundImage = Image.FromFile(resourcePath + "\\icons\\" + TitleBox.Text + ".gif"); } catch { } } } }
-            try { BgBox.BackgroundImage = Image.FromFile(resourcePath + "\\bg\\" + TitleBox.Text + ".png"); } catch { try { BgBox.BackgroundImage = Image.FromFile(resourcePath + "\\BG\\" + TitleBox.Text + ".jpg"); } catch { try { BgBox.BackgroundImage = Image.FromFile(resourcePath + "\\BG\\" + TitleBox.Text + ".jpeg"); } catch { try { BgBox.BackgroundImage = Image.FromFile(resourcePath + "\\BG\\" + TitleBox.Text + ".gif"); } catch { } } } }
+            imageTitle = TitleBox.Text;
+            Regex rgxFix1 = new Regex("/");
+            Regex rgxFix2 = new Regex(":");
+            Regex rgxFix3 = new Regex(".*");
+            Regex rgxFix4 = new Regex(".?");
+            Regex rgxFix5 = new Regex("\"");
+            Regex rgxFix6 = new Regex("<");
+            Regex rgxFix7 = new Regex(">");
+            Regex rgxFix8 = new Regex("|");
+            Regex rgxFix9 = new Regex(@"T:\\");
+
+            while (imageTitle.IndexOf("/") != -1)
+                imageTitle = rgxFix1.Replace(imageTitle, "");
+            while (imageTitle.IndexOf(":") != -1)
+                imageTitle = rgxFix2.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("*") != -1)
+                imageTitle = rgxFix3.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("?") != -1)
+                imageTitle = rgxFix4.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("\"") != -1)
+                imageTitle = rgxFix5.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("<") != -1)
+                imageTitle = rgxFix6.Replace(imageTitle, "");
+            while (imageTitle.IndexOf(">") != -1)
+                imageTitle = rgxFix7.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("|") != -1)
+                imageTitle = rgxFix8.Replace(imageTitle, "");
+            while (imageTitle.IndexOf("\\") != -1)
+                imageTitle = rgxFix9.Replace(imageTitle, "");
+
+            try { DetailsBox.BackgroundImage = Image.FromFile(resourcePath + "\\details\\" + imageTitle + ".png"); } catch { try { DetailsBox.BackgroundImage = Image.FromFile(resourcePath + "\\details\\" + imageTitle + ".jpg"); } catch { try { DetailsBox.BackgroundImage = Image.FromFile(resourcePath + "\\details\\" + imageTitle + ".jpeg"); } catch { try { DetailsBox.BackgroundImage = Image.FromFile(resourcePath + "\\details\\" + imageTitle + ".gif"); } catch { } } } }
+            try { IconBox.BackgroundImage = Image.FromFile(resourcePath + "\\icons\\" + imageTitle + ".png"); } catch { try { IconBox.BackgroundImage = Image.FromFile(resourcePath + "\\icons\\" + imageTitle + ".jpg"); } catch { try { IconBox.BackgroundImage = Image.FromFile(resourcePath + "\\icons\\" + imageTitle + ".jpeg"); } catch { try { IconBox.BackgroundImage = Image.FromFile(resourcePath + "\\icons\\" + imageTitle + ".gif"); } catch { } } } }
+            try { BgBox.BackgroundImage = Image.FromFile(resourcePath + "\\bg\\" + imageTitle + ".png"); } catch { try { BgBox.BackgroundImage = Image.FromFile(resourcePath + "\\BG\\" + imageTitle + ".jpg"); } catch { try { BgBox.BackgroundImage = Image.FromFile(resourcePath + "\\BG\\" + imageTitle + ".jpeg"); } catch { try { BgBox.BackgroundImage = Image.FromFile(resourcePath + "\\BG\\" + imageTitle + ".gif"); } catch { } } } }
 
             ReplaceButton.Visible = true;
             DeleteButton.Visible = true;
@@ -789,10 +823,10 @@ namespace UGame
             else
                 StartDatePicker.Value = startDate;
 
-            if (Convert.ToDateTime(ConsoleGamesDGV.Rows[rowIndex].Cells["LastPlayed"].Value) == new DateTime(1753, 1, 1))
-                ReleaseDateCheck.Checked = true;
+            if (Convert.ToDateTime(GamesDGV.Rows[rowIndex].Cells["LastPlayed"].Value) == new DateTime(1753, 1, 1))
+                LastPlayedCheck.Checked = true;
             else
-                ReleaseDatePicker.Value = releaseDate;
+                LastPlayedDatePicker.Value = lastPlayed;
 
             NotesBox.Text = ConsoleGamesDGV.Rows[rowIndex].Cells["Notes"].Value.ToString();
             urlString = ConsoleGamesDGV.Rows[rowIndex].Cells["URLs"].Value.ToString();
@@ -988,55 +1022,40 @@ namespace UGame
             catch { try { GamesDGV.Rows[editedRow].Cells[0].Value = Image.FromFile(config.resourcePath + "icons\\" + imageTitle + ".gif"); }
             catch { GamesDGV.Rows[editedRow].Cells[0].Value = Image.FromFile(config.resourcePath + "unknown.png"); } } } } }
 
-            GamesDGV.Rows[editedRow].Cells["Title"].Value = TitleBox.Text;
-            GamesDGV.Rows[editedRow].Cells["Platform"].Value = PlatformBox.Text;
-            GamesDGV.Rows[editedRow].Cells["Status"].Value = StatusBox.Text;
-            GamesDGV.Rows[editedRow].Cells["Rating"].Value = RatingBar.Value;
-            GamesDGV.Rows[editedRow].Cells["TimePlayed"].Value = timePlayed;
-            GamesDGV.Rows[editedRow].Cells["Obtained"].Value = ObtainedDatePicker.Value;
-            GamesDGV.Rows[editedRow].Cells["StartDate"].Value = StartDatePicker.Value;
-            GamesDGV.Rows[editedRow].Cells["LastPlayed"].Value = LastPlayedDatePicker.Value;
-            GamesDGV.Rows[editedRow].Cells["Developers"].Value = DevelopersBox.Text;
-            GamesDGV.Rows[editedRow].Cells["Publishers"].Value = PublishersBox.Text;
-            GamesDGV.Rows[editedRow].Cells["ReleaseDate"].Value = ReleaseDatePicker.Value;
-            GamesDGV.Rows[editedRow].Cells["Genre"].Value = GenreBox.Text;
-            GamesDGV.Rows[editedRow].Cells["PlayerCount"].Value = PlayerCountBox.Text;
+            for (int index = 0; index < gameTable.Rows.Count; index++)
+                if (Convert.ToInt32(gameTable.Rows[index]["Id"].ToString()) == editedId)
+                {
+                    editedRow = index;
+                    break;
+                }
 
-            if (PriceBox.Text != "")
-                GamesDGV.Rows[editedRow].Cells["Price"].Value = Convert.ToDecimal(PriceBox.Text);
-            else
-                GamesDGV.Rows[editedRow].Cells["Price"].Value = -1;
-
-            DataRow dRow = gameTable.NewRow();
-
-            dRow["Id"] = highestId + 1;
-            dRow["Title"] = TitleBox.Text;
-            dRow["Platform"] = PlatformBox.Text;
-            dRow["Status"] = StatusBox.Text;
-            dRow["Rating"] = RatingBar.Value;
-            dRow["TimePlayed"] = timePlayed;
-            dRow["Seconds"] = totalSec;
-            dRow["Obtained"] = obtained;
-            dRow["StartDate"] = startDate;
-            dRow["LastPlayed"] = lastPlayed;
-            dRow["Notes"] = NotesBox.Text;
-            dRow["URLs"] = urlString;
-            dRow["Filters"] = FiltersBox.Text;
-            dRow["Developers"] = DevelopersBox.Text;
-            dRow["Publishers"] = PublishersBox.Text;
-            dRow["ReleaseDate"] = releaseDate;
-            dRow["Genre"] = GenreBox.Text;
-            dRow["PlayerCount"] = PlayerCountBox.Text;
-            dRow["Price"] = price;
-            dRow["GameDesc"] = GameDescBox.Text;
-            dRow["Launch"] = launchString;
-            dRow["Blur"] = BlurCheck.ToString();
-            dRow["Overlay"] = OverlayCheck.ToString();
-            dRow["Discord"] = DiscordCheck.ToString();
-
-            gameTable.Rows.Add(dRow);
+            gameTable.Rows[editedRow]["Title"] = TitleBox.Text;
+            gameTable.Rows[editedRow]["Platform"] = PlatformBox.Text;
+            gameTable.Rows[editedRow]["Status"] = StatusBox.Text;
+            gameTable.Rows[editedRow]["Rating"] = RatingBar.Value;
+            gameTable.Rows[editedRow]["TimePlayed"] = timePlayed;
+            gameTable.Rows[editedRow]["Seconds"] = totalSec;
+            gameTable.Rows[editedRow]["Obtained"] = obtained;
+            gameTable.Rows[editedRow]["StartDate"] = startDate;
+            gameTable.Rows[editedRow]["LastPlayed"] = lastPlayed;
+            gameTable.Rows[editedRow]["Notes"] = NotesBox.Text;
+            gameTable.Rows[editedRow]["URLs"] = urlString;
+            gameTable.Rows[editedRow]["Filters"] = FiltersBox.Text;
+            gameTable.Rows[editedRow]["Developers"] = DevelopersBox.Text;
+            gameTable.Rows[editedRow]["Publishers"] = PublishersBox.Text;
+            gameTable.Rows[editedRow]["ReleaseDate"] = releaseDate;
+            gameTable.Rows[editedRow]["Genre"] = GenreBox.Text;
+            gameTable.Rows[editedRow]["PlayerCount"] = PlayerCountBox.Text;
+            gameTable.Rows[editedRow]["Price"] = price;
+            gameTable.Rows[editedRow]["GameDesc"] = GameDescBox.Text;
+            gameTable.Rows[editedRow]["Launch"] = launchString;
+            gameTable.Rows[editedRow]["Blur"] = BlurCheck.ToString();
+            gameTable.Rows[editedRow]["Overlay"] = OverlayCheck.ToString();
+            gameTable.Rows[editedRow]["Discord"] = DiscordCheck.ToString();
 
             highestId++;
+
+            Clear();
         }
 
         /*
@@ -1048,8 +1067,10 @@ namespace UGame
 
         private void Clear()
         {
-            TitleBox.Text = "";
-            PlatformBox.Text = "";
+            if (!titleLocked)
+                TitleBox.Text = "";
+            if (!platformLocked)
+                PlatformBox.Text = "";
             StatusBox.Text = "";
             RatingBar.Value = 0;
             TimeHoursBox.Text = "";
@@ -1078,6 +1099,9 @@ namespace UGame
             DetailsBox.BackgroundImage = null;
             IconBox.BackgroundImage = null;
             BgBox.BackgroundImage = null;
+
+            titleLocked = false;
+            platformLocked = false;
         }
 
         private void SearchDatabase()
@@ -1252,6 +1276,21 @@ namespace UGame
             PictureContextMenu.Show(Cursor.Position);
         }
 
+        private void ClearPictureButton_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("HEADS UP: Clearing a file will not delete it.", "Clearing Picture", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+
+            if (dialogResult == DialogResult.OK)
+            {
+                if (PictureContextMenu.Tag.ToString() == "details\\")
+                    DetailsBox.BackgroundImage = null;
+                else if (PictureContextMenu.Tag.ToString() == "icons\\")
+                    IconBox.BackgroundImage = null;
+                else if (PictureContextMenu.Tag.ToString() == "bg\\")
+                    BgBox.BackgroundImage = null;
+            }
+        }
+
         private void LocalPictureButton_Click(object sender, EventArgs e)
         {
             if (PictureDialog.ShowDialog() == DialogResult.OK)
@@ -1306,25 +1345,11 @@ namespace UGame
             string segment = TitleBox.Text;
             string part = "";
 
-            string url = "https://google.com/search?q=";
-            while (segment.IndexOf(" ") != -1)
-            {
-                try
-                {
-                    Console.WriteLine(segment);
-                    try
-                    {
-                        part = segment.Substring(0, segment.IndexOf(" "));
-                        segment = segment.Substring(segment.IndexOf(" ") + 1);
+            string url = "https://google.com/search?q=" + TitleBox.Text;
 
-                        url += part + "+";
-                    }
-                    catch { }
-                }
-                catch { }
-                url += segment;
-                segment = "";
-            }
+            if (PictureContextMenu.Tag.ToString() == "icons\\")
+                url += " icon";
+
             url += "&source=lnms&tbm=isch";
 
             Browser browser = new Browser(url, "Download");

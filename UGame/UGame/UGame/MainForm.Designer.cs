@@ -485,6 +485,8 @@
             // 
             // LastPlayedDatePicker
             // 
+            this.LastPlayedDatePicker.CustomFormat = "MMMM, dd, yyyy               hh:mm:ss tt";
+            this.LastPlayedDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.LastPlayedDatePicker.Location = new System.Drawing.Point(327, 229);
             this.LastPlayedDatePicker.Name = "LastPlayedDatePicker";
             this.LastPlayedDatePicker.Size = new System.Drawing.Size(287, 20);
@@ -504,6 +506,8 @@
             // 
             // StartDatePicker
             // 
+            this.StartDatePicker.CustomFormat = "MMMM, dd, yyyy               hh:mm:ss tt";
+            this.StartDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.StartDatePicker.Location = new System.Drawing.Point(327, 197);
             this.StartDatePicker.Name = "StartDatePicker";
             this.StartDatePicker.Size = new System.Drawing.Size(287, 20);
@@ -523,6 +527,8 @@
             // 
             // ObtainedDatePicker
             // 
+            this.ObtainedDatePicker.CustomFormat = "MMMM, dd, yyyy               hh:mm:ss tt";
+            this.ObtainedDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.ObtainedDatePicker.Location = new System.Drawing.Point(327, 165);
             this.ObtainedDatePicker.Name = "ObtainedDatePicker";
             this.ObtainedDatePicker.Size = new System.Drawing.Size(287, 20);
@@ -635,6 +641,7 @@
             // 
             this.EntryLabels2.BackColor = System.Drawing.Color.White;
             this.EntryLabels2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.EntryLabels2.Enabled = false;
             this.EntryLabels2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EntryLabels2.Location = new System.Drawing.Point(631, 7);
             this.EntryLabels2.Multiline = true;
@@ -656,6 +663,7 @@
             // 
             this.EntryLabels.BackColor = System.Drawing.Color.White;
             this.EntryLabels.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.EntryLabels.Enabled = false;
             this.EntryLabels.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EntryLabels.Location = new System.Drawing.Point(160, 7);
             this.EntryLabels.Multiline = true;
@@ -832,6 +840,7 @@
             this.ClearPictureButton.Name = "ClearPictureButton";
             this.ClearPictureButton.Size = new System.Drawing.Size(154, 22);
             this.ClearPictureButton.Text = "Clear Picture";
+            this.ClearPictureButton.Click += new System.EventHandler(this.ClearPictureButton_Click);
             // 
             // LocalPictureButton
             // 
@@ -886,12 +895,12 @@
             this.GameTabsContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.CloseTabButton});
             this.GameTabsContextMenu.Name = "GameTabsContextMenu";
-            this.GameTabsContextMenu.Size = new System.Drawing.Size(126, 26);
+            this.GameTabsContextMenu.Size = new System.Drawing.Size(125, 26);
             // 
             // CloseTabButton
             // 
             this.CloseTabButton.Name = "CloseTabButton";
-            this.CloseTabButton.Size = new System.Drawing.Size(125, 22);
+            this.CloseTabButton.Size = new System.Drawing.Size(124, 22);
             this.CloseTabButton.Text = "Close Tab";
             this.CloseTabButton.Click += new System.EventHandler(this.CloseTabButton_Click);
             // 

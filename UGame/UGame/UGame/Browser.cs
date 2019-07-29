@@ -42,10 +42,6 @@ namespace UGame
             {
                 InitializeLinks();
             }
-            else
-            {
-                url = "https://www.google.com";
-            }
 
             if (type == "Browser")
             {
@@ -58,7 +54,11 @@ namespace UGame
 
         public void InitializeChromium()
         {
-            try { chromeBrowser = new ChromiumWebBrowser(links[0,1]); } catch { chromeBrowser = new ChromiumWebBrowser("https://www.google.com"); }
+            try { chromeBrowser = new ChromiumWebBrowser(links[0,1]); }
+            catch {
+                try { chromeBrowser = new ChromiumWebBrowser(url); }
+                catch { chromeBrowser = new ChromiumWebBrowser("https://www.google.com"); }
+            }
 
             tabPage1.Controls.Add(chromeBrowser);
             chromeBrowser.Dock = DockStyle.Fill;

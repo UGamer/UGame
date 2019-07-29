@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -518,14 +519,47 @@ namespace UGame
                 else if (type == "Images")
                 {
                     string remoteFileUrl = DGV.Rows[e.RowIndex].Cells[0].Value.ToString();
+                    /*
                     fileExt = remoteFileUrl;
 
                     while (fileExt.IndexOf(".") != -1)
                         fileExt = fileExt.Substring(fileExt.IndexOf(".") + 1);
+                        */
 
                     byte[] imageBytes = webClient.DownloadData(remoteFileUrl);
 
-                    File.WriteAllBytes(refer.resourcePath + data + refer.TitleBox.Text + "." + fileExt, imageBytes);
+                    string imageTitle = refer.TitleBox.Text;
+                    Regex rgxFix1 = new Regex("/");
+                    Regex rgxFix2 = new Regex(":");
+                    Regex rgxFix3 = new Regex(".*");
+                    Regex rgxFix4 = new Regex(".?");
+                    Regex rgxFix5 = new Regex("\"");
+                    Regex rgxFix6 = new Regex("<");
+                    Regex rgxFix7 = new Regex(">");
+                    Regex rgxFix8 = new Regex("|");
+                    Regex rgxFix9 = new Regex(@"T:\\");
+
+                    while (imageTitle.IndexOf("/") != -1)
+                        imageTitle = rgxFix1.Replace(imageTitle, "");
+                    while (imageTitle.IndexOf(":") != -1)
+                        imageTitle = rgxFix2.Replace(imageTitle, "");
+                    while (imageTitle.IndexOf("*") != -1)
+                        imageTitle = rgxFix3.Replace(imageTitle, "");
+                    while (imageTitle.IndexOf("?") != -1)
+                        imageTitle = rgxFix4.Replace(imageTitle, "");
+                    while (imageTitle.IndexOf("\"") != -1)
+                        imageTitle = rgxFix5.Replace(imageTitle, "");
+                    while (imageTitle.IndexOf("<") != -1)
+                        imageTitle = rgxFix6.Replace(imageTitle, "");
+                    while (imageTitle.IndexOf(">") != -1)
+                        imageTitle = rgxFix7.Replace(imageTitle, "");
+                    while (imageTitle.IndexOf("|") != -1)
+                        imageTitle = rgxFix8.Replace(imageTitle, "");
+                    while (imageTitle.IndexOf("\\") != -1)
+                        imageTitle = rgxFix9.Replace(imageTitle, "");
+
+                    File.WriteAllBytes(refer.resourcePath + data + imageTitle + ".png", imageBytes);
+                    // File.WriteAllBytes(refer.resourcePath + data + refer.TitleBox.Text + "." + fileExt, imageBytes);
 
                     this.DialogResult = DialogResult.OK;
                     this.Close();

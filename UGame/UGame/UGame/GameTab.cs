@@ -83,6 +83,7 @@ namespace UGame
         static int xPos = 14;
         Point[] labelLocation = { new Point(xPos, 21), new Point(xPos, 53), new Point(xPos, 85), new Point(xPos, 117) };
 
+        bool tracking = false;
         Overlay overlay;
 
         public GameTab(MainForm refer, int rowIndex, int tabCount, int id)
@@ -444,6 +445,8 @@ namespace UGame
 
         public void Track()
         {
+            tracking = true;
+
             overlay = new Overlay(title, iconBox.BackgroundImage, this);
             overlay.Show();
 
@@ -489,6 +492,7 @@ namespace UGame
         public void Stop(bool save)
         {
             overlay.Close();
+            tracking = false;
 
             button1.Text = "Launch & Track";
             button2.Text = "Track";
@@ -550,10 +554,7 @@ namespace UGame
                 gameSummary.Show();
             }
 
-            timer.Stop();
-
             gameTab.Text = title;
-            button1.Text = "Launch & Track";
         }
 
         public void PauseResume()
@@ -574,35 +575,43 @@ namespace UGame
 
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            seconds++;
-
-            if (seconds == 60)
+            if (tracking)
             {
-                seconds = 0;
-                minutes++;
+                seconds++;
+
+                if (seconds == 60)
+                {
+                    seconds = 0;
+                    minutes++;
+                }
+                if (minutes == 60)
+                {
+                    minutes = 0;
+                    hours++;
+                }
+
+                secondsString = seconds.ToString();
+                minutesString = minutes.ToString();
+                hoursString = hours.ToString();
+
+                if (seconds < 10)
+                    secondsString = "0" + seconds;
+                if (minutes < 10)
+                    minutesString = "0" + minutes;
+                if (hours < 10)
+                    hoursString = "0" + hours;
+
+                secondsString += "s";
+                minutesString += "m:";
+                hoursString += "h:";
+
+                SetText("Stop Playing (" + hoursString + minutesString + secondsString + ")", ref button1);
             }
-            if (minutes == 60)
+            else
             {
-                minutes = 0;
-                hours++;
+                SetText("Launch & Track", ref button1);
+                timer.Stop();
             }
-
-            secondsString = seconds.ToString();
-            minutesString = minutes.ToString();
-            hoursString = hours.ToString();
-
-            if (seconds < 10)
-                secondsString = "0" + seconds;
-            if (minutes < 10)
-                minutesString = "0" + minutes;
-            if (hours < 10)
-                hoursString = "0" + hours;
-
-            secondsString += "s";
-            minutesString += "m:";
-            hoursString += "h:";
-
-            SetText("Stop Playing (" + hoursString + minutesString + secondsString + ")", ref button1);
         }
 
         private void Button1_Click(object sender, EventArgs e)
@@ -668,7 +677,7 @@ namespace UGame
 
             if (price > 0)
             {
-                message += "$" + price.ToString("d2");
+                message += price.ToString("C");
             }
             else if (price == 0)
             {
