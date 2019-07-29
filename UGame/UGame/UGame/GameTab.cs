@@ -367,6 +367,16 @@ namespace UGame
             infoPanel.Controls.Add(lastPlayedLabel);
 
             refer.AddGameTab(gameTab);
+
+            if (launchString == "[Title]Default[URL]" || launchCount == 0)
+            {
+                button1.Visible = false;
+                button3.Visible = false;
+                
+                button2.Location = new Point(365, 82);
+
+                button2.TabIndex = 0;
+            }
         }
 
         public void Launch()
@@ -445,6 +455,11 @@ namespace UGame
 
         public void Track()
         {
+            button1.Visible = true;
+            button3.Visible = true;
+
+            button2.Location = new Point(548, 82);
+
             tracking = true;
 
             overlay = new Overlay(title, iconBox.BackgroundImage, this);
@@ -555,6 +570,14 @@ namespace UGame
             }
 
             gameTab.Text = title;
+
+            if (launchString == "[Title]Default[URL]" || launchCount == 0)
+            {
+                button1.Visible = false;
+                button3.Visible = false;
+
+                button2.Location = new Point(365, 82);
+            }
         }
 
         public void PauseResume()
@@ -719,7 +742,7 @@ namespace UGame
 
         public void Close()
         {
-            if (button3.Text == "Discard Session")
+            if (button3.Text == "Discard Session") // maybe use if (tracking)
             {
                 string message = "Would you like to save the play session for \"" + titleBox.Text + "\"?";
                 string caption = "Closing Tab";
