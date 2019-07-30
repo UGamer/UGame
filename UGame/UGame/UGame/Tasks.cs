@@ -13,7 +13,9 @@ namespace UGame
 {
     public partial class Tasks : Form
     {
-        string friendlyTitle;
+        string[] tasks;
+
+        List<TaskTab> taskTabs = new List<TaskTab>();
 
         List<PictureBox> mainPics = new List<PictureBox>();
         List<CheckBox> mainChecks = new List<CheckBox>();
@@ -28,9 +30,7 @@ namespace UGame
 
         public Tasks(string friendlyTitle)
         {
-            this.friendlyTitle = friendlyTitle;
-
-            string[] tasks = Directory.GetDirectories("Tasks\\" + friendlyTitle);
+            tasks = Directory.GetDirectories("Tasks\\" + friendlyTitle);
             int taskCount = tasks.Length;
 
             InitializeComponent();
@@ -46,24 +46,27 @@ namespace UGame
                     mainPic.Size = new Size(100, 100);
                     mainPic.BackgroundImageLayout = ImageLayout.Zoom;
                     mainPic.BackgroundImage = Image.FromFile(tasks[index] + "\\img.png");
+                    mainPic.Tag = index;
+                    mainPic.Click += MainPic_Click;
 
                     mainCheck = new CheckBox();
                     mainCheck.Location = new Point(xPos, yPos + 106);
-                    mainCheck.Text = "";
+                    mainCheck.Text = "Complete?";
 
+                    /*
                     mainBox = new TextBox();
                     mainBox.Location = new Point(xPos + 21, yPos + 103);
                     mainBox.Size = new Size(79, 20);
-                    mainBox.Multiline = true;
                     mainBox.Text = tasks[index];
+                    */
 
                     mainPics.Add(mainPic);
                     mainChecks.Add(mainCheck);
-                    mainBoxes.Add(mainBox);
+                    // mainBoxes.Add(mainBox);
 
                     TasksTab.Controls.Add(mainPic);
                     TasksTab.Controls.Add(mainCheck);
-                    TasksTab.Controls.Add(mainBox);
+                    // TasksTab.Controls.Add(mainBox);
                 }
                 else
                 {
@@ -75,31 +78,43 @@ namespace UGame
                     mainPic.Size = new Size(100, 100);
                     mainPic.BackgroundImageLayout = ImageLayout.Zoom;
                     mainPic.BackgroundImage = Image.FromFile(tasks[index] + "\\img.png");
+                    mainPic.Tag = index;
                     mainPic.Click += MainPic_Click;
 
                     mainCheck = new CheckBox();
                     mainCheck.Location = new Point(xPos, yPos + 106);
-                    mainCheck.Text = "";
+                    mainCheck.Text = "Complete?";
 
+                    /*
                     mainBox = new TextBox();
                     mainBox.Location = new Point(xPos + 21, yPos + 103);
                     mainBox.Size = new Size(79, 20);
                     mainBox.Text = tasks[index];
+                    */
 
                     mainPics.Add(mainPic);
                     mainChecks.Add(mainCheck);
-                    mainBoxes.Add(mainBox);
+                    // mainBoxes.Add(mainBox);
 
                     TasksTab.Controls.Add(mainPic);
                     TasksTab.Controls.Add(mainCheck);
-                    TasksTab.Controls.Add(mainBox);
+                    // TasksTab.Controls.Add(mainBox);
                 }
             }
         }
 
         private void MainPic_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            PictureBox tempBox = (PictureBox) sender;
+            int tagIndex = Convert.ToInt32(tempBox.Tag.ToString());
+
+            TaskTab taskTab = new TaskTab(tasks[tagIndex]);
+
+            // create tab?
+
+            taskTabs.Add(taskTab);
+
+            MainTabs.TabPages.Add(taskTab.tabPage);
         }
     }
 }

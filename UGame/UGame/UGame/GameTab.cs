@@ -523,10 +523,8 @@ namespace UGame
 
             discordRpc.Initialize();
 
-            /*
             TimeSpan t = DateTime.UtcNow - new DateTime(1970, 1, 1);
-            int startTime = (int)t.TotalSeconds;
-            */
+            rpcStart = (ulong)t.TotalSeconds;
 
             discordRpc.SetPresence(new RichPresence()
             {
@@ -534,7 +532,7 @@ namespace UGame
                 State = "Playing",
                 Timestamps = new Timestamps()
                 {
-                    Start = DateTime.Now
+                    Start = DateTime.UtcNow
                 },
 
                 Assets = new Assets()
@@ -681,7 +679,6 @@ namespace UGame
                         Timestamps = new Timestamps()
                         {
                             StartUnixMilliseconds = rpcStart,
-                            EndUnixMilliseconds = rpcEnd
                         },
 
                         Assets = new Assets()

@@ -205,6 +205,7 @@
     <Compile Include="Tasks.Designer.cs">
       <DependentUpon>Tasks.cs</DependentUpon>
     </Compile>
+    <Compile Include="TaskTab.cs" />
     <EmbeddedResource Include="AddTime.resx">
       <DependentUpon>AddTime.cs</DependentUpon>
     </EmbeddedResource>
