@@ -52,6 +52,8 @@ namespace UGame
                     mainCheck = new CheckBox();
                     mainCheck.Location = new Point(xPos, yPos + 106);
                     mainCheck.Text = "Complete?";
+                    if (File.Exists(tasks[index] + "\\fullComplete.txt"))
+                        mainCheck.Checked = true;
 
                     /*
                     mainBox = new TextBox();
@@ -115,6 +117,7 @@ namespace UGame
             taskTabs.Add(taskTab);
 
             MainTabs.TabPages.Add(taskTab.tabPage);
+            MainTabs.SelectedTab = taskTab.tabPage;
         }
     }
 }
