@@ -349,7 +349,7 @@ namespace UGame
             }
             catch
             {
-                tasks = new Tasks(imageTitle);
+                tasks = new Tasks(imageTitle, this);
                 tasks.Show();
             }
         }

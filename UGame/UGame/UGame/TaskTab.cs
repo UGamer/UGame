@@ -20,13 +20,11 @@ namespace UGame
         CheckBox checkBox = new CheckBox();
         Button editButton = new Button();
         Button saveButton = new Button();
+        NotesTextBox editBox = new NotesTextBox();
         TreeView treeView = new TreeView();
-
+        
         string textFile;
-        string checkFile;
-
-        string[,] nodeTable;
-
+        
         public TaskTab(string taskPath)
         {
             this.taskPath = taskPath;
@@ -48,7 +46,7 @@ namespace UGame
             imgBox.Location = new Point(9, 7);
             imgBox.Size = new Size(130, 130);
             imgBox.BackgroundImageLayout = ImageLayout.Zoom;
-            imgBox.BackgroundImage = Image.FromFile(taskPath + "\\img.png");
+            try { imgBox.BackgroundImage = Image.FromFile(taskPath + "\\img.png"); } catch (FileNotFoundException) { }
 
             taskBox.Font = new Font("Century Gothic", 24);
             taskBox.Location = new Point(145, 39);
@@ -66,6 +64,7 @@ namespace UGame
             editButton.Size = new Size(75, 23);
             editButton.UseVisualStyleBackColor = true;
             editButton.Text = "Edit Mode";
+            editButton.Click += EditButton_Click;
 
             saveButton.Location = new Point(230, 114);
             saveButton.Size = new Size(75, 23);
@@ -73,48 +72,56 @@ namespace UGame
             saveButton.Text = "Save";
             saveButton.Click += SaveButton_Click;
 
+            editBox.Dock = DockStyle.Bottom;
+            editBox.Size = new Size(648, 330);
+            editBox.Visible = false;
+
             treeView.Dock = DockStyle.Bottom;
             treeView.Size = new Size(648, 330);
             treeView.CheckBoxes = true;
             //
             // count all of the nodes and assign them values
 
-            textFile = File.ReadAllText(taskPath + "\\text.txt", Encoding.UTF8);
-
-            string[] lines = textFile.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-            string[] checks = new string[lines.Length];
-
-            for (int index = 0; index < lines.Length; index++)
+            try
             {
-                checks[index] = lines[index].Substring(lines[index].Length - 1);
+                textFile = File.ReadAllText(taskPath + "\\text.txt", Encoding.UTF8);
 
-                lines[index] = lines[index].Substring(0, lines[index].Length - 2);
+                string[] lines = textFile.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                string[] checks = new string[lines.Length];
+
+                for (int index = 0; index < lines.Length; index++)
+                {
+                    checks[index] = lines[index].Substring(lines[index].Length - 1);
+
+                    lines[index] = lines[index].Substring(0, lines[index].Length - 2);
+                }
+
+                treeView.Nodes.Clear();
+                Dictionary<int, TreeNode> parents = new Dictionary<int, TreeNode>();
+                int checkIndex = 0;
+                foreach (string text_line in lines)
+                {
+                    // See how many tabs are at the start of the line.
+                    int level = text_line.Length - text_line.TrimStart('\t').Length;
+
+                    // Add the new node.
+                    if (level == 0)
+                        parents[level] = treeView.Nodes.Add(text_line.Trim());
+                    else
+                        parents[level] = parents[level - 1].Nodes.Add(text_line.Trim());
+
+                    parents[level].EnsureVisible();
+
+                    if (checks[checkIndex] == "Y")
+                        parents[level].Checked = true;
+
+                    checkIndex++;
+                }
+
+                if (treeView.Nodes.Count > 0)
+                    treeView.Nodes[0].EnsureVisible();
             }
-
-            treeView.Nodes.Clear();
-            Dictionary<int, TreeNode> parents = new Dictionary<int, TreeNode>();
-            int checkIndex = 0;
-            foreach (string text_line in lines)
-            {
-                // See how many tabs are at the start of the line.
-                int level = text_line.Length - text_line.TrimStart('\t').Length;
-
-                // Add the new node.
-                if (level == 0)
-                    parents[level] = treeView.Nodes.Add(text_line.Trim());
-                else
-                    parents[level] = parents[level - 1].Nodes.Add(text_line.Trim());
-
-                parents[level].EnsureVisible();
-
-                if (checks[checkIndex] == "Y")
-                    parents[level].Checked = true;
-
-                checkIndex++;
-            }
-
-            if (treeView.Nodes.Count > 0)
-                treeView.Nodes[0].EnsureVisible();
+            catch (FileNotFoundException) { }
             
             //
             // Add all contents to tabpage
@@ -124,12 +131,68 @@ namespace UGame
             tabPage.Controls.Add(checkBox);
             tabPage.Controls.Add(editButton);
             tabPage.Controls.Add(saveButton);
+            tabPage.Controls.Add(editBox);
             tabPage.Controls.Add(treeView);
 
             //
         }
 
-        private void SaveButton_Click(object sender, EventArgs e)
+        private void EditButton_Click(object sender, EventArgs e)
+        {
+            if (editButton.Text == "Edit Mode")
+            {
+                editButton.Text = "Apply Edits";
+
+                treeView.Visible = false;
+
+                editBox.Text = File.ReadAllText(taskPath + "\\text.txt", Encoding.UTF8);
+
+                editBox.Visible = true;
+            }
+            else
+            {
+                string[] lines = editBox.Text.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                string[] checks = new string[lines.Length];
+
+                for (int index = 0; index < lines.Length; index++)
+                {
+                    checks[index] = lines[index].Substring(lines[index].Length - 1);
+
+                    lines[index] = lines[index].Substring(0, lines[index].Length - 2);
+                }
+
+                treeView.Nodes.Clear();
+                Dictionary<int, TreeNode> parents = new Dictionary<int, TreeNode>();
+                int checkIndex = 0;
+                foreach (string text_line in lines)
+                {
+                    // See how many tabs are at the start of the line.
+                    int level = text_line.Length - text_line.TrimStart('\t').Length;
+
+                    // Add the new node.
+                    if (level == 0)
+                        parents[level] = treeView.Nodes.Add(text_line.Trim());
+                    else
+                        parents[level] = parents[level - 1].Nodes.Add(text_line.Trim());
+
+                    parents[level].EnsureVisible();
+
+                    if (checks[checkIndex] == "Y")
+                        parents[level].Checked = true;
+
+                    checkIndex++;
+                }
+
+                if (treeView.Nodes.Count > 0)
+                    treeView.Nodes[0].EnsureVisible();
+
+                editBox.Visible = false;
+                treeView.Visible = true;
+                editButton.Text = "Edit Mode";
+            }
+        }
+
+        private void Save()
         {
             StringBuilder sb = new StringBuilder();
             foreach (TreeNode node in treeView.Nodes)
@@ -151,13 +214,18 @@ namespace UGame
             if (fullComplete)
             {
                 // if (!File.Exists(taskPath + "\\fullComplete.txt"))
-                    File.Create(taskPath + "\\fullComplete.txt");
+                File.Create(taskPath + "\\fullComplete.txt");
             }
             else
             {
                 // if (File.Exists(taskPath + "\\fullComplete.txt"))
-                    File.Delete(taskPath + "\\fullComplete.txt");
+                File.Delete(taskPath + "\\fullComplete.txt");
             }
+        }
+
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+            Save();
         }
 
         private void WriteNodeIntoString(int level, TreeNode node, StringBuilder sb)

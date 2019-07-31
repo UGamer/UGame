@@ -13,27 +13,45 @@ namespace UGame
 {
     public partial class Tasks : Form
     {
+        string friendlyTitle;
+        Overlay overlay;
+
         string[] tasks;
 
         List<TaskTab> taskTabs = new List<TaskTab>();
 
-        List<PictureBox> mainPics = new List<PictureBox>();
-        List<CheckBox> mainChecks = new List<CheckBox>();
-        List<TextBox> mainBoxes = new List<TextBox>();
+        List<PictureBox> mainPics;
+        List<CheckBox> mainChecks;
 
         PictureBox mainPic;
         CheckBox mainCheck;
-        TextBox mainBox;
 
-        int xPos = -100;
-        int yPos = 6;
-
-        public Tasks(string friendlyTitle)
+        public Tasks(string friendlyTitle, Overlay overlay)
         {
+            this.friendlyTitle = friendlyTitle;
+            this.overlay = overlay;
+
+            InitializeComponent();
+            FillGrid();
+        }
+
+        public void FillGrid()
+        {
+            mainPics = new List<PictureBox>();
+            mainChecks = new List<CheckBox>();
+
+            Console.WriteLine(TasksTab.Controls.Count);
+
+            while (TasksTab.Controls.Count > 0)
+            {
+                TasksTab.Controls.RemoveAt(0);
+            }
+
             tasks = Directory.GetDirectories("Tasks\\" + friendlyTitle);
             int taskCount = tasks.Length;
 
-            InitializeComponent();
+            int xPos = -100;
+            int yPos = 6;
 
             for (int index = 0; index < taskCount; index++)
             {
@@ -44,8 +62,9 @@ namespace UGame
                     mainPic = new PictureBox();
                     mainPic.Location = new Point(xPos, yPos);
                     mainPic.Size = new Size(100, 100);
+                    mainPic.BorderStyle = BorderStyle.FixedSingle;
                     mainPic.BackgroundImageLayout = ImageLayout.Zoom;
-                    mainPic.BackgroundImage = Image.FromFile(tasks[index] + "\\img.png");
+                    try { mainPic.BackgroundImage = Image.FromFile(tasks[index] + "\\img.png"); } catch (FileNotFoundException) { mainPic.BackgroundImage = null; }
                     mainPic.Tag = index;
                     mainPic.Click += MainPic_Click;
 
@@ -55,20 +74,11 @@ namespace UGame
                     if (File.Exists(tasks[index] + "\\fullComplete.txt"))
                         mainCheck.Checked = true;
 
-                    /*
-                    mainBox = new TextBox();
-                    mainBox.Location = new Point(xPos + 21, yPos + 103);
-                    mainBox.Size = new Size(79, 20);
-                    mainBox.Text = tasks[index];
-                    */
-
                     mainPics.Add(mainPic);
                     mainChecks.Add(mainCheck);
-                    // mainBoxes.Add(mainBox);
 
                     TasksTab.Controls.Add(mainPic);
                     TasksTab.Controls.Add(mainCheck);
-                    // TasksTab.Controls.Add(mainBox);
                 }
                 else
                 {
@@ -79,7 +89,7 @@ namespace UGame
                     mainPic.Location = new Point(xPos, yPos);
                     mainPic.Size = new Size(100, 100);
                     mainPic.BackgroundImageLayout = ImageLayout.Zoom;
-                    mainPic.BackgroundImage = Image.FromFile(tasks[index] + "\\img.png");
+                    try { mainPic.BackgroundImage = Image.FromFile(tasks[index] + "\\img.png"); } catch (FileNotFoundException) { mainPic.BackgroundImage = null; }
                     mainPic.Tag = index;
                     mainPic.Click += MainPic_Click;
 
@@ -87,37 +97,71 @@ namespace UGame
                     mainCheck.Location = new Point(xPos, yPos + 106);
                     mainCheck.Text = "Complete?";
 
-                    /*
-                    mainBox = new TextBox();
-                    mainBox.Location = new Point(xPos + 21, yPos + 103);
-                    mainBox.Size = new Size(79, 20);
-                    mainBox.Text = tasks[index];
-                    */
-
                     mainPics.Add(mainPic);
                     mainChecks.Add(mainCheck);
-                    // mainBoxes.Add(mainBox);
 
                     TasksTab.Controls.Add(mainPic);
                     TasksTab.Controls.Add(mainCheck);
-                    // TasksTab.Controls.Add(mainBox);
                 }
+            }
+
+            xPos += 106;
+
+            if (xPos < TasksTab.Size.Width - 106)
+            {
+                mainPic = new PictureBox();
+                mainPic.Location = new Point(xPos, yPos);
+                mainPic.Size = new Size(100, 100);
+                mainPic.BackgroundImageLayout = ImageLayout.Zoom;
+                mainPic.BackgroundImage = Image.FromFile(overlay.refer.refer.config.resourcePath + "\\New Task.png");
+                mainPic.Tag = "New";
+                mainPic.Click += MainPic_Click;
+
+                mainPics.Add(mainPic);
+
+                TasksTab.Controls.Add(mainPic);
+            }
+            else
+            {
+                xPos = 6;
+                yPos += 129;
+
+                mainPic = new PictureBox();
+                mainPic.Location = new Point(xPos, yPos);
+                mainPic.Size = new Size(100, 100);
+                mainPic.BackgroundImageLayout = ImageLayout.Zoom;
+                mainPic.BackgroundImage = Image.FromFile(overlay.refer.refer.config.resourcePath + "\\New Task.png");
+                mainPic.Tag = "New";
+                mainPic.Click += MainPic_Click;
+
+                mainPics.Add(mainPic);
+
+                TasksTab.Controls.Add(mainPic);
             }
         }
 
         private void MainPic_Click(object sender, EventArgs e)
         {
             PictureBox tempBox = (PictureBox) sender;
-            int tagIndex = Convert.ToInt32(tempBox.Tag.ToString());
+            string tag = tempBox.Tag.ToString();
 
-            TaskTab taskTab = new TaskTab(tasks[tagIndex]);
+            if (tag != "New")
+            {
+                int tagIndex = Convert.ToInt32(tag);
+                TaskTab taskTab = new TaskTab(tasks[tagIndex]);
 
-            // create tab?
+                // create tab?
 
-            taskTabs.Add(taskTab);
+                taskTabs.Add(taskTab);
 
-            MainTabs.TabPages.Add(taskTab.tabPage);
-            MainTabs.SelectedTab = taskTab.tabPage;
+                MainTabs.TabPages.Add(taskTab.tabPage);
+                MainTabs.SelectedTab = taskTab.tabPage;
+            }
+            else
+            {
+                TaskCreate taskCreate = new TaskCreate(friendlyTitle, this);
+                taskCreate.Show();
+            }
         }
     }
 }

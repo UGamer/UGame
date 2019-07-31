@@ -199,6 +199,12 @@
     <Compile Include="Setup.Designer.cs">
       <DependentUpon>Setup.cs</DependentUpon>
     </Compile>
+    <Compile Include="TaskCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TaskCreate.Designer.cs">
+      <DependentUpon>TaskCreate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Tasks.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -248,6 +254,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Setup.resx">
       <DependentUpon>Setup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskCreate.resx">
+      <DependentUpon>TaskCreate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Tasks.resx">
       <DependentUpon>Tasks.cs</DependentUpon>
