@@ -47,6 +47,8 @@ namespace UGame
         public bool titleLocked = false;
         public bool platformLocked = false;
 
+        public ImageList icons;
+
         public MainForm()
         {
             config = new Config();
@@ -203,6 +205,18 @@ namespace UGame
                 GamesDGV.Columns["PlayerCount"].HeaderText = "Player Count";
             }
             catch { }
+
+            /*
+            icons = new ImageList();
+
+            ImageConverter imgConverter = new ImageConverter();
+            for (int index = 0; index < GamesDGV.Rows.Count; index++)
+            {
+                object obj = GamesDGV.Rows[index].Cells[0].Value;
+                imgConverter.ConvertFrom(jeff);
+                icons.Images.Add(obj);
+            }
+            */
 
             try { GamesDGV.Sort(GamesDGV.Columns["Title"], ListSortDirection.Ascending); } catch { }
 

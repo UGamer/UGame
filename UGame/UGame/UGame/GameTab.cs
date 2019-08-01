@@ -221,16 +221,36 @@ namespace UGame
             Image bgImage = null;
             gameTab.Text = title;
             gameTab.BackColor = Color.White;
+            List<string> pictures = new List<string>();
             try
             {
                 string gameFolder = refer.config.resourcePath + "bg\\" + imageTitle;
                 if (Directory.Exists(gameFolder))
                 {
                     string[] files = Directory.GetFiles(gameFolder);
-                    int numOfFiles = files.Length;
+
+                    string temp;
+                    for (int index = 0; index < files.Length; index++)
+                    {
+                        temp = files[index].Substring(files[index].Length - 4);
+
+                        if (temp.IndexOf("png") != -1)
+                            pictures.Add(files[index]);
+                        else if (temp.IndexOf("jpg") != -1)
+                            pictures.Add(files[index]);
+                        else if (temp.IndexOf("jpeg") != -1)
+                            pictures.Add(files[index]);
+                        else if (temp.IndexOf("gif") != -1)
+                            pictures.Add(files[index]);
+                        else if (temp.IndexOf("jfif") != -1)
+                            pictures.Add(files[index]);
+                        else if (temp.IndexOf("webp") != -1)
+                            pictures.Add(files[index]);
+                    }
+                    
                     Random randomPicture = new Random();
-                    int fileToUse = randomPicture.Next(0, numOfFiles);
-                    bgImage = Image.FromFile(files[fileToUse]);
+                    int fileToUse = randomPicture.Next(0, pictures.Count);
+                    bgImage = Image.FromFile(pictures[fileToUse]);
                 }
                 else
                     throw new Exception();
@@ -277,7 +297,24 @@ namespace UGame
             iconBox.BackColor = Color.Transparent;
 
 
-            titleBox.Location = new Point(440, 14);
+            if (iconBox.BackgroundImage == null && detailsBox.BackgroundImage != null)
+                iconBox.BackgroundImage = detailsBox.BackgroundImage;
+
+            if (detailsBox.BackgroundImage == null && iconBox.BackgroundImage != null)
+                detailsBox.BackgroundImage = iconBox.BackgroundImage;
+            if (detailsBox.BackgroundImage == null && gameTab.BackgroundImage != null)
+                detailsBox.BackgroundImage = gameTab.BackgroundImage;
+
+            if (gameTab.BackgroundImage == null && detailsBox.BackgroundImage != null)
+                gameTab.BackgroundImage = detailsBox.BackgroundImage;
+            if (gameTab.BackgroundImage == null && iconBox.BackgroundImage != null)
+                gameTab.BackgroundImage = iconBox.BackgroundImage;
+
+            if (iconBox.BackgroundImage != null)
+                titleBox.Location = new Point(440, 14);
+            else
+                titleBox.Location = new Point(508, 14);
+
             titleBox.Size = new Size(593, 68);
             titleBox.BorderStyle = BorderStyle.None;
             titleBox.Font = new Font("Century Gothic", 32);
@@ -816,7 +853,7 @@ namespace UGame
         {
             string caption = "Time Calculations for \"" + title + "\"";
             string message = "Total Seconds: " + totalSeconds + "\nTotal Minutes: " + totalSeconds / 60 + "\nTotal Hours: " + totalSeconds / 3600 + 
-                "\nTotal Days: " + totalSeconds / 86400 + "\nTotal Weeks: " + totalSeconds / 604800 + "\nTotal Months: ~" + totalSeconds / 2592000 + 
+                "\nTotal Days: " + totalSeconds / 86400 + "\nTotal Weeks: " + totalSeconds / 604800 + "\nTotal Months: " + totalSeconds / 2592000 + 
                 "\nTotal Years: " + totalSeconds / 31557600;
 
             MessageBox.Show(message, caption);
