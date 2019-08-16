@@ -92,6 +92,19 @@
             this.ConsolePictureBox = new System.Windows.Forms.PictureBox();
             this.ConsolesDGV = new System.Windows.Forms.DataGridView();
             this.NotificationsPage = new System.Windows.Forms.TabPage();
+            this.BrowserTab = new System.Windows.Forms.TabPage();
+            this.Tabs = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.BookmarkBar = new System.Windows.Forms.ToolStrip();
+            this.FavoriteButton = new System.Windows.Forms.Button();
+            this.RefreshBrowserButton = new System.Windows.Forms.Button();
+            this.NextButton = new System.Windows.Forms.Button();
+            this.BackButton = new System.Windows.Forms.Button();
+            this.SearchButton = new System.Windows.Forms.Button();
+            this.AddressBar = new System.Windows.Forms.TextBox();
+            this.DownloadButton = new System.Windows.Forms.Button();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.RefreshButton = new System.Windows.Forms.ToolStripButton();
             this.PictureContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -109,19 +122,6 @@
             this.EditConsoleGameEntryButton = new System.Windows.Forms.ToolStripMenuItem();
             this.DeleteConsoleGameEntryButton = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.BrowserTab = new System.Windows.Forms.TabPage();
-            this.FavoriteButton = new System.Windows.Forms.Button();
-            this.RefreshBrowserButton = new System.Windows.Forms.Button();
-            this.NextButton = new System.Windows.Forms.Button();
-            this.BackButton = new System.Windows.Forms.Button();
-            this.SearchButton = new System.Windows.Forms.Button();
-            this.AddressBar = new System.Windows.Forms.TextBox();
-            this.DownloadButton = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.BookmarkBar = new System.Windows.Forms.ToolStrip();
-            this.Tabs = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.MainTabs.SuspendLayout();
             this.GamesTab.SuspendLayout();
             this.GamesTabs.SuspendLayout();
@@ -136,14 +136,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.ConsoleGamesDGV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ConsolePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ConsolesDGV)).BeginInit();
+            this.BrowserTab.SuspendLayout();
+            this.Tabs.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.PictureContextMenu.SuspendLayout();
             this.GamesDGVContextMenu.SuspendLayout();
             this.GameTabsContextMenu.SuspendLayout();
             this.ConsoleGamesDGVContextMenu.SuspendLayout();
-            this.BrowserTab.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.Tabs.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainTabs
@@ -642,6 +642,19 @@
             // StatusBox
             // 
             this.StatusBox.FormattingEnabled = true;
+            this.StatusBox.Items.AddRange(new object[] {
+            "100% Run",
+            "Completed",
+            "Completed (100%)",
+            "Don\'t Own",
+            "Dropped",
+            "Never Started",
+            "On Hold",
+            "Plan to Play",
+            "Playing",
+            "Replaying",
+            "Start Over",
+            "Want"});
             this.StatusBox.Location = new System.Drawing.Point(267, 69);
             this.StatusBox.Name = "StatusBox";
             this.StatusBox.Size = new System.Drawing.Size(347, 21);
@@ -824,6 +837,137 @@
             this.NotificationsPage.Text = "Notifications";
             this.NotificationsPage.UseVisualStyleBackColor = true;
             // 
+            // BrowserTab
+            // 
+            this.BrowserTab.Controls.Add(this.Tabs);
+            this.BrowserTab.Controls.Add(this.panel1);
+            this.BrowserTab.Controls.Add(this.FavoriteButton);
+            this.BrowserTab.Controls.Add(this.RefreshBrowserButton);
+            this.BrowserTab.Controls.Add(this.NextButton);
+            this.BrowserTab.Controls.Add(this.BackButton);
+            this.BrowserTab.Controls.Add(this.SearchButton);
+            this.BrowserTab.Controls.Add(this.AddressBar);
+            this.BrowserTab.Controls.Add(this.DownloadButton);
+            this.BrowserTab.Location = new System.Drawing.Point(4, 22);
+            this.BrowserTab.Name = "BrowserTab";
+            this.BrowserTab.Padding = new System.Windows.Forms.Padding(3);
+            this.BrowserTab.Size = new System.Drawing.Size(1053, 563);
+            this.BrowserTab.TabIndex = 3;
+            this.BrowserTab.Text = "Browser";
+            this.BrowserTab.UseVisualStyleBackColor = true;
+            // 
+            // Tabs
+            // 
+            this.Tabs.Controls.Add(this.tabPage1);
+            this.Tabs.Controls.Add(this.tabPage2);
+            this.Tabs.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.Tabs.Location = new System.Drawing.Point(3, 62);
+            this.Tabs.Name = "Tabs";
+            this.Tabs.SelectedIndex = 0;
+            this.Tabs.Size = new System.Drawing.Size(1047, 498);
+            this.Tabs.TabIndex = 34;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(1039, 472);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Loading...";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1039, 472);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "+";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.BookmarkBar);
+            this.panel1.Location = new System.Drawing.Point(0, 34);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1053, 27);
+            this.panel1.TabIndex = 33;
+            // 
+            // BookmarkBar
+            // 
+            this.BookmarkBar.Location = new System.Drawing.Point(0, 0);
+            this.BookmarkBar.Name = "BookmarkBar";
+            this.BookmarkBar.Size = new System.Drawing.Size(1053, 25);
+            this.BookmarkBar.TabIndex = 1;
+            this.BookmarkBar.Text = "toolStrip1";
+            // 
+            // FavoriteButton
+            // 
+            this.FavoriteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.FavoriteButton.Location = new System.Drawing.Point(942, 5);
+            this.FavoriteButton.Name = "FavoriteButton";
+            this.FavoriteButton.Size = new System.Drawing.Size(24, 22);
+            this.FavoriteButton.TabIndex = 32;
+            this.FavoriteButton.Text = "⭐";
+            this.FavoriteButton.UseVisualStyleBackColor = true;
+            // 
+            // RefreshBrowserButton
+            // 
+            this.RefreshBrowserButton.Location = new System.Drawing.Point(90, 4);
+            this.RefreshBrowserButton.Name = "RefreshBrowserButton";
+            this.RefreshBrowserButton.Size = new System.Drawing.Size(38, 23);
+            this.RefreshBrowserButton.TabIndex = 30;
+            this.RefreshBrowserButton.Text = "↺";
+            this.RefreshBrowserButton.UseVisualStyleBackColor = true;
+            // 
+            // NextButton
+            // 
+            this.NextButton.Location = new System.Drawing.Point(46, 4);
+            this.NextButton.Name = "NextButton";
+            this.NextButton.Size = new System.Drawing.Size(38, 23);
+            this.NextButton.TabIndex = 29;
+            this.NextButton.Text = "-->";
+            this.NextButton.UseVisualStyleBackColor = true;
+            // 
+            // BackButton
+            // 
+            this.BackButton.Location = new System.Drawing.Point(7, 4);
+            this.BackButton.Name = "BackButton";
+            this.BackButton.Size = new System.Drawing.Size(38, 23);
+            this.BackButton.TabIndex = 28;
+            this.BackButton.Text = "<--";
+            this.BackButton.UseVisualStyleBackColor = true;
+            // 
+            // SearchButton
+            // 
+            this.SearchButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.SearchButton.Location = new System.Drawing.Point(906, 5);
+            this.SearchButton.Name = "SearchButton";
+            this.SearchButton.Size = new System.Drawing.Size(30, 22);
+            this.SearchButton.TabIndex = 27;
+            this.SearchButton.Text = "🔍";
+            this.SearchButton.UseVisualStyleBackColor = true;
+            // 
+            // AddressBar
+            // 
+            this.AddressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.AddressBar.Location = new System.Drawing.Point(178, 6);
+            this.AddressBar.Name = "AddressBar";
+            this.AddressBar.Size = new System.Drawing.Size(722, 20);
+            this.AddressBar.TabIndex = 26;
+            // 
+            // DownloadButton
+            // 
+            this.DownloadButton.Location = new System.Drawing.Point(134, 4);
+            this.DownloadButton.Name = "DownloadButton";
+            this.DownloadButton.Size = new System.Drawing.Size(38, 23);
+            this.DownloadButton.TabIndex = 25;
+            this.DownloadButton.Text = "V";
+            this.DownloadButton.UseVisualStyleBackColor = true;
+            // 
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -913,12 +1057,12 @@
             this.GameTabsContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.CloseTabButton});
             this.GameTabsContextMenu.Name = "GameTabsContextMenu";
-            this.GameTabsContextMenu.Size = new System.Drawing.Size(126, 26);
+            this.GameTabsContextMenu.Size = new System.Drawing.Size(125, 26);
             // 
             // CloseTabButton
             // 
             this.CloseTabButton.Name = "CloseTabButton";
-            this.CloseTabButton.Size = new System.Drawing.Size(125, 22);
+            this.CloseTabButton.Size = new System.Drawing.Size(124, 22);
             this.CloseTabButton.Text = "Close Tab";
             this.CloseTabButton.Click += new System.EventHandler(this.CloseTabButton_Click);
             // 
@@ -949,137 +1093,6 @@
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
-            // BrowserTab
-            // 
-            this.BrowserTab.Controls.Add(this.Tabs);
-            this.BrowserTab.Controls.Add(this.panel1);
-            this.BrowserTab.Controls.Add(this.FavoriteButton);
-            this.BrowserTab.Controls.Add(this.RefreshBrowserButton);
-            this.BrowserTab.Controls.Add(this.NextButton);
-            this.BrowserTab.Controls.Add(this.BackButton);
-            this.BrowserTab.Controls.Add(this.SearchButton);
-            this.BrowserTab.Controls.Add(this.AddressBar);
-            this.BrowserTab.Controls.Add(this.DownloadButton);
-            this.BrowserTab.Location = new System.Drawing.Point(4, 22);
-            this.BrowserTab.Name = "BrowserTab";
-            this.BrowserTab.Padding = new System.Windows.Forms.Padding(3);
-            this.BrowserTab.Size = new System.Drawing.Size(1053, 563);
-            this.BrowserTab.TabIndex = 3;
-            this.BrowserTab.Text = "Browser";
-            this.BrowserTab.UseVisualStyleBackColor = true;
-            // 
-            // FavoriteButton
-            // 
-            this.FavoriteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.FavoriteButton.Location = new System.Drawing.Point(942, 5);
-            this.FavoriteButton.Name = "FavoriteButton";
-            this.FavoriteButton.Size = new System.Drawing.Size(24, 22);
-            this.FavoriteButton.TabIndex = 32;
-            this.FavoriteButton.Text = "⭐";
-            this.FavoriteButton.UseVisualStyleBackColor = true;
-            // 
-            // RefreshBrowserButton
-            // 
-            this.RefreshBrowserButton.Location = new System.Drawing.Point(90, 4);
-            this.RefreshBrowserButton.Name = "RefreshBrowserButton";
-            this.RefreshBrowserButton.Size = new System.Drawing.Size(38, 23);
-            this.RefreshBrowserButton.TabIndex = 30;
-            this.RefreshBrowserButton.Text = "↺";
-            this.RefreshBrowserButton.UseVisualStyleBackColor = true;
-            // 
-            // NextButton
-            // 
-            this.NextButton.Location = new System.Drawing.Point(46, 4);
-            this.NextButton.Name = "NextButton";
-            this.NextButton.Size = new System.Drawing.Size(38, 23);
-            this.NextButton.TabIndex = 29;
-            this.NextButton.Text = "-->";
-            this.NextButton.UseVisualStyleBackColor = true;
-            // 
-            // BackButton
-            // 
-            this.BackButton.Location = new System.Drawing.Point(7, 4);
-            this.BackButton.Name = "BackButton";
-            this.BackButton.Size = new System.Drawing.Size(38, 23);
-            this.BackButton.TabIndex = 28;
-            this.BackButton.Text = "<--";
-            this.BackButton.UseVisualStyleBackColor = true;
-            // 
-            // SearchButton
-            // 
-            this.SearchButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.SearchButton.Location = new System.Drawing.Point(906, 5);
-            this.SearchButton.Name = "SearchButton";
-            this.SearchButton.Size = new System.Drawing.Size(30, 22);
-            this.SearchButton.TabIndex = 27;
-            this.SearchButton.Text = "🔍";
-            this.SearchButton.UseVisualStyleBackColor = true;
-            // 
-            // AddressBar
-            // 
-            this.AddressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.AddressBar.Location = new System.Drawing.Point(178, 6);
-            this.AddressBar.Name = "AddressBar";
-            this.AddressBar.Size = new System.Drawing.Size(722, 20);
-            this.AddressBar.TabIndex = 26;
-            // 
-            // DownloadButton
-            // 
-            this.DownloadButton.Location = new System.Drawing.Point(134, 4);
-            this.DownloadButton.Name = "DownloadButton";
-            this.DownloadButton.Size = new System.Drawing.Size(38, 23);
-            this.DownloadButton.TabIndex = 25;
-            this.DownloadButton.Text = "V";
-            this.DownloadButton.UseVisualStyleBackColor = true;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.BookmarkBar);
-            this.panel1.Location = new System.Drawing.Point(0, 34);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1053, 27);
-            this.panel1.TabIndex = 33;
-            // 
-            // BookmarkBar
-            // 
-            this.BookmarkBar.Location = new System.Drawing.Point(0, 0);
-            this.BookmarkBar.Name = "BookmarkBar";
-            this.BookmarkBar.Size = new System.Drawing.Size(1053, 25);
-            this.BookmarkBar.TabIndex = 1;
-            this.BookmarkBar.Text = "toolStrip1";
-            // 
-            // Tabs
-            // 
-            this.Tabs.Controls.Add(this.tabPage1);
-            this.Tabs.Controls.Add(this.tabPage2);
-            this.Tabs.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.Tabs.Location = new System.Drawing.Point(3, 62);
-            this.Tabs.Name = "Tabs";
-            this.Tabs.SelectedIndex = 0;
-            this.Tabs.Size = new System.Drawing.Size(1047, 498);
-            this.Tabs.TabIndex = 34;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1039, 472);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Loading...";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1013, 437);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "+";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1109,17 +1122,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.ConsoleGamesDGV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ConsolePictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ConsolesDGV)).EndInit();
+            this.BrowserTab.ResumeLayout(false);
+            this.BrowserTab.PerformLayout();
+            this.Tabs.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.PictureContextMenu.ResumeLayout(false);
             this.GamesDGVContextMenu.ResumeLayout(false);
             this.GameTabsContextMenu.ResumeLayout(false);
             this.ConsoleGamesDGVContextMenu.ResumeLayout(false);
-            this.BrowserTab.ResumeLayout(false);
-            this.BrowserTab.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.Tabs.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

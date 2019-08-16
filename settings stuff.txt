@@ -1,0 +1,39 @@
+Main Form
+	- Default row height
+	- Tab Focus
+	- Layout
+		- UGame
+		- Steam-like
+
+Overlay
+	- Use Overlay by default?
+	- Overlay Buttons
+	- When a screenshot is taken...
+		- Display a pop-up
+		- Play a camera sound
+		- Both
+	- Hotkeys
+		- Overlay show/hide
+		- Screenshot
+		- Open apps from Overlay
+
+
+Preferences
+	- Use Discord RPC by default?
+	- Default links
+	- Open On Startup
+		- Open and show
+		- Open in tray
+	- On Close:
+		- Keep open in tray (Default)
+		- Minimize
+		- Close
+
+Theme
+
+User
+	- User Name
+	- Steam User ID
+	- Origin User ID
+	- uPlay User ID
+	- Custom directories for screenshots, notes, resources, database file

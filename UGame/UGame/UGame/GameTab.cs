@@ -520,7 +520,6 @@ namespace UGame
             tracking = true;
 
             overlay = new Overlay(title, iconBox.BackgroundImage, this);
-            overlay.Show();
 
             timer = new System.Timers.Timer
             {
@@ -595,9 +594,8 @@ namespace UGame
             if (save)
             {
                 if (startDate == new DateTime(1753, 1, 1, 0, 0, 0))
-                    tempStartDate = DateTime.Now;
+                    startDate = tempStartDate;
 
-                startDate = tempStartDate;
 
                 totalSeconds += seconds + (minutes * 60) + (hours * 3600);
 

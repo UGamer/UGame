@@ -964,7 +964,7 @@ namespace UGame
 
             decimal price;
             if (PriceBox.Text != "")
-                price = Convert.ToDecimal(PriceBox.Text);
+                try { price = Convert.ToDecimal(PriceBox.Text); } catch { price = 0; }
             else
                 price = -1;
 
@@ -1463,7 +1463,7 @@ namespace UGame
         private void GamesTabs_ControlRemoved(object sender, ControlEventArgs e)
         {
             int tabIndex = e.Control.TabIndex - 2;
-            games[tabIndex].Close();
+            // games[tabIndex].Close();
             games.RemoveAt(tabIndex);
         }
         
