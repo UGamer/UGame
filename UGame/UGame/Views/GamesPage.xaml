@@ -2,17 +2,42 @@
     x:Class="UGame.Views.GamesPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Style="{StaticResource PageStyle}"
-    mc:Ignorable="d">
-    <Grid x:Name="ContentArea" Margin="{StaticResource MediumLeftRightMargin}">
-        <Grid
-            Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-            <!--
-                The SystemControlPageBackgroundChromeLowBrush background represents where you should place your content. 
-                Place your content here.
-            -->
+    xmlns:model="using:UGame.Core.Models"
+    mc:Ignorable="d" Height="898" Width="1394">
+    <Grid x:Name="ContentArea" Margin="{StaticResource SmallLeftRightMargin}">
+        <Grid>
+
+            <controls:DataGrid x:Name="GameGrid"
+                    Tapped="GameGrid_Tapped"
+                    RowDetailsVisibilityMode="VisibleWhenSelected"
+                    CanUserSortColumns="True"
+                    BorderThickness="2"
+                    BorderBrush="DarkSlateGray"
+                    GridLinesVisibility="All"
+                    AutoGenerateColumns="False"
+                    SelectionMode="Single" Margin="-14,50,0,-2" HorizontalAlignment="Left" Width="426" />
+
+
+            <TextBox x:Name="SearchBox" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Height="50" Width="289" Margin="-14,0,0,0"/>
+            <Button x:Name="SearchButton" Content="🔎" Margin="275,0,0,0" VerticalAlignment="Top" Height="50" Width="69"/>
+            <Button x:Name="SortFilterButton" Content="Sort/Filter" Margin="344,0,0,0" VerticalAlignment="Top" Height="50" Width="68"/>
+            <Image x:Name="DetailsImage" HorizontalAlignment="Left" Height="300" Margin="454,50,0,0" VerticalAlignment="Top" Width="300" Source="/Assets/Square44x44Logo.targetsize-256.png"/>
+            <Image x:Name="DetailsPicture_Copy" HorizontalAlignment="Left" Height="300" Margin="454,50,0,0" VerticalAlignment="Top" Width="300" Source="e63f9f2a-8168-4bb3-b28d-22d34a197b86"/>
+            <Image x:Name="DetailsPicture_Copy1" HorizontalAlignment="Left" Height="300" Margin="454,50,0,0" VerticalAlignment="Top" Width="300" Source="2ccb254b-9506-472a-b5d7-2118cfcbba66"/>
+            <Image x:Name="DetailsPicture_Copy2" HorizontalAlignment="Left" Height="300" Margin="454,50,0,0" VerticalAlignment="Top" Width="300" Source="2ccb254b-9506-472a-b5d7-2118cfcbba66"/>
+            <Image x:Name="DetailsPicture_Copy3" HorizontalAlignment="Left" Height="300" Margin="454,50,0,0" VerticalAlignment="Top" Width="300" Source="4b359ac2-9e06-4148-bc6c-32014d391879"/>
+            <Image x:Name="IconImage" HorizontalAlignment="Left" Height="75" Margin="781,50,0,0" VerticalAlignment="Top" Width="75" Source="/Assets/StoreLogo.png"/>
+            <TextBlock x:Name="TitleBox" HorizontalAlignment="Left" Margin="879,43,0,0" Text="Title" TextWrapping="Wrap" VerticalAlignment="Top" Height="85" FontFamily="Century Gothic" FontWeight="Bold" FontSize="72"/>
+            <Button x:Name="Button1" Content="Launch &amp; Track" Margin="783,270,0,0" VerticalAlignment="Top" Height="80" Width="166" FontFamily="Century Gothic" FontWeight="Bold" FontSize="18"/>
+            <Button x:Name="Button2" Content="Track" Margin="980,270,0,0" VerticalAlignment="Top" Height="80" Width="166" FontFamily="Century Gothic" FontWeight="Bold" FontSize="18"/>
+            <Button x:Name="Button3" Content="Launch" Margin="1177,270,0,0" VerticalAlignment="Top" Height="80" Width="166" FontFamily="Century Gothic" FontWeight="Bold" FontSize="18"/>
+            <controls:AdaptiveGridView x:Name="TasksBox" Margin="454,390,44,390" BorderThickness="50,50,50,50"/>
+            <ComboBox x:Name="PlatformBox" Margin="781,142,0,0" Width="363" IsEditable="True"/>
+            <TextBlock x:Name="TimePlayedBox" HorizontalAlignment="Left" Margin="783,200,0,0" Text="Time Played: 00h:00m:00s" TextWrapping="Wrap" VerticalAlignment="Top" Height="41" Width="560" FontFamily="Century Gothic" FontSize="24" TextAlignment="Left"/>
         </Grid>
     </Grid>
 </Page>

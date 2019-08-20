@@ -126,7 +126,7 @@
     <comment>Application description</comment>
   </data>
   <data name="Shell_Games.Content" xml:space="preserve">
-    <value>Games</value>
+    <value>Library</value>
     <comment>Navigation view item name for Games</comment>
   </data>
   <data name="Shell_Consoles.Content" xml:space="preserve">

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Data;
+using System.Data.SQLite;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -43,6 +45,19 @@ namespace UGame.Views
             InitializeComponent();
             DataContext = this;
             Initialize();
+
+            string connectionString = "Data Source=E:\\Projects\\UGame\\UWP\\UGame\\UGame\\bin\\x86\\Debug\\AppX\\UGameDB.db;Version=3;";
+            // string connectionString = "Data Source=" + config.databasePath + ";Version=3;";
+            SQLiteConnection con = new SQLiteConnection(connectionString);
+            SQLiteCommand selectCmd = new SQLiteCommand("SELECT Title FROM Games", con);
+            DataTable gameTable;
+
+            selectCmd.CommandType = CommandType.Text;
+            SQLiteDataAdapter da = new SQLiteDataAdapter(selectCmd);
+            gameTable = new DataTable();
+            da.Fill(gameTable);
+
+            GameShell.Content = "Library (" + gameTable.Rows.Count + " games)";
         }
 
         private void Initialize()
