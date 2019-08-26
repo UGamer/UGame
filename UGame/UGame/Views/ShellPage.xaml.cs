@@ -46,7 +46,7 @@ namespace UGame.Views
             DataContext = this;
             Initialize();
 
-            string connectionString = "Data Source=E:\\Projects\\UGame\\UWP\\UGame\\UGame\\bin\\x86\\Debug\\AppX\\UGameDB.db;Version=3;";
+            string connectionString = "Data Source=UGameDB.db;Version=3;";
             // string connectionString = "Data Source=" + config.databasePath + ";Version=3;";
             SQLiteConnection con = new SQLiteConnection(connectionString);
             SQLiteCommand selectCmd = new SQLiteCommand("SELECT Title FROM Games", con);
