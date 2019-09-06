@@ -51,5 +51,17 @@ namespace UGame.Views
             if (viewModel.Items.Count == 0)
                 viewModel.LoadItemsCommand.Execute(null);
         }
+
+        private void SearchBar_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            ItemsListView.BeginRefresh();
+
+            if (string.IsNullOrWhiteSpace(e.NewTextValue))
+                ItemsListView.ItemsSource = viewModel.Items;
+            else
+                ItemsListView.ItemsSource = viewModel.Items.Where(i => i.Title.Contains(e.NewTextValue));
+
+            ItemsListView.EndRefresh();
+        }
     }
 }

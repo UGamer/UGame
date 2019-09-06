@@ -8,10 +8,14 @@
              Title="{Binding Title}">
 
     <StackLayout Spacing="20" Padding="15">
-        <Label Text="Title:" FontSize="Medium" />
-        <Label Text="{Binding Item.Title}" d:Text="Item name" FontSize="Small"/>
+        <Label Text="{Binding Item.Title}" d:Text="Item name" FontSize="Large" TextColor="Black" HorizontalOptions="Center"/>
+        <Image Source="{Binding Item.DetailPath}" HorizontalOptions="Center" WidthRequest="500"/>
         <Label Text="Platform:" FontSize="Medium" />
         <Label Text="{Binding Item.Platform}" d:Text="Item description" FontSize="Small"/>
+        <Label Text="Time Played:" FontSize="Medium" />
+        <Label x:Name="TimePlayedLabel" Text="{Binding Item.TimePlayed}" d:Text="Item description" FontSize="Small"/>
+        <Label Text="Last Played:" FontSize="Medium" />
+        <Label x:Name="LastPlayedLabel" Text="{Binding Item.LastPlayed}" d:Text="Item description" FontSize="Small"/>
         <Button x:Name="Button1" Text="Track" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Clicked="Button1_Clicked" />
     </StackLayout>
     

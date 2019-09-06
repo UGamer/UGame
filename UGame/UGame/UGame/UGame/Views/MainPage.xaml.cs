@@ -21,7 +21,7 @@ namespace UGame.Views
 
             MasterBehavior = MasterBehavior.Popover;
 
-            MenuPages.Add((int)MenuItemType.Browse, (NavigationPage)Detail);
+            MenuPages.Add((int)MenuItemType.Library, (NavigationPage)Detail);
         }
 
         public async Task NavigateFromMenu(int id)
@@ -30,7 +30,7 @@ namespace UGame.Views
             {
                 switch (id)
                 {
-                    case (int)MenuItemType.Browse:
+                    case (int)MenuItemType.Library:
                         MenuPages.Add(id, new NavigationPage(new ItemsPage()));
                         break;
                     case (int)MenuItemType.About:

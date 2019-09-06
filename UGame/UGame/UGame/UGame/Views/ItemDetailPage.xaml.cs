@@ -53,6 +53,7 @@ namespace UGame.Views
                 timer.Interval = 1000;
                 timer.Elapsed += Timer_Elapsed;
                 timer.Start();
+                Plugin.LocalNotifications.CrossLocalNotifications.Current.Show("UGame", "Playing \"" +  viewModel.Item.Title + "\"", 0);
             }
             else
             {
@@ -65,9 +66,11 @@ namespace UGame.Views
                 string id = viewModel.Item.Id;
 
                 int totalSeconds = seconds + viewModel.Item.Seconds;
-                while (totalSeconds >= 60)
+
+                int sec = totalSeconds;
+                while (sec >= 60)
                 {
-                    totalSeconds -= 60;
+                    sec -= 60;
                     minutes++;
                 }
                 while (minutes >= 60)
@@ -76,12 +79,12 @@ namespace UGame.Views
                     hours++;
                 }
 
-                string secString = seconds.ToString();
+                string secString = sec.ToString();
                 string minString = minutes.ToString();
                 string hrString = hours.ToString();
 
-                if (seconds < 10)
-                    secString = "0" + seconds;
+                if (sec < 10)
+                    secString = "0" + sec;
                 if (minutes < 10)
                     minString = "0" + minutes;
                 if (hours < 10)
@@ -94,21 +97,81 @@ namespace UGame.Views
 
                 string funTime = "UPDATE Games SET TimePlayed = '" + timePlayed + "', Seconds = " + totalSeconds + ", LastPlayed = '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "' WHERE Id = " + id;
 
-                Console.WriteLine(funTime);
-                con.Execute(funTime);
+                viewModel.Item.TimePlayed = timePlayed;
+                viewModel.Item.LastPlayed = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
-                //con.Close();
+                TimePlayedLabel.Text = timePlayed;
+                LastPlayedLabel.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+                con.TableChanged += Connection_TableChanged;
+                con.TimeExecution = true;
+                con.Trace = true;
+
+                Console.WriteLine(funTime);
+
+                con.BeginTransaction();
+                con.Execute(funTime);
+                con.Commit();
+
+                con.Close();
+                con.Dispose();
+
+                minutes = 0;
+                hours = 0;
+                while (sec >= 60)
+                {
+                    sec -= 60;
+                    minutes++;
+                }
+                while (minutes >= 60)
+                {
+                    minutes -= 60;
+                    hours++;
+                }
+
+                string alertMessage = "You played " + viewModel.Item.Title + " for ";
+
+                if (hours > 1 && minutes == 0 && seconds == 0)
+                    alertMessage += hours.ToString() + " hours.";
+                if (hours == 1 && minutes == 0 && seconds == 0)
+                    alertMessage += hours.ToString() + " hour.";
+                if (hours > 1 && (minutes != 0 || seconds != 0))
+                    alertMessage += hours.ToString() + " hours, ";
+
+                if (minutes > 1 && seconds == 0)
+                    alertMessage += minutes.ToString() + " minutes.";
+                if (minutes == 1 && seconds == 0)
+                    alertMessage += minutes.ToString() + " minute.";
+                if (minutes > 1 && seconds != 0)
+                    alertMessage += minutes.ToString() + " minutes, ";
+
+                if (seconds > 1)
+                    alertMessage += seconds.ToString() + " seconds.";
+                if (seconds == 1)
+                    alertMessage += seconds.ToString() + " second.";
+
+
+                DisplayAlert("Play Session Complete", alertMessage, "OK");
 
                 seconds = 0;
+                minutes = 0;
+                hours = 0;
+
+                Plugin.LocalNotifications.CrossLocalNotifications.Current.Cancel(0);
+
             }
+        }
+
+        private void Connection_TableChanged(object sender, NotifyTableChangedEventArgs e)
+        {
+            Console.WriteLine("Successful!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         }
 
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             seconds++;
 
-            // This doesn't work due to it being a cross-thread operation.
-            /*
+            
             if (seconds == 60)
             {
                 seconds = 0;
@@ -131,7 +194,9 @@ namespace UGame.Views
             if (hours < 10)
                 hrString = "0" + hours;
 
-            
+            string playSession = hrString + "h:" + minString + "m:" + secString + "s";
+            // This doesn't work due to it being a cross-thread operation.
+            /*
             Button1.Text = "Stop (" + hrString + "h:" + minString + "m:" + secString + "s)";
             */
         }

@@ -13,6 +13,7 @@
     </ContentPage.ToolbarItems>
 
     <StackLayout>
+        <SearchBar Placeholder="Search..." TextChanged="SearchBar_OnTextChanged" />
         <ListView x:Name="ItemsListView"
                 ItemsSource="{Binding Items}"
                 VerticalOptions="FillAndExpand"
@@ -34,20 +35,7 @@
             </d:ListView.ItemsSource>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <ViewCell>
-                        <StackLayout Padding="10">
-                            <Label Text="{Binding Title}" 
-                                d:Text="{Binding .}"
-                                LineBreakMode="NoWrap" 
-                                Style="{DynamicResource ListItemTextStyle}" 
-                                FontSize="16" />
-                            <Label Text="{Binding Platform}" 
-                                d:Text="Item descripton"
-                                LineBreakMode="NoWrap"
-                                Style="{DynamicResource ListItemDetailTextStyle}"
-                                FontSize="13" />
-                        </StackLayout>
-                    </ViewCell>
+                    <ImageCell ImageSource="{Binding IconPath}" Text="{Binding Title}" Detail="{Binding Platform}" TextColor="Black" DetailColor="LightGray"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

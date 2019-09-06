@@ -6,7 +6,7 @@ namespace UGame.Models
 {
     public enum MenuItemType
     {
-        Browse,
+        Library,
         About
     }
     public class HomeMenuItem
