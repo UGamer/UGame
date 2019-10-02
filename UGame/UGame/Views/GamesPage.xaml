@@ -19,7 +19,7 @@
                     BorderBrush="DarkSlateGray"
                     GridLinesVisibility="All"
                     AutoGenerateColumns="False"
-                    SelectionMode="Single" Margin="-14,50,0,-2" HorizontalAlignment="Left" Width="426" />
+                    SelectionMode="Single" Margin="-14,50,0,10" HorizontalAlignment="Left" Width="426" />
 
 
             <TextBox x:Name="SearchBox" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Height="50" Width="289" Margin="-14,0,0,0"/>
