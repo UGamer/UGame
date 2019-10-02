@@ -1490,5 +1490,11 @@ namespace UGame
             else if (MainTabs.SelectedTab.Text == "Consoles")
                 ConsolesDGV.Focus();
         }
+
+        private void AdvancedSearchButton_Click(object sender, EventArgs e)
+        {
+            AdvancedSearch advSearch = new AdvancedSearch(this);
+            advSearch.Show();
+        }
     }
 }
