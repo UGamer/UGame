@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.MainTabs = new System.Windows.Forms.TabControl();
             this.GamesTab = new System.Windows.Forms.TabPage();
@@ -152,64 +153,61 @@
             this.MainTabs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.MainTabs.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
             this.MainTabs.Controls.Add(this.GamesTab);
             this.MainTabs.Controls.Add(this.ConsolesTab);
             this.MainTabs.Controls.Add(this.NotificationsPage);
             this.MainTabs.Controls.Add(this.BrowserTab);
-            this.MainTabs.Location = new System.Drawing.Point(0, 56);
-            this.MainTabs.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.MainTabs.Location = new System.Drawing.Point(0, 29);
             this.MainTabs.Name = "MainTabs";
             this.MainTabs.SelectedIndex = 0;
-            this.MainTabs.Size = new System.Drawing.Size(1538, 837);
+            this.MainTabs.Size = new System.Drawing.Size(1084, 614);
             this.MainTabs.TabIndex = 0;
             this.MainTabs.SelectedIndexChanged += new System.EventHandler(this.MainTabs_SelectedIndexChanged);
             // 
             // GamesTab
             // 
+            this.GamesTab.BackColor = System.Drawing.Color.Gray;
             this.GamesTab.Controls.Add(this.GamesTabs);
-            this.GamesTab.Location = new System.Drawing.Point(8, 39);
-            this.GamesTab.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.GamesTab.Location = new System.Drawing.Point(4, 25);
             this.GamesTab.Name = "GamesTab";
-            this.GamesTab.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.GamesTab.Size = new System.Drawing.Size(1522, 790);
+            this.GamesTab.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.GamesTab.Size = new System.Drawing.Size(1076, 585);
             this.GamesTab.TabIndex = 0;
             this.GamesTab.Text = "Games";
-            this.GamesTab.UseVisualStyleBackColor = true;
             // 
             // GamesTabs
             // 
             this.GamesTabs.Controls.Add(this.GamesListTab);
             this.GamesTabs.Controls.Add(this.GamesEntriesTab);
             this.GamesTabs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.GamesTabs.Location = new System.Drawing.Point(6, 6);
-            this.GamesTabs.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.GamesTabs.Location = new System.Drawing.Point(3, 3);
             this.GamesTabs.Name = "GamesTabs";
             this.GamesTabs.SelectedIndex = 0;
-            this.GamesTabs.Size = new System.Drawing.Size(1510, 778);
+            this.GamesTabs.Size = new System.Drawing.Size(1070, 579);
             this.GamesTabs.TabIndex = 0;
             this.GamesTabs.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.GamesTabs_ControlRemoved);
             this.GamesTabs.MouseUp += new System.Windows.Forms.MouseEventHandler(this.GamesTabs_MouseUp);
             // 
             // GamesListTab
             // 
+            this.GamesListTab.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.GamesListTab.Controls.Add(this.AdvancedSearchButton);
             this.GamesListTab.Controls.Add(this.SearchBox);
             this.GamesListTab.Controls.Add(this.GamesDGV);
-            this.GamesListTab.Location = new System.Drawing.Point(8, 39);
-            this.GamesListTab.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.GamesListTab.Location = new System.Drawing.Point(4, 22);
             this.GamesListTab.Name = "GamesListTab";
-            this.GamesListTab.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.GamesListTab.Size = new System.Drawing.Size(1494, 731);
+            this.GamesListTab.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.GamesListTab.Size = new System.Drawing.Size(1062, 553);
             this.GamesListTab.TabIndex = 0;
             this.GamesListTab.Text = "[LIST]";
-            this.GamesListTab.UseVisualStyleBackColor = true;
             // 
             // AdvancedSearchButton
             // 
-            this.AdvancedSearchButton.Location = new System.Drawing.Point(824, 8);
-            this.AdvancedSearchButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.AdvancedSearchButton.Location = new System.Drawing.Point(412, 4);
+            this.AdvancedSearchButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.AdvancedSearchButton.Name = "AdvancedSearchButton";
-            this.AdvancedSearchButton.Size = new System.Drawing.Size(108, 31);
+            this.AdvancedSearchButton.Size = new System.Drawing.Size(54, 20);
             this.AdvancedSearchButton.TabIndex = 2;
             this.AdvancedSearchButton.Text = "Search";
             this.AdvancedSearchButton.UseVisualStyleBackColor = true;
@@ -217,10 +215,11 @@
             // 
             // SearchBox
             // 
-            this.SearchBox.Location = new System.Drawing.Point(8, 8);
-            this.SearchBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.SearchBox.BackColor = System.Drawing.Color.Black;
+            this.SearchBox.ForeColor = System.Drawing.Color.White;
+            this.SearchBox.Location = new System.Drawing.Point(4, 4);
             this.SearchBox.Name = "SearchBox";
-            this.SearchBox.Size = new System.Drawing.Size(806, 31);
+            this.SearchBox.Size = new System.Drawing.Size(405, 20);
             this.SearchBox.TabIndex = 1;
             this.SearchBox.TextChanged += new System.EventHandler(this.SearchBox_TextChanged);
             // 
@@ -232,15 +231,20 @@
             this.GamesDGV.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.GamesDGV.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
             this.GamesDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.GamesDGV.Location = new System.Drawing.Point(6, 52);
-            this.GamesDGV.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.GamesDGV.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.GamesDGV.Location = new System.Drawing.Point(3, 30);
             this.GamesDGV.Name = "GamesDGV";
             this.GamesDGV.ReadOnly = true;
             this.GamesDGV.RowHeadersVisible = false;
             this.GamesDGV.RowHeadersWidth = 82;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            this.GamesDGV.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.GamesDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.GamesDGV.Size = new System.Drawing.Size(1488, 679);
+            this.GamesDGV.Size = new System.Drawing.Size(1056, 520);
             this.GamesDGV.TabIndex = 0;
             this.GamesDGV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GamesDGV_CellClick);
             this.GamesDGV.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GamesDGV_CellDoubleClick);
@@ -250,6 +254,7 @@
             // 
             // GamesEntriesTab
             // 
+            this.GamesEntriesTab.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.GamesEntriesTab.Controls.Add(this.DiscordStatusLabel);
             this.GamesEntriesTab.Controls.Add(this.DiscordCheck);
             this.GamesEntriesTab.Controls.Add(this.LockPlatformButton);
@@ -298,23 +303,20 @@
             this.GamesEntriesTab.Controls.Add(this.ReplaceButton);
             this.GamesEntriesTab.Controls.Add(this.EditButton);
             this.GamesEntriesTab.Controls.Add(this.AddButton);
-            this.GamesEntriesTab.Location = new System.Drawing.Point(8, 39);
-            this.GamesEntriesTab.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.GamesEntriesTab.Location = new System.Drawing.Point(4, 22);
             this.GamesEntriesTab.Name = "GamesEntriesTab";
-            this.GamesEntriesTab.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.GamesEntriesTab.Size = new System.Drawing.Size(2078, 1024);
+            this.GamesEntriesTab.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.GamesEntriesTab.Size = new System.Drawing.Size(1062, 553);
             this.GamesEntriesTab.TabIndex = 1;
             this.GamesEntriesTab.Text = "[ENTRIES]";
-            this.GamesEntriesTab.UseVisualStyleBackColor = true;
             // 
             // DiscordStatusLabel
             // 
             this.DiscordStatusLabel.AutoSize = true;
             this.DiscordStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DiscordStatusLabel.Location = new System.Drawing.Point(1516, 387);
-            this.DiscordStatusLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.DiscordStatusLabel.Location = new System.Drawing.Point(758, 201);
             this.DiscordStatusLabel.Name = "DiscordStatusLabel";
-            this.DiscordStatusLabel.Size = new System.Drawing.Size(201, 60);
+            this.DiscordStatusLabel.Size = new System.Drawing.Size(105, 32);
             this.DiscordStatusLabel.TabIndex = 47;
             this.DiscordStatusLabel.Text = "Show as \r\nDiscord Status?:";
             // 
@@ -323,20 +325,18 @@
             this.DiscordCheck.AutoSize = true;
             this.DiscordCheck.Checked = true;
             this.DiscordCheck.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.DiscordCheck.Location = new System.Drawing.Point(1738, 404);
-            this.DiscordCheck.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.DiscordCheck.Location = new System.Drawing.Point(869, 210);
             this.DiscordCheck.Name = "DiscordCheck";
-            this.DiscordCheck.Size = new System.Drawing.Size(28, 27);
+            this.DiscordCheck.Size = new System.Drawing.Size(15, 14);
             this.DiscordCheck.TabIndex = 46;
             this.DiscordCheck.UseVisualStyleBackColor = true;
             // 
             // LockPlatformButton
             // 
             this.LockPlatformButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.LockPlatformButton.Location = new System.Drawing.Point(472, 71);
-            this.LockPlatformButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.LockPlatformButton.Location = new System.Drawing.Point(236, 37);
             this.LockPlatformButton.Name = "LockPlatformButton";
-            this.LockPlatformButton.Size = new System.Drawing.Size(40, 38);
+            this.LockPlatformButton.Size = new System.Drawing.Size(20, 20);
             this.LockPlatformButton.TabIndex = 45;
             this.LockPlatformButton.UseVisualStyleBackColor = true;
             this.LockPlatformButton.Click += new System.EventHandler(this.LockPlatformButton_Click);
@@ -344,10 +344,9 @@
             // LockTitleButton
             // 
             this.LockTitleButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.LockTitleButton.Location = new System.Drawing.Point(472, 10);
-            this.LockTitleButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.LockTitleButton.Location = new System.Drawing.Point(236, 5);
             this.LockTitleButton.Name = "LockTitleButton";
-            this.LockTitleButton.Size = new System.Drawing.Size(40, 38);
+            this.LockTitleButton.Size = new System.Drawing.Size(20, 20);
             this.LockTitleButton.TabIndex = 44;
             this.LockTitleButton.UseVisualStyleBackColor = true;
             this.LockTitleButton.Click += new System.EventHandler(this.LockTitleButton_Click);
@@ -356,10 +355,9 @@
             // 
             this.BgBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BgBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.BgBox.Location = new System.Drawing.Point(1780, 802);
-            this.BgBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.BgBox.Location = new System.Drawing.Point(890, 417);
             this.BgBox.Name = "BgBox";
-            this.BgBox.Size = new System.Drawing.Size(284, 198);
+            this.BgBox.Size = new System.Drawing.Size(143, 104);
             this.BgBox.TabIndex = 43;
             this.BgBox.TabStop = false;
             this.BgBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BgBox_MouseUp);
@@ -368,10 +366,9 @@
             // 
             this.IconBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.IconBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.IconBox.Location = new System.Drawing.Point(1780, 515);
-            this.IconBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.IconBox.Location = new System.Drawing.Point(890, 268);
             this.IconBox.Name = "IconBox";
-            this.IconBox.Size = new System.Drawing.Size(284, 273);
+            this.IconBox.Size = new System.Drawing.Size(143, 143);
             this.IconBox.TabIndex = 42;
             this.IconBox.TabStop = false;
             this.IconBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.IconBox_MouseUp);
@@ -380,23 +377,23 @@
             // 
             this.DetailsBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.DetailsBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.DetailsBox.Location = new System.Drawing.Point(1262, 515);
-            this.DetailsBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.DetailsBox.Location = new System.Drawing.Point(631, 268);
             this.DetailsBox.Name = "DetailsBox";
-            this.DetailsBox.Size = new System.Drawing.Size(504, 485);
+            this.DetailsBox.Size = new System.Drawing.Size(253, 253);
             this.DetailsBox.TabIndex = 41;
             this.DetailsBox.TabStop = false;
             this.DetailsBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.DetailsBox_MouseUp);
             // 
             // SearchDatabaseButton
             // 
-            this.SearchDatabaseButton.Location = new System.Drawing.Point(14, 813);
-            this.SearchDatabaseButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.SearchDatabaseButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.SearchDatabaseButton.ForeColor = System.Drawing.Color.White;
+            this.SearchDatabaseButton.Location = new System.Drawing.Point(7, 423);
             this.SearchDatabaseButton.Name = "SearchDatabaseButton";
-            this.SearchDatabaseButton.Size = new System.Drawing.Size(292, 85);
+            this.SearchDatabaseButton.Size = new System.Drawing.Size(146, 44);
             this.SearchDatabaseButton.TabIndex = 40;
             this.SearchDatabaseButton.Text = "SEARCH DATABASE";
-            this.SearchDatabaseButton.UseVisualStyleBackColor = true;
+            this.SearchDatabaseButton.UseVisualStyleBackColor = false;
             this.SearchDatabaseButton.Click += new System.EventHandler(this.SearchDatabaseButton_Click);
             // 
             // OverlayCheck
@@ -404,10 +401,9 @@
             this.OverlayCheck.AutoSize = true;
             this.OverlayCheck.Checked = true;
             this.OverlayCheck.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.OverlayCheck.Location = new System.Drawing.Point(1448, 477);
-            this.OverlayCheck.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.OverlayCheck.Location = new System.Drawing.Point(724, 248);
             this.OverlayCheck.Name = "OverlayCheck";
-            this.OverlayCheck.Size = new System.Drawing.Size(28, 27);
+            this.OverlayCheck.Size = new System.Drawing.Size(15, 14);
             this.OverlayCheck.TabIndex = 39;
             this.OverlayCheck.UseVisualStyleBackColor = true;
             // 
@@ -416,65 +412,70 @@
             this.BlurCheck.AutoSize = true;
             this.BlurCheck.Checked = true;
             this.BlurCheck.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.BlurCheck.Location = new System.Drawing.Point(1448, 404);
-            this.BlurCheck.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.BlurCheck.Location = new System.Drawing.Point(724, 210);
             this.BlurCheck.Name = "BlurCheck";
-            this.BlurCheck.Size = new System.Drawing.Size(28, 27);
+            this.BlurCheck.Size = new System.Drawing.Size(15, 14);
             this.BlurCheck.TabIndex = 38;
             this.BlurCheck.UseVisualStyleBackColor = true;
             // 
             // FiltersBox
             // 
-            this.FiltersBox.Location = new System.Drawing.Point(1448, 317);
-            this.FiltersBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.FiltersBox.BackColor = System.Drawing.Color.Black;
+            this.FiltersBox.ForeColor = System.Drawing.Color.White;
+            this.FiltersBox.Location = new System.Drawing.Point(724, 165);
             this.FiltersBox.Name = "FiltersBox";
-            this.FiltersBox.Size = new System.Drawing.Size(614, 31);
+            this.FiltersBox.Size = new System.Drawing.Size(309, 20);
             this.FiltersBox.TabIndex = 37;
             // 
             // URLButton
             // 
-            this.URLButton.Location = new System.Drawing.Point(1448, 254);
-            this.URLButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.URLButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.URLButton.ForeColor = System.Drawing.Color.White;
+            this.URLButton.Location = new System.Drawing.Point(724, 132);
             this.URLButton.Name = "URLButton";
-            this.URLButton.Size = new System.Drawing.Size(618, 44);
+            this.URLButton.Size = new System.Drawing.Size(309, 23);
             this.URLButton.TabIndex = 36;
             this.URLButton.Text = "Show Table";
-            this.URLButton.UseVisualStyleBackColor = true;
+            this.URLButton.UseVisualStyleBackColor = false;
             this.URLButton.Click += new System.EventHandler(this.URLButton_Click);
             // 
             // LaunchButton
             // 
-            this.LaunchButton.Location = new System.Drawing.Point(1448, 192);
-            this.LaunchButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.LaunchButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.LaunchButton.ForeColor = System.Drawing.Color.White;
+            this.LaunchButton.Location = new System.Drawing.Point(724, 100);
             this.LaunchButton.Name = "LaunchButton";
-            this.LaunchButton.Size = new System.Drawing.Size(618, 44);
+            this.LaunchButton.Size = new System.Drawing.Size(309, 23);
             this.LaunchButton.TabIndex = 35;
             this.LaunchButton.Text = "Show Table";
-            this.LaunchButton.UseVisualStyleBackColor = true;
+            this.LaunchButton.UseVisualStyleBackColor = false;
             this.LaunchButton.Click += new System.EventHandler(this.LaunchButton_Click);
             // 
             // PriceBox
             // 
-            this.PriceBox.Location = new System.Drawing.Point(532, 963);
-            this.PriceBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.PriceBox.BackColor = System.Drawing.Color.Black;
+            this.PriceBox.ForeColor = System.Drawing.Color.White;
+            this.PriceBox.Location = new System.Drawing.Point(266, 501);
             this.PriceBox.Name = "PriceBox";
-            this.PriceBox.Size = new System.Drawing.Size(690, 31);
+            this.PriceBox.Size = new System.Drawing.Size(347, 20);
             this.PriceBox.TabIndex = 34;
             // 
             // PlayerCountBox
             // 
-            this.PlayerCountBox.Location = new System.Drawing.Point(532, 902);
-            this.PlayerCountBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.PlayerCountBox.BackColor = System.Drawing.Color.Black;
+            this.PlayerCountBox.ForeColor = System.Drawing.Color.White;
+            this.PlayerCountBox.Location = new System.Drawing.Point(266, 469);
             this.PlayerCountBox.Name = "PlayerCountBox";
-            this.PlayerCountBox.Size = new System.Drawing.Size(690, 31);
+            this.PlayerCountBox.Size = new System.Drawing.Size(347, 20);
             this.PlayerCountBox.TabIndex = 33;
             // 
             // GenreBox
             // 
-            this.GenreBox.Location = new System.Drawing.Point(532, 840);
-            this.GenreBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.GenreBox.BackColor = System.Drawing.Color.Black;
+            this.GenreBox.ForeColor = System.Drawing.Color.White;
+            this.GenreBox.Location = new System.Drawing.Point(266, 437);
             this.GenreBox.Name = "GenreBox";
-            this.GenreBox.Size = new System.Drawing.Size(690, 31);
+            this.GenreBox.Size = new System.Drawing.Size(347, 20);
             this.GenreBox.TabIndex = 32;
             // 
             // ReleaseDateCheck
@@ -482,54 +483,56 @@
             this.ReleaseDateCheck.AutoSize = true;
             this.ReleaseDateCheck.Checked = true;
             this.ReleaseDateCheck.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ReleaseDateCheck.Location = new System.Drawing.Point(532, 785);
-            this.ReleaseDateCheck.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.ReleaseDateCheck.Location = new System.Drawing.Point(266, 408);
             this.ReleaseDateCheck.Name = "ReleaseDateCheck";
-            this.ReleaseDateCheck.Size = new System.Drawing.Size(104, 29);
+            this.ReleaseDateCheck.Size = new System.Drawing.Size(56, 17);
             this.ReleaseDateCheck.TabIndex = 31;
             this.ReleaseDateCheck.Text = "Ignore";
             this.ReleaseDateCheck.UseVisualStyleBackColor = true;
             // 
             // ReleaseDatePicker
             // 
-            this.ReleaseDatePicker.Location = new System.Drawing.Point(652, 781);
-            this.ReleaseDatePicker.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.ReleaseDatePicker.Location = new System.Drawing.Point(326, 406);
             this.ReleaseDatePicker.Name = "ReleaseDatePicker";
-            this.ReleaseDatePicker.Size = new System.Drawing.Size(570, 31);
+            this.ReleaseDatePicker.Size = new System.Drawing.Size(287, 20);
             this.ReleaseDatePicker.TabIndex = 30;
             // 
             // PublishersBox
             // 
-            this.PublishersBox.Location = new System.Drawing.Point(532, 719);
-            this.PublishersBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.PublishersBox.BackColor = System.Drawing.Color.Black;
+            this.PublishersBox.ForeColor = System.Drawing.Color.White;
+            this.PublishersBox.Location = new System.Drawing.Point(266, 374);
             this.PublishersBox.Name = "PublishersBox";
-            this.PublishersBox.Size = new System.Drawing.Size(690, 31);
+            this.PublishersBox.Size = new System.Drawing.Size(347, 20);
             this.PublishersBox.TabIndex = 29;
             // 
             // DevelopersBox
             // 
-            this.DevelopersBox.Location = new System.Drawing.Point(532, 658);
-            this.DevelopersBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.DevelopersBox.BackColor = System.Drawing.Color.Black;
+            this.DevelopersBox.ForeColor = System.Drawing.Color.White;
+            this.DevelopersBox.Location = new System.Drawing.Point(266, 342);
             this.DevelopersBox.Name = "DevelopersBox";
-            this.DevelopersBox.Size = new System.Drawing.Size(690, 31);
+            this.DevelopersBox.Size = new System.Drawing.Size(347, 20);
             this.DevelopersBox.TabIndex = 28;
             // 
             // GameDescBox
             // 
-            this.GameDescBox.Location = new System.Drawing.Point(1448, 13);
-            this.GameDescBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.GameDescBox.BackColor = System.Drawing.Color.Black;
+            this.GameDescBox.ForeColor = System.Drawing.Color.White;
+            this.GameDescBox.Location = new System.Drawing.Point(724, 7);
             this.GameDescBox.Multiline = true;
             this.GameDescBox.Name = "GameDescBox";
-            this.GameDescBox.Size = new System.Drawing.Size(614, 131);
+            this.GameDescBox.Size = new System.Drawing.Size(309, 70);
             this.GameDescBox.TabIndex = 27;
             // 
             // NotesBox
             // 
-            this.NotesBox.Location = new System.Drawing.Point(532, 508);
-            this.NotesBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.NotesBox.BackColor = System.Drawing.Color.Black;
+            this.NotesBox.ForeColor = System.Drawing.Color.White;
+            this.NotesBox.Location = new System.Drawing.Point(266, 264);
             this.NotesBox.Multiline = true;
             this.NotesBox.Name = "NotesBox";
-            this.NotesBox.Size = new System.Drawing.Size(690, 131);
+            this.NotesBox.Size = new System.Drawing.Size(347, 70);
             this.NotesBox.TabIndex = 26;
             // 
             // LastPlayedCheck
@@ -537,10 +540,9 @@
             this.LastPlayedCheck.AutoSize = true;
             this.LastPlayedCheck.Checked = true;
             this.LastPlayedCheck.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.LastPlayedCheck.Location = new System.Drawing.Point(534, 444);
-            this.LastPlayedCheck.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.LastPlayedCheck.Location = new System.Drawing.Point(267, 231);
             this.LastPlayedCheck.Name = "LastPlayedCheck";
-            this.LastPlayedCheck.Size = new System.Drawing.Size(104, 29);
+            this.LastPlayedCheck.Size = new System.Drawing.Size(56, 17);
             this.LastPlayedCheck.TabIndex = 25;
             this.LastPlayedCheck.Text = "Ignore";
             this.LastPlayedCheck.UseVisualStyleBackColor = true;
@@ -549,10 +551,9 @@
             // 
             this.LastPlayedDatePicker.CustomFormat = "MMMM, dd, yyyy               hh:mm:ss tt";
             this.LastPlayedDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.LastPlayedDatePicker.Location = new System.Drawing.Point(654, 440);
-            this.LastPlayedDatePicker.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.LastPlayedDatePicker.Location = new System.Drawing.Point(327, 229);
             this.LastPlayedDatePicker.Name = "LastPlayedDatePicker";
-            this.LastPlayedDatePicker.Size = new System.Drawing.Size(570, 31);
+            this.LastPlayedDatePicker.Size = new System.Drawing.Size(287, 20);
             this.LastPlayedDatePicker.TabIndex = 24;
             // 
             // StartDateCheck
@@ -560,10 +561,9 @@
             this.StartDateCheck.AutoSize = true;
             this.StartDateCheck.Checked = true;
             this.StartDateCheck.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.StartDateCheck.Location = new System.Drawing.Point(534, 383);
-            this.StartDateCheck.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.StartDateCheck.Location = new System.Drawing.Point(267, 199);
             this.StartDateCheck.Name = "StartDateCheck";
-            this.StartDateCheck.Size = new System.Drawing.Size(104, 29);
+            this.StartDateCheck.Size = new System.Drawing.Size(56, 17);
             this.StartDateCheck.TabIndex = 23;
             this.StartDateCheck.Text = "Ignore";
             this.StartDateCheck.UseVisualStyleBackColor = true;
@@ -572,10 +572,9 @@
             // 
             this.StartDatePicker.CustomFormat = "MMMM, dd, yyyy               hh:mm:ss tt";
             this.StartDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.StartDatePicker.Location = new System.Drawing.Point(654, 379);
-            this.StartDatePicker.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.StartDatePicker.Location = new System.Drawing.Point(327, 197);
             this.StartDatePicker.Name = "StartDatePicker";
-            this.StartDatePicker.Size = new System.Drawing.Size(570, 31);
+            this.StartDatePicker.Size = new System.Drawing.Size(287, 20);
             this.StartDatePicker.TabIndex = 22;
             // 
             // ObtainedCheck
@@ -583,10 +582,9 @@
             this.ObtainedCheck.AutoSize = true;
             this.ObtainedCheck.Checked = true;
             this.ObtainedCheck.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ObtainedCheck.Location = new System.Drawing.Point(534, 321);
-            this.ObtainedCheck.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.ObtainedCheck.Location = new System.Drawing.Point(267, 167);
             this.ObtainedCheck.Name = "ObtainedCheck";
-            this.ObtainedCheck.Size = new System.Drawing.Size(104, 29);
+            this.ObtainedCheck.Size = new System.Drawing.Size(56, 17);
             this.ObtainedCheck.TabIndex = 21;
             this.ObtainedCheck.Text = "Ignore";
             this.ObtainedCheck.UseVisualStyleBackColor = true;
@@ -595,18 +593,16 @@
             // 
             this.ObtainedDatePicker.CustomFormat = "MMMM, dd, yyyy               hh:mm:ss tt";
             this.ObtainedDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.ObtainedDatePicker.Location = new System.Drawing.Point(654, 317);
-            this.ObtainedDatePicker.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.ObtainedDatePicker.Location = new System.Drawing.Point(327, 165);
             this.ObtainedDatePicker.Name = "ObtainedDatePicker";
-            this.ObtainedDatePicker.Size = new System.Drawing.Size(570, 31);
+            this.ObtainedDatePicker.Size = new System.Drawing.Size(287, 20);
             this.ObtainedDatePicker.TabIndex = 20;
             // 
             // AddTimeButton
             // 
-            this.AddTimeButton.Location = new System.Drawing.Point(1160, 256);
-            this.AddTimeButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.AddTimeButton.Location = new System.Drawing.Point(580, 133);
             this.AddTimeButton.Name = "AddTimeButton";
-            this.AddTimeButton.Size = new System.Drawing.Size(68, 42);
+            this.AddTimeButton.Size = new System.Drawing.Size(34, 22);
             this.AddTimeButton.TabIndex = 19;
             this.AddTimeButton.Text = "+";
             this.AddTimeButton.UseVisualStyleBackColor = true;
@@ -615,91 +611,87 @@
             // TimeSecondsLabel
             // 
             this.TimeSecondsLabel.AutoSize = true;
-            this.TimeSecondsLabel.Location = new System.Drawing.Point(1052, 263);
-            this.TimeSecondsLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.TimeSecondsLabel.Location = new System.Drawing.Point(526, 137);
             this.TimeSecondsLabel.Name = "TimeSecondsLabel";
-            this.TimeSecondsLabel.Size = new System.Drawing.Size(93, 25);
+            this.TimeSecondsLabel.Size = new System.Drawing.Size(47, 13);
             this.TimeSecondsLabel.TabIndex = 18;
             this.TimeSecondsLabel.Text = "seconds";
             // 
             // TimeSecondsBox
             // 
-            this.TimeSecondsBox.Location = new System.Drawing.Point(938, 256);
-            this.TimeSecondsBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.TimeSecondsBox.BackColor = System.Drawing.Color.Black;
+            this.TimeSecondsBox.Location = new System.Drawing.Point(469, 133);
             this.TimeSecondsBox.Name = "TimeSecondsBox";
-            this.TimeSecondsBox.Size = new System.Drawing.Size(104, 31);
+            this.TimeSecondsBox.Size = new System.Drawing.Size(54, 20);
             this.TimeSecondsBox.TabIndex = 17;
             // 
             // TimeMinutesLabel
             // 
             this.TimeMinutesLabel.AutoSize = true;
-            this.TimeMinutesLabel.Location = new System.Drawing.Point(840, 263);
-            this.TimeMinutesLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.TimeMinutesLabel.Location = new System.Drawing.Point(420, 137);
             this.TimeMinutesLabel.Name = "TimeMinutesLabel";
-            this.TimeMinutesLabel.Size = new System.Drawing.Size(87, 25);
+            this.TimeMinutesLabel.Size = new System.Drawing.Size(43, 13);
             this.TimeMinutesLabel.TabIndex = 16;
             this.TimeMinutesLabel.Text = "minutes";
             // 
             // TimeMinutesBox
             // 
-            this.TimeMinutesBox.Location = new System.Drawing.Point(726, 256);
-            this.TimeMinutesBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.TimeMinutesBox.BackColor = System.Drawing.Color.Black;
+            this.TimeMinutesBox.Location = new System.Drawing.Point(363, 133);
             this.TimeMinutesBox.Name = "TimeMinutesBox";
-            this.TimeMinutesBox.Size = new System.Drawing.Size(104, 31);
+            this.TimeMinutesBox.Size = new System.Drawing.Size(54, 20);
             this.TimeMinutesBox.TabIndex = 15;
             // 
             // TimeHoursLabel
             // 
             this.TimeHoursLabel.AutoSize = true;
-            this.TimeHoursLabel.Location = new System.Drawing.Point(648, 263);
-            this.TimeHoursLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.TimeHoursLabel.Location = new System.Drawing.Point(324, 137);
             this.TimeHoursLabel.Name = "TimeHoursLabel";
-            this.TimeHoursLabel.Size = new System.Drawing.Size(66, 25);
+            this.TimeHoursLabel.Size = new System.Drawing.Size(33, 13);
             this.TimeHoursLabel.TabIndex = 14;
             this.TimeHoursLabel.Text = "hours";
             // 
             // TimeHoursBox
             // 
-            this.TimeHoursBox.Location = new System.Drawing.Point(534, 256);
-            this.TimeHoursBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.TimeHoursBox.BackColor = System.Drawing.Color.Black;
+            this.TimeHoursBox.Location = new System.Drawing.Point(267, 133);
             this.TimeHoursBox.Name = "TimeHoursBox";
-            this.TimeHoursBox.Size = new System.Drawing.Size(104, 31);
+            this.TimeHoursBox.Size = new System.Drawing.Size(54, 20);
             this.TimeHoursBox.TabIndex = 13;
             // 
             // RatingLabel
             // 
             this.RatingLabel.AutoSize = true;
-            this.RatingLabel.Location = new System.Drawing.Point(1112, 200);
-            this.RatingLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.RatingLabel.Location = new System.Drawing.Point(556, 104);
             this.RatingLabel.Name = "RatingLabel";
-            this.RatingLabel.Size = new System.Drawing.Size(124, 25);
+            this.RatingLabel.Size = new System.Drawing.Size(63, 13);
             this.RatingLabel.TabIndex = 12;
             this.RatingLabel.Text = "0 = Unrated";
             // 
             // RatingBox
             // 
-            this.RatingBox.Location = new System.Drawing.Point(1030, 194);
-            this.RatingBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.RatingBox.Location = new System.Drawing.Point(515, 101);
             this.RatingBox.Name = "RatingBox";
             this.RatingBox.ReadOnly = true;
-            this.RatingBox.Size = new System.Drawing.Size(66, 31);
+            this.RatingBox.Size = new System.Drawing.Size(35, 20);
             this.RatingBox.TabIndex = 11;
             this.RatingBox.Text = "0";
             this.RatingBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // RatingBar
             // 
-            this.RatingBar.BackColor = System.Drawing.Color.White;
+            this.RatingBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.RatingBar.LargeChange = 1;
-            this.RatingBar.Location = new System.Drawing.Point(534, 194);
-            this.RatingBar.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.RatingBar.Location = new System.Drawing.Point(267, 101);
             this.RatingBar.Name = "RatingBar";
-            this.RatingBar.Size = new System.Drawing.Size(482, 90);
+            this.RatingBar.Size = new System.Drawing.Size(241, 45);
             this.RatingBar.TabIndex = 10;
             this.RatingBar.ValueChanged += new System.EventHandler(this.RatingBar_ValueChanged);
             // 
             // StatusBox
             // 
+            this.StatusBox.BackColor = System.Drawing.Color.Black;
+            this.StatusBox.ForeColor = System.Drawing.Color.White;
             this.StatusBox.FormattingEnabled = true;
             this.StatusBox.Items.AddRange(new object[] {
             "100% Run",
@@ -714,116 +706,120 @@
             "Replaying",
             "Start Over",
             "Want"});
-            this.StatusBox.Location = new System.Drawing.Point(534, 133);
-            this.StatusBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.StatusBox.Location = new System.Drawing.Point(267, 69);
             this.StatusBox.Name = "StatusBox";
-            this.StatusBox.Size = new System.Drawing.Size(690, 33);
+            this.StatusBox.Size = new System.Drawing.Size(347, 21);
             this.StatusBox.TabIndex = 9;
             // 
             // PlatformBox
             // 
+            this.PlatformBox.BackColor = System.Drawing.Color.Black;
+            this.PlatformBox.ForeColor = System.Drawing.Color.White;
             this.PlatformBox.FormattingEnabled = true;
-            this.PlatformBox.Location = new System.Drawing.Point(534, 71);
-            this.PlatformBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.PlatformBox.Location = new System.Drawing.Point(267, 37);
             this.PlatformBox.Name = "PlatformBox";
-            this.PlatformBox.Size = new System.Drawing.Size(690, 33);
+            this.PlatformBox.Size = new System.Drawing.Size(347, 21);
             this.PlatformBox.TabIndex = 8;
             // 
             // EntryLabels2
             // 
-            this.EntryLabels2.BackColor = System.Drawing.Color.White;
+            this.EntryLabels2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.EntryLabels2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.EntryLabels2.Enabled = false;
             this.EntryLabels2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EntryLabels2.Location = new System.Drawing.Point(1262, 13);
-            this.EntryLabels2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.EntryLabels2.Location = new System.Drawing.Point(631, 7);
             this.EntryLabels2.Multiline = true;
             this.EntryLabels2.Name = "EntryLabels2";
             this.EntryLabels2.ReadOnly = true;
-            this.EntryLabels2.Size = new System.Drawing.Size(200, 1002);
+            this.EntryLabels2.Size = new System.Drawing.Size(100, 521);
             this.EntryLabels2.TabIndex = 7;
             this.EntryLabels2.Text = "Game Description: \r\n\r\n\r\n\r\n\r\nLaunch Codes: \r\n\r\nURLs: \r\n\r\nFilters: \r\n\r\nBlur Backgro" +
     "und?: \r\n\r\nUse Overlay?: ";
             // 
             // TitleBox
             // 
-            this.TitleBox.Location = new System.Drawing.Point(534, 10);
-            this.TitleBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.TitleBox.BackColor = System.Drawing.Color.Black;
+            this.TitleBox.ForeColor = System.Drawing.Color.White;
+            this.TitleBox.Location = new System.Drawing.Point(267, 5);
             this.TitleBox.Name = "TitleBox";
-            this.TitleBox.Size = new System.Drawing.Size(690, 31);
+            this.TitleBox.Size = new System.Drawing.Size(347, 20);
             this.TitleBox.TabIndex = 6;
             // 
             // EntryLabels
             // 
-            this.EntryLabels.BackColor = System.Drawing.Color.White;
+            this.EntryLabels.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.EntryLabels.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.EntryLabels.Enabled = false;
             this.EntryLabels.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EntryLabels.Location = new System.Drawing.Point(320, 13);
-            this.EntryLabels.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.EntryLabels.Location = new System.Drawing.Point(160, 7);
             this.EntryLabels.Multiline = true;
             this.EntryLabels.Name = "EntryLabels";
             this.EntryLabels.ReadOnly = true;
-            this.EntryLabels.Size = new System.Drawing.Size(200, 1002);
+            this.EntryLabels.Size = new System.Drawing.Size(100, 521);
             this.EntryLabels.TabIndex = 5;
             this.EntryLabels.Text = resources.GetString("EntryLabels.Text");
             // 
             // ClearButton
             // 
-            this.ClearButton.Location = new System.Drawing.Point(14, 910);
-            this.ClearButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.ClearButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.ClearButton.ForeColor = System.Drawing.Color.White;
+            this.ClearButton.Location = new System.Drawing.Point(7, 473);
             this.ClearButton.Name = "ClearButton";
-            this.ClearButton.Size = new System.Drawing.Size(292, 85);
+            this.ClearButton.Size = new System.Drawing.Size(146, 44);
             this.ClearButton.TabIndex = 4;
             this.ClearButton.Text = "CLEAR FIELDS";
-            this.ClearButton.UseVisualStyleBackColor = true;
+            this.ClearButton.UseVisualStyleBackColor = false;
             this.ClearButton.Click += new System.EventHandler(this.ClearButton_Click);
             // 
             // DeleteButton
             // 
-            this.DeleteButton.Location = new System.Drawing.Point(14, 302);
-            this.DeleteButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.DeleteButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.DeleteButton.ForeColor = System.Drawing.Color.White;
+            this.DeleteButton.Location = new System.Drawing.Point(7, 157);
             this.DeleteButton.Name = "DeleteButton";
-            this.DeleteButton.Size = new System.Drawing.Size(292, 85);
+            this.DeleteButton.Size = new System.Drawing.Size(146, 44);
             this.DeleteButton.TabIndex = 3;
             this.DeleteButton.Text = "DELETE";
-            this.DeleteButton.UseVisualStyleBackColor = true;
+            this.DeleteButton.UseVisualStyleBackColor = false;
             this.DeleteButton.Visible = false;
             this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
             // ReplaceButton
             // 
-            this.ReplaceButton.Location = new System.Drawing.Point(14, 206);
-            this.ReplaceButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.ReplaceButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.ReplaceButton.ForeColor = System.Drawing.Color.White;
+            this.ReplaceButton.Location = new System.Drawing.Point(7, 107);
             this.ReplaceButton.Name = "ReplaceButton";
-            this.ReplaceButton.Size = new System.Drawing.Size(292, 85);
+            this.ReplaceButton.Size = new System.Drawing.Size(146, 44);
             this.ReplaceButton.TabIndex = 2;
             this.ReplaceButton.Text = "APPLY CHANGES";
-            this.ReplaceButton.UseVisualStyleBackColor = true;
+            this.ReplaceButton.UseVisualStyleBackColor = false;
             this.ReplaceButton.Visible = false;
             this.ReplaceButton.Click += new System.EventHandler(this.ReplaceButton_Click);
             // 
             // EditButton
             // 
-            this.EditButton.Location = new System.Drawing.Point(14, 110);
-            this.EditButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.EditButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.EditButton.ForeColor = System.Drawing.Color.White;
+            this.EditButton.Location = new System.Drawing.Point(7, 57);
             this.EditButton.Name = "EditButton";
-            this.EditButton.Size = new System.Drawing.Size(292, 85);
+            this.EditButton.Size = new System.Drawing.Size(146, 44);
             this.EditButton.TabIndex = 1;
             this.EditButton.Text = "EDIT";
-            this.EditButton.UseVisualStyleBackColor = true;
+            this.EditButton.UseVisualStyleBackColor = false;
             this.EditButton.Visible = false;
             this.EditButton.Click += new System.EventHandler(this.EditButton_Click);
             // 
             // AddButton
             // 
-            this.AddButton.Location = new System.Drawing.Point(14, 13);
-            this.AddButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.AddButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
+            this.AddButton.ForeColor = System.Drawing.Color.White;
+            this.AddButton.Location = new System.Drawing.Point(7, 7);
             this.AddButton.Name = "AddButton";
-            this.AddButton.Size = new System.Drawing.Size(292, 85);
+            this.AddButton.Size = new System.Drawing.Size(146, 44);
             this.AddButton.TabIndex = 0;
             this.AddButton.Text = "ADD";
-            this.AddButton.UseVisualStyleBackColor = true;
+            this.AddButton.UseVisualStyleBackColor = false;
             this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
             // ConsolesTab
@@ -833,11 +829,10 @@
             this.ConsolesTab.Controls.Add(this.ConsoleNameBox);
             this.ConsolesTab.Controls.Add(this.ConsolePictureBox);
             this.ConsolesTab.Controls.Add(this.ConsolesDGV);
-            this.ConsolesTab.Location = new System.Drawing.Point(8, 39);
-            this.ConsolesTab.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.ConsolesTab.Location = new System.Drawing.Point(4, 25);
             this.ConsolesTab.Name = "ConsolesTab";
-            this.ConsolesTab.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.ConsolesTab.Size = new System.Drawing.Size(2106, 1086);
+            this.ConsolesTab.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.ConsolesTab.Size = new System.Drawing.Size(1076, 585);
             this.ConsolesTab.TabIndex = 1;
             this.ConsolesTab.Text = "Consoles";
             this.ConsolesTab.UseVisualStyleBackColor = true;
@@ -847,42 +842,38 @@
             this.ConsoleGamesDGV.AllowUserToAddRows = false;
             this.ConsoleGamesDGV.AllowUserToDeleteRows = false;
             this.ConsoleGamesDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ConsoleGamesDGV.Location = new System.Drawing.Point(500, 527);
-            this.ConsoleGamesDGV.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.ConsoleGamesDGV.Location = new System.Drawing.Point(250, 274);
             this.ConsoleGamesDGV.Name = "ConsoleGamesDGV";
             this.ConsoleGamesDGV.ReadOnly = true;
             this.ConsoleGamesDGV.RowHeadersVisible = false;
             this.ConsoleGamesDGV.RowHeadersWidth = 82;
-            this.ConsoleGamesDGV.Size = new System.Drawing.Size(1590, 550);
+            this.ConsoleGamesDGV.Size = new System.Drawing.Size(795, 286);
             this.ConsoleGamesDGV.TabIndex = 1;
             this.ConsoleGamesDGV.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ConsoleGamesDGV_CellDoubleClick);
             this.ConsoleGamesDGV.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.ConsoleGamesDGV_CellMouseUp);
             // 
             // ConsoleDetailsBox
             // 
-            this.ConsoleDetailsBox.Location = new System.Drawing.Point(1014, 129);
-            this.ConsoleDetailsBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.ConsoleDetailsBox.Location = new System.Drawing.Point(507, 67);
             this.ConsoleDetailsBox.Multiline = true;
             this.ConsoleDetailsBox.Name = "ConsoleDetailsBox";
-            this.ConsoleDetailsBox.Size = new System.Drawing.Size(1072, 381);
+            this.ConsoleDetailsBox.Size = new System.Drawing.Size(538, 200);
             this.ConsoleDetailsBox.TabIndex = 3;
             // 
             // ConsoleNameBox
             // 
             this.ConsoleNameBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ConsoleNameBox.Location = new System.Drawing.Point(1014, 33);
-            this.ConsoleNameBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.ConsoleNameBox.Location = new System.Drawing.Point(507, 17);
             this.ConsoleNameBox.Name = "ConsoleNameBox";
-            this.ConsoleNameBox.Size = new System.Drawing.Size(1072, 73);
+            this.ConsoleNameBox.Size = new System.Drawing.Size(538, 40);
             this.ConsoleNameBox.TabIndex = 2;
             // 
             // ConsolePictureBox
             // 
             this.ConsolePictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ConsolePictureBox.Location = new System.Drawing.Point(500, 33);
-            this.ConsolePictureBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.ConsolePictureBox.Location = new System.Drawing.Point(250, 17);
             this.ConsolePictureBox.Name = "ConsolePictureBox";
-            this.ConsolePictureBox.Size = new System.Drawing.Size(500, 481);
+            this.ConsolePictureBox.Size = new System.Drawing.Size(250, 250);
             this.ConsolePictureBox.TabIndex = 1;
             this.ConsolePictureBox.TabStop = false;
             // 
@@ -893,24 +884,22 @@
             this.ConsolesDGV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.ConsolesDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ConsolesDGV.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ConsolesDGV.Location = new System.Drawing.Point(6, 6);
-            this.ConsolesDGV.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.ConsolesDGV.Location = new System.Drawing.Point(3, 3);
             this.ConsolesDGV.Name = "ConsolesDGV";
             this.ConsolesDGV.ReadOnly = true;
             this.ConsolesDGV.RowHeadersVisible = false;
             this.ConsolesDGV.RowHeadersWidth = 82;
-            this.ConsolesDGV.Size = new System.Drawing.Size(458, 1074);
+            this.ConsolesDGV.Size = new System.Drawing.Size(229, 579);
             this.ConsolesDGV.TabIndex = 0;
             this.ConsolesDGV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ConsolesDGV_CellClick);
             this.ConsolesDGV.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.ConsolesDGV_RowEnter);
             // 
             // NotificationsPage
             // 
-            this.NotificationsPage.Location = new System.Drawing.Point(8, 39);
-            this.NotificationsPage.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.NotificationsPage.Location = new System.Drawing.Point(4, 25);
             this.NotificationsPage.Name = "NotificationsPage";
-            this.NotificationsPage.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.NotificationsPage.Size = new System.Drawing.Size(2106, 1086);
+            this.NotificationsPage.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.NotificationsPage.Size = new System.Drawing.Size(1076, 585);
             this.NotificationsPage.TabIndex = 2;
             this.NotificationsPage.Text = "Notifications";
             this.NotificationsPage.UseVisualStyleBackColor = true;
@@ -926,11 +915,10 @@
             this.BrowserTab.Controls.Add(this.SearchButton);
             this.BrowserTab.Controls.Add(this.AddressBar);
             this.BrowserTab.Controls.Add(this.DownloadButton);
-            this.BrowserTab.Location = new System.Drawing.Point(8, 39);
-            this.BrowserTab.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.BrowserTab.Location = new System.Drawing.Point(4, 25);
             this.BrowserTab.Name = "BrowserTab";
-            this.BrowserTab.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.BrowserTab.Size = new System.Drawing.Size(2106, 1086);
+            this.BrowserTab.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.BrowserTab.Size = new System.Drawing.Size(1076, 585);
             this.BrowserTab.TabIndex = 3;
             this.BrowserTab.Text = "Browser";
             this.BrowserTab.UseVisualStyleBackColor = true;
@@ -940,31 +928,28 @@
             this.Tabs.Controls.Add(this.tabPage1);
             this.Tabs.Controls.Add(this.tabPage2);
             this.Tabs.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.Tabs.Location = new System.Drawing.Point(6, 122);
-            this.Tabs.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Tabs.Location = new System.Drawing.Point(3, 84);
             this.Tabs.Name = "Tabs";
             this.Tabs.SelectedIndex = 0;
-            this.Tabs.Size = new System.Drawing.Size(2094, 958);
+            this.Tabs.Size = new System.Drawing.Size(1070, 498);
             this.Tabs.TabIndex = 34;
             // 
             // tabPage1
             // 
-            this.tabPage1.Location = new System.Drawing.Point(8, 39);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.tabPage1.Size = new System.Drawing.Size(2078, 911);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage1.Size = new System.Drawing.Size(1062, 472);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Loading...";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
-            this.tabPage2.Location = new System.Drawing.Point(8, 39);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.tabPage2.Size = new System.Drawing.Size(2078, 911);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage2.Size = new System.Drawing.Size(1039, 472);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "+";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -972,10 +957,9 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.BookmarkBar);
-            this.panel1.Location = new System.Drawing.Point(0, 65);
-            this.panel1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.panel1.Location = new System.Drawing.Point(0, 34);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(2106, 52);
+            this.panel1.Size = new System.Drawing.Size(1053, 27);
             this.panel1.TabIndex = 33;
             // 
             // BookmarkBar
@@ -983,48 +967,44 @@
             this.BookmarkBar.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.BookmarkBar.Location = new System.Drawing.Point(0, 0);
             this.BookmarkBar.Name = "BookmarkBar";
-            this.BookmarkBar.Padding = new System.Windows.Forms.Padding(0, 0, 4, 0);
-            this.BookmarkBar.Size = new System.Drawing.Size(2106, 25);
+            this.BookmarkBar.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.BookmarkBar.Size = new System.Drawing.Size(1053, 25);
             this.BookmarkBar.TabIndex = 1;
             this.BookmarkBar.Text = "toolStrip1";
             // 
             // FavoriteButton
             // 
             this.FavoriteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.FavoriteButton.Location = new System.Drawing.Point(1884, 10);
-            this.FavoriteButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.FavoriteButton.Location = new System.Drawing.Point(942, 5);
             this.FavoriteButton.Name = "FavoriteButton";
-            this.FavoriteButton.Size = new System.Drawing.Size(48, 42);
+            this.FavoriteButton.Size = new System.Drawing.Size(24, 22);
             this.FavoriteButton.TabIndex = 32;
             this.FavoriteButton.Text = "⭐";
             this.FavoriteButton.UseVisualStyleBackColor = true;
             // 
             // RefreshBrowserButton
             // 
-            this.RefreshBrowserButton.Location = new System.Drawing.Point(180, 8);
-            this.RefreshBrowserButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.RefreshBrowserButton.Location = new System.Drawing.Point(90, 4);
             this.RefreshBrowserButton.Name = "RefreshBrowserButton";
-            this.RefreshBrowserButton.Size = new System.Drawing.Size(76, 44);
+            this.RefreshBrowserButton.Size = new System.Drawing.Size(38, 23);
             this.RefreshBrowserButton.TabIndex = 30;
             this.RefreshBrowserButton.Text = "↺";
             this.RefreshBrowserButton.UseVisualStyleBackColor = true;
             // 
             // NextButton
             // 
-            this.NextButton.Location = new System.Drawing.Point(92, 8);
-            this.NextButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.NextButton.Location = new System.Drawing.Point(46, 4);
             this.NextButton.Name = "NextButton";
-            this.NextButton.Size = new System.Drawing.Size(76, 44);
+            this.NextButton.Size = new System.Drawing.Size(38, 23);
             this.NextButton.TabIndex = 29;
             this.NextButton.Text = "-->";
             this.NextButton.UseVisualStyleBackColor = true;
             // 
             // BackButton
             // 
-            this.BackButton.Location = new System.Drawing.Point(14, 8);
-            this.BackButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.BackButton.Location = new System.Drawing.Point(7, 4);
             this.BackButton.Name = "BackButton";
-            this.BackButton.Size = new System.Drawing.Size(76, 44);
+            this.BackButton.Size = new System.Drawing.Size(38, 23);
             this.BackButton.TabIndex = 28;
             this.BackButton.Text = "<--";
             this.BackButton.UseVisualStyleBackColor = true;
@@ -1032,10 +1012,9 @@
             // SearchButton
             // 
             this.SearchButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.SearchButton.Location = new System.Drawing.Point(1812, 10);
-            this.SearchButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.SearchButton.Location = new System.Drawing.Point(906, 5);
             this.SearchButton.Name = "SearchButton";
-            this.SearchButton.Size = new System.Drawing.Size(60, 42);
+            this.SearchButton.Size = new System.Drawing.Size(30, 22);
             this.SearchButton.TabIndex = 27;
             this.SearchButton.Text = "🔍";
             this.SearchButton.UseVisualStyleBackColor = true;
@@ -1044,18 +1023,16 @@
             // 
             this.AddressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.AddressBar.Location = new System.Drawing.Point(356, 12);
-            this.AddressBar.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.AddressBar.Location = new System.Drawing.Point(178, 6);
             this.AddressBar.Name = "AddressBar";
-            this.AddressBar.Size = new System.Drawing.Size(1440, 31);
+            this.AddressBar.Size = new System.Drawing.Size(722, 20);
             this.AddressBar.TabIndex = 26;
             // 
             // DownloadButton
             // 
-            this.DownloadButton.Location = new System.Drawing.Point(268, 8);
-            this.DownloadButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.DownloadButton.Location = new System.Drawing.Point(134, 4);
             this.DownloadButton.Name = "DownloadButton";
-            this.DownloadButton.Size = new System.Drawing.Size(76, 44);
+            this.DownloadButton.Size = new System.Drawing.Size(38, 23);
             this.DownloadButton.TabIndex = 25;
             this.DownloadButton.Text = "V";
             this.DownloadButton.UseVisualStyleBackColor = true;
@@ -1063,22 +1040,24 @@
             // toolStrip1
             // 
             this.toolStrip1.AutoSize = false;
+            this.toolStrip1.BackColor = System.Drawing.Color.Black;
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.RefreshButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 4, 0);
-            this.toolStrip1.Size = new System.Drawing.Size(1538, 50);
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.toolStrip1.Size = new System.Drawing.Size(1084, 26);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // RefreshButton
             // 
+            this.RefreshButton.ForeColor = System.Drawing.Color.White;
             this.RefreshButton.Image = ((System.Drawing.Image)(resources.GetObject("RefreshButton.Image")));
             this.RefreshButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.RefreshButton.Name = "RefreshButton";
-            this.RefreshButton.Size = new System.Drawing.Size(130, 44);
+            this.RefreshButton.Size = new System.Drawing.Size(82, 23);
             this.RefreshButton.Text = "Refresh";
             this.RefreshButton.Click += new System.EventHandler(this.RefreshButton_Click);
             // 
@@ -1091,33 +1070,33 @@
             this.DatabasePictureButton,
             this.InternetPictureButton});
             this.PictureContextMenu.Name = "PictureContextMenu";
-            this.PictureContextMenu.Size = new System.Drawing.Size(251, 156);
+            this.PictureContextMenu.Size = new System.Drawing.Size(155, 92);
             // 
             // ClearPictureButton
             // 
             this.ClearPictureButton.Name = "ClearPictureButton";
-            this.ClearPictureButton.Size = new System.Drawing.Size(250, 38);
+            this.ClearPictureButton.Size = new System.Drawing.Size(154, 22);
             this.ClearPictureButton.Text = "Clear Picture";
             this.ClearPictureButton.Click += new System.EventHandler(this.ClearPictureButton_Click);
             // 
             // LocalPictureButton
             // 
             this.LocalPictureButton.Name = "LocalPictureButton";
-            this.LocalPictureButton.Size = new System.Drawing.Size(250, 38);
+            this.LocalPictureButton.Size = new System.Drawing.Size(154, 22);
             this.LocalPictureButton.Text = "From Local File";
             this.LocalPictureButton.Click += new System.EventHandler(this.LocalPictureButton_Click);
             // 
             // DatabasePictureButton
             // 
             this.DatabasePictureButton.Name = "DatabasePictureButton";
-            this.DatabasePictureButton.Size = new System.Drawing.Size(250, 38);
+            this.DatabasePictureButton.Size = new System.Drawing.Size(154, 22);
             this.DatabasePictureButton.Text = "From Database";
             this.DatabasePictureButton.Click += new System.EventHandler(this.DatabasePictureButton_Click);
             // 
             // InternetPictureButton
             // 
             this.InternetPictureButton.Name = "InternetPictureButton";
-            this.InternetPictureButton.Size = new System.Drawing.Size(250, 38);
+            this.InternetPictureButton.Size = new System.Drawing.Size(154, 22);
             this.InternetPictureButton.Text = "From Internet";
             this.InternetPictureButton.Click += new System.EventHandler(this.InternetPictureButton_Click);
             // 
@@ -1133,19 +1112,19 @@
             this.EditEntryButton,
             this.DeleteEntryButton});
             this.GamesDGVContextMenu.Name = "GamesDGVContextMenu";
-            this.GamesDGVContextMenu.Size = new System.Drawing.Size(222, 80);
+            this.GamesDGVContextMenu.Size = new System.Drawing.Size(138, 48);
             // 
             // EditEntryButton
             // 
             this.EditEntryButton.Name = "EditEntryButton";
-            this.EditEntryButton.Size = new System.Drawing.Size(221, 38);
+            this.EditEntryButton.Size = new System.Drawing.Size(137, 22);
             this.EditEntryButton.Text = "Edit Entry";
             this.EditEntryButton.Click += new System.EventHandler(this.EditEntryButton_Click);
             // 
             // DeleteEntryButton
             // 
             this.DeleteEntryButton.Name = "DeleteEntryButton";
-            this.DeleteEntryButton.Size = new System.Drawing.Size(221, 38);
+            this.DeleteEntryButton.Size = new System.Drawing.Size(137, 22);
             this.DeleteEntryButton.Text = "Delete Entry";
             this.DeleteEntryButton.Click += new System.EventHandler(this.DeleteEntryButton_Click);
             // 
@@ -1155,12 +1134,12 @@
             this.GameTabsContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.CloseTabButton});
             this.GameTabsContextMenu.Name = "GameTabsContextMenu";
-            this.GameTabsContextMenu.Size = new System.Drawing.Size(192, 42);
+            this.GameTabsContextMenu.Size = new System.Drawing.Size(125, 26);
             // 
             // CloseTabButton
             // 
             this.CloseTabButton.Name = "CloseTabButton";
-            this.CloseTabButton.Size = new System.Drawing.Size(191, 38);
+            this.CloseTabButton.Size = new System.Drawing.Size(124, 22);
             this.CloseTabButton.Text = "Close Tab";
             this.CloseTabButton.Click += new System.EventHandler(this.CloseTabButton_Click);
             // 
@@ -1171,19 +1150,19 @@
             this.EditConsoleGameEntryButton,
             this.DeleteConsoleGameEntryButton});
             this.ConsoleGamesDGVContextMenu.Name = "GamesDGVContextMenu";
-            this.ConsoleGamesDGVContextMenu.Size = new System.Drawing.Size(222, 80);
+            this.ConsoleGamesDGVContextMenu.Size = new System.Drawing.Size(138, 48);
             // 
             // EditConsoleGameEntryButton
             // 
             this.EditConsoleGameEntryButton.Name = "EditConsoleGameEntryButton";
-            this.EditConsoleGameEntryButton.Size = new System.Drawing.Size(221, 38);
+            this.EditConsoleGameEntryButton.Size = new System.Drawing.Size(137, 22);
             this.EditConsoleGameEntryButton.Text = "Edit Entry";
             this.EditConsoleGameEntryButton.Click += new System.EventHandler(this.EditConsoleGameEntryButton_Click);
             // 
             // DeleteConsoleGameEntryButton
             // 
             this.DeleteConsoleGameEntryButton.Name = "DeleteConsoleGameEntryButton";
-            this.DeleteConsoleGameEntryButton.Size = new System.Drawing.Size(221, 38);
+            this.DeleteConsoleGameEntryButton.Size = new System.Drawing.Size(137, 22);
             this.DeleteConsoleGameEntryButton.Text = "Delete Entry";
             // 
             // imageList1
@@ -1194,13 +1173,13 @@
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1538, 892);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.ClientSize = new System.Drawing.Size(1084, 643);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.MainTabs);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "MainForm";
             this.Text = "UGame";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
