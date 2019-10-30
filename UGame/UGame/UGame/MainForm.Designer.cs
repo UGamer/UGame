@@ -171,7 +171,7 @@
             this.GamesTab.Controls.Add(this.GamesTabs);
             this.GamesTab.Location = new System.Drawing.Point(4, 25);
             this.GamesTab.Name = "GamesTab";
-            this.GamesTab.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.GamesTab.Padding = new System.Windows.Forms.Padding(3);
             this.GamesTab.Size = new System.Drawing.Size(1076, 585);
             this.GamesTab.TabIndex = 0;
             this.GamesTab.Text = "Games";
@@ -197,7 +197,7 @@
             this.GamesListTab.Controls.Add(this.GamesDGV);
             this.GamesListTab.Location = new System.Drawing.Point(4, 22);
             this.GamesListTab.Name = "GamesListTab";
-            this.GamesListTab.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.GamesListTab.Padding = new System.Windows.Forms.Padding(3);
             this.GamesListTab.Size = new System.Drawing.Size(1062, 553);
             this.GamesListTab.TabIndex = 0;
             this.GamesListTab.Text = "[LIST]";
@@ -205,7 +205,7 @@
             // AdvancedSearchButton
             // 
             this.AdvancedSearchButton.Location = new System.Drawing.Point(412, 4);
-            this.AdvancedSearchButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.AdvancedSearchButton.Margin = new System.Windows.Forms.Padding(2);
             this.AdvancedSearchButton.Name = "AdvancedSearchButton";
             this.AdvancedSearchButton.Size = new System.Drawing.Size(54, 20);
             this.AdvancedSearchButton.TabIndex = 2;
@@ -305,7 +305,7 @@
             this.GamesEntriesTab.Controls.Add(this.AddButton);
             this.GamesEntriesTab.Location = new System.Drawing.Point(4, 22);
             this.GamesEntriesTab.Name = "GamesEntriesTab";
-            this.GamesEntriesTab.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.GamesEntriesTab.Padding = new System.Windows.Forms.Padding(3);
             this.GamesEntriesTab.Size = new System.Drawing.Size(1062, 553);
             this.GamesEntriesTab.TabIndex = 1;
             this.GamesEntriesTab.Text = "[ENTRIES]";
@@ -620,6 +620,7 @@
             // TimeSecondsBox
             // 
             this.TimeSecondsBox.BackColor = System.Drawing.Color.Black;
+            this.TimeSecondsBox.ForeColor = System.Drawing.Color.White;
             this.TimeSecondsBox.Location = new System.Drawing.Point(469, 133);
             this.TimeSecondsBox.Name = "TimeSecondsBox";
             this.TimeSecondsBox.Size = new System.Drawing.Size(54, 20);
@@ -637,6 +638,7 @@
             // TimeMinutesBox
             // 
             this.TimeMinutesBox.BackColor = System.Drawing.Color.Black;
+            this.TimeMinutesBox.ForeColor = System.Drawing.Color.White;
             this.TimeMinutesBox.Location = new System.Drawing.Point(363, 133);
             this.TimeMinutesBox.Name = "TimeMinutesBox";
             this.TimeMinutesBox.Size = new System.Drawing.Size(54, 20);
@@ -654,6 +656,7 @@
             // TimeHoursBox
             // 
             this.TimeHoursBox.BackColor = System.Drawing.Color.Black;
+            this.TimeHoursBox.ForeColor = System.Drawing.Color.White;
             this.TimeHoursBox.Location = new System.Drawing.Point(267, 133);
             this.TimeHoursBox.Name = "TimeHoursBox";
             this.TimeHoursBox.Size = new System.Drawing.Size(54, 20);
@@ -831,7 +834,7 @@
             this.ConsolesTab.Controls.Add(this.ConsolesDGV);
             this.ConsolesTab.Location = new System.Drawing.Point(4, 25);
             this.ConsolesTab.Name = "ConsolesTab";
-            this.ConsolesTab.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.ConsolesTab.Padding = new System.Windows.Forms.Padding(3);
             this.ConsolesTab.Size = new System.Drawing.Size(1076, 585);
             this.ConsolesTab.TabIndex = 1;
             this.ConsolesTab.Text = "Consoles";
@@ -898,7 +901,7 @@
             // 
             this.NotificationsPage.Location = new System.Drawing.Point(4, 25);
             this.NotificationsPage.Name = "NotificationsPage";
-            this.NotificationsPage.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.NotificationsPage.Padding = new System.Windows.Forms.Padding(3);
             this.NotificationsPage.Size = new System.Drawing.Size(1076, 585);
             this.NotificationsPage.TabIndex = 2;
             this.NotificationsPage.Text = "Notifications";
@@ -917,7 +920,7 @@
             this.BrowserTab.Controls.Add(this.DownloadButton);
             this.BrowserTab.Location = new System.Drawing.Point(4, 25);
             this.BrowserTab.Name = "BrowserTab";
-            this.BrowserTab.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.BrowserTab.Padding = new System.Windows.Forms.Padding(3);
             this.BrowserTab.Size = new System.Drawing.Size(1076, 585);
             this.BrowserTab.TabIndex = 3;
             this.BrowserTab.Text = "Browser";
@@ -938,7 +941,7 @@
             // 
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(1062, 472);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Loading...";
@@ -948,8 +951,8 @@
             // 
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tabPage2.Size = new System.Drawing.Size(1039, 472);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1062, 472);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "+";
             this.tabPage2.UseVisualStyleBackColor = true;
