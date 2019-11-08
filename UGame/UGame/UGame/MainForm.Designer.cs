@@ -228,6 +228,7 @@
             this.GamesDGV.AllowUserToAddRows = false;
             this.GamesDGV.AllowUserToDeleteRows = false;
             this.GamesDGV.AllowUserToOrderColumns = true;
+            this.GamesDGV.AllowUserToResizeRows = false;
             this.GamesDGV.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -243,6 +244,7 @@
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             this.GamesDGV.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.GamesDGV.RowTemplate.Height = 50;
             this.GamesDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.GamesDGV.Size = new System.Drawing.Size(1056, 520);
             this.GamesDGV.TabIndex = 0;
