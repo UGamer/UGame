@@ -291,7 +291,7 @@ namespace UGame
 
         private void GamesDGV_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            try { NewTab(e.RowIndex); } catch { }
+            
         }
 
         private void MainForm_KeyUp(object sender, KeyEventArgs e)
@@ -305,6 +305,8 @@ namespace UGame
         private void GamesDGV_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             currentRow = e.RowIndex;
+
+            try { NewTab(e.RowIndex); } catch { }
         }
 
         private void GamesDGV_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
